@@ -40,6 +40,14 @@ class ShikakuSolver {
     return _propagate(cand, tier) && cand.every((c) => c.length == 1) ? [for (final c in cand) c.single] : null;
   }
 
+  /// How far logic up to [tier] is from a full solve: surplus candidate
+  /// rectangles over all clues (0 = solved).
+  int slack(int tier) {
+    final cand = [for (final c in candidates) List.of(c)];
+    if (!_propagate(cand, tier)) return 1 << 20;
+    return cand.fold(0, (s, c) => s + c.length - 1);
+  }
+
   bool _propagate(List<List<CellRect>> cand, int tier) {
     final n = rows * cols;
     while (true) {

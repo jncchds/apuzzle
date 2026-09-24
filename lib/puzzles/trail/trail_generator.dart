@@ -1,26 +1,27 @@
 import 'dart:math';
 
 import '../../core/difficulty.dart';
+import 'trail_logic.dart';
 import 'trail_model.dart';
-import 'trail_solver.dart';
 
-/// Search budget (solver nodes) per uniqueness check.
-const _budget = 250000;
-
-/// Random Hamiltonian path (backbite moves from a serpentine), then add
-/// waypoints where alternatives diverge until unique, drop redundant ones,
-/// and add extras back for easier levels.
+/// Random Hamiltonian path (backbite moves from a serpentine), then:
+///  1. start from the two ends and add a waypoint wherever the edge logic gets
+///     stuck, until logic at the difficulty's tier traces the whole path;
+///  2. drop waypoints the logic doesn't need;
+///  3. add redundant waypoints back for easier levels.
+/// Logic solves are polynomial and sound, so no search over paths is needed.
 TrailPuzzle generateTrail(GenParams params) {
   final rows = params.size.rows, cols = params.size.cols, n = rows * cols;
   final rng = Random(params.seed);
   final d = params.difficulty;
+  final tier = d == Difficulty.easy ? 1 : 2;
 
   final path = _randomHamiltonian(rows, cols, rng);
-  final marks = <int>{0, n - 1};
-  final initial = (n * 0.1).round();
-  while (marks.length < initial + 2) {
-    marks.add(1 + rng.nextInt(n - 2));
+  final pos = List<int>.filled(n, 0);
+  for (var k = 0; k < n; k++) {
+    pos[path[k]] = k;
   }
+  final marks = <int>{0, n - 1};
 
   List<int?> numbersFor(Set<int> m) {
     final sorted = m.toList()..sort();
@@ -31,42 +32,28 @@ TrailPuzzle generateTrail(GenParams params) {
     return nums;
   }
 
-  bool unique(Set<int> m) => TrailSolver(rows, cols, numbersFor(m)).solutions(budget: _budget).length == 1;
+  TrailLogic logic(Set<int> m) => TrailLogic(rows, cols, numbersFor(m));
 
-  // 1. Add waypoints where alternatives diverge until the path is unique.
-  for (var guard = 0; guard < n; guard++) {
-    final sols = TrailSolver(rows, cols, numbersFor(marks)).solutions(budget: _budget);
-    if (sols.length == 1) break;
-    var diverge = -1;
-    if (sols.isNotEmpty) {
-      final alt = sols.firstWhere((x) => !_samePath(x, path), orElse: () => sols.last);
-      for (var i = 0; i < n; i++) {
-        if (alt[i] != path[i]) {
-          diverge = i;
-          break;
-        }
-      }
-    }
-    final free = [for (var i = 1; i < n - 1; i++) if (!marks.contains(i)) i];
-    if (free.isEmpty) break;
-    if (diverge < 0 || marks.contains(diverge)) {
-      marks.add(free[rng.nextInt(free.length)]);
-    } else {
-      marks.add(diverge);
-    }
+  // 1. Add waypoints where the logic stalls.
+  while (true) {
+    final open = logic(marks).openCells(tier);
+    if (open.isEmpty) break;
+    var pick = [for (final c in open) if (!marks.contains(pos[c])) pos[c]];
+    if (pick.isEmpty) pick = [for (var i = 1; i < n - 1; i++) if (!marks.contains(i)) i];
+    marks.add(pick[rng.nextInt(pick.length)]);
   }
 
   // 2. Drop waypoints that are not needed.
   for (final idx in (marks.toList()..shuffle(rng))) {
     if (idx == 0 || idx == n - 1) continue;
     marks.remove(idx);
-    if (!unique(marks)) marks.add(idx);
+    if (logic(marks).solve(tier) == null) marks.add(idx);
   }
 
   // 3. Easier levels get extra (redundant) waypoints.
   final target = switch (d) {
-    Difficulty.easy => (n * 0.3).round(),
-    Difficulty.medium => (n * 0.2).round(),
+    Difficulty.easy => max(marks.length, (n * 0.25).round()),
+    Difficulty.medium => marks.length + (n * 0.06).round(),
     _ => 0,
   };
   final free = [for (var i = 1; i < n - 1; i++) if (!marks.contains(i)) i]..shuffle(rng);
@@ -76,13 +63,6 @@ TrailPuzzle generateTrail(GenParams params) {
   }
 
   return TrailPuzzle(rows: rows, cols: cols, numbers: numbersFor(marks), solution: path);
-}
-
-bool _samePath(List<int> a, List<int> b) {
-  for (var i = 0; i < a.length; i++) {
-    if (a[i] != b[i]) return false;
-  }
-  return true;
 }
 
 List<int> _randomHamiltonian(int rows, int cols, Random rng) {

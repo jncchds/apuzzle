@@ -12,6 +12,8 @@ Run them through the output condenser (see the global CLAUDE.md):
 - Visual snapshots of every puzzle (phone size, dark and light) go to `build/snapshots/*.png`; view the PNGs afterwards:
   `node ~/.claude/tools/run.mjs flutter test test/snapshots --run-skipped --tags snapshot`
   (The in-app browser pane crops screenshots on high-DPI displays, so prefer these PNGs for layout checks.)
+- Generator timings (all types, or `BENCH_TYPES=kings,lits`): `flutter test test/bench/generator_bench_test.dart --run-skipped --tags bench -r expanded`
+- Per-type probes (time plus achieved tier/uniqueness): `PROBE=trail PROBE_SIZES=6,8,10 flutter test test/bench/probe_test.dart --run-skipped --tags bench -r expanded`
 
 ## Architecture
 - `lib/core/puzzle_type.dart`: the `PuzzleType<P, S>` plug-in contract. P is the immutable puzzle (clues and solution), S is the immutable play state.
@@ -54,16 +56,17 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 |----|------|------|-------|
 | mambo | Sun & Moon | ValueGridType | tiers: propagation / probing |
 | sudoku | Sudoku | ValueGridType | 4/6/9, pencil marks (auto-removal is a setting, off by default), peer + same-value highlight, tiers: singles / locked+pairs / unique-only |
-| kings | Crowns | ValueGridType | regions grown balanced + local repair for uniqueness |
+| kings | Crowns | ValueGridType | balanced regions + counterexample repair for uniqueness, then `RegionSearch` (lib/core/region_search.dart) tunes borders to the target logic tier |
 | hues | Hues | ValueGridType | 8-neighbour same-colour counts of blank cells; numbers count down as matching cells are painted |
 | mosaic | Mosaic | PuzzleType | flood-it, limit = greedy plan + slack |
 | blend | Blend | PuzzleType | free flood-it (repaint any patch), limit = best of 4 greedy runs + slack |
 | pipes | Pipes | PuzzleType | spanning tree, rule-based win (any valid tree) |
-| shikaku | Shikaku | PuzzleType | drag rectangles |
-| trail | Trail | PuzzleType | Hamiltonian path; capped at 7×7 (8×8 uniqueness proof too slow) |
+| shikaku | Shikaku | PuzzleType | drag rectangles; local search moves numbers inside their rectangles to reach the tier |
+| trail | Trail | PuzzleType | Hamiltonian path; sound edge logic (`trail_logic.dart`) adds waypoints where it stalls, so no path search; up to 10×10 |
 | atoms | Atoms | PuzzleType | Hashi bridges; sound interval solver |
-| lits | LITS | ValueGridType | capped at 7×7 (bigger boards generate too slowly); uniqueness via search |
+| lits | LITS | ValueGridType | regions grown cell by cell keeping the solution unique (monotone, so rejected pairs are never retried); capped at 7×7 (8×8 takes 1–5 s) |
 
 ## Known follow-ups
-- Faster Trail/LITS solvers to re-enable 8×8+ boards.
+- A faster LITS uniqueness check (or logic-tier construction) to re-enable 8×8+ boards.
+- Kings easy (tier 1) on 10×10 often lands on tier 2–3; tier-1 logic is very weak on big boards.
 - LITS difficulty is only a region-shape knob (no logic-tier grading yet).

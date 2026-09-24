@@ -34,8 +34,7 @@ class TrailType extends PuzzleType<TrailPuzzle, TrailState> {
 Drag to draw. Drag back over the path to undo steps, or tap a cell of the path to cut it there.''';
 
   @override
-  // 8×8 takes several seconds to prove unique; capped until the solver is faster.
-  List<GridSize> get sizes => [for (var n = 4; n <= 7; n++) GridSize.square(n)];
+  List<GridSize> get sizes => [for (var n = 4; n <= 10; n++) GridSize.square(n)];
   @override
   GridSize get defaultSize => const GridSize.square(6);
   @override

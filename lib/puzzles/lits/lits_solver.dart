@@ -21,24 +21,35 @@ class Placement {
 ///          (a placement clashing with every option of a neighbour is out);
 ///          cells in all/none of a region's placements become known.
 ///  Tier 2: + probing placements.
+///
+/// Cells in region -1 belong to no region and are known to be unshaded; the
+/// generator uses them while it grows regions around the solution.
 class LitsSolver {
   LitsSolver(this.n, this.regions) : regionCount = regions.reduce((a, b) => a > b ? a : b) + 1 {
     cellsOf = List.generate(regionCount, (_) => <int>[]);
     for (var i = 0; i < n * n; i++) {
-      cellsOf[regions[i]].add(i);
+      if (regions[i] >= 0) cellsOf[regions[i]].add(i);
     }
     nbs = List.generate(n * n, (i) {
       final r = i ~/ n, c = i % n;
       return [if (r > 0) i - n, if (r < n - 1) i + n, if (c > 0) i - 1, if (c < n - 1) i + 1];
     });
-    candidates = [for (var r = 0; r < regionCount; r++) _enumerate(r)];
+    candidates = List.generate(regionCount, (_) => <Placement>[]);
+    for (final pl in _placementsOn(n)) {
+      final r = regions[pl.cells[0]];
+      if (r >= 0 && pl.cells.every((i) => regions[i] == r)) candidates[r].add(pl);
+    }
     neighbours = List.generate(regionCount, (_) => <int>{});
     for (var i = 0; i < n * n; i++) {
+      if (regions[i] < 0) continue;
       for (final j in nbs[i]) {
-        if (regions[j] != regions[i]) neighbours[regions[i]].add(regions[j]);
+        if (regions[j] >= 0 && regions[j] != regions[i]) neighbours[regions[i]].add(regions[j]);
       }
     }
   }
+
+  /// Starting knowledge: region-less cells are unshaded.
+  List<int> _initialKnown() => [for (final r in regions) r < 0 ? -1 : 0];
 
   late final List<Set<int>> neighbours;
 
@@ -93,34 +104,40 @@ class LitsSolver {
 
   List<int> _nb(int i) => nbs[i];
 
-  List<Placement> _enumerate(int region) {
-    final seen = <String>{};
-    final out = <Placement>[];
-    void grow(List<int> cur) {
-      if (cur.length == 4) {
-        final key = (List.of(cur)..sort()).join(',');
-        if (!seen.add(key)) return;
-        final shape = classify(cur, n);
-        if (shape != null) out.add(Placement(List.of(cur)..sort(), shape, n * n));
-        return;
-      }
-      final frontier = <int>{};
-      for (final i in cur) {
-        for (final j in _nb(i)) {
-          if (regions[j] == region && !cur.contains(j)) frontier.add(j);
+  /// Every L/I/T/S placement on an n×n board (shared, read-only).
+  static List<Placement> _placementsOn(int n) => _allPlacements.putIfAbsent(n, () {
+        final seen = <String>{};
+        final out = <Placement>[];
+        List<int> nb(int i) {
+          final r = i ~/ n, c = i % n;
+          return [if (r > 0) i - n, if (r < n - 1) i + n, if (c > 0) i - 1, if (c < n - 1) i + 1];
         }
-      }
-      for (final j in frontier) {
-        if (j < cur.first) continue; // anchor = smallest cell
-        grow([...cur, j]);
-      }
-    }
 
-    for (final i in cellsOf[region]) {
-      grow([i]);
-    }
-    return out;
-  }
+        void grow(List<int> cur) {
+          if (cur.length == 4) {
+            final sorted = List.of(cur)..sort();
+            if (!seen.add(sorted.join(','))) return;
+            final shape = classify(sorted, n);
+            if (shape != null) out.add(Placement(sorted, shape, n * n));
+            return;
+          }
+          final frontier = <int>{};
+          for (final i in cur) {
+            for (final j in nb(i)) {
+              if (!cur.contains(j) && j > cur.first) frontier.add(j);
+            }
+          }
+          for (final j in frontier) {
+            grow([...cur, j]);
+          }
+        }
+
+        for (var i = 0; i < n * n; i++) {
+          grow([i]);
+        }
+        return out;
+      });
+  static final _allPlacements = <int, List<Placement>>{};
 
   /// Whether shading [pl] completes a 2×2 block together with known shaded cells.
   bool _makes2x2(Placement pl, List<int> known) {
@@ -167,7 +184,7 @@ class LitsSolver {
           for (final i in pl.cells) {
             for (final j in _nb(i)) {
               final o = regions[j];
-              if (o != r && cand[o].length == 1 && cand[o].single.shape == pl.shape && cand[o].single.has(j)) {
+              if (o >= 0 && o != r && cand[o].length == 1 && cand[o].single.shape == pl.shape && cand[o].single.has(j)) {
                 return true;
               }
             }
@@ -233,7 +250,7 @@ class LitsSolver {
   /// Remaining placements per region after logic up to [tier] (null on contradiction).
   List<List<Placement>>? logicCandidates(int tier) {
     final cand = _copy(candidates);
-    final known = List<int>.filled(n * n, 0);
+    final known = _initialKnown();
     if (!_propagate(cand, known)) return null;
     if (tier >= 2) {
       var progress = true;
@@ -283,7 +300,7 @@ class LitsSolver {
       }
     }
 
-    rec(_copy(candidates), List<int>.filled(n * n, 0));
+    rec(_copy(candidates), _initialKnown());
     if (nodes > budget && out.length == 1) out.add(out.first);
     return out;
   }

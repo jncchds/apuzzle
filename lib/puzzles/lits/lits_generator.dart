@@ -4,31 +4,44 @@ import '../../core/difficulty.dart';
 import 'lits_model.dart';
 import 'lits_solver.dart';
 
-/// Place a connected set of tetrominoes (valid LITS shading), grow one region
-/// around each, then reshape region borders until the solution is unique.
+/// Uniqueness-guided construction:
+///  1. place a connected set of tetrominoes (a valid LITS shading) and make
+///     each one its own region;
+///  2. hand out the remaining cells one at a time, most constrained first,
+///     only where the shading stays the unique solution (cells without a
+///     region count as unshaded). Joining a region only adds solutions, so a
+///     rejected (cell, region) pair stays rejected and is never re-checked;
+///  3. if some cell fits nowhere, grow again with that cell first (while
+///     regions are small); if it still fits nowhere, pick new pieces.
+/// Difficulty is a region-shape knob: harder levels prefer growth that
+/// creates more candidate placements.
 LitsPuzzle generateLits(GenParams params) {
   final n = params.size.rows;
   final rng = Random(params.seed);
-  // Harder levels get less constrained regions (more candidate placements).
   final greed = switch (params.difficulty) {
     Difficulty.easy => 1.0,
-    Difficulty.medium => 0.5,
-    _ => 0.2,
+    Difficulty.medium => 0.3,
+    _ => -0.3,
   };
 
-  for (var attempt = 0; attempt < 40; attempt++) {
+  for (var attempt = 0; attempt < 20; attempt++) {
     final pieces = _placePieces(n, n * n, rng);
-    if (pieces == null || pieces.length < 3) continue;
-    final regions = _growRegions(n, pieces, greed, rng);
+    if (pieces.length < 3) continue;
     final shaded = List<bool>.filled(n * n, false);
     for (final p in pieces) {
       for (final i in p) {
         shaded[i] = true;
       }
     }
-    if (litsConflicts(n, regions, shaded, complete: true).isNotEmpty) continue;
-    if (!_makeUnique(n, regions, shaded, rng)) continue;
-    return LitsPuzzle(n: n, regions: regions, shaded: shaded);
+    // A cell that fits nowhere is handled first on the next try, while the
+    // regions are still small; if it dies even then, the pieces are to blame.
+    final first = <int>[];
+    for (var retry = 0; retry < 6; retry++) {
+      final (regions, dead) = _growRegions(n, pieces, greed, first, rng);
+      if (regions != null) return LitsPuzzle(n: n, regions: regions, shaded: shaded);
+      if (first.contains(dead)) break;
+      first.add(dead);
+    }
   }
   return generateLits(params.withSeed(params.seed + 15485863));
 }
@@ -39,7 +52,10 @@ List<int> _nb(int n, int i) {
 }
 
 /// All tetromino placements (L/I/T/S) anywhere on the board.
-List<List<int>> _allTetros(int n) {
+List<List<int>> _allTetros(int n) => List.of(_tetroCache.putIfAbsent(n, () => _enumerateTetros(n)));
+final _tetroCache = <int, List<List<int>>>{};
+
+List<List<int>> _enumerateTetros(int n) {
   final seen = <String>{};
   final out = <List<int>>[];
   void grow(List<int> cur) {
@@ -65,7 +81,9 @@ List<List<int>> _allTetros(int n) {
   return out;
 }
 
-List<List<int>>? _placePieces(int n, int target, Random rng) {
+/// Adds random tetrominoes that touch the shading so far, never a 2×2 block
+/// and never next to the same shape, until [target] pieces or nothing fits.
+List<List<int>> _placePieces(int n, int target, Random rng) {
   final all = _allTetros(n)..shuffle(rng);
   final owner = List<int>.filled(n * n, -1);
   final pieces = <List<int>>[];
@@ -84,45 +102,38 @@ List<List<int>>? _placePieces(int n, int target, Random rng) {
       }
     }
     if (!touches) return false;
-    // no 2×2
+    bool sh(int x) => set.contains(x) || owner[x] >= 0;
     for (final i in t) {
       final r = i ~/ n, c = i % n;
       for (final (dr, dc) in const [(0, 0), (-1, 0), (0, -1), (-1, -1)]) {
         final r0 = r + dr, c0 = c + dc;
         if (r0 < 0 || c0 < 0 || r0 + 1 >= n || c0 + 1 >= n) continue;
         final a = r0 * n + c0;
-        bool sh(int x) => set.contains(x) || owner[x] >= 0;
         if (sh(a) && sh(a + 1) && sh(a + n) && sh(a + n + 1)) return false;
       }
     }
-    // Keep a free cell next to every piece so regions can have spare room.
     return true;
   }
 
-  var misses = 0;
-  while (pieces.length < target && misses < 3) {
-    var placed = false;
-    for (final t in all) {
-      if (fits(t)) {
-        for (final i in t) {
-          owner[i] = pieces.length;
-        }
-        pieces.add(t);
-        shapes.add(classify(t, n)!);
-        placed = true;
-        all.shuffle(rng);
-        break;
-      }
+  while (pieces.length < target) {
+    final t = all.firstWhere(fits, orElse: () => const []);
+    if (t.isEmpty) break;
+    for (final i in t) {
+      owner[i] = pieces.length;
     }
-    if (!placed) misses++;
+    pieces.add(t);
+    shapes.add(classify(t, n)!);
+    all.shuffle(rng);
   }
-  return pieces.isEmpty ? null : pieces;
+  return pieces;
 }
 
-/// Grows regions over unshaded cells, each step choosing the (cell, region)
-/// pair that adds the fewest new tetromino placements, which keeps alternative
-/// solutions rare. Small regions are slightly preferred for balance.
-List<int> _growRegions(int n, List<List<int>> pieces, double greed, Random rng) {
+/// Unique within the search budget (an exhausted budget counts as ambiguous).
+bool _unique(int n, List<int> regions) => LitsSolver(n, regions).solutions(budget: 4000).length == 1;
+
+/// Step 2. Returns the regions, or the first cell that fits nowhere. Cells in
+/// [first] go before all others, in that order, once they touch a region.
+(List<int>?, int) _growRegions(int n, List<List<int>> pieces, double greed, List<int> first, Random rng) {
   final regions = List<int>.filled(n * n, -1);
   final size = List<int>.filled(pieces.length, 4);
   for (var k = 0; k < pieces.length; k++) {
@@ -148,78 +159,37 @@ List<int> _growRegions(int n, List<List<int>> pieces, double greed, Random rng) 
     return count;
   }
 
-  while (regions.contains(-1)) {
-    var bestScore = double.infinity;
-    final best = <(int, int)>[];
+  final failed = <int>{};
+  var free = regions.where((r) => r < 0).length;
+  while (free > 0) {
+    // (score, cell, region): [first] cells, then fewest live options, then the
+    // difficulty's placement preference and small regions.
+    final pairs = <(double, int, int)>[];
     for (var u = 0; u < n * n; u++) {
       if (regions[u] >= 0) continue;
       final opts = {for (final j in _nb(n, u)) if (regions[j] >= 0) regions[j]};
-      for (final r in opts) {
-        final score = newPlacements(u, r) * greed + size[r] * 0.35 + rng.nextDouble() * (0.5 + 3 * (1 - greed));
-        if (score < bestScore - 1e-9) {
-          bestScore = score;
-          best
-            ..clear()
-            ..add((u, r));
-        } else if ((score - bestScore).abs() < 1e-9) {
-          best.add((u, r));
-        }
+      final live = [for (final r in opts) if (!failed.contains(u * 1000 + r)) r];
+      if (live.isEmpty && opts.isNotEmpty) return (null, u);
+      final rank = first.indexOf(u);
+      for (final r in live) {
+        final score = (rank >= 0 ? rank - 1000 : live.length * 100) +
+            newPlacements(u, r) * greed +
+            size[r] * 0.35 +
+            rng.nextDouble() * 1.5;
+        pairs.add((score, u, r));
       }
     }
-    final (u, r) = best[rng.nextInt(best.length)];
-    regions[u] = r;
-    size[r]++;
-  }
-  return regions;
-}
-
-bool _connectedWithout(int n, List<int> regions, int region, int removed) {
-  final cells = [for (var i = 0; i < n * n; i++) if (regions[i] == region && i != removed) i];
-  if (cells.isEmpty) return false;
-  final seen = {cells.first};
-  final stack = [cells.first];
-  while (stack.isNotEmpty) {
-    for (final j in _nb(n, stack.removeLast())) {
-      if (j != removed && regions[j] == region && seen.add(j)) stack.add(j);
+    pairs.sort((a, b) => a.$1.compareTo(b.$1));
+    for (final (_, u, r) in pairs) {
+      regions[u] = r;
+      if (_unique(n, regions)) {
+        size[r]++;
+        free--;
+        break;
+      }
+      regions[u] = -1;
+      failed.add(u * 1000 + r);
     }
   }
-  return seen.length == cells.length;
-}
-
-/// Reshapes regions until a (budgeted) search proves the solution unique,
-/// moving cells that an alternative solution relies on.
-bool _makeUnique(int n, List<int> regions, List<bool> shaded, Random rng) {
-  for (var it = 0; it < 80; it++) {
-    final sols = LitsSolver(n, regions).solutions(budget: 4000);
-    if (sols.length == 1) return true;
-    if (sols.isEmpty) return false;
-    final alt = sols.firstWhere((x) => !_same(x, shaded), orElse: () => sols.last);
-    final diff = <int>{};
-    for (var i = 0; i < n * n; i++) {
-      if (alt[i] != shaded[i]) diff.add(regions[i]);
-    }
-    final primary = [for (var i = 0; i < n * n; i++) if (alt[i] && !shaded[i]) i]..shuffle(rng);
-    final secondary = [
-      for (var i = 0; i < n * n; i++)
-        if (!shaded[i] && (diff.isEmpty || diff.contains(regions[i])) && !primary.contains(i)) i,
-    ]..shuffle(rng);
-    var moved = false;
-    for (final x in [...primary, ...secondary]) {
-      final from = regions[x];
-      final opts = {for (final j in _nb(n, x)) if (regions[j] != from) regions[j]}.toList();
-      if (opts.isEmpty || !_connectedWithout(n, regions, from, x)) continue;
-      regions[x] = opts[rng.nextInt(opts.length)];
-      moved = true;
-      break;
-    }
-    if (!moved) return false;
-  }
-  return false;
-}
-
-bool _same(List<bool> a, List<bool> b) {
-  for (var i = 0; i < a.length; i++) {
-    if (a[i] != b[i]) return false;
-  }
-  return true;
+  return (regions, -1);
 }

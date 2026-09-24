@@ -1,3 +1,5 @@
 tags:
   snapshot:
     skip: "Visual snapshots; run with: flutter test test/snapshots --run-skipped --tags snapshot"
+  bench:
+    skip: "Generator benchmark; run with: flutter test test/bench --run-skipped --tags bench"

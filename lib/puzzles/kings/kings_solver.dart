@@ -6,6 +6,9 @@
 ///  2. + line/region confinement (all candidates of a unit in one line/region)
 ///     and "attack" elimination (a cell whose king would empty another unit);
 ///  3. + probing (assume a king, propagate tier 2, reject on contradiction).
+///
+/// Cells in region -1 belong to no region and can't hold a king; the generator
+/// uses them while it grows regions around the solution.
 class KingsSolver {
   KingsSolver(this.n, this.regions) {
     for (var r = 0; r < n; r++) {
@@ -16,10 +19,10 @@ class KingsSolver {
     }
     final byRegion = List.generate(n, (_) => <int>[]);
     for (var i = 0; i < n * n; i++) {
-      byRegion[regions[i]].add(i);
+      if (regions[i] >= 0) byRegion[regions[i]].add(i);
     }
     units.addAll(byRegion);
-    unitsOf = List.generate(n * n, (i) => [i ~/ n, n + i % n, 2 * n + regions[i]]);
+    unitsOf = List.generate(n * n, (i) => [i ~/ n, n + i % n, if (regions[i] >= 0) 2 * n + regions[i]]);
     attacked = List.generate(n * n, (i) {
       final s = <int>{};
       for (final u in unitsOf[i]) {
@@ -45,11 +48,21 @@ class KingsSolver {
 
   /// Returns the set of king cells if solved by logic up to [tier], else null.
   List<int>? solveLogic(int tier, {List<bool>? startCand}) {
-    final cand = startCand ?? List<bool>.filled(n * n, true);
+    final cand = startCand ?? [for (final r in regions) r >= 0];
     final king = List<bool>.filled(n * n, false);
     if (!_propagate(cand, king, tier)) return null;
     final kings = [for (var i = 0; i < n * n; i++) if (king[i]) i];
     return kings.length == n ? kings : null;
+  }
+
+  /// How far logic up to [tier] is from a full solve (0 = solved): kings it
+  /// can't place, then candidate cells it leaves open.
+  int slack(int tier) {
+    final cand = [for (final r in regions) r >= 0];
+    final king = List<bool>.filled(n * n, false);
+    _propagate(cand, king, tier);
+    final missing = n - king.where((k) => k).length;
+    return missing == 0 ? 0 : missing * n * n + cand.where((c) => c).length;
   }
 
   bool _place(List<bool> cand, List<bool> king, int i) {
@@ -65,6 +78,8 @@ class KingsSolver {
 
   bool _unitHasKing(List<bool> king, int u) => units[u].any((i) => king[i]);
 
+  /// Applies logic up to [tier] in place. False only on a contradiction; a
+  /// stall returns true with kings still missing.
   bool _propagate(List<bool> cand, List<bool> king, int tier) {
     while (true) {
       var progress = false;
@@ -85,7 +100,7 @@ class KingsSolver {
       }
       if (progress) continue;
       if (king.where((k) => k).length == n) return true;
-      if (tier < 2) return false;
+      if (tier < 2) return true; // stalled
 
       // Confinement: all candidates of a unit inside another unit.
       for (var u = 0; u < units.length && !progress; u++) {
@@ -119,7 +134,7 @@ class KingsSolver {
         }
       }
       if (progress) continue;
-      if (tier < 3) return false;
+      if (tier < 3) return true;
 
       // Probing.
       for (var i = 0; i < n * n && !progress; i++) {
@@ -130,7 +145,7 @@ class KingsSolver {
           progress = true;
         }
       }
-      if (!progress) return false;
+      if (!progress) return true;
     }
   }
 
@@ -149,7 +164,7 @@ class KingsSolver {
       for (var c = 0; c < n; c++) {
         if (usedCol[c]) continue;
         final reg = regions[r * n + c];
-        if (usedReg[reg]) continue;
+        if (reg < 0 || usedReg[reg]) continue;
         if (r > 0 && (cols[r - 1] - c).abs() <= 1) continue;
         cols[r] = c;
         usedCol[c] = true;

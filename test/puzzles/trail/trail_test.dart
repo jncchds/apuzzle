@@ -1,6 +1,7 @@
 import 'package:apuzzle/core/difficulty.dart';
 import 'package:apuzzle/core/grid.dart';
 import 'package:apuzzle/puzzles/trail/trail_generator.dart';
+import 'package:apuzzle/puzzles/trail/trail_logic.dart';
 import 'package:apuzzle/puzzles/trail/trail_model.dart';
 import 'package:apuzzle/puzzles/trail/trail_solver.dart';
 import 'package:apuzzle/puzzles/trail/trail_type.dart';
@@ -8,9 +9,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   const type = TrailType();
-  for (final n in [4, 5, 6, 7]) {
+  for (final n in [4, 5, 6, 7, 8, 10]) {
     for (final d in [Difficulty.easy, Difficulty.medium, Difficulty.hard]) {
-      test('trail ${n}x$n ${d.name}: valid, unique, deterministic', () {
+      test('trail ${n}x$n ${d.name}: valid, logically unique, deterministic', () {
         final counts = <int>[];
         for (var seed = 1; seed <= 3; seed++) {
           final params = GenParams(size: GridSize.square(n), difficulty: d, seed: seed);
@@ -18,9 +19,14 @@ void main() {
           final p = generateTrail(params);
           sw.stop();
           expect(trailValid(p, p.solution), isTrue);
-          final sols = TrailSolver(n, n, p.numbers).solutions();
-          expect(sols.length, 1);
-          expect(sols.single, p.solution);
+          // The edge logic is sound, so a full solve proves uniqueness.
+          expect(TrailLogic(n, n, p.numbers).solve(d == Difficulty.easy ? 1 : 2), p.solution);
+          if (n <= 6) {
+            // Cross-check the logic against exhaustive search.
+            final sols = TrailSolver(n, n, p.numbers).solutions();
+            expect(sols.length, 1);
+            expect(sols.single, p.solution);
+          }
           expect(generateTrail(params).toJson(), p.toJson());
           expect(sw.elapsedMilliseconds, lessThan(10000), reason: '${sw.elapsedMilliseconds}ms');
           counts.add(p.lastNumber);
