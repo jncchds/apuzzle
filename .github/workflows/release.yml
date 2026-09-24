@@ -1,0 +1,203 @@
+# Builds every platform and publishes a GitHub release on pushes to
+# release/X.Y.Z branches. The version comes from the branch name (the
+# pubspec version is ignored) and the build number is the workflow run number,
+# so every push produces a higher Android versionCode.
+#
+# Required secrets: ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD (also
+# used as the key password) and ANDROID_KEY_ALIAS.
+name: Release
+
+on:
+  push:
+    branches: ['release/*']
+  workflow_dispatch:
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: '3.47.5'
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      name: ${{ steps.v.outputs.name }}
+      number: ${{ steps.v.outputs.number }}
+    steps:
+      - id: v
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#release/}"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Branch must be named release/X.Y.Z (got '$GITHUB_REF_NAME')"
+            exit 1
+          fi
+          echo "name=$version" >> "$GITHUB_OUTPUT"
+          echo "number=$GITHUB_RUN_NUMBER" >> "$GITHUB_OUTPUT"
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+
+  android:
+    needs: version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Set up signing
+        shell: bash
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "::error::ANDROID_KEYSTORE_BASE64 is not set"
+            exit 1
+          fi
+          echo "$KEYSTORE_BASE64" | base64 --decode > android/upload-keystore.jks
+          cat > android/key.properties <<EOF
+          storeFile=upload-keystore.jks
+          storePassword=$KEYSTORE_PASSWORD
+          keyAlias=$KEY_ALIAS
+          keyPassword=$KEYSTORE_PASSWORD
+          EOF
+      - run: flutter pub get
+      - name: Build APK and App Bundle
+        run: |
+          flutter build apk --release --build-name=${{ needs.version.outputs.name }} --build-number=${{ needs.version.outputs.number }}
+          flutter build appbundle --release --build-name=${{ needs.version.outputs.name }} --build-number=${{ needs.version.outputs.number }}
+      - name: Collect
+        run: |
+          mkdir dist
+          cp build/app/outputs/flutter-apk/app-release.apk dist/apuzzle-${{ needs.version.outputs.name }}-android.apk
+          cp build/app/outputs/bundle/release/app-release.aab dist/apuzzle-${{ needs.version.outputs.name }}-android.aab
+      - name: Remove signing material
+        if: always()
+        run: rm -f android/upload-keystore.jks android/key.properties
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android
+          path: dist/*
+
+  windows:
+    needs: version
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter build windows --release --build-name=${{ needs.version.outputs.name }} --build-number=${{ needs.version.outputs.number }}
+      - name: Zip
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath dist/apuzzle-${{ needs.version.outputs.name }}-windows-x64.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: dist/*
+
+  web:
+    needs: version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter build web --release --build-name=${{ needs.version.outputs.name }} --build-number=${{ needs.version.outputs.number }}
+      - name: Zip
+        run: |
+          mkdir dist
+          (cd build/web && zip -r "$GITHUB_WORKSPACE/dist/apuzzle-${{ needs.version.outputs.name }}-web.zip" .)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: dist/*
+
+  ios:
+    needs: version
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      # No Apple signing secrets yet: this is an unsigned build, for sideloading
+      # tools that re-sign it (AltStore, Sideloadly, …).
+      - run: flutter build ios --release --no-codesign --build-name=${{ needs.version.outputs.name }} --build-number=${{ needs.version.outputs.number }}
+      - name: Package unsigned IPA
+        run: |
+          mkdir -p dist Payload
+          cp -R build/ios/iphoneos/Runner.app Payload/
+          zip -qr dist/apuzzle-${{ needs.version.outputs.name }}-ios-unsigned.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios
+          path: dist/*
+
+  release:
+    needs: [version, test, android, windows, web, ios]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: v${{ needs.version.outputs.name }}
+          VERSION: ${{ needs.version.outputs.name }}
+          BUILD: ${{ needs.version.outputs.number }}
+        run: |
+          notes="APuzzle $VERSION (build $BUILD) from \`$GITHUB_REF_NAME\` @ ${GITHUB_SHA::7}.
+
+          - Android: \`.apk\` to install directly, \`.aab\` for Google Play
+          - Windows: unzip and run \`apuzzle.exe\`
+          - Web: static files, serve from any web server
+          - iOS: unsigned \`.ipa\`, re-sign with a sideloading tool"
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            # A new push to the same release branch: point the tag at this
+            # commit and replace the assets.
+            git_ref="refs/tags/$TAG"
+            gh api -X PATCH "repos/$GH_REPO/git/$git_ref" -f sha="$GITHUB_SHA" -F force=true
+            gh release edit "$TAG" --notes "$notes"
+            gh release upload "$TAG" dist/* --clobber
+          else
+            gh release create "$TAG" dist/* --target "$GITHUB_SHA" --title "APuzzle $VERSION" --notes "$notes"
+          fi
