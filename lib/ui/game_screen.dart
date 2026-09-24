@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
 import '../core/settings.dart';
 import 'new_game_sheet.dart' show formatDuration;
+import 'puzzle_code_ui.dart';
 import 'win_overlay.dart';
 
 /// Plays one puzzle. With [params] == null it resumes the saved game.
@@ -63,7 +65,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
       ));
       return;
     }
-    final save = widget.params == null ? context.read<GameStore>().readSave(type.id) : null;
+    final save = _resumable(context.read<GameStore>().readSave(type.id));
     if (save != null) {
       try {
         _attach(GameController.fromSave(
@@ -81,6 +83,14 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   }
 
   int _seed() => Random().nextInt(1 << 31);
+
+  /// The saved game, if there's nothing new to start or the requested puzzle
+  /// is the one saved (a share link opened twice, a web page reload).
+  Map<String, dynamic>? _resumable(Map<String, dynamic>? save) {
+    final params = widget.params;
+    if (save == null || params == null) return save;
+    return jsonEncode(save['params']) == jsonEncode(params.toJson()) ? save : null;
+  }
 
   Future<void> _newGame(GenParams params) async {
     final settings = context.read<Settings>();
@@ -232,9 +242,20 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
           IconButton(icon: const Icon(Icons.help_outline), tooltip: 'Rules', onPressed: _showRules),
           PopupMenuButton<String>(
             onSelected: (v) {
-              if (v == 'new' && c != null) _newGame(c.params.withSeed(_seed()));
+              switch (v) {
+                case 'new' when c != null:
+                  _newGame(c.params.withSeed(_seed()));
+                case 'copy' when c != null:
+                  copyWithToast(context, c.link, 'Share link copied');
+                case 'code':
+                  showEnterCodeDialog(context, replace: true);
+              }
             },
-            itemBuilder: (_) => const [PopupMenuItem(value: 'new', child: Text('New puzzle'))],
+            itemBuilder: (_) => [
+              const PopupMenuItem(value: 'new', child: Text('New puzzle')),
+              if (c != null) const PopupMenuItem(value: 'copy', child: Text('Copy share link')),
+              const PopupMenuItem(value: 'code', child: Text('Play a puzzle code…')),
+            ],
           ),
         ],
       ),
@@ -269,6 +290,24 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
             child: Row(children: [
               Text('${c.params.size.label} · ${c.params.difficulty.label}', style: theme.textTheme.labelLarge),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Tooltip(
+                  message: 'Copy share link',
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(6),
+                    onTap: () => copyWithToast(context, c.link, 'Share link copied'),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                      child: Text(
+                        '#${c.params.seed.toRadixString(36).toUpperCase()}',
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               const Spacer(),
               if (type.supportsModeSwitch && !c.solved)
                 SegmentedButton<InputMode>(

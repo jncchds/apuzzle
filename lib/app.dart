@@ -5,18 +5,26 @@ import 'core/settings.dart';
 import 'ui/home_screen.dart';
 
 class APuzzleApp extends StatelessWidget {
-  const APuzzleApp({super.key});
+  const APuzzleApp({super.key, this.navigatorKey, this.messengerKey});
+
+  final GlobalKey<NavigatorState>? navigatorKey;
+  final GlobalKey<ScaffoldMessengerState>? messengerKey;
 
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
     return MaterialApp(
       title: 'APuzzle',
+      navigatorKey: navigatorKey,
+      scaffoldMessengerKey: messengerKey,
       debugShowCheckedModeBanner: false,
       themeMode: settings.themeMode,
       theme: _theme(Brightness.light),
       darkTheme: _theme(Brightness.dark),
-      home: const HomeScreen(),
+      routes: {'/': (_) => const HomeScreen()},
+      // A share link's path (/apuzzle/?p=…) arrives as the initial route; always
+      // start at home and let ShareLinkHandler open the puzzle on top.
+      onGenerateInitialRoutes: (_) => [MaterialPageRoute<void>(builder: (_) => const HomeScreen(), settings: const RouteSettings(name: '/'))],
     );
   }
 }

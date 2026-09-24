@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'difficulty.dart';
 import 'grid.dart';
 import 'persistence.dart';
+import 'puzzle_code.dart';
 import 'puzzle_type.dart';
 import 'settings.dart';
 
@@ -31,6 +32,10 @@ class GameController extends ChangeNotifier {
   final Object puzzle;
   final Settings settings;
   final GameStore store;
+
+  /// Shareable code that regenerates this exact puzzle.
+  String get code => PuzzleCode.format(type, params);
+  String get link => PuzzleCode.link(type, params);
 
   Object _state;
   Object get state => _state;

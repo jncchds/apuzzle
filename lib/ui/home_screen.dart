@@ -5,6 +5,7 @@ import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
 import '../core/registry.dart';
 import 'new_game_sheet.dart';
+import 'puzzle_code_ui.dart';
 import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -27,6 +28,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('APuzzle'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.pin_outlined),
+            tooltip: 'Play a puzzle code',
+            onPressed: () async {
+              await showEnterCodeDialog(context);
+              if (mounted) setState(() {});
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             tooltip: 'Settings',

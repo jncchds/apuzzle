@@ -92,6 +92,30 @@ jobs:
           mkdir dist
           cp build/app/outputs/flutter-apk/app-release.apk dist/apuzzle-${{ needs.version.outputs.name }}-android.apk
           cp build/app/outputs/bundle/release/app-release.aab dist/apuzzle-${{ needs.version.outputs.name }}-android.aab
+      # Android App Links: lets the app open share links without asking. Published
+      # to the user site by the assetlinks job.
+      - name: Generate assetlinks.json
+        shell: bash
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          fp=$(keytool -list -v -keystore android/upload-keystore.jks -alias "$KEY_ALIAS" -storepass "$KEYSTORE_PASSWORD" | awk '/SHA256:/ {print $2; exit}')
+          if [ -z "$fp" ]; then
+            echo "::error::Could not read the signing certificate fingerprint"
+            exit 1
+          fi
+          mkdir assetlinks
+          cat > assetlinks/assetlinks.json <<EOF
+          [{
+            "relation": ["delegate_permission/common.handle_all_urls"],
+            "target": {"namespace": "android_app", "package_name": "ua.pp.chds.apuzzle", "sha256_cert_fingerprints": ["$fp"]}
+          }]
+          EOF
+      - uses: actions/upload-artifact@v4
+        with:
+          name: assetlinks
+          path: assetlinks/assetlinks.json
       - name: Remove signing material
         if: always()
         run: rm -f android/upload-keystore.jks android/key.properties
@@ -142,6 +166,71 @@ jobs:
         with:
           name: web
           path: dist/*
+      # Share links point at https://jncchds.github.io/apuzzle/ (lib/core/puzzle_code.dart).
+      - run: flutter build web --release --base-href /apuzzle/ --output build/pages --build-name=${{ needs.version.outputs.name }} --build-number=${{ needs.version.outputs.number }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/pages
+
+  # App Links are verified at the domain root, so assetlinks.json goes to the
+  # user site repo (jncchds/jncchds.github.io, served from its default branch).
+  # Needs the USER_SITE_TOKEN secret: a fine-grained token with Contents
+  # read/write on that repo. Skipped with a warning when it is missing.
+  assetlinks:
+    needs: [test, android]
+    runs-on: ubuntu-latest
+    steps:
+      - id: token
+        shell: bash
+        env:
+          TOKEN: ${{ secrets.USER_SITE_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::warning::USER_SITE_TOKEN is not set; assetlinks.json was not published"
+            echo "set=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "set=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.token.outputs.set == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: jncchds/jncchds.github.io
+          token: ${{ secrets.USER_SITE_TOKEN }}
+          path: site
+      - if: steps.token.outputs.set == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: assetlinks
+          path: site/.well-known
+      - if: steps.token.outputs.set == 'true'
+        name: Commit and push
+        shell: bash
+        working-directory: site
+        run: |
+          touch .nojekyll # Jekyll would skip the dot-directory
+          git add .nojekyll .well-known/assetlinks.json
+          if git diff --cached --quiet; then
+            echo "assetlinks.json is up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update APuzzle assetlinks.json"
+          git push
+
+  # Needs Settings → Pages → Source: "GitHub Actions".
+  pages:
+    needs: [test, web]
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
 
   ios:
     needs: version

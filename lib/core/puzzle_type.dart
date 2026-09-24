@@ -34,6 +34,10 @@ abstract class PuzzleType<P, S> {
   /// Pure and deterministic for a given [params] (same seed → same puzzle).
   P generate(GenParams params);
 
+  /// Part of the shareable puzzle code. Bump it whenever a change to [generate]
+  /// makes an old seed produce a different puzzle, so stale codes are rejected.
+  int get generatorVersion => 1;
+
   S initialState(P puzzle);
   bool isComplete(P puzzle, S state);
 

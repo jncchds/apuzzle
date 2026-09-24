@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../core/game_controller.dart';
 import 'new_game_sheet.dart' show formatDuration;
+import 'puzzle_code_ui.dart';
 
 /// Confetti + result card shown after solving.
 class WinOverlay extends StatelessWidget {
@@ -21,6 +22,9 @@ class WinOverlay extends StatelessWidget {
     final stats = controller.winStats;
     final time = controller.elapsed;
     final isBest = stats?.bestMs == time.inMilliseconds;
+    final hints = controller.hintsUsed;
+    final shareText = 'I solved this ${controller.type.name} in ${formatDuration(time)}'
+        '${hints > 0 ? ' with $hints hint${hints == 1 ? '' : 's'}' : ''}. Can you beat it? ${controller.link}';
 
     return Stack(children: [
       Positioned.fill(
@@ -52,8 +56,16 @@ class WinOverlay extends StatelessWidget {
                         '${controller.hintsUsed > 0 ? ' · ${controller.hintsUsed} hint${controller.hintsUsed == 1 ? '' : 's'}' : ''}',
                         style: theme.textTheme.bodyMedium,
                       ),
+                      const SizedBox(height: 4),
+                      Text(controller.code, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
                       const SizedBox(height: 16),
                       Row(mainAxisSize: MainAxisSize.min, children: [
+                        IconButton(
+                          icon: const Icon(Icons.share_rounded),
+                          tooltip: 'Copy result to share',
+                          onPressed: () => copyWithToast(context, shareText, 'Result copied, paste it to a friend'),
+                        ),
+                        const SizedBox(width: 4),
                         OutlinedButton(onPressed: onHome, child: const Text('Home')),
                         const SizedBox(width: 12),
                         FilledButton.icon(
