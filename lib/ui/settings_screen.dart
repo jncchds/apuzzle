@@ -20,6 +20,12 @@ class SettingsScreen extends StatelessWidget {
             onChanged: (v) => s.highlightErrors = v,
           ),
           SwitchListTile(
+            title: const Text('Auto-remove pencil marks'),
+            subtitle: const Text('Placing a number clears that note from its row, column and box'),
+            value: s.autoClearMarks,
+            onChanged: (v) => s.autoClearMarks = v,
+          ),
+          SwitchListTile(
             title: const Text('Haptic feedback'),
             value: s.haptics,
             onChanged: (v) => s.haptics = v,

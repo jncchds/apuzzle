@@ -187,7 +187,7 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
   // ---- visuals / layout (override to customize) ----
 
   /// Content of a cell holding a value.
-  Widget buildValue(BuildContext context, P puzzle, Pos pos, CellValue cell, double size) =>
+  Widget buildValue(BuildContext context, P puzzle, ValueGrid state, Pos pos, CellValue cell, double size) =>
       values[cell.value!].build(context, size);
 
   Color? cellColor(BuildContext context, P puzzle, Pos pos, CellValue cell) => null;
@@ -208,6 +208,9 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
 
   /// Emphasize cells holding the selected cell's / latched tool's value.
   bool get highlightSameValue => false;
+
+  /// Faintly tint [markPeers] of the selected cell (row/column/box).
+  bool get highlightPeers => false;
 
   Widget buildMarks(BuildContext context, Set<int> marks, double size) {
     final n = values.length;
@@ -244,6 +247,9 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
         focus = s.valueAt(ctrl.selectedCell!);
       }
     }
+    final peers = highlightPeers && ctrl.selectedCell != null && !ctrl.solved
+        ? markPeers(p, ctrl.selectedCell!).toSet()
+        : const <Pos>{};
     return CellGridBoard(
       rows: p.size.rows,
       cols: p.size.cols,
@@ -259,7 +265,7 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
         final cell = s.at(pos);
         final Widget content;
         if (cell.value != null) {
-          content = KeyedSubtree(key: ValueKey('v${cell.value}'), child: buildValue(context, p, pos, cell, m.cell));
+          content = KeyedSubtree(key: ValueKey('v${cell.value}'), child: buildValue(context, p, s, pos, cell, m.cell));
         } else if (cell.marks.isNotEmpty) {
           content = KeyedSubtree(key: const ValueKey('marks'), child: buildMarks(context, cell.marks, m.cell * 0.92));
         } else {
@@ -273,6 +279,7 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
           showLock: showLockIcon,
           selected: ctrl.selectedCell == pos,
           emphasis: focus != null && (cell.value == focus || (cell.value == null && cell.marks.contains(focus))),
+          peer: peers.contains(pos),
           error: errors.contains(pos),
           hinted: ctrl.flashHints.contains(pos),
         );
@@ -352,7 +359,7 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
     } else {
       s = s.set(pos, cell.withValue(tool));
       final p = ctrl.puzzle as P;
-      for (final q in markPeers(p, pos)) {
+      for (final q in ctrl.settings.autoClearMarks ? markPeers(p, pos) : const <Pos>[]) {
         final c = s.at(q);
         if (c.value == null && c.marks.contains(tool)) s = s.set(q, c.toggleMark(tool));
       }

@@ -28,6 +28,7 @@ class HuesType extends ValueGridType<HuesPuzzle> {
   String get rulesText => '''
 • Color every blank cell using the palette colors.
 • Each numbered cell shows how many of the blank cells around it (all 8 neighbours, including diagonals) end up in the same color as the numbered cell.
+• The number counts down as you paint matching neighbours, so it shows how many are still missing.
 • Numbered cells themselves never count.
 
 Pick a color in the palette and tap cells to paint them (tap again to clear), or tap a cell to cycle through the colors.''';
@@ -56,14 +57,35 @@ Pick a color in the palette and tap cells to paint them (tap again to clear), or
       cell.value == null ? null : palette[cell.value!];
 
   @override
-  Widget buildValue(BuildContext context, HuesPuzzle puzzle, Pos pos, CellValue cell, double size) {
-    final n = puzzle.clues[puzzle.size.index(pos)];
+  Widget buildValue(BuildContext context, HuesPuzzle puzzle, ValueGrid state, Pos pos, CellValue cell, double size) {
+    final i = puzzle.size.index(pos);
+    final n = puzzle.clues[i];
     if (n == null) return const SizedBox.shrink();
-    return Text(
-      '$n',
-      style: TextStyle(fontSize: size * 0.55, height: 1, fontWeight: FontWeight.w600, color: Colors.black.withValues(alpha: 0.82)),
+    // Count down: how many more neighbours still need this clue's color.
+    var placed = 0;
+    for (final j in _neighbors(puzzle)[i]) {
+      if (puzzle.clues[j] == null && state.cells[j].value == puzzle.solution[i]) placed++;
+    }
+    final left = n - placed;
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 200),
+      transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: FadeTransition(opacity: anim, child: child)),
+      child: Text(
+        '$left',
+        key: ValueKey(left),
+        style: TextStyle(
+          fontSize: size * 0.55,
+          height: 1,
+          fontWeight: FontWeight.w600,
+          color: Colors.black.withValues(alpha: left == 0 ? 0.3 : 0.82),
+        ),
+      ),
     );
   }
+
+  static final Map<(int, int), List<List<int>>> _nbCache = {};
+  static List<List<int>> _neighbors(HuesPuzzle p) =>
+      _nbCache.putIfAbsent((p.rows, p.cols), () => huesNeighbors(p.rows, p.cols));
 
   @override
   bool isSolved(HuesPuzzle puzzle, ValueGrid state) => state.isFull && huesConflicts(puzzle, state.toFlat()).isEmpty;

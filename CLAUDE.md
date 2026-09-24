@@ -53,10 +53,11 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 | id | name | base | notes |
 |----|------|------|-------|
 | mambo | Sun & Moon | ValueGridType | tiers: propagation / probing |
-| sudoku | Sudoku | ValueGridType | 4/6/9, pencil marks, tiers: singles / locked+pairs / unique-only |
+| sudoku | Sudoku | ValueGridType | 4/6/9, pencil marks (auto-removal is a setting, off by default), peer + same-value highlight, tiers: singles / locked+pairs / unique-only |
 | kings | Crowns | ValueGridType | regions grown balanced + local repair for uniqueness |
-| hues | Hues | ValueGridType | 8-neighbour same-colour counts of blank cells |
+| hues | Hues | ValueGridType | 8-neighbour same-colour counts of blank cells; numbers count down as matching cells are painted |
 | mosaic | Mosaic | PuzzleType | flood-it, limit = greedy plan + slack |
+| blend | Blend | PuzzleType | free flood-it (repaint any patch), limit = best of 4 greedy runs + slack |
 | pipes | Pipes | PuzzleType | spanning tree, rule-based win (any valid tree) |
 | shikaku | Shikaku | PuzzleType | drag rectangles |
 | trail | Trail | PuzzleType | Hamiltonian path; capped at 7×7 (8×8 uniqueness proof too slow) |

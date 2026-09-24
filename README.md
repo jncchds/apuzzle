@@ -19,6 +19,7 @@ You choose the grid size and the difficulty.
 | <img src="docs/screenshots/kings_dark.png" width="90"> | **Crowns** | Place one crown in every row, column and colored region. Crowns can't touch, not even diagonally. |
 | <img src="docs/screenshots/hues_light.png" width="90"> | **Hues** | Color the blank cells. Each number counts the blank cells around it (all 8 neighbors) that end up in its color. |
 | <img src="docs/screenshots/mosaic_dark.png" width="90"> | **Mosaic** | Flood the board with one color from the top-left corner, within the move limit. |
+| <img src="docs/screenshots/blend_dark.png" width="90"> | **Blend** | Pick a color and repaint any patch; it merges with touching patches of that color. Make the board one color within the move limit. |
 | <img src="docs/screenshots/pipes_dark.png" width="90"> | **Pipes** | Rotate tiles until every pipe connects to the source, with no open ends and no loops. |
 | <img src="docs/screenshots/shikaku_light.png" width="90"> | **Shikaku** | Split the grid into rectangles. Each holds one number equal to its area. |
 | <img src="docs/screenshots/trail_dark.png" width="90"> | **Trail** | Draw one path through every cell that passes the numbers in order. |

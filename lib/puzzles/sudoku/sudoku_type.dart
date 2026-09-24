@@ -45,6 +45,8 @@ Pick a number in the palette and tap cells to place it, or tap a cell first and 
   @override
   bool get highlightSameValue => true;
   @override
+  bool get highlightPeers => true;
+  @override
   bool get showLockIcon => false;
   @override
   double get gapRatio => 0.04;
@@ -72,7 +74,7 @@ Pick a number in the palette and tap cells to place it, or tap a cell first and 
   }
 
   @override
-  Widget buildValue(BuildContext context, SudokuPuzzle puzzle, Pos pos, CellValue cell, double size) {
+  Widget buildValue(BuildContext context, SudokuPuzzle puzzle, ValueGrid state, Pos pos, CellValue cell, double size) {
     final scheme = Theme.of(context).colorScheme;
     return Text(
       '${cell.value! + 1}',
@@ -80,7 +82,7 @@ Pick a number in the palette and tap cells to place it, or tap a cell first and 
         fontSize: size * 0.6,
         height: 1,
         fontWeight: cell.given ? FontWeight.w800 : FontWeight.w500,
-        color: cell.given ? scheme.onSurface : scheme.primary,
+        color: cell.given ? scheme.onSurface : _entryColor(context),
       ),
     );
   }
@@ -100,4 +102,8 @@ Pick a number in the palette and tap cells to place it, or tap a cell first and 
   Map<String, dynamic> encodePuzzle(SudokuPuzzle puzzle) => puzzle.toJson();
   @override
   SudokuPuzzle decodePuzzle(Map<String, dynamic> json) => SudokuPuzzle.fromJson(json);
+
+  /// Player-entered numbers: a clear blue, distinct from the givens.
+  static Color _entryColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? const Color(0xFF7CB6FF) : const Color(0xFF1F63D6);
 }

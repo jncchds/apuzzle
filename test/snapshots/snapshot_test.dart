@@ -36,6 +36,7 @@ Future<void> _loadFont(String family, List<String> files) async {
 /// How many hint steps to apply so the board shows some progress.
 int _progressSteps(PuzzleType t) => switch (t.id) {
       'mosaic' => 3,
+      'blend' => 2,
       'trail' => 8,
       _ => 6,
     };

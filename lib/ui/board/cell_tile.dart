@@ -12,6 +12,7 @@ class CellTile extends StatelessWidget {
     this.showLock = true,
     this.selected = false,
     this.emphasis = false,
+    this.peer = false,
     this.error = false,
     this.hinted = false,
   });
@@ -25,8 +26,14 @@ class CellTile extends StatelessWidget {
   final bool showLock;
   final bool selected;
 
-  /// Subtle tint, e.g. cells sharing the selected value.
+  /// Strong highlight, e.g. cells sharing the selected value.
   final bool emphasis;
+
+  /// Faint tint, e.g. the selected cell's row/column/box.
+  final bool peer;
+
+  /// Warm highlight that stays distinct from the primary-tinted given cells.
+  static const emphasisColor = Color(0xFFFFB020);
   final bool error;
   final bool hinted;
 
@@ -38,12 +45,20 @@ class CellTile extends StatelessWidget {
         (given
             ? Color.alphaBlend(scheme.primary.withValues(alpha: 0.14), scheme.surfaceContainerHighest)
             : scheme.surfaceContainer);
-    final tinted = emphasis && color == null ? Color.alphaBlend(scheme.primary.withValues(alpha: 0.22), bg) : bg;
+    final tinted = color != null
+        ? bg
+        : emphasis
+            ? Color.alphaBlend(emphasisColor.withValues(alpha: 0.42), bg)
+            : peer
+                ? Color.alphaBlend(scheme.onSurface.withValues(alpha: 0.07), bg)
+                : bg;
     final borderColor = selected
         ? scheme.primary
         : hinted
             ? scheme.tertiary
-            : given
+            : emphasis && color == null
+                ? emphasisColor
+                : given
                 ? scheme.outline.withValues(alpha: 0.55)
                 : scheme.outlineVariant.withValues(alpha: 0.6);
 
