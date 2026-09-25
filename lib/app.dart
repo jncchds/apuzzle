@@ -26,7 +26,7 @@ class _APuzzleAppState extends State<APuzzleApp> {
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
     return MaterialApp.router(
-      title: 'APuzzle',
+      title: 'APuzzle by CHDS',
       routerDelegate: _router,
       routeInformationParser: const AppRouteParser(),
       scaffoldMessengerKey: _messengerKey,

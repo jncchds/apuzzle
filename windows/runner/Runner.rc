@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "ua.pp.chds" "\0"
-            VALUE "FileDescription", "apuzzle" "\0"
+            VALUE "FileDescription", "APuzzle by CHDS" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "apuzzle" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 ua.pp.chds. All rights reserved." "\0"
             VALUE "OriginalFilename", "apuzzle.exe" "\0"
-            VALUE "ProductName", "apuzzle" "\0"
+            VALUE "ProductName", "APuzzle" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

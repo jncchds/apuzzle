@@ -1,11 +1,11 @@
 {
-    "name": "apuzzle",
-    "short_name": "apuzzle",
+    "name": "APuzzle by CHDS",
+    "short_name": "APuzzle",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Endless grid logic puzzles generated on your device: Sudoku, Crowns, Pearls, Mines and more, each with exactly one solution.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

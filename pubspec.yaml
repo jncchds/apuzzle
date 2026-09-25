@@ -1,5 +1,5 @@
 name: apuzzle
-description: "A new Flutter project."
+description: "Endless grid logic puzzles generated on your device: Sudoku, Crowns, Pearls, Mines and more, each with exactly one solution."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -41,6 +41,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   provider: ^6.1.5+1
   shared_preferences: ^2.5.5
+  package_info_plus: ^10.2.1
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

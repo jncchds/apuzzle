@@ -8,6 +8,7 @@ import '../l10n/l10n.dart';
 import 'app_router.dart';
 import 'new_game_sheet.dart';
 import 'puzzle_code_ui.dart';
+import 'version_pill.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,7 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
     final l = context.l10n;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('APuzzle'),
+        title: const Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [Text('APuzzle by CHDS'), SizedBox(width: 8), VersionPill()],
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.pin_outlined),
