@@ -594,6 +594,30 @@ abstract class AppLocalizations {
   /// **'Shade'**
   String get valueShade;
 
+  /// No description provided for @valueGrass.
+  ///
+  /// In en, this message translates to:
+  /// **'Grass'**
+  String get valueGrass;
+
+  /// No description provided for @valueTent.
+  ///
+  /// In en, this message translates to:
+  /// **'Tent'**
+  String get valueTent;
+
+  /// No description provided for @valueSea.
+  ///
+  /// In en, this message translates to:
+  /// **'Sea'**
+  String get valueSea;
+
+  /// No description provided for @valueLamp.
+  ///
+  /// In en, this message translates to:
+  /// **'Lamp'**
+  String get valueLamp;
+
   /// No description provided for @colorBlue.
   ///
   /// In en, this message translates to:
@@ -1013,6 +1037,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'• Find the way through the maze from the entrance in the top-left corner to the exit in the bottom-right corner.\n• You can\'t pass through walls.\n\nDrag from the end of your path to walk on. Drag back to retrace your steps, or tap a cell of the path to go back there.'**
   String get labyrinthRules;
+
+  /// No description provided for @campName.
+  ///
+  /// In en, this message translates to:
+  /// **'Campsite'**
+  String get campName;
+
+  /// No description provided for @campTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Pitch a tent next to every tree'**
+  String get campTagline;
+
+  /// No description provided for @campRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Pitch one tent for every tree, right next to it (up, down, left or right).\n• Every tree gets its own tent, and every tent belongs to one tree next to it.\n• Tents never touch each other, not even diagonally.\n• The numbers outside the grid tell how many tents are in each row and column.\n\nTap a cell to cycle empty → grass (your \"no tent here\" note) → tent. Long-press / right-click cycles back.'**
+  String get campRules;
+
+  /// No description provided for @islandsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Islands'**
+  String get islandsName;
+
+  /// No description provided for @islandsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Flood the sea around the numbered islands'**
+  String get islandsTagline;
+
+  /// No description provided for @islandsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Shade the sea so that the unshaded cells form islands.\n• Every island contains exactly one number, which equals its size in cells.\n• Islands only touch the sea, never each other (diagonal corners are fine).\n• The whole sea is connected, and it has no 2×2 pools.\n\nTap a cell to cycle empty → sea → dot (your \"land\" note). Long-press / right-click cycles back.'**
+  String get islandsRules;
+
+  /// No description provided for @minesName.
+  ///
+  /// In en, this message translates to:
+  /// **'Mines'**
+  String get minesName;
+
+  /// No description provided for @minesTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Find every mine, logic only'**
+  String get minesTagline;
+
+  /// No description provided for @minesRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Open every cell that has no mine.\n• A number tells how many mines are in the 8 cells around it.\n• You never need to guess: every board can be cleared by logic.\n• Opening a cell with no mines around it opens its neighbours too.\n\nTap a cell to dig, long-press / right-click to flag it (or switch to Flag below). Tap a number whose flags are all placed to dig the rest around it. Digging a mine flags it with a bang, and the game goes on.'**
+  String get minesRules;
+
+  /// No description provided for @minesDig.
+  ///
+  /// In en, this message translates to:
+  /// **'Dig'**
+  String get minesDig;
+
+  /// No description provided for @minesFlag.
+  ///
+  /// In en, this message translates to:
+  /// **'Flag'**
+  String get minesFlag;
+
+  /// No description provided for @minesBoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Boom! That was a mine, so it\'s flagged now'**
+  String get minesBoom;
+
+  /// No description provided for @lampsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Lamps'**
+  String get lampsName;
+
+  /// No description provided for @lampsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Light up every cell, lamps never face each other'**
+  String get lampsTagline;
+
+  /// No description provided for @lampsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Place lamps in white cells. A lamp lights its own cell and its row and column until a wall.\n• Every white cell must be lit.\n• No lamp may shine on another lamp.\n• A number on a wall tells how many lamps are right next to it (up, down, left or right).\n\nTap a cell to cycle empty → dot (your \"no lamp\" note) → lamp. Long-press / right-click cycles back.'**
+  String get lampsRules;
+
+  /// No description provided for @fenceName.
+  ///
+  /// In en, this message translates to:
+  /// **'Fence'**
+  String get fenceName;
+
+  /// No description provided for @fenceTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'One loop that fits around the numbers'**
+  String get fenceTagline;
+
+  /// No description provided for @fenceRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Draw one closed loop along the dotted lines.\n• The loop never crosses or touches itself.\n• A number tells how many of its cell\'s four sides the loop uses. Cells without a number can have any count.\n\nTap between two dots to draw a line, tap again to mark it with a cross, and once more to clear it. Drag from dot to dot to draw several lines, or to erase them if you start on a line.'**
+  String get fenceRules;
+
+  /// No description provided for @pearlsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Pearls'**
+  String get pearlsName;
+
+  /// No description provided for @pearlsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Thread one loop through all the pearls'**
+  String get pearlsTagline;
+
+  /// No description provided for @pearlsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Draw one closed loop through the centers of the cells. It never crosses or touches itself, and it doesn\'t have to visit every cell.\n• The loop passes through every pearl.\n• At a black pearl it turns, and it goes straight on through the cells before and after.\n• At a white pearl it goes straight, and it turns in the cell before or after (or both).\n\nDrag through cells to draw the loop, or drag along it to erase. Tap between two cells to cycle line → cross → empty.'**
+  String get pearlsRules;
 }
 
 class _AppLocalizationsDelegate

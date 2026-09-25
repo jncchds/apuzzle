@@ -29,6 +29,7 @@ Run them through the output condenser (see the global CLAUDE.md):
 - `lib/core/generator_runner.dart`: runs `type.generate(params)` via `compute`, which is an isolate on native platforms.
 - `lib/ui/board/cell_grid_board.dart`: a fit-to-screen grid with no zoom, and the win ripple. `cell_tile.dart` is the standard animated cell.
 - `lib/core/registry.dart`: register new types here.
+- `lib/core/grid_graph.dart`: neighbour lists and connected components for flat grids.
 - Localization: gen-l10n (`l10n.yaml`), ARB files in `lib/l10n/` (en is the template; uk, pl, de). Generated `app_localizations*.dart` are checked in; run `flutter gen-l10n` after editing ARBs. No user-facing string literals in Dart: use `context.l10n` (`lib/l10n/l10n.dart`). Type texts take an `AppLocalizations` (`name(l)`, `tagline(l)`, `rulesText(l)`, `finishTitle(l, …)`); toasts and puzzle-code errors carry a `Tr` closure resolved by the UI. Language: `Settings.language` (null = system); `resolveAppLocale` maps Russian to Ukrainian and anything unsupported to English.
 - Game options: a type can declare extra new-game choices with `optionsFor(chosen)` (later options may depend on earlier ones). They live in `GenParams.options`, go into share codes after the difficulty (`pop-10x8-hard.std.clear-SEED-v1`), and stats are kept per `GenParams.variant`. Option and choice texts come from `optionLabel`/`choiceLabel`/`choiceDescription`. Score games override `score()` (best score in stats) and `finishTitle()`.
 
@@ -70,6 +71,12 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 | labyrinth | Labyrinth | PuzzleType | perfect maze (growing tree: easy Prim-like, hard DFS-like, best of 4 by junctions on the way out), top-left → bottom-right; drag the path, fast drags follow straight corridors; hint walks to the next junction |
 | atoms | Atoms | PuzzleType | Hashi bridges; sound interval solver |
 | lits | LITS | ValueGridType | regions grown cell by cell keeping the solution unique (monotone, so rejected pairs are never retried); capped at 7×7 (8×8 takes 1–5 s) |
+| camp | Campsite (Tents) | ValueGridType | edge counts in a header band (`header()`); tier 1 = counts/no-touch/tree pairing (bipartite matching), tier 2 = probing; hard hides some counts; stalls reveal a given tent |
+| islands | Islands (Nurikabe) | ValueGridType | layout with a connected pool-free sea → local search moves numbers → where logic stalls, split an island or add a 1-island |
+| lamps | Lamps (Light Up) | ValueGridType | symmetric walls, greedy lamps, number every wall then strip; lit cells via `cellColorIn` |
+| fence | Fence (Slitherlink) | PuzzleType | `lib/core/lattice_loop.dart`: `LoopSolver` (degrees, clue rules, no early sub-loops, probing) + `LoopRegion` (region whose outline is one simple loop); `LoopBoard` (lib/ui/board/loop_board.dart): tap an edge cycles line/cross/empty, drag point to point |
+| pearls | Pearls (Masyu) | PuzzleType | same loop engine, points at cell centres; all valid pearls → local search reshapes the loop where logic stays undecided → strip pearls |
+| mines | Mines (Minesweeper) | PuzzleType | no guessing: generator plays with tier logic (1 single numbers, 2 pairs, 3 + mine count & probing) and opens a safe cell where stuck; digging a mine flags it with a toast (no game over); tap a satisfied number to chord |
 | pop | Pop | PuzzleType | bubble breaker; game options (mode: standard/shifter/continuous/mega, goal: clear (standard only, reverse-built so always clearable)/target (share of best playout)/free). Custom animated `PopBoard` |
 
 ## Known follow-ups

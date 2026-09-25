@@ -192,8 +192,19 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
 
   Color? cellColor(BuildContext context, P puzzle, Pos pos, CellValue cell) => null;
 
+  /// Like [cellColor], for colors that depend on the whole state (lit cells...).
+  Color? cellColorIn(BuildContext context, P puzzle, ValueGrid state, Pos pos, CellValue cell) =>
+      cellColor(context, puzzle, pos, cell);
+
   /// Decorations drawn above the cells (edge clues, region borders...).
   List<Widget> buildOverlay(BuildContext context, P puzzle, BoardMetrics m) => const [];
+
+  /// Like [buildOverlay], with the current state (e.g. edge counts that dim when met).
+  List<Widget> buildOverlayIn(BuildContext context, P puzzle, ValueGrid state, BoardMetrics m) =>
+      buildOverlay(context, puzzle, m);
+
+  /// Room for edge clues left of / above the grid, in cells: (columns, rows).
+  (double, double) header(P puzzle) => (0, 0);
 
   /// Decorations drawn below the cells.
   List<Widget> buildUnderlay(BuildContext context, P puzzle, BoardMetrics m) => const [];
@@ -250,16 +261,19 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
     final peers = highlightPeers && ctrl.selectedCell != null && !ctrl.solved
         ? markPeers(p, ctrl.selectedCell!).toSet()
         : const <Pos>{};
+    final (headCols, headRows) = header(p);
     return CellGridBoard(
       rows: p.size.rows,
       cols: p.size.cols,
       gapRatio: gapRatio,
+      headerCols: headCols,
+      headerRows: headRows,
       sectionRows: secR,
       sectionCols: secC,
       win: ctrl.winAnimation,
       onTap: ctrl.solved ? null : (pos) => onCellTap(ctrl, pos),
       onSecondary: ctrl.solved ? null : (pos) => onCellSecondary(ctrl, pos),
-      overlayBuilder: (context, m) => buildOverlay(context, p, m),
+      overlayBuilder: (context, m) => buildOverlayIn(context, p, s, m),
       underlayBuilder: (context, m) => buildUnderlay(context, p, m),
       cellBuilder: (context, pos, m) {
         final cell = s.at(pos);
@@ -274,7 +288,7 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
         return CellTile(
           size: m.cell,
           content: content,
-          color: cellColor(context, p, pos, cell),
+          color: cellColorIn(context, p, s, pos, cell),
           given: cell.given,
           showLock: showLockIcon,
           selected: ctrl.selectedCell == pos,

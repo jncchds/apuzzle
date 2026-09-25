@@ -325,6 +325,18 @@ class AppLocalizationsPl extends AppLocalizations {
   String get valueShade => 'Zamaluj';
 
   @override
+  String get valueGrass => 'Trawa';
+
+  @override
+  String get valueTent => 'Namiot';
+
+  @override
+  String get valueSea => 'Morze';
+
+  @override
+  String get valueLamp => 'Lampa';
+
+  @override
   String get colorBlue => 'Niebieski';
 
   @override
@@ -589,4 +601,73 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get labyrinthRules =>
       '• Znajdź drogę przez labirynt od wejścia w lewym górnym rogu do wyjścia w prawym dolnym.\n• Nie można przechodzić przez ściany.\n\nPrzeciągaj od końca ścieżki, aby iść dalej. Przeciągnij z powrotem, aby się cofnąć, albo dotknij pola ścieżki, aby do niego wrócić.';
+
+  @override
+  String get campName => 'Kemping';
+
+  @override
+  String get campTagline => 'Rozbij namiot przy każdym drzewie';
+
+  @override
+  String get campRules =>
+      '• Rozbij po jednym namiocie dla każdego drzewa, tuż obok niego (nad, pod, z lewej lub z prawej).\n• Każde drzewo ma swój namiot, a każdy namiot należy do jednego sąsiedniego drzewa.\n• Namioty nie stykają się ze sobą, nawet po przekątnej.\n• Liczby poza siatką mówią, ile namiotów jest w każdym wierszu i kolumnie.\n\nDotknij pola, aby przełączać: puste → trawa (twoja notatka „tu nie ma namiotu”) → namiot. Długie naciśnięcie / prawy przycisk przełącza wstecz.';
+
+  @override
+  String get islandsName => 'Wyspy';
+
+  @override
+  String get islandsTagline => 'Zalej morze wokół wysp z liczbami';
+
+  @override
+  String get islandsRules =>
+      '• Zamaluj morze tak, aby niezamalowane pola tworzyły wyspy.\n• Każda wyspa zawiera dokładnie jedną liczbę, równą jej wielkości w polach.\n• Wyspy stykają się tylko z morzem, nigdy ze sobą (rogami po przekątnej mogą).\n• Całe morze jest połączone i nie ma w nim bloków 2×2.\n\nDotknij pola, aby przełączać: puste → morze → kropka (twoja notatka „ląd”). Długie naciśnięcie / prawy przycisk przełącza wstecz.';
+
+  @override
+  String get minesName => 'Miny';
+
+  @override
+  String get minesTagline => 'Znajdź wszystkie miny samą logiką';
+
+  @override
+  String get minesRules =>
+      '• Odkryj wszystkie pola bez min.\n• Liczba mówi, ile min jest w 8 polach wokół niej.\n• Nigdy nie trzeba zgadywać: każdą planszę da się oczyścić logiką.\n• Odkrycie pola bez min wokół odkrywa też jego sąsiadów.\n\nDotknij pola, aby kopać, długie naciśnięcie / prawy przycisk stawia flagę (albo włącz „Flaga” poniżej). Dotknij liczby, przy której stoją już wszystkie flagi, aby odkopać resztę wokół niej. Kopnięta mina wybucha i dostaje flagę, a gra toczy się dalej.';
+
+  @override
+  String get minesDig => 'Kop';
+
+  @override
+  String get minesFlag => 'Flaga';
+
+  @override
+  String get minesBoom => 'Bum! To była mina, teraz ma flagę';
+
+  @override
+  String get lampsName => 'Lampy';
+
+  @override
+  String get lampsTagline => 'Oświetl każde pole, lampy nie świecą na siebie';
+
+  @override
+  String get lampsRules =>
+      '• Stawiaj lampy na białych polach. Lampa oświetla swoje pole oraz wiersz i kolumnę aż do ściany.\n• Każde białe pole musi być oświetlone.\n• Żadna lampa nie może świecić na inną lampę.\n• Liczba na ścianie mówi, ile lamp stoi tuż obok niej (nad, pod, z lewej lub z prawej).\n\nDotknij pola, aby przełączać: puste → kropka (twoja notatka „bez lampy”) → lampa. Długie naciśnięcie / prawy przycisk przełącza wstecz.';
+
+  @override
+  String get fenceName => 'Płot';
+
+  @override
+  String get fenceTagline => 'Jedna pętla wokół liczb';
+
+  @override
+  String get fenceRules =>
+      '• Narysuj jedną zamkniętą pętlę po kropkowanych liniach.\n• Pętla nigdzie się nie krzyżuje ani nie styka sama ze sobą.\n• Liczba mówi, ile z czterech boków jej pola zajmuje pętla. Pola bez liczby mogą mieć dowolną liczbę.\n\nDotknij między dwiema kropkami, aby narysować linię, ponownie, aby oznaczyć ją krzyżykiem, i jeszcze raz, aby ją wyczyścić. Przeciągaj od kropki do kropki, aby rysować kilka linii albo je ścierać, jeśli zaczniesz na linii.';
+
+  @override
+  String get pearlsName => 'Perły';
+
+  @override
+  String get pearlsTagline => 'Przewlecz jedną pętlę przez wszystkie perły';
+
+  @override
+  String get pearlsRules =>
+      '• Narysuj jedną zamkniętą pętlę przez środki pól. Nie krzyżuje się ani nie styka sama ze sobą i nie musi przechodzić przez każde pole.\n• Pętla przechodzi przez każdą perłę.\n• Na czarnej perle pętla skręca, a w polach przed nią i za nią biegnie prosto.\n• Przez białą perłę pętla biegnie prosto, a w polu przed nią lub za nią (albo w obu) skręca.\n\nPrzeciągaj po polach, aby rysować pętlę, albo wzdłuż niej, aby ją ścierać. Dotknij między dwoma polami, aby przełączać: linia → krzyżyk → puste.';
 }

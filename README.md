@@ -2,7 +2,7 @@
 
 A collection of grid logic puzzles for Android, Windows, iOS and the web, built with Flutter.
 Every puzzle is **generated on the device**, and a solver checks that it has **exactly one solution**.
-The color-flood games and Pop are move-based instead: their limits and targets come from solver playthroughs, so they are always reachable.
+Mines is solved by logic without guessing, and the color-flood games and Pop are move-based instead: their limits and targets come from solver playthroughs, so they are always reachable.
 You choose the grid size and the difficulty.
 
 <p align="center">
@@ -28,6 +28,12 @@ You choose the grid size and the difficulty.
 | <img src="docs/screenshots/labyrinth_dark.png" width="90"> | **Labyrinth** | Walk through the maze from the top-left corner to the exit in the bottom-right corner. |
 | <img src="docs/screenshots/atoms_dark.png" width="90"> | **Atoms** | Connect atoms with single or double bonds that match their numbers. Bonds can't cross, and all atoms must end up connected. |
 | <img src="docs/screenshots/lits_dark.png" width="90"> | **LITS** | Shade one L, I, T or S tetromino in every region. The shaded area is connected, with no 2×2 blocks, and identical shapes never touch across region borders. |
+| <img src="docs/screenshots/camp_dark.png" width="90"> | **Campsite** | Pitch a tent next to every tree, one tent per tree. Tents never touch, not even diagonally, and the counts outside the grid give the tents per row and column. |
+| <img src="docs/screenshots/islands_dark.png" width="90"> | **Islands** | Shade the sea. Every island holds one number equal to its size, islands never touch, and the sea is connected with no 2×2 pools. |
+| <img src="docs/screenshots/lamps_dark.png" width="90"> | **Lamps** | Place lamps that light their row and column up to the walls. Light every cell, never shine a lamp on another, and match the numbers on the walls. |
+| <img src="docs/screenshots/fence_dark.png" width="90"> | **Fence** | Draw one loop along the grid lines. A number tells how many sides of its cell the loop uses. |
+| <img src="docs/screenshots/pearls_dark.png" width="90"> | **Pearls** | Draw one loop through the cell centres and every pearl: straight through white pearls (turning next to them), turning on black pearls (going straight next to them). |
+| <img src="docs/screenshots/mines_dark.png" width="90"> | **Mines** | Clear every cell without a mine. Numbers count the mines around them, and the start is chosen so that logic alone clears the board. |
 
 ## Features
 
