@@ -8,7 +8,7 @@ import '../core/grid.dart';
 import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
 import '../l10n/l10n.dart';
-import 'game_screen.dart';
+import 'app_router.dart';
 
 /// Sizes of [type] whose board fits [screen] without zoom.
 List<GridSize> fittingSizes(PuzzleType type, Size screen) {
@@ -56,14 +56,20 @@ class _NewGameSheetState extends State<_NewGameSheet> {
 
   void _go({required bool resume}) {
     final store = context.read<GameStore>();
-    final nav = Navigator.of(widget.rootContext);
+    final router = AppRouterDelegate.of(widget.rootContext);
     Navigator.of(context).pop();
     GenParams? params;
-    if (!resume) {
+    if (resume) {
+      // The address names the saved puzzle; GameScreen resumes it.
+      try {
+        params = GenParams.fromJson(store.readSave(widget.type.id)!['params'] as Map<String, dynamic>);
+      } catch (e) {
+        debugPrint('Could not read the saved puzzle: $e');
+      }
+    } else {
       store.setLastChoice(widget.type.id, {'size': _size.toJson(), 'difficulty': _difficulty.name, 'options': _options});
-      params = _params(Random().nextInt(1 << 31));
     }
-    nav.push(MaterialPageRoute(builder: (_) => GameScreen(type: widget.type, params: params)));
+    router.openGame(widget.type, params ?? _params(Random().nextInt(1 << 31)));
   }
 
   @override

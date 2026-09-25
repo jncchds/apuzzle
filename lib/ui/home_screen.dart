@@ -5,9 +5,9 @@ import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
 import '../core/registry.dart';
 import '../l10n/l10n.dart';
+import 'app_router.dart';
 import 'new_game_sheet.dart';
 import 'puzzle_code_ui.dart';
-import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             tooltip: l.settings,
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const SettingsScreen())),
+            onPressed: () => AppRouterDelegate.of(context).openSettings(),
           ),
         ],
       ),

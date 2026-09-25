@@ -18,10 +18,13 @@ import 'win_overlay.dart';
 
 /// Plays one puzzle. With [params] == null it resumes the saved game.
 class GameScreen extends StatefulWidget {
-  const GameScreen({super.key, required this.type, this.params, this.presetPuzzle, this.presetState});
+  const GameScreen({super.key, required this.type, this.params, this.onPuzzleChanged, this.presetPuzzle, this.presetState});
 
   final PuzzleType type;
   final GenParams? params;
+
+  /// Called when a puzzle starts, so the address can follow "new puzzle".
+  final ValueChanged<GenParams>? onPuzzleChanged;
 
   /// Skips generation (snapshots/tests). Requires [params].
   @visibleForTesting
@@ -100,6 +103,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
       seed: params.seed,
       options: type.resolveOptions(params.options),
     );
+    widget.onPuzzleChanged?.call(params);
     final settings = context.read<Settings>();
     final store = context.read<GameStore>();
     setState(() {
@@ -257,7 +261,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
                 case 'copy' when c != null:
                   copyWithToast(context, c.link, l.shareLinkCopied);
                 case 'code':
-                  showEnterCodeDialog(context, replace: true);
+                  showEnterCodeDialog(context);
               }
             },
             itemBuilder: (_) => [

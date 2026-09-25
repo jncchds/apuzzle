@@ -28,6 +28,7 @@ Run them through the output condenser (see the global CLAUDE.md):
   - saving and resuming (shared_preferences), and win detection and stats.
 - `lib/core/generator_runner.dart`: runs `type.generate(params)` via `compute`, which is an isolate on native platforms.
 - `lib/ui/board/cell_grid_board.dart`: a fit-to-screen grid with no zoom, and the win ripple. `cell_tile.dart` is the standard animated cell.
+- `lib/ui/app_router.dart`: `MaterialApp.router`. The route is the URL: `/`, `/settings`, or `/?p=<share code>`, so the web gets browser back/forward and Android share links use the same parser. The web build uses path URLs, and the Pages deploy copies `index.html` to `404.html`. Open screens through `AppRouterDelegate.of(context)`, not `Navigator.push` (dialogs and sheets are fine).
 - `lib/core/registry.dart`: register new types here.
 - `lib/core/grid_graph.dart`: neighbour lists and connected components for flat grids.
 - Localization: gen-l10n (`l10n.yaml`), ARB files in `lib/l10n/` (en is the template; uk, pl, de). Generated `app_localizations*.dart` are checked in; run `flutter gen-l10n` after editing ARBs. No user-facing string literals in Dart: use `context.l10n` (`lib/l10n/l10n.dart`). Type texts take an `AppLocalizations` (`name(l)`, `tagline(l)`, `rulesText(l)`, `finishTitle(l, …)`); toasts and puzzle-code errors carry a `Tr` closure resolved by the UI. Language: `Settings.language` (null = system); `resolveAppLocale` maps Russian to Ukrainian and anything unsupported to English.

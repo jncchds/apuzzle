@@ -3,21 +3,33 @@ import 'package:provider/provider.dart';
 
 import 'core/settings.dart';
 import 'l10n/l10n.dart';
-import 'ui/home_screen.dart';
+import 'ui/app_router.dart';
 
-class APuzzleApp extends StatelessWidget {
-  const APuzzleApp({super.key, this.navigatorKey, this.messengerKey});
+class APuzzleApp extends StatefulWidget {
+  const APuzzleApp({super.key});
 
-  final GlobalKey<NavigatorState>? navigatorKey;
-  final GlobalKey<ScaffoldMessengerState>? messengerKey;
+  @override
+  State<APuzzleApp> createState() => _APuzzleAppState();
+}
+
+class _APuzzleAppState extends State<APuzzleApp> {
+  final _messengerKey = GlobalKey<ScaffoldMessengerState>();
+  late final _router = AppRouterDelegate(messengerKey: _messengerKey);
+
+  @override
+  void dispose() {
+    _router.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'APuzzle',
-      navigatorKey: navigatorKey,
-      scaffoldMessengerKey: messengerKey,
+      routerDelegate: _router,
+      routeInformationParser: const AppRouteParser(),
+      scaffoldMessengerKey: _messengerKey,
       debugShowCheckedModeBanner: false,
       themeMode: settings.themeMode,
       locale: settings.language == null ? null : Locale(settings.language!),
@@ -26,10 +38,6 @@ class APuzzleApp extends StatelessWidget {
       localeListResolutionCallback: (locales, _) => resolveAppLocale(locales),
       theme: _theme(Brightness.light),
       darkTheme: _theme(Brightness.dark),
-      routes: {'/': (_) => const HomeScreen()},
-      // A share link's path (/apuzzle/?p=…) arrives as the initial route; always
-      // start at home and let ShareLinkHandler open the puzzle on top.
-      onGenerateInitialRoutes: (_) => [MaterialPageRoute<void>(builder: (_) => const HomeScreen(), settings: const RouteSettings(name: '/'))],
     );
   }
 }

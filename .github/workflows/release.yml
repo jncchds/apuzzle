@@ -168,6 +168,9 @@ jobs:
           path: dist/*
       # Share links point at https://jncchds.github.io/apuzzle/ (lib/core/puzzle_code.dart).
       - run: flutter build web --release --base-href /apuzzle/ --output build/pages --build-name=${{ needs.version.outputs.name }} --build-number=${{ needs.version.outputs.number }}
+      # The app uses path URLs (lib/ui/app_router.dart); Pages serves 404.html
+      # for paths it doesn't know, such as /apuzzle/settings.
+      - run: cp build/pages/index.html build/pages/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: build/pages
