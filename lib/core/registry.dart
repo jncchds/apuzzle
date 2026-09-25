@@ -5,6 +5,7 @@ import '../puzzles/kings/kings_type.dart';
 import '../puzzles/lits/lits_type.dart';
 import '../puzzles/mambo/mambo_type.dart';
 import '../puzzles/mosaic/mosaic_type.dart';
+import '../puzzles/pop/pop_type.dart';
 import '../puzzles/pipes/pipes_type.dart';
 import '../puzzles/shikaku/shikaku_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
@@ -19,6 +20,7 @@ const List<PuzzleType> puzzleTypes = [
   HuesType(),
   MosaicType(),
   BlendType(),
+  PopType(),
   PipesType(),
   ShikakuType(),
   TrailType(),

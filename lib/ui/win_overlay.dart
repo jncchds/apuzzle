@@ -23,7 +23,11 @@ class WinOverlay extends StatelessWidget {
     final time = controller.elapsed;
     final isBest = stats?.bestMs == time.inMilliseconds;
     final hints = controller.hintsUsed;
-    final shareText = 'I solved this ${controller.type.name} in ${formatDuration(time)}'
+    final type = controller.type;
+    final score = type.score(controller.puzzle, controller.state);
+    final title = type.finishTitle(controller.puzzle, controller.state);
+    final shareText = '${score == null ? 'I solved this ${type.name}' : 'I scored $score in this ${type.name}'}'
+        ' in ${formatDuration(time)}'
         '${hints > 0 ? ' with $hints hint${hints == 1 ? '' : 's'}' : ''}. Can you beat it? ${controller.link}';
 
     return Stack(children: [
@@ -49,8 +53,15 @@ class WinOverlay extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Solved!', style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
+                      Text(title, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
                       const SizedBox(height: 8),
+                      if (score != null) ...[
+                        Text(
+                          'Score $score${stats?.bestScore == score ? ' · new best!' : stats?.bestScore != null ? ' · best ${stats!.bestScore}' : ''}',
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 4),
+                      ],
                       Text(
                         '${formatDuration(time)}${isBest ? ' · new best!' : stats?.best != null ? ' · best ${formatDuration(stats!.best!)}' : ''}'
                         '${controller.hintsUsed > 0 ? ' · ${controller.hintsUsed} hint${controller.hintsUsed == 1 ? '' : 's'}' : ''}',

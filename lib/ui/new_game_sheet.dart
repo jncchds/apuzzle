@@ -46,7 +46,12 @@ class _NewGameSheetState extends State<_NewGameSheet> {
     final last = context.read<GameStore>().lastChoice(widget.type.id);
     _size = last?['size'] != null ? GridSize.fromJson(last!['size'] as Map<String, dynamic>) : widget.type.defaultSize;
     _difficulty = Difficulty.values.asNameMap()[last?['difficulty']] ?? widget.type.difficulties.first;
+    _options = widget.type.resolveOptions((last?['options'] as Map<String, dynamic>?)?.cast<String, String>() ?? const {});
   }
+
+  late Map<String, String> _options;
+
+  GenParams _params(int seed) => GenParams(size: _size, difficulty: _difficulty, seed: seed, options: _options);
 
   void _go({required bool resume}) {
     final store = context.read<GameStore>();
@@ -54,8 +59,8 @@ class _NewGameSheetState extends State<_NewGameSheet> {
     Navigator.of(context).pop();
     GenParams? params;
     if (!resume) {
-      store.setLastChoice(widget.type.id, {'size': _size.toJson(), 'difficulty': _difficulty.name});
-      params = GenParams(size: _size, difficulty: _difficulty, seed: Random().nextInt(1 << 31));
+      store.setLastChoice(widget.type.id, {'size': _size.toJson(), 'difficulty': _difficulty.name, 'options': _options});
+      params = _params(Random().nextInt(1 << 31));
     }
     nav.push(MaterialPageRoute(builder: (_) => GameScreen(type: widget.type, params: params)));
   }
@@ -67,10 +72,10 @@ class _NewGameSheetState extends State<_NewGameSheet> {
     final sizes = fittingSizes(widget.type, MediaQuery.sizeOf(context));
     if (!sizes.contains(_size)) _size = sizes.contains(widget.type.defaultSize) ? widget.type.defaultSize : sizes.last;
     final hasSave = store.hasSave(widget.type.id);
-    final stats = store.stats(widget.type.id, _difficulty);
+    final stats = store.stats(widget.type.id, _params(0).variant);
 
     return SafeArea(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -99,11 +104,30 @@ class _NewGameSheetState extends State<_NewGameSheet> {
               showSelectedIcon: false,
               onSelectionChanged: (s) => setState(() => _difficulty = s.first),
             ),
+            for (final o in widget.type.optionsFor(_options)) ...[
+              const SizedBox(height: 16),
+              Text(o.label, style: theme.textTheme.labelLarge),
+              const SizedBox(height: 8),
+              Wrap(spacing: 8, runSpacing: 8, children: [
+                for (final c in o.choices)
+                  ChoiceChip(
+                    label: Text(c.label),
+                    selected: _options[o.id] == c.id,
+                    onSelected: (_) => setState(() => _options = widget.type.resolveOptions({..._options, o.id: c.id})),
+                  ),
+              ]),
+              if (o.choices.where((c) => c.id == _options[o.id]).firstOrNull?.description case final d?) ...[
+                const SizedBox(height: 6),
+                Text(d, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+              ],
+            ],
             const SizedBox(height: 12),
             Text(
               stats.solved == 0
                   ? 'Not solved yet on ${_difficulty.label}'
-                  : 'Solved ${stats.solved}× · best ${formatDuration(stats.best!)} · avg ${formatDuration(stats.average!)}',
+                  : stats.bestScore != null
+                      ? 'Finished ${stats.solved}× · best score ${stats.bestScore} · best time ${formatDuration(stats.best!)}'
+                      : 'Solved ${stats.solved}× · best ${formatDuration(stats.best!)} · avg ${formatDuration(stats.average!)}',
               style: theme.textTheme.bodySmall,
             ),
             const SizedBox(height: 20),

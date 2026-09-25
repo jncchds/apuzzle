@@ -93,6 +93,12 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   }
 
   Future<void> _newGame(GenParams params) async {
+    params = GenParams(
+      size: params.size,
+      difficulty: params.difficulty,
+      seed: params.seed,
+      options: type.resolveOptions(params.options),
+    );
     final settings = context.read<Settings>();
     final store = context.read<GameStore>();
     setState(() {
@@ -289,7 +295,15 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
             child: Row(children: [
-              Text('${c.params.size.label} · ${c.params.difficulty.label}', style: theme.textTheme.labelLarge),
+              Flexible(
+                flex: 8,
+                child: Text(
+                  [c.params.size.label, c.params.difficulty.label, if (type.optionsLabel(c.params) case final o when o.isNotEmpty) o]
+                      .join(' · '),
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelLarge,
+                ),
+              ),
               const SizedBox(width: 4),
               Flexible(
                 child: Tooltip(

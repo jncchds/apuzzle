@@ -28,6 +28,7 @@ Run them through the output condenser (see the global CLAUDE.md):
 - `lib/core/generator_runner.dart`: runs `type.generate(params)` via `compute`, which is an isolate on native platforms.
 - `lib/ui/board/cell_grid_board.dart`: a fit-to-screen grid with no zoom, and the win ripple. `cell_tile.dart` is the standard animated cell.
 - `lib/core/registry.dart`: register new types here.
+- Game options: a type can declare extra new-game choices with `optionsFor(chosen)` (later options may depend on earlier ones). They live in `GenParams.options`, go into share codes after the difficulty (`pop-10x8-hard.std.clear-SEED-v1`), and stats are kept per `GenParams.variant`. Score games override `score()` (best score in stats) and `finishTitle()`.
 
 ## Adding a puzzle type
 1. Create `lib/puzzles/<id>/`, containing:
@@ -65,6 +66,7 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 | trail | Trail | PuzzleType | Hamiltonian path; sound edge logic (`trail_logic.dart`) adds waypoints where it stalls, so no path search; up to 10×10 |
 | atoms | Atoms | PuzzleType | Hashi bridges; sound interval solver |
 | lits | LITS | ValueGridType | regions grown cell by cell keeping the solution unique (monotone, so rejected pairs are never retried); capped at 7×7 (8×8 takes 1–5 s) |
+| pop | Pop | PuzzleType | bubble breaker; game options (mode: standard/shifter/continuous/mega, goal: clear (standard only, reverse-built so always clearable)/target (share of best playout)/free). Custom animated `PopBoard` |
 
 ## Known follow-ups
 - A faster LITS uniqueness check (or logic-tier construction) to re-enable 8×8+ boards.

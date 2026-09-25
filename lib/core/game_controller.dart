@@ -129,7 +129,11 @@ class GameController extends ChangeNotifier {
     hintsUsed++;
     flashHints = h.cells;
     flashTick++;
-    apply(h.state);
+    if (identical(h.state, _state)) {
+      notifyListeners(); // a pointer-only hint
+    } else {
+      apply(h.state);
+    }
   }
 
   SubmitOutcome submit() {
@@ -204,7 +208,7 @@ class GameController extends ChangeNotifier {
     if (settings.haptics) HapticFeedback.mediumImpact();
     notifyListeners();
     await store.clearSave(type.id);
-    winStats = await store.recordWin(type.id, params.difficulty, elapsed);
+    winStats = await store.recordWin(type.id, params.variant, elapsed, score: type.score(puzzle, _state));
     notifyListeners();
   }
 

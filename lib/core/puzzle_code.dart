@@ -26,13 +26,14 @@ class PuzzleCode {
 
   static String format(PuzzleType type, GenParams params) {
     final s = params.size;
-    return '${type.id}-${s.cols}x${s.rows}-${params.difficulty.name}-'
+    final options = type.resolveOptions(params.options).values;
+    return '${type.id}-${s.cols}x${s.rows}-${[params.difficulty.name, ...options].join('.')}-'
         '${params.seed.toRadixString(36).toUpperCase()}-v${type.generatorVersion}';
   }
 
   static String link(PuzzleType type, GenParams params) => '$linkBase?p=${format(type, params)}';
 
-  static final _embedded = RegExp(r'\b[a-z]+-\d+x\d+-[a-z]+-[0-9a-z]+(-v\d+)?\b', caseSensitive: false);
+  static final _embedded = RegExp(r'\b[a-z]+-\d+x\d+-[a-z]+(\.[a-z]+)*-[0-9a-z]+(-v\d+)?\b', caseSensitive: false);
 
   /// The first well-formed code inside [text] (a share message or a link).
   static String? find(String text) => _embedded.firstMatch(text)?.group(0);
@@ -55,8 +56,11 @@ class PuzzleCode {
       throw FormatException('${type.name} has no ${parts[1]} size');
     }
 
-    final difficulty = type.difficulties.where((d) => d.name == parts[2] || d.name[0] == parts[2]).firstOrNull;
-    if (difficulty == null) throw FormatException('${type.name} has no "${parts[2]}" difficulty');
+    // Difficulty, then the type's options in order: "hard.std.clear".
+    final [level, ...choices] = parts[2].split('.');
+    final difficulty = type.difficulties.where((d) => d.name == level || d.name[0] == level).firstOrNull;
+    if (difficulty == null) throw FormatException('${type.name} has no "$level" difficulty');
+    final options = _parseOptions(type, choices);
 
     final seed = int.tryParse(parts[3], radix: 36);
     if (seed == null || seed < 0 || seed > maxSeed) throw FormatException('Bad seed "${parts[3]}"');
@@ -69,6 +73,22 @@ class PuzzleCode {
       }
     }
 
-    return PuzzleCode(type, GenParams(size: size, difficulty: difficulty, seed: seed));
+    return PuzzleCode(type, GenParams(size: size, difficulty: difficulty, seed: seed, options: options));
+  }
+
+  /// Maps positional choice ids onto [type]'s options (later options may
+  /// depend on earlier ones). Missing ones get defaults.
+  static Map<String, String> _parseOptions(PuzzleType type, List<String> choices) {
+    var chosen = <String, String>{};
+    for (var i = 0; i < choices.length; i++) {
+      final options = type.optionsFor(chosen);
+      if (i >= options.length) throw FormatException('${type.name} has no option "${choices[i]}"');
+      final o = options[i];
+      if (!o.choices.any((c) => c.id == choices[i])) {
+        throw FormatException('${type.name} has no ${o.label.toLowerCase()} "${choices[i]}"');
+      }
+      chosen = type.resolveOptions({...chosen, o.id: choices[i]});
+    }
+    return type.resolveOptions(chosen);
   }
 }

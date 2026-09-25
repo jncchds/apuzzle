@@ -106,7 +106,7 @@ void main() {
     expect(c.solved, isTrue);
     await Future<void>.delayed(Duration.zero);
     await Future<void>.delayed(Duration.zero);
-    expect(store.stats(type.id, params.difficulty).solved, 1);
+    expect(store.stats(type.id, params.variant).solved, 1);
     expect(store.hasSave(type.id), isFalse);
   });
 

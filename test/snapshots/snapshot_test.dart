@@ -14,6 +14,7 @@ import 'package:apuzzle/core/persistence.dart';
 import 'package:apuzzle/core/puzzle_type.dart';
 import 'package:apuzzle/core/registry.dart';
 import 'package:apuzzle/core/settings.dart';
+import 'package:apuzzle/puzzles/pop/pop_model.dart';
 import 'package:apuzzle/ui/game_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -37,6 +38,7 @@ Future<void> _loadFont(String family, List<String> files) async {
 int _progressSteps(PuzzleType t) => switch (t.id) {
       'mosaic' => 3,
       'blend' => 2,
+      'pop' => 12,
       'trail' => 8,
       _ => 6,
     };
@@ -66,6 +68,8 @@ void main() {
           final h = type.hint(puzzle, state);
           if (h == null) break;
           state = h.state as Object;
+          // Pointer-only hints (Pop): play the pointed-at group.
+          if (puzzle is PopPuzzle) state = popAt(puzzle, state as PopState, puzzle.size.index(h.cells.first))!;
         }
 
         final key = GlobalKey();
