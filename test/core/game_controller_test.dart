@@ -1,3 +1,4 @@
+import 'package:apuzzle/core/day.dart';
 import 'package:apuzzle/core/difficulty.dart';
 import 'package:apuzzle/core/game_controller.dart';
 import 'package:apuzzle/core/grid.dart';
@@ -126,5 +127,40 @@ void main() {
     final r = GameController.fromSave(type: type, json: store.readSave(type.id)!, settings: settings, store: store);
     expect((r.state as ValueGrid).valueAt(p), sun);
     expect((r.puzzle as MamboPuzzle).toJson(), puzzle.toJson());
+  });
+
+  test('a daily game has its own save slot and records the day', () async {
+    const day = Day(2026, 9, 12);
+    final free = make();
+    type.onCellTap(free, firstEmpty(free));
+    await free.save();
+
+    final c = GameController(
+      type: type,
+      params: params,
+      puzzle: puzzle,
+      state: type.initialState(puzzle),
+      settings: settings,
+      store: store,
+      daily: day,
+    );
+    await c.save();
+    expect(store.hasSave(GameStore.dailySlot(c.code)), isTrue);
+    expect(GameController.fromSave(type: type, json: store.readSave(c.saveSlot)!, settings: settings, store: store).daily,
+        day);
+
+    var s = c.state as ValueGrid;
+    for (var i = 0; i < 36; i++) {
+      final pos = puzzle.size.pos(i);
+      s = s.set(pos, s.at(pos).withValue(puzzle.solution[i]));
+    }
+    c.apply(s);
+    for (var i = 0; i < 4; i++) {
+      await Future<void>.delayed(Duration.zero);
+    }
+    expect(store.hasSave(c.saveSlot), isFalse);
+    expect(store.hasSave(type.id), isTrue, reason: 'the free game is untouched');
+    expect(store.dailyResults(day)[GameStore.dailyEntry(type.id, params.difficulty)]?.code, c.code);
+    expect(store.stats(type.id, params.variant).solved, 1, reason: 'daily wins count in the stats');
   });
 }

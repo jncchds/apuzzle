@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/l10n.dart';
+import 'daily.dart' show dailyLaunch;
+import 'day.dart';
 import 'difficulty.dart';
 import 'game_controller.dart';
 import 'grid.dart';
@@ -43,6 +45,14 @@ abstract class PuzzleType<P, S> {
   List<GridSize> get sizes;
   GridSize get defaultSize;
   List<Difficulty> get difficulties => const [Difficulty.easy, Difficulty.medium, Difficulty.hard];
+
+  /// Fixed grid size of the daily puzzle at [difficulty] (one of [sizes],
+  /// fitting a small phone).
+  GridSize dailySize(Difficulty difficulty);
+
+  /// First day this type can appear in daily challenges. A new type
+  /// overrides it with its release date, so earlier days keep their games.
+  Day get dailySince => dailyLaunch;
 
   /// Extra choices for a new game, given the current (possibly incomplete)
   /// ones, so an option's choices can depend on another (a goal per mode).

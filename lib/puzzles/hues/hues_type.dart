@@ -32,6 +32,12 @@ class HuesType extends ValueGridType<HuesPuzzle> {
   List<GridSize> get sizes => [for (var n = 5; n <= 9; n++) GridSize.square(n)];
   @override
   GridSize get defaultSize => const GridSize.square(6);
+  @override
+  GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
+        Difficulty.easy => const GridSize.square(6),
+        Difficulty.medium => const GridSize.square(7),
+        _ => const GridSize.square(8),
+      };
 
   @override
   InputMode get defaultInputMode => InputMode.palette;

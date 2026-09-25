@@ -30,6 +30,12 @@ class MamboType extends ValueGridType<MamboPuzzle> {
   List<GridSize> get sizes => const [GridSize.square(4), GridSize.square(6), GridSize.square(8), GridSize.square(10)];
   @override
   GridSize get defaultSize => const GridSize.square(6);
+  @override
+  GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
+        Difficulty.easy => const GridSize.square(6),
+        Difficulty.medium => const GridSize.square(8),
+        _ => const GridSize.square(8),
+      };
 
   @override
   List<ValueSpec> get values => const [

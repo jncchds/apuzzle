@@ -13,6 +13,26 @@ class AppLocalizationsPl extends AppLocalizations {
   String get settings => 'Ustawienia';
 
   @override
+  String get dailyTitle => 'Wyzwania dnia';
+
+  @override
+  String get dailyCalendar => 'Kalendarz';
+
+  @override
+  String dailyProgress(int done, int total) {
+    return 'Rozwiązano $done z $total';
+  }
+
+  @override
+  String get dailyDayComplete => 'Dzień ukończony!';
+
+  @override
+  String get dailyNext => 'Następna';
+
+  @override
+  String get dailyToday => 'Dziś';
+
+  @override
   String get playCode => 'Zagraj według kodu łamigłówki';
 
   @override

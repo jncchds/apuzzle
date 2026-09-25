@@ -9,12 +9,28 @@ import 'puzzle_code_ui.dart';
 
 /// Confetti + result card shown after solving.
 class WinOverlay extends StatelessWidget {
-  const WinOverlay({super.key, required this.animation, required this.controller, required this.onNew, required this.onHome});
+  const WinOverlay({
+    super.key,
+    required this.animation,
+    required this.controller,
+    required this.backLabel,
+    required this.onBack,
+    required this.nextLabel,
+    required this.onNext,
+    this.note,
+  });
 
   final Animation<double> animation;
   final GameController controller;
-  final VoidCallback onNew;
-  final VoidCallback onHome;
+  final String backLabel;
+  final VoidCallback onBack;
+  final String nextLabel;
+
+  /// Null hides the button (nothing left to play).
+  final VoidCallback? onNext;
+
+  /// An extra line, e.g. the daily challenge progress.
+  final String? note;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +95,10 @@ class WinOverlay extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(controller.code, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+                      if (note != null) ...[
+                        const SizedBox(height: 8),
+                        Text(note!, style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary)),
+                      ],
                       const SizedBox(height: 16),
                       Row(mainAxisSize: MainAxisSize.min, children: [
                         IconButton(
@@ -87,13 +107,15 @@ class WinOverlay extends StatelessWidget {
                           onPressed: () => copyWithToast(context, shareText, l.resultCopied),
                         ),
                         const SizedBox(width: 4),
-                        OutlinedButton(onPressed: onHome, child: Text(l.home)),
-                        const SizedBox(width: 12),
-                        FilledButton.icon(
-                          onPressed: onNew,
-                          icon: const Icon(Icons.auto_awesome_rounded),
-                          label: Text(l.newPuzzle),
-                        ),
+                        OutlinedButton(onPressed: onBack, child: Text(backLabel)),
+                        if (onNext != null) ...[
+                          const SizedBox(width: 12),
+                          FilledButton.icon(
+                            onPressed: onNext,
+                            icon: const Icon(Icons.auto_awesome_rounded),
+                            label: Text(nextLabel),
+                          ),
+                        ],
                       ]),
                     ],
                   ),

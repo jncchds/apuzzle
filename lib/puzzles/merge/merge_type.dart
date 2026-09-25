@@ -33,6 +33,8 @@ class MergeType extends PuzzleType<MergePuzzle, MergeState> {
   @override
   GridSize get defaultSize => const GridSize.square(4);
   @override
+  GridSize dailySize(Difficulty difficulty) => const GridSize.square(4);
+  @override
   double get controlsHeight => 56;
   @override
   bool get showSubmit => false;

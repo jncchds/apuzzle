@@ -2,6 +2,13 @@
   "@@locale": "pl",
 
   "settings": "Ustawienia",
+  "dailyTitle": "Wyzwania dnia",
+  "dailyCalendar": "Kalendarz",
+  "dailyProgress": "Rozwiązano {done} z {total}",
+  "dailyDayComplete": "Dzień ukończony!",
+  "dailyNext": "Następna",
+  "dailyToday": "Dziś",
+
   "playCode": "Zagraj według kodu łamigłówki",
   "playCodeMenu": "Zagraj według kodu…",
   "inProgress": "W toku",

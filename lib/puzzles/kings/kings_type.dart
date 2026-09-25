@@ -33,6 +33,12 @@ class KingsType extends ValueGridType<KingsPuzzle> {
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];
   @override
   GridSize get defaultSize => const GridSize.square(8);
+  @override
+  GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
+        Difficulty.easy => const GridSize.square(6),
+        Difficulty.medium => const GridSize.square(8),
+        _ => const GridSize.square(9),
+      };
 
   @override
   List<ValueSpec> get values => [

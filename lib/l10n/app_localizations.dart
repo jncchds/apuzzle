@@ -108,6 +108,42 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settings;
 
+  /// No description provided for @dailyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily challenges'**
+  String get dailyTitle;
+
+  /// No description provided for @dailyCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar'**
+  String get dailyCalendar;
+
+  /// No description provided for @dailyProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{done} of {total} solved'**
+  String dailyProgress(int done, int total);
+
+  /// No description provided for @dailyDayComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Day complete!'**
+  String get dailyDayComplete;
+
+  /// No description provided for @dailyNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next puzzle'**
+  String get dailyNext;
+
+  /// No description provided for @dailyToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get dailyToday;
+
   /// No description provided for @playCode.
   ///
   /// In en, this message translates to:

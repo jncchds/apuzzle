@@ -43,6 +43,12 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
   @override
   GridSize get defaultSize => const GridSize(10, 8);
   @override
+  GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
+        Difficulty.easy => const GridSize.square(6),
+        Difficulty.medium => const GridSize.square(8),
+        _ => const GridSize(10, 8),
+      };
+  @override
   double get minCellSize => 28;
   @override
   double get controlsHeight => 56;

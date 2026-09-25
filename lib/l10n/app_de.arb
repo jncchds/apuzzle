@@ -2,6 +2,13 @@
   "@@locale": "de",
 
   "settings": "Einstellungen",
+  "dailyTitle": "Tägliche Rätsel",
+  "dailyCalendar": "Kalender",
+  "dailyProgress": "{done} von {total} gelöst",
+  "dailyDayComplete": "Tag geschafft!",
+  "dailyNext": "Nächstes Rätsel",
+  "dailyToday": "Heute",
+
   "playCode": "Rätselcode spielen",
   "playCodeMenu": "Rätselcode spielen…",
   "inProgress": "Läuft",

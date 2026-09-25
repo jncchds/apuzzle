@@ -13,6 +13,26 @@ class AppLocalizationsUk extends AppLocalizations {
   String get settings => 'Налаштування';
 
   @override
+  String get dailyTitle => 'Щоденні виклики';
+
+  @override
+  String get dailyCalendar => 'Календар';
+
+  @override
+  String dailyProgress(int done, int total) {
+    return 'Розв’язано $done з $total';
+  }
+
+  @override
+  String get dailyDayComplete => 'День завершено!';
+
+  @override
+  String get dailyNext => 'Наступна';
+
+  @override
+  String get dailyToday => 'Сьогодні';
+
+  @override
   String get playCode => 'Грати за кодом головоломки';
 
   @override

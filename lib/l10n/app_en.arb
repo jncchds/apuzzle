@@ -2,6 +2,14 @@
   "@@locale": "en",
 
   "settings": "Settings",
+  "dailyTitle": "Daily challenges",
+  "dailyCalendar": "Calendar",
+  "dailyProgress": "{done} of {total} solved",
+  "@dailyProgress": {"placeholders": {"done": {"type": "int"}, "total": {"type": "int"}}},
+  "dailyDayComplete": "Day complete!",
+  "dailyNext": "Next puzzle",
+  "dailyToday": "Today",
+
   "playCode": "Play a puzzle code",
   "playCodeMenu": "Play a puzzle code…",
   "inProgress": "In progress",

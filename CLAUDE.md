@@ -15,6 +15,7 @@ Run them through the output condenser (see the global CLAUDE.md):
   (The in-app browser pane crops screenshots on high-DPI displays, so prefer these PNGs for layout checks.)
 - App icons (Android incl. adaptive/monochrome, iOS, web, Windows) are generated from one design ("pixel A", colors at the top of the script): `node tools/make_icons.mjs`
 - Generator timings (all types, or `BENCH_TYPES=kings,lits`): `flutter test test/bench/generator_bench_test.dart --run-skipped --tags bench -r expanded`
+- Daily puzzle timings (every type at its daily sizes): `flutter test test/bench/daily_probe_test.dart --run-skipped --tags bench -r expanded`
 - Per-type probes (time plus achieved tier/uniqueness): `PROBE=trail PROBE_SIZES=6,8,10 flutter test test/bench/probe_test.dart --run-skipped --tags bench -r expanded`
 
 ## Architecture
@@ -31,6 +32,11 @@ Run them through the output condenser (see the global CLAUDE.md):
 - `lib/ui/board/cell_grid_board.dart`: a fit-to-screen grid with no zoom, and the win ripple. `cell_tile.dart` is the standard animated cell.
 - `lib/ui/app_router.dart`: `MaterialApp.router`. The route is the URL: `/`, `/settings`, or `/?p=<share code>`, so the web gets browser back/forward and Android share links use the same parser. The web build uses path URLs, and the Pages deploy copies `index.html` to `404.html`. Open screens through `AppRouterDelegate.of(context)`, not `Navigator.push` (dialogs and sheets are fine).
 - `lib/core/registry.dart`: register new types here.
+- Daily challenges (`lib/core/daily.dart`, `lib/ui/daily_screen.dart`, route `/daily?d=2026-09-25[&p=<code>]`):
+  - each day picks 3 games (seeded by `hash31(date)`, a web-safe FNV-1a) from the types whose `dailySince` is on or before it (launch: 2026-09-01), each at all its difficulties;
+  - every puzzle of the day uses the same seed, with the type's fixed `dailySize(difficulty)` and default options, so it is a normal share code;
+  - `GameStore`: results in `daily.<date>` (`type.difficulty` → code, best ms, hints), in-progress dailies in their own save slot (`save.daily.<code>`), so they never replace the free game. Daily wins also count in the regular stats;
+  - the router only treats a code as a daily one if it really is that day's puzzle (`isDailyPuzzle`), and never for future days.
 - `lib/core/grid_graph.dart`: neighbour lists and connected components for flat grids.
 - Localization: gen-l10n (`l10n.yaml`), ARB files in `lib/l10n/` (en is the template; uk, pl, de). Generated `app_localizations*.dart` are checked in; run `flutter gen-l10n` after editing ARBs. No user-facing string literals in Dart: use `context.l10n` (`lib/l10n/l10n.dart`). Type texts take an `AppLocalizations` (`name(l)`, `tagline(l)`, `rulesText(l)`, `finishTitle(l, …)`); toasts and puzzle-code errors carry a `Tr` closure resolved by the UI. Language: `Settings.language` (null = system); `resolveAppLocale` maps Russian to Ukrainian and anything unsupported to English.
 - Game options: a type can declare extra new-game choices with `optionsFor(chosen)` (later options may depend on earlier ones). They live in `GenParams.options`, go into share codes after the difficulty (`pop-10x8-hard.std.clear-SEED-v1`), and stats are kept per `GenParams.variant`. Option and choice texts come from `optionLabel`/`choiceLabel`/`choiceDescription`. Score games override `score()` (best score in stats) and `finishTitle()`.
@@ -40,7 +46,7 @@ Run them through the output condenser (see the global CLAUDE.md):
    - `<id>_model.dart`: the puzzle plus a pure rule check;
    - `<id>_solver.dart`: tiered, sound deductions plus `countSolutions(limit: 2)`;
    - `<id>_generator.dart`: random solution → strip clues while still solvable at the difficulty's tier;
-   - `<id>_type.dart`;
+   - `<id>_type.dart`, including `dailySize` (must fit a 360×760 phone) and `dailySince` set to the release date, so earlier days keep their games;
    - `<id>Name`, `<id>Tagline`, `<id>Rules` (and any other texts) in all four ARB files.
 2. Generation must be deterministic for a given `GenParams.seed`, and pure, because it runs in an isolate. Types must be `const`.
 3. Add it to `puzzleTypes` in `registry.dart`.

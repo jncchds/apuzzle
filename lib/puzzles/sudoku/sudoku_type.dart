@@ -30,6 +30,8 @@ class SudokuType extends ValueGridType<SudokuPuzzle> {
   @override
   GridSize get defaultSize => const GridSize.square(9);
   @override
+  GridSize dailySize(Difficulty difficulty) => const GridSize.square(9);
+  @override
   List<Difficulty> get difficulties => Difficulty.values;
 
   @override

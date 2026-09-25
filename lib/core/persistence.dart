@@ -1,6 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'day.dart';
+import 'difficulty.dart';
 
 class PuzzleStats {
   const PuzzleStats({this.solved = 0, this.bestMs, this.totalMs = 0, this.bestScore});
@@ -26,7 +30,27 @@ class PuzzleStats {
       );
 }
 
-/// Saved games, stats and small per-type preferences.
+/// A solved daily puzzle.
+class DailyResult {
+  const DailyResult({required this.code, required this.bestMs, this.hints = 0});
+
+  final String code;
+
+  /// Best time on this puzzle.
+  final int bestMs;
+
+  /// Hints used in that best solve.
+  final int hints;
+
+  Duration get best => Duration(milliseconds: bestMs);
+
+  Map<String, dynamic> toJson() => {'code': code, 'ms': bestMs, if (hints > 0) 'hints': hints};
+
+  factory DailyResult.fromJson(Map<String, dynamic> j) =>
+      DailyResult(code: j['code'] as String, bestMs: j['ms'] as int, hints: j['hints'] as int? ?? 0);
+}
+
+/// Saved games, stats, daily results and small per-type preferences.
 class GameStore {
   GameStore(this.prefs);
 
@@ -34,18 +58,48 @@ class GameStore {
 
   static Future<GameStore> open() async => GameStore(await SharedPreferences.getInstance());
 
-  String _saveKey(String typeId) => 'save.$typeId';
+  /// Bumped when a daily result is recorded, so screens can refresh.
+  final ValueNotifier<int> dailyRevision = ValueNotifier(0);
+
+  String _saveKey(String slot) => 'save.$slot';
   String _statsKey(String typeId, String variant) => 'stats.$typeId.$variant';
   String _lastKey(String typeId) => 'last.$typeId';
+  String _dailyKey(Day day) => 'daily.$day';
 
-  bool hasSave(String typeId) => prefs.containsKey(_saveKey(typeId));
+  /// The save slot of a daily puzzle, apart from the type's free game.
+  static String dailySlot(String code) => 'daily.$code';
 
-  Map<String, dynamic>? readSave(String typeId) => _readJson(_saveKey(typeId));
+  /// Saves live in slots: a type id for the free game, or a [dailySlot].
+  bool hasSave(String slot) => prefs.containsKey(_saveKey(slot));
 
-  Future<void> writeSave(String typeId, Map<String, dynamic> data) =>
-      prefs.setString(_saveKey(typeId), jsonEncode(data));
+  Map<String, dynamic>? readSave(String slot) => _readJson(_saveKey(slot));
 
-  Future<void> clearSave(String typeId) => prefs.remove(_saveKey(typeId));
+  Future<void> writeSave(String slot, Map<String, dynamic> data) => prefs.setString(_saveKey(slot), jsonEncode(data));
+
+  Future<void> clearSave(String slot) => prefs.remove(_saveKey(slot));
+
+  /// Solved puzzles of [day], by [dailyEntry].
+  Map<String, DailyResult> dailyResults(Day day) {
+    final j = _readJson(_dailyKey(day)) ?? const {};
+    return {
+      for (final e in j.entries)
+        if (e.value is Map<String, dynamic>) e.key: DailyResult.fromJson(e.value as Map<String, dynamic>),
+    };
+  }
+
+  static String dailyEntry(String typeId, Difficulty difficulty) => '$typeId.${difficulty.name}';
+
+  /// Records a solve of one of [day]'s puzzles, keeping the best time.
+  Future<void> recordDaily(Day day, String typeId, Difficulty difficulty, String code, Duration time, int hints) async {
+    final results = dailyResults(day);
+    final key = dailyEntry(typeId, difficulty);
+    final old = results[key];
+    if (old == null || time.inMilliseconds < old.bestMs) {
+      results[key] = DailyResult(code: code, bestMs: time.inMilliseconds, hints: hints);
+      await prefs.setString(_dailyKey(day), jsonEncode({for (final e in results.entries) e.key: e.value.toJson()}));
+    }
+    dailyRevision.value++;
+  }
 
   /// Stats for one [GenParams.variant] (difficulty plus options).
   PuzzleStats stats(String typeId, String variant) {

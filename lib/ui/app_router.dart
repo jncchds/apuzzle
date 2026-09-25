@@ -1,23 +1,31 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../core/daily.dart';
+import '../core/day.dart';
 import '../core/difficulty.dart';
 import '../core/puzzle_code.dart';
 import '../core/puzzle_type.dart';
 import '../core/registry.dart';
 import '../l10n/l10n.dart';
+import 'daily_screen.dart';
 import 'game_screen.dart';
 import 'home_screen.dart';
 import 'settings_screen.dart';
 
-/// What the address bar shows: home (`/`), settings (`/settings`) or a puzzle
-/// by its share code (`/?p=kings-8x8-hard-4FZ8K1-v1`, the share link itself).
-/// On the web this gives the browser's back and forward buttons real history;
-/// on Android the same parser opens share links.
+/// What the address bar shows: home (`/`), settings (`/settings`), daily
+/// challenges (`/daily?d=2026-09-25`) or a puzzle by its share code
+/// (`/?p=kings-8x8-hard-4FZ8K1-v1`, the share link itself; a daily one is
+/// `/daily?d=…&p=…`). On the web this gives the browser's back and forward
+/// buttons real history; on Android the same parser opens share links.
 class AppRoute {
-  const AppRoute({this.settings = false, this.game, this.error});
+  const AppRoute({this.settings = false, this.daily, this.game, this.error});
 
   final bool settings;
+
+  /// The daily challenges page with this day selected. With [game], that
+  /// game is one of the day's puzzles.
+  final Day? daily;
   final PuzzleCode? game;
 
   /// A puzzle link that didn't parse.
@@ -27,19 +35,31 @@ class AppRoute {
     // Android passes the link's full path (/apuzzle/?p=…), the web the path
     // below the base href (/?p=…).
     final link = uri.toString();
+    PuzzleCode? game;
     if (PuzzleCode.find(link) != null) {
       try {
-        return AppRoute(game: PuzzleCode.parse(link, puzzleTypes));
+        game = PuzzleCode.parse(link, puzzleTypes);
       } on PuzzleCodeException catch (e) {
         return AppRoute(error: e.describe);
       }
     }
-    return AppRoute(settings: uri.pathSegments.lastOrNull == 'settings');
+    final page = uri.pathSegments.lastOrNull;
+    if (page == 'daily') {
+      final today = Day.today();
+      var day = Day.tryParse(uri.queryParameters['d']) ?? today;
+      if (day > today || day < dailyLaunch) day = today;
+      // Only the day's own puzzles count as its challenges.
+      if (game != null && !isDailyPuzzle(day, game, today: today)) return AppRoute(game: game);
+      return AppRoute(daily: day, game: game);
+    }
+    return game != null ? AppRoute(game: game) : AppRoute(settings: page == 'settings');
   }
 
-  Uri get uri => game != null
-      ? Uri(path: '/', queryParameters: {'p': game.toString()})
-      : Uri(path: settings ? '/settings' : '/');
+  Uri get uri => daily != null
+      ? Uri(path: '/daily', queryParameters: {'d': daily.toString(), if (game != null) 'p': game.toString()})
+      : game != null
+          ? Uri(path: '/', queryParameters: {'p': game.toString()})
+          : Uri(path: settings ? '/settings' : '/');
 }
 
 class AppRouteParser extends RouteInformationParser<AppRoute> {
@@ -54,16 +74,19 @@ class AppRouteParser extends RouteInformationParser<AppRoute> {
 }
 
 class _Game {
-  _Game(this.code, this.id);
+  _Game(this.code, this.id, this.daily);
 
   PuzzleCode code;
+
+  /// The day whose challenge this is, or null.
+  final Day? daily;
 
   /// Keeps the page (and its [GameScreen] state) while the in-game "new
   /// puzzle" changes [code].
   final int id;
 }
 
-/// Home, with settings or one game on top. Dialogs and sheets stay pageless.
+/// Home, with settings or daily challenges, then one game on top. Dialogs and sheets stay pageless.
 class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, PopNavigatorRouterDelegateMixin<AppRoute> {
   AppRouterDelegate({this.messengerKey});
 
@@ -75,11 +98,12 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
   static AppRouterDelegate of(BuildContext context) => Router.of(context).routerDelegate as AppRouterDelegate;
 
   bool _settings = false;
+  Day? _daily;
   _Game? _game;
   int _games = 0;
 
   @override
-  AppRoute get currentConfiguration => AppRoute(settings: _settings, game: _game?.code);
+  AppRoute get currentConfiguration => AppRoute(settings: _settings, daily: _daily, game: _game?.code);
 
   @override
   Future<void> setNewRoutePath(AppRoute configuration) {
@@ -93,13 +117,18 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
       });
       return SynchronousFuture(null);
     }
-    _show(settings: configuration.settings, game: configuration.game);
+    _show(settings: configuration.settings, daily: configuration.daily, game: configuration.game);
     return SynchronousFuture(null);
   }
 
-  void _show({bool settings = false, PuzzleCode? game}) {
+  /// With [daily] and [game], the game is that day's challenge.
+  void _show({bool settings = false, Day? daily, PuzzleCode? game}) {
     _settings = settings;
-    if (game?.toString() != _game?.code.toString()) _game = game == null ? null : _Game(game, ++_games);
+    _daily = daily;
+    final gameDaily = game == null ? null : daily;
+    if (game?.toString() != _game?.code.toString() || gameDaily != _game?.daily) {
+      _game = game == null ? null : _Game(game, ++_games, gameDaily);
+    }
     notifyListeners();
   }
 
@@ -107,6 +136,23 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
 
   /// Opens a puzzle; if it is the saved one, the game resumes.
   void openGame(PuzzleType type, GenParams params) => _show(game: PuzzleCode(type, params));
+
+  /// Opens the daily challenges of [day] (today by default).
+  void openDaily([Day? day]) => _show(daily: day ?? Day.today());
+
+  /// Picks another day on the open daily page, without a history entry.
+  void selectDailyDay(Day day) {
+    final context = navigatorKey.currentContext;
+    if (context == null || _daily == null) return;
+    Router.neglect(context, () {
+      _daily = day;
+      notifyListeners();
+    });
+  }
+
+  /// Opens one of [day]'s puzzles (over the daily page); a saved one resumes.
+  void openDailyGame(Day day, PuzzleType type, Difficulty difficulty) =>
+      _show(daily: day, game: PuzzleCode(type, dailyParams(day, type, difficulty)));
 
   /// The game screen started another puzzle: update the address in place, so
   /// back still leads home.
@@ -128,18 +174,21 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
       pages: [
         const MaterialPage(key: ValueKey('home'), child: HomeScreen()),
         if (_settings) const MaterialPage(key: ValueKey('settings'), child: SettingsScreen()),
+        if (_daily case final day?) MaterialPage(key: const ValueKey('daily'), child: DailyScreen(day: day)),
         if (game != null)
           MaterialPage(
             key: ValueKey(game.id),
             child: GameScreen(
               type: game.code.type,
               params: game.code.params,
-              onPuzzleChanged: (params) => _puzzleChanged(game, params),
+              daily: game.daily,
+              onPuzzleChanged: game.daily != null ? null : (params) => _puzzleChanged(game, params),
             ),
           ),
       ],
       onDidRemovePage: (page) {
         if (page.key == const ValueKey('settings')) _settings = false;
+        if (page.key == const ValueKey('daily')) _daily = null;
         if (_game case final g? when page.key == ValueKey(g.id)) _game = null;
         notifyListeners();
       },

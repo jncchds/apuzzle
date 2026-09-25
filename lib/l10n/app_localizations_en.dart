@@ -13,6 +13,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
+  String get dailyTitle => 'Daily challenges';
+
+  @override
+  String get dailyCalendar => 'Calendar';
+
+  @override
+  String dailyProgress(int done, int total) {
+    return '$done of $total solved';
+  }
+
+  @override
+  String get dailyDayComplete => 'Day complete!';
+
+  @override
+  String get dailyNext => 'Next puzzle';
+
+  @override
+  String get dailyToday => 'Today';
+
+  @override
   String get playCode => 'Play a puzzle code';
 
   @override

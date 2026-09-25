@@ -38,6 +38,12 @@ class MosaicType extends PuzzleType<MosaicPuzzle, MosaicState> {
   @override
   GridSize get defaultSize => const GridSize.square(12);
   @override
+  GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
+        Difficulty.easy => const GridSize.square(8),
+        Difficulty.medium => const GridSize.square(12),
+        _ => const GridSize.square(14),
+      };
+  @override
   double get minCellSize => 20;
   @override
   double get controlsHeight => 120;

@@ -35,6 +35,12 @@ class FenceType extends PuzzleType<FencePuzzle, LoopMarks> {
   @override
   GridSize get defaultSize => const GridSize.square(6);
   @override
+  GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
+        Difficulty.easy => const GridSize.square(5),
+        Difficulty.medium => const GridSize.square(7),
+        _ => const GridSize.square(8),
+      };
+  @override
   double get controlsHeight => 40;
 
   @override

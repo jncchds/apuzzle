@@ -34,6 +34,12 @@ class TrailType extends PuzzleType<TrailPuzzle, TrailState> {
   @override
   GridSize get defaultSize => const GridSize.square(6);
   @override
+  GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
+        Difficulty.easy => const GridSize.square(5),
+        Difficulty.medium => const GridSize.square(7),
+        _ => const GridSize.square(9),
+      };
+  @override
   double get controlsHeight => 40;
 
   @override

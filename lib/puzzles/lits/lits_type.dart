@@ -42,6 +42,12 @@ class LitsType extends ValueGridType<LitsPuzzle> {
   @override
   GridSize get defaultSize => const GridSize.square(6);
   @override
+  GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
+        Difficulty.easy => const GridSize.square(5),
+        Difficulty.medium => const GridSize.square(6),
+        _ => const GridSize.square(7),
+      };
+  @override
   double get gapRatio => 0.06;
 
   @override

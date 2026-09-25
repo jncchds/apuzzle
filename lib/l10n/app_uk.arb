@@ -2,6 +2,13 @@
   "@@locale": "uk",
 
   "settings": "Налаштування",
+  "dailyTitle": "Щоденні виклики",
+  "dailyCalendar": "Календар",
+  "dailyProgress": "Розв’язано {done} з {total}",
+  "dailyDayComplete": "День завершено!",
+  "dailyNext": "Наступна",
+  "dailyToday": "Сьогодні",
+
   "playCode": "Грати за кодом головоломки",
   "playCodeMenu": "Грати за кодом…",
   "inProgress": "Триває",

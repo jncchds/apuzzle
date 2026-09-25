@@ -5,23 +5,39 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../core/daily.dart';
+import '../core/day.dart';
 import '../core/difficulty.dart';
 import '../core/game_controller.dart';
 import '../core/generator_runner.dart';
 import '../core/persistence.dart';
+import '../core/puzzle_code.dart';
 import '../core/puzzle_type.dart';
 import '../core/settings.dart';
 import '../l10n/l10n.dart';
+import 'app_router.dart';
 import 'new_game_sheet.dart' show formatDuration;
 import 'puzzle_code_ui.dart';
 import 'win_overlay.dart';
 
 /// Plays one puzzle. With [params] == null it resumes the saved game.
 class GameScreen extends StatefulWidget {
-  const GameScreen({super.key, required this.type, this.params, this.onPuzzleChanged, this.presetPuzzle, this.presetState});
+  const GameScreen({
+    super.key,
+    required this.type,
+    this.params,
+    this.daily,
+    this.onPuzzleChanged,
+    this.presetPuzzle,
+    this.presetState,
+  });
 
   final PuzzleType type;
   final GenParams? params;
+
+  /// Set when [params] is this day's challenge: it gets its own save slot,
+  /// counts toward the day and offers the day's next puzzle when solved.
+  final Day? daily;
 
   /// Called when a puzzle starts, so the address can follow "new puzzle".
   final ValueChanged<GenParams>? onPuzzleChanged;
@@ -66,10 +82,11 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
         state: widget.presetState ?? type.initialState(widget.presetPuzzle) as Object,
         settings: context.read<Settings>(),
         store: context.read<GameStore>(),
+        daily: widget.daily,
       ));
       return;
     }
-    final save = _resumable(context.read<GameStore>().readSave(type.id));
+    final save = _resumable(context.read<GameStore>().readSave(_slot));
     if (save != null) {
       try {
         _attach(GameController.fromSave(
@@ -87,6 +104,11 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   }
 
   int _seed() => Random().nextInt(1 << 31);
+
+  String get _slot => switch ((widget.daily, widget.params)) {
+        (_?, final params?) => GameStore.dailySlot(PuzzleCode.format(type, params)),
+        _ => type.id,
+      };
 
   /// The saved game, if there's nothing new to start or the requested puzzle
   /// is the one saved (a share link opened twice, a web page reload).
@@ -121,6 +143,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
         state: type.initialState(puzzle) as Object,
         settings: settings,
         store: store,
+        daily: widget.daily,
       ));
     } catch (e, st) {
       debugPrint('Generation failed: $e\n$st');
@@ -265,7 +288,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
               }
             },
             itemBuilder: (_) => [
-              PopupMenuItem(value: 'new', child: Text(l.newPuzzle)),
+              if (widget.daily == null) PopupMenuItem(value: 'new', child: Text(l.newPuzzle)),
               if (c != null) PopupMenuItem(value: 'copy', child: Text(l.copyShareLink)),
               PopupMenuItem(value: 'code', child: Text(l.playCodeMenu)),
             ],
@@ -364,16 +387,37 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
           ],
         ]),
       ),
-      if (c.solved)
-        Positioned.fill(
-          child: WinOverlay(
-            animation: _win,
-            controller: c,
-            onHome: () => Navigator.of(context).pop(),
-            onNew: () => _newGame(c.params.withSeed(_seed())),
-          ),
-        ),
+      if (c.solved) Positioned.fill(child: c.daily != null ? _dailyWin(c, c.daily!) : _freeWin(c)),
     ]);
+  }
+
+  Widget _freeWin(GameController c) => WinOverlay(
+        animation: _win,
+        controller: c,
+        backLabel: context.l10n.home,
+        onBack: () => Navigator.of(context).pop(),
+        nextLabel: context.l10n.newPuzzle,
+        onNext: () => _newGame(c.params.withSeed(_seed())),
+      );
+
+  /// Back leads to the calendar; next is the day's next unsolved puzzle.
+  Widget _dailyWin(GameController c, Day day) {
+    final l = context.l10n;
+    final puzzles = dailyPuzzles(day);
+    final results = context.read<GameStore>().dailyResults(day);
+    bool solved(DailyPuzzle p) => results.containsKey(GameStore.dailyEntry(p.type.id, p.difficulty));
+    final done = puzzles.where(solved).length;
+    final here = puzzles.indexWhere((p) => p.type == type && p.difficulty == c.params.difficulty);
+    final next = [...puzzles.skip(here + 1), ...puzzles.take(here + 1)].where((p) => !solved(p)).firstOrNull;
+    return WinOverlay(
+      animation: _win,
+      controller: c,
+      note: done == puzzles.length ? l.dailyDayComplete : l.dailyProgress(done, puzzles.length),
+      backLabel: l.dailyCalendar,
+      onBack: () => Navigator.of(context).pop(),
+      nextLabel: l.dailyNext,
+      onNext: next == null ? null : () => AppRouterDelegate.of(context).openDailyGame(day, next.type, next.difficulty),
+    );
   }
 }
 

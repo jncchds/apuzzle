@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import '../l10n/l10n.dart';
+import 'day.dart';
 import 'difficulty.dart';
 import 'grid.dart';
 import 'persistence.dart';
@@ -24,6 +25,7 @@ class GameController extends ChangeNotifier {
     required this.store,
     Duration elapsed = Duration.zero,
     this.hintsUsed = 0,
+    this.daily,
   })  : _state = state, // ignore: prefer_initializing_formals
         _banked = elapsed,
         inputMode = type.defaultInputMode;
@@ -33,6 +35,12 @@ class GameController extends ChangeNotifier {
   final Object puzzle;
   final Settings settings;
   final GameStore store;
+
+  /// The day whose daily challenge this puzzle belongs to, or null.
+  final Day? daily;
+
+  /// Where this game is saved: daily puzzles don't replace the free game.
+  String get saveSlot => daily == null ? type.id : GameStore.dailySlot(code);
 
   /// Shareable code that regenerates this exact puzzle.
   String get code => PuzzleCode.format(type, params);
@@ -208,8 +216,9 @@ class GameController extends ChangeNotifier {
     pause();
     if (settings.haptics) HapticFeedback.mediumImpact();
     notifyListeners();
-    await store.clearSave(type.id);
+    await store.clearSave(saveSlot);
     winStats = await store.recordWin(type.id, params.variant, elapsed, score: type.score(puzzle, _state));
+    if (daily case final day?) await store.recordDaily(day, type.id, params.difficulty, code, elapsed, hintsUsed);
     notifyListeners();
   }
 
@@ -220,11 +229,12 @@ class GameController extends ChangeNotifier {
         'state': type.encodeState(_state),
         'elapsed': elapsed.inMilliseconds,
         'hints': hintsUsed,
+        if (daily != null) 'daily': daily.toString(),
       };
 
   Future<void> save() async {
     if (solved) return;
-    await store.writeSave(type.id, toSave());
+    await store.writeSave(saveSlot, toSave());
   }
 
   static GameController fromSave({
@@ -243,6 +253,7 @@ class GameController extends ChangeNotifier {
       store: store,
       elapsed: Duration(milliseconds: json['elapsed'] as int? ?? 0),
       hintsUsed: json['hints'] as int? ?? 0,
+      daily: Day.tryParse(json['daily'] as String?),
     );
   }
 }
