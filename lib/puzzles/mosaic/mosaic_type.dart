@@ -6,10 +6,12 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/board/region_borders.dart';
 import 'mosaic_model.dart';
+import 'mosaic_tutorial.dart';
 
 /// Flood-fill from the top-left corner within a move limit.
 class MosaicType extends PuzzleType<MosaicPuzzle, MosaicState> {
@@ -32,6 +34,9 @@ class MosaicType extends PuzzleType<MosaicPuzzle, MosaicState> {
 
   @override
   String rulesText(AppLocalizations l) => l.mosaicRules;
+
+  @override
+  List<TutorialStep> tutorial() => mosaicTutorial;
 
   @override
   List<GridSize> get sizes => [for (final n in [6, 8, 10, 12, 14, 16, 18]) GridSize.square(n)];

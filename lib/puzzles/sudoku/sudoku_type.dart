@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import 'sudoku_generator.dart';
 import 'sudoku_model.dart';
+import 'sudoku_tutorial.dart';
 
 class SudokuType extends ValueGridType<SudokuPuzzle> {
   const SudokuType();
@@ -24,6 +26,9 @@ class SudokuType extends ValueGridType<SudokuPuzzle> {
 
   @override
   String rulesText(AppLocalizations l) => l.sudokuRules;
+
+  @override
+  List<TutorialStep> tutorial() => sudokuTutorial;
 
   @override
   List<GridSize> get sizes => const [GridSize.square(4), GridSize.square(6), GridSize.square(9)];

@@ -26,6 +26,7 @@ class GameController extends ChangeNotifier {
     Duration elapsed = Duration.zero,
     this.hintsUsed = 0,
     this.daily,
+    this.practice = false,
   })  : _state = state, // ignore: prefer_initializing_formals
         _banked = elapsed,
         inputMode = type.defaultInputMode;
@@ -38,6 +39,9 @@ class GameController extends ChangeNotifier {
 
   /// The day whose daily challenge this puzzle belongs to, or null.
   final Day? daily;
+
+  /// A tutorial board: nothing is saved and wins don't count.
+  final bool practice;
 
   /// Where this game is saved: daily puzzles don't replace the free game.
   String get saveSlot => daily == null ? type.id : GameStore.dailySlot(code);
@@ -171,6 +175,12 @@ class GameController extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Marks [cells] like a hint, until the next flash or [clearFlash].
+  void pointAt(Set<Pos> cells) {
+    flashHints = cells;
+    notifyListeners();
+  }
+
   void clearFlash() {
     if (flashErrors.isEmpty && flashHints.isEmpty) return;
     flashErrors = const {};
@@ -216,6 +226,7 @@ class GameController extends ChangeNotifier {
     pause();
     if (settings.haptics) HapticFeedback.mediumImpact();
     notifyListeners();
+    if (practice) return;
     await store.clearSave(saveSlot);
     winStats = await store.recordWin(type.id, params.variant, elapsed, score: type.score(puzzle, _state));
     if (daily case final day?) await store.recordDaily(day, type.id, params.difficulty, code, elapsed, hintsUsed);
@@ -233,7 +244,7 @@ class GameController extends ChangeNotifier {
       };
 
   Future<void> save() async {
-    if (solved) return;
+    if (solved || practice) return;
     await store.writeSave(saveSlot, toSave());
   }
 

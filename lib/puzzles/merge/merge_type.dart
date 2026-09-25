@@ -4,10 +4,12 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import 'merge_board.dart';
 import 'merge_generator.dart';
 import 'merge_model.dart';
+import 'merge_tutorial.dart';
 
 /// 2048: slide every tile one way; two equal tiles that meet merge into
 /// their sum. Difficulty sets the tile to build.
@@ -27,6 +29,9 @@ class MergeType extends PuzzleType<MergePuzzle, MergeState> {
 
   @override
   String rulesText(AppLocalizations l) => l.mergeRules;
+
+  @override
+  List<TutorialStep> tutorial() => mergeTutorial;
 
   @override
   List<GridSize> get sizes => const [GridSize.square(3), GridSize.square(4), GridSize.square(5), GridSize.square(6)];

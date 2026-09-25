@@ -9,6 +9,7 @@ import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
+import 'tutorial_screen.dart';
 
 /// Sizes of [type] whose board fits [screen] without zoom.
 List<GridSize> fittingSizes(PuzzleType type, Size screen) {
@@ -18,6 +19,21 @@ List<GridSize> fittingSizes(PuzzleType type, Size screen) {
   final maxRows = ((screen.height - 160 - type.controlsHeight) / cell).floor();
   final fit = type.sizes.where((s) => s.cols <= maxCols && s.rows <= maxRows).toList();
   return fit.isEmpty ? [type.sizes.first] : fit;
+}
+
+/// A new game with the last choices for [type] (or its defaults), without
+/// asking: the size that fits [screen], a fresh seed.
+GenParams quickParams(PuzzleType type, GameStore store, Size screen) {
+  final last = store.lastChoice(type.id);
+  final sizes = fittingSizes(type, screen);
+  var size = last?['size'] != null ? GridSize.fromJson(last!['size'] as Map<String, dynamic>) : type.defaultSize;
+  if (!sizes.contains(size)) size = sizes.contains(type.defaultSize) ? type.defaultSize : sizes.last;
+  return GenParams(
+    size: size,
+    difficulty: Difficulty.values.asNameMap()[last?['difficulty']] ?? type.difficulties.first,
+    seed: Random().nextInt(1 << 31),
+    options: type.resolveOptions((last?['options'] as Map<String, dynamic>?)?.cast<String, String>() ?? const {}),
+  );
 }
 
 Future<void> showNewGameSheet(BuildContext context, PuzzleType type) => showModalBottomSheet<void>(
@@ -66,10 +82,12 @@ class _NewGameSheetState extends State<_NewGameSheet> {
       } catch (e) {
         debugPrint('Could not read the saved puzzle: $e');
       }
-    } else {
-      store.setLastChoice(widget.type.id, {'size': _size.toJson(), 'difficulty': _difficulty.name, 'options': _options});
+      router.openGame(widget.type, params ?? _params(Random().nextInt(1 << 31)));
+      return;
     }
-    router.openGame(widget.type, params ?? _params(Random().nextInt(1 << 31)));
+    store.setLastChoice(widget.type.id, {'size': _size.toJson(), 'difficulty': _difficulty.name, 'options': _options});
+    final chosen = _params(Random().nextInt(1 << 31));
+    offerTutorial(widget.rootContext, widget.type, play: () => router.openGame(widget.type, chosen));
   }
 
   @override

@@ -6,10 +6,12 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import 'labyrinth_generator.dart';
 import 'labyrinth_model.dart';
+import 'labyrinth_tutorial.dart';
 
 /// Walk through the maze from the top-left corner to the bottom-right one.
 class LabyrinthType extends PuzzleType<LabyrinthPuzzle, LabyrinthState> {
@@ -30,6 +32,9 @@ class LabyrinthType extends PuzzleType<LabyrinthPuzzle, LabyrinthState> {
 
   @override
   String rulesText(AppLocalizations l) => l.labyrinthRules;
+
+  @override
+  List<TutorialStep> tutorial() => labyrinthTutorial;
 
   @override
   List<GridSize> get sizes => const [

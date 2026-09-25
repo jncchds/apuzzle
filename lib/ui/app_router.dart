@@ -11,17 +11,26 @@ import '../l10n/l10n.dart';
 import 'daily_screen.dart';
 import 'game_screen.dart';
 import 'home_screen.dart';
+import 'learn_screen.dart';
 import 'settings_screen.dart';
+import 'tutorial_screen.dart';
 
-/// What the address bar shows: home (`/`), settings (`/settings`), daily
+/// What the address bar shows: home (`/`), settings (`/settings`), the
+/// tutorials (`/learn`; one game's is `/learn?t=mambo`), daily
 /// challenges (`/daily?d=2026-09-25`) or a puzzle by its share code
 /// (`/?p=kings-8x8-hard-4FZ8K1-v1`, the share link itself; a daily one is
 /// `/daily?d=…&p=…`). On the web this gives the browser's back and forward
 /// buttons real history; on Android the same parser opens share links.
 class AppRoute {
-  const AppRoute({this.settings = false, this.daily, this.game, this.error});
+  const AppRoute({this.settings = false, this.learn = false, this.tutorial, this.daily, this.game, this.error});
 
   final bool settings;
+
+  /// The list of tutorials.
+  final bool learn;
+
+  /// One game's tutorial, shown over whatever is open.
+  final PuzzleType? tutorial;
 
   /// The daily challenges page with this day selected. With [game], that
   /// game is one of the day's puzzles.
@@ -44,6 +53,10 @@ class AppRoute {
       }
     }
     final page = uri.pathSegments.lastOrNull;
+    if (page == 'learn') {
+      final tutorial = puzzleTypes.where((t) => t.id == uri.queryParameters['t']).firstOrNull;
+      return AppRoute(learn: tutorial == null, tutorial: tutorial);
+    }
     if (page == 'daily') {
       final today = Day.today();
       var day = Day.tryParse(uri.queryParameters['d']) ?? today;
@@ -55,7 +68,9 @@ class AppRoute {
     return game != null ? AppRoute(game: game) : AppRoute(settings: page == 'settings');
   }
 
-  Uri get uri => daily != null
+  Uri get uri => tutorial != null || learn
+      ? Uri(path: '/learn', queryParameters: tutorial == null ? null : {'t': tutorial!.id})
+      : daily != null
       ? Uri(path: '/daily', queryParameters: {'d': daily.toString(), if (game != null) 'p': game.toString()})
       : game != null
           ? Uri(path: '/', queryParameters: {'p': game.toString()})
@@ -98,12 +113,18 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
   static AppRouterDelegate of(BuildContext context) => Router.of(context).routerDelegate as AppRouterDelegate;
 
   bool _settings = false;
+  bool _learn = false;
   Day? _daily;
   _Game? _game;
   int _games = 0;
+  PuzzleType? _tutorial;
+
+  /// Where the tutorial's "Play" button leads (the game it was offered for).
+  VoidCallback? _tutorialPlay;
 
   @override
-  AppRoute get currentConfiguration => AppRoute(settings: _settings, daily: _daily, game: _game?.code);
+  AppRoute get currentConfiguration =>
+      AppRoute(settings: _settings, learn: _learn, tutorial: _tutorial, daily: _daily, game: _game?.code);
 
   @override
   Future<void> setNewRoutePath(AppRoute configuration) {
@@ -117,14 +138,21 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
       });
       return SynchronousFuture(null);
     }
-    _show(settings: configuration.settings, daily: configuration.daily, game: configuration.game);
+    if (configuration.tutorial case final type?) {
+      openTutorial(type);
+    } else {
+      _show(settings: configuration.settings, learn: configuration.learn, daily: configuration.daily, game: configuration.game);
+    }
     return SynchronousFuture(null);
   }
 
   /// With [daily] and [game], the game is that day's challenge.
-  void _show({bool settings = false, Day? daily, PuzzleCode? game}) {
+  void _show({bool settings = false, bool learn = false, Day? daily, PuzzleCode? game}) {
     _settings = settings;
+    _learn = learn;
     _daily = daily;
+    _tutorial = null;
+    _tutorialPlay = null;
     final gameDaily = game == null ? null : daily;
     if (game?.toString() != _game?.code.toString() || gameDaily != _game?.daily) {
       _game = game == null ? null : _Game(game, ++_games, gameDaily);
@@ -133,6 +161,17 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
   }
 
   void openSettings() => _show(settings: true);
+
+  /// The list of tutorials.
+  void openLearn() => _show(learn: true);
+
+  /// Opens [type]'s tutorial over the current page. [play] is what its "Play"
+  /// button starts (none: the tutorial just closes).
+  void openTutorial(PuzzleType type, {VoidCallback? play}) {
+    _tutorial = type;
+    _tutorialPlay = play;
+    notifyListeners();
+  }
 
   /// Opens a puzzle; if it is the saved one, the game resumes.
   void openGame(PuzzleType type, GenParams params) => _show(game: PuzzleCode(type, params));
@@ -174,6 +213,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
       pages: [
         const MaterialPage(key: ValueKey('home'), child: HomeScreen()),
         if (_settings) const MaterialPage(key: ValueKey('settings'), child: SettingsScreen()),
+        if (_learn) const MaterialPage(key: ValueKey('learn'), child: LearnScreen()),
         if (_daily case final day?) MaterialPage(key: const ValueKey('daily'), child: DailyScreen(day: day)),
         if (game != null)
           MaterialPage(
@@ -185,9 +225,19 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
               onPuzzleChanged: game.daily != null ? null : (params) => _puzzleChanged(game, params),
             ),
           ),
+        if (_tutorial case final type?)
+          MaterialPage(
+            key: ValueKey('tutorial.${type.id}'),
+            child: TutorialScreen(type: type, onPlay: _tutorialPlay),
+          ),
       ],
       onDidRemovePage: (page) {
         if (page.key == const ValueKey('settings')) _settings = false;
+        if (page.key == const ValueKey('learn')) _learn = false;
+        if (page.key == ValueKey('tutorial.${_tutorial?.id}')) {
+          _tutorial = null;
+          _tutorialPlay = null;
+        }
         if (page.key == const ValueKey('daily')) _daily = null;
         if (_game case final g? when page.key == ValueKey(g.id)) _game = null;
         notifyListeners();

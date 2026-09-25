@@ -19,6 +19,7 @@ import 'package:apuzzle/core/settings.dart';
 import 'package:apuzzle/l10n/l10n.dart';
 import 'package:apuzzle/puzzles/pop/pop_model.dart';
 import 'package:apuzzle/ui/game_screen.dart';
+import 'package:apuzzle/ui/tutorial_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -119,6 +120,51 @@ void main() {
           File('${outDir.path}/${type.id}_${brightness.name}$_suffix.png').writeAsBytesSync(png!.buffer.asUint8List());
         });
         // Leave the screen so its timers are cancelled.
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 2));
+      });
+    }
+  }
+
+  // Every tutorial step (dark), as tutorial_<id>_<step>.png.
+  for (final type in puzzleTypes) {
+    for (var k = 0; k < type.tutorial().length; k++) {
+      testWidgets('snapshot tutorial ${type.id} ${k + 1}', (tester) async {
+        tester.view.physicalSize = const Size(1080, 2280);
+        tester.view.devicePixelRatio = 3;
+        addTearDown(tester.view.reset);
+        SharedPreferences.setMockInitialValues({'set.theme': 'dark', 'set.language': ?_lang});
+        final store = await GameStore.open();
+        final settings = Settings(store.prefs);
+        // Generated boards are built outside the fake-async zone.
+        await tester.runAsync(() async => type.tutorial()[k].puzzle);
+        final key = GlobalKey();
+        await tester.pumpWidget(MultiProvider(
+          providers: [Provider.value(value: store), ChangeNotifierProvider.value(value: settings)],
+          child: RepaintBoundary(
+            key: key,
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              themeMode: ThemeMode.dark,
+              locale: Locale(_lang ?? 'en'),
+              supportedLocales: AppLocalizations.supportedLocales,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              darkTheme: ThemeData(
+                useMaterial3: true,
+                fontFamily: 'Roboto',
+                colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF), brightness: Brightness.dark),
+              ),
+              home: TutorialScreen(type: type, firstStep: k),
+            ),
+          ),
+        ));
+        await tester.pump(const Duration(seconds: 1));
+        await tester.runAsync(() async {
+          final boundary = key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+          final image = await boundary.toImage(pixelRatio: 1);
+          final png = await image.toByteData(format: ui.ImageByteFormat.png);
+          File('${outDir.path}/tutorial_${type.id}_${k + 1}$_suffix.png').writeAsBytesSync(png!.buffer.asUint8List());
+        });
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 2));
       });

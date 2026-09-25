@@ -61,6 +61,9 @@ class GameStore {
   /// Bumped when a daily result is recorded, so screens can refresh.
   final ValueNotifier<int> dailyRevision = ValueNotifier(0);
 
+  /// Bumped when a tutorial's status changes.
+  final ValueNotifier<int> tutorialRevision = ValueNotifier(0);
+
   String _saveKey(String slot) => 'save.$slot';
   String _statsKey(String typeId, String variant) => 'stats.$typeId.$variant';
   String _lastKey(String typeId) => 'last.$typeId';
@@ -119,6 +122,26 @@ class GameStore {
     await prefs.setString(_statsKey(typeId, variant), jsonEncode(next.toJson()));
     return next;
   }
+
+  String _tutorialKey(String typeId) => 'tutorial.$typeId';
+
+  /// Whether the tutorial of [typeId] was played to the end.
+  bool tutorialDone(String typeId) => prefs.getString(_tutorialKey(typeId)) == 'done';
+
+  /// Records that the tutorial was finished, or (unless it already was)
+  /// turned down or left halfway, so it isn't offered again.
+  Future<void> setTutorial(String typeId, {required bool done}) async {
+    if (!done && prefs.containsKey(_tutorialKey(typeId))) return;
+    await prefs.setString(_tutorialKey(typeId), done ? 'done' : 'skipped');
+    tutorialRevision.value++;
+  }
+
+  /// Whether the player already knows [typeId]: its tutorial was offered, or
+  /// they have played it before.
+  bool knowsGame(String typeId) =>
+      prefs.containsKey(_tutorialKey(typeId)) ||
+      hasSave(typeId) ||
+      prefs.getKeys().any((k) => k.startsWith('stats.$typeId.'));
 
   /// Last chosen size/difficulty/options for the new-game sheet.
   Map<String, dynamic>? lastChoice(String typeId) => _readJson(_lastKey(typeId));

@@ -1253,6 +1253,552 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'• Draw one closed loop through the centers of the cells. It never crosses or touches itself, and it doesn\'t have to visit every cell.\n• The loop passes through every pearl.\n• At a black pearl it turns, and it goes straight on through the cells before and after.\n• At a white pearl it goes straight, and it turns in the cell before or after (or both).\n\nDrag through cells to draw the loop, or drag along it to erase. Tap between two cells to cycle line → cross → empty.'**
   String get pearlsRules;
+
+  /// No description provided for @learnTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How to play'**
+  String get learnTitle;
+
+  /// No description provided for @learnIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Short interactive lessons: every step is a tiny board that shows one rule or trick.'**
+  String get learnIntro;
+
+  /// No description provided for @learnSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{1 step} other{{count} steps}}'**
+  String learnSteps(int count);
+
+  /// No description provided for @learnDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Learned'**
+  String get learnDone;
+
+  /// No description provided for @tutorialOfferTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New to {name}?'**
+  String tutorialOfferTitle(String name);
+
+  /// No description provided for @tutorialOfferBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a quick interactive lesson first? A few tiny boards show you every rule.'**
+  String get tutorialOfferBody;
+
+  /// No description provided for @tutorialOfferNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No, thanks'**
+  String get tutorialOfferNo;
+
+  /// No description provided for @tutorialOfferYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Show me how'**
+  String get tutorialOfferYes;
+
+  /// No description provided for @tutorialTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How to play {name}'**
+  String tutorialTitle(String name);
+
+  /// No description provided for @tutorialStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {step} of {total}'**
+  String tutorialStep(int step, int total);
+
+  /// No description provided for @tutorialNice.
+  ///
+  /// In en, this message translates to:
+  /// **'Nice!'**
+  String get tutorialNice;
+
+  /// No description provided for @tutorialNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get tutorialNext;
+
+  /// No description provided for @tutorialFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get tutorialFinish;
+
+  /// No description provided for @tutorialShowMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Show me'**
+  String get tutorialShowMe;
+
+  /// No description provided for @tutorialPrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous step'**
+  String get tutorialPrevious;
+
+  /// No description provided for @tutorialReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Start this step over'**
+  String get tutorialReset;
+
+  /// No description provided for @tutorialFinishedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve got it!'**
+  String get tutorialFinishedTitle;
+
+  /// No description provided for @tutorialFinishedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s everything you need to play {name}.'**
+  String tutorialFinishedBody(String name);
+
+  /// No description provided for @tutorialPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play now'**
+  String get tutorialPlay;
+
+  /// No description provided for @tutorialAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Start over'**
+  String get tutorialAgain;
+
+  /// No description provided for @tutorialClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get tutorialClose;
+
+  /// No description provided for @tutMambo1.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill every cell with a sun or a moon. Never three of the same in a row: after two suns side by side comes a moon. Tap a highlighted cell to cycle empty → sun → moon.'**
+  String get tutMambo1;
+
+  /// No description provided for @tutMambo2.
+  ///
+  /// In en, this message translates to:
+  /// **'Every row and column holds as many suns as moons. The top row already has its two suns, so its other cells are moons. The right column works the same way.'**
+  String get tutMambo2;
+
+  /// No description provided for @tutMambo3.
+  ///
+  /// In en, this message translates to:
+  /// **'An = between two cells means they hold the same symbol. Match the highlighted cells to their neighbours.'**
+  String get tutMambo3;
+
+  /// No description provided for @tutMambo4.
+  ///
+  /// In en, this message translates to:
+  /// **'A × means the two cells are different: one sun, one moon.'**
+  String get tutMambo4;
+
+  /// No description provided for @tutMambo5.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a whole board: use every rule together. Tip: the palette button at the top lets you stamp one symbol on many cells, and a long press (or right-click) cycles backwards.'**
+  String get tutMambo5;
+
+  /// No description provided for @tutSudoku1.
+  ///
+  /// In en, this message translates to:
+  /// **'Each row, column and box (the thick outlines) holds every number from 1 to 4 once. This row is missing one number: pick it in the palette, then tap the empty cell.'**
+  String get tutSudoku1;
+
+  /// No description provided for @tutSudoku2.
+  ///
+  /// In en, this message translates to:
+  /// **'By their row, these two cells could be 3 or 4. Their columns decide: each column is missing just one number.'**
+  String get tutSudoku2;
+
+  /// No description provided for @tutSudoku3.
+  ///
+  /// In en, this message translates to:
+  /// **'The boxes count too: every box needs 1 to 4 once. Finish the last box.'**
+  String get tutSudoku3;
+
+  /// No description provided for @tutSudoku4.
+  ///
+  /// In en, this message translates to:
+  /// **'Not sure yet? Take notes. Turn on the pencil next to the palette, select the highlighted cell and note every number it could still hold.'**
+  String get tutSudoku4;
+
+  /// No description provided for @tutSudoku5.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a whole puzzle. Selecting a cell tints its row, column and box, and highlights the same number elsewhere. Settings can remove notes for you when you place a number.'**
+  String get tutSudoku5;
+
+  /// No description provided for @tutKings1.
+  ///
+  /// In en, this message translates to:
+  /// **'Put exactly one crown in every row, every column and every colored region. Three are placed, and the last one has just one spot left. Tap it twice: first a dot, then a crown.'**
+  String get tutKings1;
+
+  /// No description provided for @tutKings2.
+  ///
+  /// In en, this message translates to:
+  /// **'Crowns never touch, not even at the corners. Tap once to put a dot (your \"no crown here\" note) on each cell around this crown.'**
+  String get tutKings2;
+
+  /// No description provided for @tutKings3.
+  ///
+  /// In en, this message translates to:
+  /// **'The crowns\' rows and the touching rule leave just one cell of the highlighted region without a dot. Place its crown.'**
+  String get tutKings3;
+
+  /// No description provided for @tutKings4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a whole board. Dot the cells you can rule out, and look for rows, columns or regions with a single free cell.'**
+  String get tutKings4;
+
+  /// No description provided for @tutHues1.
+  ///
+  /// In en, this message translates to:
+  /// **'Paint every blank cell. A number counts the blank cells around it (diagonals too) that end up in its own color. The blue 3 has exactly three blank neighbours, so all of them are blue. Pick a color in the palette and tap cells to paint them.'**
+  String get tutHues1;
+
+  /// No description provided for @tutHues2.
+  ///
+  /// In en, this message translates to:
+  /// **'Numbers count down as you paint: they show how many matching cells are still missing. A 0 means no blank neighbour takes its color, and numbered cells never count. Start with the blue 3, then see what the pink 2 still needs.'**
+  String get tutHues2;
+
+  /// No description provided for @tutHues3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with numbers that need all of their blank neighbours, or none of them.'**
+  String get tutHues3;
+
+  /// No description provided for @tutMosaic1.
+  ///
+  /// In en, this message translates to:
+  /// **'The patch in the top-left corner is yours. Pick a color below: your patch takes it and swallows every touching cell of that color. Turn the whole board one color.'**
+  String get tutMosaic1;
+
+  /// No description provided for @tutMosaic2.
+  ///
+  /// In en, this message translates to:
+  /// **'Mind the move limit: pick the color that grows your patch the most. Tapping a cell on the board also picks its color.'**
+  String get tutMosaic2;
+
+  /// No description provided for @tutMosaic3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board, with a few moves to spare.'**
+  String get tutMosaic3;
+
+  /// No description provided for @tutBlend1.
+  ///
+  /// In en, this message translates to:
+  /// **'The board is made of patches: touching cells of one color. Pick a color below, then tap a patch to repaint it. It merges with the touching patches of that color. Repaint the middle patch.'**
+  String get tutBlend1;
+
+  /// No description provided for @tutBlend2.
+  ///
+  /// In en, this message translates to:
+  /// **'One move can merge many patches. The middle patch touches four others: paint it to join them, then finish. You have only 2 moves.'**
+  String get tutBlend2;
+
+  /// No description provided for @tutBlend3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. The chosen color stays selected, so you can paint several patches in a row.'**
+  String get tutBlend3;
+
+  /// No description provided for @tutPop1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a group of two or more touching bubbles of one color to select it, then tap it again to pop it. Clear the board.'**
+  String get tutPop1;
+
+  /// No description provided for @tutPop2.
+  ///
+  /// In en, this message translates to:
+  /// **'Bubbles above fall into the gaps, so new groups can form. Order matters: pop the highlighted group first.'**
+  String get tutPop2;
+
+  /// No description provided for @tutPop3.
+  ///
+  /// In en, this message translates to:
+  /// **'When a column empties, the columns to its left slide right to close the gap. Pop the middle to bring the sides together.'**
+  String get tutPop3;
+
+  /// No description provided for @tutPop4.
+  ///
+  /// In en, this message translates to:
+  /// **'A group of n bubbles scores n × (n − 1): 2 bubbles score 2, 5 score 20. Save up for a big group to reach 20 points.'**
+  String get tutPop4;
+
+  /// No description provided for @tutPop5.
+  ///
+  /// In en, this message translates to:
+  /// **'Other modes: in Shifter every row also slides right to close its gaps, in Continuous new columns roll in from the left, and Mega does both. Goals: clear the board, reach a target score, or play freely for your best. The game ends when no group of 2 is left.'**
+  String get tutPop5;
+
+  /// No description provided for @tutMerge1.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe (or press an arrow key) to slide every tile as far as it goes. Two equal tiles that meet merge into their sum. Make a 4.'**
+  String get tutMerge1;
+
+  /// No description provided for @tutMerge2.
+  ///
+  /// In en, this message translates to:
+  /// **'A tile merges only once per move: 4, 4, 8 slides into 8, 8, not 16. After every move a new 2 (sometimes a 4) appears. Build a 16.'**
+  String get tutMerge2;
+
+  /// No description provided for @tutMerge3.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your biggest tile in a corner and feed it step by step. Build a 32.'**
+  String get tutMerge3;
+
+  /// No description provided for @tutPipes1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a tile to turn it clockwise (a long press or right-click turns it back). Connect every pipe to the source, the ringed tile. Water shows what\'s already connected.'**
+  String get tutPipes1;
+
+  /// No description provided for @tutPipes2.
+  ///
+  /// In en, this message translates to:
+  /// **'No pipe end may stay open, so no pipe can point off the board. Tiles with a lock are already right. Start at the edges and corners, where tiles have the fewest ways to turn.'**
+  String get tutPipes2;
+
+  /// No description provided for @tutPipes3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. The network may not form loops.'**
+  String get tutPipes3;
+
+  /// No description provided for @tutShikaku1.
+  ///
+  /// In en, this message translates to:
+  /// **'Split the grid into rectangles. Each holds exactly one number, equal to its area in cells. Drag from one corner to the opposite one to draw a rectangle.'**
+  String get tutShikaku1;
+
+  /// No description provided for @tutShikaku2.
+  ///
+  /// In en, this message translates to:
+  /// **'A 1 is a rectangle on its own: just tap it. Tap a drawn rectangle to remove it. Here the 6 fits only one way.'**
+  String get tutShikaku2;
+
+  /// No description provided for @tutShikaku3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Big numbers near the edges usually have the fewest ways to fit.'**
+  String get tutShikaku3;
+
+  /// No description provided for @tutTrail1.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag from 1 to draw one path through every cell, moving up, down, left or right. It ends on the last number.'**
+  String get tutTrail1;
+
+  /// No description provided for @tutTrail2.
+  ///
+  /// In en, this message translates to:
+  /// **'The path must pass the numbers in order: 1 → 2 → 3 → 4. Drag back over your path to undo steps, or tap a cell of it to cut it there.'**
+  String get tutTrail2;
+
+  /// No description provided for @tutTrail3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Cells in corners have only two ways in and out, so the path must use both.'**
+  String get tutTrail3;
+
+  /// No description provided for @tutLabyrinth1.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag from the start in the top-left corner and walk to the flag in the bottom-right corner. Walls block the way.'**
+  String get tutLabyrinth1;
+
+  /// No description provided for @tutLabyrinth2.
+  ///
+  /// In en, this message translates to:
+  /// **'A bigger maze. Hit a dead end? Drag back along your path, or tap any cell of it to return there. A quick drag follows straight corridors.'**
+  String get tutLabyrinth2;
+
+  /// No description provided for @tutAtoms1.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect the atoms with bonds. Each atom needs as many bonds as its number, and two atoms can share one or two. Drag from an atom toward a neighbour to add a bond (1 → 2 → none).'**
+  String get tutAtoms1;
+
+  /// No description provided for @tutAtoms2.
+  ///
+  /// In en, this message translates to:
+  /// **'All atoms must join into one molecule, and bonds can\'t cross. Bonding the top-left 1 downwards would leave two separate pairs, so where does its bond go?'**
+  String get tutAtoms2;
+
+  /// No description provided for @tutAtoms3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with atoms that have only one way to get their bonds.'**
+  String get tutAtoms3;
+
+  /// No description provided for @tutLits1.
+  ///
+  /// In en, this message translates to:
+  /// **'Shade exactly 4 cells in every outlined region, forming an L, I, T or S. The top region has exactly 4 cells, so shade them all. Tap a cell to shade it.'**
+  String get tutLits1;
+
+  /// No description provided for @tutLits2.
+  ///
+  /// In en, this message translates to:
+  /// **'No 2×2 block may be fully shaded, and two identical shapes may not touch across a border. Just one cell completes the left region. Which one?'**
+  String get tutLits2;
+
+  /// No description provided for @tutLits3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. All shaded cells must form one connected area. Tap twice for a dot, your note that a cell stays empty.'**
+  String get tutLits3;
+
+  /// No description provided for @tutCamp1.
+  ///
+  /// In en, this message translates to:
+  /// **'Pitch one tent next to every tree: up, down, left or right, never diagonal. The numbers outside tell how many tents each row and column holds. Tap a cell twice: grass, then a tent.'**
+  String get tutCamp1;
+
+  /// No description provided for @tutCamp2.
+  ///
+  /// In en, this message translates to:
+  /// **'Tents never touch each other, not even diagonally. One tent is pitched already. Where can the other tree\'s tent go?'**
+  String get tutCamp2;
+
+  /// No description provided for @tutCamp3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. A 0 means the whole row or column is grass, and every tree gets its own tent.'**
+  String get tutCamp3;
+
+  /// No description provided for @tutIslands1.
+  ///
+  /// In en, this message translates to:
+  /// **'Shade the sea so that the unshaded cells form islands. Each number is an island of exactly that many cells. Here the 1 is an island by itself: tap every other cell to make it sea.'**
+  String get tutIslands1;
+
+  /// No description provided for @tutIslands2.
+  ///
+  /// In en, this message translates to:
+  /// **'Islands never touch each other. A cell between two numbers must be sea, or it would join them into one island.'**
+  String get tutIslands2;
+
+  /// No description provided for @tutIslands3.
+  ///
+  /// In en, this message translates to:
+  /// **'The sea must stay connected and may never form a 2×2 pool. Grow the 3 so that neither happens. Tap twice for a dot, your note for land.'**
+  String get tutIslands3;
+
+  /// No description provided for @tutIslands4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Every island holds exactly one number.'**
+  String get tutIslands4;
+
+  /// No description provided for @tutLamps1.
+  ///
+  /// In en, this message translates to:
+  /// **'Put lamps in the white cells: tap twice (a dot, then a lamp). A lamp lights its own row and column up to the walls. Light up every white cell.'**
+  String get tutLamps1;
+
+  /// No description provided for @tutLamps2.
+  ///
+  /// In en, this message translates to:
+  /// **'A number on a wall tells how many lamps touch it (up, down, left or right). This 3 needs a lamp on each of its free sides.'**
+  String get tutLamps2;
+
+  /// No description provided for @tutLamps3.
+  ///
+  /// In en, this message translates to:
+  /// **'Lamps may never shine on each other, and a 0 means no lamp right next to it. Where does the second lamp go?'**
+  String get tutLamps3;
+
+  /// No description provided for @tutLamps4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Dots help you mark cells that can\'t hold a lamp.'**
+  String get tutLamps4;
+
+  /// No description provided for @tutFence1.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw one closed loop along the dotted lines. A number tells how many sides of its cell the loop uses. Tap between two dots to draw a line, or drag from dot to dot.'**
+  String get tutFence1;
+
+  /// No description provided for @tutFence2.
+  ///
+  /// In en, this message translates to:
+  /// **'A 0 has no line around it. Tap a line again to turn it into a cross, your note that no line goes there. Cells without a number can have any count.'**
+  String get tutFence2;
+
+  /// No description provided for @tutFence3.
+  ///
+  /// In en, this message translates to:
+  /// **'The loop never branches or crosses itself: every dot has either no line or two. Numbers next to the board\'s edge are a good place to start.'**
+  String get tutFence3;
+
+  /// No description provided for @tutFence4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with the 0s and 3s.'**
+  String get tutFence4;
+
+  /// No description provided for @tutPearls1.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag through the cells to draw one closed loop. At a black pearl the loop turns, then runs straight through the next cell on both sides.'**
+  String get tutPearls1;
+
+  /// No description provided for @tutPearls2.
+  ///
+  /// In en, this message translates to:
+  /// **'At a white pearl the loop goes straight through, and it turns in the cell just before or after it (or both).'**
+  String get tutPearls2;
+
+  /// No description provided for @tutPearls3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. The loop doesn\'t have to visit every cell, and it never crosses or touches itself.'**
+  String get tutPearls3;
+
+  /// No description provided for @tutMines1.
+  ///
+  /// In en, this message translates to:
+  /// **'A number counts the mines in the 8 cells around it. Each 1 here touches just one closed cell, so that cell is a mine. Flag it: long-press or right-click it, or switch to Flag below and tap it.'**
+  String get tutMines1;
+
+  /// No description provided for @tutMines2.
+  ///
+  /// In en, this message translates to:
+  /// **'This 1 already has its mine flagged, so every other cell around it is safe. Dig them, or tap the 1 itself to dig them all at once.'**
+  String get tutMines2;
+
+  /// No description provided for @tutMines3.
+  ///
+  /// In en, this message translates to:
+  /// **'A cell with no mines around it opens its neighbours for you. Dig the highlighted corner.'**
+  String get tutMines3;
+
+  /// No description provided for @tutMines4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. You never need to guess. If you dig a mine by mistake, it just gets flagged and the game goes on.'**
+  String get tutMines4;
 }
 
 class _AppLocalizationsDelegate

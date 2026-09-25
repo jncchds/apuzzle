@@ -34,7 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Row(
           mainAxisSize: MainAxisSize.min,
-          children: [Text('APuzzle by CHDS'), SizedBox(width: 8), VersionPill()],
+          children: [
+            Flexible(child: Text('APuzzle by CHDS', maxLines: 1, overflow: TextOverflow.ellipsis)),
+            SizedBox(width: 8),
+            VersionPill(),
+          ],
         ),
         actions: [
           IconButton(
@@ -44,6 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
               await showEnterCodeDialog(context);
               if (mounted) setState(() {});
             },
+          ),
+          IconButton(
+            icon: const Icon(Icons.school_outlined),
+            tooltip: l.learnTitle,
+            onPressed: () => AppRouterDelegate.of(context).openLearn(),
           ),
           IconButton(
             icon: const Icon(Icons.settings_outlined),

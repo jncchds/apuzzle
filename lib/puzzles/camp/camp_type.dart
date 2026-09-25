@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/symbols.dart';
 import 'camp_generator.dart';
 import 'camp_model.dart';
+import 'camp_tutorial.dart';
 
 /// Tents: pitch one tent next to every tree.
 class CampType extends ValueGridType<CampPuzzle> {
@@ -31,6 +33,9 @@ class CampType extends ValueGridType<CampPuzzle> {
 
   @override
   String rulesText(AppLocalizations l) => l.campRules;
+
+  @override
+  List<TutorialStep> tutorial() => campTutorial;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

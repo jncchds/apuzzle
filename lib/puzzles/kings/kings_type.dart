@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
@@ -10,6 +11,7 @@ import '../../ui/board/region_borders.dart';
 import '../../ui/symbols.dart';
 import 'kings_generator.dart';
 import 'kings_model.dart';
+import 'kings_tutorial.dart';
 
 /// Kings (one per row/column/region, never touching).
 class KingsType extends ValueGridType<KingsPuzzle> {
@@ -28,6 +30,9 @@ class KingsType extends ValueGridType<KingsPuzzle> {
 
   @override
   String rulesText(AppLocalizations l) => l.kingsRules;
+
+  @override
+  List<TutorialStep> tutorial() => kingsTutorial;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

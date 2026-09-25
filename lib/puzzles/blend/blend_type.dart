@@ -6,11 +6,13 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/board/region_borders.dart';
 import '../mosaic/mosaic_type.dart';
 import 'blend_model.dart';
+import 'blend_tutorial.dart';
 
 /// Free flood: repaint any patch; touching patches of that color merge.
 class BlendType extends PuzzleType<BlendPuzzle, BlendState> {
@@ -31,6 +33,9 @@ class BlendType extends PuzzleType<BlendPuzzle, BlendState> {
 
   @override
   String rulesText(AppLocalizations l) => l.blendRules;
+
+  @override
+  List<TutorialStep> tutorial() => blendTutorial;
 
   @override
   List<GridSize> get sizes => [for (final n in [5, 6, 8, 10, 12, 14]) GridSize.square(n)];

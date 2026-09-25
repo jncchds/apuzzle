@@ -4,10 +4,12 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import 'atoms_generator.dart';
 import 'atoms_model.dart';
+import 'atoms_tutorial.dart';
 
 /// Hashiwokakero: connect atoms with single/double bonds.
 class AtomsType extends PuzzleType<AtomsPuzzle, AtomsState> {
@@ -28,6 +30,9 @@ class AtomsType extends PuzzleType<AtomsPuzzle, AtomsState> {
 
   @override
   String rulesText(AppLocalizations l) => l.atomsRules;
+
+  @override
+  List<TutorialStep> tutorial() => atomsTutorial;
 
   @override
   List<GridSize> get sizes => [for (final n in [5, 6, 7, 8, 9, 10]) GridSize.square(n)];

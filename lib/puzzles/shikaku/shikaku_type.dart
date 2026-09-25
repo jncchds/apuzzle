@@ -4,11 +4,13 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/symbols.dart';
 import 'shikaku_generator.dart';
 import 'shikaku_model.dart';
+import 'shikaku_tutorial.dart';
 
 /// Divide the grid into rectangles; each holds one number equal to its area.
 class ShikakuType extends PuzzleType<ShikakuPuzzle, ShikakuState> {
@@ -27,6 +29,9 @@ class ShikakuType extends PuzzleType<ShikakuPuzzle, ShikakuState> {
 
   @override
   String rulesText(AppLocalizations l) => l.shikakuRules;
+
+  @override
+  List<TutorialStep> tutorial() => shikakuTutorial;
 
   @override
   List<GridSize> get sizes => [for (final n in [5, 6, 7, 8, 9, 10, 12]) GridSize.square(n)];

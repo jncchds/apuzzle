@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
@@ -10,6 +11,7 @@ import '../../ui/board/region_borders.dart';
 import '../../ui/symbols.dart';
 import 'lits_generator.dart';
 import 'lits_model.dart';
+import 'lits_tutorial.dart';
 
 /// LITS: shade one tetromino per region.
 class LitsType extends ValueGridType<LitsPuzzle> {
@@ -35,6 +37,9 @@ class LitsType extends ValueGridType<LitsPuzzle> {
 
   @override
   String rulesText(AppLocalizations l) => l.litsRules;
+
+  @override
+  List<TutorialStep> tutorial() => litsTutorial;
 
   @override
   // Larger boards take too long to generate on-device for now (see CLAUDE.md).

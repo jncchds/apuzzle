@@ -7,12 +7,14 @@ import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/grid_graph.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/symbols.dart';
 import 'mines_generator.dart';
 import 'mines_model.dart';
 import 'mines_solver.dart';
+import 'mines_tutorial.dart';
 
 /// Minesweeper where logic always suffices.
 class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
@@ -39,6 +41,9 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
 
   @override
   String rulesText(AppLocalizations l) => l.minesRules;
+
+  @override
+  List<TutorialStep> tutorial() => minesTutorial;
 
   @override
   List<GridSize> get sizes => const [

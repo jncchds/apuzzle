@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import 'hues_generator.dart';
 import 'hues_model.dart';
+import 'hues_tutorial.dart';
 
 /// Color every blank cell; numbers count same-colored blank neighbours.
 class HuesType extends ValueGridType<HuesPuzzle> {
@@ -27,6 +29,9 @@ class HuesType extends ValueGridType<HuesPuzzle> {
 
   @override
   String rulesText(AppLocalizations l) => l.huesRules;
+
+  @override
+  List<TutorialStep> tutorial() => huesTutorial;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 9; n++) GridSize.square(n)];

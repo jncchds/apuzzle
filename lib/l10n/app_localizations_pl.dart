@@ -724,4 +724,366 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get pearlsRules =>
       '• Narysuj jedną zamkniętą pętlę przez środki pól. Nie krzyżuje się ani nie styka sama ze sobą i nie musi przechodzić przez każde pole.\n• Pętla przechodzi przez każdą perłę.\n• Na czarnej perle pętla skręca, a w polach przed nią i za nią biegnie prosto.\n• Przez białą perłę pętla biegnie prosto, a w polu przed nią lub za nią (albo w obu) skręca.\n\nPrzeciągaj po polach, aby rysować pętlę, albo wzdłuż niej, aby ją ścierać. Dotknij między dwoma polami, aby przełączać: linia → krzyżyk → puste.';
+
+  @override
+  String get learnTitle => 'Jak grać';
+
+  @override
+  String get learnIntro =>
+      'Krótkie interaktywne lekcje: każdy krok to mała plansza, która pokazuje jedną zasadę lub sztuczkę.';
+
+  @override
+  String learnSteps(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count kroku',
+      many: '$count kroków',
+      few: '$count kroki',
+      one: '$count krok',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get learnDone => 'Opanowane';
+
+  @override
+  String tutorialOfferTitle(String name) {
+    return 'Pierwszy raz grasz w „$name”?';
+  }
+
+  @override
+  String get tutorialOfferBody =>
+      'Najpierw krótka interaktywna lekcja? Kilka małych plansz pokaże wszystkie zasady.';
+
+  @override
+  String get tutorialOfferNo => 'Nie, dziękuję';
+
+  @override
+  String get tutorialOfferYes => 'Pokaż';
+
+  @override
+  String tutorialTitle(String name) {
+    return 'Jak grać: $name';
+  }
+
+  @override
+  String tutorialStep(int step, int total) {
+    return 'Krok $step z $total';
+  }
+
+  @override
+  String get tutorialNice => 'Świetnie!';
+
+  @override
+  String get tutorialNext => 'Dalej';
+
+  @override
+  String get tutorialFinish => 'Gotowe';
+
+  @override
+  String get tutorialShowMe => 'Pokaż';
+
+  @override
+  String get tutorialPrevious => 'Poprzedni krok';
+
+  @override
+  String get tutorialReset => 'Zacznij krok od nowa';
+
+  @override
+  String get tutorialFinishedTitle => 'Już umiesz!';
+
+  @override
+  String tutorialFinishedBody(String name) {
+    return 'To wszystko, czego potrzebujesz, żeby grać w „$name”.';
+  }
+
+  @override
+  String get tutorialPlay => 'Graj';
+
+  @override
+  String get tutorialAgain => 'Od początku';
+
+  @override
+  String get tutorialClose => 'Zamknij';
+
+  @override
+  String get tutMambo1 =>
+      'Wypełnij każde pole słońcem lub księżycem. Nigdy trzy takie same obok siebie: po dwóch słońcach obok siebie przychodzi księżyc. Dotknij zaznaczonego pola, aby przełączać: puste → słońce → księżyc.';
+
+  @override
+  String get tutMambo2 =>
+      'W każdym wierszu i kolumnie jest tyle samo słońc co księżyców. Górny wiersz ma już oba słońca, więc reszta jego pól to księżyce. Prawa kolumna działa tak samo.';
+
+  @override
+  String get tutMambo3 =>
+      '„=” między dwoma polami oznacza, że mają ten sam symbol. Wstaw w zaznaczone pola to samo, co mają sąsiedzi.';
+
+  @override
+  String get tutMambo4 =>
+      '„×” oznacza, że pola są różne: jedno słońce, jeden księżyc.';
+
+  @override
+  String get tutMambo5 =>
+      'Teraz cała plansza: użyj wszystkich zasad naraz. Wskazówka: przycisk palety u góry pozwala stawiać jeden symbol na wielu polach, a długie naciśnięcie (lub prawy przycisk) przełącza wstecz.';
+
+  @override
+  String get tutSudoku1 =>
+      'W każdym wierszu, kolumnie i bloku (grube ramki) każda liczba od 1 do 4 występuje raz. W tym wierszu brakuje jednej liczby: wybierz ją w palecie i dotknij pustego pola.';
+
+  @override
+  String get tutSudoku2 =>
+      'Według wiersza te dwa pola mogą mieć 3 lub 4. Rozstrzygają kolumny: w każdej brakuje tylko jednej liczby.';
+
+  @override
+  String get tutSudoku3 =>
+      'Bloki też się liczą: w każdym bloku 1–4 występują raz. Dokończ ostatni blok.';
+
+  @override
+  String get tutSudoku4 =>
+      'Nie masz pewności? Rób notatki. Włącz ołówek obok palety, wybierz zaznaczone pole i zanotuj wszystkie liczby, które mogą się tam jeszcze znaleźć.';
+
+  @override
+  String get tutSudoku5 =>
+      'Teraz cała łamigłówka. Wybrane pole podświetla swój wiersz, kolumnę i blok oraz tę samą liczbę gdzie indziej. W ustawieniach możesz włączyć automatyczne usuwanie notatek.';
+
+  @override
+  String get tutKings1 =>
+      'Umieść dokładnie jedną koronę w każdym wierszu, każdej kolumnie i każdym kolorowym obszarze. Trzy już stoją, a na ostatnią zostało jedno miejsce. Dotknij go dwa razy: najpierw kropka, potem korona.';
+
+  @override
+  String get tutKings2 =>
+      'Korony nigdy się nie stykają, nawet rogami. Dotknij raz, aby postawić kropkę (notatkę „tu nie ma korony”) na każdym polu wokół tej korony.';
+
+  @override
+  String get tutKings3 =>
+      'Wiersze koron i zasada stykania zostawiają w zaznaczonym obszarze tylko jedno pole bez kropki. Postaw tam koronę.';
+
+  @override
+  String get tutKings4 =>
+      'Teraz cała plansza. Stawiaj kropki tam, gdzie korony być nie może, i szukaj wierszy, kolumn lub obszarów z jednym wolnym polem.';
+
+  @override
+  String get tutHues1 =>
+      'Pomaluj każde puste pole. Liczba mówi, ile pustych pól wokół niej (także po przekątnej) będzie miało jej kolor. Niebieska 3 ma dokładnie trzech pustych sąsiadów, więc wszyscy są niebiescy. Wybierz kolor w palecie i dotykaj pól.';
+
+  @override
+  String get tutHues2 =>
+      'Liczby maleją, gdy malujesz: pokazują, ilu pasujących pól jeszcze brakuje. 0 oznacza, że żaden pusty sąsiad nie ma jej koloru, a pola z liczbami się nie liczą. Zacznij od niebieskiej 3, potem zobacz, czego jeszcze brakuje różowej 2.';
+
+  @override
+  String get tutHues3 =>
+      'Teraz prawdziwa plansza. Zacznij od liczb, które potrzebują wszystkich pustych sąsiadów albo żadnego.';
+
+  @override
+  String get tutMosaic1 =>
+      'Plama w lewym górnym rogu jest twoja. Wybierz kolor na dole: plama go przyjmie i wchłonie wszystkie stykające się pola tego koloru. Pomaluj całą planszę na jeden kolor.';
+
+  @override
+  String get tutMosaic2 =>
+      'Uważaj na limit ruchów: wybieraj kolor, który najbardziej powiększy plamę. Dotknięcie pola na planszy też wybiera jego kolor.';
+
+  @override
+  String get tutMosaic3 =>
+      'Teraz prawdziwa plansza, z kilkoma zapasowymi ruchami.';
+
+  @override
+  String get tutBlend1 =>
+      'Plansza składa się z plam: stykających się pól jednego koloru. Wybierz kolor na dole i dotknij plamy, aby ją przemalować. Połączy się ze stykającymi plamami tego koloru. Przemaluj środkową plamę.';
+
+  @override
+  String get tutBlend2 =>
+      'Jeden ruch może połączyć wiele plam. Środkowa plama styka się z czterema innymi: przemaluj ją, aby je połączyć, a potem dokończ. Masz tylko 2 ruchy.';
+
+  @override
+  String get tutBlend3 =>
+      'Teraz prawdziwa plansza. Wybrany kolor zostaje, więc możesz malować kilka plam z rzędu.';
+
+  @override
+  String get tutPop1 =>
+      'Dotknij grupy dwóch lub więcej stykających się bąbelków jednego koloru, aby ją zaznaczyć, i jeszcze raz, aby ją zbić. Wyczyść planszę.';
+
+  @override
+  String get tutPop2 =>
+      'Bąbelki z góry spadają w luki, więc tworzą się nowe grupy. Kolejność ma znaczenie: najpierw zbij zaznaczoną grupę.';
+
+  @override
+  String get tutPop3 =>
+      'Gdy kolumna się opróżni, kolumny na lewo od niej przesuwają się w prawo. Zbij środek, aby połączyć boki.';
+
+  @override
+  String get tutPop4 =>
+      'Grupa n bąbelków daje n × (n − 1) punktów: 2 bąbelki to 2 punkty, 5 to 20. Zbierz dużą grupę, aby zdobyć 20 punktów.';
+
+  @override
+  String get tutPop5 =>
+      'Inne tryby: w Przesuwaniu każdy wiersz też przesuwa się w prawo, w Ciągłym z lewej wjeżdżają nowe kolumny, a Mega łączy oba. Cele: wyczyść planszę, osiągnij wynik docelowy albo graj swobodnie o rekord. Gra kończy się, gdy nie zostaje żadna grupa 2.';
+
+  @override
+  String get tutMerge1 =>
+      'Przesuń palcem (lub naciśnij strzałkę), aby przesunąć wszystkie kafelki do oporu. Dwa równe kafelki, które na siebie wpadną, łączą się w sumę. Zrób 4.';
+
+  @override
+  String get tutMerge2 =>
+      'W jednym ruchu kafelek łączy się tylko raz: 4, 4, 8 zmienia się w 8, 8, a nie 16. Po każdym ruchu pojawia się nowa 2 (czasem 4). Zbuduj 16.';
+
+  @override
+  String get tutMerge3 =>
+      'Trzymaj największy kafelek w rogu i dokarmiaj go krok po kroku. Zbuduj 32.';
+
+  @override
+  String get tutPipes1 =>
+      'Dotknij kafelka, aby obrócić go zgodnie z ruchem wskazówek zegara (długie naciśnięcie lub prawy przycisk obraca z powrotem). Połącz wszystkie rury ze źródłem, kafelkiem z pierścieniem. Woda pokazuje, co już jest połączone.';
+
+  @override
+  String get tutPipes2 =>
+      'Żaden koniec rury nie może zostać otwarty, więc żadna rura nie może wychodzić poza planszę. Kafelki z kłódką są już dobrze. Zacznij od brzegów i rogów, gdzie kafelki mają najmniej możliwości.';
+
+  @override
+  String get tutPipes3 =>
+      'Teraz prawdziwa plansza. Sieć nie może tworzyć pętli.';
+
+  @override
+  String get tutShikaku1 =>
+      'Podziel siatkę na prostokąty. Każdy zawiera dokładnie jedną liczbę, równą jego polu w kratkach. Przeciągnij od jednego rogu do przeciwległego, aby narysować prostokąt.';
+
+  @override
+  String get tutShikaku2 =>
+      '1 to prostokąt sam w sobie: po prostu go dotknij. Dotknij narysowanego prostokąta, aby go usunąć. Tutaj 6 pasuje tylko na jeden sposób.';
+
+  @override
+  String get tutShikaku3 =>
+      'Teraz prawdziwa plansza. Duże liczby przy brzegach zwykle mają najmniej możliwości.';
+
+  @override
+  String get tutTrail1 =>
+      'Przeciągnij od 1, aby narysować jedną ścieżkę przez każde pole: w górę, w dół, w lewo lub w prawo. Kończy się na ostatniej liczbie.';
+
+  @override
+  String get tutTrail2 =>
+      'Ścieżka musi mijać liczby po kolei: 1 → 2 → 3 → 4. Przeciągnij po ścieżce z powrotem, aby cofnąć kroki, albo dotknij jej pola, aby ją tam uciąć.';
+
+  @override
+  String get tutTrail3 =>
+      'Teraz prawdziwa plansza. Do pola w rogu prowadzą tylko dwie drogi, więc ścieżka musi użyć obu.';
+
+  @override
+  String get tutLabyrinth1 =>
+      'Przeciągnij od startu w lewym górnym rogu do flagi w prawym dolnym. Ściany blokują drogę.';
+
+  @override
+  String get tutLabyrinth2 =>
+      'Większy labirynt. Ślepy zaułek? Przeciągnij z powrotem po swojej ścieżce albo dotknij dowolnego jej pola, aby tam wrócić. Szybkie przeciągnięcie biegnie prostymi korytarzami.';
+
+  @override
+  String get tutAtoms1 =>
+      'Połącz atomy wiązaniami. Każdy atom potrzebuje tylu wiązań, ile wynosi jego liczba, a dwa atomy mogą mieć jedno lub dwa wspólne. Przeciągnij od atomu w stronę sąsiada, aby dodać wiązanie (1 → 2 → brak).';
+
+  @override
+  String get tutAtoms2 =>
+      'Wszystkie atomy muszą tworzyć jedną cząsteczkę, a wiązania się nie krzyżują. Wiązanie od lewej górnej 1 w dół zostawiłoby dwie osobne pary. Gdzie więc idzie?';
+
+  @override
+  String get tutAtoms3 =>
+      'Teraz prawdziwa plansza. Zacznij od atomów, które mogą dostać wiązania tylko na jeden sposób.';
+
+  @override
+  String get tutLits1 =>
+      'Zamaluj dokładnie 4 pola w każdym obrysowanym obszarze, tworząc L, I, T lub S. Górny obszar ma dokładnie 4 pola, więc zamaluj wszystkie. Dotknij pola, aby je zamalować.';
+
+  @override
+  String get tutLits2 =>
+      'Żaden blok 2×2 nie może być w całości zamalowany, a identyczne kształty nie stykają się przez granicę. Lewy obszar dopełnia tylko jedno pole. Które?';
+
+  @override
+  String get tutLits3 =>
+      'Teraz prawdziwa plansza. Wszystkie zamalowane pola muszą być połączone. Dotknij dwa razy, aby postawić kropkę, notatkę, że pole zostaje puste.';
+
+  @override
+  String get tutCamp1 =>
+      'Rozbij namiot obok każdego drzewa: nad, pod, z lewej lub z prawej, nigdy po przekątnej. Liczby na zewnątrz mówią, ile namiotów jest w wierszu i kolumnie. Dotknij pola dwa razy: trawa, potem namiot.';
+
+  @override
+  String get tutCamp2 =>
+      'Namioty nigdy się nie stykają, nawet po przekątnej. Jeden namiot już stoi. Gdzie może stanąć namiot drugiego drzewa?';
+
+  @override
+  String get tutCamp3 =>
+      'Teraz prawdziwa plansza. 0 oznacza, że cały wiersz lub kolumna to trawa, a każde drzewo ma swój namiot.';
+
+  @override
+  String get tutIslands1 =>
+      'Zamaluj morze tak, aby niezamalowane pola tworzyły wyspy. Każda liczba to wyspa z dokładnie tylu pól. Tu 1 jest wyspą sama w sobie: dotknij pozostałych pól, aby zrobić z nich morze.';
+
+  @override
+  String get tutIslands2 =>
+      'Wyspy nigdy się nie stykają. Pole między dwiema liczbami musi być morzem, inaczej połączyłoby je w jedną wyspę.';
+
+  @override
+  String get tutIslands3 =>
+      'Morze musi być połączone i nie może tworzyć basenów 2×2. Powiększ 3 tak, aby nie złamać żadnej z tych zasad. Dotknij dwa razy, aby postawić kropkę, notatkę „ląd”.';
+
+  @override
+  String get tutIslands4 =>
+      'Teraz prawdziwa plansza. Każda wyspa ma dokładnie jedną liczbę.';
+
+  @override
+  String get tutLamps1 =>
+      'Stawiaj lampy na białych polach: dotknij dwa razy (kropka, potem lampa). Lampa oświetla swój wiersz i kolumnę aż do ścian. Oświetl wszystkie białe pola.';
+
+  @override
+  String get tutLamps2 =>
+      'Liczba na ścianie mówi, ile lamp jej dotyka (nad, pod, z lewej lub z prawej). Ta 3 potrzebuje lampy z każdej wolnej strony.';
+
+  @override
+  String get tutLamps3 =>
+      'Lampy nigdy nie świecą na siebie, a 0 oznacza brak lampy tuż obok. Gdzie stanie druga lampa?';
+
+  @override
+  String get tutLamps4 =>
+      'Teraz prawdziwa plansza. Kropkami zaznaczaj pola, na których nie może stać lampa.';
+
+  @override
+  String get tutFence1 =>
+      'Narysuj jedną zamkniętą pętlę po kropkowanych liniach. Liczba mówi, ile boków jej pola zajmuje pętla. Dotknij między dwiema kropkami, aby narysować linię, albo przeciągaj od kropki do kropki.';
+
+  @override
+  String get tutFence2 =>
+      'Wokół 0 nie ma linii. Dotknij linii jeszcze raz, aby zmienić ją w krzyżyk, notatkę, że linii tam nie ma. Pola bez liczby mogą mieć dowolną liczbę.';
+
+  @override
+  String get tutFence3 =>
+      'Pętla nie rozgałęzia się ani nie krzyżuje: w każdej kropce jest zero lub dwie linie. Liczby przy brzegu planszy to dobry początek.';
+
+  @override
+  String get tutFence4 => 'Teraz prawdziwa plansza. Zacznij od 0 i 3.';
+
+  @override
+  String get tutPearls1 =>
+      'Przeciągaj po polach, aby narysować jedną zamkniętą pętlę. Na czarnej perle pętla skręca, a potem biegnie prosto przez następne pole po obu stronach.';
+
+  @override
+  String get tutPearls2 =>
+      'Przez białą perłę pętla biegnie prosto i skręca w polu tuż przed nią lub za nią (albo w obu).';
+
+  @override
+  String get tutPearls3 =>
+      'Teraz prawdziwa plansza. Pętla nie musi przechodzić przez każde pole i nigdy się nie krzyżuje ani nie styka ze sobą.';
+
+  @override
+  String get tutMines1 =>
+      'Liczba mówi, ile min jest w 8 polach wokół niej. Każda 1 tutaj dotyka tylko jednego zakrytego pola, więc tam jest mina. Postaw flagę: długie naciśnięcie lub prawy przycisk, albo włącz „Flaga” poniżej i dotknij.';
+
+  @override
+  String get tutMines2 =>
+      'Mina tej 1 ma już flagę, więc wszystkie inne pola wokół są bezpieczne. Odkop je albo dotknij samej 1, aby odkopać wszystkie naraz.';
+
+  @override
+  String get tutMines3 =>
+      'Pole bez min wokół samo odkrywa swoich sąsiadów. Kop w zaznaczonym rogu.';
+
+  @override
+  String get tutMines4 =>
+      'Teraz prawdziwa plansza. Nigdy nie musisz zgadywać. Jeśli przez pomyłkę kopniesz minę, po prostu dostanie flagę, a gra toczy się dalej.';
 }

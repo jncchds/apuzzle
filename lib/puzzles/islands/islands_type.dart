@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/symbols.dart';
 import 'islands_generator.dart';
 import 'islands_model.dart';
+import 'islands_tutorial.dart';
 
 /// Nurikabe: flood the sea around numbered islands.
 class IslandsType extends ValueGridType<IslandsPuzzle> {
@@ -29,6 +31,9 @@ class IslandsType extends ValueGridType<IslandsPuzzle> {
 
   @override
   String rulesText(AppLocalizations l) => l.islandsRules;
+
+  @override
+  List<TutorialStep> tutorial() => islandsTutorial;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

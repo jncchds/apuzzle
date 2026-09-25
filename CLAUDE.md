@@ -9,7 +9,7 @@ Run them through the output condenser (see the global CLAUDE.md):
 - `node ~/.claude/tools/run.mjs flutter test`
 - `node ~/.claude/tools/run.mjs flutter build web --debug`, then preview with the `web` launch config (`tools/serve.mjs` serves `build/web` on :8080)
 - `flutter run -d windows` (needs VS 2022 with the C++ workload, plus Developer Mode for plugin symlinks)
-- Visual snapshots of every puzzle (phone size, dark and light) go to `build/snapshots/*.png`; view the PNGs afterwards:
+- Visual snapshots of every puzzle (phone size, dark and light) and every tutorial step (`tutorial_<id>_<n>.png`) go to `build/snapshots/*.png`; view the PNGs afterwards:
   `node ~/.claude/tools/run.mjs flutter test test/snapshots --run-skipped --tags snapshot`
   Add `SNAPSHOT_LANG=uk` (or pl, de) to render another language (`*_uk.png`).
   (The in-app browser pane crops screenshots on high-DPI displays, so prefer these PNGs for layout checks.)
@@ -38,6 +38,11 @@ Run them through the output condenser (see the global CLAUDE.md):
   - `GameStore`: results in `daily.<date>` (`type.difficulty` → code, best ms, hints), in-progress dailies in their own save slot (`save.daily.<code>`), so they never replace the free game. Daily wins also count in the regular stats;
   - the router only treats a code as a daily one if it really is that day's puzzle (`isDailyPuzzle`), and never for future days.
 - `lib/core/grid_graph.dart`: neighbour lists and connected components for flat grids.
+- Tutorials (`lib/core/tutorial.dart`, `lib/ui/tutorial_screen.dart`, `lib/ui/learn_screen.dart`, routes `/learn` and `/learn?t=<id>`):
+  - each type's `tutorial()` returns `TutorialStep`s from `lib/puzzles/<id>/<id>_tutorial.dart`: a tiny hand-made board (or `TutorialStep.generated` for the final "real board"), a text (`tut<Type><n>` ARB keys), cells to point at, and either "solve it" or a custom `done` goal with an `answer` state;
+  - steps run on the real board in a `GameController(practice: true)` (no saves, no stats); "Show me" is the type's hint (or the step's `answer`);
+  - the first new game of a type (new-game sheet, daily screen) calls `offerTutorial`: "No, thanks" (or leaving the tutorial halfway) marks it offered, finishing marks it done (`GameStore.setTutorial`, `tutorial.<id>`); players with stats or a save are never asked;
+  - `test/core/tutorial_test.dart` checks every step: solvable by "Show me", not solved at the start, and exactly one solution for value-grid boards (unless `openEnded`).
 - Localization: gen-l10n (`l10n.yaml`), ARB files in `lib/l10n/` (en is the template; uk, pl, de). Generated `app_localizations*.dart` are checked in; run `flutter gen-l10n` after editing ARBs. No user-facing string literals in Dart: use `context.l10n` (`lib/l10n/l10n.dart`). Type texts take an `AppLocalizations` (`name(l)`, `tagline(l)`, `rulesText(l)`, `finishTitle(l, …)`); toasts and puzzle-code errors carry a `Tr` closure resolved by the UI. Language: `Settings.language` (null = system); `resolveAppLocale` maps Russian to Ukrainian and anything unsupported to English.
 - Game options: a type can declare extra new-game choices with `optionsFor(chosen)` (later options may depend on earlier ones). They live in `GenParams.options`, go into share codes after the difficulty (`pop-10x8-hard.std.clear-SEED-v1`), and stats are kept per `GenParams.variant`. Option and choice texts come from `optionLabel`/`choiceLabel`/`choiceDescription`. Score games override `score()` (best score in stats) and `finishTitle()`.
 
@@ -47,7 +52,8 @@ Run them through the output condenser (see the global CLAUDE.md):
    - `<id>_solver.dart`: tiered, sound deductions plus `countSolutions(limit: 2)`;
    - `<id>_generator.dart`: random solution → strip clues while still solvable at the difficulty's tier;
    - `<id>_type.dart`, including `dailySize` (must fit a 360×760 phone) and `dailySince` set to the release date, so earlier days keep their games;
-   - `<id>Name`, `<id>Tagline`, `<id>Rules` (and any other texts) in all four ARB files.
+   - `<id>_tutorial.dart`: 3–5 tiny boards, one rule or edge case each, ending with a small generated board; override `tutorial()` in the type;
+   - `<id>Name`, `<id>Tagline`, `<id>Rules`, `tut<Id><n>` (and any other texts) in all four ARB files.
 2. Generation must be deterministic for a given `GenParams.seed`, and pure, because it runs in an isolate. Types must be `const`.
 3. Add it to `puzzleTypes` in `registry.dart`.
 4. Add tests in `test/puzzles/<id>/`. Across seeds, sizes and difficulties, check that:

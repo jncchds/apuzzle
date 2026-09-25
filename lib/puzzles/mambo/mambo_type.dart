@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
 import '../../core/grid.dart';
+import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import 'mambo_generator.dart';
 import 'mambo_model.dart';
+import 'mambo_tutorial.dart';
 
 /// Sun & Moon (Tango / Binairo with = and × clues).
 class MamboType extends ValueGridType<MamboPuzzle> {
@@ -25,6 +27,9 @@ class MamboType extends ValueGridType<MamboPuzzle> {
 
   @override
   String rulesText(AppLocalizations l) => l.mamboRules;
+
+  @override
+  List<TutorialStep> tutorial() => mamboTutorial;
 
   @override
   List<GridSize> get sizes => const [GridSize.square(4), GridSize.square(6), GridSize.square(8), GridSize.square(10)];

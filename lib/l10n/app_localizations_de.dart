@@ -720,4 +720,365 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get pearlsRules =>
       '• Zeichne eine geschlossene Schleife durch die Mitten der Felder. Sie kreuzt und berührt sich nicht selbst und muss nicht durch jedes Feld laufen.\n• Die Schleife läuft durch jede Perle.\n• An einer schwarzen Perle biegt sie ab und läuft in den Feldern davor und danach geradeaus.\n• Durch eine weiße Perle läuft sie geradeaus und biegt im Feld davor oder danach (oder in beiden) ab.\n\nZiehe durch Felder, um die Schleife zu zeichnen, oder an ihr entlang, um sie zu löschen. Tippe zwischen zwei Felder, um zu wechseln: Linie → Kreuz → leer.';
+
+  @override
+  String get learnTitle => 'So wird gespielt';
+
+  @override
+  String get learnIntro =>
+      'Kurze interaktive Lektionen: Jeder Schritt ist ein kleines Feld, das eine Regel oder einen Kniff zeigt.';
+
+  @override
+  String learnSteps(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Schritte',
+      one: '1 Schritt',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get learnDone => 'Gelernt';
+
+  @override
+  String tutorialOfferTitle(String name) {
+    return 'Neu bei $name?';
+  }
+
+  @override
+  String get tutorialOfferBody =>
+      'Erst eine kurze interaktive Lektion? Ein paar kleine Felder zeigen dir alle Regeln.';
+
+  @override
+  String get tutorialOfferNo => 'Nein, danke';
+
+  @override
+  String get tutorialOfferYes => 'Zeig\'s mir';
+
+  @override
+  String tutorialTitle(String name) {
+    return 'So spielt man $name';
+  }
+
+  @override
+  String tutorialStep(int step, int total) {
+    return 'Schritt $step von $total';
+  }
+
+  @override
+  String get tutorialNice => 'Super!';
+
+  @override
+  String get tutorialNext => 'Weiter';
+
+  @override
+  String get tutorialFinish => 'Fertig';
+
+  @override
+  String get tutorialShowMe => 'Zeig\'s mir';
+
+  @override
+  String get tutorialPrevious => 'Voriger Schritt';
+
+  @override
+  String get tutorialReset => 'Schritt neu starten';
+
+  @override
+  String get tutorialFinishedTitle => 'Du hast es drauf!';
+
+  @override
+  String tutorialFinishedBody(String name) {
+    return 'Das ist alles, was du für $name wissen musst.';
+  }
+
+  @override
+  String get tutorialPlay => 'Jetzt spielen';
+
+  @override
+  String get tutorialAgain => 'Von vorn';
+
+  @override
+  String get tutorialClose => 'Schließen';
+
+  @override
+  String get tutMambo1 =>
+      'Fülle jedes Feld mit einer Sonne oder einem Mond. Nie drei gleiche nebeneinander: Auf zwei Sonnen nebeneinander folgt ein Mond. Tippe auf ein markiertes Feld, um zu wechseln: leer → Sonne → Mond.';
+
+  @override
+  String get tutMambo2 =>
+      'Jede Zeile und Spalte hat gleich viele Sonnen und Monde. Die obere Zeile hat ihre zwei Sonnen schon, also sind ihre anderen Felder Monde. Die rechte Spalte funktioniert genauso.';
+
+  @override
+  String get tutMambo3 =>
+      'Ein „=“ zwischen zwei Feldern heißt: Sie enthalten dasselbe Symbol. Gib den markierten Feldern das Symbol ihrer Nachbarn.';
+
+  @override
+  String get tutMambo4 =>
+      'Ein „×“ heißt: Die beiden Felder sind verschieden, eine Sonne und ein Mond.';
+
+  @override
+  String get tutMambo5 =>
+      'Jetzt ein ganzes Brett: Nutze alle Regeln zusammen. Tipp: Mit der Palette oben setzt du ein Symbol auf viele Felder, und langes Drücken (oder Rechtsklick) wechselt rückwärts.';
+
+  @override
+  String get tutSudoku1 =>
+      'Jede Zeile, Spalte und jeder Block (die dicken Rahmen) enthält jede Zahl von 1 bis 4 einmal. In dieser Zeile fehlt eine Zahl: Wähle sie in der Palette und tippe auf das leere Feld.';
+
+  @override
+  String get tutSudoku2 =>
+      'Nach ihrer Zeile könnten diese beiden Felder 3 oder 4 sein. Die Spalten entscheiden: In jeder fehlt nur eine Zahl.';
+
+  @override
+  String get tutSudoku3 =>
+      'Die Blöcke zählen auch: Jeder Block braucht 1 bis 4 einmal. Vervollständige den letzten Block.';
+
+  @override
+  String get tutSudoku4 =>
+      'Noch unsicher? Mach Notizen. Schalte den Stift neben der Palette ein, wähle das markierte Feld und notiere jede Zahl, die dort noch möglich ist.';
+
+  @override
+  String get tutSudoku5 =>
+      'Jetzt ein ganzes Rätsel. Ein ausgewähltes Feld tönt seine Zeile, Spalte und seinen Block ein und hebt dieselbe Zahl anderswo hervor. In den Einstellungen können Notizen automatisch entfernt werden.';
+
+  @override
+  String get tutKings1 =>
+      'Setze genau eine Krone in jede Zeile, jede Spalte und jeden farbigen Bereich. Drei stehen schon, und für die letzte ist nur ein Platz frei. Tippe zweimal darauf: erst ein Punkt, dann eine Krone.';
+
+  @override
+  String get tutKings2 =>
+      'Kronen berühren sich nie, auch nicht an den Ecken. Tippe einmal, um einen Punkt (deine Notiz „keine Krone hier“) auf jedes Feld um diese Krone zu setzen.';
+
+  @override
+  String get tutKings3 =>
+      'Die Zeilen der Kronen und die Berührungsregel lassen im markierten Bereich nur ein Feld ohne Punkt übrig. Setze dort seine Krone.';
+
+  @override
+  String get tutKings4 =>
+      'Jetzt ein ganzes Brett. Setze Punkte, wo keine Krone hin kann, und suche Zeilen, Spalten oder Bereiche mit nur einem freien Feld.';
+
+  @override
+  String get tutHues1 =>
+      'Färbe jedes leere Feld. Eine Zahl zählt die leeren Felder um sie herum (auch diagonal), die am Ende ihre Farbe haben. Die blaue 3 hat genau drei leere Nachbarn, also sind alle blau. Wähle eine Farbe in der Palette und tippe auf Felder.';
+
+  @override
+  String get tutHues2 =>
+      'Die Zahlen zählen beim Färben herunter: Sie zeigen, wie viele passende Felder noch fehlen. Eine 0 heißt, dass kein leerer Nachbar ihre Farbe bekommt, und Zahlenfelder zählen nie mit. Fang mit der blauen 3 an und schau dann, was der rosa 2 noch fehlt.';
+
+  @override
+  String get tutHues3 =>
+      'Jetzt ein echtes Brett. Fang mit Zahlen an, die alle leeren Nachbarn brauchen oder keinen.';
+
+  @override
+  String get tutMosaic1 =>
+      'Der Fleck in der oberen linken Ecke gehört dir. Wähle unten eine Farbe: Dein Fleck nimmt sie an und schluckt alle angrenzenden Felder dieser Farbe. Färbe das ganze Brett in einer Farbe.';
+
+  @override
+  String get tutMosaic2 =>
+      'Achte auf das Zuglimit: Wähle die Farbe, die deinen Fleck am meisten wachsen lässt. Ein Tipp auf ein Feld des Bretts wählt ebenfalls dessen Farbe.';
+
+  @override
+  String get tutMosaic3 =>
+      'Jetzt ein echtes Brett, mit ein paar Zügen Reserve.';
+
+  @override
+  String get tutBlend1 =>
+      'Das Brett besteht aus Flecken: angrenzenden Feldern einer Farbe. Wähle unten eine Farbe und tippe auf einen Fleck, um ihn zu übermalen. Er verschmilzt mit angrenzenden Flecken dieser Farbe. Übermale den mittleren Fleck.';
+
+  @override
+  String get tutBlend2 =>
+      'Ein Zug kann viele Flecken verschmelzen. Der mittlere Fleck grenzt an vier andere: Übermale ihn, um sie zu verbinden, und mach dann fertig. Du hast nur 2 Züge.';
+
+  @override
+  String get tutBlend3 =>
+      'Jetzt ein echtes Brett. Die gewählte Farbe bleibt ausgewählt, sodass du mehrere Flecken hintereinander übermalen kannst.';
+
+  @override
+  String get tutPop1 =>
+      'Tippe auf eine Gruppe von zwei oder mehr angrenzenden Blasen einer Farbe, um sie auszuwählen, und noch einmal, um sie platzen zu lassen. Leere das Brett.';
+
+  @override
+  String get tutPop2 =>
+      'Blasen darüber fallen in die Lücken, so entstehen neue Gruppen. Die Reihenfolge zählt: Lass zuerst die markierte Gruppe platzen.';
+
+  @override
+  String get tutPop3 =>
+      'Wenn eine Spalte leer wird, rücken die Spalten links davon nach rechts. Lass die Mitte platzen, um die Seiten zusammenzubringen.';
+
+  @override
+  String get tutPop4 =>
+      'Eine Gruppe von n Blasen bringt n × (n − 1) Punkte: 2 Blasen bringen 2, 5 bringen 20. Spar dir eine große Gruppe auf, um 20 Punkte zu erreichen.';
+
+  @override
+  String get tutPop5 =>
+      'Weitere Modi: Bei Schieber rutscht auch jede Zeile nach rechts, bei Endlos rollen neue Spalten von links herein, und Mega macht beides. Ziele: Brett leeren, eine Zielpunktzahl erreichen oder frei um den Rekord spielen. Das Spiel endet, wenn keine Zweiergruppe mehr übrig ist.';
+
+  @override
+  String get tutMerge1 =>
+      'Wische (oder drück eine Pfeiltaste), um alle Kacheln so weit wie möglich zu schieben. Zwei gleiche Kacheln, die aufeinandertreffen, verschmelzen zu ihrer Summe. Mach eine 4.';
+
+  @override
+  String get tutMerge2 =>
+      'Eine Kachel verschmilzt pro Zug nur einmal: Aus 4, 4, 8 wird 8, 8, nicht 16. Nach jedem Zug erscheint eine neue 2 (manchmal eine 4). Bau eine 16.';
+
+  @override
+  String get tutMerge3 =>
+      'Halte deine größte Kachel in einer Ecke und füttere sie Schritt für Schritt. Bau eine 32.';
+
+  @override
+  String get tutPipes1 =>
+      'Tippe auf eine Kachel, um sie im Uhrzeigersinn zu drehen (langes Drücken oder Rechtsklick dreht zurück). Verbinde jedes Rohr mit der Quelle, der Kachel mit Ring. Das Wasser zeigt, was schon verbunden ist.';
+
+  @override
+  String get tutPipes2 =>
+      'Kein Rohrende darf offen bleiben, also darf kein Rohr über den Rand zeigen. Kacheln mit Schloss stimmen schon. Fang an den Rändern und Ecken an, wo Kacheln die wenigsten Möglichkeiten haben.';
+
+  @override
+  String get tutPipes3 =>
+      'Jetzt ein echtes Brett. Das Netz darf keine Schleifen bilden.';
+
+  @override
+  String get tutShikaku1 =>
+      'Teile das Gitter in Rechtecke. Jedes enthält genau eine Zahl, die seiner Fläche in Feldern entspricht. Ziehe von einer Ecke zur gegenüberliegenden, um ein Rechteck zu zeichnen.';
+
+  @override
+  String get tutShikaku2 =>
+      'Eine 1 ist allein schon ein Rechteck: Tippe einfach darauf. Tippe auf ein gezeichnetes Rechteck, um es zu entfernen. Hier passt die 6 nur auf eine Art.';
+
+  @override
+  String get tutShikaku3 =>
+      'Jetzt ein echtes Brett. Große Zahlen am Rand haben meist die wenigsten Möglichkeiten.';
+
+  @override
+  String get tutTrail1 =>
+      'Ziehe von der 1 aus einen Pfad durch jedes Feld, nach oben, unten, links oder rechts. Er endet auf der letzten Zahl.';
+
+  @override
+  String get tutTrail2 =>
+      'Der Pfad muss die Zahlen der Reihe nach passieren: 1 → 2 → 3 → 4. Ziehe auf deinem Pfad zurück, um Schritte zurückzunehmen, oder tippe auf eines seiner Felder, um ihn dort abzuschneiden.';
+
+  @override
+  String get tutTrail3 =>
+      'Jetzt ein echtes Brett. Ein Eckfeld hat nur zwei Wege hinein und hinaus, also nutzt der Pfad beide.';
+
+  @override
+  String get tutLabyrinth1 =>
+      'Ziehe vom Start in der linken oberen Ecke zur Flagge in der rechten unteren Ecke. Wände versperren den Weg.';
+
+  @override
+  String get tutLabyrinth2 =>
+      'Ein größeres Labyrinth. In einer Sackgasse? Ziehe auf deinem Weg zurück oder tippe auf eines seiner Felder, um dorthin zurückzukehren. Ein schneller Zug folgt geraden Gängen.';
+
+  @override
+  String get tutAtoms1 =>
+      'Verbinde die Atome mit Bindungen. Jedes Atom braucht so viele Bindungen, wie seine Zahl angibt, und zwei Atome können sich eine oder zwei teilen. Ziehe von einem Atom zu einem Nachbarn, um eine Bindung hinzuzufügen (1 → 2 → keine).';
+
+  @override
+  String get tutAtoms2 =>
+      'Alle Atome müssen ein Molekül bilden, und Bindungen dürfen sich nicht kreuzen. Eine Bindung von der 1 oben links nach unten ließe zwei getrennte Paare übrig. Wohin geht sie also?';
+
+  @override
+  String get tutAtoms3 =>
+      'Jetzt ein echtes Brett. Fang mit Atomen an, die ihre Bindungen nur auf eine Art bekommen können.';
+
+  @override
+  String get tutLits1 =>
+      'Schattiere in jedem umrandeten Bereich genau 4 Felder, die ein L, I, T oder S bilden. Der obere Bereich hat genau 4 Felder, also schattiere alle. Tippe auf ein Feld, um es zu schattieren.';
+
+  @override
+  String get tutLits2 =>
+      'Kein 2×2-Block darf ganz schattiert sein, und gleiche Formen dürfen sich über eine Grenze nicht berühren. Nur ein Feld vervollständigt den linken Bereich. Welches?';
+
+  @override
+  String get tutLits3 =>
+      'Jetzt ein echtes Brett. Alle schattierten Felder müssen zusammenhängen. Tippe zweimal für einen Punkt, deine Notiz, dass ein Feld leer bleibt.';
+
+  @override
+  String get tutCamp1 =>
+      'Stell neben jeden Baum ein Zelt: oben, unten, links oder rechts, nie diagonal. Die Zahlen außen geben an, wie viele Zelte in jeder Zeile und Spalte stehen. Tippe zweimal auf ein Feld: Gras, dann Zelt.';
+
+  @override
+  String get tutCamp2 =>
+      'Zelte berühren sich nie, auch nicht diagonal. Ein Zelt steht schon. Wo kann das Zelt des anderen Baums hin?';
+
+  @override
+  String get tutCamp3 =>
+      'Jetzt ein echtes Brett. Eine 0 heißt, dass die ganze Zeile oder Spalte Gras ist, und jeder Baum bekommt sein eigenes Zelt.';
+
+  @override
+  String get tutIslands1 =>
+      'Schattiere das Meer so, dass die freien Felder Inseln bilden. Jede Zahl ist eine Insel aus genau so vielen Feldern. Hier ist die 1 eine Insel für sich: Tippe auf alle anderen Felder, um sie zu Meer zu machen.';
+
+  @override
+  String get tutIslands2 =>
+      'Inseln berühren sich nie. Ein Feld zwischen zwei Zahlen muss Meer sein, sonst würde es sie zu einer Insel verbinden.';
+
+  @override
+  String get tutIslands3 =>
+      'Das Meer muss zusammenhängen und darf nie ein 2×2-Becken bilden. Lass die 3 so wachsen, dass beides eingehalten wird. Tippe zweimal für einen Punkt, deine Notiz für Land.';
+
+  @override
+  String get tutIslands4 =>
+      'Jetzt ein echtes Brett. Jede Insel enthält genau eine Zahl.';
+
+  @override
+  String get tutLamps1 =>
+      'Setze Lampen auf weiße Felder: zweimal tippen (Punkt, dann Lampe). Eine Lampe beleuchtet ihre Zeile und Spalte bis zu den Wänden. Beleuchte jedes weiße Feld.';
+
+  @override
+  String get tutLamps2 =>
+      'Eine Zahl auf einer Wand gibt an, wie viele Lampen sie berühren (oben, unten, links oder rechts). Diese 3 braucht auf jeder freien Seite eine Lampe.';
+
+  @override
+  String get tutLamps3 =>
+      'Lampen dürfen nie aufeinander scheinen, und eine 0 heißt: keine Lampe direkt daneben. Wo steht die zweite Lampe?';
+
+  @override
+  String get tutLamps4 =>
+      'Jetzt ein echtes Brett. Mit Punkten markierst du Felder, auf denen keine Lampe stehen kann.';
+
+  @override
+  String get tutFence1 =>
+      'Zeichne eine geschlossene Schleife entlang der gepunkteten Linien. Eine Zahl gibt an, wie viele Seiten ihres Feldes die Schleife benutzt. Tippe zwischen zwei Punkte, um eine Linie zu ziehen, oder ziehe von Punkt zu Punkt.';
+
+  @override
+  String get tutFence2 =>
+      'Um eine 0 herum gibt es keine Linie. Tippe noch einmal auf eine Linie, um sie in ein Kreuz zu verwandeln, deine Notiz, dass dort keine Linie verläuft. Felder ohne Zahl dürfen beliebig viele haben.';
+
+  @override
+  String get tutFence3 =>
+      'Die Schleife verzweigt und kreuzt sich nie: An jedem Punkt liegen null oder zwei Linien. Zahlen am Rand des Bretts sind ein guter Anfang.';
+
+  @override
+  String get tutFence4 =>
+      'Jetzt ein echtes Brett. Fang mit den 0en und 3en an.';
+
+  @override
+  String get tutPearls1 =>
+      'Ziehe durch die Felder, um eine geschlossene Schleife zu zeichnen. An einer schwarzen Perle biegt die Schleife ab und läuft dann auf beiden Seiten geradeaus durch das nächste Feld.';
+
+  @override
+  String get tutPearls2 =>
+      'Durch eine weiße Perle läuft die Schleife geradeaus und biegt im Feld direkt davor oder danach (oder in beiden) ab.';
+
+  @override
+  String get tutPearls3 =>
+      'Jetzt ein echtes Brett. Die Schleife muss nicht durch jedes Feld laufen und kreuzt oder berührt sich nie selbst.';
+
+  @override
+  String get tutMines1 =>
+      'Eine Zahl zählt die Minen in den 8 Feldern um sie herum. Jede 1 hier berührt nur ein geschlossenes Feld, also liegt dort eine Mine. Markiere sie: langes Drücken oder Rechtsklick, oder wechsle unten zu „Flagge“ und tippe darauf.';
+
+  @override
+  String get tutMines2 =>
+      'Die Mine dieser 1 ist schon markiert, also sind alle anderen Felder ringsum sicher. Grab sie auf oder tippe auf die 1 selbst, um alle auf einmal aufzugraben.';
+
+  @override
+  String get tutMines3 =>
+      'Ein Feld ohne Minen ringsum öffnet seine Nachbarn von selbst. Grab in der markierten Ecke.';
+
+  @override
+  String get tutMines4 =>
+      'Jetzt ein echtes Brett. Raten ist nie nötig. Gräbst du aus Versehen eine Mine aus, bekommt sie einfach eine Flagge, und das Spiel geht weiter.';
 }

@@ -11,6 +11,7 @@ import '../core/puzzle_type.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
 import 'new_game_sheet.dart' show formatDuration;
+import 'tutorial_screen.dart';
 
 /// Solved and total puzzles of [day].
 ({int done, int total}) dailyProgress(GameStore store, Day day) {
@@ -324,7 +325,7 @@ class _GameRow extends StatelessWidget {
                 label: d.label(l),
                 result: results[GameStore.dailyEntry(type.id, d)],
                 inProgress: store.hasSave(GameStore.dailySlot(PuzzleCode.format(type, dailyParams(day, type, d)))),
-                onTap: () => router.openDailyGame(day, type, d),
+                onTap: () => offerTutorial(context, type, play: () => router.openDailyGame(day, type, d)),
               ),
           ]),
         ]),

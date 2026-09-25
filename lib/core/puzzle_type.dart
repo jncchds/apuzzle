@@ -6,6 +6,7 @@ import 'day.dart';
 import 'difficulty.dart';
 import 'game_controller.dart';
 import 'grid.dart';
+import 'tutorial.dart';
 
 enum InputMode { cycle, palette }
 
@@ -112,6 +113,9 @@ abstract class PuzzleType<P, S> {
 
   /// Heading of the win card.
   String finishTitle(AppLocalizations l, P puzzle, S state) => l.solved;
+
+  /// The interactive "how to play": tiny boards, one rule or trick each.
+  List<TutorialStep> tutorial() => const [];
 
   Map<String, dynamic> encodePuzzle(P puzzle);
   P decodePuzzle(Map<String, dynamic> json);

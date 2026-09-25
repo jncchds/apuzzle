@@ -5,10 +5,12 @@ import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/lattice_loop.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/loop_board.dart';
 import 'pearls_generator.dart';
 import 'pearls_model.dart';
+import 'pearls_tutorial.dart';
 
 /// Masyu: one loop through the pearls.
 class PearlsType extends PuzzleType<PearlsPuzzle, LoopMarks> {
@@ -29,6 +31,9 @@ class PearlsType extends PuzzleType<PearlsPuzzle, LoopMarks> {
 
   @override
   String rulesText(AppLocalizations l) => l.pearlsRules;
+
+  @override
+  List<TutorialStep> tutorial() => pearlsTutorial;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

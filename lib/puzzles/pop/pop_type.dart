@@ -4,11 +4,13 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../mosaic/mosaic_type.dart';
 import 'pop_board.dart';
 import 'pop_generator.dart';
 import 'pop_model.dart';
+import 'pop_tutorial.dart';
 
 /// Bubble popping: tap a group of touching same-colored bubbles to select
 /// it, tap again to pop it. Bigger groups score more.
@@ -30,6 +32,9 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
 
   @override
   String rulesText(AppLocalizations l) => l.popRules;
+
+  @override
+  List<TutorialStep> tutorial() => popTutorial;
 
   @override
   List<GridSize> get sizes => const [

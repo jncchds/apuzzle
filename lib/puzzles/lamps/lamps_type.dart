@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/symbols.dart';
 import 'lamps_generator.dart';
 import 'lamps_model.dart';
+import 'lamps_tutorial.dart';
 
 /// Light Up: place lamps until every cell is lit.
 class LampsType extends ValueGridType<LampsPuzzle> {
@@ -30,6 +32,9 @@ class LampsType extends ValueGridType<LampsPuzzle> {
 
   @override
   String rulesText(AppLocalizations l) => l.lampsRules;
+
+  @override
+  List<TutorialStep> tutorial() => lampsTutorial;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

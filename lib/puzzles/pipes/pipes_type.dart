@@ -4,10 +4,12 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import 'pipes_generator.dart';
 import 'pipes_model.dart';
+import 'pipes_tutorial.dart';
 
 /// Rotate tiles so every pipe connects back to the source.
 class PipesType extends PuzzleType<PipesPuzzle, PipesState> {
@@ -28,6 +30,9 @@ class PipesType extends PuzzleType<PipesPuzzle, PipesState> {
 
   @override
   String rulesText(AppLocalizations l) => l.pipesRules;
+
+  @override
+  List<TutorialStep> tutorial() => pipesTutorial;
 
   @override
   List<GridSize> get sizes => [for (var n = 4; n <= 11; n++) GridSize.square(n)];

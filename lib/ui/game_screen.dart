@@ -256,7 +256,18 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
         builder: (context) => AlertDialog(
           title: Text(type.name(context.l10n)),
           content: SingleChildScrollView(child: Text(type.rulesText(context.l10n))),
-          actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text(context.l10n.gotIt))],
+          actions: [
+            if (type.tutorial().isNotEmpty)
+              TextButton.icon(
+                onPressed: () {
+                  Navigator.pop(context);
+                  AppRouterDelegate.of(this.context).openTutorial(type);
+                },
+                icon: const Icon(Icons.school_outlined),
+                label: Text(context.l10n.learnTitle),
+              ),
+            TextButton(onPressed: () => Navigator.pop(context), child: Text(context.l10n.gotIt)),
+          ],
         ),
       );
 
