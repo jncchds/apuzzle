@@ -3,11 +3,9 @@ import 'dart:math';
 import '../../core/difficulty.dart';
 import 'pop_model.dart';
 
-int popColorsFor(Difficulty d) => switch (d) {
-      Difficulty.easy => 3,
-      Difficulty.medium => 4,
-      _ => 5,
-    };
+/// Five colors, like the classic; difficulty sets the target share and, when
+/// clearing, the group sizes.
+const popColors = 5;
 
 /// Share of the best found score to reach, per difficulty.
 double _targetShare(Difficulty d) => switch (d) {
@@ -19,7 +17,7 @@ double _targetShare(Difficulty d) => switch (d) {
 PopPuzzle generatePop(GenParams params, PopMode mode, PopGoal goal) {
   final rows = params.size.rows, cols = params.size.cols;
   final rng = Random(params.seed);
-  final colors = popColorsFor(params.difficulty);
+  final colors = popColors;
 
   if (goal == PopGoal.clear) {
     final (start, plan) = _clearable(rows, cols, colors, params.difficulty, rng);

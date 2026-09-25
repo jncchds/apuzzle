@@ -138,7 +138,7 @@ void main() {
     final params = GenParams(
         size: const GridSize(15, 12), difficulty: Difficulty.hard, seed: 99, options: const {'mode': 'shift', 'goal': 'free'});
     final code = PuzzleCode.format(type, params);
-    expect(code, 'pop-12x15-hard.shift.free-2R-v1');
+    expect(code, 'pop-12x15-hard.shift.free-2R-v2');
     final back = PuzzleCode.parse(code, puzzleTypes).params;
     expect(back.options, params.options);
     expect(back.variant, 'hard.shift.free');

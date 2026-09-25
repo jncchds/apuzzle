@@ -82,7 +82,7 @@ The game ends when no group of 2 is left.''';
 
   /// Bump when [generate] changes what a seed produces.
   @override
-  int get generatorVersion => 1;
+  int get generatorVersion => 2;
 
   @override
   PopPuzzle generate(GenParams params) {

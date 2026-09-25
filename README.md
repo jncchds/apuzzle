@@ -2,6 +2,7 @@
 
 A collection of grid logic puzzles for Android, Windows, iOS and the web, built with Flutter.
 Every puzzle is **generated on the device**, and a solver checks that it has **exactly one solution**.
+The color-flood games and Pop are move-based instead: their limits and targets come from solver playthroughs, so they are always reachable.
 You choose the grid size and the difficulty.
 
 <p align="center">
@@ -20,6 +21,7 @@ You choose the grid size and the difficulty.
 | <img src="docs/screenshots/hues_light.png" width="90"> | **Hues** | Color the blank cells. Each number counts the blank cells around it (all 8 neighbors) that end up in its color. |
 | <img src="docs/screenshots/mosaic_dark.png" width="90"> | **Mosaic** | Flood the board with one color from the top-left corner, within the move limit. |
 | <img src="docs/screenshots/blend_dark.png" width="90"> | **Blend** | Pick a color and repaint any patch; it merges with touching patches of that color. Make the board one color within the move limit. |
+| <img src="docs/screenshots/pop_dark.png" width="90"> | **Pop** | Tap a group of touching same-colored bubbles to select it, tap again to pop it: n bubbles score n×(n−1). Modes: Standard, Shifter (rows slide right), Continuous (new columns roll in) and Mega (both). Goals: clear the board (Standard only, always possible), reach a target score, or free play for a best score. |
 | <img src="docs/screenshots/pipes_dark.png" width="90"> | **Pipes** | Rotate tiles until every pipe connects to the source, with no open ends and no loops. |
 | <img src="docs/screenshots/shikaku_light.png" width="90"> | **Shikaku** | Split the grid into rectangles. Each holds one number equal to its area. |
 | <img src="docs/screenshots/trail_dark.png" width="90"> | **Trail** | Draw one path through every cell that passes the numbers in order. |
@@ -30,12 +32,13 @@ You choose the grid size and the difficulty.
 
 - **Endless puzzles.** Generation is seeded and deterministic, and runs in a background isolate.
 - **Exactly one solution.** Most types are also graded by how deep the solver's logic has to go (easy, medium, hard, and expert for Sudoku).
+- **Game options.** A puzzle can offer extra choices when you start a game, like Pop's mode and goal. They are part of the share code, and stats are kept per choice.
 - **Variable grid sizes.** A size is only offered if it fits the screen, so there's no zooming.
 - **Two input styles.** Tap a cell to cycle its values, or pick a value from a palette and stamp it. Pencil marks are available where useful.
 - **Checked on submit.** Mistakes aren't highlighted while you play; live highlighting is an option in Settings.
-- **Undo, redo, restart and hints.** There's a timer, and stats are kept per puzzle and difficulty.
+- **Undo, redo, restart and hints.** There's a timer, and stats (best time, and best score for Pop) are kept per puzzle and difficulty.
 - **Auto-save.** Leave at any time and continue where you stopped.
-- **Animations.** Cells pop and fade, pipes rotate, colors flood, and solving plays a ripple with confetti.
+- **Animations.** Cells pop and fade, pipes rotate, colors flood, bubbles fall and slide, and solving plays a ripple with confetti.
 - **Light and dark themes** (Material 3).
 
 ## Getting started
