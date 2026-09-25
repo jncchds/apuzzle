@@ -2,6 +2,7 @@ import '../puzzles/atoms/atoms_type.dart';
 import '../puzzles/blend/blend_type.dart';
 import '../puzzles/hues/hues_type.dart';
 import '../puzzles/kings/kings_type.dart';
+import '../puzzles/labyrinth/labyrinth_type.dart';
 import '../puzzles/lits/lits_type.dart';
 import '../puzzles/mambo/mambo_type.dart';
 import '../puzzles/mosaic/mosaic_type.dart';
@@ -24,6 +25,7 @@ const List<PuzzleType> puzzleTypes = [
   PipesType(),
   ShikakuType(),
   TrailType(),
+  LabyrinthType(),
   AtomsType(),
   LitsType(),
 ];

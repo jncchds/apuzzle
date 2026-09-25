@@ -25,6 +25,7 @@ You choose the grid size and the difficulty.
 | <img src="docs/screenshots/pipes_dark.png" width="90"> | **Pipes** | Rotate tiles until every pipe connects to the source, with no open ends and no loops. |
 | <img src="docs/screenshots/shikaku_light.png" width="90"> | **Shikaku** | Split the grid into rectangles. Each holds one number equal to its area. |
 | <img src="docs/screenshots/trail_dark.png" width="90"> | **Trail** | Draw one path through every cell that passes the numbers in order. |
+| <img src="docs/screenshots/labyrinth_dark.png" width="90"> | **Labyrinth** | Walk through the maze from the top-left corner to the exit in the bottom-right corner. |
 | <img src="docs/screenshots/atoms_dark.png" width="90"> | **Atoms** | Connect atoms with single or double bonds that match their numbers. Bonds can't cross, and all atoms must end up connected. |
 | <img src="docs/screenshots/lits_dark.png" width="90"> | **LITS** | Shade one L, I, T or S tetromino in every region. The shaded area is connected, with no 2×2 blocks, and identical shapes never touch across region borders. |
 

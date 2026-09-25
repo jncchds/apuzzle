@@ -562,4 +562,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get litsRules =>
       '• Shade exactly 4 connected cells in every outlined region, forming an L, I, T or S shape (rotations and mirror images allowed).\n• All shaded cells together form one connected area.\n• No 2×2 block may be fully shaded.\n• Two identical shapes may not touch each other across a region border.\n\nTap a cell to cycle empty → shaded → dot (your \"not shaded\" note).';
+
+  @override
+  String get labyrinthName => 'Labyrinth';
+
+  @override
+  String get labyrinthTagline => 'Find the way from corner to corner';
+
+  @override
+  String get labyrinthRules =>
+      '• Find the way through the maze from the entrance in the top-left corner to the exit in the bottom-right corner.\n• You can\'t pass through walls.\n\nDrag from the end of your path to walk on. Drag back to retrace your steps, or tap a cell of the path to go back there.';
 }

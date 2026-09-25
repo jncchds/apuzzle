@@ -995,6 +995,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'• Shade exactly 4 connected cells in every outlined region, forming an L, I, T or S shape (rotations and mirror images allowed).\n• All shaded cells together form one connected area.\n• No 2×2 block may be fully shaded.\n• Two identical shapes may not touch each other across a region border.\n\nTap a cell to cycle empty → shaded → dot (your \"not shaded\" note).'**
   String get litsRules;
+
+  /// No description provided for @labyrinthName.
+  ///
+  /// In en, this message translates to:
+  /// **'Labyrinth'**
+  String get labyrinthName;
+
+  /// No description provided for @labyrinthTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the way from corner to corner'**
+  String get labyrinthTagline;
+
+  /// No description provided for @labyrinthRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Find the way through the maze from the entrance in the top-left corner to the exit in the bottom-right corner.\n• You can\'t pass through walls.\n\nDrag from the end of your path to walk on. Drag back to retrace your steps, or tap a cell of the path to go back there.'**
+  String get labyrinthRules;
 }
 
 class _AppLocalizationsDelegate

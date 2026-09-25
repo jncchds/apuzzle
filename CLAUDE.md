@@ -67,6 +67,7 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 | pipes | Pipes | PuzzleType | spanning tree, rule-based win (any valid tree) |
 | shikaku | Shikaku | PuzzleType | drag rectangles; local search moves numbers inside their rectangles to reach the tier |
 | trail | Trail | PuzzleType | Hamiltonian path; sound edge logic (`trail_logic.dart`) adds waypoints where it stalls, so no path search; up to 10×10 |
+| labyrinth | Labyrinth | PuzzleType | perfect maze (growing tree: easy Prim-like, hard DFS-like, best of 4 by junctions on the way out), top-left → bottom-right; drag the path, fast drags follow straight corridors; hint walks to the next junction |
 | atoms | Atoms | PuzzleType | Hashi bridges; sound interval solver |
 | lits | LITS | ValueGridType | regions grown cell by cell keeping the solution unique (monotone, so rejected pairs are never retried); capped at 7×7 (8×8 takes 1–5 s) |
 | pop | Pop | PuzzleType | bubble breaker; game options (mode: standard/shifter/continuous/mega, goal: clear (standard only, reverse-built so always clearable)/target (share of best playout)/free). Custom animated `PopBoard` |
