@@ -4,6 +4,7 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../l10n/l10n.dart';
 import '../mosaic/mosaic_type.dart';
 import 'pop_board.dart';
 import 'pop_generator.dart';
@@ -19,32 +20,16 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
   @override
   String get id => 'pop';
   @override
-  String get name => 'Pop';
+  String name(AppLocalizations l) => l.popName;
   @override
-  String get tagline => 'Pop big bubble groups for big points';
+  String tagline(AppLocalizations l) => l.popTagline;
   @override
   IconData get icon => Icons.bubble_chart_rounded;
   @override
   Color get accent => const Color(0xFF5B8DEF);
 
   @override
-  String get rulesText => '''
-• Tap a group of 2 or more touching bubbles of one color to select it; tap it again to pop it.
-• A group of n bubbles scores n × (n − 1), so saving up for big groups pays off.
-• Bubbles above fall down, and empty columns close up to the right.
-
-Modes
-• Standard: just that.
-• Shifter: every row also slides right to close its gaps.
-• Continuous: new columns roll in from the left as space frees up.
-• Mega: Shifter and Continuous together.
-
-Goals
-• Clear the board: pop every bubble (Standard only; there is always a way).
-• Target score: reach the score before no moves are left.
-• Free play: no target, just beat your best score.
-
-The game ends when no group of 2 is left.''';
+  String rulesText(AppLocalizations l) => l.popRules;
 
   @override
   List<GridSize> get sizes => const [
@@ -64,21 +49,40 @@ The game ends when no group of 2 is left.''';
   @override
   bool get showSubmit => false;
 
-  static const _modes = GameOption('mode', 'Mode', [
-    OptionChoice('std', 'Standard', 'Bubbles fall down; empty columns close up to the right.'),
-    OptionChoice('shift', 'Shifter', 'Rows also slide right to close every gap.'),
-    OptionChoice('cont', 'Continuous', 'New columns roll in from the left as space frees up.'),
-    OptionChoice('mega', 'Mega', 'Shifter and Continuous together.'),
-  ]);
-  static const _clear = OptionChoice('clear', 'Clear board', 'Pop every bubble. There is always a way.');
-  static const _target = OptionChoice('target', 'Target score', 'Reach the target before no moves are left.');
-  static const _free = OptionChoice('free', 'Free play', 'No target: play it out and beat your best score.');
+  static const _modes = GameOption('mode', ['std', 'shift', 'cont', 'mega']);
 
   @override
   List<GameOption> optionsFor(Map<String, String> chosen) => [
         _modes,
-        GameOption('goal', 'Goal', [if (PopMode.byId(chosen['mode']) == PopMode.standard) _clear, _target, _free]),
+        GameOption('goal', [if (PopMode.byId(chosen['mode']) == PopMode.standard) 'clear', 'target', 'free']),
       ];
+
+  @override
+  String optionLabel(AppLocalizations l, String option) => option == 'mode' ? l.popMode : l.popGoal;
+
+  @override
+  String choiceLabel(AppLocalizations l, String option, String choice) => switch (choice) {
+        'std' => l.popModeStandard,
+        'shift' => l.popModeShifter,
+        'cont' => l.popModeContinuous,
+        'mega' => l.popModeMega,
+        'clear' => l.popGoalClear,
+        'target' => l.popGoalTarget,
+        'free' => l.popGoalFree,
+        _ => choice,
+      };
+
+  @override
+  String? choiceDescription(AppLocalizations l, String option, String choice) => switch (choice) {
+        'std' => l.popModeStandardHint,
+        'shift' => l.popModeShifterHint,
+        'cont' => l.popModeContinuousHint,
+        'mega' => l.popModeMegaHint,
+        'clear' => l.popGoalClearHint,
+        'target' => l.popGoalTargetHint,
+        'free' => l.popGoalFreeHint,
+        _ => null,
+      };
 
   /// Bump when [generate] changes what a seed produces.
   @override
@@ -116,10 +120,10 @@ The game ends when no group of 2 is left.''';
   int? score(PopPuzzle puzzle, PopState state) => state.score;
 
   @override
-  String finishTitle(PopPuzzle puzzle, PopState state) => switch (puzzle.goal) {
-        PopGoal.clear => 'Cleared!',
-        PopGoal.target => 'Target reached!',
-        PopGoal.free => 'Game over',
+  String finishTitle(AppLocalizations l, PopPuzzle puzzle, PopState state) => switch (puzzle.goal) {
+        PopGoal.clear => l.popCleared,
+        PopGoal.target => l.popTargetReached,
+        PopGoal.free => l.popGameOver,
       };
 
   void _tap(GameController ctrl, Pos pos) {
@@ -140,10 +144,10 @@ The game ends when no group of 2 is left.''';
     ctrl.apply(popAt(p, s, i)!);
     final after = ctrl.state as PopState;
     if (!ctrl.solved && isComplete(p, after)) {
-      ctrl.showToast(switch (p.goal) {
-        PopGoal.clear => 'No moves left with ${after.left} bubble${after.left == 1 ? '' : 's'} on the board: undo or restart',
-        _ => 'No moves left, ${p.target - after.score} points short: undo or restart',
-      });
+      ctrl.showToast((l) => switch (p.goal) {
+            PopGoal.clear => l.popStuckBubbles(after.left),
+            _ => l.popStuckPoints(p.target - after.score),
+          });
     }
   }
 
@@ -171,6 +175,7 @@ The game ends when no group of 2 is left.''';
     final p = ctrl.puzzle as PopPuzzle;
     final s = ctrl.state as PopState;
     final theme = Theme.of(context);
+    final l = context.l10n;
     final sel = ctrl.selectedCell;
     final group = sel == null ? 0 : popGroup(s.cells, p.rows, p.cols, p.size.index(sel)).length;
     final numbers = theme.textTheme.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()]);
@@ -183,9 +188,9 @@ The game ends when no group of 2 is left.''';
           child: Text(text, style: numbers),
         );
     return Wrap(spacing: 10, runSpacing: 8, alignment: WrapAlignment.center, children: [
-      pill(p.goal == PopGoal.target ? '${s.score} / ${p.target}' : '${s.score} pts', strong: p.goal == PopGoal.target && s.score >= p.target),
-      if (p.goal == PopGoal.clear) pill('${s.left} left'),
-      if (p.mode.refills) pill('+${p.reserve.length - s.used} cols'),
+      pill(p.goal == PopGoal.target ? '${s.score} / ${p.target}' : l.popPoints(s.score), strong: p.goal == PopGoal.target && s.score >= p.target),
+      if (p.goal == PopGoal.clear) pill(l.popLeft(s.left)),
+      if (p.mode.refills) pill(l.popColumns(p.reserve.length - s.used)),
       if (group > 1) pill('+${popPoints(group)}', strong: true),
     ]);
   }

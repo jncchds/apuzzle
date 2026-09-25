@@ -7,6 +7,7 @@ class Settings extends ChangeNotifier {
     _haptics = _prefs.getBool('set.haptics') ?? true;
     _autoClearMarks = _prefs.getBool('set.autoClearMarks') ?? false;
     _themeMode = ThemeMode.values.asNameMap()[_prefs.getString('set.theme')] ?? ThemeMode.system;
+    _language = _prefs.getString('set.language');
   }
 
   final SharedPreferences _prefs;
@@ -15,6 +16,7 @@ class Settings extends ChangeNotifier {
   late bool _haptics;
   late bool _autoClearMarks;
   late ThemeMode _themeMode;
+  String? _language;
 
   /// Show rule conflicts while playing (off by default: validation on submit).
   bool get highlightErrors => _highlightErrors;
@@ -36,6 +38,14 @@ class Settings extends ChangeNotifier {
   set haptics(bool v) {
     _haptics = v;
     _prefs.setBool('set.haptics', v);
+    notifyListeners();
+  }
+
+  /// App language code (see [appLanguages]), or null to follow the system.
+  String? get language => _language;
+  set language(String? v) {
+    _language = v;
+    v == null ? _prefs.remove('set.language') : _prefs.setString('set.language', v);
     notifyListeners();
   }
 

@@ -4,6 +4,7 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import 'atoms_generator.dart';
 import 'atoms_model.dart';
@@ -17,23 +18,16 @@ class AtomsType extends PuzzleType<AtomsPuzzle, AtomsState> {
   @override
   String get id => 'atoms';
   @override
-  String get name => 'Atoms';
+  String name(AppLocalizations l) => l.atomsName;
   @override
-  String get tagline => 'Bond every atom to match its number';
+  String tagline(AppLocalizations l) => l.atomsTagline;
   @override
   IconData get icon => Icons.hub_outlined;
   @override
   Color get accent => const Color(0xFF7FB8A4);
 
   @override
-  String get rulesText => '''
-• Connect the atoms with horizontal or vertical bonds.
-• Each atom needs exactly as many bonds as its number.
-• Two atoms can share one or two bonds.
-• Bonds can't cross each other or pass through atoms.
-• All atoms must end up connected into one molecule.
-
-Drag from an atom towards a neighbour to add a bond (1 → 2 → none). You can also tap the space between two atoms.''';
+  String rulesText(AppLocalizations l) => l.atomsRules;
 
   @override
   List<GridSize> get sizes => [for (final n in [5, 6, 7, 8, 9, 10]) GridSize.square(n)];
@@ -96,7 +90,7 @@ Drag from an atom towards a neighbour to add a bond (1 → 2 → none). You can 
     if (s.bonds[e] == 0) {
       final crossing = atomCrossings(p.cols, p.islands, p.edges)[e].any((f) => s.bonds[f] > 0);
       if (crossing) {
-        ctrl.showToast("Bonds can't cross");
+        ctrl.showToast((l) => l.bondsCantCross);
         return;
       }
     }

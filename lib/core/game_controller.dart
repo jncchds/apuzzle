@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import '../l10n/l10n.dart';
 import 'difficulty.dart';
 import 'grid.dart';
 import 'persistence.dart';
@@ -61,7 +62,7 @@ class GameController extends ChangeNotifier {
   int shakeTick = 0;
 
   /// Short message for the game screen to show (e.g. "Out of moves").
-  String? toast;
+  Tr? toast;
   int toastTick = 0;
 
   /// Set by the game screen; drives the win ripple on the board.
@@ -156,7 +157,7 @@ class GameController extends ChangeNotifier {
     return complete ? SubmitOutcome.wrong : SubmitOutcome.incomplete;
   }
 
-  void showToast(String message) {
+  void showToast(Tr message) {
     toast = message;
     toastTick++;
     notifyListeners();

@@ -6,6 +6,7 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/board/region_borders.dart';
 import '../mosaic/mosaic_type.dart';
@@ -20,21 +21,16 @@ class BlendType extends PuzzleType<BlendPuzzle, BlendState> {
   @override
   String get id => 'blend';
   @override
-  String get name => 'Blend';
+  String name(AppLocalizations l) => l.blendName;
   @override
-  String get tagline => 'Repaint any patch until one color remains';
+  String tagline(AppLocalizations l) => l.blendTagline;
   @override
   IconData get icon => Icons.format_paint_rounded;
   @override
   Color get accent => const Color(0xFFB57EDC);
 
   @override
-  String get rulesText => '''
-• The board is made of colored patches (touching cells of the same color).
-• Pick a color, then tap any patch to repaint it. It merges with every touching patch of that color.
-• Make the whole board one color within the move limit.
-
-The palette color stays selected, so you can paint several patches in a row.''';
+  String rulesText(AppLocalizations l) => l.blendRules;
 
   @override
   List<GridSize> get sizes => [for (final n in [5, 6, 8, 10, 12, 14]) GridSize.square(n)];
@@ -100,12 +96,12 @@ The palette color stays selected, so you can paint several patches in a row.''';
     final color = _color(ctrl);
     if (s.cells[i] == color || blendDone(s.cells)) return;
     if (s.moves >= p.limit) {
-      ctrl.showToast('Out of moves: undo or restart');
+      ctrl.showToast((l) => l.outOfMoves);
       return;
     }
     ctrl.apply(BlendState(blendApply(s.cells, p.rows, p.cols, i, color), s.moves + 1));
     final after = ctrl.state as BlendState;
-    if (!blendDone(after.cells) && after.moves >= p.limit) ctrl.showToast('Out of moves: undo or restart');
+    if (!blendDone(after.cells) && after.moves >= p.limit) ctrl.showToast((l) => l.outOfMoves);
   }
 
   @override
@@ -152,7 +148,7 @@ The palette color stays selected, so you can paint several patches in a row.''';
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: s.moves >= p.limit ? theme.colorScheme.error : theme.colorScheme.outline, width: 2),
         ),
-        child: Text('${s.moves} / ${p.limit} moves',
+        child: Text(context.l10n.movesOfLimit(s.moves, p.limit),
             style: theme.textTheme.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()])),
       ),
       const SizedBox(height: 10),

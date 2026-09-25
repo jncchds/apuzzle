@@ -4,6 +4,7 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import 'trail_generator.dart';
 import 'trail_model.dart';
@@ -17,21 +18,16 @@ class TrailType extends PuzzleType<TrailPuzzle, TrailState> {
   @override
   String get id => 'trail';
   @override
-  String get name => 'Trail';
+  String name(AppLocalizations l) => l.trailName;
   @override
-  String get tagline => 'One path through every cell, numbers in order';
+  String tagline(AppLocalizations l) => l.trailTagline;
   @override
   IconData get icon => Icons.route_rounded;
   @override
   Color get accent => trailColor;
 
   @override
-  String get rulesText => '''
-• Draw a single path that starts at 1 and visits every cell exactly once.
-• The path moves up, down, left or right (no diagonals).
-• It must pass the numbers in order (1 → 2 → 3 → …) and finish on the last number.
-
-Drag to draw. Drag back over the path to undo steps, or tap a cell of the path to cut it there.''';
+  String rulesText(AppLocalizations l) => l.trailRules;
 
   @override
   List<GridSize> get sizes => [for (var n = 4; n <= 10; n++) GridSize.square(n)];

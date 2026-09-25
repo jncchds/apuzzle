@@ -4,6 +4,7 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/symbols.dart';
 import 'shikaku_generator.dart';
@@ -16,21 +17,16 @@ class ShikakuType extends PuzzleType<ShikakuPuzzle, ShikakuState> {
   @override
   String get id => 'shikaku';
   @override
-  String get name => 'Shikaku';
+  String name(AppLocalizations l) => l.shikakuName;
   @override
-  String get tagline => 'Split the grid into numbered rectangles';
+  String tagline(AppLocalizations l) => l.shikakuTagline;
   @override
   IconData get icon => Icons.crop_square_rounded;
   @override
   Color get accent => const Color(0xFFD4C97E);
 
   @override
-  String get rulesText => '''
-• Divide the whole grid into rectangles (squares count too).
-• Every rectangle contains exactly one number.
-• That number equals the rectangle's area in cells.
-
-Drag from one corner to the opposite corner to draw a rectangle. Tap a rectangle to remove it.''';
+  String rulesText(AppLocalizations l) => l.shikakuRules;
 
   @override
   List<GridSize> get sizes => [for (final n in [5, 6, 7, 8, 9, 10, 12]) GridSize.square(n)];

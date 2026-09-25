@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'core/settings.dart';
+import 'l10n/l10n.dart';
 import 'ui/home_screen.dart';
 
 class APuzzleApp extends StatelessWidget {
@@ -19,6 +20,10 @@ class APuzzleApp extends StatelessWidget {
       scaffoldMessengerKey: messengerKey,
       debugShowCheckedModeBanner: false,
       themeMode: settings.themeMode,
+      locale: settings.language == null ? null : Locale(settings.language!),
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localeListResolutionCallback: (locales, _) => resolveAppLocale(locales),
       theme: _theme(Brightness.light),
       darkTheme: _theme(Brightness.dark),
       routes: {'/': (_) => const HomeScreen()},

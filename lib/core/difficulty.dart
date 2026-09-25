@@ -1,13 +1,18 @@
+import '../l10n/l10n.dart';
 import 'grid.dart';
 
 enum Difficulty {
-  easy('Easy'),
-  medium('Medium'),
-  hard('Hard'),
-  expert('Expert');
+  easy,
+  medium,
+  hard,
+  expert;
 
-  const Difficulty(this.label);
-  final String label;
+  String label(AppLocalizations l) => switch (this) {
+        easy => l.difficultyEasy,
+        medium => l.difficultyMedium,
+        hard => l.difficultyHard,
+        expert => l.difficultyExpert,
+      };
 }
 
 /// Everything needed to (re)generate a puzzle deterministically.

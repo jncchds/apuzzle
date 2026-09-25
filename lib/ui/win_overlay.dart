@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../core/game_controller.dart';
+import '../l10n/l10n.dart';
 import 'new_game_sheet.dart' show formatDuration;
 import 'puzzle_code_ui.dart';
 
@@ -18,6 +19,7 @@ class WinOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l = context.l10n;
     final card = CurvedAnimation(parent: animation, curve: const Interval(0.45, 1, curve: Curves.easeOutBack));
     final stats = controller.winStats;
     final time = controller.elapsed;
@@ -25,10 +27,12 @@ class WinOverlay extends StatelessWidget {
     final hints = controller.hintsUsed;
     final type = controller.type;
     final score = type.score(controller.puzzle, controller.state);
-    final title = type.finishTitle(controller.puzzle, controller.state);
-    final shareText = '${score == null ? 'I solved this ${type.name}' : 'I scored $score in this ${type.name}'}'
-        ' in ${formatDuration(time)}'
-        '${hints > 0 ? ' with $hints hint${hints == 1 ? '' : 's'}' : ''}. Can you beat it? ${controller.link}';
+    final title = type.finishTitle(l, controller.puzzle, controller.state);
+    final name = type.name(l);
+    final result = score == null
+        ? l.shareSolved(hints, name, formatDuration(time))
+        : l.shareScored(hints, score, name, formatDuration(time));
+    final shareText = '$result ${l.shareChallenge} ${controller.link}';
 
     return Stack(children: [
       Positioned.fill(
@@ -57,14 +61,20 @@ class WinOverlay extends StatelessWidget {
                       const SizedBox(height: 8),
                       if (score != null) ...[
                         Text(
-                          'Score $score${stats?.bestScore == score ? ' · new best!' : stats?.bestScore != null ? ' · best ${stats!.bestScore}' : ''}',
+                          [
+                            l.scoreValue(score),
+                            if (stats?.bestScore == score) l.newBest else if (stats?.bestScore != null) l.bestValue(stats!.bestScore!),
+                          ].join(' · '),
                           style: theme.textTheme.titleMedium,
                         ),
                         const SizedBox(height: 4),
                       ],
                       Text(
-                        '${formatDuration(time)}${isBest ? ' · new best!' : stats?.best != null ? ' · best ${formatDuration(stats!.best!)}' : ''}'
-                        '${controller.hintsUsed > 0 ? ' · ${controller.hintsUsed} hint${controller.hintsUsed == 1 ? '' : 's'}' : ''}',
+                        [
+                          formatDuration(time),
+                          if (isBest) l.newBest else if (stats?.best != null) l.bestValue(formatDuration(stats!.best!)),
+                          if (hints > 0) l.hintsUsed(hints),
+                        ].join(' · '),
                         style: theme.textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 4),
@@ -73,16 +83,16 @@ class WinOverlay extends StatelessWidget {
                       Row(mainAxisSize: MainAxisSize.min, children: [
                         IconButton(
                           icon: const Icon(Icons.share_rounded),
-                          tooltip: 'Copy result to share',
-                          onPressed: () => copyWithToast(context, shareText, 'Result copied, paste it to a friend'),
+                          tooltip: l.copyResult,
+                          onPressed: () => copyWithToast(context, shareText, l.resultCopied),
                         ),
                         const SizedBox(width: 4),
-                        OutlinedButton(onPressed: onHome, child: const Text('Home')),
+                        OutlinedButton(onPressed: onHome, child: Text(l.home)),
                         const SizedBox(width: 12),
                         FilledButton.icon(
                           onPressed: onNew,
                           icon: const Icon(Icons.auto_awesome_rounded),
-                          label: const Text('New puzzle'),
+                          label: Text(l.newPuzzle),
                         ),
                       ]),
                     ],

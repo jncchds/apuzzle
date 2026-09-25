@@ -4,6 +4,7 @@ import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/value_grid.dart';
+import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/board/region_borders.dart';
 import '../../ui/symbols.dart';
@@ -17,20 +18,16 @@ class KingsType extends ValueGridType<KingsPuzzle> {
   @override
   String get id => 'kings';
   @override
-  String get name => 'Crowns';
+  String name(AppLocalizations l) => l.kingsName;
   @override
-  String get tagline => 'One crown per row, column and region';
+  String tagline(AppLocalizations l) => l.kingsTagline;
   @override
   IconData get icon => Icons.workspace_premium_outlined;
   @override
   Color get accent => const Color(0xFFB39DDB);
 
   @override
-  String get rulesText => '''
-• Place exactly one crown in every row, every column and every colored region.
-• Crowns may not touch each other, not even diagonally.
-
-Tap a cell to cycle empty → dot (your "no crown here" note) → crown. Long-press / right-click cycles back.''';
+  String rulesText(AppLocalizations l) => l.kingsRules;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];
@@ -39,8 +36,8 @@ Tap a cell to cycle empty → dot (your "no crown here" note) → crown. Long-pr
 
   @override
   List<ValueSpec> get values => [
-        ValueSpec.custom((context, size) => DotSymbol(size: size, color: Colors.black54), label: 'Dot'),
-        ValueSpec.custom((context, size) => CrownSymbol(size: size * 0.9, color: Colors.black87), label: 'Crown'),
+        ValueSpec.custom((context, size) => DotSymbol(size: size, color: Colors.black54), label: 'dot'),
+        ValueSpec.custom((context, size) => CrownSymbol(size: size * 0.9, color: Colors.black87), label: 'crown'),
       ];
 
   @override

@@ -4,6 +4,7 @@ import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/value_grid.dart';
+import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/board/region_borders.dart';
 import '../../ui/symbols.dart';
@@ -24,22 +25,16 @@ class LitsType extends ValueGridType<LitsPuzzle> {
   @override
   String get id => 'lits';
   @override
-  String get name => 'LITS';
+  String name(AppLocalizations l) => l.litsName;
   @override
-  String get tagline => 'One tetromino in every region';
+  String tagline(AppLocalizations l) => l.litsTagline;
   @override
   IconData get icon => Icons.extension_outlined;
   @override
   Color get accent => const Color(0xFF9CC79A);
 
   @override
-  String get rulesText => '''
-• Shade exactly 4 connected cells in every outlined region, forming an L, I, T or S shape (rotations and mirror images allowed).
-• All shaded cells together form one connected area.
-• No 2×2 block may be fully shaded.
-• Two identical shapes may not touch each other across a region border.
-
-Tap a cell to cycle empty → shaded → dot (your "not shaded" note).''';
+  String rulesText(AppLocalizations l) => l.litsRules;
 
   @override
   // Larger boards take too long to generate on-device for now (see CLAUDE.md).
@@ -51,8 +46,8 @@ Tap a cell to cycle empty → shaded → dot (your "not shaded" note).''';
 
   @override
   List<ValueSpec> get values => [
-        ValueSpec.custom((context, size) => const SizedBox.shrink(), label: 'Shade'),
-        ValueSpec.custom((context, size) => DotSymbol(size: size), label: 'Dot'),
+        ValueSpec.custom((context, size) => const SizedBox.shrink(), label: 'shade'),
+        ValueSpec.custom((context, size) => DotSymbol(size: size), label: 'dot'),
       ];
 
   @override

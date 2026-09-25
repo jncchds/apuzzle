@@ -4,6 +4,7 @@ import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/value_grid.dart';
+import '../../l10n/l10n.dart';
 import 'sudoku_generator.dart';
 import 'sudoku_model.dart';
 
@@ -13,21 +14,16 @@ class SudokuType extends ValueGridType<SudokuPuzzle> {
   @override
   String get id => 'sudoku';
   @override
-  String get name => 'Sudoku';
+  String name(AppLocalizations l) => l.sudokuName;
   @override
-  String get tagline => 'Every number once per row, column and box';
+  String tagline(AppLocalizations l) => l.sudokuTagline;
   @override
   IconData get icon => Icons.grid_3x3_rounded;
   @override
   Color get accent => const Color(0xFF5B8DEF);
 
   @override
-  String get rulesText => '''
-• Fill every cell with a number from 1 to N (N = grid size).
-• Each number appears exactly once in every row, every column and every box.
-• Given numbers are fixed.
-
-Pick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.''';
+  String rulesText(AppLocalizations l) => l.sudokuRules;
 
   @override
   List<GridSize> get sizes => const [GridSize.square(4), GridSize.square(6), GridSize.square(9)];

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/value_grid.dart';
+import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import 'mambo_generator.dart';
 import 'mambo_model.dart';
@@ -14,24 +15,16 @@ class MamboType extends ValueGridType<MamboPuzzle> {
   @override
   String get id => 'mambo';
   @override
-  String get name => 'Sun & Moon';
+  String name(AppLocalizations l) => l.mamboName;
   @override
-  String get tagline => 'Balance suns and moons';
+  String tagline(AppLocalizations l) => l.mamboTagline;
   @override
   IconData get icon => Icons.wb_twilight_rounded;
   @override
   Color get accent => const Color(0xFFF5A524);
 
   @override
-  String get rulesText => '''
-• Fill every cell with a sun or a moon.
-• No more than 2 identical symbols next to each other in a row or column.
-• Each row and column has the same number of suns and moons.
-• "=" between two cells: they hold the same symbol.
-• "×" between two cells: they hold different symbols.
-• Locked cells are given.
-
-Tap a cell to cycle empty → sun → moon. Long-press / right-click cycles back.''';
+  String rulesText(AppLocalizations l) => l.mamboRules;
 
   @override
   List<GridSize> get sizes => const [GridSize.square(4), GridSize.square(6), GridSize.square(8), GridSize.square(10)];
@@ -40,8 +33,8 @@ Tap a cell to cycle empty → sun → moon. Long-press / right-click cycles back
 
   @override
   List<ValueSpec> get values => const [
-        ValueSpec.icon(Icons.wb_sunny_rounded, color: Color(0xFFF5A524), label: 'Sun'),
-        ValueSpec.icon(Icons.dark_mode_rounded, color: Color(0xFF4F6BFF), label: 'Moon'),
+        ValueSpec.icon(Icons.wb_sunny_rounded, color: Color(0xFFF5A524), label: 'sun'),
+        ValueSpec.icon(Icons.dark_mode_rounded, color: Color(0xFF4F6BFF), label: 'moon'),
       ];
 
   @override

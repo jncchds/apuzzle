@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/game_controller.dart';
 import '../core/value_grid.dart';
+import '../l10n/l10n.dart';
 
 /// Bottom palette: one button per value, eraser and (optional) pencil toggle.
 class InputPalette extends StatelessWidget {
@@ -21,6 +22,7 @@ class InputPalette extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l = context.l10n;
     final n = values.length + 1 + (supportsPencil ? 1 : 0);
     return LayoutBuilder(builder: (context, cons) {
       final size = ((cons.maxWidth - 8 * (n - 1)) / n).clamp(36.0, 60.0);
@@ -58,20 +60,20 @@ class InputPalette extends StatelessWidget {
               child: values[i].build(context, size * 0.8),
               active: controller.tool == i,
               onTap: () => onTool(i),
-              tooltip: values[i].label,
+              tooltip: valueName(l, values[i].label),
             ),
           button(
             child: Icon(Icons.backspace_outlined, size: size * 0.45),
             active: controller.tool == GameController.eraser,
             onTap: () => onTool(GameController.eraser),
-            tooltip: 'Erase',
+            tooltip: l.erase,
           ),
           if (supportsPencil)
             button(
               child: Icon(Icons.edit_outlined, size: size * 0.45),
               active: controller.pencil,
               onTap: controller.togglePencil,
-              tooltip: 'Pencil marks',
+              tooltip: l.pencilMarks,
             ),
         ],
       );

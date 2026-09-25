@@ -4,6 +4,7 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import 'pipes_generator.dart';
 import 'pipes_model.dart';
@@ -17,22 +18,16 @@ class PipesType extends PuzzleType<PipesPuzzle, PipesState> {
   @override
   String get id => 'pipes';
   @override
-  String get name => 'Pipes';
+  String name(AppLocalizations l) => l.pipesName;
   @override
-  String get tagline => 'Connect every pipe to the source';
+  String tagline(AppLocalizations l) => l.pipesTagline;
   @override
   IconData get icon => Icons.plumbing_rounded;
   @override
   Color get accent => water;
 
   @override
-  String get rulesText => '''
-• Rotate the tiles so that every pipe connects back to the source (the ringed tile).
-• No pipe end may be left open, and the network may not contain loops.
-• Water flows through everything already connected to the source.
-• Tiles with a lock are already in place.
-
-Tap a tile to rotate it clockwise; long-press / right-click rotates it back.''';
+  String rulesText(AppLocalizations l) => l.pipesRules;
 
   @override
   List<GridSize> get sizes => [for (var n = 4; n <= 11; n++) GridSize.square(n)];

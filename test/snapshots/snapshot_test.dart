@@ -2,6 +2,8 @@
 // (real fonts), for visual review without a device.
 //
 //   flutter test test/snapshots --run-skipped --tags snapshot
+//
+// SNAPSHOT_LANG=uk (or pl, de) renders that language, with the code in the file names.
 @Tags(['snapshot'])
 library;
 
@@ -14,6 +16,7 @@ import 'package:apuzzle/core/persistence.dart';
 import 'package:apuzzle/core/puzzle_type.dart';
 import 'package:apuzzle/core/registry.dart';
 import 'package:apuzzle/core/settings.dart';
+import 'package:apuzzle/l10n/l10n.dart';
 import 'package:apuzzle/puzzles/pop/pop_model.dart';
 import 'package:apuzzle/ui/game_screen.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +46,10 @@ int _progressSteps(PuzzleType t) => switch (t.id) {
       _ => 6,
     };
 
+/// Language to render (SNAPSHOT_LANG), or null for English.
+final _lang = Platform.environment['SNAPSHOT_LANG'];
+final _suffix = _lang == null ? '' : '_$_lang';
+
 void main() {
   setUpAll(() async {
     await _loadFont('Roboto', ['roboto-regular.ttf', 'roboto-medium.ttf', 'roboto-bold.ttf']);
@@ -58,7 +65,10 @@ void main() {
         tester.view.devicePixelRatio = 3;
         addTearDown(tester.view.reset);
 
-        SharedPreferences.setMockInitialValues({'set.theme': brightness == Brightness.dark ? 'dark' : 'light'});
+        SharedPreferences.setMockInitialValues({
+          'set.theme': brightness == Brightness.dark ? 'dark' : 'light',
+          'set.language': ?_lang,
+        });
         final store = await GameStore.open();
         final settings = Settings(store.prefs);
         final params = GenParams(size: type.defaultSize, difficulty: Difficulty.medium, seed: 7);
@@ -80,6 +90,9 @@ void main() {
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               themeMode: settings.themeMode,
+              locale: Locale(_lang ?? 'en'),
+              supportedLocales: AppLocalizations.supportedLocales,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
               theme: ThemeData(
                 useMaterial3: true,
                 fontFamily: 'Roboto',
@@ -101,7 +114,7 @@ void main() {
           final boundary = key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
           final image = await boundary.toImage(pixelRatio: 1);
           final png = await image.toByteData(format: ui.ImageByteFormat.png);
-          File('${outDir.path}/${type.id}_${brightness.name}.png').writeAsBytesSync(png!.buffer.asUint8List());
+          File('${outDir.path}/${type.id}_${brightness.name}$_suffix.png').writeAsBytesSync(png!.buffer.asUint8List());
         });
         // Leave the screen so its timers are cancelled.
         await tester.pumpWidget(const SizedBox());
@@ -115,7 +128,7 @@ void main() {
     tester.view.physicalSize = const Size(1080, 2280);
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
-    SharedPreferences.setMockInitialValues({'set.theme': 'dark'});
+    SharedPreferences.setMockInitialValues({'set.theme': 'dark', 'set.language': ?_lang});
     final store = await GameStore.open();
     final key = GlobalKey();
     await tester.pumpWidget(MultiProvider(
@@ -127,7 +140,7 @@ void main() {
       final boundary = key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
       final image = await boundary.toImage(pixelRatio: 1);
       final png = await image.toByteData(format: ui.ImageByteFormat.png);
-      File('${outDir.path}/home.png').writeAsBytesSync(png!.buffer.asUint8List());
+      File('${outDir.path}/home$_suffix.png').writeAsBytesSync(png!.buffer.asUint8List());
     });
   });
 }

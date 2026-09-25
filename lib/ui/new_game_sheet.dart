@@ -7,6 +7,7 @@ import '../core/difficulty.dart';
 import '../core/grid.dart';
 import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
+import '../l10n/l10n.dart';
 import 'game_screen.dart';
 
 /// Sizes of [type] whose board fits [screen] without zoom.
@@ -68,11 +69,13 @@ class _NewGameSheetState extends State<_NewGameSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l = context.l10n;
+    final type = widget.type;
     final store = context.read<GameStore>();
-    final sizes = fittingSizes(widget.type, MediaQuery.sizeOf(context));
-    if (!sizes.contains(_size)) _size = sizes.contains(widget.type.defaultSize) ? widget.type.defaultSize : sizes.last;
-    final hasSave = store.hasSave(widget.type.id);
-    final stats = store.stats(widget.type.id, _params(0).variant);
+    final sizes = fittingSizes(type, MediaQuery.sizeOf(context));
+    if (!sizes.contains(_size)) _size = sizes.contains(type.defaultSize) ? type.defaultSize : sizes.last;
+    final hasSave = store.hasSave(type.id);
+    final stats = store.stats(type.id, _params(0).variant);
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -82,41 +85,41 @@ class _NewGameSheetState extends State<_NewGameSheet> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(children: [
-              Icon(widget.type.icon, color: widget.type.accent),
+              Icon(type.icon, color: type.accent),
               const SizedBox(width: 10),
-              Text(widget.type.name, style: theme.textTheme.titleLarge),
+              Text(type.name(l), style: theme.textTheme.titleLarge),
             ]),
             const SizedBox(height: 16),
-            Text('Size', style: theme.textTheme.labelLarge),
+            Text(l.size, style: theme.textTheme.labelLarge),
             const SizedBox(height: 8),
             Wrap(spacing: 8, runSpacing: 8, children: [
               for (final s in sizes)
                 ChoiceChip(label: Text(s.label), selected: s == _size, onSelected: (_) => setState(() => _size = s)),
             ]),
             const SizedBox(height: 16),
-            Text('Difficulty', style: theme.textTheme.labelLarge),
+            Text(l.difficulty, style: theme.textTheme.labelLarge),
             const SizedBox(height: 8),
             SegmentedButton<Difficulty>(
               segments: [
-                for (final d in widget.type.difficulties) ButtonSegment(value: d, label: Text(d.label)),
+                for (final d in type.difficulties) ButtonSegment(value: d, label: Text(d.label(l))),
               ],
               selected: {_difficulty},
               showSelectedIcon: false,
               onSelectionChanged: (s) => setState(() => _difficulty = s.first),
             ),
-            for (final o in widget.type.optionsFor(_options)) ...[
+            for (final o in type.optionsFor(_options)) ...[
               const SizedBox(height: 16),
-              Text(o.label, style: theme.textTheme.labelLarge),
+              Text(type.optionLabel(l, o.id), style: theme.textTheme.labelLarge),
               const SizedBox(height: 8),
               Wrap(spacing: 8, runSpacing: 8, children: [
                 for (final c in o.choices)
                   ChoiceChip(
-                    label: Text(c.label),
-                    selected: _options[o.id] == c.id,
-                    onSelected: (_) => setState(() => _options = widget.type.resolveOptions({..._options, o.id: c.id})),
+                    label: Text(type.choiceLabel(l, o.id, c)),
+                    selected: _options[o.id] == c,
+                    onSelected: (_) => setState(() => _options = type.resolveOptions({..._options, o.id: c})),
                   ),
               ]),
-              if (o.choices.where((c) => c.id == _options[o.id]).firstOrNull?.description case final d?) ...[
+              if (type.choiceDescription(l, o.id, _options[o.id]!) case final d?) ...[
                 const SizedBox(height: 6),
                 Text(d, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
               ],
@@ -124,10 +127,10 @@ class _NewGameSheetState extends State<_NewGameSheet> {
             const SizedBox(height: 12),
             Text(
               stats.solved == 0
-                  ? 'Not solved yet on ${_difficulty.label}'
+                  ? l.notSolvedYet(_difficulty.label(l))
                   : stats.bestScore != null
-                      ? 'Finished ${stats.solved}× · best score ${stats.bestScore} · best time ${formatDuration(stats.best!)}'
-                      : 'Solved ${stats.solved}× · best ${formatDuration(stats.best!)} · avg ${formatDuration(stats.average!)}',
+                      ? l.statsScore(stats.solved, stats.bestScore!, formatDuration(stats.best!))
+                      : l.statsTime(stats.solved, formatDuration(stats.best!), formatDuration(stats.average!)),
               style: theme.textTheme.bodySmall,
             ),
             const SizedBox(height: 20),
@@ -135,14 +138,14 @@ class _NewGameSheetState extends State<_NewGameSheet> {
               OutlinedButton.icon(
                 onPressed: () => _go(resume: true),
                 icon: const Icon(Icons.play_arrow_rounded),
-                label: const Text('Continue'),
+                label: Text(l.continueGame),
               ),
               const SizedBox(height: 8),
             ],
             FilledButton.icon(
               onPressed: () => _go(resume: false),
               icon: const Icon(Icons.auto_awesome_rounded),
-              label: const Text('New puzzle'),
+              label: Text(l.newPuzzle),
             ),
           ],
         ),

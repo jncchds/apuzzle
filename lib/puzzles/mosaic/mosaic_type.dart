@@ -6,6 +6,7 @@ import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
+import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/board/region_borders.dart';
 import 'mosaic_model.dart';
@@ -21,21 +22,16 @@ class MosaicType extends PuzzleType<MosaicPuzzle, MosaicState> {
   @override
   String get id => 'mosaic';
   @override
-  String get name => 'Mosaic';
+  String name(AppLocalizations l) => l.mosaicName;
   @override
-  String get tagline => 'Flood the board with one color';
+  String tagline(AppLocalizations l) => l.mosaicTagline;
   @override
   IconData get icon => Icons.format_color_fill_rounded;
   @override
   Color get accent => const Color(0xFF6FE8C4);
 
   @override
-  String get rulesText => '''
-• The colored area in the top-left corner is yours.
-• Pick a color: your area takes that color and absorbs every touching cell of the same color.
-• Paint the whole board in one color within the move limit.
-
-Tap a palette color, or tap any cell to use its color.''';
+  String rulesText(AppLocalizations l) => l.mosaicRules;
 
   @override
   List<GridSize> get sizes => [for (final n in [6, 8, 10, 12, 14, 16, 18]) GridSize.square(n)];
@@ -91,12 +87,12 @@ Tap a palette color, or tap any cell to use its color.''';
     final s = ctrl.state as MosaicState;
     if (s.cells[0] == color || floodDone(s.cells)) return;
     if (s.moves >= p.limit) {
-      ctrl.showToast('Out of moves: undo or restart');
+      ctrl.showToast((l) => l.outOfMoves);
       return;
     }
     ctrl.apply(MosaicState(floodApply(s.cells, p.rows, p.cols, color), s.moves + 1));
     final after = ctrl.state as MosaicState;
-    if (!floodDone(after.cells) && after.moves >= p.limit) ctrl.showToast('Out of moves: undo or restart');
+    if (!floodDone(after.cells) && after.moves >= p.limit) ctrl.showToast((l) => l.outOfMoves);
   }
 
   @override
@@ -146,7 +142,7 @@ Tap a palette color, or tap any cell to use its color.''';
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: left <= 0 ? theme.colorScheme.error : theme.colorScheme.outline, width: 2),
         ),
-        child: Text('${s.moves} / ${p.limit} moves',
+        child: Text(context.l10n.movesOfLimit(s.moves, p.limit),
             style: theme.textTheme.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()])),
       ),
       const SizedBox(height: 10),

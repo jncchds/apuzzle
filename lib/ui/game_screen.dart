@@ -11,6 +11,7 @@ import '../core/generator_runner.dart';
 import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
 import '../core/settings.dart';
+import '../l10n/l10n.dart';
 import 'new_game_sheet.dart' show formatDuration;
 import 'puzzle_code_ui.dart';
 import 'win_overlay.dart';
@@ -152,7 +153,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
       if (msg != null) {
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
-          ..showSnackBar(SnackBar(content: Text(msg), duration: const Duration(seconds: 2)));
+          ..showSnackBar(SnackBar(content: Text(msg(context.l10n)), duration: const Duration(seconds: 2)));
       }
     }
     if (c.flashTick != _seenFlash) {
@@ -194,11 +195,12 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
 
   void _submit() {
     final r = _ctrl!.submit();
+    final l = context.l10n;
     final msg = switch (r) {
       SubmitOutcome.solved => null,
-      SubmitOutcome.conflicts => 'Some cells break the rules',
-      SubmitOutcome.incomplete => 'Not finished yet',
-      SubmitOutcome.wrong => 'Not quite right',
+      SubmitOutcome.conflicts => l.submitConflicts,
+      SubmitOutcome.incomplete => l.submitIncomplete,
+      SubmitOutcome.wrong => l.submitWrong,
     };
     if (msg != null) {
       ScaffoldMessenger.of(context)
@@ -211,11 +213,11 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
     final ok = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Restart puzzle?'),
-        content: const Text('All your entries will be cleared. You can still undo.'),
+        title: Text(context.l10n.restartTitle),
+        content: Text(context.l10n.restartBody),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
-          FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Restart')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(context.l10n.cancel)),
+          FilledButton(onPressed: () => Navigator.pop(context, true), child: Text(context.l10n.restart)),
         ],
       ),
     );
@@ -225,18 +227,19 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   void _showRules() => showDialog<void>(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(type.name),
-          content: SingleChildScrollView(child: Text(type.rulesText)),
-          actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Got it'))],
+          title: Text(type.name(context.l10n)),
+          content: SingleChildScrollView(child: Text(type.rulesText(context.l10n))),
+          actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text(context.l10n.gotIt))],
         ),
       );
 
   @override
   Widget build(BuildContext context) {
     final c = _ctrl;
+    final l = context.l10n;
     return Scaffold(
       appBar: AppBar(
-        title: Text(type.name),
+        title: Text(type.name(l)),
         actions: [
           if (c != null)
             Padding(
@@ -245,49 +248,50 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
                 child: Text(formatDuration(c.elapsed), style: const TextStyle(fontFeatures: [FontFeature.tabularFigures()])),
               ),
             ),
-          IconButton(icon: const Icon(Icons.help_outline), tooltip: 'Rules', onPressed: _showRules),
+          IconButton(icon: const Icon(Icons.help_outline), tooltip: l.rules, onPressed: _showRules),
           PopupMenuButton<String>(
             onSelected: (v) {
               switch (v) {
                 case 'new' when c != null:
                   _newGame(c.params.withSeed(_seed()));
                 case 'copy' when c != null:
-                  copyWithToast(context, c.link, 'Share link copied');
+                  copyWithToast(context, c.link, l.shareLinkCopied);
                 case 'code':
                   showEnterCodeDialog(context, replace: true);
               }
             },
             itemBuilder: (_) => [
-              const PopupMenuItem(value: 'new', child: Text('New puzzle')),
-              if (c != null) const PopupMenuItem(value: 'copy', child: Text('Copy share link')),
-              const PopupMenuItem(value: 'code', child: Text('Play a puzzle code…')),
+              PopupMenuItem(value: 'new', child: Text(l.newPuzzle)),
+              if (c != null) PopupMenuItem(value: 'copy', child: Text(l.copyShareLink)),
+              PopupMenuItem(value: 'code', child: Text(l.playCodeMenu)),
             ],
           ),
         ],
       ),
-      body: c == null ? _loading() : _game(context, c),
+      body: c == null ? _loading(l) : _game(context, c),
     );
   }
 
-  Widget _loading() => Center(
+  Widget _loading(AppLocalizations l) => Center(
         child: _error != null
             ? Column(mainAxisSize: MainAxisSize.min, children: [
-                const Text('Could not generate a puzzle'),
+                Text(l.couldNotGenerate),
                 const SizedBox(height: 12),
                 FilledButton(
                   onPressed: () => _newGame(widget.params ?? GenParams(size: type.defaultSize, difficulty: Difficulty.easy, seed: _seed())),
-                  child: const Text('Try again'),
+                  child: Text(l.tryAgain),
                 ),
               ])
-            : const Column(mainAxisSize: MainAxisSize.min, children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 16),
-                Text('Generating puzzle…'),
+            : Column(mainAxisSize: MainAxisSize.min, children: [
+                const CircularProgressIndicator(),
+                const SizedBox(height: 16),
+                Text(l.generating),
               ]),
       );
 
   Widget _game(BuildContext context, GameController c) {
     final theme = Theme.of(context);
+    final l = context.l10n;
     final controls = type.buildControls(context, c);
     return Stack(children: [
       SafeArea(
@@ -298,7 +302,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
               Flexible(
                 flex: 8,
                 child: Text(
-                  [c.params.size.label, c.params.difficulty.label, if (type.optionsLabel(c.params) case final o when o.isNotEmpty) o]
+                  [c.params.size.label, c.params.difficulty.label(l), if (type.optionsLabel(l, c.params) case final o when o.isNotEmpty) o]
                       .join(' · '),
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.labelLarge,
@@ -307,10 +311,10 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
               const SizedBox(width: 4),
               Flexible(
                 child: Tooltip(
-                  message: 'Copy share link',
+                  message: l.copyShareLink,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(6),
-                    onTap: () => copyWithToast(context, c.link, 'Share link copied'),
+                    onTap: () => copyWithToast(context, c.link, l.shareLinkCopied),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
                       child: Text(
@@ -326,9 +330,9 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
               if (type.supportsModeSwitch && !c.solved)
                 SegmentedButton<InputMode>(
                   style: const ButtonStyle(visualDensity: VisualDensity.compact),
-                  segments: const [
-                    ButtonSegment(value: InputMode.cycle, icon: Icon(Icons.touch_app_outlined), tooltip: 'Tap to cycle'),
-                    ButtonSegment(value: InputMode.palette, icon: Icon(Icons.palette_outlined), tooltip: 'Palette'),
+                  segments: [
+                    ButtonSegment(value: InputMode.cycle, icon: const Icon(Icons.touch_app_outlined), tooltip: l.tapToCycle),
+                    ButtonSegment(value: InputMode.palette, icon: const Icon(Icons.palette_outlined), tooltip: l.palette),
                   ],
                   selected: {c.inputMode},
                   showSelectedIcon: false,
@@ -379,17 +383,18 @@ class _Toolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = controller;
+    final l = context.l10n;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          IconButton(icon: const Icon(Icons.undo_rounded), tooltip: 'Undo', onPressed: c.canUndo ? c.undo : null),
-          IconButton(icon: const Icon(Icons.redo_rounded), tooltip: 'Redo', onPressed: c.canRedo ? c.redo : null),
-          IconButton(icon: const Icon(Icons.restart_alt_rounded), tooltip: 'Restart', onPressed: onRestart),
-          IconButton(icon: const Icon(Icons.lightbulb_outline_rounded), tooltip: 'Hint', onPressed: c.hint),
+          IconButton(icon: const Icon(Icons.undo_rounded), tooltip: l.undo, onPressed: c.canUndo ? c.undo : null),
+          IconButton(icon: const Icon(Icons.redo_rounded), tooltip: l.redo, onPressed: c.canRedo ? c.redo : null),
+          IconButton(icon: const Icon(Icons.restart_alt_rounded), tooltip: l.restart, onPressed: onRestart),
+          IconButton(icon: const Icon(Icons.lightbulb_outline_rounded), tooltip: l.hint, onPressed: c.hint),
           if (onSubmit != null)
-            FilledButton.icon(onPressed: onSubmit, icon: const Icon(Icons.check_rounded), label: const Text('Submit')),
+            FilledButton.icon(onPressed: onSubmit, icon: const Icon(Icons.check_rounded), label: Text(l.submit)),
         ],
       ),
     );

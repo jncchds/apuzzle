@@ -11,6 +11,7 @@ Run them through the output condenser (see the global CLAUDE.md):
 - `flutter run -d windows` (needs VS 2022 with the C++ workload, plus Developer Mode for plugin symlinks)
 - Visual snapshots of every puzzle (phone size, dark and light) go to `build/snapshots/*.png`; view the PNGs afterwards:
   `node ~/.claude/tools/run.mjs flutter test test/snapshots --run-skipped --tags snapshot`
+  Add `SNAPSHOT_LANG=uk` (or pl, de) to render another language (`*_uk.png`).
   (The in-app browser pane crops screenshots on high-DPI displays, so prefer these PNGs for layout checks.)
 - Generator timings (all types, or `BENCH_TYPES=kings,lits`): `flutter test test/bench/generator_bench_test.dart --run-skipped --tags bench -r expanded`
 - Per-type probes (time plus achieved tier/uniqueness): `PROBE=trail PROBE_SIZES=6,8,10 flutter test test/bench/probe_test.dart --run-skipped --tags bench -r expanded`
@@ -28,14 +29,16 @@ Run them through the output condenser (see the global CLAUDE.md):
 - `lib/core/generator_runner.dart`: runs `type.generate(params)` via `compute`, which is an isolate on native platforms.
 - `lib/ui/board/cell_grid_board.dart`: a fit-to-screen grid with no zoom, and the win ripple. `cell_tile.dart` is the standard animated cell.
 - `lib/core/registry.dart`: register new types here.
-- Game options: a type can declare extra new-game choices with `optionsFor(chosen)` (later options may depend on earlier ones). They live in `GenParams.options`, go into share codes after the difficulty (`pop-10x8-hard.std.clear-SEED-v1`), and stats are kept per `GenParams.variant`. Score games override `score()` (best score in stats) and `finishTitle()`.
+- Localization: gen-l10n (`l10n.yaml`), ARB files in `lib/l10n/` (en is the template; uk, pl, de). Generated `app_localizations*.dart` are checked in; run `flutter gen-l10n` after editing ARBs. No user-facing string literals in Dart: use `context.l10n` (`lib/l10n/l10n.dart`). Type texts take an `AppLocalizations` (`name(l)`, `tagline(l)`, `rulesText(l)`, `finishTitle(l, …)`); toasts and puzzle-code errors carry a `Tr` closure resolved by the UI. Language: `Settings.language` (null = system); `resolveAppLocale` maps Russian to Ukrainian and anything unsupported to English.
+- Game options: a type can declare extra new-game choices with `optionsFor(chosen)` (later options may depend on earlier ones). They live in `GenParams.options`, go into share codes after the difficulty (`pop-10x8-hard.std.clear-SEED-v1`), and stats are kept per `GenParams.variant`. Option and choice texts come from `optionLabel`/`choiceLabel`/`choiceDescription`. Score games override `score()` (best score in stats) and `finishTitle()`.
 
 ## Adding a puzzle type
 1. Create `lib/puzzles/<id>/`, containing:
    - `<id>_model.dart`: the puzzle plus a pure rule check;
    - `<id>_solver.dart`: tiered, sound deductions plus `countSolutions(limit: 2)`;
    - `<id>_generator.dart`: random solution → strip clues while still solvable at the difficulty's tier;
-   - `<id>_type.dart`.
+   - `<id>_type.dart`;
+   - `<id>Name`, `<id>Tagline`, `<id>Rules` (and any other texts) in all four ARB files.
 2. Generation must be deterministic for a given `GenParams.seed`, and pure, because it runs in an isolate. Types must be `const`.
 3. Add it to `puzzleTypes` in `registry.dart`.
 4. Add tests in `test/puzzles/<id>/`. Across seeds, sizes and difficulties, check that:

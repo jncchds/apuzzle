@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../core/puzzle_code.dart';
 import '../core/registry.dart';
+import '../l10n/l10n.dart';
 import 'game_screen.dart';
 
 Future<void> copyWithToast(BuildContext context, String text, String message) async {
@@ -54,8 +55,9 @@ class ShareLinkHandler with WidgetsBindingObserver {
       final code = PuzzleCode.parse(link, puzzleTypes);
       nav.popUntil((r) => r.isFirst);
       nav.push(MaterialPageRoute<void>(builder: (_) => GameScreen(type: code.type, params: code.params)));
-    } on FormatException catch (e) {
-      messengerKey.currentState?.showSnackBar(SnackBar(content: Text('Could not open the link: ${e.message}')));
+    } on PuzzleCodeException catch (e) {
+      final l = AppLocalizations.of(nav.context);
+      messengerKey.currentState?.showSnackBar(SnackBar(content: Text(l.couldNotOpenLink(e.describe(l)))));
     }
     return true;
   }
@@ -92,14 +94,14 @@ class _EnterCodeDialogState extends State<_EnterCodeDialog> {
   void _submit() {
     try {
       Navigator.pop(context, PuzzleCode.parse(_text.text, puzzleTypes));
-    } on FormatException catch (e) {
-      setState(() => _error = e.message);
+    } on PuzzleCodeException catch (e) {
+      setState(() => _error = e.describe(context.l10n));
     }
   }
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        title: const Text('Play a puzzle code'),
+        title: Text(context.l10n.playCode),
         content: TextField(
           controller: _text,
           autofocus: true,
@@ -107,15 +109,15 @@ class _EnterCodeDialogState extends State<_EnterCodeDialog> {
           textInputAction: TextInputAction.go,
           onSubmitted: (_) => _submit(),
           decoration: InputDecoration(
-            hintText: 'kings-8x8-hard-4FZ8K1-v1',
+            hintText: PuzzleCode.example,
             errorText: _error,
             errorMaxLines: 3,
-            suffixIcon: IconButton(icon: const Icon(Icons.content_paste_rounded), tooltip: 'Paste', onPressed: _paste),
+            suffixIcon: IconButton(icon: const Icon(Icons.content_paste_rounded), tooltip: context.l10n.paste, onPressed: _paste),
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          FilledButton(onPressed: _submit, child: const Text('Play')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(context.l10n.cancel)),
+          FilledButton(onPressed: _submit, child: Text(context.l10n.play)),
         ],
       );
 }

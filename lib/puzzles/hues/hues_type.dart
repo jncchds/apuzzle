@@ -4,6 +4,7 @@ import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/value_grid.dart';
+import '../../l10n/l10n.dart';
 import 'hues_generator.dart';
 import 'hues_model.dart';
 
@@ -16,22 +17,16 @@ class HuesType extends ValueGridType<HuesPuzzle> {
   @override
   String get id => 'hues';
   @override
-  String get name => 'Hues';
+  String name(AppLocalizations l) => l.huesName;
   @override
-  String get tagline => 'Count the matching colors around each number';
+  String tagline(AppLocalizations l) => l.huesTagline;
   @override
   IconData get icon => Icons.palette_outlined;
   @override
   Color get accent => const Color(0xFFE05A87);
 
   @override
-  String get rulesText => '''
-• Color every blank cell using the palette colors.
-• Each numbered cell shows how many of the blank cells around it (all 8 neighbours, including diagonals) end up in the same color as the numbered cell.
-• The number counts down as you paint matching neighbours, so it shows how many are still missing.
-• Numbered cells themselves never count.
-
-Pick a color in the palette and tap cells to paint them (tap again to clear), or tap a cell to cycle through the colors.''';
+  String rulesText(AppLocalizations l) => l.huesRules;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 9; n++) GridSize.square(n)];
@@ -43,7 +38,7 @@ Pick a color in the palette and tap cells to paint them (tap again to clear), or
 
   @override
   List<ValueSpec> get values => [
-        for (var i = 0; i < huesColorCount; i++) ValueSpec.fill(palette[i], label: ['Blue', 'Pink', 'Yellow', 'Green'][i]),
+        for (var i = 0; i < huesColorCount; i++) ValueSpec.fill(palette[i], label: ['blue', 'pink', 'yellow', 'green'][i]),
       ];
 
   @override
