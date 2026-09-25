@@ -26,7 +26,7 @@
             </intent-filter>
             <!-- Share links (lib/core/puzzle_code.dart). Verification needs
                  https://jncchds.github.io/.well-known/assetlinks.json; until then,
-                 enable "Open supported links" in the app's Android settings. -->
+                 enable "Open supported links" (Settings → Open puzzle links in the app). -->
             <meta-data android:name="flutter_deeplinking_enabled" android:value="true" />
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
