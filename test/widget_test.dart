@@ -16,7 +16,7 @@ void main() {
       ],
       child: const APuzzleApp(),
     ));
-    expect(find.text('APuzzle'), findsOneWidget);
+    expect(find.text('APuzzle by CHDS'), findsOneWidget);
     expect(find.text('Sun & Moon'), findsOneWidget);
   });
 }
