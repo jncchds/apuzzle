@@ -80,6 +80,7 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 | pearls | Pearls (Masyu) | PuzzleType | same loop engine, points at cell centres; all valid pearls → local search reshapes the loop where logic stays undecided → strip pearls |
 | mines | Mines (Minesweeper) | PuzzleType | no guessing: generator plays with tier logic (1 single numbers, 2 pairs, 3 + mine count & probing) and opens a safe cell where stuck; digging a mine flags it with a toast (no game over); tap a satisfied number to chord |
 | pop | Pop | PuzzleType | bubble breaker; game options (mode: standard/shifter/continuous/mega, goal: clear (standard only, reverse-built so always clearable)/target (share of best playout)/free). Custom animated `PopBoard` |
+| merge | 2048 | PuzzleType | slide and merge; tiles spawn from (seed, move number) so share codes replay; goal option: build the tile (target by size and difficulty, 2048 on 4×4 hard) or free play; hint = depth-2 expectimax, plays the move; swipe or arrow keys/WASD; custom animated `MergeBoard` |
 
 ## Known follow-ups
 - A faster LITS uniqueness check (or logic-tier construction) to re-enable 8×8+ boards.

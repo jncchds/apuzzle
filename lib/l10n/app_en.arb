@@ -160,6 +160,18 @@
   "popLeft": "{count} left",
   "popColumns": "+{count} cols",
 
+  "mergeName": "2048",
+  "mergeTagline": "Slide the tiles, merge the twins, build the big one",
+  "mergeRules": "• Swipe (or press an arrow key) to slide every tile as far as it goes that way.\n• Two tiles with the same number that run into each other merge into one with their sum. A tile merges only once per move.\n• After every move a new 2 (sometimes a 4) appears on an empty cell.\n• Each merge scores the new tile's value.\n\nGoals\n• Build the tile: reach the target tile (it depends on the board size and difficulty).\n• Free play: keep going until the board locks up, and beat your best score.\n\nThe game ends when the board is full and no two neighbours match.",
+  "mergeGoalTarget": "Build the tile",
+  "mergeGoalTargetHint": "Reach the target tile before the board locks up.",
+  "mergeGoalFreeHint": "No target: play until the board locks up and beat your best score.",
+  "mergeReached": "{tile}!",
+  "@mergeReached": {"placeholders": {"tile": {"type": "int"}}},
+  "mergeStuck": "No moves left: undo or restart",
+  "mergeBest": "Best {tile}",
+  "@mergeBest": {"placeholders": {"tile": {"type": "int"}}},
+
   "pipesName": "Pipes",
   "pipesTagline": "Connect every pipe to the source",
   "pipesRules": "• Rotate the tiles so that every pipe connects back to the source (the ringed tile).\n• No pipe end may be left open, and the network may not contain loops.\n• Water flows through everything already connected to the source.\n• Tiles with a lock are already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.",

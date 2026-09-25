@@ -548,6 +548,40 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
+  String get mergeName => '2048';
+
+  @override
+  String get mergeTagline => 'Зсувай плитки, зливай пари, збирай найбільшу';
+
+  @override
+  String get mergeRules =>
+      '• Проведи пальцем (або натисни стрілку), щоб усі плитки з’їхали в той бік до упору.\n• Дві плитки з однаковим числом, що зіткнулися, зливаються в одну з їхньою сумою. За один хід плитка зливається лише раз.\n• Після кожного ходу на порожній клітинці з’являється нова 2 (іноді 4).\n• Кожне злиття дає стільки очок, скільки на новій плитці.\n\nЦілі\n• Збери плитку: досягни цільової плитки (вона залежить від розміру поля та складності).\n• Вільна гра: грай, доки поле не заблокується, і побий свій рекорд.\n\nГра закінчується, коли поле заповнене і жодні сусіди не збігаються.';
+
+  @override
+  String get mergeGoalTarget => 'Збери плитку';
+
+  @override
+  String get mergeGoalTargetHint =>
+      'Досягни цільової плитки, доки поле не заблоковане.';
+
+  @override
+  String get mergeGoalFreeHint =>
+      'Без мети: грай, доки поле не заблокується, і побий свій рекорд.';
+
+  @override
+  String mergeReached(int tile) {
+    return '$tile!';
+  }
+
+  @override
+  String get mergeStuck => 'Ходів немає: скасуй хід або почни знову';
+
+  @override
+  String mergeBest(int tile) {
+    return 'Макс. $tile';
+  }
+
+  @override
   String get pipesName => 'Труби';
 
   @override

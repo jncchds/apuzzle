@@ -930,6 +930,60 @@ abstract class AppLocalizations {
   /// **'+{count} cols'**
   String popColumns(Object count);
 
+  /// No description provided for @mergeName.
+  ///
+  /// In en, this message translates to:
+  /// **'2048'**
+  String get mergeName;
+
+  /// No description provided for @mergeTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Slide the tiles, merge the twins, build the big one'**
+  String get mergeTagline;
+
+  /// No description provided for @mergeRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Swipe (or press an arrow key) to slide every tile as far as it goes that way.\n• Two tiles with the same number that run into each other merge into one with their sum. A tile merges only once per move.\n• After every move a new 2 (sometimes a 4) appears on an empty cell.\n• Each merge scores the new tile\'s value.\n\nGoals\n• Build the tile: reach the target tile (it depends on the board size and difficulty).\n• Free play: keep going until the board locks up, and beat your best score.\n\nThe game ends when the board is full and no two neighbours match.'**
+  String get mergeRules;
+
+  /// No description provided for @mergeGoalTarget.
+  ///
+  /// In en, this message translates to:
+  /// **'Build the tile'**
+  String get mergeGoalTarget;
+
+  /// No description provided for @mergeGoalTargetHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Reach the target tile before the board locks up.'**
+  String get mergeGoalTargetHint;
+
+  /// No description provided for @mergeGoalFreeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'No target: play until the board locks up and beat your best score.'**
+  String get mergeGoalFreeHint;
+
+  /// No description provided for @mergeReached.
+  ///
+  /// In en, this message translates to:
+  /// **'{tile}!'**
+  String mergeReached(int tile);
+
+  /// No description provided for @mergeStuck.
+  ///
+  /// In en, this message translates to:
+  /// **'No moves left: undo or restart'**
+  String get mergeStuck;
+
+  /// No description provided for @mergeBest.
+  ///
+  /// In en, this message translates to:
+  /// **'Best {tile}'**
+  String mergeBest(int tile);
+
   /// No description provided for @pipesName.
   ///
   /// In en, this message translates to:

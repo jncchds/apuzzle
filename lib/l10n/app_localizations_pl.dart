@@ -543,6 +543,40 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
+  String get mergeName => '2048';
+
+  @override
+  String get mergeTagline => 'Przesuwaj kafelki, łącz pary, zbuduj największy';
+
+  @override
+  String get mergeRules =>
+      '• Przesuń palcem (lub naciśnij strzałkę), aby wszystkie kafelki przesunęły się w tę stronę do oporu.\n• Dwa kafelki z tą samą liczbą, które na siebie wpadną, łączą się w jeden z ich sumą. W jednym ruchu kafelek łączy się tylko raz.\n• Po każdym ruchu na pustym polu pojawia się nowa 2 (czasem 4).\n• Każde połączenie daje tyle punktów, ile wynosi nowy kafelek.\n\nCele\n• Zbuduj kafelek: osiągnij docelowy kafelek (zależy od rozmiaru planszy i poziomu trudności).\n• Gra swobodna: graj, aż plansza się zablokuje, i pobij swój rekord.\n\nGra kończy się, gdy plansza jest pełna i żadni sąsiedzi do siebie nie pasują.';
+
+  @override
+  String get mergeGoalTarget => 'Zbuduj kafelek';
+
+  @override
+  String get mergeGoalTargetHint =>
+      'Osiągnij docelowy kafelek, zanim plansza się zablokuje.';
+
+  @override
+  String get mergeGoalFreeHint =>
+      'Bez celu: graj, aż plansza się zablokuje, i pobij swój rekord.';
+
+  @override
+  String mergeReached(int tile) {
+    return '$tile!';
+  }
+
+  @override
+  String get mergeStuck => 'Brak ruchów: cofnij lub zacznij od nowa';
+
+  @override
+  String mergeBest(int tile) {
+    return 'Maks. $tile';
+  }
+
+  @override
   String get pipesName => 'Rury';
 
   @override

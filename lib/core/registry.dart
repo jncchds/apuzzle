@@ -9,6 +9,7 @@ import '../puzzles/labyrinth/labyrinth_type.dart';
 import '../puzzles/lamps/lamps_type.dart';
 import '../puzzles/lits/lits_type.dart';
 import '../puzzles/mambo/mambo_type.dart';
+import '../puzzles/merge/merge_type.dart';
 import '../puzzles/mines/mines_type.dart';
 import '../puzzles/mosaic/mosaic_type.dart';
 import '../puzzles/pearls/pearls_type.dart';
@@ -28,6 +29,7 @@ const List<PuzzleType> puzzleTypes = [
   MosaicType(),
   BlendType(),
   PopType(),
+  MergeType(),
   PipesType(),
   ShikakuType(),
   TrailType(),

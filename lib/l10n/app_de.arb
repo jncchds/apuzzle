@@ -160,6 +160,16 @@
   "popLeft": "{count} übrig",
   "popColumns": "+{count} Sp.",
 
+  "mergeName": "2048",
+  "mergeTagline": "Schieb die Kacheln, verschmelze Paare, bau die große",
+  "mergeRules": "• Wische (oder drück eine Pfeiltaste), um alle Kacheln so weit wie möglich in diese Richtung zu schieben.\n• Zwei Kacheln mit derselben Zahl, die aufeinandertreffen, verschmelzen zu einer mit ihrer Summe. Pro Zug verschmilzt eine Kachel nur einmal.\n• Nach jedem Zug erscheint auf einem leeren Feld eine neue 2 (manchmal eine 4).\n• Jede Verschmelzung bringt so viele Punkte, wie auf der neuen Kachel steht.\n\nZiele\n• Bau die Kachel: Erreiche die Zielkachel (sie hängt von Feldgröße und Schwierigkeit ab).\n• Freies Spiel: Spiel, bis das Feld blockiert ist, und schlag deinen Rekord.\n\nDas Spiel endet, wenn das Feld voll ist und keine Nachbarn zusammenpassen.",
+  "mergeGoalTarget": "Bau die Kachel",
+  "mergeGoalTargetHint": "Erreiche die Zielkachel, bevor das Feld blockiert ist.",
+  "mergeGoalFreeHint": "Ohne Ziel: Spiel, bis das Feld blockiert ist, und schlag deinen Rekord.",
+  "mergeReached": "{tile}!",
+  "mergeStuck": "Keine Züge mehr: rückgängig machen oder neu starten",
+  "mergeBest": "Max. {tile}",
+
   "pipesName": "Rohre",
   "pipesTagline": "Verbinde jedes Rohr mit der Quelle",
   "pipesRules": "• Drehe die Kacheln so, dass jedes Rohr mit der Quelle (der Kachel mit Ring) verbunden ist.\n• Kein Rohrende darf offen bleiben, und das Netz darf keine Schleifen enthalten.\n• Wasser fließt durch alles, was bereits mit der Quelle verbunden ist.\n• Kacheln mit Schloss sind schon an ihrem Platz.\n\nTippe auf eine Kachel, um sie im Uhrzeigersinn zu drehen; langes Drücken / Rechtsklick dreht sie zurück.",

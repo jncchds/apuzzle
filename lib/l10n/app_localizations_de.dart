@@ -536,6 +536,42 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get mergeName => '2048';
+
+  @override
+  String get mergeTagline =>
+      'Schieb die Kacheln, verschmelze Paare, bau die große';
+
+  @override
+  String get mergeRules =>
+      '• Wische (oder drück eine Pfeiltaste), um alle Kacheln so weit wie möglich in diese Richtung zu schieben.\n• Zwei Kacheln mit derselben Zahl, die aufeinandertreffen, verschmelzen zu einer mit ihrer Summe. Pro Zug verschmilzt eine Kachel nur einmal.\n• Nach jedem Zug erscheint auf einem leeren Feld eine neue 2 (manchmal eine 4).\n• Jede Verschmelzung bringt so viele Punkte, wie auf der neuen Kachel steht.\n\nZiele\n• Bau die Kachel: Erreiche die Zielkachel (sie hängt von Feldgröße und Schwierigkeit ab).\n• Freies Spiel: Spiel, bis das Feld blockiert ist, und schlag deinen Rekord.\n\nDas Spiel endet, wenn das Feld voll ist und keine Nachbarn zusammenpassen.';
+
+  @override
+  String get mergeGoalTarget => 'Bau die Kachel';
+
+  @override
+  String get mergeGoalTargetHint =>
+      'Erreiche die Zielkachel, bevor das Feld blockiert ist.';
+
+  @override
+  String get mergeGoalFreeHint =>
+      'Ohne Ziel: Spiel, bis das Feld blockiert ist, und schlag deinen Rekord.';
+
+  @override
+  String mergeReached(int tile) {
+    return '$tile!';
+  }
+
+  @override
+  String get mergeStuck =>
+      'Keine Züge mehr: rückgängig machen oder neu starten';
+
+  @override
+  String mergeBest(int tile) {
+    return 'Max. $tile';
+  }
+
+  @override
   String get pipesName => 'Rohre';
 
   @override

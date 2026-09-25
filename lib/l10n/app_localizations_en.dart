@@ -526,6 +526,41 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get mergeName => '2048';
+
+  @override
+  String get mergeTagline =>
+      'Slide the tiles, merge the twins, build the big one';
+
+  @override
+  String get mergeRules =>
+      '• Swipe (or press an arrow key) to slide every tile as far as it goes that way.\n• Two tiles with the same number that run into each other merge into one with their sum. A tile merges only once per move.\n• After every move a new 2 (sometimes a 4) appears on an empty cell.\n• Each merge scores the new tile\'s value.\n\nGoals\n• Build the tile: reach the target tile (it depends on the board size and difficulty).\n• Free play: keep going until the board locks up, and beat your best score.\n\nThe game ends when the board is full and no two neighbours match.';
+
+  @override
+  String get mergeGoalTarget => 'Build the tile';
+
+  @override
+  String get mergeGoalTargetHint =>
+      'Reach the target tile before the board locks up.';
+
+  @override
+  String get mergeGoalFreeHint =>
+      'No target: play until the board locks up and beat your best score.';
+
+  @override
+  String mergeReached(int tile) {
+    return '$tile!';
+  }
+
+  @override
+  String get mergeStuck => 'No moves left: undo or restart';
+
+  @override
+  String mergeBest(int tile) {
+    return 'Best $tile';
+  }
+
+  @override
   String get pipesName => 'Pipes';
 
   @override
