@@ -1005,7 +1005,7 @@ abstract class AppLocalizations {
   /// No description provided for @litsName.
   ///
   /// In en, this message translates to:
-  /// **'LITS'**
+  /// **'Tetra'**
   String get litsName;
 
   /// No description provided for @litsTagline.

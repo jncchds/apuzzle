@@ -176,7 +176,7 @@
   "atomsTagline": "Bond every atom to match its number",
   "atomsRules": "• Connect the atoms with horizontal or vertical bonds.\n• Each atom needs exactly as many bonds as its number.\n• Two atoms can share one or two bonds.\n• Bonds can't cross each other or pass through atoms.\n• All atoms must end up connected into one molecule.\n\nDrag from an atom towards a neighbour to add a bond (1 → 2 → none). You can also tap the space between two atoms.",
 
-  "litsName": "LITS",
+  "litsName": "Tetra",
   "litsTagline": "One tetromino in every region",
   "litsRules": "• Shade exactly 4 connected cells in every outlined region, forming an L, I, T or S shape (rotations and mirror images allowed).\n• All shaded cells together form one connected area.\n• No 2×2 block may be fully shaded.\n• Two identical shapes may not touch each other across a region border.\n\nTap a cell to cycle empty → shaded → dot (your \"not shaded\" note).",
   "labyrinthName": "Labyrinth",

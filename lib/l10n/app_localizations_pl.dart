@@ -583,7 +583,7 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Połącz atomy poziomymi lub pionowymi wiązaniami.\n• Każdy atom potrzebuje dokładnie tylu wiązań, ile wskazuje jego liczba.\n• Dwa atomy mogą mieć jedno lub dwa wspólne wiązania.\n• Wiązania nie mogą się krzyżować ani przechodzić przez atomy.\n• Wszystkie atomy muszą tworzyć jedną cząsteczkę.\n\nPrzeciągnij od atomu w stronę sąsiada, aby dodać wiązanie (1 → 2 → brak). Możesz też dotknąć przestrzeni między dwoma atomami.';
 
   @override
-  String get litsName => 'LITS';
+  String get litsName => 'Tetra';
 
   @override
   String get litsTagline => 'Jedno tetromino w każdym obszarze';

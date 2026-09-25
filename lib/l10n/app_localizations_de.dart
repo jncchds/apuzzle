@@ -576,7 +576,7 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Verbinde die Atome mit waagerechten oder senkrechten Bindungen.\n• Jedes Atom braucht genau so viele Bindungen, wie seine Zahl angibt.\n• Zwei Atome können eine oder zwei Bindungen teilen.\n• Bindungen dürfen sich nicht kreuzen und nicht durch Atome verlaufen.\n• Alle Atome müssen am Ende zu einem Molekül verbunden sein.\n\nZiehe von einem Atom zu einem Nachbarn, um eine Bindung hinzuzufügen (1 → 2 → keine). Du kannst auch auf den Raum zwischen zwei Atomen tippen.';
 
   @override
-  String get litsName => 'LITS';
+  String get litsName => 'Tetra';
 
   @override
   String get litsTagline => 'Ein Tetromino in jedem Bereich';

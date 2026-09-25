@@ -566,7 +566,7 @@ class AppLocalizationsEn extends AppLocalizations {
       '• Connect the atoms with horizontal or vertical bonds.\n• Each atom needs exactly as many bonds as its number.\n• Two atoms can share one or two bonds.\n• Bonds can\'t cross each other or pass through atoms.\n• All atoms must end up connected into one molecule.\n\nDrag from an atom towards a neighbour to add a bond (1 → 2 → none). You can also tap the space between two atoms.';
 
   @override
-  String get litsName => 'LITS';
+  String get litsName => 'Tetra';
 
   @override
   String get litsTagline => 'One tetromino in every region';

@@ -27,7 +27,7 @@ You choose the grid size and the difficulty.
 | <img src="docs/screenshots/trail_dark.png" width="90"> | **Trail** | Draw one path through every cell that passes the numbers in order. |
 | <img src="docs/screenshots/labyrinth_dark.png" width="90"> | **Labyrinth** | Walk through the maze from the top-left corner to the exit in the bottom-right corner. |
 | <img src="docs/screenshots/atoms_dark.png" width="90"> | **Atoms** | Connect atoms with single or double bonds that match their numbers. Bonds can't cross, and all atoms must end up connected. |
-| <img src="docs/screenshots/lits_dark.png" width="90"> | **LITS** | Shade one L, I, T or S tetromino in every region. The shaded area is connected, with no 2×2 blocks, and identical shapes never touch across region borders. |
+| <img src="docs/screenshots/lits_dark.png" width="90"> | **Tetra** | Shade one L, I, T or S tetromino in every region. The shaded area is connected, with no 2×2 blocks, and identical shapes never touch across region borders. |
 | <img src="docs/screenshots/camp_dark.png" width="90"> | **Campsite** | Pitch a tent next to every tree, one tent per tree. Tents never touch, not even diagonally, and the counts outside the grid give the tents per row and column. |
 | <img src="docs/screenshots/islands_dark.png" width="90"> | **Islands** | Shade the sea. Every island holds one number equal to its size, islands never touch, and the sea is connected with no 2×2 pools. |
 | <img src="docs/screenshots/lamps_dark.png" width="90"> | **Lamps** | Place lamps that light their row and column up to the walls. Light every cell, never shine a lamp on another, and match the numbers on the walls. |
@@ -120,7 +120,7 @@ To add a puzzle:
 
 ## Status
 
-The Trail and LITS generators are currently limited to 7×7. At larger sizes, proving the solution is unique is still too slow to do on the device.
+The Trail and Tetra generators are currently limited to 7×7. At larger sizes, proving the solution is unique is still too slow to do on the device.
 
 ## License
 
