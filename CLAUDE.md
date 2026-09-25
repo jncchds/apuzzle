@@ -13,6 +13,7 @@ Run them through the output condenser (see the global CLAUDE.md):
   `node ~/.claude/tools/run.mjs flutter test test/snapshots --run-skipped --tags snapshot`
   Add `SNAPSHOT_LANG=uk` (or pl, de) to render another language (`*_uk.png`).
   (The in-app browser pane crops screenshots on high-DPI displays, so prefer these PNGs for layout checks.)
+- App icons (Android incl. adaptive/monochrome, iOS, web, Windows) are generated from one design ("pixel A", colors at the top of the script): `node tools/make_icons.mjs`
 - Generator timings (all types, or `BENCH_TYPES=kings,lits`): `flutter test test/bench/generator_bench_test.dart --run-skipped --tags bench -r expanded`
 - Per-type probes (time plus achieved tier/uniqueness): `PROBE=trail PROBE_SIZES=6,8,10 flutter test test/bench/probe_test.dart --run-skipped --tags bench -r expanded`
 
@@ -71,7 +72,7 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 | trail | Trail | PuzzleType | Hamiltonian path; sound edge logic (`trail_logic.dart`) adds waypoints where it stalls, so no path search; up to 10×10 |
 | labyrinth | Labyrinth | PuzzleType | perfect maze (growing tree: easy Prim-like, hard DFS-like, best of 4 by junctions on the way out), top-left → bottom-right; drag the path, fast drags follow straight corridors; hint walks to the next junction |
 | atoms | Atoms | PuzzleType | Hashi bridges; sound interval solver |
-| lits | LITS | ValueGridType | regions grown cell by cell keeping the solution unique (monotone, so rejected pairs are never retried); capped at 7×7 (8×8 takes 1–5 s) |
+| lits | Tetra (LITS) | ValueGridType | regions grown cell by cell keeping the solution unique (monotone, so rejected pairs are never retried); capped at 7×7 (8×8 takes 1–5 s) |
 | camp | Campsite (Tents) | ValueGridType | edge counts in a header band (`header()`); tier 1 = counts/no-touch/tree pairing (bipartite matching), tier 2 = probing; hard hides some counts; stalls reveal a given tent |
 | islands | Islands (Nurikabe) | ValueGridType | layout with a connected pool-free sea → local search moves numbers → where logic stalls, split an island or add a 1-island |
 | lamps | Lamps (Light Up) | ValueGridType | symmetric walls, greedy lamps, number every wall then strip; lit cells via `cellColorIn` |
