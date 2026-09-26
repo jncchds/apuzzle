@@ -45,6 +45,8 @@ class LoopBoard extends StatefulWidget {
     this.cellBackground = false,
     this.cluesOnTop = false,
     this.maxCell = 72,
+    this.locked,
+    this.margins,
   });
 
   final LatticeLoop g;
@@ -69,6 +71,13 @@ class LoopBoard extends StatefulWidget {
   final bool cellBackground;
   final double maxCell;
 
+  /// Edges the player can't change (given clues), or null.
+  final List<bool>? locked;
+
+  /// Space around the grid in cells (for labels outside it), or null for
+  /// the default (a margin for corner lattices only).
+  final EdgeInsets? margins;
+
   @override
   State<LoopBoard> createState() => _LoopBoardState();
 }
@@ -81,15 +90,19 @@ class _LoopBoardState extends State<LoopBoard> {
   LatticeLoop get g => widget.g;
   List<int> get _marks => _draft ?? widget.marks;
 
+  EdgeInsets get _margins => widget.margins ?? EdgeInsets.all(widget.centered ? 0 : 0.4);
+
+  bool _locked(int e) => widget.locked?[e] ?? false;
+
   LoopGeom _geom(Size space) {
-    final margin = widget.centered ? 0.0 : 0.4;
+    final m = _margins;
     final cell = min(
-      min(space.width / (widget.cols + 2 * margin), space.height / (widget.rows + 2 * margin)),
+      min(space.width / (widget.cols + m.horizontal), space.height / (widget.rows + m.vertical)),
       widget.maxCell,
     ).floorToDouble();
     return LoopGeom(
       cell: cell,
-      origin: Offset(cell * margin, cell * margin),
+      origin: Offset(cell * m.left, cell * m.top),
       centered: widget.centered,
       rows: widget.rows,
       cols: widget.cols,
@@ -122,7 +135,7 @@ class _LoopBoardState extends State<LoopBoard> {
 
   void _tap(LoopGeom geo, Offset o, {bool secondary = false}) {
     final e = _nearestEdge(geo, o);
-    if (e == null) return;
+    if (e == null || _locked(e)) return;
     final next = List.of(widget.marks);
     next[e] = secondary ? (next[e] == 2 ? 0 : 2) : (next[e] + 1) % 3;
     widget.onCommit(next);
@@ -153,9 +166,10 @@ class _LoopBoardState extends State<LoopBoard> {
       while (cur != p) {
         final next = cur + dr * g.vc + dc;
         final e = g.between(cur, next);
+        cur = next;
+        if (_locked(e)) continue;
         _mode ??= d[e] == 1 ? 0 : 1;
         d[e] = _mode!;
-        cur = next;
       }
       _at = p;
     });
@@ -182,8 +196,8 @@ class _LoopBoardState extends State<LoopBoard> {
     return LayoutBuilder(builder: (context, cons) {
       final geo = _geom(cons.biggest);
       final size = Size(
-        geo.cell * widget.cols + geo.origin.dx * 2,
-        geo.cell * widget.rows + geo.origin.dy * 2,
+        geo.cell * (widget.cols + _margins.horizontal),
+        geo.cell * (widget.rows + _margins.vertical),
       );
       final on = widget.enabled;
       Widget paint(double pulse) => CustomPaint(

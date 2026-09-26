@@ -710,6 +710,16 @@ class AppLocalizationsEn extends AppLocalizations {
       '• Draw one closed loop through the centers of the cells. It never crosses or touches itself, and it doesn\'t have to visit every cell.\n• The loop passes through every pearl.\n• At a black pearl it turns, and it goes straight on through the cells before and after.\n• At a white pearl it goes straight, and it turns in the cell before or after (or both).\n\nDrag through cells to draw the loop, or drag along it to erase. Tap between two cells to cycle line → cross → empty.';
 
   @override
+  String get railsName => 'Rails';
+
+  @override
+  String get railsTagline => 'Lay one track from the entry to the exit';
+
+  @override
+  String get railsRules =>
+      '• Lay one track through the centers of the cells, from the entry on the left edge to the exit on the bottom edge.\n• The track never branches, crosses itself or closes into a loop, and it doesn\'t have to visit every cell.\n• The numbers above and to the right of the grid tell how many cells of each column and row the track passes through.\n• Pieces already on the board are fixed: the track runs through them exactly as shown.\n\nDrag through cells to lay track, or drag along it to erase. Tap between two cells to cycle track → cross → empty.';
+
+  @override
   String get learnTitle => 'How to play';
 
   @override
@@ -1050,6 +1060,18 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutPearls3 =>
       'Now a real board. The loop doesn\'t have to visit every cell, and it never crosses or touches itself.';
+
+  @override
+  String get tutRails1 =>
+      'Drag through the cells to lay one track from the entry on the left to the exit at the bottom. The numbers above and to the right count the track cells in each column and row.';
+
+  @override
+  String get tutRails2 =>
+      'Pieces already on the board are fixed: the track runs through them exactly as shown. A 0 means no track in that row or column at all.';
+
+  @override
+  String get tutRails3 =>
+      'Now a real board. The track never branches or crosses itself, and it doesn\'t have to visit every cell.';
 
   @override
   String get tutMines1 =>

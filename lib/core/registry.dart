@@ -15,6 +15,7 @@ import '../puzzles/mosaic/mosaic_type.dart';
 import '../puzzles/pearls/pearls_type.dart';
 import '../puzzles/pop/pop_type.dart';
 import '../puzzles/pipes/pipes_type.dart';
+import '../puzzles/rails/rails_type.dart';
 import '../puzzles/shikaku/shikaku_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
 import '../puzzles/trail/trail_type.dart';
@@ -41,6 +42,7 @@ const List<PuzzleType> puzzleTypes = [
   LampsType(),
   FenceType(),
   PearlsType(),
+  RailsType(),
   MinesType(),
 ];
 

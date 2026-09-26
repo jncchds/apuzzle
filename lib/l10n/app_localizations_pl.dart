@@ -726,6 +726,16 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Narysuj jedną zamkniętą pętlę przez środki pól. Nie krzyżuje się ani nie styka sama ze sobą i nie musi przechodzić przez każde pole.\n• Pętla przechodzi przez każdą perłę.\n• Na czarnej perle pętla skręca, a w polach przed nią i za nią biegnie prosto.\n• Przez białą perłę pętla biegnie prosto, a w polu przed nią lub za nią (albo w obu) skręca.\n\nPrzeciągaj po polach, aby rysować pętlę, albo wzdłuż niej, aby ją ścierać. Dotknij między dwoma polami, aby przełączać: linia → krzyżyk → puste.';
 
   @override
+  String get railsName => 'Tory';
+
+  @override
+  String get railsTagline => 'Ułóż jeden tor od wjazdu do wyjazdu';
+
+  @override
+  String get railsRules =>
+      '• Ułóż jeden tor przez środki pól, od wjazdu na lewej krawędzi do wyjazdu na dolnej.\n• Tor się nie rozgałęzia, nie krzyżuje ani nie zamyka w pętlę i nie musi przechodzić przez każde pole.\n• Liczby nad planszą i po jej prawej stronie mówią, przez ile pól każdej kolumny i wiersza biegnie tor.\n• Odcinki, które już są na planszy, są stałe: tor biegnie przez nie dokładnie tak, jak pokazano.\n\nPrzeciągaj po polach, aby układać tor, albo wzdłuż niego, aby go ścierać. Dotknij między dwoma polami, aby przełączać: tor → krzyżyk → puste.';
+
+  @override
   String get learnTitle => 'Jak grać';
 
   @override
@@ -1070,6 +1080,18 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutPearls3 =>
       'Teraz prawdziwa plansza. Pętla nie musi przechodzić przez każde pole i nigdy się nie krzyżuje ani nie styka ze sobą.';
+
+  @override
+  String get tutRails1 =>
+      'Przeciągaj po polach, aby ułożyć jeden tor od wjazdu po lewej do wyjazdu na dole. Liczby u góry i po prawej liczą pola toru w każdej kolumnie i wierszu.';
+
+  @override
+  String get tutRails2 =>
+      'Odcinki, które już są na planszy, są stałe: tor biegnie przez nie dokładnie tak, jak pokazano. 0 oznacza, że w tym wierszu lub kolumnie nie ma toru wcale.';
+
+  @override
+  String get tutRails3 =>
+      'Teraz prawdziwa plansza. Tor się nie rozgałęzia ani nie krzyżuje i nie musi przechodzić przez każde pole.';
 
   @override
   String get tutMines1 =>

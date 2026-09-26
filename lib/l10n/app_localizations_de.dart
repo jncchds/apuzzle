@@ -722,6 +722,16 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Zeichne eine geschlossene Schleife durch die Mitten der Felder. Sie kreuzt und berührt sich nicht selbst und muss nicht durch jedes Feld laufen.\n• Die Schleife läuft durch jede Perle.\n• An einer schwarzen Perle biegt sie ab und läuft in den Feldern davor und danach geradeaus.\n• Durch eine weiße Perle läuft sie geradeaus und biegt im Feld davor oder danach (oder in beiden) ab.\n\nZiehe durch Felder, um die Schleife zu zeichnen, oder an ihr entlang, um sie zu löschen. Tippe zwischen zwei Felder, um zu wechseln: Linie → Kreuz → leer.';
 
   @override
+  String get railsName => 'Gleise';
+
+  @override
+  String get railsTagline => 'Verlege ein Gleis von der Einfahrt zur Ausfahrt';
+
+  @override
+  String get railsRules =>
+      '• Verlege ein Gleis durch die Mitten der Felder, von der Einfahrt am linken Rand zur Ausfahrt am unteren Rand.\n• Das Gleis verzweigt sich nicht, kreuzt sich nicht und schließt sich nicht zu einer Schleife. Es muss nicht durch jedes Feld laufen.\n• Die Zahlen über und rechts neben dem Gitter geben an, durch wie viele Felder jeder Spalte und Zeile das Gleis läuft.\n• Stücke, die schon auf dem Gitter liegen, sind fest: Das Gleis läuft genau so hindurch, wie gezeigt.\n\nZiehe durch Felder, um Gleis zu verlegen, oder an ihm entlang, um es zu löschen. Tippe zwischen zwei Felder, um zu wechseln: Gleis → Kreuz → leer.';
+
+  @override
   String get learnTitle => 'So wird gespielt';
 
   @override
@@ -1065,6 +1075,18 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutPearls3 =>
       'Jetzt ein echtes Brett. Die Schleife muss nicht durch jedes Feld laufen und kreuzt oder berührt sich nie selbst.';
+
+  @override
+  String get tutRails1 =>
+      'Ziehe durch die Felder, um ein Gleis von der Einfahrt links zur Ausfahrt unten zu verlegen. Die Zahlen oben und rechts zählen die Gleisfelder jeder Spalte und Zeile.';
+
+  @override
+  String get tutRails2 =>
+      'Stücke, die schon auf dem Gitter liegen, sind fest: Das Gleis läuft genau so hindurch, wie gezeigt. Eine 0 heißt: In dieser Zeile oder Spalte liegt gar kein Gleis.';
+
+  @override
+  String get tutRails3 =>
+      'Jetzt ein echtes Gitter. Das Gleis verzweigt und kreuzt sich nie und muss nicht durch jedes Feld laufen.';
 
   @override
   String get tutMines1 =>

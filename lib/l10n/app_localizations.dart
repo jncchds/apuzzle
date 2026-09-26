@@ -1254,6 +1254,24 @@ abstract class AppLocalizations {
   /// **'• Draw one closed loop through the centers of the cells. It never crosses or touches itself, and it doesn\'t have to visit every cell.\n• The loop passes through every pearl.\n• At a black pearl it turns, and it goes straight on through the cells before and after.\n• At a white pearl it goes straight, and it turns in the cell before or after (or both).\n\nDrag through cells to draw the loop, or drag along it to erase. Tap between two cells to cycle line → cross → empty.'**
   String get pearlsRules;
 
+  /// No description provided for @railsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Rails'**
+  String get railsName;
+
+  /// No description provided for @railsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Lay one track from the entry to the exit'**
+  String get railsTagline;
+
+  /// No description provided for @railsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Lay one track through the centers of the cells, from the entry on the left edge to the exit on the bottom edge.\n• The track never branches, crosses itself or closes into a loop, and it doesn\'t have to visit every cell.\n• The numbers above and to the right of the grid tell how many cells of each column and row the track passes through.\n• Pieces already on the board are fixed: the track runs through them exactly as shown.\n\nDrag through cells to lay track, or drag along it to erase. Tap between two cells to cycle track → cross → empty.'**
+  String get railsRules;
+
   /// No description provided for @learnTitle.
   ///
   /// In en, this message translates to:
@@ -1775,6 +1793,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. The loop doesn\'t have to visit every cell, and it never crosses or touches itself.'**
   String get tutPearls3;
+
+  /// No description provided for @tutRails1.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag through the cells to lay one track from the entry on the left to the exit at the bottom. The numbers above and to the right count the track cells in each column and row.'**
+  String get tutRails1;
+
+  /// No description provided for @tutRails2.
+  ///
+  /// In en, this message translates to:
+  /// **'Pieces already on the board are fixed: the track runs through them exactly as shown. A 0 means no track in that row or column at all.'**
+  String get tutRails2;
+
+  /// No description provided for @tutRails3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. The track never branches or crosses itself, and it doesn\'t have to visit every cell.'**
+  String get tutRails3;
 
   /// No description provided for @tutMines1.
   ///
