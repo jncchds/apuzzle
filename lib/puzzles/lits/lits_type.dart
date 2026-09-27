@@ -40,6 +40,8 @@ class LitsType extends ValueGridType<LitsPuzzle> {
 
   @override
   List<TutorialStep> tutorial() => litsTutorial;
+  @override
+  List<TutorialStep> strategies() => litsStrategies;
 
   @override
   // Larger boards take too long to generate on-device for now (see CLAUDE.md).

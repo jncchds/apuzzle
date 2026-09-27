@@ -32,3 +32,15 @@ final List<TutorialStep> lampsTutorial = [
     make: () => generateLamps(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 2)),
   ),
 ];
+
+// The corner can only be lit from itself or its two neighbours, and the 0
+// rules those out. Then the 1 has one free side left.
+final _corner = _board(['L.1L', '.0..', '#.L.']);
+
+final List<TutorialStep> lampsStrategies = [
+  TutorialStep(text: (l) => l.tutLampsS1, puzzle: _corner, focus: {const Pos(0, 0)}),
+  TutorialStep.generated(
+    text: (l) => l.tutLampsS2,
+    make: () => generateLamps(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

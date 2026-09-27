@@ -29,6 +29,8 @@ class SudokuType extends ValueGridType<SudokuPuzzle> {
 
   @override
   List<TutorialStep> tutorial() => sudokuTutorial;
+  @override
+  List<TutorialStep> strategies() => sudokuStrategies;
 
   @override
   List<GridSize> get sizes => const [GridSize.square(4), GridSize.square(6), GridSize.square(9)];

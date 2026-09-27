@@ -39,3 +39,15 @@ final List<TutorialStep> litsTutorial = [
     make: () => generateLits(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 2)),
   ),
 ];
+
+final List<TutorialStep> litsStrategies = [
+  TutorialStep.generated(
+    text: (l) => l.tutLitsS1,
+    make: () => generateLits(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 1)),
+  ),
+  // Needs probing (checked: the first tier gets stuck).
+  TutorialStep.generated(
+    text: (l) => l.tutLitsS2,
+    make: () => generateLits(const GenParams(size: GridSize.square(5), difficulty: Difficulty.medium, seed: 5)),
+  ),
+];

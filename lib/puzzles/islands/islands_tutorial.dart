@@ -45,3 +45,15 @@ final List<TutorialStep> islandsTutorial = [
     make: () => generateIslands(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 3)),
   ),
 ];
+
+// The 3 reaches two steps, the 2 one step, the 1 none: five cells are out
+// of every island's reach.
+final _reach = _board(['3~~~', '.~.2', '.~~~', '~~1~']);
+
+final List<TutorialStep> islandsStrategies = [
+  TutorialStep(text: (l) => l.tutIslandsS1, puzzle: _reach, focus: {const Pos(2, 1), const Pos(2, 2), const Pos(3, 0), const Pos(3, 1), const Pos(3, 3)}),
+  TutorialStep.generated(
+    text: (l) => l.tutIslandsS2,
+    make: () => generateIslands(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

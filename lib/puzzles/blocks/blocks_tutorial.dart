@@ -36,3 +36,15 @@ final List<TutorialStep> blocksTutorial = [
     make: () => generateBlocks(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 2)),
   ),
 ];
+
+final List<TutorialStep> blocksStrategies = [
+  // Medium boards need pointing or pairs (checked: singles get stuck).
+  TutorialStep.generated(
+    text: (l) => l.tutBlocksS1,
+    make: () => generateBlocks(const GenParams(size: GridSize.square(5), difficulty: Difficulty.medium, seed: 1)),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutBlocksS2,
+    make: () => generateBlocks(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

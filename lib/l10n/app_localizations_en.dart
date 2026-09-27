@@ -588,7 +588,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pipesRules =>
-      '• Rotate the tiles so that every pipe connects back to the source (the ringed tile).\n• No pipe end may be left open, and the network may not contain loops.\n• Water flows through everything already connected to the source.\n• Tiles with a lock are already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.';
+      '• Rotate the tiles so that every pipe connects back to the source (the ringed tile).\n• No pipe end may be left open, and the network may not contain loops.\n• Water flows through everything already connected to the source.\n• Tiles with a dot in the corner are fixed and already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.';
 
   @override
   String get shikakuName => 'Shikaku';
@@ -687,7 +687,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lampsRules =>
-      '• Place lamps in white cells. A lamp lights its own cell and its row and column until a wall.\n• Every white cell must be lit.\n• No lamp may shine on another lamp.\n• A number on a wall tells how many lamps are right next to it (up, down, left or right).\n\nTap a cell to cycle empty → dot (your \"no lamp\" note) → lamp. Long-press / right-click cycles back.';
+      '• Place lamps in the empty cells (not on walls). A lamp lights its own cell and its row and column until a wall.\n• Every empty cell must be lit.\n• No lamp may shine on another lamp.\n• A number on a wall tells how many lamps are right next to it (up, down, left or right).\n\nTap a cell to cycle empty → dot (your \"no lamp\" note) → lamp. Long-press / right-click cycles back.';
 
   @override
   String get fenceName => 'Fence';
@@ -769,7 +769,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get arrowsRules =>
-      '• Shade some cells. Shaded cells never touch side by side.\n• Draw one closed loop through the centers of all the other cells. It never branches or crosses itself.\n• Gray clue cells are neither shaded nor on the loop. A clue\'s number counts the shaded cells in its arrow\'s direction, all the way to the edge.\n\nDrag through cells to draw the loop, or along it to erase. Tap the center of a cell to cycle empty → shaded → dot (your \"on the loop\" note), or tap between two cells to cycle line → cross → empty.';
+      '• Shade some cells. Shaded cells never touch side by side.\n• Draw one closed loop through the centers of all the other cells. It never branches or crosses itself.\n• Clue cells (a number and an arrow) are neither shaded nor on the loop. A clue\'s number counts the shaded cells in its arrow\'s direction, all the way to the edge.\n\nDrag through cells to draw the loop, or along it to erase. Tap the center of a cell to cycle empty → shaded → dot (your \"on the loop\" note), or tap between two cells to cycle line → cross → empty.';
 
   @override
   String get learnTitle => 'How to play';
@@ -853,6 +853,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tutorialClose => 'Close';
 
   @override
+  String get tutorialStrategies => 'Learn strategies';
+
+  @override
+  String strategiesTitle(String name) {
+    return '$name strategies';
+  }
+
+  @override
+  String strategiesFinishedBody(String name) {
+    return 'You know the main techniques for solving $name.';
+  }
+
+  @override
+  String get learnBasicsTab => 'Basics';
+
+  @override
+  String get learnStrategiesTab => 'Strategies';
+
+  @override
+  String get learnStrategiesIntro =>
+      'For when you know the rules: each lesson shows a technique that strong players use, on a board that needs it.';
+
+  @override
   String get tutMambo1 =>
       'Fill every cell with a sun or a moon. Never three of the same in a row: after two suns side by side comes a moon. Tap a highlighted cell to cycle empty → sun → moon.';
 
@@ -871,6 +894,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutMambo5 =>
       'Now a whole board: use every rule together. Tip: the palette button at the top lets you stamp one symbol on many cells, and a long press (or right-click) cycles backwards.';
+
+  @override
+  String get tutMamboS1 =>
+      'When no rule applies directly, ask “what if?”. The highlighted pair is joined by =, so both cells hold the same symbol. Two suns would give the top row three suns out of four, so both are moons.';
+
+  @override
+  String get tutMamboS2 =>
+      'A harder board, where you\'ll need that trick often: try a symbol in a cell and follow the rules a few steps. If something breaks, the other symbol is right. A × pair always holds one of each, so it counts as one sun and one moon in its row.';
 
   @override
   String get tutSudoku1 =>
@@ -893,6 +924,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a whole puzzle. Selecting a cell tints its row, column and box, and highlights the same number elsewhere. Settings can remove notes for you when you place a number.';
 
   @override
+  String get tutSudokuS1 =>
+      'Look at one number instead of one cell. The highlighted box needs a 1: the 1s in its columns and in its second row rule out every cell but one. Then finish the board the same way.';
+
+  @override
+  String get tutSudokuS2 =>
+      'Two more tricks. Pairs: two cells of a line or box that can only hold the same two numbers claim them. Pointing: if a box\'s spots for a number share a line, the rest of that line can\'t have it.';
+
+  @override
   String get tutKings1 =>
       'Put exactly one crown in every row, every column and every colored region. Three are placed, and the last one has just one spot left. Tap it twice: first a dot, then a crown.';
 
@@ -909,6 +948,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a whole board. Dot the cells you can rule out, and look for rows, columns or regions with a single free cell.';
 
   @override
+  String get tutKingsS1 =>
+      'Look for a region that fits in one row or column. The highlighted region lies entirely in the bottom row, so that row\'s crown is in it: dot the other cells of the bottom row, then carry on.';
+
+  @override
+  String get tutKingsS2 =>
+      'Another trick: if a crown in a cell would rule out every cell of another region (by its row, its column or by touching), that cell can\'t hold a crown. Dot it. The same works for two regions squeezed into two rows.';
+
+  @override
   String get tutHues1 =>
       'Paint every blank cell. A number counts the blank cells around it (diagonals too) that end up in its own color. The blue 3 has exactly three blank neighbours, so all of them are blue. Pick a color in the palette and tap cells to paint them.';
 
@@ -919,6 +966,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutHues3 =>
       'Now a real board. Start with numbers that need all of their blank neighbours, or none of them.';
+
+  @override
+  String get tutHuesS1 =>
+      'Rule out colors. Each highlighted cell touches the blue 0, so it can\'t be blue, and the pink 0, so it can\'t be pink. Only yellow is left.';
+
+  @override
+  String get tutHuesS2 =>
+      'A harder board. Compare numbers that share blank neighbors: what one still needs may already be used up by the other. When stuck, try a color in a cell and see whether some number breaks.';
 
   @override
   String get tutMosaic1 =>
@@ -932,6 +987,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tutMosaic3 => 'Now a real board, with a few moves to spare.';
 
   @override
+  String get tutMosaicS1 =>
+      'Plan ahead. Reach the middle of the board early, since your patch then touches more colors, and whenever you can, pick a color that wipes that color off the board.';
+
+  @override
   String get tutBlend1 =>
       'The board is made of patches: touching cells of one color. Pick a color below, then tap a patch to repaint it. It merges with the touching patches of that color. Repaint the middle patch.';
 
@@ -942,6 +1001,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutBlend3 =>
       'Now a real board. The chosen color stays selected, so you can paint several patches in a row.';
+
+  @override
+  String get tutBlendS1 =>
+      'Pick one patch in the middle and keep repainting it: each move then swallows every touching patch of the new color. Choose the color that most of its neighbors share.';
 
   @override
   String get tutPop1 =>
@@ -964,6 +1027,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Other modes: in Shifter every row also slides right to close its gaps, in Continuous new columns roll in from the left, and Mega does both. Goals: clear the board, reach a target score, or play freely for your best. The game ends when no group of 2 is left.';
 
   @override
+  String get tutPopS1 =>
+      'Clearing a board takes planning. Before popping, ask what falls into the gap: pop groups that bring bubbles of one color together, and never leave a single bubble of a color on its own.';
+
+  @override
+  String get tutPopS2 =>
+      'Chasing points: a group of n scores n × (n − 1), so one group of 8 (56) beats four groups of 2 (8). Pop the other colors first to merge a color into one big group.';
+
+  @override
   String get tutMerge1 =>
       'Swipe (or press an arrow key) to slide every tile as far as it goes. Two equal tiles that meet merge into their sum. Make a 4.';
 
@@ -976,15 +1047,27 @@ class AppLocalizationsEn extends AppLocalizations {
       'Keep your biggest tile in a corner and feed it step by step. Build a 32.';
 
   @override
+  String get tutMergeS1 =>
+      'Build a chain: keep your tiles in order along one row with the biggest in the corner, like 64, 32, 16, 8. Then one new 8 at the end rolls all the way up. Make 128.';
+
+  @override
   String get tutPipes1 =>
       'Tap a tile to turn it clockwise (a long press or right-click turns it back). Connect every pipe to the source, the ringed tile. Water shows what\'s already connected.';
 
   @override
   String get tutPipes2 =>
-      'No pipe end may stay open, so no pipe can point off the board. Tiles with a lock are already right. Start at the edges and corners, where tiles have the fewest ways to turn.';
+      'No pipe end may stay open, so no pipe can point off the board. Tiles with a dot in the corner are fixed and already right. Start at the edges and corners, where tiles have the fewest ways to turn.';
 
   @override
   String get tutPipes3 => 'Now a real board. The network may not form loops.';
+
+  @override
+  String get tutPipesS1 =>
+      'Work inward from the rim. A straight on the edge must run along it, a corner holds only an elbow pointing inward, and a T on the edge turns its flat side to the edge. Every tile you settle limits its neighbors.';
+
+  @override
+  String get tutPipesS2 =>
+      'A hard board. The network may not form a loop: if turning a tile would close one, it must point elsewhere. And two dead ends never face each other, or they\'d form a pair cut off from the rest.';
 
   @override
   String get tutShikaku1 =>
@@ -999,6 +1082,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a real board. Big numbers near the edges usually have the fewest ways to fit.';
 
   @override
+  String get tutShikakuS1 =>
+      'Ask which numbers can reach a cell. The bottom-left corner is too far for the 4 and the 6 to cover with a rectangle of their size, so it belongs to the 2.';
+
+  @override
+  String get tutShikakuS2 =>
+      'A hard board. List the few rectangles a big number could use: cells that all of them cover belong to it, and a cell only one number can reach belongs to that number.';
+
+  @override
   String get tutTrail1 =>
       'Drag from 1 to draw one path through every cell, moving up, down, left or right. It ends on the last number.';
 
@@ -1011,12 +1102,28 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a real board. Cells in corners have only two ways in and out, so the path must use both.';
 
   @override
+  String get tutTrailS1 =>
+      'Cells with only two free neighbors must be passed straight through: the path comes in one side and leaves by the other. Watch for cells your own path has just boxed in.';
+
+  @override
+  String get tutTrailS2 =>
+      'A hard board. Never cut the free cells into two parts: the path can\'t come back for the other part. And a cell with only one free neighbor is a dead end, allowed only for the last number.';
+
+  @override
   String get tutLabyrinth1 =>
       'Drag from the start in the top-left corner and walk to the flag in the bottom-right corner. Walls block the way.';
 
   @override
   String get tutLabyrinth2 =>
       'A bigger maze. Hit a dead end? Drag back along your path, or tap any cell of it to return there. A quick drag follows straight corridors.';
+
+  @override
+  String get tutLabyrinthS1 =>
+      'Lost? Keep one hand on a wall: always take the rightmost opening. In a maze like this it always leads out, though not by the shortest way.';
+
+  @override
+  String get tutLabyrinthS2 =>
+      'Or work backwards: trace the way from the flag toward the start, and look for where the two routes meet. Dead ends near the flag are ruled out fast that way.';
 
   @override
   String get tutAtoms1 =>
@@ -1031,6 +1138,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a real board. Start with atoms that have only one way to get their bonds.';
 
   @override
+  String get tutAtomsS1 =>
+      'Compare an atom\'s number with its neighbors. The 4 in the corner has just two neighbors, and a pair can share at most two bonds, so both bonds are double. Likewise a 3 with two neighbors gets at least one bond to each.';
+
+  @override
+  String get tutAtomsS2 =>
+      'A hard board. Keep the molecule in one piece: two 1s never bond to each other, and two 2s never share a double bond, unless they\'re the only atoms. When stuck, try a bond and see if part of the board gets cut off.';
+
+  @override
   String get tutLits1 =>
       'Shade exactly 4 cells in every outlined region, forming an L, I, T or S. The top region has exactly 4 cells, so shade them all. Tap a cell to shade it.';
 
@@ -1043,6 +1158,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a real board. All shaded cells must form one connected area. Tap twice for a dot, your note that a cell stays empty.';
 
   @override
+  String get tutLitsS1 =>
+      'List the shapes each region can still hold. Cells that every possible shape covers are shaded, and cells that none covers stay empty. Small regions and regions squeezed by the 2×2 rule have the fewest options.';
+
+  @override
+  String get tutLitsS2 =>
+      'A harder board. When stuck, try one shape in a region: if it makes a 2×2 block, cuts the shaded area in two or puts two equal shapes side by side, it\'s wrong.';
+
+  @override
   String get tutCamp1 =>
       'Pitch one tent next to every tree: up, down, left or right, never diagonal. The numbers outside tell how many tents each row and column holds. Tap a cell twice: grass, then a tent.';
 
@@ -1053,6 +1176,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutCamp3 =>
       'Now a real board. A 0 means the whole row or column is grass, and every tree gets its own tent.';
+
+  @override
+  String get tutCampS1 =>
+      'Count the gaps. The top row needs 2 tents, and only its three highlighted cells can hold one. Two tents in three cells that may not touch must take both ends.';
+
+  @override
+  String get tutCampS2 =>
+      'A hard board, and some counts are hidden. When stuck, try a tent on a spot: if some tree is left with no place for its own tent, that spot is grass.';
 
   @override
   String get tutIslands1 =>
@@ -1071,8 +1202,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a real board. Every island holds exactly one number.';
 
   @override
+  String get tutIslandsS1 =>
+      'Find cells no island can reach. The 3 grows at most two steps from its number, the 2 one step and the 1 none. The highlighted cells are out of every island\'s reach, so they\'re sea.';
+
+  @override
+  String get tutIslandsS2 =>
+      'A hard board. Keep the sea in mind: it must stay connected, so a sea cell with one way out continues that way, and it may not form a 2×2 pool. When stuck, try a cell as land and see whether something breaks.';
+
+  @override
   String get tutLamps1 =>
-      'Put lamps in the white cells: tap twice (a dot, then a lamp). A lamp lights its own row and column up to the walls. Light up every white cell.';
+      'Put lamps in the empty cells: tap twice (a dot, then a lamp). The dark cells are walls. A lamp lights its own row and column up to the walls. Light up every empty cell.';
 
   @override
   String get tutLamps2 =>
@@ -1085,6 +1224,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutLamps4 =>
       'Now a real board. Dots help you mark cells that can\'t hold a lamp.';
+
+  @override
+  String get tutLampsS1 =>
+      'Some cells have just one way to get light. The top-left corner can only be lit from itself or its two neighbors, and the 0 rules the neighbors out: the lamp goes in the corner. Then look at the 1.';
+
+  @override
+  String get tutLampsS2 =>
+      'A hard board. When stuck, try a lamp on a cell and follow what it forces: if some cell can no longer be lit, or a number can\'t be met, that cell gets a dot.';
 
   @override
   String get tutFence1 =>
@@ -1102,6 +1249,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tutFence4 => 'Now a real board. Start with the 0s and 3s.';
 
   @override
+  String get tutFenceS1 =>
+      'Learn a few patterns. Two 3s side by side always have a line between them and a line on each far side: any other way leaves one of them short. The 0 above helps too.';
+
+  @override
+  String get tutFenceS2 =>
+      'Corners are strong. A 1 in a corner never uses its two outer sides: the loop would have to turn right there and use both. A 3 in a corner always uses both.';
+
+  @override
+  String get tutFenceS3 =>
+      'A hard board. When stuck, try a line on one edge and follow it: if it leads to a dead end, a number it can\'t satisfy, or a small loop that leaves others out, that edge gets a cross.';
+
+  @override
   String get tutPearls1 =>
       'Drag through the cells to draw one closed loop. At a black pearl the loop turns, then runs straight through the next cell on both sides.';
 
@@ -1112,6 +1271,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutPearls3 =>
       'Now a real board. The loop doesn\'t have to visit every cell, and it never crosses or touches itself.';
+
+  @override
+  String get tutPearlsS1 =>
+      'A black pearl can\'t turn toward an edge that\'s too close: the loop needs two straight cells on each side. Both black pearls here are too close to two edges, so their directions are fixed.';
+
+  @override
+  String get tutPearlsS2 =>
+      'A hard board. Three white pearls in a row can\'t all lie on one straight stretch (the middle one needs a turn next to it), so the loop crosses them. When stuck, try a line and see if some pearl breaks.';
 
   @override
   String get tutRails1 =>
@@ -1126,6 +1293,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a real board. The track never branches or crosses itself, and it doesn\'t have to visit every cell.';
 
   @override
+  String get tutRailsS1 =>
+      'Start with lines whose count leaves no choice. The second row needs 4 track cells and has only 4, and so does the right column. Then join the ends.';
+
+  @override
+  String get tutRailsS2 =>
+      'A hard board. A count that\'s already used up blocks the rest of its line, and a track cell always needs exactly two track neighbors. When stuck, try a piece and check that the counts still fit.';
+
+  @override
   String get tutBlocks1 =>
       'Every region of k cells holds the numbers 1 to k once each. Each highlighted cell is the last gap in its region: pick the missing number in the palette, then tap the cell.';
 
@@ -1138,16 +1313,32 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a real board. Start with small regions and with cells whose neighbours rule out most numbers. Pencil notes help.';
 
   @override
+  String get tutBlocksS1 =>
+      'Pointing: note where each region can still put a number. When all those cells touch the same outside cell, that cell can\'t hold the number, since it would touch it. Pencil notes help you see it.';
+
+  @override
+  String get tutBlocksS2 =>
+      'A hard board. When nothing else works, pick a cell with just two possible numbers and try one: if it soon leaves a region with no place for a number, the other one is right.';
+
+  @override
   String get tutPairs1 =>
       'Shade exactly two cells in every region, so that each shaded cell touches exactly one other: the shading comes in pairs. The highlighted region has just two cells, so shade both.';
 
   @override
   String get tutPairs2 =>
-      'Pairs never touch each other side by side. Put a dot (tap twice) next to a finished pair: those cells stay white.';
+      'Pairs never touch each other side by side. The top pair is finished, so the highlighted cells next to it stay unshaded: put a dot there (tap twice), then finish the board.';
 
   @override
   String get tutPairs3 =>
       'Now a real board. Small regions and cells boxed in by dots are good places to start.';
+
+  @override
+  String get tutPairsS1 =>
+      'Try every way to finish a small region: a cell shaded in all of them is shaded, and a cell shaded in none gets a dot. An L of three cells, for example, always shades its corner.';
+
+  @override
+  String get tutPairsS2 =>
+      'A hard board. When stuck, shade a cell and follow the rules: if some region can no longer get its two cells, or two pairs would touch, that cell stays unshaded.';
 
   @override
   String get tutPlots1 =>
@@ -1162,6 +1353,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a real board. Some plots show no number at all: work out their size from the room that\'s left.';
 
   @override
+  String get tutPlotsS1 =>
+      'Look for pockets. The two highlighted cells are fenced in by finished plots, so they can only join each other. Two 1s may not touch, so together they are a plot of 2.';
+
+  @override
+  String get tutPlotsS2 =>
+      'A hard board. When nothing is certain, pick a cell with only two or three possible numbers and test each one: a number that leaves some plot unable to reach its size is out.';
+
+  @override
   String get tutLinks1 =>
       'Drag from a dot to its twin to join them. Paths go through neighbouring cells, never diagonally.';
 
@@ -1174,16 +1373,32 @@ class AppLocalizationsEn extends AppLocalizations {
       'Now a real board. Corners and edges leave the fewest ways to go, so start there.';
 
   @override
+  String get tutLinksS1 =>
+      'Fill the tight spots first. An empty corner has only two neighbors, so the path through it uses both. The same goes for any cell squeezed down to two free neighbors.';
+
+  @override
+  String get tutLinksS2 =>
+      'A hard board. In a puzzle with one answer, a path never folds back beside itself (it could take a shortcut), so no 2×2 square belongs to a single path. And never leave an empty cell that no path can still reach.';
+
+  @override
   String get tutArrows1 =>
-      'Draw one loop through the centers of all the white cells: drag from cell to cell. The gray clue cell is never on the loop, and its 0 says there are no shaded cells above it.';
+      'Draw one loop through the centers of all the empty cells: drag from cell to cell. The clue cell in the middle is never on the loop. Its 0 says no cell above it is shaded, so here nothing is.';
 
   @override
   String get tutArrows2 =>
-      'Now some cells are shaded: tap a cell\'s center to shade it. Each clue counts the shaded cells in its arrow\'s direction. Shaded cells never touch side by side, and the loop goes through every other cell.';
+      'Now two cells must be shaded. Each clue counts the shaded cells in its arrow\'s direction: find them and tap their centers to shade them. Shaded cells never touch side by side. Then draw the loop through all the other cells.';
 
   @override
   String get tutArrows3 =>
       'Now a real board. Cells next to a shaded cell are always on the loop, and a loop cell needs two ways out.';
+
+  @override
+  String get tutArrowsS1 =>
+      'Look for tight clues. The 2 in the middle row has just three cells to its right, and its two shaded cells may not touch, so they take the first and the last. The 2 in the top row is even easier: it has only two free cells.';
+
+  @override
+  String get tutArrowsS2 =>
+      'A hard board. Every cell that isn\'t shaded or a clue is on the loop, so a cell with only two free neighbors has its path fixed. When stuck, try shading a cell and see if a loop cell is left with fewer than two ways out.';
 
   @override
   String get tutMines1 =>
@@ -1200,4 +1415,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutMines4 =>
       'Now a real board. You never need to guess. If you dig a mine by mistake, it just gets flagged and the game goes on.';
+
+  @override
+  String get tutMinesS1 =>
+      'Compare neighboring numbers. The 2 sees three closed cells, the 1 on its left sees only the first two, so the third one is a mine. The same works from the right. Then the middle cell is safe.';
+
+  @override
+  String get tutMinesS2 =>
+      'A hard board. Keep comparing numbers that share closed cells. Near the end, count what\'s left: the mine counter can settle the last closed cells.';
 }

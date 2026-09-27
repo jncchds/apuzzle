@@ -20,6 +20,12 @@ class PairsType extends ValueGridType<PairsPuzzle> {
 
   static const shadeColor = Color(0xFF3E6E8E);
 
+  /// Region tints without the blues, so blue always means shaded.
+  static final _regionColors = [
+    for (final c in regionColors)
+      if (c != const Color(0xFF90CAF9) && c != const Color(0xFF80DEEA) && c != const Color(0xFFB0BEC5)) c,
+  ];
+
   @override
   String get id => 'pairs';
   @override
@@ -36,6 +42,8 @@ class PairsType extends ValueGridType<PairsPuzzle> {
 
   @override
   List<TutorialStep> tutorial() => pairsTutorial;
+  @override
+  List<TutorialStep> strategies() => pairsStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];
@@ -116,7 +124,7 @@ class PairsType extends ValueGridType<PairsPuzzle> {
   Color? cellColor(BuildContext context, PairsPuzzle puzzle, Pos pos, CellValue cell) {
     final dark = Theme.of(context).brightness == Brightness.dark;
     if (cell.value == pairsShade) return dark ? const Color(0xFF7FB2D6) : shadeColor;
-    final base = regionColors[puzzle.regions[puzzle.size.index(pos)] % regionColors.length];
+    final base = _regionColors[puzzle.regions[puzzle.size.index(pos)] % _regionColors.length];
     return Color.lerp(base, Theme.of(context).colorScheme.surface, dark ? 0.7 : 0.55);
   }
 

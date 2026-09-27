@@ -36,3 +36,12 @@ final List<TutorialStep> minesTutorial = [
     make: () => generateMines(const GenParams(size: GridSize.square(6), difficulty: Difficulty.easy, seed: 4)),
   ),
 ];
+
+final List<TutorialStep> minesStrategies = [
+  // 1-2-1: the mines sit above the 1s.
+  TutorialStep(text: (l) => l.tutMinesS1, puzzle: _board(['*.*', 'ooo', 'ooo']), focus: {const Pos(0, 0), const Pos(0, 1), const Pos(0, 2)}),
+  TutorialStep.generated(
+    text: (l) => l.tutMinesS2,
+    make: () => generateMines(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

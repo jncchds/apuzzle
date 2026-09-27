@@ -62,37 +62,38 @@ void main() {
   });
 
   for (final type in puzzleTypes) {
-    group('${type.id} tutorial', () {
-      final steps = type.tutorial();
-      for (var k = 0; k < steps.length; k++) {
-        final TutorialStep step = steps[k];
-        test('step ${k + 1}', () {
-          for (final l in langs.values) {
-            expect(step.text(l), isNotEmpty);
-          }
-          final puzzle = step.puzzle;
-          // Boards survive (de)serialization like real ones.
-          final json = type.encodePuzzle(puzzle);
-          expect(type.encodePuzzle(type.decodePuzzle(json)), json);
-          final start = step.state ?? type.initialState(puzzle) as Object;
-          type.encodeState(start);
+    for (final (kind, steps) in [('tutorial', type.tutorial()), ('strategies', type.strategies())]) {
+      group('${type.id} $kind', () {
+        for (var k = 0; k < steps.length; k++) {
+          final TutorialStep step = steps[k];
+          test('step ${k + 1}', () {
+            for (final l in langs.values) {
+              expect(step.text(l), isNotEmpty);
+            }
+            final puzzle = step.puzzle;
+            // Boards survive (de)serialization like real ones.
+            final json = type.encodePuzzle(puzzle);
+            expect(type.encodePuzzle(type.decodePuzzle(json)), json);
+            final start = step.state ?? type.initialState(puzzle) as Object;
+            type.encodeState(start);
 
-          if (step.look) return;
-          if (step.done case final done?) {
-            expect(done(start), isFalse, reason: 'already done at the start');
-            expect(done(step.answer!), isTrue, reason: 'the answer does not meet the goal');
-            return;
-          }
-          expect(type.isComplete(puzzle, start) && type.isSolved(puzzle, start), isFalse, reason: 'solved at the start');
-          final end = playHints(type, puzzle, start);
-          expect(type.isComplete(puzzle, end) && type.isSolved(puzzle, end), isTrue, reason: '"Show me" does not solve it');
-          if (type is ValueGridType && !step.openEnded) {
-            // Big generated boards are unique by construction (their own tests).
-            final count = countFillings(type, puzzle as ValueGridPuzzle, start as ValueGrid);
-            if (count != null) expect(count, 1, reason: 'not exactly one solution');
-          }
-        });
-      }
-    });
+            if (step.look) return;
+            if (step.done case final done?) {
+              expect(done(start), isFalse, reason: 'already done at the start');
+              expect(done(step.answer!), isTrue, reason: 'the answer does not meet the goal');
+              return;
+            }
+            expect(type.isComplete(puzzle, start) && type.isSolved(puzzle, start), isFalse, reason: 'solved at the start');
+            final end = playHints(type, puzzle, start);
+            expect(type.isComplete(puzzle, end) && type.isSolved(puzzle, end), isTrue, reason: '"Show me" does not solve it');
+            if (type is ValueGridType && !step.openEnded) {
+              // Big generated boards are unique by construction (their own tests).
+              final count = countFillings(type, puzzle as ValueGridPuzzle, start as ValueGrid);
+              if (count != null) expect(count, 1, reason: 'not exactly one solution');
+            }
+          });
+        }
+      });
+    }
   }
 }

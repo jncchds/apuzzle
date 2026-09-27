@@ -27,7 +27,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const _fontsDir = 'C:/flutter/bin/cache/artifacts/material_fonts';
+// flutter_tester lives in <sdk>/bin/cache/artifacts/engine/<platform>/.
+final _fontsDir = '${File(Platform.resolvedExecutable).parent.parent.parent.path}/material_fonts';
 
 Future<void> _loadFont(String family, List<String> files) async {
   final loader = FontLoader(family);
@@ -55,8 +56,8 @@ final _suffix = _lang == null ? '' : '_$_lang';
 
 void main() {
   setUpAll(() async {
-    await _loadFont('Roboto', ['roboto-regular.ttf', 'roboto-medium.ttf', 'roboto-bold.ttf']);
-    await _loadFont('MaterialIcons', ['materialicons-regular.otf']);
+    await _loadFont('Roboto', ['Roboto-Regular.ttf', 'Roboto-Medium.ttf', 'Roboto-Bold.ttf']);
+    await _loadFont('MaterialIcons', ['MaterialIcons-Regular.otf']);
   });
 
   final outDir = Directory('build/snapshots')..createSync(recursive: true);
@@ -126,48 +127,67 @@ void main() {
     }
   }
 
-  // Every tutorial step (dark), as tutorial_<id>_<step>.png.
+  // Every tutorial step as tutorial_<id>_<step>.png (dark), ..._light.png, and
+  // ..._done.png (dark, after "Show me" until the step is done); strategy
+  // lessons as tutorial_<id>_s<step>*.png.
   for (final type in puzzleTypes) {
-    for (var k = 0; k < type.tutorial().length; k++) {
-      testWidgets('snapshot tutorial ${type.id} ${k + 1}', (tester) async {
-        tester.view.physicalSize = const Size(1080, 2280);
-        tester.view.devicePixelRatio = 3;
-        addTearDown(tester.view.reset);
-        SharedPreferences.setMockInitialValues({'set.theme': 'dark', 'set.language': ?_lang});
-        final store = await GameStore.open();
-        final settings = Settings(store.prefs);
-        // Generated boards are built outside the fake-async zone.
-        await tester.runAsync(() async => type.tutorial()[k].puzzle);
-        final key = GlobalKey();
-        await tester.pumpWidget(MultiProvider(
-          providers: [Provider.value(value: store), ChangeNotifierProvider.value(value: settings)],
-          child: RepaintBoundary(
-            key: key,
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              themeMode: ThemeMode.dark,
-              locale: Locale(_lang ?? 'en'),
-              supportedLocales: AppLocalizations.supportedLocales,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              darkTheme: ThemeData(
-                useMaterial3: true,
-                fontFamily: 'Roboto',
-                colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF), brightness: Brightness.dark),
+    for (final strategies in [false, true]) {
+      final steps = strategies ? type.strategies() : type.tutorial();
+      for (var k = 0; k < steps.length; k++) {
+        final name = '${type.id}_${strategies ? 's' : ''}${k + 1}';
+        for (final (mode, tag) in [(ThemeMode.dark, ''), (ThemeMode.light, '_light'), (ThemeMode.dark, '_done')]) {
+          testWidgets('snapshot tutorial $name$tag', (tester) async {
+            tester.view.physicalSize = const Size(1080, 2280);
+            tester.view.devicePixelRatio = 3;
+            addTearDown(tester.view.reset);
+            SharedPreferences.setMockInitialValues(
+                {'set.theme': mode == ThemeMode.dark ? 'dark' : 'light', 'set.language': ?_lang});
+            final store = await GameStore.open();
+            final settings = Settings(store.prefs);
+            // Generated boards are built outside the fake-async zone.
+            await tester.runAsync(() async => steps[k].puzzle);
+            final key = GlobalKey();
+            ThemeData theme(Brightness b) => ThemeData(
+                  useMaterial3: true,
+                  fontFamily: 'Roboto',
+                  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF), brightness: b),
+                );
+            await tester.pumpWidget(MultiProvider(
+              providers: [Provider.value(value: store), ChangeNotifierProvider.value(value: settings)],
+              child: RepaintBoundary(
+                key: key,
+                child: MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  themeMode: mode,
+                  locale: Locale(_lang ?? 'en'),
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  localizationsDelegates: AppLocalizations.localizationsDelegates,
+                  theme: theme(Brightness.light),
+                  darkTheme: theme(Brightness.dark),
+                  home: TutorialScreen(type: type, strategies: strategies, firstStep: k),
+                ),
               ),
-              home: TutorialScreen(type: type, firstStep: k),
-            ),
-          ),
-        ));
-        await tester.pump(const Duration(seconds: 1));
-        await tester.runAsync(() async {
-          final boundary = key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
-          final image = await boundary.toImage(pixelRatio: 1);
-          final png = await image.toByteData(format: ui.ImageByteFormat.png);
-          File('${outDir.path}/tutorial_${type.id}_${k + 1}$_suffix.png').writeAsBytesSync(png!.buffer.asUint8List());
-        });
-        await tester.pumpWidget(const SizedBox());
-        await tester.pump(const Duration(seconds: 2));
-      });
+            ));
+            await tester.pump(const Duration(seconds: 1));
+            if (tag == '_done') {
+              final showMe = find.byIcon(Icons.lightbulb_outline_rounded);
+              for (var i = 0; i < 400 && showMe.evaluate().isNotEmpty; i++) {
+                await tester.tap(showMe);
+                await tester.pump(const Duration(milliseconds: 50));
+              }
+              await tester.pump(const Duration(seconds: 3));
+            }
+            await tester.runAsync(() async {
+              final boundary = key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+              final image = await boundary.toImage(pixelRatio: 1);
+              final png = await image.toByteData(format: ui.ImageByteFormat.png);
+              File('${outDir.path}/tutorial_$name$tag$_suffix.png').writeAsBytesSync(png!.buffer.asUint8List());
+            });
+            await tester.pumpWidget(const SizedBox());
+            await tester.pump(const Duration(seconds: 2));
+          });
+        }
+      }
     }
   }
 

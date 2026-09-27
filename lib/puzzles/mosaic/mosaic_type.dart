@@ -37,6 +37,8 @@ class MosaicType extends PuzzleType<MosaicPuzzle, MosaicState> {
 
   @override
   List<TutorialStep> tutorial() => mosaicTutorial;
+  @override
+  List<TutorialStep> strategies() => mosaicStrategies;
 
   @override
   List<GridSize> get sizes => [for (final n in [6, 8, 10, 12, 14, 16, 18]) GridSize.square(n)];

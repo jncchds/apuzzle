@@ -34,6 +34,8 @@ class FenceType extends PuzzleType<FencePuzzle, LoopMarks> {
 
   @override
   List<TutorialStep> tutorial() => fenceTutorial;
+  @override
+  List<TutorialStep> strategies() => fenceStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

@@ -49,13 +49,17 @@ Future<void> offerTutorial(BuildContext context, PuzzleType type, {required Void
   }
 }
 
-/// A type's interactive tutorial: its [PuzzleType.tutorial] steps, each a
-/// tiny practice board with a short text. A step is done when its board is
-/// solved (or its own goal is met); then Next opens.
+/// A type's interactive tutorial: its [PuzzleType.tutorial] steps (or with
+/// [strategies], its [PuzzleType.strategies]), each a tiny practice board
+/// with a short text. A step is done when its board is solved (or its own
+/// goal is met); then Next opens.
 class TutorialScreen extends StatefulWidget {
-  const TutorialScreen({super.key, required this.type, this.onPlay, this.firstStep = 0});
+  const TutorialScreen({super.key, required this.type, this.strategies = false, this.onPlay, this.firstStep = 0});
 
   final PuzzleType type;
+
+  /// The advanced lessons instead of the basics.
+  final bool strategies;
 
   /// What "Play now" on the last page starts (none: no such button).
   final VoidCallback? onPlay;
@@ -69,7 +73,7 @@ class TutorialScreen extends StatefulWidget {
 }
 
 class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStateMixin {
-  late final List<TutorialStep> _steps = widget.type.tutorial();
+  late final List<TutorialStep> _steps = widget.strategies ? widget.type.strategies() : widget.type.tutorial();
   late final GameStore _store;
   int _index = 0;
   GameController? _ctrl;
@@ -101,8 +105,8 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
 
   @override
   void dispose() {
-    // Leaving halfway still counts as "offered".
-    if (!_finished) _store.setTutorial(type.id, done: false);
+    // Leaving the basics halfway still counts as "offered".
+    if (!_finished && !widget.strategies) _store.setTutorial(type.id, done: false);
     _flashTimer?.cancel();
     _ctrl?.removeListener(_onCtrl);
     _ctrl?.dispose();
@@ -211,7 +215,11 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
       _open(_index + 1);
       return;
     }
-    _store.setTutorial(type.id, done: true);
+    if (widget.strategies) {
+      _store.setStrategiesDone(type.id);
+    } else {
+      _store.setTutorial(type.id, done: true);
+    }
     setState(() => _finished = true);
   }
 
@@ -219,7 +227,7 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
   Widget build(BuildContext context) {
     final l = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: Text(l.tutorialTitle(type.name(l)))),
+      appBar: AppBar(title: Text(widget.strategies ? l.strategiesTitle(type.name(l)) : l.tutorialTitle(type.name(l)))),
       body: SafeArea(
         child: _steps.isEmpty
             ? const SizedBox.shrink()
@@ -363,10 +371,23 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
           const SizedBox(height: 20),
           Text(l.tutorialFinishedTitle, style: theme.textTheme.headlineSmall, textAlign: TextAlign.center),
           const SizedBox(height: 8),
-          Text(l.tutorialFinishedBody(type.name(l)), style: theme.textTheme.bodyLarge, textAlign: TextAlign.center),
+          Text(
+            widget.strategies ? l.strategiesFinishedBody(type.name(l)) : l.tutorialFinishedBody(type.name(l)),
+            style: theme.textTheme.bodyLarge,
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: 28),
           if (play != null) ...[
             FilledButton.icon(onPressed: play, icon: const Icon(Icons.play_arrow_rounded), label: Text(l.tutorialPlay)),
+            const SizedBox(height: 8),
+          ],
+          // After the basics, the advanced lessons are one tap away.
+          if (!widget.strategies && type.strategies().isNotEmpty) ...[
+            FilledButton.tonalIcon(
+              onPressed: () => AppRouterDelegate.of(context).openTutorial(type, play: play, strategies: true),
+              icon: const Icon(Icons.psychology_alt_rounded),
+              label: Text(l.tutorialStrategies),
+            ),
             const SizedBox(height: 8),
           ],
           OutlinedButton.icon(

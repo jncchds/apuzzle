@@ -1035,7 +1035,7 @@ abstract class AppLocalizations {
   /// No description provided for @pipesRules.
   ///
   /// In en, this message translates to:
-  /// **'• Rotate the tiles so that every pipe connects back to the source (the ringed tile).\n• No pipe end may be left open, and the network may not contain loops.\n• Water flows through everything already connected to the source.\n• Tiles with a lock are already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.'**
+  /// **'• Rotate the tiles so that every pipe connects back to the source (the ringed tile).\n• No pipe end may be left open, and the network may not contain loops.\n• Water flows through everything already connected to the source.\n• Tiles with a dot in the corner are fixed and already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.'**
   String get pipesRules;
 
   /// No description provided for @shikakuName.
@@ -1215,7 +1215,7 @@ abstract class AppLocalizations {
   /// No description provided for @lampsRules.
   ///
   /// In en, this message translates to:
-  /// **'• Place lamps in white cells. A lamp lights its own cell and its row and column until a wall.\n• Every white cell must be lit.\n• No lamp may shine on another lamp.\n• A number on a wall tells how many lamps are right next to it (up, down, left or right).\n\nTap a cell to cycle empty → dot (your \"no lamp\" note) → lamp. Long-press / right-click cycles back.'**
+  /// **'• Place lamps in the empty cells (not on walls). A lamp lights its own cell and its row and column until a wall.\n• Every empty cell must be lit.\n• No lamp may shine on another lamp.\n• A number on a wall tells how many lamps are right next to it (up, down, left or right).\n\nTap a cell to cycle empty → dot (your \"no lamp\" note) → lamp. Long-press / right-click cycles back.'**
   String get lampsRules;
 
   /// No description provided for @fenceName.
@@ -1359,7 +1359,7 @@ abstract class AppLocalizations {
   /// No description provided for @arrowsRules.
   ///
   /// In en, this message translates to:
-  /// **'• Shade some cells. Shaded cells never touch side by side.\n• Draw one closed loop through the centers of all the other cells. It never branches or crosses itself.\n• Gray clue cells are neither shaded nor on the loop. A clue\'s number counts the shaded cells in its arrow\'s direction, all the way to the edge.\n\nDrag through cells to draw the loop, or along it to erase. Tap the center of a cell to cycle empty → shaded → dot (your \"on the loop\" note), or tap between two cells to cycle line → cross → empty.'**
+  /// **'• Shade some cells. Shaded cells never touch side by side.\n• Draw one closed loop through the centers of all the other cells. It never branches or crosses itself.\n• Clue cells (a number and an arrow) are neither shaded nor on the loop. A clue\'s number counts the shaded cells in its arrow\'s direction, all the way to the edge.\n\nDrag through cells to draw the loop, or along it to erase. Tap the center of a cell to cycle empty → shaded → dot (your \"on the loop\" note), or tap between two cells to cycle line → cross → empty.'**
   String get arrowsRules;
 
   /// No description provided for @learnTitle.
@@ -1488,6 +1488,42 @@ abstract class AppLocalizations {
   /// **'Close'**
   String get tutorialClose;
 
+  /// No description provided for @tutorialStrategies.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn strategies'**
+  String get tutorialStrategies;
+
+  /// No description provided for @strategiesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} strategies'**
+  String strategiesTitle(String name);
+
+  /// No description provided for @strategiesFinishedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You know the main techniques for solving {name}.'**
+  String strategiesFinishedBody(String name);
+
+  /// No description provided for @learnBasicsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Basics'**
+  String get learnBasicsTab;
+
+  /// No description provided for @learnStrategiesTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Strategies'**
+  String get learnStrategiesTab;
+
+  /// No description provided for @learnStrategiesIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'For when you know the rules: each lesson shows a technique that strong players use, on a board that needs it.'**
+  String get learnStrategiesIntro;
+
   /// No description provided for @tutMambo1.
   ///
   /// In en, this message translates to:
@@ -1517,6 +1553,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a whole board: use every rule together. Tip: the palette button at the top lets you stamp one symbol on many cells, and a long press (or right-click) cycles backwards.'**
   String get tutMambo5;
+
+  /// No description provided for @tutMamboS1.
+  ///
+  /// In en, this message translates to:
+  /// **'When no rule applies directly, ask “what if?”. The highlighted pair is joined by =, so both cells hold the same symbol. Two suns would give the top row three suns out of four, so both are moons.'**
+  String get tutMamboS1;
+
+  /// No description provided for @tutMamboS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A harder board, where you\'ll need that trick often: try a symbol in a cell and follow the rules a few steps. If something breaks, the other symbol is right. A × pair always holds one of each, so it counts as one sun and one moon in its row.'**
+  String get tutMamboS2;
 
   /// No description provided for @tutSudoku1.
   ///
@@ -1548,6 +1596,18 @@ abstract class AppLocalizations {
   /// **'Now a whole puzzle. Selecting a cell tints its row, column and box, and highlights the same number elsewhere. Settings can remove notes for you when you place a number.'**
   String get tutSudoku5;
 
+  /// No description provided for @tutSudokuS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Look at one number instead of one cell. The highlighted box needs a 1: the 1s in its columns and in its second row rule out every cell but one. Then finish the board the same way.'**
+  String get tutSudokuS1;
+
+  /// No description provided for @tutSudokuS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Two more tricks. Pairs: two cells of a line or box that can only hold the same two numbers claim them. Pointing: if a box\'s spots for a number share a line, the rest of that line can\'t have it.'**
+  String get tutSudokuS2;
+
   /// No description provided for @tutKings1.
   ///
   /// In en, this message translates to:
@@ -1572,6 +1632,18 @@ abstract class AppLocalizations {
   /// **'Now a whole board. Dot the cells you can rule out, and look for rows, columns or regions with a single free cell.'**
   String get tutKings4;
 
+  /// No description provided for @tutKingsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Look for a region that fits in one row or column. The highlighted region lies entirely in the bottom row, so that row\'s crown is in it: dot the other cells of the bottom row, then carry on.'**
+  String get tutKingsS1;
+
+  /// No description provided for @tutKingsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Another trick: if a crown in a cell would rule out every cell of another region (by its row, its column or by touching), that cell can\'t hold a crown. Dot it. The same works for two regions squeezed into two rows.'**
+  String get tutKingsS2;
+
   /// No description provided for @tutHues1.
   ///
   /// In en, this message translates to:
@@ -1589,6 +1661,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. Start with numbers that need all of their blank neighbours, or none of them.'**
   String get tutHues3;
+
+  /// No description provided for @tutHuesS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Rule out colors. Each highlighted cell touches the blue 0, so it can\'t be blue, and the pink 0, so it can\'t be pink. Only yellow is left.'**
+  String get tutHuesS1;
+
+  /// No description provided for @tutHuesS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A harder board. Compare numbers that share blank neighbors: what one still needs may already be used up by the other. When stuck, try a color in a cell and see whether some number breaks.'**
+  String get tutHuesS2;
 
   /// No description provided for @tutMosaic1.
   ///
@@ -1608,6 +1692,12 @@ abstract class AppLocalizations {
   /// **'Now a real board, with a few moves to spare.'**
   String get tutMosaic3;
 
+  /// No description provided for @tutMosaicS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan ahead. Reach the middle of the board early, since your patch then touches more colors, and whenever you can, pick a color that wipes that color off the board.'**
+  String get tutMosaicS1;
+
   /// No description provided for @tutBlend1.
   ///
   /// In en, this message translates to:
@@ -1625,6 +1715,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. The chosen color stays selected, so you can paint several patches in a row.'**
   String get tutBlend3;
+
+  /// No description provided for @tutBlendS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick one patch in the middle and keep repainting it: each move then swallows every touching patch of the new color. Choose the color that most of its neighbors share.'**
+  String get tutBlendS1;
 
   /// No description provided for @tutPop1.
   ///
@@ -1656,6 +1752,18 @@ abstract class AppLocalizations {
   /// **'Other modes: in Shifter every row also slides right to close its gaps, in Continuous new columns roll in from the left, and Mega does both. Goals: clear the board, reach a target score, or play freely for your best. The game ends when no group of 2 is left.'**
   String get tutPop5;
 
+  /// No description provided for @tutPopS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Clearing a board takes planning. Before popping, ask what falls into the gap: pop groups that bring bubbles of one color together, and never leave a single bubble of a color on its own.'**
+  String get tutPopS1;
+
+  /// No description provided for @tutPopS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Chasing points: a group of n scores n × (n − 1), so one group of 8 (56) beats four groups of 2 (8). Pop the other colors first to merge a color into one big group.'**
+  String get tutPopS2;
+
   /// No description provided for @tutMerge1.
   ///
   /// In en, this message translates to:
@@ -1674,6 +1782,12 @@ abstract class AppLocalizations {
   /// **'Keep your biggest tile in a corner and feed it step by step. Build a 32.'**
   String get tutMerge3;
 
+  /// No description provided for @tutMergeS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Build a chain: keep your tiles in order along one row with the biggest in the corner, like 64, 32, 16, 8. Then one new 8 at the end rolls all the way up. Make 128.'**
+  String get tutMergeS1;
+
   /// No description provided for @tutPipes1.
   ///
   /// In en, this message translates to:
@@ -1683,7 +1797,7 @@ abstract class AppLocalizations {
   /// No description provided for @tutPipes2.
   ///
   /// In en, this message translates to:
-  /// **'No pipe end may stay open, so no pipe can point off the board. Tiles with a lock are already right. Start at the edges and corners, where tiles have the fewest ways to turn.'**
+  /// **'No pipe end may stay open, so no pipe can point off the board. Tiles with a dot in the corner are fixed and already right. Start at the edges and corners, where tiles have the fewest ways to turn.'**
   String get tutPipes2;
 
   /// No description provided for @tutPipes3.
@@ -1691,6 +1805,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. The network may not form loops.'**
   String get tutPipes3;
+
+  /// No description provided for @tutPipesS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Work inward from the rim. A straight on the edge must run along it, a corner holds only an elbow pointing inward, and a T on the edge turns its flat side to the edge. Every tile you settle limits its neighbors.'**
+  String get tutPipesS1;
+
+  /// No description provided for @tutPipesS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. The network may not form a loop: if turning a tile would close one, it must point elsewhere. And two dead ends never face each other, or they\'d form a pair cut off from the rest.'**
+  String get tutPipesS2;
 
   /// No description provided for @tutShikaku1.
   ///
@@ -1710,6 +1836,18 @@ abstract class AppLocalizations {
   /// **'Now a real board. Big numbers near the edges usually have the fewest ways to fit.'**
   String get tutShikaku3;
 
+  /// No description provided for @tutShikakuS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask which numbers can reach a cell. The bottom-left corner is too far for the 4 and the 6 to cover with a rectangle of their size, so it belongs to the 2.'**
+  String get tutShikakuS1;
+
+  /// No description provided for @tutShikakuS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. List the few rectangles a big number could use: cells that all of them cover belong to it, and a cell only one number can reach belongs to that number.'**
+  String get tutShikakuS2;
+
   /// No description provided for @tutTrail1.
   ///
   /// In en, this message translates to:
@@ -1728,6 +1866,18 @@ abstract class AppLocalizations {
   /// **'Now a real board. Cells in corners have only two ways in and out, so the path must use both.'**
   String get tutTrail3;
 
+  /// No description provided for @tutTrailS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Cells with only two free neighbors must be passed straight through: the path comes in one side and leaves by the other. Watch for cells your own path has just boxed in.'**
+  String get tutTrailS1;
+
+  /// No description provided for @tutTrailS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. Never cut the free cells into two parts: the path can\'t come back for the other part. And a cell with only one free neighbor is a dead end, allowed only for the last number.'**
+  String get tutTrailS2;
+
   /// No description provided for @tutLabyrinth1.
   ///
   /// In en, this message translates to:
@@ -1739,6 +1889,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A bigger maze. Hit a dead end? Drag back along your path, or tap any cell of it to return there. A quick drag follows straight corridors.'**
   String get tutLabyrinth2;
+
+  /// No description provided for @tutLabyrinthS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Lost? Keep one hand on a wall: always take the rightmost opening. In a maze like this it always leads out, though not by the shortest way.'**
+  String get tutLabyrinthS1;
+
+  /// No description provided for @tutLabyrinthS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Or work backwards: trace the way from the flag toward the start, and look for where the two routes meet. Dead ends near the flag are ruled out fast that way.'**
+  String get tutLabyrinthS2;
 
   /// No description provided for @tutAtoms1.
   ///
@@ -1758,6 +1920,18 @@ abstract class AppLocalizations {
   /// **'Now a real board. Start with atoms that have only one way to get their bonds.'**
   String get tutAtoms3;
 
+  /// No description provided for @tutAtomsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare an atom\'s number with its neighbors. The 4 in the corner has just two neighbors, and a pair can share at most two bonds, so both bonds are double. Likewise a 3 with two neighbors gets at least one bond to each.'**
+  String get tutAtomsS1;
+
+  /// No description provided for @tutAtomsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. Keep the molecule in one piece: two 1s never bond to each other, and two 2s never share a double bond, unless they\'re the only atoms. When stuck, try a bond and see if part of the board gets cut off.'**
+  String get tutAtomsS2;
+
   /// No description provided for @tutLits1.
   ///
   /// In en, this message translates to:
@@ -1776,6 +1950,18 @@ abstract class AppLocalizations {
   /// **'Now a real board. All shaded cells must form one connected area. Tap twice for a dot, your note that a cell stays empty.'**
   String get tutLits3;
 
+  /// No description provided for @tutLitsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'List the shapes each region can still hold. Cells that every possible shape covers are shaded, and cells that none covers stay empty. Small regions and regions squeezed by the 2×2 rule have the fewest options.'**
+  String get tutLitsS1;
+
+  /// No description provided for @tutLitsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A harder board. When stuck, try one shape in a region: if it makes a 2×2 block, cuts the shaded area in two or puts two equal shapes side by side, it\'s wrong.'**
+  String get tutLitsS2;
+
   /// No description provided for @tutCamp1.
   ///
   /// In en, this message translates to:
@@ -1793,6 +1979,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. A 0 means the whole row or column is grass, and every tree gets its own tent.'**
   String get tutCamp3;
+
+  /// No description provided for @tutCampS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Count the gaps. The top row needs 2 tents, and only its three highlighted cells can hold one. Two tents in three cells that may not touch must take both ends.'**
+  String get tutCampS1;
+
+  /// No description provided for @tutCampS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board, and some counts are hidden. When stuck, try a tent on a spot: if some tree is left with no place for its own tent, that spot is grass.'**
+  String get tutCampS2;
 
   /// No description provided for @tutIslands1.
   ///
@@ -1818,10 +2016,22 @@ abstract class AppLocalizations {
   /// **'Now a real board. Every island holds exactly one number.'**
   String get tutIslands4;
 
+  /// No description provided for @tutIslandsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Find cells no island can reach. The 3 grows at most two steps from its number, the 2 one step and the 1 none. The highlighted cells are out of every island\'s reach, so they\'re sea.'**
+  String get tutIslandsS1;
+
+  /// No description provided for @tutIslandsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. Keep the sea in mind: it must stay connected, so a sea cell with one way out continues that way, and it may not form a 2×2 pool. When stuck, try a cell as land and see whether something breaks.'**
+  String get tutIslandsS2;
+
   /// No description provided for @tutLamps1.
   ///
   /// In en, this message translates to:
-  /// **'Put lamps in the white cells: tap twice (a dot, then a lamp). A lamp lights its own row and column up to the walls. Light up every white cell.'**
+  /// **'Put lamps in the empty cells: tap twice (a dot, then a lamp). The dark cells are walls. A lamp lights its own row and column up to the walls. Light up every empty cell.'**
   String get tutLamps1;
 
   /// No description provided for @tutLamps2.
@@ -1841,6 +2051,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. Dots help you mark cells that can\'t hold a lamp.'**
   String get tutLamps4;
+
+  /// No description provided for @tutLampsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Some cells have just one way to get light. The top-left corner can only be lit from itself or its two neighbors, and the 0 rules the neighbors out: the lamp goes in the corner. Then look at the 1.'**
+  String get tutLampsS1;
+
+  /// No description provided for @tutLampsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When stuck, try a lamp on a cell and follow what it forces: if some cell can no longer be lit, or a number can\'t be met, that cell gets a dot.'**
+  String get tutLampsS2;
 
   /// No description provided for @tutFence1.
   ///
@@ -1866,6 +2088,24 @@ abstract class AppLocalizations {
   /// **'Now a real board. Start with the 0s and 3s.'**
   String get tutFence4;
 
+  /// No description provided for @tutFenceS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn a few patterns. Two 3s side by side always have a line between them and a line on each far side: any other way leaves one of them short. The 0 above helps too.'**
+  String get tutFenceS1;
+
+  /// No description provided for @tutFenceS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Corners are strong. A 1 in a corner never uses its two outer sides: the loop would have to turn right there and use both. A 3 in a corner always uses both.'**
+  String get tutFenceS2;
+
+  /// No description provided for @tutFenceS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When stuck, try a line on one edge and follow it: if it leads to a dead end, a number it can\'t satisfy, or a small loop that leaves others out, that edge gets a cross.'**
+  String get tutFenceS3;
+
   /// No description provided for @tutPearls1.
   ///
   /// In en, this message translates to:
@@ -1883,6 +2123,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. The loop doesn\'t have to visit every cell, and it never crosses or touches itself.'**
   String get tutPearls3;
+
+  /// No description provided for @tutPearlsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'A black pearl can\'t turn toward an edge that\'s too close: the loop needs two straight cells on each side. Both black pearls here are too close to two edges, so their directions are fixed.'**
+  String get tutPearlsS1;
+
+  /// No description provided for @tutPearlsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. Three white pearls in a row can\'t all lie on one straight stretch (the middle one needs a turn next to it), so the loop crosses them. When stuck, try a line and see if some pearl breaks.'**
+  String get tutPearlsS2;
 
   /// No description provided for @tutRails1.
   ///
@@ -1902,6 +2154,18 @@ abstract class AppLocalizations {
   /// **'Now a real board. The track never branches or crosses itself, and it doesn\'t have to visit every cell.'**
   String get tutRails3;
 
+  /// No description provided for @tutRailsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with lines whose count leaves no choice. The second row needs 4 track cells and has only 4, and so does the right column. Then join the ends.'**
+  String get tutRailsS1;
+
+  /// No description provided for @tutRailsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. A count that\'s already used up blocks the rest of its line, and a track cell always needs exactly two track neighbors. When stuck, try a piece and check that the counts still fit.'**
+  String get tutRailsS2;
+
   /// No description provided for @tutBlocks1.
   ///
   /// In en, this message translates to:
@@ -1920,6 +2184,18 @@ abstract class AppLocalizations {
   /// **'Now a real board. Start with small regions and with cells whose neighbours rule out most numbers. Pencil notes help.'**
   String get tutBlocks3;
 
+  /// No description provided for @tutBlocksS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Pointing: note where each region can still put a number. When all those cells touch the same outside cell, that cell can\'t hold the number, since it would touch it. Pencil notes help you see it.'**
+  String get tutBlocksS1;
+
+  /// No description provided for @tutBlocksS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When nothing else works, pick a cell with just two possible numbers and try one: if it soon leaves a region with no place for a number, the other one is right.'**
+  String get tutBlocksS2;
+
   /// No description provided for @tutPairs1.
   ///
   /// In en, this message translates to:
@@ -1929,7 +2205,7 @@ abstract class AppLocalizations {
   /// No description provided for @tutPairs2.
   ///
   /// In en, this message translates to:
-  /// **'Pairs never touch each other side by side. Put a dot (tap twice) next to a finished pair: those cells stay white.'**
+  /// **'Pairs never touch each other side by side. The top pair is finished, so the highlighted cells next to it stay unshaded: put a dot there (tap twice), then finish the board.'**
   String get tutPairs2;
 
   /// No description provided for @tutPairs3.
@@ -1937,6 +2213,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. Small regions and cells boxed in by dots are good places to start.'**
   String get tutPairs3;
+
+  /// No description provided for @tutPairsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Try every way to finish a small region: a cell shaded in all of them is shaded, and a cell shaded in none gets a dot. An L of three cells, for example, always shades its corner.'**
+  String get tutPairsS1;
+
+  /// No description provided for @tutPairsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When stuck, shade a cell and follow the rules: if some region can no longer get its two cells, or two pairs would touch, that cell stays unshaded.'**
+  String get tutPairsS2;
 
   /// No description provided for @tutPlots1.
   ///
@@ -1956,6 +2244,18 @@ abstract class AppLocalizations {
   /// **'Now a real board. Some plots show no number at all: work out their size from the room that\'s left.'**
   String get tutPlots3;
 
+  /// No description provided for @tutPlotsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Look for pockets. The two highlighted cells are fenced in by finished plots, so they can only join each other. Two 1s may not touch, so together they are a plot of 2.'**
+  String get tutPlotsS1;
+
+  /// No description provided for @tutPlotsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When nothing is certain, pick a cell with only two or three possible numbers and test each one: a number that leaves some plot unable to reach its size is out.'**
+  String get tutPlotsS2;
+
   /// No description provided for @tutLinks1.
   ///
   /// In en, this message translates to:
@@ -1974,16 +2274,28 @@ abstract class AppLocalizations {
   /// **'Now a real board. Corners and edges leave the fewest ways to go, so start there.'**
   String get tutLinks3;
 
+  /// No description provided for @tutLinksS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill the tight spots first. An empty corner has only two neighbors, so the path through it uses both. The same goes for any cell squeezed down to two free neighbors.'**
+  String get tutLinksS1;
+
+  /// No description provided for @tutLinksS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. In a puzzle with one answer, a path never folds back beside itself (it could take a shortcut), so no 2×2 square belongs to a single path. And never leave an empty cell that no path can still reach.'**
+  String get tutLinksS2;
+
   /// No description provided for @tutArrows1.
   ///
   /// In en, this message translates to:
-  /// **'Draw one loop through the centers of all the white cells: drag from cell to cell. The gray clue cell is never on the loop, and its 0 says there are no shaded cells above it.'**
+  /// **'Draw one loop through the centers of all the empty cells: drag from cell to cell. The clue cell in the middle is never on the loop. Its 0 says no cell above it is shaded, so here nothing is.'**
   String get tutArrows1;
 
   /// No description provided for @tutArrows2.
   ///
   /// In en, this message translates to:
-  /// **'Now some cells are shaded: tap a cell\'s center to shade it. Each clue counts the shaded cells in its arrow\'s direction. Shaded cells never touch side by side, and the loop goes through every other cell.'**
+  /// **'Now two cells must be shaded. Each clue counts the shaded cells in its arrow\'s direction: find them and tap their centers to shade them. Shaded cells never touch side by side. Then draw the loop through all the other cells.'**
   String get tutArrows2;
 
   /// No description provided for @tutArrows3.
@@ -1991,6 +2303,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. Cells next to a shaded cell are always on the loop, and a loop cell needs two ways out.'**
   String get tutArrows3;
+
+  /// No description provided for @tutArrowsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Look for tight clues. The 2 in the middle row has just three cells to its right, and its two shaded cells may not touch, so they take the first and the last. The 2 in the top row is even easier: it has only two free cells.'**
+  String get tutArrowsS1;
+
+  /// No description provided for @tutArrowsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. Every cell that isn\'t shaded or a clue is on the loop, so a cell with only two free neighbors has its path fixed. When stuck, try shading a cell and see if a loop cell is left with fewer than two ways out.'**
+  String get tutArrowsS2;
 
   /// No description provided for @tutMines1.
   ///
@@ -2015,6 +2339,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. You never need to guess. If you dig a mine by mistake, it just gets flagged and the game goes on.'**
   String get tutMines4;
+
+  /// No description provided for @tutMinesS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare neighboring numbers. The 2 sees three closed cells, the 1 on its left sees only the first two, so the third one is a mine. The same works from the right. Then the middle cell is safe.'**
+  String get tutMinesS1;
+
+  /// No description provided for @tutMinesS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. Keep comparing numbers that share closed cells. Near the end, count what\'s left: the mine counter can settle the last closed cells.'**
+  String get tutMinesS2;
 }
 
 class _AppLocalizationsDelegate

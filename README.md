@@ -51,7 +51,7 @@ You choose the grid size and the difficulty.
 
 - **Endless puzzles.** Generation is seeded and deterministic, and runs in a background isolate.
 - **Daily challenges.** Every day picks three games, each at every difficulty, the same for everyone. Results are kept in a calendar.
-- **Interactive tutorials.** Every game teaches its rules on a few tiny boards you play, ending with a small real one.
+- **Interactive tutorials.** Every game teaches its rules on a few tiny boards you play, ending with a small real one. Optional strategy lessons then show the techniques strong players use, each on a board that needs it.
 - **Share codes.** Every puzzle has a code (and a link on the web) that recreates it exactly.
 - **Exactly one solution.** Most types are also graded by how deep the solver's logic has to go (easy, medium, hard, and expert for Sudoku).
 - **Game options.** A puzzle can offer extra choices when you start a game, like Pop's mode and goal. They are part of the share code, and stats are kept per choice.

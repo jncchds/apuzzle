@@ -33,6 +33,8 @@ class TrailType extends PuzzleType<TrailPuzzle, TrailState> {
 
   @override
   List<TutorialStep> tutorial() => trailTutorial;
+  @override
+  List<TutorialStep> strategies() => trailStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 4; n <= 10; n++) GridSize.square(n)];

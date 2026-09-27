@@ -33,6 +33,8 @@ class AtomsType extends PuzzleType<AtomsPuzzle, AtomsState> {
 
   @override
   List<TutorialStep> tutorial() => atomsTutorial;
+  @override
+  List<TutorialStep> strategies() => atomsStrategies;
 
   @override
   List<GridSize> get sizes => [for (final n in [5, 6, 7, 8, 9, 10]) GridSize.square(n)];

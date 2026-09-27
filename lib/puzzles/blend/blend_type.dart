@@ -36,6 +36,8 @@ class BlendType extends PuzzleType<BlendPuzzle, BlendState> {
 
   @override
   List<TutorialStep> tutorial() => blendTutorial;
+  @override
+  List<TutorialStep> strategies() => blendStrategies;
 
   @override
   List<GridSize> get sizes => [for (final n in [5, 6, 8, 10, 12, 14]) GridSize.square(n)];

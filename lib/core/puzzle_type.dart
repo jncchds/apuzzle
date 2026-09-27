@@ -117,6 +117,9 @@ abstract class PuzzleType<P, S> {
   /// The interactive "how to play": tiny boards, one rule or trick each.
   List<TutorialStep> tutorial() => const [];
 
+  /// The optional advanced lessons: solving techniques, same step format.
+  List<TutorialStep> strategies() => const [];
+
   Map<String, dynamic> encodePuzzle(P puzzle);
   P decodePuzzle(Map<String, dynamic> json);
   Map<String, dynamic> encodeState(S state);

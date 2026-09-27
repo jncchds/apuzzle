@@ -35,6 +35,8 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
 
   @override
   List<TutorialStep> tutorial() => popTutorial;
+  @override
+  List<TutorialStep> strategies() => popStrategies;
 
   @override
   List<GridSize> get sizes => const [

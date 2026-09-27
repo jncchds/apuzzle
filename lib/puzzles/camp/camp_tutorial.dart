@@ -34,3 +34,22 @@ final List<TutorialStep> campTutorial = [
     make: () => generateCamp(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 5)),
   ),
 ];
+
+// Two tents in the top row's three cells can't touch, so they take both
+// ends. Column counts are hidden so the row has to do the work.
+const _ends = CampPuzzle(
+  rows: 3,
+  cols: 3,
+  trees: [false, false, false, true, true, true, false, false, false],
+  tents: [true, false, true, false, false, false, false, true, false],
+  rowCounts: [2, 0, 1],
+  colCounts: [null, null, null],
+);
+
+final List<TutorialStep> campStrategies = [
+  TutorialStep(text: (l) => l.tutCampS1, puzzle: _ends, focus: {const Pos(0, 0), const Pos(0, 1), const Pos(0, 2)}),
+  TutorialStep.generated(
+    text: (l) => l.tutCampS2,
+    make: () => generateCamp(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

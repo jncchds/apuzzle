@@ -1,6 +1,7 @@
 import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/tutorial.dart';
+import '../../core/value_grid.dart';
 import 'hues_generator.dart';
 import 'hues_model.dart';
 
@@ -39,5 +40,29 @@ final List<TutorialStep> huesTutorial = [
   TutorialStep.generated(
     text: (l) => l.tutHues3,
     make: () => generateHues(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 3)),
+  ),
+];
+
+// The two middle cells of the top rows touch the blue 0 and the pink 0, so
+// only yellow is left for them (the rest is painted already).
+final _zeros = _board([
+  ['b0', 'y', 'p0'],
+  ['p', 'y', 'b'],
+  ['p1', 'y', 'b1'],
+]);
+
+final List<TutorialStep> huesStrategies = [
+  TutorialStep(
+    text: (l) => l.tutHuesS1,
+    puzzle: _zeros,
+    state: ValueGrid.fromGivens(_zeros.size, _zeros.givenAt)
+        .set(const Pos(1, 0), const CellValue(value: 1))
+        .set(const Pos(1, 2), const CellValue(value: 0))
+        .set(const Pos(2, 1), const CellValue(value: 2)),
+    focus: {const Pos(0, 1), const Pos(1, 1)},
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutHuesS2,
+    make: () => generateHues(const GenParams(size: GridSize.square(5), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

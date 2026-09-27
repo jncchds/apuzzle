@@ -39,3 +39,14 @@ final List<TutorialStep> fenceTutorial = [
     make: () => generateFence(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 3)),
   ),
 ];
+
+final List<TutorialStep> fenceStrategies = [
+  // Two 3s side by side (and a 0 to start from).
+  TutorialStep(text: (l) => l.tutFenceS1, puzzle: _board(['.o.', 'Xo#', '###']), focus: {const Pos(1, 0), const Pos(1, 1)}),
+  // A 1 and a 3 in corners.
+  TutorialStep(text: (l) => l.tutFenceS2, puzzle: _board(['###o', '#.oo', '#XXo', '#o#X']), focus: {const Pos(0, 3), const Pos(3, 3)}),
+  TutorialStep.generated(
+    text: (l) => l.tutFenceS3,
+    make: () => generateFence(const GenParams(size: GridSize.square(5), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

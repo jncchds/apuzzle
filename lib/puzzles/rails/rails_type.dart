@@ -36,6 +36,8 @@ class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
 
   @override
   List<TutorialStep> tutorial() => railsTutorial;
+  @override
+  List<TutorialStep> strategies() => railsStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

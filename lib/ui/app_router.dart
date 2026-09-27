@@ -16,13 +16,22 @@ import 'settings_screen.dart';
 import 'tutorial_screen.dart';
 
 /// What the address bar shows: home (`/`), settings (`/settings`), the
-/// tutorials (`/learn`; one game's is `/learn?t=mambo`), daily
+/// tutorials (`/learn`; one game's is `/learn?t=mambo`, its strategy
+/// lessons `/learn?t=mambo&s=1`), daily
 /// challenges (`/daily?d=2026-09-25`) or a puzzle by its share code
 /// (`/?p=kings-8x8-hard-4FZ8K1-v1`, the share link itself; a daily one is
 /// `/daily?d=…&p=…`). On the web this gives the browser's back and forward
 /// buttons real history; on Android the same parser opens share links.
 class AppRoute {
-  const AppRoute({this.settings = false, this.learn = false, this.tutorial, this.daily, this.game, this.error});
+  const AppRoute({
+    this.settings = false,
+    this.learn = false,
+    this.tutorial,
+    this.strategies = false,
+    this.daily,
+    this.game,
+    this.error,
+  });
 
   final bool settings;
 
@@ -31,6 +40,9 @@ class AppRoute {
 
   /// One game's tutorial, shown over whatever is open.
   final PuzzleType? tutorial;
+
+  /// With [tutorial]: its strategy lessons instead of the basics.
+  final bool strategies;
 
   /// The daily challenges page with this day selected. With [game], that
   /// game is one of the day's puzzles.
@@ -55,7 +67,11 @@ class AppRoute {
     final page = uri.pathSegments.lastOrNull;
     if (page == 'learn') {
       final tutorial = puzzleTypes.where((t) => t.id == uri.queryParameters['t']).firstOrNull;
-      return AppRoute(learn: tutorial == null, tutorial: tutorial);
+      return AppRoute(
+        learn: tutorial == null,
+        tutorial: tutorial,
+        strategies: tutorial != null && uri.queryParameters['s'] == '1' && tutorial.strategies().isNotEmpty,
+      );
     }
     if (page == 'daily') {
       final today = Day.today();
@@ -69,7 +85,7 @@ class AppRoute {
   }
 
   Uri get uri => tutorial != null || learn
-      ? Uri(path: '/learn', queryParameters: tutorial == null ? null : {'t': tutorial!.id})
+      ? Uri(path: '/learn', queryParameters: tutorial == null ? null : {'t': tutorial!.id, if (strategies) 's': '1'})
       : daily != null
       ? Uri(path: '/daily', queryParameters: {'d': daily.toString(), if (game != null) 'p': game.toString()})
       : game != null
@@ -118,13 +134,21 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
   _Game? _game;
   int _games = 0;
   PuzzleType? _tutorial;
+  bool _strategies = false;
 
   /// Where the tutorial's "Play" button leads (the game it was offered for).
   VoidCallback? _tutorialPlay;
 
   @override
   AppRoute get currentConfiguration =>
-      AppRoute(settings: _settings, learn: _learn, tutorial: _tutorial, daily: _daily, game: _game?.code);
+      AppRoute(
+        settings: _settings,
+        learn: _learn,
+        tutorial: _tutorial,
+        strategies: _strategies,
+        daily: _daily,
+        game: _game?.code,
+      );
 
   @override
   Future<void> setNewRoutePath(AppRoute configuration) {
@@ -139,7 +163,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
       return SynchronousFuture(null);
     }
     if (configuration.tutorial case final type?) {
-      openTutorial(type);
+      openTutorial(type, strategies: configuration.strategies);
     } else {
       _show(settings: configuration.settings, learn: configuration.learn, daily: configuration.daily, game: configuration.game);
     }
@@ -165,10 +189,12 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
   /// The list of tutorials.
   void openLearn() => _show(learn: true);
 
-  /// Opens [type]'s tutorial over the current page. [play] is what its "Play"
-  /// button starts (none: the tutorial just closes).
-  void openTutorial(PuzzleType type, {VoidCallback? play}) {
+  /// Opens [type]'s tutorial (or with [strategies], its strategy lessons)
+  /// over the current page. [play] is what its "Play" button starts (none:
+  /// the tutorial just closes).
+  void openTutorial(PuzzleType type, {VoidCallback? play, bool strategies = false}) {
     _tutorial = type;
+    _strategies = strategies;
     _tutorialPlay = play;
     notifyListeners();
   }
@@ -227,14 +253,14 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
           ),
         if (_tutorial case final type?)
           MaterialPage(
-            key: ValueKey('tutorial.${type.id}'),
-            child: TutorialScreen(type: type, onPlay: _tutorialPlay),
+            key: ValueKey('tutorial.${type.id}.$_strategies'),
+            child: TutorialScreen(type: type, strategies: _strategies, onPlay: _tutorialPlay),
           ),
       ],
       onDidRemovePage: (page) {
         if (page.key == const ValueKey('settings')) _settings = false;
         if (page.key == const ValueKey('learn')) _learn = false;
-        if (page.key == ValueKey('tutorial.${_tutorial?.id}')) {
+        if (page.key == ValueKey('tutorial.${_tutorial?.id}.$_strategies')) {
           _tutorial = null;
           _tutorialPlay = null;
         }

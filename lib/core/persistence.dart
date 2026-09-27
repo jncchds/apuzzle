@@ -136,6 +136,16 @@ class GameStore {
     tutorialRevision.value++;
   }
 
+  String _strategiesKey(String typeId) => 'strategies.$typeId';
+
+  /// Whether the strategy lessons of [typeId] were played to the end.
+  bool strategiesDone(String typeId) => prefs.getBool(_strategiesKey(typeId)) ?? false;
+
+  Future<void> setStrategiesDone(String typeId) async {
+    await prefs.setBool(_strategiesKey(typeId), true);
+    tutorialRevision.value++;
+  }
+
   /// Whether the player already knows [typeId]: its tutorial was offered, or
   /// they have played it before.
   bool knowsGame(String typeId) =>

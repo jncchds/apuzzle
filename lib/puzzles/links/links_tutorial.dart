@@ -26,3 +26,14 @@ final List<TutorialStep> linksTutorial = [
     make: () => generateLinks(const GenParams(size: GridSize.square(6), difficulty: Difficulty.easy, seed: 3)),
   ),
 ];
+
+final List<TutorialStep> linksStrategies = [
+  TutorialStep.generated(
+    text: (l) => l.tutLinksS1,
+    make: () => generateLinks(const GenParams(size: GridSize.square(5), difficulty: Difficulty.medium, seed: 1)),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutLinksS2,
+    make: () => generateLinks(const GenParams(size: GridSize.square(7), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

@@ -44,6 +44,8 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
 
   @override
   List<TutorialStep> tutorial() => minesTutorial;
+  @override
+  List<TutorialStep> strategies() => minesStrategies;
 
   @override
   List<GridSize> get sizes => const [

@@ -10,3 +10,18 @@ final List<TutorialStep> mergeTutorial = [
   TutorialStep(text: (l) => l.tutMerge2, puzzle: _board([4, 4, 8, 0, 0, 0, 0, 0, 0], 16)),
   TutorialStep(text: (l) => l.tutMerge3, puzzle: _board([16, 8, 4, 0, 0, 4, 0, 0, 0], 32)),
 ];
+
+final List<TutorialStep> mergeStrategies = [
+  // A chain along the top row: the new 8 rolls all the way up to 128.
+  TutorialStep(
+    text: (l) => l.tutMergeS1,
+    puzzle: const MergePuzzle(
+      rows: 4,
+      cols: 4,
+      goal: MergeGoal.target,
+      target: 128,
+      seed: 7,
+      start: [64, 32, 16, 8, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0],
+    ),
+  ),
+];

@@ -34,6 +34,8 @@ class ArrowsType extends PuzzleType<ArrowsPuzzle, ArrowsState> {
 
   @override
   List<TutorialStep> tutorial() => arrowsTutorial;
+  @override
+  List<TutorialStep> strategies() => arrowsStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];
@@ -126,8 +128,13 @@ class ArrowsType extends PuzzleType<ArrowsPuzzle, ArrowsState> {
     final g = p.lattice;
     final scheme = Theme.of(context).colorScheme;
     final dark = Theme.of(context).brightness == Brightness.dark;
-    final shade = dark ? const Color(0xFFB8BECB) : const Color(0xFF2B2F3A);
-    final clueFill = scheme.surfaceContainerHighest;
+    // Shading stays a dark fill in both themes; clues sit in the page colour with a rim, so neither looks like a loop cell.
+    final shade = dark ? const Color(0xFF55607A) : const Color(0xFF2B2F3A);
+    final clueFill = scheme.surface;
+    final clueRim = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.5
+      ..color = scheme.onSurface.withValues(alpha: 0.35);
     final ink = scheme.onSurface;
     final textStyle = Theme.of(context).textTheme.bodyMedium!;
 
@@ -182,6 +189,7 @@ class ArrowsType extends PuzzleType<ArrowsPuzzle, ArrowsState> {
           final rr = RRect.fromRectAndRadius(rect, Radius.circular(cell * 0.1));
           if (p.isClue(i)) {
             canvas.drawRRect(rr, Paint()..color = clueFill);
+            canvas.drawRRect(rr, clueRim);
             _paintClue(canvas, rect, p.arrows[i], p.counts[i], textStyle.copyWith(color: ink));
           } else if (s.cells[i] == arrowsShade) {
             canvas.drawRRect(rr, Paint()..color = shade);

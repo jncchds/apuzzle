@@ -34,6 +34,8 @@ class IslandsType extends ValueGridType<IslandsPuzzle> {
 
   @override
   List<TutorialStep> tutorial() => islandsTutorial;
+  @override
+  List<TutorialStep> strategies() => islandsStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

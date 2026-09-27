@@ -33,6 +33,8 @@ class PipesType extends PuzzleType<PipesPuzzle, PipesState> {
 
   @override
   List<TutorialStep> tutorial() => pipesTutorial;
+  @override
+  List<TutorialStep> strategies() => pipesStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 4; n <= 11; n++) GridSize.square(n)];

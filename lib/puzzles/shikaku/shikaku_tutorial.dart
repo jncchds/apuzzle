@@ -32,3 +32,20 @@ final List<TutorialStep> shikakuTutorial = [
     make: () => generateShikaku(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 2)),
   ),
 ];
+
+final List<TutorialStep> shikakuStrategies = [
+  // Only the 2 can reach the bottom-left corner.
+  TutorialStep(
+    text: (l) => l.tutShikakuS1,
+    puzzle: _board(3, 4, [
+      (const CellRect(0, 0, 1, 1), 0, 1),
+      (const CellRect(0, 2, 2, 3), 1, 3),
+      (const CellRect(2, 0, 2, 1), 2, 1),
+    ]),
+    focus: {const Pos(2, 0)},
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutShikakuS2,
+    make: () => generateShikaku(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

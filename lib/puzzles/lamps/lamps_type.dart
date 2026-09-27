@@ -35,6 +35,8 @@ class LampsType extends ValueGridType<LampsPuzzle> {
 
   @override
   List<TutorialStep> tutorial() => lampsTutorial;
+  @override
+  List<TutorialStep> strategies() => lampsStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];
@@ -112,10 +114,11 @@ class LampsType extends ValueGridType<LampsPuzzle> {
   Color? cellColorIn(BuildContext context, LampsPuzzle puzzle, ValueGrid state, Pos pos, CellValue cell) {
     final dark = Theme.of(context).brightness == Brightness.dark;
     final i = puzzle.size.index(pos);
-    if (puzzle.walls[i]) return dark ? const Color(0xFF12151B) : wallColor;
+    if (puzzle.walls[i]) return dark ? const Color(0xFF08090C) : wallColor;
     final sight = _sight(puzzle);
     final lit = state.cells[i].value == lampsLamp || sight[i].any((j) => state.cells[j].value == lampsLamp);
-    if (!lit) return null;
+    // In the dark theme open cells are lifted, so the walls read as solid blocks.
+    if (!lit) return dark ? Theme.of(context).colorScheme.surfaceContainerHighest : null;
     return dark ? Color.lerp(glow, Colors.black, 0.55) : glow;
   }
 

@@ -599,7 +599,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pipesRules =>
-      '• Drehe die Kacheln so, dass jedes Rohr mit der Quelle (der Kachel mit Ring) verbunden ist.\n• Kein Rohrende darf offen bleiben, und das Netz darf keine Schleifen enthalten.\n• Wasser fließt durch alles, was bereits mit der Quelle verbunden ist.\n• Kacheln mit Schloss sind schon an ihrem Platz.\n\nTippe auf eine Kachel, um sie im Uhrzeigersinn zu drehen; langes Drücken / Rechtsklick dreht sie zurück.';
+      '• Drehe die Kacheln so, dass jedes Rohr mit der Quelle (der Kachel mit Ring) verbunden ist.\n• Kein Rohrende darf offen bleiben, und das Netz darf keine Schleifen enthalten.\n• Wasser fließt durch alles, was bereits mit der Quelle verbunden ist.\n• Kacheln mit einem Punkt in der Ecke sind fest und schon an ihrem Platz.\n\nTippe auf eine Kachel, um sie im Uhrzeigersinn zu drehen; langes Drücken / Rechtsklick dreht sie zurück.';
 
   @override
   String get shikakuName => 'Shikaku';
@@ -699,7 +699,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get lampsRules =>
-      '• Setze Lampen auf weiße Felder. Eine Lampe beleuchtet ihr Feld sowie ihre Zeile und Spalte bis zur nächsten Wand.\n• Jedes weiße Feld muss beleuchtet sein.\n• Keine Lampe darf auf eine andere Lampe scheinen.\n• Eine Zahl auf einer Wand gibt an, wie viele Lampen direkt daneben stehen (oben, unten, links oder rechts).\n\nTippe auf ein Feld, um zu wechseln: leer → Punkt (deine Notiz „keine Lampe“) → Lampe. Langes Drücken / Rechtsklick wechselt zurück.';
+      '• Setze Lampen auf leere Felder (nicht auf Wände). Eine Lampe beleuchtet ihr Feld sowie ihre Zeile und Spalte bis zur nächsten Wand.\n• Jedes leere Feld muss beleuchtet sein.\n• Keine Lampe darf auf eine andere Lampe scheinen.\n• Eine Zahl auf einer Wand gibt an, wie viele Lampen direkt daneben stehen (oben, unten, links oder rechts).\n\nTippe auf ein Feld, um zu wechseln: leer → Punkt (deine Notiz „keine Lampe“) → Lampe. Langes Drücken / Rechtsklick wechselt zurück.';
 
   @override
   String get fenceName => 'Zaun';
@@ -783,7 +783,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get arrowsRules =>
-      '• Schattiere einige Felder. Schattierte Felder berühren sich nie seitlich.\n• Zeichne eine geschlossene Schleife durch die Mitten aller anderen Felder. Sie verzweigt und kreuzt sich nicht.\n• Graue Hinweisfelder sind weder schattiert noch auf der Schleife. Die Zahl eines Hinweises zählt die schattierten Felder in Pfeilrichtung bis zum Rand.\n\nZiehe durch Felder, um die Schleife zu zeichnen, oder an ihr entlang, um sie zu löschen. Tippe auf die Mitte eines Felds, um zu wechseln: leer → schattiert → Punkt (deine Notiz „auf der Schleife“), oder zwischen zwei Felder, um zu wechseln: Linie → Kreuz → leer.';
+      '• Schattiere einige Felder. Schattierte Felder berühren sich nie seitlich.\n• Zeichne eine geschlossene Schleife durch die Mitten aller anderen Felder. Sie verzweigt und kreuzt sich nicht.\n• Hinweisfelder (Zahl und Pfeil) sind weder schattiert noch auf der Schleife. Die Zahl eines Hinweises zählt die schattierten Felder in Pfeilrichtung bis zum Rand.\n\nZiehe durch Felder, um die Schleife zu zeichnen, oder an ihr entlang, um sie zu löschen. Tippe auf die Mitte eines Felds, um zu wechseln: leer → schattiert → Punkt (deine Notiz „auf der Schleife“), oder zwischen zwei Felder, um zu wechseln: Linie → Kreuz → leer.';
 
   @override
   String get learnTitle => 'So wird gespielt';
@@ -867,6 +867,29 @@ class AppLocalizationsDe extends AppLocalizations {
   String get tutorialClose => 'Schließen';
 
   @override
+  String get tutorialStrategies => 'Strategien lernen';
+
+  @override
+  String strategiesTitle(String name) {
+    return '$name: Strategien';
+  }
+
+  @override
+  String strategiesFinishedBody(String name) {
+    return 'Du kennst die wichtigsten Techniken für $name.';
+  }
+
+  @override
+  String get learnBasicsTab => 'Grundlagen';
+
+  @override
+  String get learnStrategiesTab => 'Strategien';
+
+  @override
+  String get learnStrategiesIntro =>
+      'Für alle, die die Regeln kennen: Jede Lektion zeigt eine Technik erfahrener Spieler auf einem Gitter, das sie braucht.';
+
+  @override
   String get tutMambo1 =>
       'Fülle jedes Feld mit einer Sonne oder einem Mond. Nie drei gleiche nebeneinander: Auf zwei Sonnen nebeneinander folgt ein Mond. Tippe auf ein markiertes Feld, um zu wechseln: leer → Sonne → Mond.';
 
@@ -885,6 +908,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutMambo5 =>
       'Jetzt ein ganzes Brett: Nutze alle Regeln zusammen. Tipp: Mit der Palette oben setzt du ein Symbol auf viele Felder, und langes Drücken (oder Rechtsklick) wechselt rückwärts.';
+
+  @override
+  String get tutMamboS1 =>
+      'Wenn keine Regel direkt greift, frag dich: „Was wäre, wenn?“ Das markierte Paar ist mit = verbunden, beide Felder sind also gleich. Zwei Sonnen gäben der oberen Zeile drei Sonnen von vier, also sind beide Monde.';
+
+  @override
+  String get tutMamboS2 =>
+      'Ein schwereres Gitter, auf dem du den Trick oft brauchst: Probier ein Symbol in einem Feld und folge den Regeln ein paar Schritte. Geht etwas kaputt, ist das andere Symbol richtig. Ein ×-Paar hat immer eins von jedem, zählt in seiner Zeile also als eine Sonne und ein Mond.';
 
   @override
   String get tutSudoku1 =>
@@ -907,6 +938,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein ganzes Rätsel. Ein ausgewähltes Feld tönt seine Zeile, Spalte und seinen Block ein und hebt dieselbe Zahl anderswo hervor. In den Einstellungen können Notizen automatisch entfernt werden.';
 
   @override
+  String get tutSudokuS1 =>
+      'Schau auf eine Zahl statt auf ein Feld. Der markierte Block braucht eine 1: Die Einsen in seinen Spalten und in seiner zweiten Zeile schließen alle Felder bis auf eins aus. Löse dann das Gitter genauso weiter.';
+
+  @override
+  String get tutSudokuS2 =>
+      'Zwei neue Tricks. Paare: Zwei Felder einer Linie oder eines Blocks, in die nur dieselben zwei Zahlen passen, beanspruchen sie. Zeigen: Liegen die Plätze eines Blocks für eine Zahl auf einer Linie, fehlt sie im Rest dieser Linie.';
+
+  @override
   String get tutKings1 =>
       'Setze genau eine Krone in jede Zeile, jede Spalte und jeden farbigen Bereich. Drei stehen schon, und für die letzte ist nur ein Platz frei. Tippe zweimal darauf: erst ein Punkt, dann eine Krone.';
 
@@ -923,6 +962,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein ganzes Brett. Setze Punkte, wo keine Krone hin kann, und suche Zeilen, Spalten oder Bereiche mit nur einem freien Feld.';
 
   @override
+  String get tutKingsS1 =>
+      'Such eine Region, die in eine Zeile oder Spalte passt. Die markierte Region liegt ganz in der unteren Zeile, also steht die Krone dieser Zeile in ihr: Setz Punkte in die anderen Felder der unteren Zeile und mach weiter.';
+
+  @override
+  String get tutKingsS2 =>
+      'Noch ein Trick: Würde eine Krone in einem Feld alle Felder einer anderen Region ausschließen (über Zeile, Spalte oder Berühren), kann dort keine Krone stehen. Setz einen Punkt. Genauso bei zwei Regionen, die in zwei Zeilen passen.';
+
+  @override
   String get tutHues1 =>
       'Färbe jedes leere Feld. Eine Zahl zählt die leeren Felder um sie herum (auch diagonal), die am Ende ihre Farbe haben. Die blaue 3 hat genau drei leere Nachbarn, also sind alle blau. Wähle eine Farbe in der Palette und tippe auf Felder.';
 
@@ -933,6 +980,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutHues3 =>
       'Jetzt ein echtes Brett. Fang mit Zahlen an, die alle leeren Nachbarn brauchen oder keinen.';
+
+  @override
+  String get tutHuesS1 =>
+      'Schließ Farben aus. Jedes markierte Feld berührt die blaue 0, kann also nicht blau sein, und die rosa 0, kann also nicht rosa sein. Bleibt nur Gelb.';
+
+  @override
+  String get tutHuesS2 =>
+      'Ein schwereres Gitter. Vergleiche Zahlen mit gemeinsamen leeren Nachbarn: Was der einen noch fehlt, hat die andere vielleicht schon aufgebraucht. Wenn du feststeckst, probier eine Farbe in einem Feld und schau, ob eine Zahl nicht mehr passt.';
 
   @override
   String get tutMosaic1 =>
@@ -947,6 +1002,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Brett, mit ein paar Zügen Reserve.';
 
   @override
+  String get tutMosaicS1 =>
+      'Plan voraus. Erreich früh die Mitte des Bretts, denn dann berührt dein Fleck mehr Farben, und wähl wann immer möglich eine Farbe, die damit ganz vom Brett verschwindet.';
+
+  @override
   String get tutBlend1 =>
       'Das Brett besteht aus Flecken: angrenzenden Feldern einer Farbe. Wähle unten eine Farbe und tippe auf einen Fleck, um ihn zu übermalen. Er verschmilzt mit angrenzenden Flecken dieser Farbe. Übermale den mittleren Fleck.';
 
@@ -957,6 +1016,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutBlend3 =>
       'Jetzt ein echtes Brett. Die gewählte Farbe bleibt ausgewählt, sodass du mehrere Flecken hintereinander übermalen kannst.';
+
+  @override
+  String get tutBlendS1 =>
+      'Nimm einen Fleck in der Mitte und färb immer ihn um: Jeder Zug schluckt dann alle angrenzenden Flecken der neuen Farbe. Wähl die Farbe, die die meisten seiner Nachbarn haben.';
 
   @override
   String get tutPop1 =>
@@ -979,6 +1042,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Weitere Modi: Bei Schieber rutscht auch jede Zeile nach rechts, bei Endlos rollen neue Spalten von links herein, und Mega macht beides. Ziele: Brett leeren, eine Zielpunktzahl erreichen oder frei um den Rekord spielen. Das Spiel endet, wenn keine Zweiergruppe mehr übrig ist.';
 
   @override
+  String get tutPopS1 =>
+      'Ein Brett zu leeren braucht einen Plan. Überleg vor dem Platzen, was in die Lücke fällt: Lass Gruppen platzen, die Blasen einer Farbe zusammenbringen, und lass nie eine einzelne Blase einer Farbe allein.';
+
+  @override
+  String get tutPopS2 =>
+      'Jagd auf Punkte: Eine Gruppe aus n Blasen bringt n × (n − 1), also schlägt eine Gruppe aus 8 (56) vier Gruppen aus 2 (8). Lass erst die anderen Farben platzen, um eine Farbe zu einer großen Gruppe zu vereinen.';
+
+  @override
   String get tutMerge1 =>
       'Wische (oder drück eine Pfeiltaste), um alle Kacheln so weit wie möglich zu schieben. Zwei gleiche Kacheln, die aufeinandertreffen, verschmelzen zu ihrer Summe. Mach eine 4.';
 
@@ -991,16 +1062,28 @@ class AppLocalizationsDe extends AppLocalizations {
       'Halte deine größte Kachel in einer Ecke und füttere sie Schritt für Schritt. Bau eine 32.';
 
   @override
+  String get tutMergeS1 =>
+      'Bau eine Kette: Halt deine Kacheln der Reihe nach in einer Zeile, die größte in der Ecke, etwa 64, 32, 16, 8. Dann rollt eine neue 8 am Ende ganz nach vorn. Bau eine 128.';
+
+  @override
   String get tutPipes1 =>
       'Tippe auf eine Kachel, um sie im Uhrzeigersinn zu drehen (langes Drücken oder Rechtsklick dreht zurück). Verbinde jedes Rohr mit der Quelle, der Kachel mit Ring. Das Wasser zeigt, was schon verbunden ist.';
 
   @override
   String get tutPipes2 =>
-      'Kein Rohrende darf offen bleiben, also darf kein Rohr über den Rand zeigen. Kacheln mit Schloss stimmen schon. Fang an den Rändern und Ecken an, wo Kacheln die wenigsten Möglichkeiten haben.';
+      'Kein Rohrende darf offen bleiben, also darf kein Rohr über den Rand zeigen. Kacheln mit einem Punkt in der Ecke sind fest und stimmen schon. Fang an den Rändern und Ecken an, wo Kacheln die wenigsten Möglichkeiten haben.';
 
   @override
   String get tutPipes3 =>
       'Jetzt ein echtes Brett. Das Netz darf keine Schleifen bilden.';
+
+  @override
+  String get tutPipesS1 =>
+      'Arbeite dich vom Rand nach innen. Ein gerades Stück am Rand muss an ihm entlanglaufen, in eine Ecke passt nur ein nach innen zeigender Bogen, und ein T am Rand dreht seine flache Seite zum Rand. Jede feste Kachel schränkt ihre Nachbarn ein.';
+
+  @override
+  String get tutPipesS2 =>
+      'Ein schweres Gitter. Das Netz darf keine Schleife bilden: Würde eine Drehung eine schließen, muss die Kachel anders zeigen. Und zwei Endstücke zeigen nie aufeinander, sonst wären sie ein vom Rest abgeschnittenes Paar.';
 
   @override
   String get tutShikaku1 =>
@@ -1015,6 +1098,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Brett. Große Zahlen am Rand haben meist die wenigsten Möglichkeiten.';
 
   @override
+  String get tutShikakuS1 =>
+      'Frag, welche Zahlen ein Feld erreichen können. Die untere linke Ecke ist zu weit weg, als dass die 4 oder die 6 sie mit einem Rechteck ihrer Größe abdecken könnten, also gehört sie zur 2.';
+
+  @override
+  String get tutShikakuS2 =>
+      'Ein schweres Gitter. Überleg, welche wenigen Rechtecke eine große Zahl nutzen kann: Felder, die alle davon abdecken, gehören ihr, und ein Feld, das nur eine Zahl erreicht, gehört dieser Zahl.';
+
+  @override
   String get tutTrail1 =>
       'Ziehe von der 1 aus einen Pfad durch jedes Feld, nach oben, unten, links oder rechts. Er endet auf der letzten Zahl.';
 
@@ -1027,12 +1118,28 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Brett. Ein Eckfeld hat nur zwei Wege hinein und hinaus, also nutzt der Pfad beide.';
 
   @override
+  String get tutTrailS1 =>
+      'Felder mit nur zwei freien Nachbarn musst du durchqueren: Der Pfad kommt auf einer Seite hinein und geht auf der anderen hinaus. Achte auf Felder, die dein eigener Pfad gerade eingeengt hat.';
+
+  @override
+  String get tutTrailS2 =>
+      'Ein schweres Gitter. Teil die freien Felder nie in zwei Teile: Der Pfad kann für den anderen Teil nicht zurückkommen. Und ein Feld mit nur einem freien Nachbarn ist eine Sackgasse, die nur die letzte Zahl haben darf.';
+
+  @override
   String get tutLabyrinth1 =>
       'Ziehe vom Start in der linken oberen Ecke zur Flagge in der rechten unteren Ecke. Wände versperren den Weg.';
 
   @override
   String get tutLabyrinth2 =>
       'Ein größeres Labyrinth. In einer Sackgasse? Ziehe auf deinem Weg zurück oder tippe auf eines seiner Felder, um dorthin zurückzukehren. Ein schneller Zug folgt geraden Gängen.';
+
+  @override
+  String get tutLabyrinthS1 =>
+      'Verlaufen? Halt eine Hand an der Wand: Nimm immer die Öffnung ganz rechts. In so einem Labyrinth führt das immer hinaus, wenn auch nicht auf dem kürzesten Weg.';
+
+  @override
+  String get tutLabyrinthS2 =>
+      'Oder arbeite rückwärts: Verfolg den Weg von der Flagge zum Start und such, wo sich die beiden Routen treffen. So fallen Sackgassen nahe der Flagge schnell weg.';
 
   @override
   String get tutAtoms1 =>
@@ -1047,6 +1154,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Brett. Fang mit Atomen an, die ihre Bindungen nur auf eine Art bekommen können.';
 
   @override
+  String get tutAtomsS1 =>
+      'Vergleich die Zahl eines Atoms mit seinen Nachbarn. Die 4 in der Ecke hat nur zwei Nachbarn, und ein Paar kann höchstens zwei Bindungen teilen, also sind beide doppelt. Ebenso bekommt eine 3 mit zwei Nachbarn zu jedem mindestens eine Bindung.';
+
+  @override
+  String get tutAtomsS2 =>
+      'Ein schweres Gitter. Halt das Molekül zusammen: Zwei 1en binden nie aneinander, und zwei 2en teilen keine Doppelbindung, außer sie sind die einzigen Atome. Wenn du feststeckst, probier eine Bindung und schau, ob ein Teil des Gitters abgeschnitten wird.';
+
+  @override
   String get tutLits1 =>
       'Schattiere in jedem umrandeten Bereich genau 4 Felder, die ein L, I, T oder S bilden. Der obere Bereich hat genau 4 Felder, also schattiere alle. Tippe auf ein Feld, um es zu schattieren.';
 
@@ -1059,6 +1174,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Brett. Alle schattierten Felder müssen zusammenhängen. Tippe zweimal für einen Punkt, deine Notiz, dass ein Feld leer bleibt.';
 
   @override
+  String get tutLitsS1 =>
+      'Überleg, welche Formen jede Region noch aufnehmen kann. Felder, die jede mögliche Form abdeckt, werden schattiert, Felder, die keine abdeckt, bleiben leer. Kleine Regionen und solche, die die 2×2-Regel einengt, haben die wenigsten Möglichkeiten.';
+
+  @override
+  String get tutLitsS2 =>
+      'Ein schwereres Gitter. Wenn du feststeckst, probier eine Form in einer Region: Entsteht dadurch ein 2×2-Block, zerfällt die schattierte Fläche in zwei Teile oder liegen zwei gleiche Formen nebeneinander, ist sie falsch.';
+
+  @override
   String get tutCamp1 =>
       'Stell neben jeden Baum ein Zelt: oben, unten, links oder rechts, nie diagonal. Die Zahlen außen geben an, wie viele Zelte in jeder Zeile und Spalte stehen. Tippe zweimal auf ein Feld: Gras, dann Zelt.';
 
@@ -1069,6 +1192,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutCamp3 =>
       'Jetzt ein echtes Brett. Eine 0 heißt, dass die ganze Zeile oder Spalte Gras ist, und jeder Baum bekommt sein eigenes Zelt.';
+
+  @override
+  String get tutCampS1 =>
+      'Zähl die Lücken. Die obere Zeile braucht 2 Zelte, und nur ihre drei markierten Felder kommen infrage. Zwei Zelte in drei Feldern, die sich nicht berühren dürfen, stehen an beiden Enden.';
+
+  @override
+  String get tutCampS2 =>
+      'Ein schweres Gitter, und manche Zahlen sind verdeckt. Wenn du feststeckst, probier ein Zelt auf einem Feld: Bleibt dann ein Baum ohne Platz für sein eigenes Zelt, ist dort Gras.';
 
   @override
   String get tutIslands1 =>
@@ -1087,8 +1218,16 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Brett. Jede Insel enthält genau eine Zahl.';
 
   @override
+  String get tutIslandsS1 =>
+      'Such Felder, die keine Insel erreicht. Die 3 wächst höchstens zwei Schritte von ihrer Zahl weg, die 2 einen und die 1 keinen. Die markierten Felder erreicht keine Insel, also sind sie Meer.';
+
+  @override
+  String get tutIslandsS2 =>
+      'Ein schweres Gitter. Denk ans Meer: Es muss zusammenhängen, also setzt sich ein Meerfeld mit nur einem Ausweg dorthin fort, und es darf keinen 2×2-Teich bilden. Wenn du feststeckst, probier ein Feld als Land und schau, ob etwas nicht mehr passt.';
+
+  @override
   String get tutLamps1 =>
-      'Setze Lampen auf weiße Felder: zweimal tippen (Punkt, dann Lampe). Eine Lampe beleuchtet ihre Zeile und Spalte bis zu den Wänden. Beleuchte jedes weiße Feld.';
+      'Setze Lampen auf leere Felder: zweimal tippen (Punkt, dann Lampe). Die dunklen Felder sind Wände. Eine Lampe beleuchtet ihre Zeile und Spalte bis zu den Wänden. Beleuchte jedes leere Feld.';
 
   @override
   String get tutLamps2 =>
@@ -1101,6 +1240,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutLamps4 =>
       'Jetzt ein echtes Brett. Mit Punkten markierst du Felder, auf denen keine Lampe stehen kann.';
+
+  @override
+  String get tutLampsS1 =>
+      'Manche Felder können nur auf eine Art Licht bekommen. Die obere linke Ecke kann nur von sich selbst oder ihren zwei Nachbarn beleuchtet werden, und die 0 schließt die Nachbarn aus: Die Lampe kommt in die Ecke. Dann schau auf die 1.';
+
+  @override
+  String get tutLampsS2 =>
+      'Ein schweres Gitter. Wenn du feststeckst, probier eine Lampe in einem Feld und verfolge die Folgen: Kann dann ein Feld nicht mehr beleuchtet oder eine Zahl nicht erfüllt werden, bekommt das Feld einen Punkt.';
 
   @override
   String get tutFence1 =>
@@ -1119,6 +1266,18 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Brett. Fang mit den 0en und 3en an.';
 
   @override
+  String get tutFenceS1 =>
+      'Lern ein paar Muster. Zwei 3en nebeneinander haben immer eine Linie dazwischen und je eine auf ihrer äußeren Seite: Sonst fehlt einer von beiden etwas. Die 0 darüber hilft auch.';
+
+  @override
+  String get tutFenceS2 =>
+      'Ecken verraten viel. Eine 1 in einer Ecke nutzt nie ihre zwei Außenseiten: Die Schleife müsste dort abbiegen und beide nehmen. Eine 3 in einer Ecke nutzt immer beide.';
+
+  @override
+  String get tutFenceS3 =>
+      'Ein schweres Gitter. Wenn du feststeckst, probier eine Linie an einer Kante und verfolge sie: Führt sie in eine Sackgasse, zu einer unerfüllbaren Zahl oder zu einer kleinen Schleife, die andere ausschließt, bekommt die Kante ein Kreuz.';
+
+  @override
   String get tutPearls1 =>
       'Ziehe durch die Felder, um eine geschlossene Schleife zu zeichnen. An einer schwarzen Perle biegt die Schleife ab und läuft dann auf beiden Seiten geradeaus durch das nächste Feld.';
 
@@ -1129,6 +1288,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutPearls3 =>
       'Jetzt ein echtes Brett. Die Schleife muss nicht durch jedes Feld laufen und kreuzt oder berührt sich nie selbst.';
+
+  @override
+  String get tutPearlsS1 =>
+      'Eine schwarze Perle kann nicht zu einem zu nahen Rand abbiegen: Die Schleife braucht auf jeder Seite zwei gerade Felder. Beide schwarzen Perlen hier sind zu nah an zwei Rändern, ihre Richtungen stehen also fest.';
+
+  @override
+  String get tutPearlsS2 =>
+      'Ein schweres Gitter. Drei weiße Perlen in einer Reihe können nicht auf einem geraden Stück liegen (die mittlere braucht daneben eine Kurve), also kreuzt die Schleife sie quer. Wenn du feststeckst, probier eine Linie und schau, ob eine Perle nicht mehr passt.';
 
   @override
   String get tutRails1 =>
@@ -1143,6 +1310,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Gitter. Das Gleis verzweigt und kreuzt sich nie und muss nicht durch jedes Feld laufen.';
 
   @override
+  String get tutRailsS1 =>
+      'Fang mit Linien an, deren Zahl keine Wahl lässt. Die zweite Zeile braucht 4 Gleisfelder und hat nur 4, die rechte Spalte ebenso. Dann verbinde die Enden.';
+
+  @override
+  String get tutRailsS2 =>
+      'Ein schweres Gitter. Eine aufgebrauchte Zahl sperrt den Rest ihrer Linie, und ein Gleisfeld braucht immer genau zwei Gleisnachbarn. Wenn du feststeckst, probier ein Stück und prüf, ob die Zahlen noch passen.';
+
+  @override
   String get tutBlocks1 =>
       'Jeder Bereich aus k Feldern enthält die Zahlen 1 bis k je einmal. Jedes markierte Feld ist die letzte Lücke in seinem Bereich: Wähle die fehlende Zahl in der Palette und tippe auf das Feld.';
 
@@ -1155,16 +1330,32 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Gitter. Fang mit kleinen Bereichen an und mit Feldern, deren Nachbarn die meisten Zahlen ausschließen. Stift-Notizen helfen.';
 
   @override
+  String get tutBlocksS1 =>
+      'Zeigen: Notiere, wo jede Region eine Zahl noch setzen kann. Berühren all diese Felder dasselbe Feld außerhalb, kann dort diese Zahl nicht stehen, denn sie würde sie berühren. Bleistiftnotizen helfen, das zu sehen.';
+
+  @override
+  String get tutBlocksS2 =>
+      'Ein schweres Gitter. Wenn sonst nichts geht, nimm ein Feld mit nur zwei möglichen Zahlen und probier eine: Hat bald eine Region keinen Platz mehr für eine Zahl, ist die andere richtig.';
+
+  @override
   String get tutPairs1 =>
       'Schattiere in jedem Bereich genau zwei Felder, sodass jedes schattierte Feld genau ein anderes berührt: Die Schattierung besteht aus Paaren. Der markierte Bereich hat nur zwei Felder, also schattiere beide.';
 
   @override
   String get tutPairs2 =>
-      'Paare berühren einander nie seitlich. Setze einen Punkt (zweimal tippen) neben ein fertiges Paar: Diese Felder bleiben weiß.';
+      'Paare berühren einander nie seitlich. Das obere Paar ist fertig, also bleiben die markierten Felder daneben unschattiert: Setze dort Punkte (zweimal tippen) und löse dann das Gitter zu Ende.';
 
   @override
   String get tutPairs3 =>
       'Jetzt ein echtes Gitter. Kleine Bereiche und von Punkten eingeschlossene Felder sind gute Startpunkte.';
+
+  @override
+  String get tutPairsS1 =>
+      'Geh alle Wege durch, eine kleine Region fertigzumachen: Ein Feld, das in allen schattiert ist, wird schattiert, eines, das in keinem schattiert ist, bekommt einen Punkt. Ein L aus drei Feldern etwa schattiert immer seine Ecke.';
+
+  @override
+  String get tutPairsS2 =>
+      'Ein schweres Gitter. Wenn du feststeckst, schattiere ein Feld und folge den Regeln: Kann eine Region dann ihre zwei Felder nicht mehr bekommen oder würden sich zwei Paare berühren, bleibt das Feld unschattiert.';
 
   @override
   String get tutPlots1 =>
@@ -1179,6 +1370,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Gitter. Manche Parzellen zeigen gar keine Zahl: Leite ihre Größe aus dem übrigen Platz ab.';
 
   @override
+  String get tutPlotsS1 =>
+      'Such nach Taschen. Die zwei markierten Felder sind von fertigen Parzellen umgeben, sie können sich also nur miteinander verbinden. Zwei Einsen dürfen sich nicht berühren, also bilden sie zusammen eine Parzelle aus 2.';
+
+  @override
+  String get tutPlotsS2 =>
+      'Ein schweres Gitter. Wenn nichts sicher ist, nimm ein Feld mit nur zwei oder drei möglichen Zahlen und prüf jede: Eine Zahl, mit der eine Parzelle ihre Größe nicht mehr erreichen kann, fällt weg.';
+
+  @override
   String get tutLinks1 =>
       'Ziehe von einem Punkt zu seinem Partner, um sie zu verbinden. Wege laufen durch benachbarte Felder, nie diagonal.';
 
@@ -1191,16 +1390,32 @@ class AppLocalizationsDe extends AppLocalizations {
       'Jetzt ein echtes Gitter. Ecken und Ränder lassen die wenigsten Wege offen, also fang dort an.';
 
   @override
+  String get tutLinksS1 =>
+      'Füll zuerst die engen Stellen. Eine leere Ecke hat nur zwei Nachbarn, der Pfad hindurch nutzt also beide. Genauso bei jedem Feld, dem nur zwei freie Nachbarn bleiben.';
+
+  @override
+  String get tutLinksS2 =>
+      'Ein schweres Gitter. In einem Rätsel mit einer Lösung faltet sich ein Pfad nie neben sich selbst zurück (er könnte abkürzen), also gehört kein 2×2-Quadrat zu einem einzigen Pfad. Und lass kein leeres Feld übrig, das kein Pfad mehr erreichen kann.';
+
+  @override
   String get tutArrows1 =>
-      'Zeichne eine Schleife durch die Mitten aller weißen Felder: Ziehe von Feld zu Feld. Das graue Hinweisfeld ist nie auf der Schleife, und seine 0 sagt, dass darüber keine schattierten Felder liegen.';
+      'Zeichne eine Schleife durch die Mitten aller leeren Felder: Ziehe von Feld zu Feld. Das Hinweisfeld in der Mitte ist nie auf der Schleife. Seine 0 sagt, dass darüber kein Feld schattiert ist, hier also keins.';
 
   @override
   String get tutArrows2 =>
-      'Jetzt sind manche Felder schattiert: Tippe auf die Mitte eines Felds, um es zu schattieren. Jeder Hinweis zählt die schattierten Felder in Pfeilrichtung. Schattierte Felder berühren sich nie seitlich, und die Schleife läuft durch alle anderen.';
+      'Jetzt müssen zwei Felder schattiert werden. Jeder Hinweis zählt die schattierten Felder in Pfeilrichtung: Finde sie und tippe auf ihre Mitten, um sie zu schattieren. Schattierte Felder berühren sich nie seitlich. Dann zeichne die Schleife durch alle anderen Felder.';
 
   @override
   String get tutArrows3 =>
       'Jetzt ein echtes Gitter. Felder neben einem schattierten Feld liegen immer auf der Schleife, und ein Schleifenfeld braucht zwei Ausgänge.';
+
+  @override
+  String get tutArrowsS1 =>
+      'Such enge Hinweise. Die 2 in der mittleren Zeile hat rechts nur drei Felder, und ihre zwei schattierten Felder dürfen sich nicht berühren, also nehmen sie das erste und das letzte. Die 2 in der oberen Zeile ist noch leichter: Sie hat nur zwei freie Felder.';
+
+  @override
+  String get tutArrowsS2 =>
+      'Ein schweres Gitter. Jedes Feld, das weder schattiert noch Hinweis ist, liegt auf der Schleife, also steht der Weg durch ein Feld mit nur zwei freien Nachbarn fest. Wenn du feststeckst, schattiere probeweise ein Feld und schau, ob ein Schleifenfeld weniger als zwei Ausgänge behält.';
 
   @override
   String get tutMines1 =>
@@ -1217,4 +1432,12 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutMines4 =>
       'Jetzt ein echtes Brett. Raten ist nie nötig. Gräbst du aus Versehen eine Mine aus, bekommt sie einfach eine Flagge, und das Spiel geht weiter.';
+
+  @override
+  String get tutMinesS1 =>
+      'Vergleich benachbarte Zahlen. Die 2 sieht drei geschlossene Felder, die 1 links daneben nur die ersten zwei, also ist das dritte eine Mine. Von rechts geht es genauso. Dann ist das mittlere Feld sicher.';
+
+  @override
+  String get tutMinesS2 =>
+      'Ein schweres Gitter. Vergleich weiter Zahlen mit gemeinsamen geschlossenen Feldern. Gegen Ende zähl, was übrig ist: Der Minenzähler kann die letzten geschlossenen Felder entscheiden.';
 }

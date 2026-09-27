@@ -19,10 +19,9 @@ class TutorialStep {
 
   /// A step on a board made by [make] (usually the type's generator), built
   /// only when the step opens.
-  TutorialStep.generated({required this.text, required Object Function() make, this.look = false})
+  TutorialStep.generated({required this.text, required Object Function() make, this.focus = const {}, this.look = false})
       : _make = (() => make()),
         state = null,
-        focus = const {},
         done = null,
         answer = null,
         openEnded = false;

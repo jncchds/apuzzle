@@ -21,3 +21,14 @@ final List<TutorialStep> trailTutorial = [
     make: () => generateTrail(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 3)),
   ),
 ];
+
+final List<TutorialStep> trailStrategies = [
+  TutorialStep.generated(
+    text: (l) => l.tutTrailS1,
+    make: () => generateTrail(const GenParams(size: GridSize.square(5), difficulty: Difficulty.medium, seed: 1)),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutTrailS2,
+    make: () => generateTrail(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

@@ -34,6 +34,8 @@ class PearlsType extends PuzzleType<PearlsPuzzle, LoopMarks> {
 
   @override
   List<TutorialStep> tutorial() => pearlsTutorial;
+  @override
+  List<TutorialStep> strategies() => pearlsStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];
@@ -101,8 +103,9 @@ class PearlsType extends PuzzleType<PearlsPuzzle, LoopMarks> {
     final p = controller.puzzle as PearlsPuzzle;
     final s = controller.state as LoopMarks;
     final dark = Theme.of(context).brightness == Brightness.dark;
-    final ink = dark ? const Color(0xFF0E1116) : const Color(0xFF2B2F3A);
-    final rim = dark ? const Color(0xFFB8BECB) : const Color(0xFF2B2F3A);
+    final ink = dark ? const Color(0xFF07080B) : const Color(0xFF2B2F3A);
+    // A faint rim only: a bright one makes a black pearl read as a hollow (white) one.
+    final rim = dark ? const Color(0xFF5A6070) : const Color(0xFF2B2F3A);
     return LoopBoard(
       g: p.lattice,
       rows: p.rows,

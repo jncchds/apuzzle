@@ -29,3 +29,18 @@ final List<TutorialStep> plotsTutorial = [
     make: () => generatePlots(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 2)),
   ),
 ];
+
+final List<TutorialStep> plotsStrategies = [
+  // The two empty cells can't join any finished plot around them, and two
+  // 1s can't touch: a plot of 2.
+  TutorialStep(
+    text: (l) => l.tutPlotsS1,
+    puzzle: _board(['3331', '4422', '4413', '2233'], ['3331', '44..', '4413', '2.33']),
+    focus: {const Pos(1, 2), const Pos(1, 3)},
+  ),
+  // Hard boards need probing (checked: group logic alone gets stuck).
+  TutorialStep.generated(
+    text: (l) => l.tutPlotsS2,
+    make: () => generatePlots(const GenParams(size: GridSize.square(5), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

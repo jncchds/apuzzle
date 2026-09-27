@@ -32,6 +32,8 @@ class ShikakuType extends PuzzleType<ShikakuPuzzle, ShikakuState> {
 
   @override
   List<TutorialStep> tutorial() => shikakuTutorial;
+  @override
+  List<TutorialStep> strategies() => shikakuStrategies;
 
   @override
   List<GridSize> get sizes => [for (final n in [5, 6, 7, 8, 9, 10, 12]) GridSize.square(n)];

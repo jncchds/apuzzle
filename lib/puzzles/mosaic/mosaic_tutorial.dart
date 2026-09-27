@@ -27,3 +27,10 @@ final List<TutorialStep> mosaicTutorial = [
     make: () => const MosaicType().generate(const GenParams(size: GridSize.square(6), difficulty: Difficulty.easy, seed: 5)),
   ),
 ];
+
+final List<TutorialStep> mosaicStrategies = [
+  TutorialStep.generated(
+    text: (l) => l.tutMosaicS1,
+    make: () => const MosaicType().generate(const GenParams(size: GridSize.square(8), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

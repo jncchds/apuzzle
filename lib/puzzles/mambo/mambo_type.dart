@@ -30,6 +30,8 @@ class MamboType extends ValueGridType<MamboPuzzle> {
 
   @override
   List<TutorialStep> tutorial() => mamboTutorial;
+  @override
+  List<TutorialStep> strategies() => mamboStrategies;
 
   @override
   List<GridSize> get sizes => const [GridSize.square(4), GridSize.square(6), GridSize.square(8), GridSize.square(10)];

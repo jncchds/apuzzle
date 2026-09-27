@@ -41,6 +41,8 @@ class LinksType extends PuzzleType<LinksPuzzle, LinksState> {
 
   @override
   List<TutorialStep> tutorial() => linksTutorial;
+  @override
+  List<TutorialStep> strategies() => linksStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

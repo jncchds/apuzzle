@@ -35,6 +35,8 @@ class LabyrinthType extends PuzzleType<LabyrinthPuzzle, LabyrinthState> {
 
   @override
   List<TutorialStep> tutorial() => labyrinthTutorial;
+  @override
+  List<TutorialStep> strategies() => labyrinthStrategies;
 
   @override
   List<GridSize> get sizes => const [

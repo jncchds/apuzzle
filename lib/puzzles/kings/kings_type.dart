@@ -33,6 +33,8 @@ class KingsType extends ValueGridType<KingsPuzzle> {
 
   @override
   List<TutorialStep> tutorial() => kingsTutorial;
+  @override
+  List<TutorialStep> strategies() => kingsStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

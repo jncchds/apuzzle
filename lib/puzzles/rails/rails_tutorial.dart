@@ -37,3 +37,16 @@ final List<TutorialStep> railsTutorial = [
     make: () => generateRails(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 1)),
   ),
 ];
+
+final List<TutorialStep> railsStrategies = [
+  // The second row and the right column are full.
+  TutorialStep(
+    text: (l) => l.tutRailsS1,
+    puzzle: _board(4, 4, [4, 5, 6, 2, 3, 7, 11, 15]),
+    focus: {for (var c = 0; c < 4; c++) Pos(1, c), for (var r = 0; r < 4; r++) Pos(r, 3)},
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutRailsS2,
+    make: () => generateRails(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

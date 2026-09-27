@@ -32,3 +32,17 @@ final List<TutorialStep> arrowsTutorial = [
     make: () => generateArrows(const GenParams(size: GridSize.square(6), difficulty: Difficulty.easy, seed: 3)),
   ),
 ];
+
+final List<TutorialStep> arrowsStrategies = [
+  // Seed 7: the middle row's "2 to the right" has exactly three free cells
+  // (the top row's has two, around a clue).
+  TutorialStep.generated(
+    text: (l) => l.tutArrowsS1,
+    make: () => generateArrows(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 7)),
+    focus: {for (var c = 2; c < 5; c++) Pos(2, c)},
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutArrowsS2,
+    make: () => generateArrows(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

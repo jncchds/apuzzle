@@ -34,6 +34,8 @@ class PlotsType extends ValueGridType<PlotsPuzzle> {
 
   @override
   List<TutorialStep> tutorial() => plotsTutorial;
+  @override
+  List<TutorialStep> strategies() => plotsStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 10; n++) GridSize.square(n)];

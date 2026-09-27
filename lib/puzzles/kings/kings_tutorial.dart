@@ -1,6 +1,8 @@
+import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
+import 'kings_generator.dart';
 import 'kings_model.dart';
 
 /// A board from rows of region letters and the crown's column in each row.
@@ -72,4 +74,20 @@ final List<TutorialStep> kingsTutorial = [
     );
   }(),
   TutorialStep(text: (l) => l.tutKings4, puzzle: _five),
+];
+
+// Region E fits in the bottom row, so the row's other cells get no crown
+// (with those two dots, the basic rules finish the board).
+final _confined = _board(['ABCCC', 'ABBCC', 'ABCCC', 'ADCCC', 'DDEEE'], [0, 2, 4, 1, 3]);
+
+final List<TutorialStep> kingsStrategies = [
+  TutorialStep(
+    text: (l) => l.tutKingsS1,
+    puzzle: _confined,
+    focus: {const Pos(4, 2), const Pos(4, 3), const Pos(4, 4)},
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutKingsS2,
+    make: () => generateKings(const GenParams(size: GridSize.square(6), difficulty: Difficulty.medium, seed: 1)),
+  ),
 ];

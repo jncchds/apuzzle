@@ -32,3 +32,14 @@ final List<TutorialStep> pipesTutorial = [
     make: () => generatePipes(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 6)),
   ),
 ];
+
+final List<TutorialStep> pipesStrategies = [
+  TutorialStep.generated(
+    text: (l) => l.tutPipesS1,
+    make: () => generatePipes(const GenParams(size: GridSize.square(5), difficulty: Difficulty.medium, seed: 1)),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutPipesS2,
+    make: () => generatePipes(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

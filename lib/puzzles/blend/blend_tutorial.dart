@@ -21,3 +21,10 @@ final List<TutorialStep> blendTutorial = [
     make: () => const BlendType().generate(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 4)),
   ),
 ];
+
+final List<TutorialStep> blendStrategies = [
+  TutorialStep.generated(
+    text: (l) => l.tutBlendS1,
+    make: () => const BlendType().generate(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

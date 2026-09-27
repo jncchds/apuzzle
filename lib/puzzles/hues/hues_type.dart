@@ -32,6 +32,8 @@ class HuesType extends ValueGridType<HuesPuzzle> {
 
   @override
   List<TutorialStep> tutorial() => huesTutorial;
+  @override
+  List<TutorialStep> strategies() => huesStrategies;
 
   @override
   List<GridSize> get sizes => [for (var n = 5; n <= 9; n++) GridSize.square(n)];

@@ -32,6 +32,8 @@ class MergeType extends PuzzleType<MergePuzzle, MergeState> {
 
   @override
   List<TutorialStep> tutorial() => mergeTutorial;
+  @override
+  List<TutorialStep> strategies() => mergeStrategies;
 
   @override
   List<GridSize> get sizes => const [GridSize.square(3), GridSize.square(4), GridSize.square(5), GridSize.square(6)];

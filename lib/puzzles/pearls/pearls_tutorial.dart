@@ -31,3 +31,16 @@ final List<TutorialStep> pearlsTutorial = [
     make: () => generatePearls(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 2)),
   ),
 ];
+
+final List<TutorialStep> pearlsStrategies = [
+  // Both black pearls are too close to two edges to turn toward them.
+  TutorialStep(
+    text: (l) => l.tutPearlsS1,
+    puzzle: _board(4, 4, [5, 6, 7, 11, 15, 14, 13, 9], black: [5, 15]),
+    focus: {const Pos(1, 1), const Pos(3, 3)},
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutPearlsS2,
+    make: () => generatePearls(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+  ),
+];

@@ -604,7 +604,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get pipesRules =>
-      '• Obracaj kafelki tak, aby każda rura łączyła się ze źródłem (kafelek z pierścieniem).\n• Żaden koniec rury nie może zostać otwarty, a sieć nie może mieć pętli.\n• Woda płynie przez wszystko, co jest już połączone ze źródłem.\n• Kafelki z kłódką są już na miejscu.\n\nDotknij kafelka, aby obrócić go zgodnie z ruchem wskazówek zegara; długie naciśnięcie / prawy przycisk obraca go z powrotem.';
+      '• Obracaj kafelki tak, aby każda rura łączyła się ze źródłem (kafelek z pierścieniem).\n• Żaden koniec rury nie może zostać otwarty, a sieć nie może mieć pętli.\n• Woda płynie przez wszystko, co jest już połączone ze źródłem.\n• Kafelki z kropką w rogu są zablokowane i już na miejscu.\n\nDotknij kafelka, aby obrócić go zgodnie z ruchem wskazówek zegara; długie naciśnięcie / prawy przycisk obraca go z powrotem.';
 
   @override
   String get shikakuName => 'Shikaku';
@@ -703,7 +703,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get lampsRules =>
-      '• Stawiaj lampy na białych polach. Lampa oświetla swoje pole oraz wiersz i kolumnę aż do ściany.\n• Każde białe pole musi być oświetlone.\n• Żadna lampa nie może świecić na inną lampę.\n• Liczba na ścianie mówi, ile lamp stoi tuż obok niej (nad, pod, z lewej lub z prawej).\n\nDotknij pola, aby przełączać: puste → kropka (twoja notatka „bez lampy”) → lampa. Długie naciśnięcie / prawy przycisk przełącza wstecz.';
+      '• Stawiaj lampy na pustych polach (nie na ścianach). Lampa oświetla swoje pole oraz wiersz i kolumnę aż do ściany.\n• Każde puste pole musi być oświetlone.\n• Żadna lampa nie może świecić na inną lampę.\n• Liczba na ścianie mówi, ile lamp stoi tuż obok niej (nad, pod, z lewej lub z prawej).\n\nDotknij pola, aby przełączać: puste → kropka (twoja notatka „bez lampy”) → lampa. Długie naciśnięcie / prawy przycisk przełącza wstecz.';
 
   @override
   String get fenceName => 'Płot';
@@ -786,7 +786,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get arrowsRules =>
-      '• Zamaluj niektóre pola. Zamalowane pola nigdy nie stykają się bokami.\n• Narysuj jedną zamkniętą pętlę przez środki wszystkich pozostałych pól. Nie rozgałęzia się ani nie krzyżuje.\n• Szare pola ze wskazówkami nie są zamalowane ani na pętli. Liczba wskazówki liczy zamalowane pola w kierunku jej strzałki, aż do krawędzi.\n\nPrzeciągaj po polach, aby rysować pętlę, albo wzdłuż niej, aby ją ścierać. Dotknij środka pola, aby przełączać: puste → zamalowane → kropka (twoja notatka „na pętli”), albo dotknij między dwoma polami, aby przełączać: linia → krzyżyk → puste.';
+      '• Zamaluj niektóre pola. Zamalowane pola nigdy nie stykają się bokami.\n• Narysuj jedną zamkniętą pętlę przez środki wszystkich pozostałych pól. Nie rozgałęzia się ani nie krzyżuje.\n• Pola ze wskazówkami (liczba i strzałka) nie są zamalowane ani na pętli. Liczba wskazówki liczy zamalowane pola w kierunku jej strzałki, aż do krawędzi.\n\nPrzeciągaj po polach, aby rysować pętlę, albo wzdłuż niej, aby ją ścierać. Dotknij środka pola, aby przełączać: puste → zamalowane → kropka (twoja notatka „na pętli”), albo dotknij między dwoma polami, aby przełączać: linia → krzyżyk → puste.';
 
   @override
   String get learnTitle => 'Jak grać';
@@ -872,6 +872,29 @@ class AppLocalizationsPl extends AppLocalizations {
   String get tutorialClose => 'Zamknij';
 
   @override
+  String get tutorialStrategies => 'Poznaj strategie';
+
+  @override
+  String strategiesTitle(String name) {
+    return '$name: strategie';
+  }
+
+  @override
+  String strategiesFinishedBody(String name) {
+    return 'Znasz już główne techniki rozwiązywania gry $name.';
+  }
+
+  @override
+  String get learnBasicsTab => 'Podstawy';
+
+  @override
+  String get learnStrategiesTab => 'Strategie';
+
+  @override
+  String get learnStrategiesIntro =>
+      'Dla znających zasady: każda lekcja pokazuje technikę doświadczonych graczy na planszy, która jej wymaga.';
+
+  @override
   String get tutMambo1 =>
       'Wypełnij każde pole słońcem lub księżycem. Nigdy trzy takie same obok siebie: po dwóch słońcach obok siebie przychodzi księżyc. Dotknij zaznaczonego pola, aby przełączać: puste → słońce → księżyc.';
 
@@ -890,6 +913,14 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutMambo5 =>
       'Teraz cała plansza: użyj wszystkich zasad naraz. Wskazówka: przycisk palety u góry pozwala stawiać jeden symbol na wielu polach, a długie naciśnięcie (lub prawy przycisk) przełącza wstecz.';
+
+  @override
+  String get tutMamboS1 =>
+      'Gdy żadna zasada nie działa wprost, zapytaj „a co, jeśli?”. Zaznaczona para jest połączona znakiem =, więc oba pola mają ten sam symbol. Dwa słońca dałyby górnemu wierszowi trzy słońca na cztery pola, więc oba to księżyce.';
+
+  @override
+  String get tutMamboS2 =>
+      'Trudniejsza plansza, na której ta sztuczka przyda się często: spróbuj symbolu w polu i pójdź kilka kroków za zasadami. Jeśli coś się psuje, właściwy jest drugi symbol. Para z × zawsze ma po jednym, więc w swoim wierszu liczy się jako jedno słońce i jeden księżyc.';
 
   @override
   String get tutSudoku1 =>
@@ -912,6 +943,14 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz cała łamigłówka. Wybrane pole podświetla swój wiersz, kolumnę i blok oraz tę samą liczbę gdzie indziej. W ustawieniach możesz włączyć automatyczne usuwanie notatek.';
 
   @override
+  String get tutSudokuS1 =>
+      'Patrz na jedną liczbę zamiast na jedno pole. Zaznaczony blok potrzebuje 1: jedynki w jego kolumnach i w drugim wierszu wykluczają wszystkie pola oprócz jednego. Potem dokończ planszę w ten sam sposób.';
+
+  @override
+  String get tutSudokuS2 =>
+      'Dwie nowe sztuczki. Pary: dwa pola linii lub bloku, w których pasują tylko te same dwie liczby, zabierają je dla siebie. Wskazywanie: jeśli miejsca na liczbę w bloku leżą na jednej linii, reszta tej linii jej nie ma.';
+
+  @override
   String get tutKings1 =>
       'Umieść dokładnie jedną koronę w każdym wierszu, każdej kolumnie i każdym kolorowym obszarze. Trzy już stoją, a na ostatnią zostało jedno miejsce. Dotknij go dwa razy: najpierw kropka, potem korona.';
 
@@ -928,6 +967,14 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz cała plansza. Stawiaj kropki tam, gdzie korony być nie może, i szukaj wierszy, kolumn lub obszarów z jednym wolnym polem.';
 
   @override
+  String get tutKingsS1 =>
+      'Szukaj regionu, który mieści się w jednym wierszu lub kolumnie. Zaznaczony region leży cały w dolnym wierszu, więc korona tego wiersza jest w nim: postaw kropki na pozostałych polach dolnego wiersza i działaj dalej.';
+
+  @override
+  String get tutKingsS2 =>
+      'Kolejna sztuczka: jeśli korona w polu wykluczyłaby wszystkie pola innego regionu (swoim wierszem, kolumną lub stykaniem), to pole nie może mieć korony. Postaw kropkę. Tak samo działa z dwoma regionami wciśniętymi w dwa wiersze.';
+
+  @override
   String get tutHues1 =>
       'Pomaluj każde puste pole. Liczba mówi, ile pustych pól wokół niej (także po przekątnej) będzie miało jej kolor. Niebieska 3 ma dokładnie trzech pustych sąsiadów, więc wszyscy są niebiescy. Wybierz kolor w palecie i dotykaj pól.';
 
@@ -938,6 +985,14 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutHues3 =>
       'Teraz prawdziwa plansza. Zacznij od liczb, które potrzebują wszystkich pustych sąsiadów albo żadnego.';
+
+  @override
+  String get tutHuesS1 =>
+      'Wykluczaj kolory. Każde zaznaczone pole styka się z niebieskim 0, więc nie może być niebieskie, i z różowym 0, więc nie może być różowe. Zostaje tylko żółty.';
+
+  @override
+  String get tutHuesS2 =>
+      'Trudniejsza plansza. Porównuj liczby, które mają wspólnych pustych sąsiadów: to, czego brakuje jednej, mogła już wyczerpać druga. Gdy utkniesz, spróbuj koloru w polu i sprawdź, czy jakaś liczba się nie psuje.';
 
   @override
   String get tutMosaic1 =>
@@ -952,6 +1007,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz prawdziwa plansza, z kilkoma zapasowymi ruchami.';
 
   @override
+  String get tutMosaicS1 =>
+      'Planuj z wyprzedzeniem. Wcześnie dotrzyj do środka planszy, bo wtedy twoja plama styka się z większą liczbą kolorów, a gdy możesz, wybieraj kolor, który całkiem znika z planszy.';
+
+  @override
   String get tutBlend1 =>
       'Plansza składa się z plam: stykających się pól jednego koloru. Wybierz kolor na dole i dotknij plamy, aby ją przemalować. Połączy się ze stykającymi plamami tego koloru. Przemaluj środkową plamę.';
 
@@ -962,6 +1021,10 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutBlend3 =>
       'Teraz prawdziwa plansza. Wybrany kolor zostaje, więc możesz malować kilka plam z rzędu.';
+
+  @override
+  String get tutBlendS1 =>
+      'Wybierz jedną plamę na środku i przemalowuj właśnie ją: każdy ruch pochłania wtedy wszystkie stykające się plamy nowego koloru. Wybieraj kolor, który ma większość jej sąsiadów.';
 
   @override
   String get tutPop1 =>
@@ -984,6 +1047,14 @@ class AppLocalizationsPl extends AppLocalizations {
       'Inne tryby: w Przesuwaniu każdy wiersz też przesuwa się w prawo, w Ciągłym z lewej wjeżdżają nowe kolumny, a Mega łączy oba. Cele: wyczyść planszę, osiągnij wynik docelowy albo graj swobodnie o rekord. Gra kończy się, gdy nie zostaje żadna grupa 2.';
 
   @override
+  String get tutPopS1 =>
+      'Czyszczenie planszy wymaga planu. Zanim pękniesz grupę, pomyśl, co spadnie w lukę: pękaj grupy, które łączą bąbelki jednego koloru, i nigdy nie zostawiaj samotnego bąbelka jakiegoś koloru.';
+
+  @override
+  String get tutPopS2 =>
+      'Pogoń za punktami: grupa n bąbelków daje n × (n − 1), więc jedna grupa 8 (56) bije cztery grupy po 2 (8). Najpierw pękaj inne kolory, by zebrać jeden kolor w dużą grupę.';
+
+  @override
   String get tutMerge1 =>
       'Przesuń palcem (lub naciśnij strzałkę), aby przesunąć wszystkie kafelki do oporu. Dwa równe kafelki, które na siebie wpadną, łączą się w sumę. Zrób 4.';
 
@@ -996,16 +1067,28 @@ class AppLocalizationsPl extends AppLocalizations {
       'Trzymaj największy kafelek w rogu i dokarmiaj go krok po kroku. Zbuduj 32.';
 
   @override
+  String get tutMergeS1 =>
+      'Buduj łańcuch: trzymaj kafelki po kolei wzdłuż jednego wiersza, największy w rogu, jak 64, 32, 16, 8. Wtedy jedna nowa 8 na końcu toczy się aż do początku. Zbuduj 128.';
+
+  @override
   String get tutPipes1 =>
       'Dotknij kafelka, aby obrócić go zgodnie z ruchem wskazówek zegara (długie naciśnięcie lub prawy przycisk obraca z powrotem). Połącz wszystkie rury ze źródłem, kafelkiem z pierścieniem. Woda pokazuje, co już jest połączone.';
 
   @override
   String get tutPipes2 =>
-      'Żaden koniec rury nie może zostać otwarty, więc żadna rura nie może wychodzić poza planszę. Kafelki z kłódką są już dobrze. Zacznij od brzegów i rogów, gdzie kafelki mają najmniej możliwości.';
+      'Żaden koniec rury nie może zostać otwarty, więc żadna rura nie może wychodzić poza planszę. Kafelki z kropką w rogu są zablokowane i już dobrze ustawione. Zacznij od brzegów i rogów, gdzie kafelki mają najmniej możliwości.';
 
   @override
   String get tutPipes3 =>
       'Teraz prawdziwa plansza. Sieć nie może tworzyć pętli.';
+
+  @override
+  String get tutPipesS1 =>
+      'Działaj od brzegu do środka. Prosta na krawędzi musi biec wzdłuż niej, w rogu pasuje tylko kolanko skierowane do środka, a trójnik na krawędzi odwraca się płaskim bokiem do krawędzi. Każdy ustawiony kafelek ogranicza sąsiadów.';
+
+  @override
+  String get tutPipesS2 =>
+      'Trudna plansza. Sieć nie może mieć pętli: jeśli obrót kafelka zamknąłby pętlę, musi on wskazywać gdzie indziej. A dwa ślepe końce nigdy nie patrzą na siebie, bo tworzyłyby parę odciętą od reszty.';
 
   @override
   String get tutShikaku1 =>
@@ -1020,6 +1103,14 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz prawdziwa plansza. Duże liczby przy brzegach zwykle mają najmniej możliwości.';
 
   @override
+  String get tutShikakuS1 =>
+      'Pytaj, które liczby mogą sięgnąć pola. Lewy dolny róg jest za daleko, by 4 lub 6 pokryły go prostokątem swojej wielkości, więc należy do 2.';
+
+  @override
+  String get tutShikakuS2 =>
+      'Trudna plansza. Wypisz kilka prostokątów, których może użyć duża liczba: pola pokryte przez wszystkie należą do niej, a pole, do którego sięga tylko jedna liczba, należy do tej liczby.';
+
+  @override
   String get tutTrail1 =>
       'Przeciągnij od 1, aby narysować jedną ścieżkę przez każde pole: w górę, w dół, w lewo lub w prawo. Kończy się na ostatniej liczbie.';
 
@@ -1032,12 +1123,28 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz prawdziwa plansza. Do pola w rogu prowadzą tylko dwie drogi, więc ścieżka musi użyć obu.';
 
   @override
+  String get tutTrailS1 =>
+      'Pola z tylko dwoma wolnymi sąsiadami trzeba przejść na wylot: ścieżka wchodzi jedną stroną i wychodzi drugą. Uważaj na pola, które twoja ścieżka właśnie osaczyła.';
+
+  @override
+  String get tutTrailS2 =>
+      'Trudna plansza. Nigdy nie dziel wolnych pól na dwie części: ścieżka nie wróci po drugą. A pole z tylko jednym wolnym sąsiadem to ślepy zaułek, dozwolony tylko dla ostatniej liczby.';
+
+  @override
   String get tutLabyrinth1 =>
       'Przeciągnij od startu w lewym górnym rogu do flagi w prawym dolnym. Ściany blokują drogę.';
 
   @override
   String get tutLabyrinth2 =>
       'Większy labirynt. Ślepy zaułek? Przeciągnij z powrotem po swojej ścieżce albo dotknij dowolnego jej pola, aby tam wrócić. Szybkie przeciągnięcie biegnie prostymi korytarzami.';
+
+  @override
+  String get tutLabyrinthS1 =>
+      'Zgubiony? Trzymaj się ręką ściany: zawsze wybieraj skrajne prawe przejście. W takim labiryncie to zawsze wyprowadza, choć nie najkrótszą drogą.';
+
+  @override
+  String get tutLabyrinthS2 =>
+      'Albo idź od końca: prześledź drogę od flagi w stronę startu i szukaj, gdzie spotkają się obie trasy. Tak ślepe zaułki przy fladze szybko odpadają.';
 
   @override
   String get tutAtoms1 =>
@@ -1052,6 +1159,14 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz prawdziwa plansza. Zacznij od atomów, które mogą dostać wiązania tylko na jeden sposób.';
 
   @override
+  String get tutAtomsS1 =>
+      'Porównuj liczbę atomu z jego sąsiadami. 4 w rogu ma tylko dwóch sąsiadów, a para może mieć najwyżej dwa wiązania, więc oba wiązania są podwójne. Podobnie 3 z dwoma sąsiadami dostaje co najmniej jedno wiązanie z każdym.';
+
+  @override
+  String get tutAtomsS2 =>
+      'Trudna plansza. Utrzymuj cząsteczkę w jednym kawałku: dwie jedynki nigdy nie łączą się ze sobą, a dwie dwójki nie mają podwójnego wiązania, chyba że to jedyne atomy. Gdy utkniesz, spróbuj wiązania i zobacz, czy część planszy się nie odcina.';
+
+  @override
   String get tutLits1 =>
       'Zamaluj dokładnie 4 pola w każdym obrysowanym obszarze, tworząc L, I, T lub S. Górny obszar ma dokładnie 4 pola, więc zamaluj wszystkie. Dotknij pola, aby je zamalować.';
 
@@ -1064,6 +1179,14 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz prawdziwa plansza. Wszystkie zamalowane pola muszą być połączone. Dotknij dwa razy, aby postawić kropkę, notatkę, że pole zostaje puste.';
 
   @override
+  String get tutLitsS1 =>
+      'Wypisz kształty, które każdy region jeszcze pomieści. Pola pokryte przez każdy możliwy kształt są zamalowane, a te, których nie pokrywa żaden, zostają puste. Najmniej opcji mają małe regiony i te ściśnięte zasadą 2×2.';
+
+  @override
+  String get tutLitsS2 =>
+      'Trudniejsza plansza. Gdy utkniesz, spróbuj jednego kształtu w regionie: jeśli tworzy blok 2×2, rozcina zamalowany obszar na dwoje albo stawia obok siebie dwa jednakowe kształty, jest zły.';
+
+  @override
   String get tutCamp1 =>
       'Rozbij namiot obok każdego drzewa: nad, pod, z lewej lub z prawej, nigdy po przekątnej. Liczby na zewnątrz mówią, ile namiotów jest w wierszu i kolumnie. Dotknij pola dwa razy: trawa, potem namiot.';
 
@@ -1074,6 +1197,14 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutCamp3 =>
       'Teraz prawdziwa plansza. 0 oznacza, że cały wiersz lub kolumna to trawa, a każde drzewo ma swój namiot.';
+
+  @override
+  String get tutCampS1 =>
+      'Licz luki. Górny wiersz potrzebuje 2 namiotów, a zmieszczą się tylko w trzech zaznaczonych polach. Dwa namioty w trzech polach, które nie mogą się stykać, zajmują oba końce.';
+
+  @override
+  String get tutCampS2 =>
+      'Trudna plansza, a część liczb jest ukryta. Gdy utkniesz, spróbuj postawić namiot: jeśli jakieś drzewo zostaje bez miejsca na własny namiot, tam jest trawa.';
 
   @override
   String get tutIslands1 =>
@@ -1092,8 +1223,16 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz prawdziwa plansza. Każda wyspa ma dokładnie jedną liczbę.';
 
   @override
+  String get tutIslandsS1 =>
+      'Szukaj pól, do których nie sięga żadna wyspa. 3 rośnie najwyżej o dwa kroki od swojej liczby, 2 o jeden, a 1 wcale. Zaznaczone pola są poza zasięgiem wszystkich wysp, więc to morze.';
+
+  @override
+  String get tutIslandsS2 =>
+      'Trudna plansza. Pamiętaj o morzu: musi pozostać połączone, więc pole morza z jednym wyjściem ciągnie się w tę stronę, i nie może tworzyć sadzawki 2×2. Gdy utkniesz, spróbuj pola jako lądu i zobacz, czy coś się nie psuje.';
+
+  @override
   String get tutLamps1 =>
-      'Stawiaj lampy na białych polach: dotknij dwa razy (kropka, potem lampa). Lampa oświetla swój wiersz i kolumnę aż do ścian. Oświetl wszystkie białe pola.';
+      'Stawiaj lampy na pustych polach: dotknij dwa razy (kropka, potem lampa). Ciemne pola to ściany. Lampa oświetla swój wiersz i kolumnę aż do ścian. Oświetl wszystkie puste pola.';
 
   @override
   String get tutLamps2 =>
@@ -1106,6 +1245,14 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutLamps4 =>
       'Teraz prawdziwa plansza. Kropkami zaznaczaj pola, na których nie może stać lampa.';
+
+  @override
+  String get tutLampsS1 =>
+      'Niektóre pola da się oświetlić tylko w jeden sposób. Lewy górny róg może oświetlić tylko lampa w nim lub u jednego z dwóch sąsiadów, a 0 wyklucza sąsiadów: lampa stoi w rogu. Potem spójrz na 1.';
+
+  @override
+  String get tutLampsS2 =>
+      'Trudna plansza. Gdy utkniesz, spróbuj lampy w polu i prześledź skutki: jeśli jakiegoś pola nie da się już oświetlić albo liczby spełnić, to pole dostaje kropkę.';
 
   @override
   String get tutFence1 =>
@@ -1123,6 +1270,18 @@ class AppLocalizationsPl extends AppLocalizations {
   String get tutFence4 => 'Teraz prawdziwa plansza. Zacznij od 0 i 3.';
 
   @override
+  String get tutFenceS1 =>
+      'Poznaj kilka wzorów. Dwie trójki obok siebie zawsze mają linię między sobą i po linii na dalszych bokach: inaczej jednej z nich zabraknie. 0 nad nimi też pomaga.';
+
+  @override
+  String get tutFenceS2 =>
+      'Rogi dużo mówią. 1 w rogu nigdy nie używa swoich dwóch zewnętrznych boków: pętla musiałaby tam skręcić i zająć oba. 3 w rogu zawsze używa obu.';
+
+  @override
+  String get tutFenceS3 =>
+      'Trudna plansza. Gdy utkniesz, spróbuj linii na jednej krawędzi i prześledź ją: jeśli prowadzi w ślepy zaułek, do liczby nie do spełnienia albo do małej pętli, która zostawia inne poza sobą, ta krawędź dostaje krzyżyk.';
+
+  @override
   String get tutPearls1 =>
       'Przeciągaj po polach, aby narysować jedną zamkniętą pętlę. Na czarnej perle pętla skręca, a potem biegnie prosto przez następne pole po obu stronach.';
 
@@ -1133,6 +1292,14 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutPearls3 =>
       'Teraz prawdziwa plansza. Pętla nie musi przechodzić przez każde pole i nigdy się nie krzyżuje ani nie styka ze sobą.';
+
+  @override
+  String get tutPearlsS1 =>
+      'Czarna perła nie skręci ku zbyt bliskiej krawędzi: pętla potrzebuje dwóch prostych pól z każdej strony. Obie czarne perły są tu za blisko dwóch krawędzi, więc ich kierunki są ustalone.';
+
+  @override
+  String get tutPearlsS2 =>
+      'Trudna plansza. Trzy białe perły w rzędzie nie mogą leżeć na jednym prostym odcinku (środkowa potrzebuje skrętu obok), więc pętla przecina je w poprzek. Gdy utkniesz, spróbuj linii i zobacz, czy jakaś perła się nie psuje.';
 
   @override
   String get tutRails1 =>
@@ -1147,6 +1314,14 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz prawdziwa plansza. Tor się nie rozgałęzia ani nie krzyżuje i nie musi przechodzić przez każde pole.';
 
   @override
+  String get tutRailsS1 =>
+      'Zacznij od linii, w których liczba nie zostawia wyboru. Drugi wiersz potrzebuje 4 pól toru i ma ich tylko 4, prawa kolumna tak samo. Potem połącz końce.';
+
+  @override
+  String get tutRailsS2 =>
+      'Trudna plansza. Wyczerpana liczba blokuje resztę swojej linii, a pole toru zawsze potrzebuje dokładnie dwóch sąsiadów z torem. Gdy utkniesz, spróbuj kawałka toru i sprawdź, czy liczby wciąż się zgadzają.';
+
+  @override
   String get tutBlocks1 =>
       'Każdy obszar z k pól zawiera liczby od 1 do k po jednym razie. Każde podświetlone pole to ostatnia luka w swoim obszarze: wybierz brakującą liczbę z palety i dotknij pola.';
 
@@ -1159,16 +1334,32 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz prawdziwa plansza. Zacznij od małych obszarów i pól, których sąsiedzi wykluczają większość liczb. Notatki ołówkiem pomagają.';
 
   @override
+  String get tutBlocksS1 =>
+      'Wskazywanie: zanotuj, gdzie każdy region może jeszcze postawić liczbę. Gdy wszystkie te pola stykają się z tym samym polem poza regionem, to pole nie może mieć tej liczby, bo by się z nią stykało. Notatki ołówkiem pomagają to zobaczyć.';
+
+  @override
+  String get tutBlocksS2 =>
+      'Trudna plansza. Gdy nic innego nie działa, wybierz pole z tylko dwiema możliwymi liczbami i spróbuj jednej: jeśli wkrótce jakiś region nie ma miejsca na liczbę, właściwa jest druga.';
+
+  @override
   String get tutPairs1 =>
       'Zamaluj dokładnie dwa pola w każdym obszarze tak, aby każde zamalowane stykało się z dokładnie jednym innym: zamalowane pola tworzą pary. Podświetlony obszar ma tylko dwa pola, więc zamaluj oba.';
 
   @override
   String get tutPairs2 =>
-      'Pary nigdy nie stykają się ze sobą bokami. Postaw kropkę (dotknij dwa razy) obok gotowej pary: te pola zostają białe.';
+      'Pary nigdy nie stykają się ze sobą bokami. Górna para jest gotowa, więc zaznaczone pola obok niej zostają niezamalowane: postaw na nich kropki (dotknij dwa razy), a potem dokończ planszę.';
 
   @override
   String get tutPairs3 =>
       'Teraz prawdziwa plansza. Małe obszary i pola otoczone kropkami to dobre miejsca na start.';
+
+  @override
+  String get tutPairsS1 =>
+      'Przejrzyj wszystkie sposoby dokończenia małego regionu: pole zamalowane w każdym z nich jest zamalowane, a pole niezamalowane w żadnym dostaje kropkę. Na przykład w literze L z trzech pól zawsze zamalowany jest róg.';
+
+  @override
+  String get tutPairsS2 =>
+      'Trudna plansza. Gdy utkniesz, zamaluj pole i idź za zasadami: jeśli jakiś region nie może już dostać swoich dwóch pól albo dwie pary by się stykały, to pole zostaje niezamalowane.';
 
   @override
   String get tutPlots1 =>
@@ -1183,6 +1374,14 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz prawdziwa plansza. Niektóre działki nie mają żadnej liczby: ustal ich wielkość z miejsca, które zostało.';
 
   @override
+  String get tutPlotsS1 =>
+      'Szukaj kieszeni. Dwa zaznaczone pola otaczają gotowe działki, więc mogą połączyć się tylko ze sobą. Dwie jedynki nie mogą się stykać, więc razem tworzą działkę 2.';
+
+  @override
+  String get tutPlotsS2 =>
+      'Trudna plansza. Gdy nic nie jest pewne, wybierz pole z tylko dwiema lub trzema możliwymi liczbami i sprawdź każdą: liczba, przez którą jakaś działka nie może osiągnąć swojego rozmiaru, odpada.';
+
+  @override
   String get tutLinks1 =>
       'Przeciągnij od kółka do jego pary, aby je połączyć. Ścieżki biegną przez sąsiednie pola, nigdy po przekątnej.';
 
@@ -1195,16 +1394,32 @@ class AppLocalizationsPl extends AppLocalizations {
       'Teraz prawdziwa plansza. W rogach i przy krawędziach jest najmniej dróg, więc zacznij tam.';
 
   @override
+  String get tutLinksS1 =>
+      'Najpierw wypełniaj ciasne miejsca. Pusty róg ma tylko dwóch sąsiadów, więc ścieżka przez niego używa obu. Tak samo z każdym polem, któremu zostało dwóch wolnych sąsiadów.';
+
+  @override
+  String get tutLinksS2 =>
+      'Trudna plansza. W łamigłówce z jedną odpowiedzią ścieżka nigdy nie zawraca tuż obok siebie (mogłaby pójść na skróty), więc żaden kwadrat 2×2 nie należy do jednej ścieżki. I nie zostawiaj pustego pola, do którego żadna ścieżka już nie dotrze.';
+
+  @override
   String get tutArrows1 =>
-      'Narysuj jedną pętlę przez środki wszystkich białych pól: przeciągaj od pola do pola. Szare pole ze wskazówką nigdy nie jest na pętli, a jego 0 mówi, że nad nim nie ma zamalowanych pól.';
+      'Narysuj jedną pętlę przez środki wszystkich pustych pól: przeciągaj od pola do pola. Pole ze wskazówką pośrodku nigdy nie jest na pętli. Jego 0 mówi, że nad nim nic nie jest zamalowane, więc tu nic nie zamalowujesz.';
 
   @override
   String get tutArrows2 =>
-      'Teraz niektóre pola są zamalowane: dotknij środka pola, aby je zamalować. Każda wskazówka liczy zamalowane pola w kierunku swojej strzałki. Zamalowane pola nie stykają się bokami, a pętla przechodzi przez wszystkie pozostałe.';
+      'Teraz dwa pola trzeba zamalować. Każda wskazówka liczy zamalowane pola w kierunku swojej strzałki: znajdź je i dotknij ich środków, aby je zamalować. Zamalowane pola nie stykają się bokami. Potem narysuj pętlę przez wszystkie pozostałe pola.';
 
   @override
   String get tutArrows3 =>
       'Teraz prawdziwa plansza. Pola obok zamalowanego są zawsze na pętli, a pole pętli potrzebuje dwóch wyjść.';
+
+  @override
+  String get tutArrowsS1 =>
+      'Szukaj ciasnych wskazówek. 2 w środkowym wierszu ma po prawej tylko trzy pola, a jej dwa zamalowane pola nie mogą się stykać, więc zajmują pierwsze i ostatnie. Z 2 w górnym wierszu jest jeszcze łatwiej: ma tylko dwa wolne pola.';
+
+  @override
+  String get tutArrowsS2 =>
+      'Trudna plansza. Każde pole, które nie jest zamalowane ani wskazówką, leży na pętli, więc pole z tylko dwoma wolnymi sąsiadami ma ustaloną drogę. Gdy utkniesz, spróbuj zamalować pole i zobacz, czy jakiemuś polu pętli nie zostało mniej niż dwa wyjścia.';
 
   @override
   String get tutMines1 =>
@@ -1221,4 +1436,12 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutMines4 =>
       'Teraz prawdziwa plansza. Nigdy nie musisz zgadywać. Jeśli przez pomyłkę kopniesz minę, po prostu dostanie flagę, a gra toczy się dalej.';
+
+  @override
+  String get tutMinesS1 =>
+      'Porównuj sąsiednie liczby. 2 widzi trzy zakryte pola, a 1 po jej lewej tylko dwa pierwsze, więc trzecie to mina. To samo działa z prawej. Wtedy środkowe pole jest bezpieczne.';
+
+  @override
+  String get tutMinesS2 =>
+      'Trudna plansza. Dalej porównuj liczby, które mają wspólne zakryte pola. Pod koniec policz, co zostało: licznik min może rozstrzygnąć ostatnie zakryte pola.';
 }

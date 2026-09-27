@@ -1,7 +1,9 @@
+import '../../core/difficulty.dart';
 import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
+import 'sudoku_generator.dart';
 import 'sudoku_model.dart';
 
 /// A 4×4 board from rows of digits (given) and letters a–d (a cell to fill
@@ -48,4 +50,28 @@ final List<TutorialStep> sudokuTutorial = [
     );
   }(),
   TutorialStep(text: (l) => l.tutSudoku5, puzzle: _full),
+];
+
+/// A 6×6 board from its solution and the shown digits ('.' for empty).
+SudokuPuzzle _board6(List<String> solution, List<String> shown) => SudokuPuzzle(
+      n: 6,
+      givens: [for (final ch in shown.join().split('')) ch == '.' ? null : int.parse(ch) - 1],
+      solution: [for (final ch in solution.join().split('')) int.parse(ch) - 1],
+    );
+
+final List<TutorialStep> sudokuStrategies = [
+  // Hidden single: the top-left box's 1 has one spot left.
+  TutorialStep(
+    text: (l) => l.tutSudokuS1,
+    puzzle: _board6(
+      ['123456', '456123', '231564', '564231', '312645', '645312'],
+      ['....56', '...12.', '2315.4', '564.31', '31264.', '6.5312'],
+    ),
+    focus: {for (var r = 0; r < 2; r++) for (var c = 0; c < 3; c++) Pos(r, c)},
+  ),
+  // Needs pointing or pairs (checked: singles alone get stuck).
+  TutorialStep.generated(
+    text: (l) => l.tutSudokuS2,
+    make: () => generateSudoku(const GenParams(size: GridSize.square(9), difficulty: Difficulty.hard, seed: 1)),
+  ),
 ];
