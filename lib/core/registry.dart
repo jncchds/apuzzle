@@ -1,4 +1,6 @@
+import '../puzzles/arrows/arrows_type.dart';
 import '../puzzles/atoms/atoms_type.dart';
+import '../puzzles/blocks/blocks_type.dart';
 import '../puzzles/blend/blend_type.dart';
 import '../puzzles/camp/camp_type.dart';
 import '../puzzles/fence/fence_type.dart';
@@ -7,12 +9,15 @@ import '../puzzles/islands/islands_type.dart';
 import '../puzzles/kings/kings_type.dart';
 import '../puzzles/labyrinth/labyrinth_type.dart';
 import '../puzzles/lamps/lamps_type.dart';
+import '../puzzles/links/links_type.dart';
 import '../puzzles/lits/lits_type.dart';
 import '../puzzles/mambo/mambo_type.dart';
 import '../puzzles/merge/merge_type.dart';
 import '../puzzles/mines/mines_type.dart';
 import '../puzzles/mosaic/mosaic_type.dart';
+import '../puzzles/pairs/pairs_type.dart';
 import '../puzzles/pearls/pearls_type.dart';
+import '../puzzles/plots/plots_type.dart';
 import '../puzzles/pop/pop_type.dart';
 import '../puzzles/pipes/pipes_type.dart';
 import '../puzzles/rails/rails_type.dart';
@@ -26,6 +31,8 @@ const List<PuzzleType> puzzleTypes = [
   MamboType(),
   SudokuType(),
   KingsType(),
+  BlocksType(),
+  PairsType(),
   HuesType(),
   MosaicType(),
   BlendType(),
@@ -33,7 +40,9 @@ const List<PuzzleType> puzzleTypes = [
   MergeType(),
   PipesType(),
   ShikakuType(),
+  PlotsType(),
   TrailType(),
+  LinksType(),
   LabyrinthType(),
   AtomsType(),
   LitsType(),
@@ -43,6 +52,7 @@ const List<PuzzleType> puzzleTypes = [
   FenceType(),
   PearlsType(),
   RailsType(),
+  ArrowsType(),
   MinesType(),
 ];
 

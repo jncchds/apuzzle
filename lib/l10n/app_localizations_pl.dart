@@ -736,6 +736,59 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Ułóż jeden tor przez środki pól, od wjazdu na lewej krawędzi do wyjazdu na dolnej.\n• Tor się nie rozgałęzia, nie krzyżuje ani nie zamyka w pętlę i nie musi przechodzić przez każde pole.\n• Liczby nad planszą i po jej prawej stronie mówią, przez ile pól każdej kolumny i wiersza biegnie tor.\n• Odcinki, które już są na planszy, są stałe: tor biegnie przez nie dokładnie tak, jak pokazano.\n\nPrzeciągaj po polach, aby układać tor, albo wzdłuż niego, aby go ścierać. Dotknij między dwoma polami, aby przełączać: tor → krzyżyk → puste.';
 
   @override
+  String get blocksName => 'Bloki';
+
+  @override
+  String get blocksTagline => 'Liczby od 1 do k w każdym obszarze z k pól';
+
+  @override
+  String get blocksRules =>
+      '• Wypełnij każde pole liczbą.\n• Obszar z k pól zawiera każdą liczbę od 1 do k dokładnie raz (obszar z jednego pola zawiera 1).\n• Równe liczby nigdy się nie stykają, nawet po przekątnej.\n• Podanych liczb nie można zmieniać.\n\nWybierz liczbę z palety i dotykaj pól, aby ją wpisać, albo najpierw dotknij pola, a potem liczby. Przycisk ołówka włącza małe notatki. Długie naciśnięcie / prawy przycisk czyści pole.';
+
+  @override
+  String get pairsName => 'Pary';
+
+  @override
+  String get pairsTagline =>
+      'Dwa zamalowane pola obok siebie w każdym obszarze';
+
+  @override
+  String get pairsRules =>
+      '• Zamaluj dokładnie dwa pola w każdym obrysowanym obszarze.\n• Każde zamalowane pole styka się bokiem z dokładnie jednym innym zamalowanym polem, więc zamalowane pola tworzą pary.\n• Pary nigdy nie stykają się ze sobą bokami (rogami mogą).\n\nDotknij pola, aby przełączać: puste → zamalowane → kropka (twoja notatka „niezamalowane”). Długie naciśnięcie / prawy przycisk przełącza wstecz.';
+
+  @override
+  String get plotsName => 'Działki';
+
+  @override
+  String get plotsTagline =>
+      'Podziel planszę na działki tak duże jak ich liczby';
+
+  @override
+  String get plotsRules =>
+      '• Wypełnij każde pole liczbą.\n• Równe liczby stykające się bokami tworzą działkę, a działka ma dokładnie tyle pól, ile mówi jej liczba: 3 leży w działce z trzech pól.\n• Dwie działki tej samej wielkości nigdy nie stykają się bokami (byłyby jedną działką).\n• Niektóre działki nie mają żadnej podanej liczby.\n\nWybierz liczbę z palety i dotykaj pól, aby je wypełnić, albo najpierw dotknij pola, a potem liczby. Między różnymi liczbami pojawiają się linie, więc widać, jak powstają działki.';
+
+  @override
+  String get linksName => 'Połączenia';
+
+  @override
+  String get linksTagline => 'Połącz pary i wypełnij planszę';
+
+  @override
+  String get linksRules =>
+      '• Połącz każdą parę jednakowych kółek ścieżką przez sąsiednie pola (nie po przekątnej).\n• Ścieżki się nie krzyżują, nie rozgałęziają i nie dzielą pól.\n• Razem ścieżki wypełniają każde pole planszy.\n\nPrzeciągnij od kółka, aby narysować jego ścieżkę; ścieżka poprowadzona przez inną przecina ją. Dotknij kółka, aby wyczyścić jego ścieżkę, albo pola ścieżki, aby ją tam przyciąć.';
+
+  @override
+  String get arrowsName => 'Strzałki';
+
+  @override
+  String get arrowsTagline =>
+      'Zamaluj, co liczą strzałki, a resztę obejdź pętlą';
+
+  @override
+  String get arrowsRules =>
+      '• Zamaluj niektóre pola. Zamalowane pola nigdy nie stykają się bokami.\n• Narysuj jedną zamkniętą pętlę przez środki wszystkich pozostałych pól. Nie rozgałęzia się ani nie krzyżuje.\n• Szare pola ze wskazówkami nie są zamalowane ani na pętli. Liczba wskazówki liczy zamalowane pola w kierunku jej strzałki, aż do krawędzi.\n\nPrzeciągaj po polach, aby rysować pętlę, albo wzdłuż niej, aby ją ścierać. Dotknij środka pola, aby przełączać: puste → zamalowane → kropka (twoja notatka „na pętli”), albo dotknij między dwoma polami, aby przełączać: linia → krzyżyk → puste.';
+
+  @override
   String get learnTitle => 'Jak grać';
 
   @override
@@ -1092,6 +1145,66 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutRails3 =>
       'Teraz prawdziwa plansza. Tor się nie rozgałęzia ani nie krzyżuje i nie musi przechodzić przez każde pole.';
+
+  @override
+  String get tutBlocks1 =>
+      'Każdy obszar z k pól zawiera liczby od 1 do k po jednym razie. Każde podświetlone pole to ostatnia luka w swoim obszarze: wybierz brakującą liczbę z palety i dotknij pola.';
+
+  @override
+  String get tutBlocks2 =>
+      'Równe liczby nigdy się nie stykają, nawet rogami. Obszar w lewym górnym rogu potrzebuje 1 i 2, a jedno z jego pól już styka się z dwójką. Tak samo wypełnij dolny wiersz.';
+
+  @override
+  String get tutBlocks3 =>
+      'Teraz prawdziwa plansza. Zacznij od małych obszarów i pól, których sąsiedzi wykluczają większość liczb. Notatki ołówkiem pomagają.';
+
+  @override
+  String get tutPairs1 =>
+      'Zamaluj dokładnie dwa pola w każdym obszarze tak, aby każde zamalowane stykało się z dokładnie jednym innym: zamalowane pola tworzą pary. Podświetlony obszar ma tylko dwa pola, więc zamaluj oba.';
+
+  @override
+  String get tutPairs2 =>
+      'Pary nigdy nie stykają się ze sobą bokami. Postaw kropkę (dotknij dwa razy) obok gotowej pary: te pola zostają białe.';
+
+  @override
+  String get tutPairs3 =>
+      'Teraz prawdziwa plansza. Małe obszary i pola otoczone kropkami to dobre miejsca na start.';
+
+  @override
+  String get tutPlots1 =>
+      'Wypełnij każde pole liczbą. Równe liczby stykające się bokami tworzą działkę z dokładnie tylu pól. Podświetlona trójka potrzebuje jeszcze dwóch pól do swojej działki.';
+
+  @override
+  String get tutPlots2 =>
+      'Dwie działki tej samej wielkości nie mogą się stykać: połączyłyby się w jedną, za dużą. Podświetlone pole styka się z dwiema działkami po 2, więc nie może być dwójką.';
+
+  @override
+  String get tutPlots3 =>
+      'Teraz prawdziwa plansza. Niektóre działki nie mają żadnej liczby: ustal ich wielkość z miejsca, które zostało.';
+
+  @override
+  String get tutLinks1 =>
+      'Przeciągnij od kółka do jego pary, aby je połączyć. Ścieżki biegną przez sąsiednie pola, nigdy po przekątnej.';
+
+  @override
+  String get tutLinks2 =>
+      'Ścieżki się nie krzyżują, a razem wypełniają każde pole, więc niektóre muszą iść naokoło.';
+
+  @override
+  String get tutLinks3 =>
+      'Teraz prawdziwa plansza. W rogach i przy krawędziach jest najmniej dróg, więc zacznij tam.';
+
+  @override
+  String get tutArrows1 =>
+      'Narysuj jedną pętlę przez środki wszystkich białych pól: przeciągaj od pola do pola. Szare pole ze wskazówką nigdy nie jest na pętli, a jego 0 mówi, że nad nim nie ma zamalowanych pól.';
+
+  @override
+  String get tutArrows2 =>
+      'Teraz niektóre pola są zamalowane: dotknij środka pola, aby je zamalować. Każda wskazówka liczy zamalowane pola w kierunku swojej strzałki. Zamalowane pola nie stykają się bokami, a pętla przechodzi przez wszystkie pozostałe.';
+
+  @override
+  String get tutArrows3 =>
+      'Teraz prawdziwa plansza. Pola obok zamalowanego są zawsze na pętli, a pole pętli potrzebuje dwóch wyjść.';
 
   @override
   String get tutMines1 =>

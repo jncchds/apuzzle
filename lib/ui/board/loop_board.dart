@@ -47,6 +47,7 @@ class LoopBoard extends StatefulWidget {
     this.maxCell = 72,
     this.locked,
     this.margins,
+    this.onCellTap,
   });
 
   final LatticeLoop g;
@@ -77,6 +78,10 @@ class LoopBoard extends StatefulWidget {
   /// Space around the grid in cells (for labels outside it), or null for
   /// the default (a margin for corner lattices only).
   final EdgeInsets? margins;
+
+  /// Taps near a cell centre go here instead of to the edges (for boards
+  /// that also mark cells). [secondary]: long-press or right-click.
+  final void Function(Pos pos, bool secondary)? onCellTap;
 
   @override
   State<LoopBoard> createState() => _LoopBoardState();
@@ -134,6 +139,13 @@ class _LoopBoardState extends State<LoopBoard> {
   }
 
   void _tap(LoopGeom geo, Offset o, {bool secondary = false}) {
+    if (widget.onCellTap case final onCell?) {
+      final c = ((o.dx - geo.origin.dx) / geo.cell).floor(), r = ((o.dy - geo.origin.dy) / geo.cell).floor();
+      if (r >= 0 && c >= 0 && r < widget.rows && c < widget.cols && (geo.cellRect(r, c).center - o).distance < geo.cell * 0.3) {
+        onCell(Pos(r, c), secondary);
+        return;
+      }
+    }
     final e = _nearestEdge(geo, o);
     if (e == null || _locked(e)) return;
     final next = List.of(widget.marks);

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import '../../core/difficulty.dart';
+import '../../core/grid_graph.dart';
 import 'trail_logic.dart';
 import 'trail_model.dart';
 
@@ -16,7 +17,7 @@ TrailPuzzle generateTrail(GenParams params) {
   final d = params.difficulty;
   final tier = d == Difficulty.easy ? 1 : 2;
 
-  final path = _randomHamiltonian(rows, cols, rng);
+  final path = randomHamiltonianPath(rows, cols, rng);
   final pos = List<int>.filled(n, 0);
   for (var k = 0; k < n; k++) {
     pos[path[k]] = k;
@@ -63,32 +64,4 @@ TrailPuzzle generateTrail(GenParams params) {
   }
 
   return TrailPuzzle(rows: rows, cols: cols, numbers: numbersFor(marks), solution: path);
-}
-
-List<int> _randomHamiltonian(int rows, int cols, Random rng) {
-  var path = <int>[
-    for (var r = 0; r < rows; r++)
-      for (var k = 0; k < cols; k++) r * cols + (r.isEven ? k : cols - 1 - k),
-  ];
-  List<int> neighbors(int i) {
-    final r = i ~/ cols, c = i % cols;
-    return [if (r > 0) i - cols, if (r < rows - 1) i + cols, if (c > 0) i - 1, if (c < cols - 1) i + 1];
-  }
-
-  final steps = rows * cols * 40;
-  final pos = List<int>.filled(rows * cols, 0);
-  for (var s = 0; s < steps; s++) {
-    if (rng.nextBool()) path = path.reversed.toList();
-    for (var k = 0; k < path.length; k++) {
-      pos[path[k]] = k;
-    }
-    final endCell = path.last;
-    final opts = [for (final x in neighbors(endCell)) if (pos[x] != path.length - 2) x];
-    if (opts.isEmpty) continue;
-    final x = opts[rng.nextInt(opts.length)];
-    final i = pos[x];
-    // p0..pi, pL, pL-1, ..., p(i+1)
-    path = [...path.sublist(0, i + 1), ...path.sublist(i + 1).reversed];
-  }
-  return path;
 }

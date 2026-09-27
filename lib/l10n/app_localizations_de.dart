@@ -732,6 +732,60 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Verlege ein Gleis durch die Mitten der Felder, von der Einfahrt am linken Rand zur Ausfahrt am unteren Rand.\n• Das Gleis verzweigt sich nicht, kreuzt sich nicht und schließt sich nicht zu einer Schleife. Es muss nicht durch jedes Feld laufen.\n• Die Zahlen über und rechts neben dem Gitter geben an, durch wie viele Felder jeder Spalte und Zeile das Gleis läuft.\n• Stücke, die schon auf dem Gitter liegen, sind fest: Das Gleis läuft genau so hindurch, wie gezeigt.\n\nZiehe durch Felder, um Gleis zu verlegen, oder an ihm entlang, um es zu löschen. Tippe zwischen zwei Felder, um zu wechseln: Gleis → Kreuz → leer.';
 
   @override
+  String get blocksName => 'Blöcke';
+
+  @override
+  String get blocksTagline =>
+      'Zahlen von 1 bis k in jedem Bereich aus k Feldern';
+
+  @override
+  String get blocksRules =>
+      '• Fülle jedes Feld mit einer Zahl.\n• Ein Bereich aus k Feldern enthält jede Zahl von 1 bis k genau einmal (ein Bereich aus einem Feld enthält eine 1).\n• Gleiche Zahlen berühren sich nie, auch nicht diagonal.\n• Vorgegebene Zahlen sind fest.\n\nWähle eine Zahl in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Zahl. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld.';
+
+  @override
+  String get pairsName => 'Paare';
+
+  @override
+  String get pairsTagline =>
+      'Zwei schattierte Felder nebeneinander in jedem Bereich';
+
+  @override
+  String get pairsRules =>
+      '• Schattiere in jedem umrandeten Bereich genau zwei Felder.\n• Jedes schattierte Feld berührt seitlich genau ein anderes schattiertes Feld, die Schattierung besteht also aus Paaren.\n• Paare berühren einander nie seitlich (an den Ecken schon).\n\nTippe auf ein Feld, um zu wechseln: leer → schattiert → Punkt (deine Notiz „nicht schattiert“). Langes Drücken / Rechtsklick wechselt zurück.';
+
+  @override
+  String get plotsName => 'Parzellen';
+
+  @override
+  String get plotsTagline =>
+      'Teile das Gitter in Parzellen so groß wie ihre Zahlen';
+
+  @override
+  String get plotsRules =>
+      '• Fülle jedes Feld mit einer Zahl.\n• Gleiche Zahlen, die sich seitlich berühren, bilden eine Parzelle, und eine Parzelle hat genau so viele Felder wie ihre Zahl: Eine 3 liegt in einer Parzelle aus drei Feldern.\n• Zwei gleich große Parzellen berühren sich nie seitlich (sonst wären sie eine).\n• Manche Parzellen zeigen gar keine Zahl.\n\nWähle eine Zahl in der Palette und tippe auf Felder, um sie zu füllen, oder tippe zuerst auf ein Feld und dann auf eine Zahl. Zwischen verschiedenen Zahlen erscheinen Linien, so siehst du die Parzellen entstehen.';
+
+  @override
+  String get linksName => 'Verbindungen';
+
+  @override
+  String get linksTagline => 'Verbinde die Paare und fülle das Gitter';
+
+  @override
+  String get linksRules =>
+      '• Verbinde jedes Paar gleicher Punkte mit einem Weg durch benachbarte Felder (nicht diagonal).\n• Wege kreuzen sich nicht, verzweigen sich nicht und teilen sich keine Felder.\n• Zusammen füllen die Wege jedes Feld des Gitters.\n\nZiehe von einem Punkt aus, um seinen Weg zu zeichnen; ein Weg quer über einen anderen schneidet diesen ab. Tippe auf einen Punkt, um seinen Weg zu löschen, oder auf ein Feld eines Wegs, um ihn dort zu kürzen.';
+
+  @override
+  String get arrowsName => 'Pfeile';
+
+  @override
+  String get arrowsTagline =>
+      'Schattiere, was die Pfeile zählen, und umrunde den Rest';
+
+  @override
+  String get arrowsRules =>
+      '• Schattiere einige Felder. Schattierte Felder berühren sich nie seitlich.\n• Zeichne eine geschlossene Schleife durch die Mitten aller anderen Felder. Sie verzweigt und kreuzt sich nicht.\n• Graue Hinweisfelder sind weder schattiert noch auf der Schleife. Die Zahl eines Hinweises zählt die schattierten Felder in Pfeilrichtung bis zum Rand.\n\nZiehe durch Felder, um die Schleife zu zeichnen, oder an ihr entlang, um sie zu löschen. Tippe auf die Mitte eines Felds, um zu wechseln: leer → schattiert → Punkt (deine Notiz „auf der Schleife“), oder zwischen zwei Felder, um zu wechseln: Linie → Kreuz → leer.';
+
+  @override
   String get learnTitle => 'So wird gespielt';
 
   @override
@@ -1087,6 +1141,66 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutRails3 =>
       'Jetzt ein echtes Gitter. Das Gleis verzweigt und kreuzt sich nie und muss nicht durch jedes Feld laufen.';
+
+  @override
+  String get tutBlocks1 =>
+      'Jeder Bereich aus k Feldern enthält die Zahlen 1 bis k je einmal. Jedes markierte Feld ist die letzte Lücke in seinem Bereich: Wähle die fehlende Zahl in der Palette und tippe auf das Feld.';
+
+  @override
+  String get tutBlocks2 =>
+      'Gleiche Zahlen berühren sich nie, auch nicht an den Ecken. Der Bereich oben links braucht eine 1 und eine 2, und eines seiner Felder berührt schon eine 2. Fülle die untere Zeile genauso.';
+
+  @override
+  String get tutBlocks3 =>
+      'Jetzt ein echtes Gitter. Fang mit kleinen Bereichen an und mit Feldern, deren Nachbarn die meisten Zahlen ausschließen. Stift-Notizen helfen.';
+
+  @override
+  String get tutPairs1 =>
+      'Schattiere in jedem Bereich genau zwei Felder, sodass jedes schattierte Feld genau ein anderes berührt: Die Schattierung besteht aus Paaren. Der markierte Bereich hat nur zwei Felder, also schattiere beide.';
+
+  @override
+  String get tutPairs2 =>
+      'Paare berühren einander nie seitlich. Setze einen Punkt (zweimal tippen) neben ein fertiges Paar: Diese Felder bleiben weiß.';
+
+  @override
+  String get tutPairs3 =>
+      'Jetzt ein echtes Gitter. Kleine Bereiche und von Punkten eingeschlossene Felder sind gute Startpunkte.';
+
+  @override
+  String get tutPlots1 =>
+      'Fülle jedes Feld mit einer Zahl. Gleiche Zahlen, die sich seitlich berühren, bilden eine Parzelle aus genau so vielen Feldern. Die markierte 3 braucht noch zwei Felder für ihre Parzelle.';
+
+  @override
+  String get tutPlots2 =>
+      'Zwei gleich große Parzellen dürfen sich nicht berühren: Sie würden zu einer zu großen Parzelle verschmelzen. Das markierte Feld berührt zwei Parzellen aus 2, also kann es keine 2 sein.';
+
+  @override
+  String get tutPlots3 =>
+      'Jetzt ein echtes Gitter. Manche Parzellen zeigen gar keine Zahl: Leite ihre Größe aus dem übrigen Platz ab.';
+
+  @override
+  String get tutLinks1 =>
+      'Ziehe von einem Punkt zu seinem Partner, um sie zu verbinden. Wege laufen durch benachbarte Felder, nie diagonal.';
+
+  @override
+  String get tutLinks2 =>
+      'Wege kreuzen sich nie und füllen zusammen jedes Feld, also müssen manche einen Umweg nehmen.';
+
+  @override
+  String get tutLinks3 =>
+      'Jetzt ein echtes Gitter. Ecken und Ränder lassen die wenigsten Wege offen, also fang dort an.';
+
+  @override
+  String get tutArrows1 =>
+      'Zeichne eine Schleife durch die Mitten aller weißen Felder: Ziehe von Feld zu Feld. Das graue Hinweisfeld ist nie auf der Schleife, und seine 0 sagt, dass darüber keine schattierten Felder liegen.';
+
+  @override
+  String get tutArrows2 =>
+      'Jetzt sind manche Felder schattiert: Tippe auf die Mitte eines Felds, um es zu schattieren. Jeder Hinweis zählt die schattierten Felder in Pfeilrichtung. Schattierte Felder berühren sich nie seitlich, und die Schleife läuft durch alle anderen.';
+
+  @override
+  String get tutArrows3 =>
+      'Jetzt ein echtes Gitter. Felder neben einem schattierten Feld liegen immer auf der Schleife, und ein Schleifenfeld braucht zwei Ausgänge.';
 
   @override
   String get tutMines1 =>

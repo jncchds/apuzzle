@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/grid.dart';
@@ -197,6 +198,8 @@ class CellGridBoard extends StatelessWidget {
       if (onDragStart != null) {
         board = GestureDetector(
           behavior: HitTestBehavior.opaque,
+          // Start drags where the finger went down, not after the slop.
+          dragStartBehavior: DragStartBehavior.down,
           onPanStart: (d) {
             final p = m.cellAt(d.localPosition);
             if (p != null) onDragStart!(p, d.localPosition);

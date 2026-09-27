@@ -1272,6 +1272,96 @@ abstract class AppLocalizations {
   /// **'• Lay one track through the centers of the cells, from the entry on the left edge to the exit on the bottom edge.\n• The track never branches, crosses itself or closes into a loop, and it doesn\'t have to visit every cell.\n• The numbers above and to the right of the grid tell how many cells of each column and row the track passes through.\n• Pieces already on the board are fixed: the track runs through them exactly as shown.\n\nDrag through cells to lay track, or drag along it to erase. Tap between two cells to cycle track → cross → empty.'**
   String get railsRules;
 
+  /// No description provided for @blocksName.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocks'**
+  String get blocksName;
+
+  /// No description provided for @blocksTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Numbers 1 to k in every region of k cells'**
+  String get blocksTagline;
+
+  /// No description provided for @blocksRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Fill every cell with a number.\n• A region of k cells holds each number from 1 to k exactly once (a region of one cell holds a 1).\n• Equal numbers never touch, not even diagonally.\n• Given numbers are fixed.\n\nPick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.'**
+  String get blocksRules;
+
+  /// No description provided for @pairsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Pairs'**
+  String get pairsName;
+
+  /// No description provided for @pairsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Two shaded cells in every region, side by side'**
+  String get pairsTagline;
+
+  /// No description provided for @pairsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Shade exactly two cells in every outlined region.\n• Every shaded cell touches exactly one other shaded cell side by side, so the shading is all pairs.\n• Pairs never touch each other side by side (corners are fine).\n\nTap a cell to cycle empty → shaded → dot (your \"not shaded\" note). Long-press / right-click cycles back.'**
+  String get pairsRules;
+
+  /// No description provided for @plotsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Plots'**
+  String get plotsName;
+
+  /// No description provided for @plotsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Split the grid into plots as big as their numbers'**
+  String get plotsTagline;
+
+  /// No description provided for @plotsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Fill every cell with a number.\n• Equal numbers that touch side by side form a plot, and a plot has exactly as many cells as its number: a 3 lies in a plot of three cells.\n• Two plots of the same size never touch side by side (they would be one plot).\n• Some plots show no number at all.\n\nPick a number in the palette and tap cells to fill them, or tap a cell first and then a number. Lines appear between different numbers, so you can see the plots take shape.'**
+  String get plotsRules;
+
+  /// No description provided for @linksName.
+  ///
+  /// In en, this message translates to:
+  /// **'Links'**
+  String get linksName;
+
+  /// No description provided for @linksTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Join the pairs and fill the grid'**
+  String get linksTagline;
+
+  /// No description provided for @linksRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Join each pair of equal dots with a path through neighbouring cells (no diagonals).\n• Paths never cross, branch or share a cell.\n• Together the paths fill every cell of the grid.\n\nDrag from a dot to draw its path; drawing across another path cuts it. Tap a dot to clear its path, or a cell of a path to cut the path there.'**
+  String get linksRules;
+
+  /// No description provided for @arrowsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrows'**
+  String get arrowsName;
+
+  /// No description provided for @arrowsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Shade what the arrows count, loop through the rest'**
+  String get arrowsTagline;
+
+  /// No description provided for @arrowsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Shade some cells. Shaded cells never touch side by side.\n• Draw one closed loop through the centers of all the other cells. It never branches or crosses itself.\n• Gray clue cells are neither shaded nor on the loop. A clue\'s number counts the shaded cells in its arrow\'s direction, all the way to the edge.\n\nDrag through cells to draw the loop, or along it to erase. Tap the center of a cell to cycle empty → shaded → dot (your \"on the loop\" note), or tap between two cells to cycle line → cross → empty.'**
+  String get arrowsRules;
+
   /// No description provided for @learnTitle.
   ///
   /// In en, this message translates to:
@@ -1811,6 +1901,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Now a real board. The track never branches or crosses itself, and it doesn\'t have to visit every cell.'**
   String get tutRails3;
+
+  /// No description provided for @tutBlocks1.
+  ///
+  /// In en, this message translates to:
+  /// **'Every region of k cells holds the numbers 1 to k once each. Each highlighted cell is the last gap in its region: pick the missing number in the palette, then tap the cell.'**
+  String get tutBlocks1;
+
+  /// No description provided for @tutBlocks2.
+  ///
+  /// In en, this message translates to:
+  /// **'Equal numbers never touch, not even at the corners. The top-left region needs a 1 and a 2, and one of its cells already touches a 2. Fill the bottom row the same way.'**
+  String get tutBlocks2;
+
+  /// No description provided for @tutBlocks3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with small regions and with cells whose neighbours rule out most numbers. Pencil notes help.'**
+  String get tutBlocks3;
+
+  /// No description provided for @tutPairs1.
+  ///
+  /// In en, this message translates to:
+  /// **'Shade exactly two cells in every region, so that each shaded cell touches exactly one other: the shading comes in pairs. The highlighted region has just two cells, so shade both.'**
+  String get tutPairs1;
+
+  /// No description provided for @tutPairs2.
+  ///
+  /// In en, this message translates to:
+  /// **'Pairs never touch each other side by side. Put a dot (tap twice) next to a finished pair: those cells stay white.'**
+  String get tutPairs2;
+
+  /// No description provided for @tutPairs3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Small regions and cells boxed in by dots are good places to start.'**
+  String get tutPairs3;
+
+  /// No description provided for @tutPlots1.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill every cell with a number. Equal numbers that touch side by side form a plot with exactly that many cells. The highlighted 3 needs two more cells for its plot.'**
+  String get tutPlots1;
+
+  /// No description provided for @tutPlots2.
+  ///
+  /// In en, this message translates to:
+  /// **'Two plots of the same size can\'t touch: they would join into one plot that is too big. The highlighted cell touches two plots of 2, so it can\'t be a 2.'**
+  String get tutPlots2;
+
+  /// No description provided for @tutPlots3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Some plots show no number at all: work out their size from the room that\'s left.'**
+  String get tutPlots3;
+
+  /// No description provided for @tutLinks1.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag from a dot to its twin to join them. Paths go through neighbouring cells, never diagonally.'**
+  String get tutLinks1;
+
+  /// No description provided for @tutLinks2.
+  ///
+  /// In en, this message translates to:
+  /// **'Paths never cross, and together they fill every cell, so some have to take the long way round.'**
+  String get tutLinks2;
+
+  /// No description provided for @tutLinks3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Corners and edges leave the fewest ways to go, so start there.'**
+  String get tutLinks3;
+
+  /// No description provided for @tutArrows1.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw one loop through the centers of all the white cells: drag from cell to cell. The gray clue cell is never on the loop, and its 0 says there are no shaded cells above it.'**
+  String get tutArrows1;
+
+  /// No description provided for @tutArrows2.
+  ///
+  /// In en, this message translates to:
+  /// **'Now some cells are shaded: tap a cell\'s center to shade it. Each clue counts the shaded cells in its arrow\'s direction. Shaded cells never touch side by side, and the loop goes through every other cell.'**
+  String get tutArrows2;
+
+  /// No description provided for @tutArrows3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Cells next to a shaded cell are always on the loop, and a loop cell needs two ways out.'**
+  String get tutArrows3;
 
   /// No description provided for @tutMines1.
   ///
