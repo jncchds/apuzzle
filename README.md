@@ -2,7 +2,7 @@
 
 A collection of grid logic puzzles for Android, Windows, iOS and the web, built with Flutter.
 Every puzzle is **generated on the device**, and a solver checks that it has **exactly one solution**.
-Mines is solved by logic without guessing, and the color-flood games and Pop are move-based instead: their limits and targets come from solver playthroughs, so they are always reachable.
+Mines is solved by logic without guessing. The color-flood games, Pop and 2048 are move-based instead: their limits and targets come from solver playthroughs or the board size, so they are always reachable.
 You choose the grid size and the difficulty.
 
 <p align="center">
@@ -18,13 +18,18 @@ You choose the grid size and the difficulty.
 | <img src="docs/screenshots/mambo_dark.png" width="90"> | **Sun & Moon** | Fill every cell with a sun or a moon. No three of the same in a row, equal counts in every row and column, and `=` / `×` clues between cells. |
 | <img src="docs/screenshots/sudoku_dark.png" width="90"> | **Sudoku** | 4×4, 6×6 or 9×9 grids. Every number appears once per row, column and box. Supports pencil marks. |
 | <img src="docs/screenshots/kings_dark.png" width="90"> | **Crowns** | Place one crown in every row, column and colored region. Crowns can't touch, not even diagonally. |
+| <img src="docs/screenshots/blocks_dark.png" width="90"> | **Blocks** | Fill every region of k cells with the numbers 1 to k. Equal numbers never touch, not even diagonally. Supports pencil marks. |
+| <img src="docs/screenshots/pairs_dark.png" width="90"> | **Pairs** | Shade exactly two cells in every region. Shaded cells come in side-by-side pairs, and pairs never touch each other. |
 | <img src="docs/screenshots/hues_light.png" width="90"> | **Hues** | Color the blank cells. Each number counts the blank cells around it (all 8 neighbors) that end up in its color. |
 | <img src="docs/screenshots/mosaic_dark.png" width="90"> | **Mosaic** | Flood the board with one color from the top-left corner, within the move limit. |
 | <img src="docs/screenshots/blend_dark.png" width="90"> | **Blend** | Pick a color and repaint any patch; it merges with touching patches of that color. Make the board one color within the move limit. |
 | <img src="docs/screenshots/pop_dark.png" width="90"> | **Pop** | Tap a group of touching same-colored bubbles to select it, tap again to pop it: n bubbles score n×(n−1). Modes: Standard, Shifter (rows slide right), Continuous (new columns roll in) and Mega (both). Goals: clear the board (Standard only, always possible), reach a target score, or free play for a best score. |
+| <img src="docs/screenshots/merge_dark.png" width="90"> | **2048** | Slide the tiles and merge equal ones. Build the target tile (2048 on a hard 4×4), or play freely for a best score. New tiles come from the seed, so a share code replays the same game. |
 | <img src="docs/screenshots/pipes_dark.png" width="90"> | **Pipes** | Rotate tiles until every pipe connects to the source, with no open ends and no loops. |
 | <img src="docs/screenshots/shikaku_light.png" width="90"> | **Shikaku** | Split the grid into rectangles. Each holds one number equal to its area. |
+| <img src="docs/screenshots/plots_dark.png" width="90"> | **Plots** | Fill every cell with a number. Equal numbers that touch form a plot with exactly that many cells, and plots of the same size never touch. |
 | <img src="docs/screenshots/trail_dark.png" width="90"> | **Trail** | Draw one path through every cell that passes the numbers in order. |
+| <img src="docs/screenshots/links_dark.png" width="90"> | **Links** | Join each pair of equal dots with a path. Paths never cross, and together they fill the whole grid. |
 | <img src="docs/screenshots/labyrinth_dark.png" width="90"> | **Labyrinth** | Walk through the maze from the top-left corner to the exit in the bottom-right corner. |
 | <img src="docs/screenshots/atoms_dark.png" width="90"> | **Atoms** | Connect atoms with single or double bonds that match their numbers. Bonds can't cross, and all atoms must end up connected. |
 | <img src="docs/screenshots/lits_dark.png" width="90"> | **Tetra** | Shade one L, I, T or S tetromino in every region. The shaded area is connected, with no 2×2 blocks, and identical shapes never touch across region borders. |
@@ -33,11 +38,16 @@ You choose the grid size and the difficulty.
 | <img src="docs/screenshots/lamps_dark.png" width="90"> | **Lamps** | Place lamps that light their row and column up to the walls. Light every cell, never shine a lamp on another, and match the numbers on the walls. |
 | <img src="docs/screenshots/fence_dark.png" width="90"> | **Fence** | Draw one loop along the grid lines. A number tells how many sides of its cell the loop uses. |
 | <img src="docs/screenshots/pearls_dark.png" width="90"> | **Pearls** | Draw one loop through the cell centres and every pearl: straight through white pearls (turning next to them), turning on black pearls (going straight next to them). |
+| <img src="docs/screenshots/rails_dark.png" width="90"> | **Rails** | Lay one track from the entry on the left to the exit at the bottom. The counts outside the grid give the track cells per row and column, and given pieces are fixed. |
+| <img src="docs/screenshots/arrows_dark.png" width="90"> | **Arrows** | Shade some cells and draw one loop through all the others. Shaded cells never touch, and each arrow clue counts the shaded cells in its direction. |
 | <img src="docs/screenshots/mines_dark.png" width="90"> | **Mines** | Clear every cell without a mine. Numbers count the mines around them, and the start is chosen so that logic alone clears the board. |
 
 ## Features
 
 - **Endless puzzles.** Generation is seeded and deterministic, and runs in a background isolate.
+- **Daily challenges.** Every day picks three games, each at every difficulty, the same for everyone. Results are kept in a calendar.
+- **Interactive tutorials.** Every game teaches its rules on a few tiny boards you play, ending with a small real one.
+- **Share codes.** Every puzzle has a code (and a link on the web) that recreates it exactly.
 - **Exactly one solution.** Most types are also graded by how deep the solver's logic has to go (easy, medium, hard, and expert for Sudoku).
 - **Game options.** A puzzle can offer extra choices when you start a game, like Pop's mode and goal. They are part of the share code, and stats are kept per choice.
 - **Variable grid sizes.** A size is only offered if it fits the screen, so there's no zooming.
@@ -47,6 +57,7 @@ You choose the grid size and the difficulty.
 - **Auto-save.** Leave at any time and continue where you stopped.
 - **Animations.** Cells pop and fade, pipes rotate, colors flood, bubbles fall and slide, and solving plays a ripple with confetti.
 - **Light and dark themes** (Material 3).
+- **Four languages:** English, Ukrainian, Polish and German.
 
 ## Getting started
 
@@ -120,7 +131,7 @@ To add a puzzle:
 
 ## Status
 
-The Trail and Tetra generators are currently limited to 7×7. At larger sizes, proving the solution is unique is still too slow to do on the device.
+The Tetra generator is currently limited to 7×7. At larger sizes, proving the solution is unique is still too slow to do on the device.
 
 ## License
 
