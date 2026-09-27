@@ -42,7 +42,10 @@ void main() {
 }
 
 bool _connected(int n, List<int> regions, int reg) {
-  final cells = [for (var i = 0; i < n * n; i++) if (regions[i] == reg) i];
+  final cells = [
+    for (var i = 0; i < n * n; i++)
+      if (regions[i] == reg) i,
+  ];
   final seen = {cells.first};
   final stack = [cells.first];
   while (stack.isNotEmpty) {

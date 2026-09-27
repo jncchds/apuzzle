@@ -54,7 +54,7 @@ void main() {
     final side = [
       for (final i in p.solution)
         for (final d in dirs)
-          if (p.open[i] & d != 0) neighbor(i, d, p.rows, p.cols)!
+          if (p.open[i] & d != 0) neighbor(i, d, p.rows, p.cols)!,
     ].firstWhere((j) => !p.solution.contains(j));
     final branch = p.solution.indexWhere((i) => passable(p, i, side));
     var s = LabyrinthState([...p.solution.sublist(0, branch + 1), side]);

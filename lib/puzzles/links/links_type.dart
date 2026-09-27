@@ -50,10 +50,10 @@ class LinksType extends PuzzleType<LinksPuzzle, LinksState> {
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(8),
+  };
   @override
   Day get dailySince => const Day(2026, 9, 28);
   @override
@@ -81,13 +81,15 @@ class LinksType extends PuzzleType<LinksPuzzle, LinksState> {
   Set<Pos> conflicts(LinksPuzzle puzzle, LinksState state) {
     if (!isComplete(puzzle, state)) return const {};
     final used = {for (final p in state.paths) ...p};
-    return {for (var i = 0; i < puzzle.rows * puzzle.cols; i++) if (!used.contains(i)) puzzle.size.pos(i)};
+    return {
+      for (var i = 0; i < puzzle.rows * puzzle.cols; i++)
+        if (!used.contains(i)) puzzle.size.pos(i),
+    };
   }
 
   @override
   HintResult<LinksState>? hint(LinksPuzzle puzzle, LinksState state) {
-    bool same(List<int> a, List<int> b) =>
-        a.length == b.length && (_eq(a, b) || _eq(a, b.reversed.toList()));
+    bool same(List<int> a, List<int> b) => a.length == b.length && (_eq(a, b) || _eq(a, b.reversed.toList()));
     for (var k = 0; k < puzzle.pairs; k++) {
       final want = puzzle.paths[k];
       if (same(state.paths[k], want)) continue;
@@ -169,10 +171,10 @@ class _LinksBoardState extends State<_LinksBoard> {
   }
 
   void _begin(int k, List<int> draft) => setState(() {
-        _base = [for (final path in _committed) List.of(path)];
-        _active = k;
-        _draft = draft;
-      });
+    _base = [for (final path in _committed) List.of(path)];
+    _active = k;
+    _draft = draft;
+  });
 
   void _extend(Pos? pos) {
     final d = _draft;
@@ -267,9 +269,11 @@ class _LinksBoardState extends State<_LinksBoard> {
       onDragUpdate: (pos, _) => _extend(pos),
       onDragEnd: _end,
       overlayBuilder: (context, m) => [
-        Positioned.fill(child: CustomPaint(
+        Positioned.fill(
+          child: CustomPaint(
             painter: _LinksPainter(paths: paths, m: m, dots: p.dots, style: Theme.of(context).textTheme.bodyMedium!),
-          )),
+          ),
+        ),
       ],
       cellBuilder: (context, pos, m) {
         final i = p.size.index(pos);
@@ -285,8 +289,8 @@ class _LinksBoardState extends State<_LinksBoard> {
               color: errors.contains(pos)
                   ? scheme.error
                   : hinted
-                      ? scheme.tertiary
-                      : scheme.outlineVariant.withValues(alpha: 0.5),
+                  ? scheme.tertiary
+                  : scheme.outlineVariant.withValues(alpha: 0.5),
               width: errors.contains(pos) || hinted ? 2.5 : 1,
             ),
           ),

@@ -11,11 +11,13 @@ Future<void> main() async {
   usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   final store = await GameStore.open();
-  runApp(MultiProvider(
-    providers: [
-      Provider.value(value: store),
-      ChangeNotifierProvider(create: (_) => Settings(store.prefs)),
-    ],
-    child: const APuzzleApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider.value(value: store),
+        ChangeNotifierProvider(create: (_) => Settings(store.prefs)),
+      ],
+      child: const APuzzleApp(),
+    ),
+  );
 }

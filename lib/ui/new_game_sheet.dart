@@ -37,11 +37,11 @@ GenParams quickParams(PuzzleType type, GameStore store, Size screen) {
 }
 
 Future<void> showNewGameSheet(BuildContext context, PuzzleType type) => showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      isScrollControlled: true,
-      builder: (_) => _NewGameSheet(type: type, rootContext: context),
-    );
+  context: context,
+  showDragHandle: true,
+  isScrollControlled: true,
+  builder: (_) => _NewGameSheet(type: type, rootContext: context),
+);
 
 class _NewGameSheet extends StatefulWidget {
   const _NewGameSheet({required this.type, required this.rootContext});
@@ -63,7 +63,9 @@ class _NewGameSheetState extends State<_NewGameSheet> {
     final last = context.read<GameStore>().lastChoice(widget.type.id);
     _size = last?['size'] != null ? GridSize.fromJson(last!['size'] as Map<String, dynamic>) : widget.type.defaultSize;
     _difficulty = Difficulty.values.asNameMap()[last?['difficulty']] ?? widget.type.difficulties.first;
-    _options = widget.type.resolveOptions((last?['options'] as Map<String, dynamic>?)?.cast<String, String>() ?? const {});
+    _options = widget.type.resolveOptions(
+      (last?['options'] as Map<String, dynamic>?)?.cast<String, String>() ?? const {},
+    );
   }
 
   late Map<String, String> _options;
@@ -108,18 +110,24 @@ class _NewGameSheetState extends State<_NewGameSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(children: [
-              Icon(type.icon, color: type.accent),
-              const SizedBox(width: 10),
-              Text(type.name(l), style: theme.textTheme.titleLarge),
-            ]),
+            Row(
+              children: [
+                Icon(type.icon, color: type.accent),
+                const SizedBox(width: 10),
+                Text(type.name(l), style: theme.textTheme.titleLarge),
+              ],
+            ),
             const SizedBox(height: 16),
             Text(l.size, style: theme.textTheme.labelLarge),
             const SizedBox(height: 8),
-            Wrap(spacing: 8, runSpacing: 8, children: [
-              for (final s in sizes)
-                ChoiceChip(label: Text(s.label), selected: s == _size, onSelected: (_) => setState(() => _size = s)),
-            ]),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final s in sizes)
+                  ChoiceChip(label: Text(s.label), selected: s == _size, onSelected: (_) => setState(() => _size = s)),
+              ],
+            ),
             const SizedBox(height: 16),
             Text(l.difficulty, style: theme.textTheme.labelLarge),
             const SizedBox(height: 8),
@@ -135,14 +143,18 @@ class _NewGameSheetState extends State<_NewGameSheet> {
               const SizedBox(height: 16),
               Text(type.optionLabel(l, o.id), style: theme.textTheme.labelLarge),
               const SizedBox(height: 8),
-              Wrap(spacing: 8, runSpacing: 8, children: [
-                for (final c in o.choices)
-                  ChoiceChip(
-                    label: Text(type.choiceLabel(l, o.id, c)),
-                    selected: _options[o.id] == c,
-                    onSelected: (_) => setState(() => _options = type.resolveOptions({..._options, o.id: c})),
-                  ),
-              ]),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (final c in o.choices)
+                    ChoiceChip(
+                      label: Text(type.choiceLabel(l, o.id, c)),
+                      selected: _options[o.id] == c,
+                      onSelected: (_) => setState(() => _options = type.resolveOptions({..._options, o.id: c})),
+                    ),
+                ],
+              ),
               if (type.choiceDescription(l, o.id, _options[o.id]!) case final d?) ...[
                 const SizedBox(height: 6),
                 Text(d, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
@@ -153,8 +165,8 @@ class _NewGameSheetState extends State<_NewGameSheet> {
               stats.solved == 0
                   ? l.notSolvedYet(_difficulty.label(l))
                   : stats.bestScore != null
-                      ? l.statsScore(stats.solved, stats.bestScore!, formatDuration(stats.best!))
-                      : l.statsTime(stats.solved, formatDuration(stats.best!), formatDuration(stats.average!)),
+                  ? l.statsScore(stats.solved, stats.bestScore!, formatDuration(stats.best!))
+                  : l.statsTime(stats.solved, formatDuration(stats.best!), formatDuration(stats.average!)),
               style: theme.textTheme.bodySmall,
             ),
             const SizedBox(height: 20),

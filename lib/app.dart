@@ -43,6 +43,6 @@ class _APuzzleAppState extends State<APuzzleApp> {
 }
 
 ThemeData _theme(Brightness brightness) => ThemeData(
-      useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF), brightness: brightness),
-    );
+  useMaterial3: true,
+  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF), brightness: brightness),
+);

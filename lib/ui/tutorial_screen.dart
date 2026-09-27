@@ -120,17 +120,18 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
     _ctrl?.removeListener(_onCtrl);
     _ctrl?.dispose();
     final step = _steps[k];
-    final c = GameController(
-      type: type,
-      params: GenParams(size: type.defaultSize, difficulty: Difficulty.easy, seed: 0),
-      puzzle: step.puzzle,
-      state: step.state ?? type.initialState(step.puzzle) as Object,
-      settings: context.read<Settings>(),
-      store: _store,
-      practice: true,
-    )
-      ..winAnimation = _win
-      ..flashHints = step.focus;
+    final c =
+        GameController(
+            type: type,
+            params: GenParams(size: type.defaultSize, difficulty: Difficulty.easy, seed: 0),
+            puzzle: step.puzzle,
+            state: step.state ?? type.initialState(step.puzzle) as Object,
+            settings: context.read<Settings>(),
+            store: _store,
+            practice: true,
+          )
+          ..winAnimation = _win
+          ..flashHints = step.focus;
     c.addListener(_onCtrl);
     _win.value = 0;
     _lastState = c.state;
@@ -232,8 +233,8 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
         child: _steps.isEmpty
             ? const SizedBox.shrink()
             : _finished
-                ? _finishView(context)
-                : _stepView(context, _ctrl!),
+            ? _finishView(context)
+            : _stepView(context, _ctrl!),
       ),
     );
   }
@@ -245,114 +246,142 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
     final playing = !step.look && !_done;
     final controls = playing ? type.buildControls(context, c) : null;
     final last = _index == _steps.length - 1;
-    return Column(children: [
-      LinearProgressIndicator(value: (_index + (_done ? 1 : 0)) / _steps.length, minHeight: 3),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(4, 4, 16, 0),
-        child: Row(children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back_rounded),
-            visualDensity: VisualDensity.compact,
-            tooltip: l.tutorialPrevious,
-            onPressed: _index > 0 ? () => _open(_index - 1) : null,
-          ),
-          Text(l.tutorialStep(_index + 1, _steps.length), style: theme.textTheme.labelLarge),
-          const Spacer(),
-          if (type.supportsModeSwitch && playing)
-            SegmentedButton<InputMode>(
-              style: const ButtonStyle(visualDensity: VisualDensity.compact),
-              segments: [
-                ButtonSegment(value: InputMode.cycle, icon: const Icon(Icons.touch_app_outlined), tooltip: l.tapToCycle),
-                ButtonSegment(value: InputMode.palette, icon: const Icon(Icons.palette_outlined), tooltip: l.palette),
-              ],
-              selected: {c.inputMode},
-              showSelectedIcon: false,
-              onSelectionChanged: (s) => c.setInputMode(s.first),
-            ),
-        ]),
-      ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 250),
-          child: Container(
-            key: ValueKey(_index),
-            width: double.infinity,
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHigh,
-              borderRadius: BorderRadius.circular(16),
-              border: Border(left: BorderSide(color: type.accent, width: 4)),
-            ),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(step.text(l), style: theme.textTheme.bodyLarge),
-              AnimatedSize(
-                duration: const Duration(milliseconds: 200),
-                child: _done && !step.look
-                    ? Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Row(children: [
-                          Icon(Icons.check_circle_rounded, color: theme.colorScheme.primary, size: 20),
-                          const SizedBox(width: 6),
-                          Text(l.tutorialNice,
-                              style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary)),
-                        ]),
-                      )
-                    : const SizedBox(width: double.infinity),
+    return Column(
+      children: [
+        LinearProgressIndicator(value: (_index + (_done ? 1 : 0)) / _steps.length, minHeight: 3),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(4, 4, 16, 0),
+          child: Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back_rounded),
+                visualDensity: VisualDensity.compact,
+                tooltip: l.tutorialPrevious,
+                onPressed: _index > 0 ? () => _open(_index - 1) : null,
               ),
-            ]),
+              Text(l.tutorialStep(_index + 1, _steps.length), style: theme.textTheme.labelLarge),
+              const Spacer(),
+              if (type.supportsModeSwitch && playing)
+                SegmentedButton<InputMode>(
+                  style: const ButtonStyle(visualDensity: VisualDensity.compact),
+                  segments: [
+                    ButtonSegment(
+                      value: InputMode.cycle,
+                      icon: const Icon(Icons.touch_app_outlined),
+                      tooltip: l.tapToCycle,
+                    ),
+                    ButtonSegment(
+                      value: InputMode.palette,
+                      icon: const Icon(Icons.palette_outlined),
+                      tooltip: l.palette,
+                    ),
+                  ],
+                  selected: {c.inputMode},
+                  showSelectedIcon: false,
+                  onSelectionChanged: (s) => c.setInputMode(s.first),
+                ),
+            ],
           ),
         ),
-      ),
-      Expanded(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
-          child: AnimatedBuilder(
-            animation: _shake,
-            builder: (context, child) => Transform.translate(
-              offset: Offset(sin(_shake.value * pi * 6) * 10 * (1 - _shake.value), 0),
-              child: child,
-            ),
-            child: IgnorePointer(
-              ignoring: !playing,
-              child: KeyedSubtree(key: ValueKey(_index), child: type.buildBoard(context, c)),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 250),
+            child: Container(
+              key: ValueKey(_index),
+              width: double.infinity,
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surfaceContainerHigh,
+                borderRadius: BorderRadius.circular(16),
+                border: Border(left: BorderSide(color: type.accent, width: 4)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(step.text(l), style: theme.textTheme.bodyLarge),
+                  AnimatedSize(
+                    duration: const Duration(milliseconds: 200),
+                    child: _done && !step.look
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Row(
+                              children: [
+                                Icon(Icons.check_circle_rounded, color: theme.colorScheme.primary, size: 20),
+                                const SizedBox(width: 6),
+                                Text(
+                                  l.tutorialNice,
+                                  style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary),
+                                ),
+                              ],
+                            ),
+                          )
+                        : const SizedBox(width: double.infinity),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      if (controls != null) Padding(padding: const EdgeInsets.fromLTRB(16, 0, 16, 8), child: controls),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(8, 0, 12, 12),
-        child: Row(children: [
-          if (!step.look) ...[
-            IconButton(icon: const Icon(Icons.undo_rounded), tooltip: l.undo, onPressed: c.canUndo ? c.undo : null),
-            IconButton(icon: const Icon(Icons.restart_alt_rounded), tooltip: l.tutorialReset, onPressed: () => _open(_index)),
-          ],
-          // "Show me" takes the free space and shortens its label if it must.
-          Expanded(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: playing
-                  ? TextButton(
-                      onPressed: _showMe,
-                      child: Row(mainAxisSize: MainAxisSize.min, children: [
-                        const Icon(Icons.lightbulb_outline_rounded, size: 18),
-                        const SizedBox(width: 6),
-                        Flexible(child: Text(l.tutorialShowMe, maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    )
-                  : null,
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
+            child: AnimatedBuilder(
+              animation: _shake,
+              builder: (context, child) => Transform.translate(
+                offset: Offset(sin(_shake.value * pi * 6) * 10 * (1 - _shake.value), 0),
+                child: child,
+              ),
+              child: IgnorePointer(
+                ignoring: !playing,
+                child: KeyedSubtree(key: ValueKey(_index), child: type.buildBoard(context, c)),
+              ),
             ),
           ),
-          const SizedBox(width: 8),
-          FilledButton.icon(
-            onPressed: _done ? _next : null,
-            icon: Icon(last ? Icons.check_rounded : Icons.arrow_forward_rounded),
-            label: Text(last ? l.tutorialFinish : l.tutorialNext),
+        ),
+        if (controls != null) Padding(padding: const EdgeInsets.fromLTRB(16, 0, 16, 8), child: controls),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(8, 0, 12, 12),
+          child: Row(
+            children: [
+              if (!step.look) ...[
+                IconButton(icon: const Icon(Icons.undo_rounded), tooltip: l.undo, onPressed: c.canUndo ? c.undo : null),
+                IconButton(
+                  icon: const Icon(Icons.restart_alt_rounded),
+                  tooltip: l.tutorialReset,
+                  onPressed: () => _open(_index),
+                ),
+              ],
+              // "Show me" takes the free space and shortens its label if it must.
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: playing
+                      ? TextButton(
+                          onPressed: _showMe,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.lightbulb_outline_rounded, size: 18),
+                              const SizedBox(width: 6),
+                              Flexible(child: Text(l.tutorialShowMe, maxLines: 1, overflow: TextOverflow.ellipsis)),
+                            ],
+                          ),
+                        )
+                      : null,
+                ),
+              ),
+              const SizedBox(width: 8),
+              FilledButton.icon(
+                onPressed: _done ? _next : null,
+                icon: Icon(last ? Icons.check_rounded : Icons.arrow_forward_rounded),
+                label: Text(last ? l.tutorialFinish : l.tutorialNext),
+              ),
+            ],
           ),
-        ]),
-      ),
-    ]);
+        ),
+      ],
+    );
   }
 
   Widget _finishView(BuildContext context) {
@@ -362,42 +391,49 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
     return Center(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Container(
-            padding: const EdgeInsets.all(18),
-            decoration: BoxDecoration(color: type.accent.withValues(alpha: 0.18), shape: BoxShape.circle),
-            child: Icon(type.icon, color: type.accent, size: 48),
-          ),
-          const SizedBox(height: 20),
-          Text(l.tutorialFinishedTitle, style: theme.textTheme.headlineSmall, textAlign: TextAlign.center),
-          const SizedBox(height: 8),
-          Text(
-            widget.strategies ? l.strategiesFinishedBody(type.name(l)) : l.tutorialFinishedBody(type.name(l)),
-            style: theme.textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 28),
-          if (play != null) ...[
-            FilledButton.icon(onPressed: play, icon: const Icon(Icons.play_arrow_rounded), label: Text(l.tutorialPlay)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(color: type.accent.withValues(alpha: 0.18), shape: BoxShape.circle),
+              child: Icon(type.icon, color: type.accent, size: 48),
+            ),
+            const SizedBox(height: 20),
+            Text(l.tutorialFinishedTitle, style: theme.textTheme.headlineSmall, textAlign: TextAlign.center),
             const SizedBox(height: 8),
-          ],
-          // After the basics, the advanced lessons are one tap away.
-          if (!widget.strategies && type.strategies().isNotEmpty) ...[
-            FilledButton.tonalIcon(
-              onPressed: () => AppRouterDelegate.of(context).openTutorial(type, play: play, strategies: true),
-              icon: const Icon(Icons.psychology_alt_rounded),
-              label: Text(l.tutorialStrategies),
+            Text(
+              widget.strategies ? l.strategiesFinishedBody(type.name(l)) : l.tutorialFinishedBody(type.name(l)),
+              style: theme.textTheme.bodyLarge,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 28),
+            if (play != null) ...[
+              FilledButton.icon(
+                onPressed: play,
+                icon: const Icon(Icons.play_arrow_rounded),
+                label: Text(l.tutorialPlay),
+              ),
+              const SizedBox(height: 8),
+            ],
+            // After the basics, the advanced lessons are one tap away.
+            if (!widget.strategies && type.strategies().isNotEmpty) ...[
+              FilledButton.tonalIcon(
+                onPressed: () => AppRouterDelegate.of(context).openTutorial(type, play: play, strategies: true),
+                icon: const Icon(Icons.psychology_alt_rounded),
+                label: Text(l.tutorialStrategies),
+              ),
+              const SizedBox(height: 8),
+            ],
+            OutlinedButton.icon(
+              onPressed: () => _open(0),
+              icon: const Icon(Icons.replay_rounded),
+              label: Text(l.tutorialAgain),
             ),
             const SizedBox(height: 8),
+            TextButton(onPressed: () => Navigator.of(context).maybePop(), child: Text(l.tutorialClose)),
           ],
-          OutlinedButton.icon(
-            onPressed: () => _open(0),
-            icon: const Icon(Icons.replay_rounded),
-            label: Text(l.tutorialAgain),
-          ),
-          const SizedBox(height: 8),
-          TextButton(onPressed: () => Navigator.of(context).maybePop(), child: Text(l.tutorialClose)),
-        ]),
+        ),
       ),
     );
   }

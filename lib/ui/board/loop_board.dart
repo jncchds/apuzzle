@@ -8,7 +8,13 @@ import '../../core/lattice_loop.dart';
 
 /// Where things are on a laid-out [LoopBoard].
 class LoopGeom {
-  const LoopGeom({required this.cell, required this.origin, required this.centered, required this.rows, required this.cols});
+  const LoopGeom({
+    required this.cell,
+    required this.origin,
+    required this.centered,
+    required this.rows,
+    required this.cols,
+  });
 
   final double cell;
 
@@ -141,7 +147,11 @@ class _LoopBoardState extends State<LoopBoard> {
   void _tap(LoopGeom geo, Offset o, {bool secondary = false}) {
     if (widget.onCellTap case final onCell?) {
       final c = ((o.dx - geo.origin.dx) / geo.cell).floor(), r = ((o.dy - geo.origin.dy) / geo.cell).floor();
-      if (r >= 0 && c >= 0 && r < widget.rows && c < widget.cols && (geo.cellRect(r, c).center - o).distance < geo.cell * 0.3) {
+      if (r >= 0 &&
+          c >= 0 &&
+          r < widget.rows &&
+          c < widget.cols &&
+          (geo.cellRect(r, c).center - o).distance < geo.cell * 0.3) {
         onCell(Pos(r, c), secondary);
         return;
       }
@@ -205,51 +215,53 @@ class _LoopBoardState extends State<LoopBoard> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return LayoutBuilder(builder: (context, cons) {
-      final geo = _geom(cons.biggest);
-      final size = Size(
-        geo.cell * (widget.cols + _margins.horizontal),
-        geo.cell * (widget.rows + _margins.vertical),
-      );
-      final on = widget.enabled;
-      Widget paint(double pulse) => CustomPaint(
-            size: size,
-            painter: _LoopPainter(
-              g: g,
-              geo: geo,
-              marks: _marks,
-              lineColor: widget.lineColor,
-              dotColor: scheme.onSurface.withValues(alpha: 0.55),
-              crossColor: scheme.onSurface.withValues(alpha: 0.4),
-              tileColor: widget.cellBackground ? scheme.surfaceContainer : null,
-              hintColor: scheme.tertiary.withValues(alpha: 0.3),
-              errorColor: scheme.error.withValues(alpha: 0.3),
-              hintCells: widget.hintCells,
-              errorCells: widget.errorCells,
-              paintClues: widget.paintClues,
-              cluesOnTop: widget.cluesOnTop,
-              pulse: pulse,
-            ),
-          );
-      final win = widget.win;
-      return Center(
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          // Start drags where the finger went down, not after the slop.
-          dragStartBehavior: DragStartBehavior.down,
-          onTapUp: on ? (d) => _tap(geo, d.localPosition) : null,
-          onSecondaryTapUp: on ? (d) => _tap(geo, d.localPosition, secondary: true) : null,
-          onLongPressStart: on ? (d) => _tap(geo, d.localPosition, secondary: true) : null,
-          onPanStart: on ? (d) => _panStart(geo, d.localPosition) : null,
-          onPanUpdate: on ? (d) => _panUpdate(geo, d.localPosition) : null,
-          onPanEnd: on ? (_) => _panEnd() : null,
-          onPanCancel: on ? _panEnd : null,
-          child: win == null
-              ? paint(0)
-              : AnimatedBuilder(animation: win, builder: (context, _) => paint(sin(pi * win.value))),
-        ),
-      );
-    });
+    return LayoutBuilder(
+      builder: (context, cons) {
+        final geo = _geom(cons.biggest);
+        final size = Size(
+          geo.cell * (widget.cols + _margins.horizontal),
+          geo.cell * (widget.rows + _margins.vertical),
+        );
+        final on = widget.enabled;
+        Widget paint(double pulse) => CustomPaint(
+          size: size,
+          painter: _LoopPainter(
+            g: g,
+            geo: geo,
+            marks: _marks,
+            lineColor: widget.lineColor,
+            dotColor: scheme.onSurface.withValues(alpha: 0.55),
+            crossColor: scheme.onSurface.withValues(alpha: 0.4),
+            tileColor: widget.cellBackground ? scheme.surfaceContainer : null,
+            hintColor: scheme.tertiary.withValues(alpha: 0.3),
+            errorColor: scheme.error.withValues(alpha: 0.3),
+            hintCells: widget.hintCells,
+            errorCells: widget.errorCells,
+            paintClues: widget.paintClues,
+            cluesOnTop: widget.cluesOnTop,
+            pulse: pulse,
+          ),
+        );
+        final win = widget.win;
+        return Center(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            // Start drags where the finger went down, not after the slop.
+            dragStartBehavior: DragStartBehavior.down,
+            onTapUp: on ? (d) => _tap(geo, d.localPosition) : null,
+            onSecondaryTapUp: on ? (d) => _tap(geo, d.localPosition, secondary: true) : null,
+            onLongPressStart: on ? (d) => _tap(geo, d.localPosition, secondary: true) : null,
+            onPanStart: on ? (d) => _panStart(geo, d.localPosition) : null,
+            onPanUpdate: on ? (d) => _panUpdate(geo, d.localPosition) : null,
+            onPanEnd: on ? (_) => _panEnd() : null,
+            onPanCancel: on ? _panEnd : null,
+            child: win == null
+                ? paint(0)
+                : AnimatedBuilder(animation: win, builder: (context, _) => paint(sin(pi * win.value))),
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -329,7 +341,11 @@ class _LoopPainter extends CustomPainter {
       if (geo.centered) {
         if (used) canvas.drawCircle(_pos(p), cell * (0.07 + 0.03 * pulse), Paint()..color = lineColor);
       } else {
-        canvas.drawCircle(_pos(p), used ? cell * (0.07 + 0.03 * pulse) : cell * 0.05, Paint()..color = used ? lineColor : dotColor);
+        canvas.drawCircle(
+          _pos(p),
+          used ? cell * (0.07 + 0.03 * pulse) : cell * 0.05,
+          Paint()..color = used ? lineColor : dotColor,
+        );
       }
     }
     if (cluesOnTop) paintClues(canvas, geo);

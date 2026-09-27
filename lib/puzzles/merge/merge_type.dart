@@ -48,35 +48,37 @@ class MergeType extends PuzzleType<MergePuzzle, MergeState> {
 
   @override
   List<GameOption> optionsFor(Map<String, String> chosen) => const [
-        GameOption('goal', ['target', 'free']),
-      ];
+    GameOption('goal', ['target', 'free']),
+  ];
 
   @override
   String optionLabel(AppLocalizations l, String option) => l.popGoal;
 
   @override
   String choiceLabel(AppLocalizations l, String option, String choice) => switch (choice) {
-        'target' => l.mergeGoalTarget,
-        'free' => l.popGoalFree,
-        _ => choice,
-      };
+    'target' => l.mergeGoalTarget,
+    'free' => l.popGoalFree,
+    _ => choice,
+  };
 
   @override
   String? choiceDescription(AppLocalizations l, String option, String choice) => switch (choice) {
-        'target' => l.mergeGoalTargetHint,
-        'free' => l.mergeGoalFreeHint,
-        _ => null,
-      };
+    'target' => l.mergeGoalTargetHint,
+    'free' => l.mergeGoalFreeHint,
+    _ => null,
+  };
 
   @override
-  MergePuzzle generate(GenParams params) => generateMerge(params, MergeGoal.byId(resolveOptions(params.options)['goal']));
+  MergePuzzle generate(GenParams params) =>
+      generateMerge(params, MergeGoal.byId(resolveOptions(params.options)['goal']));
 
   @override
   MergeState initialState(MergePuzzle puzzle) => MergeState.initial(puzzle);
 
   @override
   bool isComplete(MergePuzzle puzzle, MergeState state) =>
-      (puzzle.goal == MergeGoal.target && state.best >= puzzle.target) || !mergeCanMove(state.cells, puzzle.rows, puzzle.cols);
+      (puzzle.goal == MergeGoal.target && state.best >= puzzle.target) ||
+      !mergeCanMove(state.cells, puzzle.rows, puzzle.cols);
 
   @override
   bool isSolved(MergePuzzle puzzle, MergeState state) => puzzle.goal == MergeGoal.free || state.best >= puzzle.target;
@@ -131,17 +133,25 @@ class MergeType extends PuzzleType<MergePuzzle, MergeState> {
     final l = context.l10n;
     final numbers = theme.textTheme.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()]);
     Widget pill(String text, {bool strong = false}) => Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: strong ? theme.colorScheme.primary : theme.colorScheme.outline, width: 2),
-          ),
-          child: Text(text, style: numbers),
-        );
-    return Wrap(spacing: 10, runSpacing: 8, alignment: WrapAlignment.center, children: [
-      pill(l.popPoints(s.score)),
-      if (p.goal == MergeGoal.target) pill('${s.best} / ${p.target}', strong: s.best >= p.target) else pill(l.mergeBest(s.best)),
-    ]);
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: strong ? theme.colorScheme.primary : theme.colorScheme.outline, width: 2),
+      ),
+      child: Text(text, style: numbers),
+    );
+    return Wrap(
+      spacing: 10,
+      runSpacing: 8,
+      alignment: WrapAlignment.center,
+      children: [
+        pill(l.popPoints(s.score)),
+        if (p.goal == MergeGoal.target)
+          pill('${s.best} / ${p.target}', strong: s.best >= p.target)
+        else
+          pill(l.mergeBest(s.best)),
+      ],
+    );
   }
 
   @override

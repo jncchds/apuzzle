@@ -19,10 +19,15 @@ Future<Settings> _pumpApp(WidgetTester tester, {Map<String, Object> prefs = cons
   SharedPreferences.setMockInitialValues(prefs);
   final store = await GameStore.open();
   final settings = Settings(store.prefs);
-  await tester.pumpWidget(MultiProvider(
-    providers: [Provider.value(value: store), ChangeNotifierProvider.value(value: settings)],
-    child: const APuzzleApp(),
-  ));
+  await tester.pumpWidget(
+    MultiProvider(
+      providers: [
+        Provider.value(value: store),
+        ChangeNotifierProvider.value(value: settings),
+      ],
+      child: const APuzzleApp(),
+    ),
+  );
   await tester.pumpAndSettle();
   return settings;
 }

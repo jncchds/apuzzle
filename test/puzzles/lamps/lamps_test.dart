@@ -25,8 +25,10 @@ void main() {
           }
           expect(generateLamps(params).toJson(), p.toJson());
           expect(sw.elapsedMilliseconds, lessThan(3000));
-          info.add('${sw.elapsedMilliseconds}ms w${p.walls.where((w) => w).length} '
-              '#${p.numbers.where((x) => x != null).length}');
+          info.add(
+            '${sw.elapsedMilliseconds}ms w${p.walls.where((w) => w).length} '
+            '#${p.numbers.where((x) => x != null).length}',
+          );
         }
         // ignore: avoid_print
         print('lamps $n ${d.name}: $info');

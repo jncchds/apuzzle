@@ -6,7 +6,12 @@ import '../../core/grid.dart';
 const int dN = 1, dE = 2, dS = 4, dW = 8;
 const dirs = [dN, dE, dS, dW];
 
-int opposite(int d) => switch (d) { dN => dS, dE => dW, dS => dN, _ => dE };
+int opposite(int d) => switch (d) {
+  dN => dS,
+  dE => dW,
+  dS => dN,
+  _ => dE,
+};
 
 /// Rotate a connection mask clockwise [times] quarter turns.
 int rotateMask(int mask, int times) {
@@ -18,7 +23,14 @@ int rotateMask(int mask, int times) {
 }
 
 class PipesPuzzle {
-  const PipesPuzzle({required this.rows, required this.cols, required this.source, required this.masks, required this.start, required this.locked});
+  const PipesPuzzle({
+    required this.rows,
+    required this.cols,
+    required this.source,
+    required this.masks,
+    required this.start,
+    required this.locked,
+  });
 
   final int rows;
   final int cols;
@@ -35,16 +47,22 @@ class PipesPuzzle {
 
   GridSize get size => GridSize(rows, cols);
 
-  Map<String, dynamic> toJson() =>
-      {'rows': rows, 'cols': cols, 'source': source, 'masks': masks, 'start': start, 'locked': locked};
+  Map<String, dynamic> toJson() => {
+    'rows': rows,
+    'cols': cols,
+    'source': source,
+    'masks': masks,
+    'start': start,
+    'locked': locked,
+  };
   factory PipesPuzzle.fromJson(Map<String, dynamic> j) => PipesPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        source: j['source'] as int,
-        masks: (j['masks'] as List).cast<int>(),
-        start: (j['start'] as List).cast<int>(),
-        locked: (j['locked'] as List).cast<bool>(),
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    source: j['source'] as int,
+    masks: (j['masks'] as List).cast<int>(),
+    start: (j['start'] as List).cast<int>(),
+    locked: (j['locked'] as List).cast<bool>(),
+  );
 }
 
 /// Cumulative clockwise quarter turns per tile (kept unbounded so the
@@ -67,8 +85,9 @@ int? neighbor(int i, int d, int rows, int cols) {
   };
 }
 
-List<int> currentMasks(PipesPuzzle p, PipesState s) =>
-    [for (var i = 0; i < p.masks.length; i++) rotateMask(p.masks[i], s.turns[i])];
+List<int> currentMasks(PipesPuzzle p, PipesState s) => [
+  for (var i = 0; i < p.masks.length; i++) rotateMask(p.masks[i], s.turns[i]),
+];
 
 /// Tiles reachable from the source through matching connections.
 Set<int> litTiles(PipesPuzzle p, List<int> m) {

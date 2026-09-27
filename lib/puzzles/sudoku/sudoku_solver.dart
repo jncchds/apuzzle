@@ -20,9 +20,7 @@ int _low(int x) => (x & -x).bitLength - 1;
 ///  2. + locked candidates (pointing / claiming) + naked pairs
 /// All tiers are sound, so a full logical solve implies uniqueness.
 class SudokuSolver {
-  SudokuSolver(this.n)
-      : geo = SudokuGeometry.of(n),
-        full = (1 << n) - 1;
+  SudokuSolver(this.n) : geo = SudokuGeometry.of(n), full = (1 << n) - 1;
 
   final int n;
   final SudokuGeometry geo;
@@ -102,7 +100,10 @@ class SudokuSolver {
         final boxCells = geo.units[bu];
         for (var d = 0; d < n; d++) {
           final bit = 1 << d;
-          final cells = [for (final i in boxCells) if (g[i] < 0 && cand[i] & bit != 0) i];
+          final cells = [
+            for (final i in boxCells)
+              if (g[i] < 0 && cand[i] & bit != 0) i,
+          ];
           if (cells.isEmpty) continue;
           for (final lineKind in const [0, 1]) {
             final line = geo.unitsOf[cells.first][lineKind];
@@ -122,7 +123,10 @@ class SudokuSolver {
         final lineCells = geo.units[lu];
         for (var d = 0; d < n; d++) {
           final bit = 1 << d;
-          final cells = [for (final i in lineCells) if (g[i] < 0 && cand[i] & bit != 0) i];
+          final cells = [
+            for (final i in lineCells)
+              if (g[i] < 0 && cand[i] & bit != 0) i,
+          ];
           if (cells.isEmpty) continue;
           final b = geo.unitsOf[cells.first][2];
           if (cells.every((i) => geo.unitsOf[i][2] == b)) {
@@ -209,7 +213,10 @@ class SudokuSolver {
       }
     }
     if (best < 0) return g;
-    final digits = [for (var d = 0; d < n; d++) if (cand[best] & (1 << d) != 0) d]..shuffle(rng);
+    final digits = [
+      for (var d = 0; d < n; d++)
+        if (cand[best] & (1 << d) != 0) d,
+    ]..shuffle(rng);
     for (final d in digits) {
       final g2 = List.of(g), c2 = List.of(cand);
       if (!_assign(g2, c2, best, d)) continue;

@@ -34,7 +34,9 @@ class PearlsSolver extends LoopSolver {
         }
       }
       if (pearls[p] == pearlWhite) {
-        if (!_white(st, p, e[0], e[1], e[2], e[3], -1, 0) || !_white(st, p, e[2], e[3], e[0], e[1], 0, -1)) return false;
+        if (!_white(st, p, e[0], e[1], e[2], e[3], -1, 0) || !_white(st, p, e[2], e[3], e[0], e[1], 0, -1)) {
+          return false;
+        }
       } else {
         for (var k = 0; k < 4; k++) {
           final (dr, dc) = pearlDirs[k];

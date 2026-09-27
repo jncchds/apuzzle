@@ -41,24 +41,30 @@ class CampPuzzle implements ValueGridPuzzle {
   int? givenAt(int index) => trees[index]
       ? campTree
       : givenTents.contains(index)
-          ? campTent
-          : null;
+      ? campTent
+      : null;
   @override
   int solutionAt(int index) => trees[index]
       ? campTree
       : tents[index]
-          ? campTent
-          : campGrass;
+      ? campTent
+      : campGrass;
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'trees': [for (var i = 0; i < trees.length; i++) if (trees[i]) i],
-        'tents': [for (var i = 0; i < tents.length; i++) if (tents[i]) i],
-        'rc': rowCounts,
-        'cc': colCounts,
-        if (givenTents.isNotEmpty) 'given': givenTents,
-      };
+    'rows': rows,
+    'cols': cols,
+    'trees': [
+      for (var i = 0; i < trees.length; i++)
+        if (trees[i]) i,
+    ],
+    'tents': [
+      for (var i = 0; i < tents.length; i++)
+        if (tents[i]) i,
+    ],
+    'rc': rowCounts,
+    'cc': colCounts,
+    if (givenTents.isNotEmpty) 'given': givenTents,
+  };
 
   factory CampPuzzle.fromJson(Map<String, dynamic> j) {
     final rows = j['rows'] as int, cols = j['cols'] as int;
@@ -120,7 +126,10 @@ Set<int> campConflicts(CampPuzzle p, List<bool> tents, {required bool complete})
   }
   void line(Iterable<int> cells, int? want) {
     if (want == null) return;
-    final t = [for (final i in cells) if (tents[i]) i];
+    final t = [
+      for (final i in cells)
+        if (tents[i]) i,
+    ];
     if (t.length > want || (complete && t.length != want)) bad.addAll(t.isEmpty ? cells : t);
   }
 
@@ -131,8 +140,17 @@ Set<int> campConflicts(CampPuzzle p, List<bool> tents, {required bool complete})
     line([for (var r = 0; r < p.rows; r++) r * p.cols + c], p.colCounts[c]);
   }
   if (complete && bad.isEmpty) {
-    final treeList = [for (var i = 0; i < p.trees.length; i++) if (p.trees[i]) i];
-    final m = maxMatching([for (final t in treeList) [for (final j in on[t]) if (tents[j]) j]], tents.length);
+    final treeList = [
+      for (var i = 0; i < p.trees.length; i++)
+        if (p.trees[i]) i,
+    ];
+    final m = maxMatching([
+      for (final t in treeList)
+        [
+          for (final j in on[t])
+            if (tents[j]) j,
+        ],
+    ], tents.length);
     final used = m.where((v) => v >= 0).toSet();
     for (var k = 0; k < treeList.length; k++) {
       if (m[k] < 0) bad.add(treeList[k]);

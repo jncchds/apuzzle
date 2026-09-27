@@ -22,9 +22,7 @@ class Pos {
 @immutable
 class GridSize {
   const GridSize(this.rows, this.cols);
-  const GridSize.square(int n)
-      : rows = n,
-        cols = n;
+  const GridSize.square(int n) : rows = n, cols = n;
 
   final int rows;
   final int cols;

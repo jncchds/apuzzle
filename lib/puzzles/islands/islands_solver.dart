@@ -9,8 +9,8 @@ const int _unk = -1;
 /// Tier 2: + probing (try a value, refute it by propagation).
 class IslandsSolver {
   IslandsSolver(this.rows, this.cols, this.clues)
-      : nb = orthNeighbors(rows, cols),
-        totalLand = clues.fold(0, (a, b) => a + (b ?? 0));
+    : nb = orthNeighbors(rows, cols),
+      totalLand = clues.fold(0, (a, b) => a + (b ?? 0));
 
   final int rows;
   final int cols;
@@ -179,12 +179,12 @@ class IslandsSolver {
   }
 
   bool _valid(List<int> st) => islandsConflicts(
-        rows,
-        cols,
-        clues,
-        [for (final v in st) v == islandsSea],
-        complete: true,
-      ).isEmpty;
+    rows,
+    cols,
+    clues,
+    [for (final v in st) v == islandsSea],
+    complete: true,
+  ).isEmpty;
 
   bool solved(List<int> st) => !st.contains(_unk);
 

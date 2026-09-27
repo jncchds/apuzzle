@@ -9,13 +9,15 @@ void main() {
   testWidgets('home screen lists puzzle types', (tester) async {
     SharedPreferences.setMockInitialValues({});
     final store = await GameStore.open();
-    await tester.pumpWidget(MultiProvider(
-      providers: [
-        Provider.value(value: store),
-        ChangeNotifierProvider(create: (_) => Settings(store.prefs)),
-      ],
-      child: const APuzzleApp(),
-    ));
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          Provider.value(value: store),
+          ChangeNotifierProvider(create: (_) => Settings(store.prefs)),
+        ],
+        child: const APuzzleApp(),
+      ),
+    );
     expect(find.text('APuzzle by CHDS'), findsOneWidget);
     expect(find.text('Sun & Moon'), findsOneWidget);
   });

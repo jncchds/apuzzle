@@ -40,22 +40,22 @@ class LabyrinthType extends PuzzleType<LabyrinthPuzzle, LabyrinthState> {
 
   @override
   List<GridSize> get sizes => const [
-        GridSize.square(6),
-        GridSize.square(8),
-        GridSize.square(10),
-        GridSize.square(12),
-        GridSize(16, 12),
-        GridSize(20, 14),
-        GridSize(24, 16),
-      ];
+    GridSize.square(6),
+    GridSize.square(8),
+    GridSize.square(10),
+    GridSize.square(12),
+    GridSize(16, 12),
+    GridSize(20, 14),
+    GridSize(24, 16),
+  ];
   @override
   GridSize get defaultSize => const GridSize.square(10);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(8),
-        _ => const GridSize.square(10),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(8),
+    _ => const GridSize.square(10),
+  };
   @override
   double get minCellSize => 24;
   @override
@@ -200,12 +200,16 @@ class _LabyrinthBoardState extends State<_LabyrinthBoard> {
           ),
         ),
         Positioned.fill(
-          child: CustomPaint(painter: _PathPainter(path: path, m: m, color: LabyrinthType.pathColor)),
+          child: CustomPaint(
+            painter: _PathPainter(path: path, m: m, color: LabyrinthType.pathColor),
+          ),
         ),
       ],
       overlayBuilder: (context, m) => [
         Positioned.fill(
-          child: CustomPaint(painter: _WallPainter(puzzle: p, m: m, color: scheme.onSurfaceVariant)),
+          child: CustomPaint(
+            painter: _WallPainter(puzzle: p, m: m, color: scheme.onSurfaceVariant),
+          ),
         ),
       ],
       cellBuilder: (context, pos, m) {

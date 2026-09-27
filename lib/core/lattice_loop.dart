@@ -68,10 +68,13 @@ class LatticeLoop {
     // Walk the loop from start.
     var prev = -1, cur = start, seen = 0;
     do {
-      final next = incident[cur].where((e) => lines[e]).map((e) {
-        final (a, b) = ends(e);
-        return a == cur ? b : a;
-      }).firstWhere((q) => q != prev, orElse: () => prev);
+      final next = incident[cur]
+          .where((e) => lines[e])
+          .map((e) {
+            final (a, b) = ends(e);
+            return a == cur ? b : a;
+          })
+          .firstWhere((q) => q != prev, orElse: () => prev);
       prev = cur;
       cur = next;
       seen++;
@@ -81,9 +84,9 @@ class LatticeLoop {
 
   /// Points where the [lines] break the loop rules (branching or dead ends).
   Set<int> badPoints(List<bool> lines) => {
-        for (var p = 0; p < vertexCount; p++)
-          if (incident[p].where((e) => lines[e]).length case final d when d != 0 && d != 2) p,
-      };
+    for (var p = 0; p < vertexCount; p++)
+      if (incident[p].where((e) => lines[e]).length case final d when d != 0 && d != 2) p,
+  };
 
   /// The loop around a region of unit squares ([faces], (vr-1) × (vc-1)).
   List<bool> boundary(List<bool> faces) {
@@ -146,7 +149,10 @@ class LoopRegion {
     // The region is one piece, and so is the outside (through the border).
     final seen = List<bool>.filled(n, false);
     List<int> flood(bool side, Iterable<int> from) {
-      final queue = [for (final k in from) if (!seen[k] && inside[k] == side) k];
+      final queue = [
+        for (final k in from)
+          if (!seen[k] && inside[k] == side) k,
+      ];
       for (final k in queue) {
         seen[k] = true;
       }

@@ -18,15 +18,20 @@ Future<GameStore> _pump(WidgetTester tester, Widget home, {Map<String, Object> p
   addTearDown(tester.view.reset);
   SharedPreferences.setMockInitialValues(prefs);
   final store = await GameStore.open();
-  await tester.pumpWidget(MultiProvider(
-    providers: [Provider.value(value: store), ChangeNotifierProvider(create: (_) => Settings(store.prefs))],
-    child: MaterialApp(
-      locale: const Locale('en'),
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      home: home,
+  await tester.pumpWidget(
+    MultiProvider(
+      providers: [
+        Provider.value(value: store),
+        ChangeNotifierProvider(create: (_) => Settings(store.prefs)),
+      ],
+      child: MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        home: home,
+      ),
     ),
-  ));
+  );
   await tester.pump();
   return store;
 }
@@ -75,16 +80,21 @@ void main() {
       addTearDown(tester.view.reset);
       SharedPreferences.setMockInitialValues(prefs);
       final store = await GameStore.open();
-      await tester.pumpWidget(MultiProvider(
-        providers: [Provider.value(value: store), ChangeNotifierProvider(create: (_) => Settings(store.prefs))],
-        child: MaterialApp.router(
-          locale: const Locale('en'),
-          supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          routerDelegate: router,
-          routeInformationParser: const AppRouteParser(),
+      await tester.pumpWidget(
+        MultiProvider(
+          providers: [
+            Provider.value(value: store),
+            ChangeNotifierProvider(create: (_) => Settings(store.prefs)),
+          ],
+          child: MaterialApp.router(
+            locale: const Locale('en'),
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            routerDelegate: router,
+            routeInformationParser: const AppRouteParser(),
+          ),
         ),
-      ));
+      );
       await tester.pumpAndSettle();
       final context = router.navigatorKey.currentContext!;
       offerTutorial(context, const MamboType(), play: () => played.add('mambo'));

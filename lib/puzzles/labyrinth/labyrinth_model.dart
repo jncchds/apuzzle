@@ -4,7 +4,12 @@ import '../../core/grid.dart';
 const int dN = 1, dE = 2, dS = 4, dW = 8;
 const dirs = [dN, dE, dS, dW];
 
-int opposite(int d) => switch (d) { dN => dS, dE => dW, dS => dN, _ => dE };
+int opposite(int d) => switch (d) {
+  dN => dS,
+  dE => dW,
+  dS => dN,
+  _ => dE,
+};
 
 class LabyrinthPuzzle {
   const LabyrinthPuzzle({required this.rows, required this.cols, required this.open, required this.solution});
@@ -25,11 +30,11 @@ class LabyrinthPuzzle {
 
   Map<String, dynamic> toJson() => {'rows': rows, 'cols': cols, 'open': open, 'solution': solution};
   factory LabyrinthPuzzle.fromJson(Map<String, dynamic> j) => LabyrinthPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        open: (j['open'] as List).cast<int>(),
-        solution: (j['solution'] as List).cast<int>(),
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    open: (j['open'] as List).cast<int>(),
+    solution: (j['solution'] as List).cast<int>(),
+  );
 }
 
 /// The walked path, from the start to the player's current cell.

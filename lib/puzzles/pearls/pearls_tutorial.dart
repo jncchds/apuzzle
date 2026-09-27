@@ -16,7 +16,14 @@ PearlsPuzzle _board(int rows, int cols, List<int> loop, {List<int> black = const
   return PearlsPuzzle(
     rows: rows,
     cols: cols,
-    pearls: [for (var i = 0; i < rows * cols; i++) black.contains(i) ? pearlBlack : white.contains(i) ? pearlWhite : pearlNone],
+    pearls: [
+      for (var i = 0; i < rows * cols; i++)
+        black.contains(i)
+            ? pearlBlack
+            : white.contains(i)
+            ? pearlWhite
+            : pearlNone,
+    ],
     lines: lines,
   );
 }
@@ -24,8 +31,14 @@ PearlsPuzzle _board(int rows, int cols, List<int> loop, {List<int> black = const
 const _ring = [0, 1, 2, 5, 8, 7, 6, 3];
 
 final List<TutorialStep> pearlsTutorial = [
-  TutorialStep(text: (l) => l.tutPearls1, puzzle: _board(3, 3, _ring, black: [0])),
-  TutorialStep(text: (l) => l.tutPearls2, puzzle: _board(3, 3, _ring, white: [1, 3])),
+  TutorialStep(
+    text: (l) => l.tutPearls1,
+    puzzle: _board(3, 3, _ring, black: [0]),
+  ),
+  TutorialStep(
+    text: (l) => l.tutPearls2,
+    puzzle: _board(3, 3, _ring, white: [1, 3]),
+  ),
   TutorialStep.generated(
     text: (l) => l.tutPearls3,
     make: () => generatePearls(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 2)),

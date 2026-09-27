@@ -39,16 +39,16 @@ class MamboType extends ValueGridType<MamboPuzzle> {
   GridSize get defaultSize => const GridSize.square(6);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(8),
-        _ => const GridSize.square(8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(8),
+    _ => const GridSize.square(8),
+  };
 
   @override
   List<ValueSpec> get values => const [
-        ValueSpec.icon(Icons.wb_sunny_rounded, color: Color(0xFFF5A524), label: 'sun'),
-        ValueSpec.icon(Icons.dark_mode_rounded, color: Color(0xFF4F6BFF), label: 'moon'),
-      ];
+    ValueSpec.icon(Icons.wb_sunny_rounded, color: Color(0xFFF5A524), label: 'sun'),
+    ValueSpec.icon(Icons.dark_mode_rounded, color: Color(0xFF4F6BFF), label: 'moon'),
+  ];
 
   @override
   MamboPuzzle generate(GenParams params) => generateMambo(params);
@@ -58,8 +58,9 @@ class MamboType extends ValueGridType<MamboPuzzle> {
       state.isFull && mamboConflicts(puzzle.n, state.toFlat(), puzzle.edges).isEmpty;
 
   @override
-  Set<Pos> conflicts(MamboPuzzle puzzle, ValueGrid state) =>
-      {for (final i in mamboConflicts(puzzle.n, state.toFlat(), puzzle.edges)) puzzle.size.pos(i)};
+  Set<Pos> conflicts(MamboPuzzle puzzle, ValueGrid state) => {
+    for (final i in mamboConflicts(puzzle.n, state.toFlat(), puzzle.edges)) puzzle.size.pos(i),
+  };
 
   @override
   Map<String, dynamic> encodePuzzle(MamboPuzzle puzzle) => puzzle.toJson();
@@ -72,23 +73,29 @@ class MamboType extends ValueGridType<MamboPuzzle> {
     final d = (m.cell * 0.34).clamp(14.0, 26.0);
     return [
       for (final e in puzzle.edges)
-        Builder(builder: (context) {
-          final c = m.edgeCenter(puzzle.size.pos(e.a), puzzle.size.pos(e.b));
-          return Positioned(
-            left: c.dx - d / 2,
-            top: c.dy - d / 2,
-            width: d,
-            height: d,
-            child: Container(
-              decoration: BoxDecoration(
-                color: scheme.surface,
-                shape: BoxShape.circle,
-                border: Border.all(color: scheme.outline, width: 1.5),
+        Builder(
+          builder: (context) {
+            final c = m.edgeCenter(puzzle.size.pos(e.a), puzzle.size.pos(e.b));
+            return Positioned(
+              left: c.dx - d / 2,
+              top: c.dy - d / 2,
+              width: d,
+              height: d,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: scheme.surface,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: scheme.outline, width: 1.5),
+                ),
+                child: Icon(
+                  e.same ? Icons.drag_handle_rounded : Icons.close_rounded,
+                  size: d * 0.72,
+                  color: scheme.onSurface,
+                ),
               ),
-              child: Icon(e.same ? Icons.drag_handle_rounded : Icons.close_rounded, size: d * 0.72, color: scheme.onSurface),
-            ),
-          );
-        }),
+            );
+          },
+        ),
     ];
   }
 }

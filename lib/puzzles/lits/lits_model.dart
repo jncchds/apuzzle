@@ -54,12 +54,16 @@ class LitsPuzzle implements ValueGridPuzzle {
   @override
   int solutionAt(int index) => shaded[index] ? litsShade : litsDot;
 
-  Map<String, dynamic> toJson() => {'n': n, 'regions': regions, 'shaded': [for (final s in shaded) s ? 1 : 0]};
+  Map<String, dynamic> toJson() => {
+    'n': n,
+    'regions': regions,
+    'shaded': [for (final s in shaded) s ? 1 : 0],
+  };
   factory LitsPuzzle.fromJson(Map<String, dynamic> j) => LitsPuzzle(
-        n: j['n'] as int,
-        regions: (j['regions'] as List).cast<int>(),
-        shaded: [for (final v in j['shaded'] as List) v == 1],
-      );
+    n: j['n'] as int,
+    regions: (j['regions'] as List).cast<int>(),
+    shaded: [for (final v in j['shaded'] as List) v == 1],
+  );
 }
 
 /// Rule check on a shading. Returns offending cells (empty = valid so far).
@@ -79,7 +83,14 @@ Set<int> litsConflicts(int n, List<int> regions, List<bool> shaded, {bool comple
       shape[r] = classify(cells, n);
       if (shape[r] == null) bad.addAll(cells);
     } else if (complete && cells.length != 4) {
-      bad.addAll(cells.isEmpty ? [for (var i = 0; i < n * n; i++) if (regions[i] == r) i] : cells);
+      bad.addAll(
+        cells.isEmpty
+            ? [
+                for (var i = 0; i < n * n; i++)
+                  if (regions[i] == r) i,
+              ]
+            : cells,
+      );
     }
   }
   // No 2×2 shaded blocks.
@@ -103,7 +114,10 @@ Set<int> litsConflicts(int n, List<int> regions, List<bool> shaded, {bool comple
     }
   }
   if (complete && bad.isEmpty) {
-    final all = [for (var i = 0; i < n * n; i++) if (shaded[i]) i];
+    final all = [
+      for (var i = 0; i < n * n; i++)
+        if (shaded[i]) i,
+    ];
     if (all.isNotEmpty) {
       final seen = {all.first};
       final stack = [all.first];

@@ -48,10 +48,18 @@ final List<TutorialStep> popTutorial = [
 final List<TutorialStep> popStrategies = [
   TutorialStep.generated(
     text: (l) => l.tutPopS1,
-    make: () => generatePop(const GenParams(size: GridSize.square(6), difficulty: Difficulty.medium, seed: 1), PopMode.standard, PopGoal.clear),
+    make: () => generatePop(
+      const GenParams(size: GridSize.square(6), difficulty: Difficulty.medium, seed: 1),
+      PopMode.standard,
+      PopGoal.clear,
+    ),
   ),
   TutorialStep.generated(
     text: (l) => l.tutPopS2,
-    make: () => generatePop(const GenParams(size: GridSize.square(6), difficulty: Difficulty.medium, seed: 2), PopMode.standard, PopGoal.target),
+    make: () => generatePop(
+      const GenParams(size: GridSize.square(6), difficulty: Difficulty.medium, seed: 2),
+      PopMode.standard,
+      PopGoal.target,
+    ),
   ),
 ];

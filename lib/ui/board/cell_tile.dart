@@ -41,26 +41,27 @@ class CellTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final radius = BorderRadius.circular(size * 0.18);
-    final bg = color ??
+    final bg =
+        color ??
         (given
             ? Color.alphaBlend(scheme.primary.withValues(alpha: 0.14), scheme.surfaceContainerHighest)
             : scheme.surfaceContainer);
     final tinted = color != null
         ? bg
         : emphasis
-            ? Color.alphaBlend(emphasisColor.withValues(alpha: 0.42), bg)
-            : peer
-                ? Color.alphaBlend(scheme.onSurface.withValues(alpha: 0.07), bg)
-                : bg;
+        ? Color.alphaBlend(emphasisColor.withValues(alpha: 0.42), bg)
+        : peer
+        ? Color.alphaBlend(scheme.onSurface.withValues(alpha: 0.07), bg)
+        : bg;
     final borderColor = selected
         ? scheme.primary
         : hinted
-            ? scheme.tertiary
-            : emphasis && color == null
-                ? emphasisColor
-                : given
-                ? scheme.outline.withValues(alpha: 0.55)
-                : scheme.outlineVariant.withValues(alpha: 0.6);
+        ? scheme.tertiary
+        : emphasis && color == null
+        ? emphasisColor
+        : given
+        ? scheme.outline.withValues(alpha: 0.55)
+        : scheme.outlineVariant.withValues(alpha: 0.6);
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 220),

@@ -27,13 +27,13 @@ void main() {
   });
 
   GameController make() => GameController(
-        type: type,
-        params: params,
-        puzzle: puzzle,
-        state: type.initialState(puzzle),
-        settings: settings,
-        store: store,
-      );
+    type: type,
+    params: params,
+    puzzle: puzzle,
+    state: type.initialState(puzzle),
+    settings: settings,
+    store: store,
+  );
 
   Pos firstEmpty(GameController c) =>
       puzzle.size.positions.firstWhere((p) => (c.state as ValueGrid).at(p).value == null);
@@ -146,8 +146,10 @@ void main() {
     );
     await c.save();
     expect(store.hasSave(GameStore.dailySlot(c.code)), isTrue);
-    expect(GameController.fromSave(type: type, json: store.readSave(c.saveSlot)!, settings: settings, store: store).daily,
-        day);
+    expect(
+      GameController.fromSave(type: type, json: store.readSave(c.saveSlot)!, settings: settings, store: store).daily,
+      day,
+    );
 
     var s = c.state as ValueGrid;
     for (var i = 0; i < 36; i++) {

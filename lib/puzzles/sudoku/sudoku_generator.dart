@@ -15,10 +15,10 @@ SudokuPuzzle generateSudoku(GenParams params) {
   SudokuPuzzle? fallback;
 
   bool ok(List<int> g) => switch (d) {
-        Difficulty.easy || Difficulty.medium => solver.solveLogic(List.of(g), 1),
-        Difficulty.hard => solver.solveLogic(List.of(g), 2),
-        Difficulty.expert => solver.countSolutions(g) == 1,
-      };
+    Difficulty.easy || Difficulty.medium => solver.solveLogic(List.of(g), 1),
+    Difficulty.hard => solver.solveLogic(List.of(g), 2),
+    Difficulty.expert => solver.countSolutions(g) == 1,
+  };
 
   final keep = d == Difficulty.easy ? (cells * 0.47).round() : 0;
   final attempts = n <= 4 ? 3 : 12;

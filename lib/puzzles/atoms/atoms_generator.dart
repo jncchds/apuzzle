@@ -33,7 +33,14 @@ AtomsPuzzle generateAtoms(GenParams params) {
       numbers[edges[e].a] += solution[e];
       numbers[edges[e].b] += solution[e];
     }
-    final puzzle = AtomsPuzzle(rows: rows, cols: cols, islands: islands, numbers: numbers, edges: edges, solution: solution);
+    final puzzle = AtomsPuzzle(
+      rows: rows,
+      cols: cols,
+      islands: islands,
+      numbers: numbers,
+      edges: edges,
+      solution: solution,
+    );
     if (!atomsSolved(puzzle, solution)) continue;
     final solver = AtomsSolver(puzzle);
     if (solver.solutions().length != 1) continue;

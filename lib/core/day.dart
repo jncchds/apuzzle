@@ -48,5 +48,6 @@ class Day implements Comparable<Day> {
   int get hashCode => year * 10000 + month * 100 + day;
 
   @override
-  String toString() => '${year.toString().padLeft(4, '0')}-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
+  String toString() =>
+      '${year.toString().padLeft(4, '0')}-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
 }

@@ -37,21 +37,21 @@ class AtomsPuzzle {
   GridSize get size => GridSize(rows, cols);
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'islands': islands,
-        'numbers': numbers,
-        'edges': [for (final e in edges) e.toJson()],
-        'solution': solution,
-      };
+    'rows': rows,
+    'cols': cols,
+    'islands': islands,
+    'numbers': numbers,
+    'edges': [for (final e in edges) e.toJson()],
+    'solution': solution,
+  };
   factory AtomsPuzzle.fromJson(Map<String, dynamic> j) => AtomsPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        islands: (j['islands'] as List).cast<int>(),
-        numbers: (j['numbers'] as List).cast<int>(),
-        edges: [for (final e in j['edges'] as List) AtomEdge.fromJson(e as List)],
-        solution: (j['solution'] as List).cast<int>(),
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    islands: (j['islands'] as List).cast<int>(),
+    numbers: (j['numbers'] as List).cast<int>(),
+    edges: [for (final e in j['edges'] as List) AtomEdge.fromJson(e as List)],
+    solution: (j['solution'] as List).cast<int>(),
+  );
 }
 
 class AtomsState {

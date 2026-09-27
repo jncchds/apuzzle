@@ -44,7 +44,9 @@ void main() {
     for (var seed = 1; seed <= 5; seed++) {
       int clues(MamboPuzzle p) => p.givens.where((v) => v != null).length + p.edges.length;
       easy += clues(generateMambo(GenParams(size: const GridSize.square(6), difficulty: Difficulty.easy, seed: seed)));
-      medium += clues(generateMambo(GenParams(size: const GridSize.square(6), difficulty: Difficulty.medium, seed: seed)));
+      medium += clues(
+        generateMambo(GenParams(size: const GridSize.square(6), difficulty: Difficulty.medium, seed: seed)),
+      );
     }
     expect(easy, greaterThan(medium));
   });

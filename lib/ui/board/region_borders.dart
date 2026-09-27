@@ -7,7 +7,7 @@ import 'cell_grid_board.dart';
 /// says directly whether two neighbouring cells get a line between them.
 class RegionBorders extends StatelessWidget {
   const RegionBorders({super.key, required this.metrics, this.regionOf, this.split, this.color, this.outer = true})
-      : assert(regionOf != null || split != null);
+    : assert(regionOf != null || split != null);
 
   final BoardMetrics metrics;
   final int Function(int index)? regionOf;
@@ -17,10 +17,15 @@ class RegionBorders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Positioned.fill(
-        child: CustomPaint(
-          painter: _RegionPainter(metrics, split ?? (a, b) => regionOf!(a) != regionOf!(b), color ?? Theme.of(context).colorScheme.onSurface, outer),
-        ),
-      );
+    child: CustomPaint(
+      painter: _RegionPainter(
+        metrics,
+        split ?? (a, b) => regionOf!(a) != regionOf!(b),
+        color ?? Theme.of(context).colorScheme.onSurface,
+        outer,
+      ),
+    ),
+  );
 }
 
 class _RegionPainter extends CustomPainter {

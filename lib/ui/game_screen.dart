@@ -75,26 +75,30 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
       if (mounted && _ctrl != null && !_ctrl!.solved) setState(() {});
     });
     if (widget.presetPuzzle != null) {
-      _attach(GameController(
-        type: type,
-        params: widget.params!,
-        puzzle: widget.presetPuzzle!,
-        state: widget.presetState ?? type.initialState(widget.presetPuzzle) as Object,
-        settings: context.read<Settings>(),
-        store: context.read<GameStore>(),
-        daily: widget.daily,
-      ));
+      _attach(
+        GameController(
+          type: type,
+          params: widget.params!,
+          puzzle: widget.presetPuzzle!,
+          state: widget.presetState ?? type.initialState(widget.presetPuzzle) as Object,
+          settings: context.read<Settings>(),
+          store: context.read<GameStore>(),
+          daily: widget.daily,
+        ),
+      );
       return;
     }
     final save = _resumable(context.read<GameStore>().readSave(_slot));
     if (save != null) {
       try {
-        _attach(GameController.fromSave(
-          type: type,
-          json: save,
-          settings: context.read<Settings>(),
-          store: context.read<GameStore>(),
-        ));
+        _attach(
+          GameController.fromSave(
+            type: type,
+            json: save,
+            settings: context.read<Settings>(),
+            store: context.read<GameStore>(),
+          ),
+        );
         return;
       } catch (e) {
         debugPrint('Could not restore save: $e');
@@ -106,9 +110,9 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   int _seed() => Random().nextInt(1 << 31);
 
   String get _slot => switch ((widget.daily, widget.params)) {
-        (_?, final params?) => GameStore.dailySlot(PuzzleCode.format(type, params)),
-        _ => type.id,
-      };
+    (_?, final params?) => GameStore.dailySlot(PuzzleCode.format(type, params)),
+    _ => type.id,
+  };
 
   /// The saved game, if there's nothing new to start or the requested puzzle
   /// is the one saved (a share link opened twice, a web page reload).
@@ -136,15 +140,17 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
     try {
       final puzzle = await generatePuzzle(type, params);
       if (!mounted) return;
-      _attach(GameController(
-        type: type,
-        params: params,
-        puzzle: puzzle,
-        state: type.initialState(puzzle) as Object,
-        settings: settings,
-        store: store,
-        daily: widget.daily,
-      ));
+      _attach(
+        GameController(
+          type: type,
+          params: params,
+          puzzle: puzzle,
+          state: type.initialState(puzzle) as Object,
+          settings: settings,
+          store: store,
+          daily: widget.daily,
+        ),
+      );
     } catch (e, st) {
       debugPrint('Generation failed: $e\n$st');
       if (mounted) setState(() => _error = e);
@@ -252,24 +258,24 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   }
 
   void _showRules() => showDialog<void>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(type.name(context.l10n)),
-          content: SingleChildScrollView(child: Text(type.rulesText(context.l10n))),
-          actions: [
-            if (type.tutorial().isNotEmpty)
-              TextButton.icon(
-                onPressed: () {
-                  Navigator.pop(context);
-                  AppRouterDelegate.of(this.context).openTutorial(type);
-                },
-                icon: const Icon(Icons.school_outlined),
-                label: Text(context.l10n.learnTitle),
-              ),
-            TextButton(onPressed: () => Navigator.pop(context), child: Text(context.l10n.gotIt)),
-          ],
-        ),
-      );
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(type.name(context.l10n)),
+      content: SingleChildScrollView(child: Text(type.rulesText(context.l10n))),
+      actions: [
+        if (type.tutorial().isNotEmpty)
+          TextButton.icon(
+            onPressed: () {
+              Navigator.pop(context);
+              AppRouterDelegate.of(this.context).openTutorial(type);
+            },
+            icon: const Icon(Icons.school_outlined),
+            label: Text(context.l10n.learnTitle),
+          ),
+        TextButton(onPressed: () => Navigator.pop(context), child: Text(context.l10n.gotIt)),
+      ],
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -283,7 +289,10 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Center(
-                child: Text(formatDuration(c.elapsed), style: const TextStyle(fontFeatures: [FontFeature.tabularFigures()])),
+                child: Text(
+                  formatDuration(c.elapsed),
+                  style: const TextStyle(fontFeatures: [FontFeature.tabularFigures()]),
+                ),
               ),
             ),
           IconButton(icon: const Icon(Icons.help_outline), tooltip: l.rules, onPressed: _showRules),
@@ -311,105 +320,130 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   }
 
   Widget _loading(AppLocalizations l) => Center(
-        child: _error != null
-            ? Column(mainAxisSize: MainAxisSize.min, children: [
-                Text(l.couldNotGenerate),
-                const SizedBox(height: 12),
-                FilledButton(
-                  onPressed: () => _newGame(widget.params ?? GenParams(size: type.defaultSize, difficulty: Difficulty.easy, seed: _seed())),
-                  child: Text(l.tryAgain),
+    child: _error != null
+        ? Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(l.couldNotGenerate),
+              const SizedBox(height: 12),
+              FilledButton(
+                onPressed: () => _newGame(
+                  widget.params ?? GenParams(size: type.defaultSize, difficulty: Difficulty.easy, seed: _seed()),
                 ),
-              ])
-            : Column(mainAxisSize: MainAxisSize.min, children: [
-                const CircularProgressIndicator(),
-                const SizedBox(height: 16),
-                Text(l.generating),
-              ]),
-      );
+                child: Text(l.tryAgain),
+              ),
+            ],
+          )
+        : Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(height: 16),
+              Text(l.generating),
+            ],
+          ),
+  );
 
   Widget _game(BuildContext context, GameController c) {
     final theme = Theme.of(context);
     final l = context.l10n;
     final controls = type.buildControls(context, c);
-    return Stack(children: [
-      SafeArea(
-        child: Column(children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-            child: Row(children: [
-              Flexible(
-                flex: 8,
-                child: Text(
-                  [c.params.size.label, c.params.difficulty.label(l), if (type.optionsLabel(l, c.params) case final o when o.isNotEmpty) o]
-                      .join(' · '),
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.labelLarge,
-                ),
-              ),
-              const SizedBox(width: 4),
-              Flexible(
-                child: Tooltip(
-                  message: l.copyShareLink,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(6),
-                    onTap: () => copyWithToast(context, c.link, l.shareLinkCopied),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+    return Stack(
+      children: [
+        SafeArea(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+                child: Row(
+                  children: [
+                    Flexible(
+                      flex: 8,
                       child: Text(
-                        '#${c.params.seed.toRadixString(36).toUpperCase()}',
+                        [
+                          c.params.size.label,
+                          c.params.difficulty.label(l),
+                          if (type.optionsLabel(l, c.params) case final o when o.isNotEmpty) o,
+                        ].join(' · '),
                         overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                        style: theme.textTheme.labelLarge,
                       ),
                     ),
+                    const SizedBox(width: 4),
+                    Flexible(
+                      child: Tooltip(
+                        message: l.copyShareLink,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(6),
+                          onTap: () => copyWithToast(context, c.link, l.shareLinkCopied),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                            child: Text(
+                              '#${c.params.seed.toRadixString(36).toUpperCase()}',
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    if (type.supportsModeSwitch && !c.solved)
+                      SegmentedButton<InputMode>(
+                        style: const ButtonStyle(visualDensity: VisualDensity.compact),
+                        segments: [
+                          ButtonSegment(
+                            value: InputMode.cycle,
+                            icon: const Icon(Icons.touch_app_outlined),
+                            tooltip: l.tapToCycle,
+                          ),
+                          ButtonSegment(
+                            value: InputMode.palette,
+                            icon: const Icon(Icons.palette_outlined),
+                            tooltip: l.palette,
+                          ),
+                        ],
+                        selected: {c.inputMode},
+                        showSelectedIcon: false,
+                        onSelectionChanged: (s) => c.setInputMode(s.first),
+                      ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: AnimatedBuilder(
+                    animation: _shake,
+                    builder: (context, child) => Transform.translate(
+                      offset: Offset(sin(_shake.value * pi * 6) * 10 * (1 - _shake.value), 0),
+                      child: child,
+                    ),
+                    child: type.buildBoard(context, c),
                   ),
                 ),
               ),
-              const Spacer(),
-              if (type.supportsModeSwitch && !c.solved)
-                SegmentedButton<InputMode>(
-                  style: const ButtonStyle(visualDensity: VisualDensity.compact),
-                  segments: [
-                    ButtonSegment(value: InputMode.cycle, icon: const Icon(Icons.touch_app_outlined), tooltip: l.tapToCycle),
-                    ButtonSegment(value: InputMode.palette, icon: const Icon(Icons.palette_outlined), tooltip: l.palette),
-                  ],
-                  selected: {c.inputMode},
-                  showSelectedIcon: false,
-                  onSelectionChanged: (s) => c.setInputMode(s.first),
-                ),
-            ]),
+              if (!c.solved) ...[
+                _Toolbar(controller: c, onRestart: _confirmRestart, onSubmit: type.showSubmit ? _submit : null),
+                if (controls != null) Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 12), child: controls),
+                if (controls == null) const SizedBox(height: 8),
+              ],
+            ],
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: AnimatedBuilder(
-                animation: _shake,
-                builder: (context, child) => Transform.translate(
-                  offset: Offset(sin(_shake.value * pi * 6) * 10 * (1 - _shake.value), 0),
-                  child: child,
-                ),
-                child: type.buildBoard(context, c),
-              ),
-            ),
-          ),
-          if (!c.solved) ...[
-            _Toolbar(controller: c, onRestart: _confirmRestart, onSubmit: type.showSubmit ? _submit : null),
-            if (controls != null) Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 12), child: controls),
-            if (controls == null) const SizedBox(height: 8),
-          ],
-        ]),
-      ),
-      if (c.solved) Positioned.fill(child: c.daily != null ? _dailyWin(c, c.daily!) : _freeWin(c)),
-    ]);
+        ),
+        if (c.solved) Positioned.fill(child: c.daily != null ? _dailyWin(c, c.daily!) : _freeWin(c)),
+      ],
+    );
   }
 
   Widget _freeWin(GameController c) => WinOverlay(
-        animation: _win,
-        controller: c,
-        backLabel: context.l10n.home,
-        onBack: () => Navigator.of(context).pop(),
-        nextLabel: context.l10n.newPuzzle,
-        onNext: () => _newGame(c.params.withSeed(_seed())),
-      );
+    animation: _win,
+    controller: c,
+    backLabel: context.l10n.home,
+    onBack: () => Navigator.of(context).pop(),
+    nextLabel: context.l10n.newPuzzle,
+    onNext: () => _newGame(c.params.withSeed(_seed())),
+  );
 
   /// Back leads to the calendar; next is the day's next unsolved puzzle.
   Widget _dailyWin(GameController c, Day day) {

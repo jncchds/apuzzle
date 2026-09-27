@@ -51,7 +51,10 @@ MergeDir? mergeSuggest(MergePuzzle p, MergeState s) {
 
 /// Expected value over new tiles (a sample of empty cells on big boards).
 double _chance(List<int> cells, int rows, int cols, int depth) {
-  final empty = [for (var i = 0; i < cells.length; i++) if (cells[i] == 0) i];
+  final empty = [
+    for (var i = 0; i < cells.length; i++)
+      if (cells[i] == 0) i,
+  ];
   if (empty.isEmpty) return _heuristic(cells, rows, cols);
   final step = max(1, empty.length ~/ 6);
   var sum = 0.0;

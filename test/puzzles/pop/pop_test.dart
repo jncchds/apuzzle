@@ -7,15 +7,16 @@ import 'package:apuzzle/puzzles/pop/pop_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 PopPuzzle _puzzle(List<int> start, int rows, int cols, PopMode mode, {List<List<int>> reserve = const []}) => PopPuzzle(
-    rows: rows,
-    cols: cols,
-    colors: 4,
-    mode: mode,
-    goal: PopGoal.free,
-    start: start,
-    reserve: reserve,
-    target: 0,
-    plan: const []);
+  rows: rows,
+  cols: cols,
+  colors: 4,
+  mode: mode,
+  goal: PopGoal.free,
+  start: start,
+  reserve: reserve,
+  target: 0,
+  plan: const [],
+);
 
 /// Replays the puzzle's plan from the start.
 PopState _replay(PopPuzzle p) {
@@ -51,10 +52,16 @@ void main() {
   test('continuous: reserve columns roll in from the left', () {
     // 0 1
     // 0 1   → pop the 0s; the 1s close right, reserve column [2, 3] fills the left
-    final p = _puzzle([0, 1, 0, 1], 2, 2, PopMode.continuous, reserve: [
-      [2, 3],
-      [2],
-    ]);
+    final p = _puzzle(
+      [0, 1, 0, 1],
+      2,
+      2,
+      PopMode.continuous,
+      reserve: [
+        [2, 3],
+        [2],
+      ],
+    );
     final s = popAt(p, PopState.initial(p), 0)!;
     expect(s.cells, [3, 1, 2, 1]);
     expect(s.used, 1);
@@ -65,7 +72,12 @@ void main() {
     for (final d in type.difficulties) {
       test('clear ${size.label} ${d.name}: the plan clears the board, deterministic, fast', () {
         for (var seed = 1; seed <= 3; seed++) {
-          final params = GenParams(size: size, difficulty: d, seed: seed, options: const {'mode': 'std', 'goal': 'clear'});
+          final params = GenParams(
+            size: size,
+            difficulty: d,
+            seed: seed,
+            options: const {'mode': 'std', 'goal': 'clear'},
+          );
           final sw = Stopwatch()..start();
           final p = type.generate(params);
           sw.stop();
@@ -107,8 +119,14 @@ void main() {
   });
 
   test('free play wins whenever the game ends', () {
-    final p = type.generate(const GenParams(
-        size: GridSize.square(8), difficulty: Difficulty.hard, seed: 3, options: {'mode': 'cont', 'goal': 'free'}));
+    final p = type.generate(
+      const GenParams(
+        size: GridSize.square(8),
+        difficulty: Difficulty.hard,
+        seed: 3,
+        options: {'mode': 'cont', 'goal': 'free'},
+      ),
+    );
     var s = type.initialState(p);
     var guard = 0;
     while (!type.isComplete(p, s) && guard++ < 500) {
@@ -121,8 +139,14 @@ void main() {
   });
 
   test('hints follow the plan, then still point at a real group', () {
-    final p = type.generate(const GenParams(
-        size: GridSize.square(8), difficulty: Difficulty.medium, seed: 5, options: {'mode': 'std', 'goal': 'clear'}));
+    final p = type.generate(
+      const GenParams(
+        size: GridSize.square(8),
+        difficulty: Difficulty.medium,
+        seed: 5,
+        options: {'mode': 'std', 'goal': 'clear'},
+      ),
+    );
     var s = type.initialState(p);
     final first = type.hint(p, s)!;
     expect(identical(first.state, s), isTrue, reason: 'hints only point');
@@ -136,7 +160,11 @@ void main() {
 
   test('codes carry the mode and goal', () {
     final params = GenParams(
-        size: const GridSize(15, 12), difficulty: Difficulty.hard, seed: 99, options: const {'mode': 'shift', 'goal': 'free'});
+      size: const GridSize(15, 12),
+      difficulty: Difficulty.hard,
+      seed: 99,
+      options: const {'mode': 'shift', 'goal': 'free'},
+    );
     final code = PuzzleCode.format(type, params);
     expect(code, 'pop-12x15-hard.shift.free-2R-v2');
     final back = PuzzleCode.parse(code, puzzleTypes).params;

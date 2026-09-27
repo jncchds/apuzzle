@@ -6,12 +6,12 @@ import 'plots_model.dart';
 
 /// A board from the solution's digits and the shown ones ('.' for empty).
 PlotsPuzzle _board(List<String> solution, List<String> shown) => PlotsPuzzle(
-      rows: solution.length,
-      cols: solution.first.length,
-      maxValue: 4,
-      givens: [for (final ch in shown.join().split('')) ch == '.' ? null : int.parse(ch) - 1],
-      solution: [for (final ch in solution.join().split('')) int.parse(ch) - 1],
-    );
+  rows: solution.length,
+  cols: solution.first.length,
+  maxValue: 4,
+  givens: [for (final ch in shown.join().split('')) ch == '.' ? null : int.parse(ch) - 1],
+  solution: [for (final ch in solution.join().split('')) int.parse(ch) - 1],
+);
 
 final List<TutorialStep> plotsTutorial = [
   TutorialStep(

@@ -17,11 +17,17 @@ class MinesPuzzle {
   int get mineCount => mines.where((m) => m).length;
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'mines': [for (var i = 0; i < mines.length; i++) if (mines[i]) i],
-        'open': [for (var i = 0; i < opened.length; i++) if (opened[i]) i],
-      };
+    'rows': rows,
+    'cols': cols,
+    'mines': [
+      for (var i = 0; i < mines.length; i++)
+        if (mines[i]) i,
+    ],
+    'open': [
+      for (var i = 0; i < opened.length; i++)
+        if (opened[i]) i,
+    ],
+  };
 
   factory MinesPuzzle.fromJson(Map<String, dynamic> j) {
     final rows = j['rows'] as int, cols = j['cols'] as int;
@@ -47,11 +53,17 @@ class MinesState {
   final List<int> booms;
 
   Map<String, dynamic> toJson() => {
-        'n': open.length,
-        'open': [for (var i = 0; i < open.length; i++) if (open[i]) i],
-        'flags': [for (var i = 0; i < flags.length; i++) if (flags[i]) i],
-        if (booms.isNotEmpty) 'booms': booms,
-      };
+    'n': open.length,
+    'open': [
+      for (var i = 0; i < open.length; i++)
+        if (open[i]) i,
+    ],
+    'flags': [
+      for (var i = 0; i < flags.length; i++)
+        if (flags[i]) i,
+    ],
+    if (booms.isNotEmpty) 'booms': booms,
+  };
 
   factory MinesState.fromJson(Map<String, dynamic> j) {
     final n = j['n'] as int;

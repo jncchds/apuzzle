@@ -36,25 +36,25 @@ class MamboPuzzle implements ValueGridPuzzle {
   int solutionAt(int index) => solution[index];
 
   Map<String, dynamic> toJson() => {
-        'n': n,
-        'givens': givens,
-        'solution': solution,
-        'edges': [for (final e in edges) e.toJson()],
-      };
+    'n': n,
+    'givens': givens,
+    'solution': solution,
+    'edges': [for (final e in edges) e.toJson()],
+  };
 
   factory MamboPuzzle.fromJson(Map<String, dynamic> j) => MamboPuzzle(
-        n: j['n'] as int,
-        givens: (j['givens'] as List).cast<int?>(),
-        solution: (j['solution'] as List).cast<int>(),
-        edges: [for (final e in j['edges'] as List) MamboEdge.fromJson(e as List)],
-      );
+    n: j['n'] as int,
+    givens: (j['givens'] as List).cast<int?>(),
+    solution: (j['solution'] as List).cast<int>(),
+    edges: [for (final e in j['edges'] as List) MamboEdge.fromJson(e as List)],
+  );
 }
 
 /// Rows then columns, as lists of flat indices.
 List<List<int>> mamboLines(int n) => [
-      for (var r = 0; r < n; r++) [for (var c = 0; c < n; c++) r * n + c],
-      for (var c = 0; c < n; c++) [for (var r = 0; r < n; r++) r * n + c],
-    ];
+  for (var r = 0; r < n; r++) [for (var c = 0; c < n; c++) r * n + c],
+  for (var c = 0; c < n; c++) [for (var r = 0; r < n; r++) r * n + c],
+];
 
 /// Cells that break a rule in a (possibly partial) grid; -1 = empty.
 Set<int> mamboConflicts(int n, List<int> g, List<MamboEdge> edges) {

@@ -55,9 +55,9 @@ PipesPuzzle generatePipes(GenParams params) {
     for (var i = 0; i < n; i++) locked[i] ? 0 : rng.nextInt(4),
   ];
   // Make sure the puzzle doesn't start solved.
-  if (pipesSolved(
-      PipesPuzzle(rows: rows, cols: cols, source: source, masks: masks, start: start, locked: locked),
-      [for (var i = 0; i < n; i++) rotateMask(masks[i], start[i])])) {
+  if (pipesSolved(PipesPuzzle(rows: rows, cols: cols, source: source, masks: masks, start: start, locked: locked), [
+    for (var i = 0; i < n; i++) rotateMask(masks[i], start[i]),
+  ])) {
     for (var i = 0; i < n; i++) {
       if (!locked[i] && masks[i] != 5 && masks[i] != 10 && masks[i] != 15) {
         start[i] = (start[i] + 1) % 4;

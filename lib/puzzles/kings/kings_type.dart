@@ -42,16 +42,22 @@ class KingsType extends ValueGridType<KingsPuzzle> {
   GridSize get defaultSize => const GridSize.square(8);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(8),
-        _ => const GridSize.square(9),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(8),
+    _ => const GridSize.square(9),
+  };
 
   @override
   List<ValueSpec> get values => [
-        ValueSpec.custom((context, size) => DotSymbol(size: size, color: Colors.black54), label: 'dot'),
-        ValueSpec.custom((context, size) => CrownSymbol(size: size * 0.9, color: Colors.black87), label: 'crown'),
-      ];
+    ValueSpec.custom(
+      (context, size) => DotSymbol(size: size, color: Colors.black54),
+      label: 'dot',
+    ),
+    ValueSpec.custom(
+      (context, size) => CrownSymbol(size: size * 0.9, color: Colors.black87),
+      label: 'crown',
+    ),
+  ];
 
   @override
   double get gapRatio => 0.06;
@@ -59,7 +65,10 @@ class KingsType extends ValueGridType<KingsPuzzle> {
   @override
   KingsPuzzle generate(GenParams params) => generateKings(params);
 
-  List<int> _kings(ValueGrid s) => [for (var i = 0; i < s.cells.length; i++) if (s.cells[i].value == kKing) i];
+  List<int> _kings(ValueGrid s) => [
+    for (var i = 0; i < s.cells.length; i++)
+      if (s.cells[i].value == kKing) i,
+  ];
 
   @override
   bool isComplete(KingsPuzzle puzzle, ValueGrid state) => _kings(state).length == puzzle.n;
@@ -71,8 +80,9 @@ class KingsType extends ValueGridType<KingsPuzzle> {
   }
 
   @override
-  Set<Pos> conflicts(KingsPuzzle puzzle, ValueGrid state) =>
-      {for (final i in kingsConflicts(puzzle.n, puzzle.regions, _kings(state))) puzzle.size.pos(i)};
+  Set<Pos> conflicts(KingsPuzzle puzzle, ValueGrid state) => {
+    for (final i in kingsConflicts(puzzle.n, puzzle.regions, _kings(state))) puzzle.size.pos(i),
+  };
 
   @override
   HintResult<ValueGrid>? hint(KingsPuzzle puzzle, ValueGrid state) {
@@ -101,8 +111,8 @@ class KingsType extends ValueGridType<KingsPuzzle> {
 
   @override
   List<Widget> buildOverlay(BuildContext context, KingsPuzzle puzzle, BoardMetrics m) => [
-        RegionBorders(metrics: m, regionOf: (i) => puzzle.regions[i], color: Theme.of(context).colorScheme.onSurface),
-      ];
+    RegionBorders(metrics: m, regionOf: (i) => puzzle.regions[i], color: Theme.of(context).colorScheme.onSurface),
+  ];
 
   @override
   Map<String, dynamic> encodePuzzle(KingsPuzzle puzzle) => puzzle.toJson();

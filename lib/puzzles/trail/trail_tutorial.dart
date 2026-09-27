@@ -7,11 +7,11 @@ import 'trail_model.dart';
 /// A 3×3 board from its path (cells as row * 3 + column) and the cells
 /// showing the numbers 1, 2, ….
 TrailPuzzle _board(List<int> path, List<int> numbered) => TrailPuzzle(
-      rows: 3,
-      cols: 3,
-      numbers: [for (var i = 0; i < 9; i++) numbered.contains(i) ? numbered.indexOf(i) + 1 : null],
-      solution: path,
-    );
+  rows: 3,
+  cols: 3,
+  numbers: [for (var i = 0; i < 9; i++) numbered.contains(i) ? numbered.indexOf(i) + 1 : null],
+  solution: path,
+);
 
 final List<TutorialStep> trailTutorial = [
   TutorialStep(text: (l) => l.tutTrail1, puzzle: _board([0, 1, 2, 5, 4, 3, 6, 7, 8], [0, 8])),

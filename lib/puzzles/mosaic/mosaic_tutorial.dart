@@ -24,13 +24,15 @@ final List<TutorialStep> mosaicTutorial = [
   TutorialStep(text: (l) => l.tutMosaic2, puzzle: _board(['0012', '1112', '2202', '0222', '1100'])),
   TutorialStep.generated(
     text: (l) => l.tutMosaic3,
-    make: () => const MosaicType().generate(const GenParams(size: GridSize.square(6), difficulty: Difficulty.easy, seed: 5)),
+    make: () =>
+        const MosaicType().generate(const GenParams(size: GridSize.square(6), difficulty: Difficulty.easy, seed: 5)),
   ),
 ];
 
 final List<TutorialStep> mosaicStrategies = [
   TutorialStep.generated(
     text: (l) => l.tutMosaicS1,
-    make: () => const MosaicType().generate(const GenParams(size: GridSize.square(8), difficulty: Difficulty.hard, seed: 1)),
+    make: () =>
+        const MosaicType().generate(const GenParams(size: GridSize.square(8), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

@@ -42,7 +42,10 @@ LampsPuzzle generateLamps(GenParams params) {
     if (!solvable(tier)) continue;
     // Easy and medium keep a few more numbers than the logic strictly needs.
     final keep = d == Difficulty.hard ? 0.0 : 0.25;
-    for (final i in [for (var i = 0; i < n; i++) if (walls[i]) i]..shuffle(rng)) {
+    for (final i in [
+      for (var i = 0; i < n; i++)
+        if (walls[i]) i,
+    ]..shuffle(rng)) {
       if (rng.nextDouble() < keep) continue;
       final v = numbers[i];
       numbers[i] = null;

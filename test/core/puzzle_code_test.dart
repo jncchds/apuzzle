@@ -64,7 +64,11 @@ void main() {
     final params = GenParams(size: kings.sizes.last, difficulty: Difficulty.medium, seed: 987654);
     final link = PuzzleCode.link(kings, params);
     expect(link, startsWith(PuzzleCode.linkBase));
-    for (final text in [link, '/apuzzle/?p=${PuzzleCode.format(kings, params)}', 'I solved this Crowns in 1:02. Can you beat it? $link']) {
+    for (final text in [
+      link,
+      '/apuzzle/?p=${PuzzleCode.format(kings, params)}',
+      'I solved this Crowns in 1:02. Can you beat it? $link',
+    ]) {
       final c = PuzzleCode.parse(text, puzzleTypes);
       expect(c.type, same(kings), reason: text);
       expect(c.params.seed, 987654, reason: text);

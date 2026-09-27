@@ -19,7 +19,9 @@ void main() {
         }
         times.sort();
         // ignore: avoid_print
-        print('${type.id.padRight(10)} ${d.name.padRight(7)} ${type.dailySize(d).label.padRight(6)} median ${times[2]} ms, max ${times.last} ms');
+        print(
+          '${type.id.padRight(10)} ${d.name.padRight(7)} ${type.dailySize(d).label.padRight(6)} median ${times[2]} ms, max ${times.last} ms',
+        );
       }
     }
   });

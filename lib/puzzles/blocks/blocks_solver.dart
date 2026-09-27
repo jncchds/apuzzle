@@ -7,9 +7,7 @@ import '../../core/grid_graph.dart';
 /// Tier 2: + pointing (every spot for a value in a region touches one outside
 /// cell) and naked pairs. Tier 3: + probing.
 class BlocksSolver {
-  BlocksSolver(this.rows, this.cols, this.regions)
-      : n = rows * cols,
-        kn = kingNeighbors(rows, cols) {
+  BlocksSolver(this.rows, this.cols, this.regions) : n = rows * cols, kn = kingNeighbors(rows, cols) {
     members = List.generate(regions.reduce(max) + 1, (_) => <int>[]);
     for (var i = 0; i < n; i++) {
       members[regions[i]].add(i);
@@ -171,7 +169,10 @@ class BlocksSolver {
         total++;
         return;
       }
-      final vals = [for (var v = 0; v < 8; v++) if (cur[pick] & (1 << v) != 0) v];
+      final vals = [
+        for (var v = 0; v < 8; v++)
+          if (cur[pick] & (1 << v) != 0) v,
+      ];
       if (rng != null) vals.shuffle(rng);
       for (final v in vals) {
         rec(List.of(cur)..[pick] = 1 << v);

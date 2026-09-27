@@ -45,19 +45,28 @@ class CampType extends ValueGridType<CampPuzzle> {
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(8),
-        _ => const GridSize.square(9),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(8),
+    _ => const GridSize.square(9),
+  };
   @override
   double get minCellSize => 32;
 
   @override
   List<ValueSpec> get values => [
-        ValueSpec.custom((context, size) => DotSymbol(size: size, color: const Color(0xFF5E8C4A)), label: 'grass'),
-        ValueSpec.custom((context, size) => TentSymbol(size: size * 0.86, color: tentColor), label: 'tent'),
-        ValueSpec.custom((context, size) => Icon(Icons.park_rounded, size: size * 0.78, color: treeColor), label: 'tree'),
-      ];
+    ValueSpec.custom(
+      (context, size) => DotSymbol(size: size, color: const Color(0xFF5E8C4A)),
+      label: 'grass',
+    ),
+    ValueSpec.custom(
+      (context, size) => TentSymbol(size: size * 0.86, color: tentColor),
+      label: 'tent',
+    ),
+    ValueSpec.custom(
+      (context, size) => Icon(Icons.park_rounded, size: size * 0.78, color: treeColor),
+      label: 'tree',
+    ),
+  ];
 
   @override
   List<ValueSpec> valuesFor(CampPuzzle puzzle) => values.sublist(0, 2);
@@ -81,8 +90,8 @@ class CampType extends ValueGridType<CampPuzzle> {
 
   @override
   Set<Pos> conflicts(CampPuzzle puzzle, ValueGrid state) => {
-        for (final i in campConflicts(puzzle, _tents(state), complete: isComplete(puzzle, state))) puzzle.size.pos(i),
-      };
+    for (final i in campConflicts(puzzle, _tents(state), complete: isComplete(puzzle, state))) puzzle.size.pos(i),
+  };
 
   @override
   HintResult<ValueGrid>? hint(CampPuzzle puzzle, ValueGrid state) {
@@ -136,11 +145,17 @@ class CampType extends ValueGridType<CampPuzzle> {
     int count(Iterable<int> cells) => cells.where((i) => state.cells[i].value == campTent).length;
     return [
       for (var r = 0; r < puzzle.rows; r++)
-        label(Rect.fromLTWH(0, m.y(r), m.ox - m.gap, m.cell), puzzle.rowCounts[r],
-            count([for (var c = 0; c < puzzle.cols; c++) r * puzzle.cols + c])),
+        label(
+          Rect.fromLTWH(0, m.y(r), m.ox - m.gap, m.cell),
+          puzzle.rowCounts[r],
+          count([for (var c = 0; c < puzzle.cols; c++) r * puzzle.cols + c]),
+        ),
       for (var c = 0; c < puzzle.cols; c++)
-        label(Rect.fromLTWH(m.x(c), 0, m.cell, m.oy - m.gap), puzzle.colCounts[c],
-            count([for (var r = 0; r < puzzle.rows; r++) r * puzzle.cols + c])),
+        label(
+          Rect.fromLTWH(m.x(c), 0, m.cell, m.oy - m.gap),
+          puzzle.colCounts[c],
+          count([for (var r = 0; r < puzzle.rows; r++) r * puzzle.cols + c]),
+        ),
     ];
   }
 

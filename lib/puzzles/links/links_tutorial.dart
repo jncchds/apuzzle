@@ -7,19 +7,27 @@ import 'links_model.dart';
 final List<TutorialStep> linksTutorial = [
   TutorialStep(
     text: (l) => l.tutLinks1,
-    puzzle: const LinksPuzzle(rows: 3, cols: 3, paths: [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-    ]),
+    puzzle: const LinksPuzzle(
+      rows: 3,
+      cols: 3,
+      paths: [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+      ],
+    ),
   ),
   TutorialStep(
     text: (l) => l.tutLinks2,
-    puzzle: const LinksPuzzle(rows: 4, cols: 4, paths: [
-      [10, 6, 5, 4, 0, 1],
-      [8, 12, 13, 9],
-      [2, 3, 7, 11, 15, 14],
-    ]),
+    puzzle: const LinksPuzzle(
+      rows: 4,
+      cols: 4,
+      paths: [
+        [10, 6, 5, 4, 0, 1],
+        [8, 12, 13, 9],
+        [2, 3, 7, 11, 15, 14],
+      ],
+    ),
   ),
   TutorialStep.generated(
     text: (l) => l.tutLinks3,

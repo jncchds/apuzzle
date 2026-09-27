@@ -43,10 +43,10 @@ class ArrowsType extends PuzzleType<ArrowsPuzzle, ArrowsState> {
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(8),
+  };
   @override
   Day get dailySince => const Day(2026, 9, 28);
   @override
@@ -100,7 +100,10 @@ class ArrowsType extends PuzzleType<ArrowsPuzzle, ArrowsState> {
     final g = puzzle.lattice;
     HintResult<ArrowsState> edge(int e, int v) {
       final (a, b) = g.ends(e);
-      return HintResult(ArrowsState(List.of(state.marks)..[e] = v, state.cells), {puzzle.size.pos(a), puzzle.size.pos(b)});
+      return HintResult(ArrowsState(List.of(state.marks)..[e] = v, state.cells), {
+        puzzle.size.pos(a),
+        puzzle.size.pos(b),
+      });
     }
 
     HintResult<ArrowsState> cell(int i, int v) =>

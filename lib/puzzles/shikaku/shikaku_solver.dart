@@ -135,7 +135,10 @@ class ShikakuSolver {
       List<CellRect>? bestList;
       for (var k = 0; k < cand0.length; k++) {
         if (chosen[k] != null) continue;
-        final ok = [for (final r in cand0[k]) if (r.cells(cols).every((i) => !covered[i])) r];
+        final ok = [
+          for (final r in cand0[k])
+            if (r.cells(cols).every((i) => !covered[i])) r,
+        ];
         if (ok.isEmpty) return;
         if (bestList == null || ok.length < bestList.length) {
           best = k;

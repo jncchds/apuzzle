@@ -3,7 +3,14 @@ import 'dart:collection';
 import '../../core/grid.dart';
 
 class MosaicPuzzle {
-  const MosaicPuzzle({required this.rows, required this.cols, required this.colors, required this.start, required this.limit, required this.plan});
+  const MosaicPuzzle({
+    required this.rows,
+    required this.cols,
+    required this.colors,
+    required this.start,
+    required this.limit,
+    required this.plan,
+  });
 
   final int rows;
   final int cols;
@@ -18,15 +25,22 @@ class MosaicPuzzle {
 
   GridSize get size => GridSize(rows, cols);
 
-  Map<String, dynamic> toJson() => {'rows': rows, 'cols': cols, 'colors': colors, 'start': start, 'limit': limit, 'plan': plan};
+  Map<String, dynamic> toJson() => {
+    'rows': rows,
+    'cols': cols,
+    'colors': colors,
+    'start': start,
+    'limit': limit,
+    'plan': plan,
+  };
   factory MosaicPuzzle.fromJson(Map<String, dynamic> j) => MosaicPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        colors: j['colors'] as int,
-        start: (j['start'] as List).cast<int>(),
-        limit: j['limit'] as int,
-        plan: (j['plan'] as List).cast<int>(),
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    colors: j['colors'] as int,
+    start: (j['start'] as List).cast<int>(),
+    limit: j['limit'] as int,
+    plan: (j['plan'] as List).cast<int>(),
+  );
 }
 
 class MosaicState {
@@ -36,7 +50,8 @@ class MosaicState {
   final int moves;
 
   Map<String, dynamic> toJson() => {'cells': cells, 'moves': moves};
-  factory MosaicState.fromJson(Map<String, dynamic> j) => MosaicState((j['cells'] as List).cast<int>(), j['moves'] as int);
+  factory MosaicState.fromJson(Map<String, dynamic> j) =>
+      MosaicState((j['cells'] as List).cast<int>(), j['moves'] as int);
 }
 
 /// Flood region from the top-left corner: index → BFS distance (only region cells).

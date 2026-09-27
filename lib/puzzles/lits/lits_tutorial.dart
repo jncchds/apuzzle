@@ -18,8 +18,9 @@ final _board = LitsPuzzle(
 
 /// A state with the cells marked # shaded, the rest empty.
 ValueGrid _state(String marks) => ValueGrid(_board.size, [
-      for (final ch in marks.replaceAll('|', '').split('')) ch == '#' ? const CellValue(value: litsShade) : const CellValue(),
-    ]);
+  for (final ch in marks.replaceAll('|', '').split(''))
+    ch == '#' ? const CellValue(value: litsShade) : const CellValue(),
+]);
 
 final List<TutorialStep> litsTutorial = [
   TutorialStep(

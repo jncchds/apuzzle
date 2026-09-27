@@ -14,17 +14,21 @@ class TutorialStep {
     this.answer,
     this.look = false,
     this.openEnded = false,
-  })  : _make = (() => puzzle),
-        assert(done == null || answer != null, 'a custom goal needs an answer');
+  }) : _make = (() => puzzle),
+       assert(done == null || answer != null, 'a custom goal needs an answer');
 
   /// A step on a board made by [make] (usually the type's generator), built
   /// only when the step opens.
-  TutorialStep.generated({required this.text, required Object Function() make, this.focus = const {}, this.look = false})
-      : _make = (() => make()),
-        state = null,
-        done = null,
-        answer = null,
-        openEnded = false;
+  TutorialStep.generated({
+    required this.text,
+    required Object Function() make,
+    this.focus = const {},
+    this.look = false,
+  }) : _make = (() => make()),
+       state = null,
+       done = null,
+       answer = null,
+       openEnded = false;
 
   /// What to read (and do) at this step.
   final Tr text;

@@ -7,10 +7,10 @@ import 'kings_model.dart';
 
 /// A board from rows of region letters and the crown's column in each row.
 KingsPuzzle _board(List<String> rows, List<int> crowns) => KingsPuzzle(
-      n: rows.length,
-      regions: [for (final ch in rows.join().split('')) ch.codeUnitAt(0) - 'A'.codeUnitAt(0)],
-      solution: crowns,
-    );
+  n: rows.length,
+  regions: [for (final ch in rows.join().split('')) ch.codeUnitAt(0) - 'A'.codeUnitAt(0)],
+  solution: crowns,
+);
 
 /// A state with given crowns (C) and dots (.) where the rows say, the rest empty.
 ValueGrid _state(KingsPuzzle p, List<String> rows) {

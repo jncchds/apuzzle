@@ -20,11 +20,14 @@ class FencePuzzle {
   static final _lattices = Expando<LatticeLoop>();
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'numbers': numbers,
-        'lines': [for (var e = 0; e < lines.length; e++) if (lines[e]) e],
-      };
+    'rows': rows,
+    'cols': cols,
+    'numbers': numbers,
+    'lines': [
+      for (var e = 0; e < lines.length; e++)
+        if (lines[e]) e,
+    ],
+  };
 
   factory FencePuzzle.fromJson(Map<String, dynamic> j) {
     final rows = j['rows'] as int, cols = j['cols'] as int;
@@ -41,9 +44,9 @@ List<int> fenceSides(LatticeLoop g, int r, int c) => [g.h(r, c), g.h(r + 1, c), 
 
 /// Numbered cells whose count of drawn sides is wrong ([complete]) or too high.
 Set<int> fenceBadCells(FencePuzzle p, LatticeLoop g, List<bool> lines, {required bool complete}) => {
-      for (var i = 0; i < p.numbers.length; i++)
-        if (p.numbers[i] case final want?)
-          if (fenceSides(g, i ~/ p.cols, i % p.cols).where((e) => lines[e]).length case final have
-              when have > want || (complete && have != want))
-            i,
-    };
+  for (var i = 0; i < p.numbers.length; i++)
+    if (p.numbers[i] case final want?)
+      if (fenceSides(g, i ~/ p.cols, i % p.cols).where((e) => lines[e]).length case final have
+          when have > want || (complete && have != want))
+        i,
+};

@@ -74,8 +74,7 @@ abstract class PuzzleType<P, S> {
     var out = wanted;
     for (var pass = 0; pass < 4; pass++) {
       final next = {
-        for (final o in optionsFor(out))
-          o.id: o.choices.contains(out[o.id]) ? out[o.id]! : o.choices.first,
+        for (final o in optionsFor(out)) o.id: o.choices.contains(out[o.id]) ? out[o.id]! : o.choices.first,
       };
       if (_sameOrder(next, out)) return next;
       out = next;
@@ -145,4 +144,5 @@ abstract class PuzzleType<P, S> {
 
 /// Same entries in the same order.
 bool _sameOrder(Map<String, String> a, Map<String, String> b) =>
-    a.length == b.length && a.entries.map((e) => '${e.key}=${e.value}').join(',') == b.entries.map((e) => '${e.key}=${e.value}').join(',');
+    a.length == b.length &&
+    a.entries.map((e) => '${e.key}=${e.value}').join(',') == b.entries.map((e) => '${e.key}=${e.value}').join(',');

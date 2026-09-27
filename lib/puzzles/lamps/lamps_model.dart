@@ -36,16 +36,22 @@ class LampsPuzzle implements ValueGridPuzzle {
   int solutionAt(int index) => walls[index]
       ? lampsWall
       : lamps[index]
-          ? lampsLamp
-          : lampsDot;
+      ? lampsLamp
+      : lampsDot;
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'walls': [for (var i = 0; i < walls.length; i++) if (walls[i]) i],
-        'numbers': numbers,
-        'lamps': [for (var i = 0; i < lamps.length; i++) if (lamps[i]) i],
-      };
+    'rows': rows,
+    'cols': cols,
+    'walls': [
+      for (var i = 0; i < walls.length; i++)
+        if (walls[i]) i,
+    ],
+    'numbers': numbers,
+    'lamps': [
+      for (var i = 0; i < lamps.length; i++)
+        if (lamps[i]) i,
+    ],
+  };
 
   factory LampsPuzzle.fromJson(Map<String, dynamic> j) {
     final rows = j['rows'] as int, cols = j['cols'] as int;
@@ -69,19 +75,19 @@ class LampsPuzzle implements ValueGridPuzzle {
 
 /// Open cells each open cell sees along its row and column (up to walls).
 List<List<int>> lampsSight(int rows, int cols, List<bool> walls) => List.generate(rows * cols, (i) {
-      if (walls[i]) return const <int>[];
-      final out = <int>[];
-      final r = i ~/ cols, c = i % cols;
-      for (final (dr, dc) in const [(-1, 0), (1, 0), (0, -1), (0, 1)]) {
-        var rr = r + dr, cc = c + dc;
-        while (rr >= 0 && rr < rows && cc >= 0 && cc < cols && !walls[rr * cols + cc]) {
-          out.add(rr * cols + cc);
-          rr += dr;
-          cc += dc;
-        }
-      }
-      return out;
-    });
+  if (walls[i]) return const <int>[];
+  final out = <int>[];
+  final r = i ~/ cols, c = i % cols;
+  for (final (dr, dc) in const [(-1, 0), (1, 0), (0, -1), (0, 1)]) {
+    var rr = r + dr, cc = c + dc;
+    while (rr >= 0 && rr < rows && cc >= 0 && cc < cols && !walls[rr * cols + cc]) {
+      out.add(rr * cols + cc);
+      rr += dr;
+      cc += dc;
+    }
+  }
+  return out;
+});
 
 /// Which cells the [lamps] light.
 List<bool> lampsLit(List<List<int>> sight, List<bool> lamps) {

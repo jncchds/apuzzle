@@ -27,7 +27,10 @@ ShikakuPuzzle generateShikaku(GenParams params) {
   for (var attempt = 0; attempt < 20; attempt++) {
     final rects = _partition(rows, cols, maxArea, rng);
     final clueAt = [for (final r in rects) _randomCell(r, cols, rng)];
-    final movable = [for (var k = 0; k < rects.length; k++) if (rects[k].area > 1) k];
+    final movable = [
+      for (var k = 0; k < rects.length; k++)
+        if (rects[k].area > 1) k,
+    ];
     if (movable.isEmpty) continue;
 
     ShikakuSolver solver() {

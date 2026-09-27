@@ -51,25 +51,28 @@ class PairsType extends ValueGridType<PairsPuzzle> {
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(8),
+  };
   @override
   Day get dailySince => const Day(2026, 9, 28);
 
   @override
   List<ValueSpec> get values => [
-        ValueSpec.custom(
-          (context, size) => Container(
-            width: size * 0.78,
-            height: size * 0.78,
-            decoration: BoxDecoration(color: shadeColor, borderRadius: BorderRadius.circular(size * 0.14)),
-          ),
-          label: 'shade',
-        ),
-        ValueSpec.custom((context, size) => DotSymbol(size: size, color: Colors.black54), label: 'dot'),
-      ];
+    ValueSpec.custom(
+      (context, size) => Container(
+        width: size * 0.78,
+        height: size * 0.78,
+        decoration: BoxDecoration(color: shadeColor, borderRadius: BorderRadius.circular(size * 0.14)),
+      ),
+      label: 'shade',
+    ),
+    ValueSpec.custom(
+      (context, size) => DotSymbol(size: size, color: Colors.black54),
+      label: 'dot',
+    ),
+  ];
 
   @override
   bool get showLockIcon => false;
@@ -91,9 +94,9 @@ class PairsType extends ValueGridType<PairsPuzzle> {
 
   @override
   Set<Pos> conflicts(PairsPuzzle puzzle, ValueGrid state) => {
-        for (final i in pairsConflicts(puzzle.n, puzzle.regions, _shaded(state), complete: isComplete(puzzle, state)))
-          puzzle.size.pos(i),
-      };
+    for (final i in pairsConflicts(puzzle.n, puzzle.regions, _shaded(state), complete: isComplete(puzzle, state)))
+      puzzle.size.pos(i),
+  };
 
   @override
   HintResult<ValueGrid>? hint(PairsPuzzle puzzle, ValueGrid state) {
@@ -130,8 +133,8 @@ class PairsType extends ValueGridType<PairsPuzzle> {
 
   @override
   List<Widget> buildOverlay(BuildContext context, PairsPuzzle puzzle, BoardMetrics m) => [
-        RegionBorders(metrics: m, regionOf: (i) => puzzle.regions[i], color: Theme.of(context).colorScheme.onSurface),
-      ];
+    RegionBorders(metrics: m, regionOf: (i) => puzzle.regions[i], color: Theme.of(context).colorScheme.onSurface),
+  ];
 
   @override
   Map<String, dynamic> encodePuzzle(PairsPuzzle puzzle) => puzzle.toJson();

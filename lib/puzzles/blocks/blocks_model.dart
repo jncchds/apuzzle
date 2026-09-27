@@ -42,15 +42,21 @@ class BlocksPuzzle implements ValueGridPuzzle {
 
   int get maxRegion => regionSizeAt.reduce((a, b) => a > b ? a : b);
 
-  Map<String, dynamic> toJson() => {'rows': rows, 'cols': cols, 'regions': regions, 'givens': givens, 'solution': solution};
+  Map<String, dynamic> toJson() => {
+    'rows': rows,
+    'cols': cols,
+    'regions': regions,
+    'givens': givens,
+    'solution': solution,
+  };
 
   factory BlocksPuzzle.fromJson(Map<String, dynamic> j) => BlocksPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        regions: (j['regions'] as List).cast<int>(),
-        givens: (j['givens'] as List).cast<int?>(),
-        solution: (j['solution'] as List).cast<int>(),
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    regions: (j['regions'] as List).cast<int>(),
+    givens: (j['givens'] as List).cast<int?>(),
+    solution: (j['solution'] as List).cast<int>(),
+  );
 }
 
 /// Cells breaking a rule. [values] holds -1 for empty cells.

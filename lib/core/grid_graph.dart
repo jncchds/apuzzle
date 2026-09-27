@@ -5,24 +5,25 @@ import 'dart:math';
 
 /// Orthogonal neighbours of every cell.
 List<List<int>> orthNeighbors(int rows, int cols) => List.generate(rows * cols, (i) {
-      final r = i ~/ cols, c = i % cols;
-      return [
-        if (r > 0) i - cols,
-        if (c + 1 < cols) i + 1,
-        if (r + 1 < rows) i + cols,
-        if (c > 0) i - 1,
-      ];
-    });
+  final r = i ~/ cols, c = i % cols;
+  return [
+    if (r > 0) i - cols,
+    if (c + 1 < cols) i + 1,
+    if (r + 1 < rows) i + cols,
+    if (c > 0) i - 1,
+  ];
+});
 
 /// All 8 neighbours of every cell.
 List<List<int>> kingNeighbors(int rows, int cols) => List.generate(rows * cols, (i) {
-      final r = i ~/ cols, c = i % cols;
-      return [
-        for (var dr = -1; dr <= 1; dr++)
-          for (var dc = -1; dc <= 1; dc++)
-            if ((dr != 0 || dc != 0) && r + dr >= 0 && r + dr < rows && c + dc >= 0 && c + dc < cols) (r + dr) * cols + c + dc,
-      ];
-    });
+  final r = i ~/ cols, c = i % cols;
+  return [
+    for (var dr = -1; dr <= 1; dr++)
+      for (var dc = -1; dc <= 1; dc++)
+        if ((dr != 0 || dc != 0) && r + dr >= 0 && r + dr < rows && c + dc >= 0 && c + dc < cols)
+          (r + dr) * cols + c + dc,
+  ];
+});
 
 /// Connected components of the cells where [inside] holds (lists of indices).
 List<List<int>> components(List<List<int>> nb, bool Function(int) inside) {
@@ -64,7 +65,10 @@ List<int> randomHamiltonianPath(int rows, int cols, Random rng) {
       pos[path[k]] = k;
     }
     final endCell = path.last;
-    final opts = [for (final x in neighbors(endCell)) if (pos[x] != path.length - 2) x];
+    final opts = [
+      for (final x in neighbors(endCell))
+        if (pos[x] != path.length - 2) x,
+    ];
     if (opts.isEmpty) continue;
     final x = opts[rng.nextInt(opts.length)];
     final i = pos[x];

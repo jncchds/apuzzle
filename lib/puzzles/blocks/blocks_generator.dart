@@ -85,7 +85,10 @@ BlocksPuzzle generateBlocks(GenParams params) {
 
   while (true) {
     var start = -1, best = 99;
-    for (final i in [for (var i = 0; i < n; i++) if (regions[i] < 0) i]..shuffle(rng)) {
+    for (final i in [
+      for (var i = 0; i < n; i++)
+        if (regions[i] < 0) i,
+    ]..shuffle(rng)) {
       final f = free(i);
       if (f < best) {
         best = f;
@@ -100,7 +103,11 @@ BlocksPuzzle generateBlocks(GenParams params) {
       final cells = [start];
       regions[start] = id;
       while (cells.length < target) {
-        final frontier = {for (final c in cells) for (final j in nb[c]) if (regions[j] < 0) j}.toList();
+        final frontier = {
+          for (final c in cells)
+            for (final j in nb[c])
+              if (regions[j] < 0) j,
+        }.toList();
         if (frontier.isEmpty) break;
         frontier.sort((a, b) => free(a).compareTo(free(b)));
         final pick = rng.nextDouble() < 0.5 ? frontier.first : frontier[rng.nextInt(frontier.length)];

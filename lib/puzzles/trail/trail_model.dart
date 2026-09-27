@@ -18,11 +18,11 @@ class TrailPuzzle {
 
   Map<String, dynamic> toJson() => {'rows': rows, 'cols': cols, 'numbers': numbers, 'solution': solution};
   factory TrailPuzzle.fromJson(Map<String, dynamic> j) => TrailPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        numbers: (j['numbers'] as List).cast<int?>(),
-        solution: (j['solution'] as List).cast<int>(),
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    numbers: (j['numbers'] as List).cast<int?>(),
+    solution: (j['solution'] as List).cast<int>(),
+  );
 }
 
 class TrailState {

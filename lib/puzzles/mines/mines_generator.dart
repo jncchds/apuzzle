@@ -6,10 +6,10 @@ import 'mines_model.dart';
 import 'mines_solver.dart';
 
 int minesTier(Difficulty d) => switch (d) {
-      Difficulty.easy => 1,
-      Difficulty.medium => 2,
-      _ => 3,
-    };
+  Difficulty.easy => 1,
+  Difficulty.medium => 2,
+  _ => 3,
+};
 
 /// Random mines around a safe start → play it with the difficulty's logic →
 /// wherever that gets stuck, open one more safe cell at the start. Of a few
@@ -33,7 +33,10 @@ MinesPuzzle generateMines(GenParams params) {
     final start = (rows ~/ 4 + rng.nextInt((rows + 1) ~/ 2)) * cols + cols ~/ 4 + rng.nextInt((cols + 1) ~/ 2);
     final safe = {start, ...kn[start]};
     final mines = List<bool>.filled(n, false);
-    final spots = [for (var i = 0; i < n; i++) if (!safe.contains(i)) i]..shuffle(rng);
+    final spots = [
+      for (var i = 0; i < n; i++)
+        if (!safe.contains(i)) i,
+    ]..shuffle(rng);
     for (final i in spots.take((n * share).round())) {
       mines[i] = true;
     }
@@ -48,11 +51,22 @@ MinesPuzzle generateMines(GenParams params) {
     var extra = 0;
     while (!minesCleared(p0, open) && extra * extraWeight < bestScore) {
       solver.deduce(open, k, tier);
-      final fresh = [for (var i = 0; i < n; i++) if (k[i] == 0 && !open[i]) i];
+      final fresh = [
+        for (var i = 0; i < n; i++)
+          if (k[i] == 0 && !open[i]) i,
+      ];
       if (fresh.isEmpty) {
         // Stuck: open a safe cell next to the known area (or anywhere).
-        final edge = [for (var i = 0; i < n; i++) if (!open[i] && !mines[i] && kn[i].any((j) => open[j])) i];
-        final pool = edge.isNotEmpty ? edge : [for (var i = 0; i < n; i++) if (!open[i] && !mines[i]) i];
+        final edge = [
+          for (var i = 0; i < n; i++)
+            if (!open[i] && !mines[i] && kn[i].any((j) => open[j])) i,
+        ];
+        final pool = edge.isNotEmpty
+            ? edge
+            : [
+                for (var i = 0; i < n; i++)
+                  if (!open[i] && !mines[i]) i,
+              ];
         final g = pool[rng.nextInt(pool.length)];
         seeds.add(g);
         fresh.add(g);

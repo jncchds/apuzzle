@@ -8,9 +8,12 @@ const int _unk = -1;
 /// Tier 2: + probing (try a value, refute it by propagation).
 class CampSolver {
   CampSolver(this.rows, this.cols, this.trees, this.rowCounts, this.colCounts)
-      : on = orthNeighbors(rows, cols),
-        kn = kingNeighbors(rows, cols) {
-    treeList = [for (var i = 0; i < trees.length; i++) if (trees[i]) i];
+    : on = orthNeighbors(rows, cols),
+      kn = kingNeighbors(rows, cols) {
+    treeList = [
+      for (var i = 0; i < trees.length; i++)
+        if (trees[i]) i,
+    ];
     lines = [
       for (var r = 0; r < rows; r++) ([for (var c = 0; c < cols; c++) r * cols + c], rowCounts[r]),
       for (var c = 0; c < cols; c++) ([for (var r = 0; r < rows; r++) r * cols + c], colCounts[c]),
@@ -33,8 +36,8 @@ class CampSolver {
         trees[i]
             ? campTree
             : on[i].any((j) => trees[j])
-                ? _unk
-                : campGrass,
+            ? _unk
+            : campGrass,
     ];
     for (final i in givenTents) {
       st[i] = campTent;
@@ -107,7 +110,10 @@ class CampSolver {
         continue;
       }
       for (final t in treeList) {
-        final free = [for (final j in on[t]) if (st[j] == campTent || st[j] == _unk) j];
+        final free = [
+          for (final j in on[t])
+            if (st[j] == campTent || st[j] == _unk) j,
+        ];
         if (free.isEmpty) return false;
         if (free.length == 1 && st[free.first] == _unk) {
           st[free.first] = campTent;
@@ -125,10 +131,25 @@ class CampSolver {
   /// Every tree can get its own tent, and every placed tent its own tree.
   /// (Two matchings saturating each side imply one saturating both.)
   bool _pairable(List<int> st) {
-    final opts = [for (final t in treeList) [for (final j in on[t]) if (st[j] == campTent || st[j] == _unk) j]];
+    final opts = [
+      for (final t in treeList)
+        [
+          for (final j in on[t])
+            if (st[j] == campTent || st[j] == _unk) j,
+        ],
+    ];
     if (maxMatching(opts, st.length).any((v) => v < 0)) return false;
-    final tents = [for (var i = 0; i < st.length; i++) if (st[i] == campTent) i];
-    final back = [for (final i in tents) [for (final j in on[i]) if (trees[j]) j]];
+    final tents = [
+      for (var i = 0; i < st.length; i++)
+        if (st[i] == campTent) i,
+    ];
+    final back = [
+      for (final i in tents)
+        [
+          for (final j in on[i])
+            if (trees[j]) j,
+        ],
+    ];
     return !maxMatching(back, st.length).any((v) => v < 0);
   }
 

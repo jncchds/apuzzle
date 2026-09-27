@@ -25,16 +25,21 @@ CampPuzzle generateCamp(GenParams params) {
     for (final i in [for (var i = 0; i < n; i++) i]..shuffle(rng)) {
       if (placed >= target) break;
       if (trees[i] || tents[i] || kn[i].any((j) => tents[j])) continue;
-      final spots = [for (final j in on[i]) if (!trees[j] && !tents[j]) j];
+      final spots = [
+        for (final j in on[i])
+          if (!trees[j] && !tents[j]) j,
+      ];
       if (spots.isEmpty) continue;
       tents[i] = true;
       trees[spots[rng.nextInt(spots.length)]] = true;
       placed++;
     }
     List<int?> counts(bool byRow) => [
-          for (var a = 0; a < (byRow ? rows : cols); a++)
-            [for (var b = 0; b < (byRow ? cols : rows); b++) byRow ? a * cols + b : b * cols + a].where((i) => tents[i]).length,
-        ];
+      for (var a = 0; a < (byRow ? rows : cols); a++)
+        [for (var b = 0; b < (byRow ? cols : rows); b++) byRow ? a * cols + b : b * cols + a]
+            .where((i) => tents[i])
+            .length,
+    ];
     final rc = counts(true), cc = counts(false);
     final given = <int>[];
 
@@ -48,7 +53,10 @@ CampPuzzle generateCamp(GenParams params) {
         final s = solver();
         final st = s.initial(givenTents: given);
         if (s.solve(st, tier)) break;
-        final open = [for (var i = 0; i < n; i++) if (tents[i] && st[i] == -1) i];
+        final open = [
+          for (var i = 0; i < n; i++)
+            if (tents[i] && st[i] == -1) i,
+        ];
         if (open.isEmpty) break;
         given.add(open[rng.nextInt(open.length)]);
       }

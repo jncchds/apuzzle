@@ -59,23 +59,27 @@ class _EnterCodeDialogState extends State<_EnterCodeDialog> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        title: Text(context.l10n.playCode),
-        content: TextField(
-          controller: _text,
-          autofocus: true,
-          autocorrect: false,
-          textInputAction: TextInputAction.go,
-          onSubmitted: (_) => _submit(),
-          decoration: InputDecoration(
-            hintText: PuzzleCode.example,
-            errorText: _error,
-            errorMaxLines: 3,
-            suffixIcon: IconButton(icon: const Icon(Icons.content_paste_rounded), tooltip: context.l10n.paste, onPressed: _paste),
-          ),
+    title: Text(context.l10n.playCode),
+    content: TextField(
+      controller: _text,
+      autofocus: true,
+      autocorrect: false,
+      textInputAction: TextInputAction.go,
+      onSubmitted: (_) => _submit(),
+      decoration: InputDecoration(
+        hintText: PuzzleCode.example,
+        errorText: _error,
+        errorMaxLines: 3,
+        suffixIcon: IconButton(
+          icon: const Icon(Icons.content_paste_rounded),
+          tooltip: context.l10n.paste,
+          onPressed: _paste,
         ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: Text(context.l10n.cancel)),
-          FilledButton(onPressed: _submit, child: Text(context.l10n.play)),
-        ],
-      );
+      ),
+    ),
+    actions: [
+      TextButton(onPressed: () => Navigator.pop(context), child: Text(context.l10n.cancel)),
+      FilledButton(onPressed: _submit, child: Text(context.l10n.play)),
+    ],
+  );
 }

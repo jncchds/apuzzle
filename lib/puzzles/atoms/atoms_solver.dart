@@ -8,8 +8,8 @@ import 'atoms_model.dart';
 /// All rules are sound, so a logical solve implies uniqueness.
 class AtomsSolver {
   AtomsSolver(this.p)
-      : cross = atomCrossings(p.cols, p.islands, p.edges),
-        edgesOf = List.generate(p.islands.length, (_) => <int>[]) {
+    : cross = atomCrossings(p.cols, p.islands, p.edges),
+      edgesOf = List.generate(p.islands.length, (_) => <int>[]) {
     for (var e = 0; e < p.edges.length; e++) {
       edgesOf[p.edges[e].a].add(e);
       edgesOf[p.edges[e].b].add(e);
@@ -22,8 +22,8 @@ class AtomsSolver {
 
   List<int> initialLo() => List.filled(p.edges.length, 0);
   List<int> initialHi() => [
-        for (final e in p.edges) [2, p.numbers[e.a], p.numbers[e.b]].reduce((a, b) => a < b ? a : b),
-      ];
+    for (final e in p.edges) [2, p.numbers[e.a], p.numbers[e.b]].reduce((a, b) => a < b ? a : b),
+  ];
 
   bool _propagate(List<int> lo, List<int> hi, bool conn) {
     var changed = true;

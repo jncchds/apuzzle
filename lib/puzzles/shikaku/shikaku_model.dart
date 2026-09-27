@@ -43,34 +43,39 @@ class ShikakuPuzzle {
   GridSize get size => GridSize(rows, cols);
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'clues': clues,
-        'solution': [for (final r in solution) r.toJson()],
-      };
+    'rows': rows,
+    'cols': cols,
+    'clues': clues,
+    'solution': [for (final r in solution) r.toJson()],
+  };
   factory ShikakuPuzzle.fromJson(Map<String, dynamic> j) => ShikakuPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        clues: (j['clues'] as List).cast<int?>(),
-        solution: [for (final r in j['solution'] as List) CellRect.fromJson(r as List)],
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    clues: (j['clues'] as List).cast<int?>(),
+    solution: [for (final r in j['solution'] as List) CellRect.fromJson(r as List)],
+  );
 }
 
 class ShikakuState {
   const ShikakuState(this.rects);
   final List<CellRect> rects;
 
-  Map<String, dynamic> toJson() => {'rects': [for (final r in rects) r.toJson()]};
+  Map<String, dynamic> toJson() => {
+    'rects': [for (final r in rects) r.toJson()],
+  };
   factory ShikakuState.fromJson(Map<String, dynamic> j) =>
       ShikakuState([for (final r in j['rects'] as List) CellRect.fromJson(r as List)]);
 }
 
 /// Rectangles that don't hold exactly one number equal to their area.
 List<CellRect> shikakuBadRects(ShikakuPuzzle p, List<CellRect> rects) => [
-      for (final rect in rects)
-        if (() {
-          final nums = [for (final i in rect.cells(p.cols)) if (p.clues[i] != null) p.clues[i]!];
-          return nums.length != 1 || nums.single != rect.area;
-        }())
-          rect,
-    ];
+  for (final rect in rects)
+    if (() {
+      final nums = [
+        for (final i in rect.cells(p.cols))
+          if (p.clues[i] != null) p.clues[i]!,
+      ];
+      return nums.length != 1 || nums.single != rect.area;
+    }())
+      rect,
+];

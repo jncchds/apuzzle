@@ -41,14 +41,14 @@ Future<void> _loadFont(String family, List<String> files) async {
 
 /// How many hint steps to apply so the board shows some progress.
 int _progressSteps(PuzzleType t) => switch (t.id) {
-      'mosaic' => 3,
-      'blend' => 2,
-      'pop' => 12,
-      'merge' => 120,
-      'trail' => 8,
-      'labyrinth' => 3,
-      _ => 6,
-    };
+  'mosaic' => 3,
+  'blend' => 2,
+  'pop' => 12,
+  'merge' => 120,
+  'trail' => 8,
+  'labyrinth' => 3,
+  _ => 6,
+};
 
 /// Language to render (SNAPSHOT_LANG), or null for English.
 final _lang = Platform.environment['SNAPSHOT_LANG'];
@@ -87,30 +87,35 @@ void main() {
         }
 
         final key = GlobalKey();
-        await tester.pumpWidget(MultiProvider(
-          providers: [Provider.value(value: store), ChangeNotifierProvider.value(value: settings)],
-          child: RepaintBoundary(
-            key: key,
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              themeMode: settings.themeMode,
-              locale: Locale(_lang ?? 'en'),
-              supportedLocales: AppLocalizations.supportedLocales,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              theme: ThemeData(
-                useMaterial3: true,
-                fontFamily: 'Roboto',
-                colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF)),
+        await tester.pumpWidget(
+          MultiProvider(
+            providers: [
+              Provider.value(value: store),
+              ChangeNotifierProvider.value(value: settings),
+            ],
+            child: RepaintBoundary(
+              key: key,
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                themeMode: settings.themeMode,
+                locale: Locale(_lang ?? 'en'),
+                supportedLocales: AppLocalizations.supportedLocales,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                theme: ThemeData(
+                  useMaterial3: true,
+                  fontFamily: 'Roboto',
+                  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF)),
+                ),
+                darkTheme: ThemeData(
+                  useMaterial3: true,
+                  fontFamily: 'Roboto',
+                  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF), brightness: Brightness.dark),
+                ),
+                home: GameScreen(type: type, params: params, presetPuzzle: puzzle, presetState: state),
               ),
-              darkTheme: ThemeData(
-                useMaterial3: true,
-                fontFamily: 'Roboto',
-                colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF), brightness: Brightness.dark),
-              ),
-              home: GameScreen(type: type, params: params, presetPuzzle: puzzle, presetState: state),
             ),
           ),
-        ));
+        );
         await tester.pump(const Duration(seconds: 1));
         await tester.pump(const Duration(seconds: 1));
 
@@ -140,34 +145,41 @@ void main() {
             tester.view.physicalSize = const Size(1080, 2280);
             tester.view.devicePixelRatio = 3;
             addTearDown(tester.view.reset);
-            SharedPreferences.setMockInitialValues(
-                {'set.theme': mode == ThemeMode.dark ? 'dark' : 'light', 'set.language': ?_lang});
+            SharedPreferences.setMockInitialValues({
+              'set.theme': mode == ThemeMode.dark ? 'dark' : 'light',
+              'set.language': ?_lang,
+            });
             final store = await GameStore.open();
             final settings = Settings(store.prefs);
             // Generated boards are built outside the fake-async zone.
             await tester.runAsync(() async => steps[k].puzzle);
             final key = GlobalKey();
             ThemeData theme(Brightness b) => ThemeData(
-                  useMaterial3: true,
-                  fontFamily: 'Roboto',
-                  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF), brightness: b),
-                );
-            await tester.pumpWidget(MultiProvider(
-              providers: [Provider.value(value: store), ChangeNotifierProvider.value(value: settings)],
-              child: RepaintBoundary(
-                key: key,
-                child: MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  themeMode: mode,
-                  locale: Locale(_lang ?? 'en'),
-                  supportedLocales: AppLocalizations.supportedLocales,
-                  localizationsDelegates: AppLocalizations.localizationsDelegates,
-                  theme: theme(Brightness.light),
-                  darkTheme: theme(Brightness.dark),
-                  home: TutorialScreen(type: type, strategies: strategies, firstStep: k),
+              useMaterial3: true,
+              fontFamily: 'Roboto',
+              colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B6CFF), brightness: b),
+            );
+            await tester.pumpWidget(
+              MultiProvider(
+                providers: [
+                  Provider.value(value: store),
+                  ChangeNotifierProvider.value(value: settings),
+                ],
+                child: RepaintBoundary(
+                  key: key,
+                  child: MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    themeMode: mode,
+                    locale: Locale(_lang ?? 'en'),
+                    supportedLocales: AppLocalizations.supportedLocales,
+                    localizationsDelegates: AppLocalizations.localizationsDelegates,
+                    theme: theme(Brightness.light),
+                    darkTheme: theme(Brightness.dark),
+                    home: TutorialScreen(type: type, strategies: strategies, firstStep: k),
+                  ),
                 ),
               ),
-            ));
+            );
             await tester.pump(const Duration(seconds: 1));
             if (tag == '_done') {
               final showMe = find.byIcon(Icons.lightbulb_outline_rounded);
@@ -199,10 +211,15 @@ void main() {
     SharedPreferences.setMockInitialValues({'set.theme': 'dark', 'set.language': ?_lang});
     final store = await GameStore.open();
     final key = GlobalKey();
-    await tester.pumpWidget(MultiProvider(
-      providers: [Provider.value(value: store), ChangeNotifierProvider(create: (_) => Settings(store.prefs))],
-      child: RepaintBoundary(key: key, child: const APuzzleApp()),
-    ));
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          Provider.value(value: store),
+          ChangeNotifierProvider(create: (_) => Settings(store.prefs)),
+        ],
+        child: RepaintBoundary(key: key, child: const APuzzleApp()),
+      ),
+    );
     await tester.pump(const Duration(milliseconds: 500));
     await tester.runAsync(() async {
       final boundary = key.currentContext!.findRenderObject()! as RenderRepaintBoundary;

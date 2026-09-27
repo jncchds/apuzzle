@@ -28,10 +28,13 @@ class PairsPuzzle implements ValueGridPuzzle {
   int solutionAt(int index) => shaded[index] ? pairsShade : pairsDot;
 
   Map<String, dynamic> toJson() => {
-        'n': n,
-        'regions': regions,
-        'shaded': [for (var i = 0; i < shaded.length; i++) if (shaded[i]) i],
-      };
+    'n': n,
+    'regions': regions,
+    'shaded': [
+      for (var i = 0; i < shaded.length; i++)
+        if (shaded[i]) i,
+    ],
+  };
 
   factory PairsPuzzle.fromJson(Map<String, dynamic> j) {
     final n = j['n'] as int;

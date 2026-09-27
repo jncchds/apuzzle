@@ -8,9 +8,7 @@
 ///  Tier 2: + probing single edges with tier 1.
 /// Every rule holds in every solution, so a full solve proves uniqueness.
 class TrailLogic {
-  TrailLogic(this.rows, this.cols, List<int?> numbers)
-      : n = rows * cols,
-        num = [for (final v in numbers) v ?? 0] {
+  TrailLogic(this.rows, this.cols, List<int?> numbers) : n = rows * cols, num = [for (final v in numbers) v ?? 0] {
     for (var i = 0; i < n; i++) {
       final r = i ~/ cols, c = i % cols;
       if (c + 1 < cols) _addEdge(i, i + 1);
@@ -174,7 +172,8 @@ class TrailLogic {
           final sa = a == endB[ca] ? nums[ca] : nums[ca].reversed.toList();
           final sb = b == endA[cb] ? nums[cb] : nums[cb].reversed.toList();
           final joined = [...sa, ...sb];
-          bad = !_consecutive(joined) ||
+          bad =
+              !_consecutive(joined) ||
               (size[ca] + size[cb] < n && joined.contains(1) && joined.contains(last) && last > 1);
         }
         if (bad) {

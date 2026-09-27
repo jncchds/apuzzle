@@ -84,15 +84,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get highlightErrors => 'Fehler beim Spielen hervorheben';
 
   @override
-  String get highlightErrorsHint =>
-      'Aus: Fehler werden erst nach „Prüfen“ angezeigt';
+  String get highlightErrorsHint => 'Aus: Fehler werden erst nach „Prüfen“ angezeigt';
 
   @override
   String get autoClearMarks => 'Notizen automatisch entfernen';
 
   @override
-  String get autoClearMarksHint =>
-      'Eine gesetzte Zahl löscht diese Notiz aus Zeile, Spalte und Block';
+  String get autoClearMarksHint => 'Eine gesetzte Zahl löscht diese Notiz aus Zeile, Spalte und Block';
 
   @override
   String get haptics => 'Haptisches Feedback';
@@ -135,8 +133,7 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get couldNotOpenSettings =>
-      'Die Systemeinstellungen konnten nicht geöffnet werden';
+  String get couldNotOpenSettings => 'Die Systemeinstellungen konnten nicht geöffnet werden';
 
   @override
   String get submitConflicts => 'Einige Felder verletzen die Regeln';
@@ -151,8 +148,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get restartTitle => 'Rätsel neu starten?';
 
   @override
-  String get restartBody =>
-      'Alle Eingaben werden gelöscht. Du kannst es noch rückgängig machen.';
+  String get restartBody => 'Alle Eingaben werden gelöscht. Du kannst es noch rückgängig machen.';
 
   @override
   String get cancel => 'Abbrechen';
@@ -258,8 +254,7 @@ class AppLocalizationsDe extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       hints,
       locale: localeName,
-      other:
-          'Ich habe in „$name“ $score Punkte in $time mit $hints Tipps erreicht.',
+      other: 'Ich habe in „$name“ $score Punkte in $time mit $hints Tipps erreicht.',
       one: 'Ich habe in „$name“ $score Punkte in $time mit 1 Tipp erreicht.',
       zero: 'Ich habe in „$name“ $score Punkte in $time erreicht.',
     );
@@ -364,8 +359,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get colorGreen => 'Grün';
 
   @override
-  String get outOfMoves =>
-      'Keine Züge mehr: rückgängig machen oder neu starten';
+  String get outOfMoves => 'Keine Züge mehr: rückgängig machen oder neu starten';
 
   @override
   String movesOfLimit(Object moves, int limit) {
@@ -458,22 +452,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get popModeStandard => 'Standard';
 
   @override
-  String get popModeStandardHint =>
-      'Blasen fallen nach unten; leere Spalten rücken nach rechts zusammen.';
+  String get popModeStandardHint => 'Blasen fallen nach unten; leere Spalten rücken nach rechts zusammen.';
 
   @override
   String get popModeShifter => 'Schieber';
 
   @override
-  String get popModeShifterHint =>
-      'Zeilen rutschen außerdem nach rechts und schließen jede Lücke.';
+  String get popModeShifterHint => 'Zeilen rutschen außerdem nach rechts und schließen jede Lücke.';
 
   @override
   String get popModeContinuous => 'Endlos';
 
   @override
-  String get popModeContinuousHint =>
-      'Neue Spalten rollen von links herein, sobald Platz frei wird.';
+  String get popModeContinuousHint => 'Neue Spalten rollen von links herein, sobald Platz frei wird.';
 
   @override
   String get popModeMega => 'Mega';
@@ -488,22 +479,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get popGoalClear => 'Brett leeren';
 
   @override
-  String get popGoalClearHint =>
-      'Lass alle Blasen platzen. Es gibt immer einen Weg.';
+  String get popGoalClearHint => 'Lass alle Blasen platzen. Es gibt immer einen Weg.';
 
   @override
   String get popGoalTarget => 'Zielpunktzahl';
 
   @override
-  String get popGoalTargetHint =>
-      'Erreiche das Ziel, bevor keine Züge mehr übrig sind.';
+  String get popGoalTargetHint => 'Erreiche das Ziel, bevor keine Züge mehr übrig sind.';
 
   @override
   String get popGoalFree => 'Freies Spiel';
 
   @override
-  String get popGoalFreeHint =>
-      'Kein Ziel: Spiel bis zum Ende und schlag deinen Rekord.';
+  String get popGoalFreeHint => 'Kein Ziel: Spiel bis zum Ende und schlag deinen Rekord.';
 
   @override
   String get popCleared => 'Geleert!';
@@ -519,10 +507,8 @@ class AppLocalizationsDe extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other:
-          'Keine Züge mehr, $count Blasen sind übrig: rückgängig machen oder neu starten',
-      one:
-          'Keine Züge mehr, $count Blase ist übrig: rückgängig machen oder neu starten',
+      other: 'Keine Züge mehr, $count Blasen sind übrig: rückgängig machen oder neu starten',
+      one: 'Keine Züge mehr, $count Blase ist übrig: rückgängig machen oder neu starten',
     );
     return '$_temp0';
   }
@@ -532,10 +518,8 @@ class AppLocalizationsDe extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other:
-          'Keine Züge mehr, $count Punkte fehlen: rückgängig machen oder neu starten',
-      one:
-          'Keine Züge mehr, $count Punkt fehlt: rückgängig machen oder neu starten',
+      other: 'Keine Züge mehr, $count Punkte fehlen: rückgängig machen oder neu starten',
+      one: 'Keine Züge mehr, $count Punkt fehlt: rückgängig machen oder neu starten',
     );
     return '$_temp0';
   }
@@ -559,8 +543,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mergeName => '2048';
 
   @override
-  String get mergeTagline =>
-      'Schieb die Kacheln, verschmelze Paare, bau die große';
+  String get mergeTagline => 'Schieb die Kacheln, verschmelze Paare, bau die große';
 
   @override
   String get mergeRules =>
@@ -570,12 +553,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mergeGoalTarget => 'Bau die Kachel';
 
   @override
-  String get mergeGoalTargetHint =>
-      'Erreiche die Zielkachel, bevor das Feld blockiert ist.';
+  String get mergeGoalTargetHint => 'Erreiche die Zielkachel, bevor das Feld blockiert ist.';
 
   @override
-  String get mergeGoalFreeHint =>
-      'Ohne Ziel: Spiel, bis das Feld blockiert ist, und schlag deinen Rekord.';
+  String get mergeGoalFreeHint => 'Ohne Ziel: Spiel, bis das Feld blockiert ist, und schlag deinen Rekord.';
 
   @override
   String mergeReached(int tile) {
@@ -583,8 +564,7 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get mergeStuck =>
-      'Keine Züge mehr: rückgängig machen oder neu starten';
+  String get mergeStuck => 'Keine Züge mehr: rückgängig machen oder neu starten';
 
   @override
   String mergeBest(int tile) {
@@ -694,8 +674,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get lampsName => 'Lampen';
 
   @override
-  String get lampsTagline =>
-      'Beleuchte jedes Feld, Lampen scheinen nie aufeinander';
+  String get lampsTagline => 'Beleuchte jedes Feld, Lampen scheinen nie aufeinander';
 
   @override
   String get lampsRules =>
@@ -735,8 +714,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get blocksName => 'Blöcke';
 
   @override
-  String get blocksTagline =>
-      'Zahlen von 1 bis k in jedem Bereich aus k Feldern';
+  String get blocksTagline => 'Zahlen von 1 bis k in jedem Bereich aus k Feldern';
 
   @override
   String get blocksRules =>
@@ -746,8 +724,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pairsName => 'Paare';
 
   @override
-  String get pairsTagline =>
-      'Zwei schattierte Felder nebeneinander in jedem Bereich';
+  String get pairsTagline => 'Zwei schattierte Felder nebeneinander in jedem Bereich';
 
   @override
   String get pairsRules =>
@@ -757,8 +734,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get plotsName => 'Parzellen';
 
   @override
-  String get plotsTagline =>
-      'Teile das Gitter in Parzellen so groß wie ihre Zahlen';
+  String get plotsTagline => 'Teile das Gitter in Parzellen so groß wie ihre Zahlen';
 
   @override
   String get plotsRules =>
@@ -778,8 +754,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get arrowsName => 'Pfeile';
 
   @override
-  String get arrowsTagline =>
-      'Schattiere, was die Pfeile zählen, und umrunde den Rest';
+  String get arrowsTagline => 'Schattiere, was die Pfeile zählen, und umrunde den Rest';
 
   @override
   String get arrowsRules =>
@@ -812,8 +787,7 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get tutorialOfferBody =>
-      'Erst eine kurze interaktive Lektion? Ein paar kleine Felder zeigen dir alle Regeln.';
+  String get tutorialOfferBody => 'Erst eine kurze interaktive Lektion? Ein paar kleine Felder zeigen dir alle Regeln.';
 
   @override
   String get tutorialOfferNo => 'Nein, danke';
@@ -902,8 +876,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Ein „=“ zwischen zwei Feldern heißt: Sie enthalten dasselbe Symbol. Gib den markierten Feldern das Symbol ihrer Nachbarn.';
 
   @override
-  String get tutMambo4 =>
-      'Ein „×“ heißt: Die beiden Felder sind verschieden, eine Sonne und ein Mond.';
+  String get tutMambo4 => 'Ein „×“ heißt: Die beiden Felder sind verschieden, eine Sonne und ein Mond.';
 
   @override
   String get tutMambo5 =>
@@ -978,8 +951,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Die Zahlen zählen beim Färben herunter: Sie zeigen, wie viele passende Felder noch fehlen. Eine 0 heißt, dass kein leerer Nachbar ihre Farbe bekommt, und Zahlenfelder zählen nie mit. Fang mit der blauen 3 an und schau dann, was der rosa 2 noch fehlt.';
 
   @override
-  String get tutHues3 =>
-      'Jetzt ein echtes Brett. Fang mit Zahlen an, die alle leeren Nachbarn brauchen oder keinen.';
+  String get tutHues3 => 'Jetzt ein echtes Brett. Fang mit Zahlen an, die alle leeren Nachbarn brauchen oder keinen.';
 
   @override
   String get tutHuesS1 =>
@@ -998,8 +970,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Achte auf das Zuglimit: Wähle die Farbe, die deinen Fleck am meisten wachsen lässt. Ein Tipp auf ein Feld des Bretts wählt ebenfalls dessen Farbe.';
 
   @override
-  String get tutMosaic3 =>
-      'Jetzt ein echtes Brett, mit ein paar Zügen Reserve.';
+  String get tutMosaic3 => 'Jetzt ein echtes Brett, mit ein paar Zügen Reserve.';
 
   @override
   String get tutMosaicS1 =>
@@ -1058,8 +1029,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Eine Kachel verschmilzt pro Zug nur einmal: Aus 4, 4, 8 wird 8, 8, nicht 16. Nach jedem Zug erscheint eine neue 2 (manchmal eine 4). Bau eine 16.';
 
   @override
-  String get tutMerge3 =>
-      'Halte deine größte Kachel in einer Ecke und füttere sie Schritt für Schritt. Bau eine 32.';
+  String get tutMerge3 => 'Halte deine größte Kachel in einer Ecke und füttere sie Schritt für Schritt. Bau eine 32.';
 
   @override
   String get tutMergeS1 =>
@@ -1074,8 +1044,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Kein Rohrende darf offen bleiben, also darf kein Rohr über den Rand zeigen. Kacheln mit einem Punkt in der Ecke sind fest und stimmen schon. Fang an den Rändern und Ecken an, wo Kacheln die wenigsten Möglichkeiten haben.';
 
   @override
-  String get tutPipes3 =>
-      'Jetzt ein echtes Brett. Das Netz darf keine Schleifen bilden.';
+  String get tutPipes3 => 'Jetzt ein echtes Brett. Das Netz darf keine Schleifen bilden.';
 
   @override
   String get tutPipesS1 =>
@@ -1094,8 +1063,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Eine 1 ist allein schon ein Rechteck: Tippe einfach darauf. Tippe auf ein gezeichnetes Rechteck, um es zu entfernen. Hier passt die 6 nur auf eine Art.';
 
   @override
-  String get tutShikaku3 =>
-      'Jetzt ein echtes Brett. Große Zahlen am Rand haben meist die wenigsten Möglichkeiten.';
+  String get tutShikaku3 => 'Jetzt ein echtes Brett. Große Zahlen am Rand haben meist die wenigsten Möglichkeiten.';
 
   @override
   String get tutShikakuS1 =>
@@ -1214,8 +1182,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Das Meer muss zusammenhängen und darf nie ein 2×2-Becken bilden. Lass die 3 so wachsen, dass beides eingehalten wird. Tippe zweimal für einen Punkt, deine Notiz für Land.';
 
   @override
-  String get tutIslands4 =>
-      'Jetzt ein echtes Brett. Jede Insel enthält genau eine Zahl.';
+  String get tutIslands4 => 'Jetzt ein echtes Brett. Jede Insel enthält genau eine Zahl.';
 
   @override
   String get tutIslandsS1 =>
@@ -1238,8 +1205,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Lampen dürfen nie aufeinander scheinen, und eine 0 heißt: keine Lampe direkt daneben. Wo steht die zweite Lampe?';
 
   @override
-  String get tutLamps4 =>
-      'Jetzt ein echtes Brett. Mit Punkten markierst du Felder, auf denen keine Lampe stehen kann.';
+  String get tutLamps4 => 'Jetzt ein echtes Brett. Mit Punkten markierst du Felder, auf denen keine Lampe stehen kann.';
 
   @override
   String get tutLampsS1 =>
@@ -1262,8 +1228,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Die Schleife verzweigt und kreuzt sich nie: An jedem Punkt liegen null oder zwei Linien. Zahlen am Rand des Bretts sind ein guter Anfang.';
 
   @override
-  String get tutFence4 =>
-      'Jetzt ein echtes Brett. Fang mit den 0en und 3en an.';
+  String get tutFence4 => 'Jetzt ein echtes Brett. Fang mit den 0en und 3en an.';
 
   @override
   String get tutFenceS1 =>
@@ -1426,8 +1391,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Die Mine dieser 1 ist schon markiert, also sind alle anderen Felder ringsum sicher. Grab sie auf oder tippe auf die 1 selbst, um alle auf einmal aufzugraben.';
 
   @override
-  String get tutMines3 =>
-      'Ein Feld ohne Minen ringsum öffnet seine Nachbarn von selbst. Grab in der markierten Ecke.';
+  String get tutMines3 => 'Ein Feld ohne Minen ringsum öffnet seine Nachbarn von selbst. Grab in der markierten Ecke.';
 
   @override
   String get tutMines4 =>

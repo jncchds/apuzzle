@@ -27,11 +27,14 @@ class IslandsPuzzle implements ValueGridPuzzle {
   int solutionAt(int index) => sea[index] ? islandsSea : islandsLand;
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'clues': clues,
-        'sea': [for (var i = 0; i < sea.length; i++) if (sea[i]) i],
-      };
+    'rows': rows,
+    'cols': cols,
+    'clues': clues,
+    'sea': [
+      for (var i = 0; i < sea.length; i++)
+        if (sea[i]) i,
+    ],
+  };
 
   factory IslandsPuzzle.fromJson(Map<String, dynamic> j) {
     final rows = j['rows'] as int, cols = j['cols'] as int;
@@ -59,7 +62,10 @@ Set<int> islandsConflicts(int rows, int cols, List<int?> clues, List<bool> sea, 
   }
   if (!complete) return bad;
   for (final comp in components(nb, (i) => !sea[i])) {
-    final nums = [for (final i in comp) if (clues[i] != null) i];
+    final nums = [
+      for (final i in comp)
+        if (clues[i] != null) i,
+    ];
     if (nums.length != 1 || clues[nums.first] != comp.length) bad.addAll(nums.isEmpty ? comp : nums);
   }
   final seas = components(nb, (i) => sea[i]);

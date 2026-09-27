@@ -76,7 +76,10 @@ bool _makeUnique(int n, List<int> regions, List<int> sol, Random rng) {
     final sols = KingsSolver(n, regions).solutions();
     if (sols.length == 1) return true;
     final alt = sols.firstWhere((s) => !_same(s, sol), orElse: () => sols.last);
-    final targets = [for (var r = 0; r < n; r++) if (alt[r] != sol[r]) r * n + alt[r]]..shuffle(rng);
+    final targets = [
+      for (var r = 0; r < n; r++)
+        if (alt[r] != sol[r]) r * n + alt[r],
+    ]..shuffle(rng);
     if (!targets.any(search.moveCell)) return false;
   }
   return false;
@@ -105,7 +108,11 @@ void _tune(int n, List<int> regions, List<int> sol, int target, Random rng) {
     final saved = List.of(regions);
     // Tier-1 checks are cheap, so easy gets a longer search.
     final budget = (target == 1 ? 400 : 40) * n;
-    if (!search.minimize(() => KingsSolver(n, regions).slack(target) * 100 + tiny(), budget: budget, temperature: 20.0 * n * n) &&
+    if (!search.minimize(
+          () => KingsSolver(n, regions).slack(target) * 100 + tiny(),
+          budget: budget,
+          temperature: 20.0 * n * n,
+        ) &&
         KingsSolver(n, regions).slack(target) != 0) {
       regions.setAll(0, saved);
     }

@@ -18,7 +18,10 @@ SudokuPuzzle _board(List<String> rows) {
   );
 }
 
-Set<Pos> _open(SudokuPuzzle p) => {for (var i = 0; i < 16; i++) if (p.givens[i] == null) p.size.pos(i)};
+Set<Pos> _open(SudokuPuzzle p) => {
+  for (var i = 0; i < 16; i++)
+    if (p.givens[i] == null) p.size.pos(i),
+};
 
 TutorialStep _step(Tr text, List<String> rows) {
   final p = _board(rows);
@@ -54,10 +57,10 @@ final List<TutorialStep> sudokuTutorial = [
 
 /// A 6×6 board from its solution and the shown digits ('.' for empty).
 SudokuPuzzle _board6(List<String> solution, List<String> shown) => SudokuPuzzle(
-      n: 6,
-      givens: [for (final ch in shown.join().split('')) ch == '.' ? null : int.parse(ch) - 1],
-      solution: [for (final ch in solution.join().split('')) int.parse(ch) - 1],
-    );
+  n: 6,
+  givens: [for (final ch in shown.join().split('')) ch == '.' ? null : int.parse(ch) - 1],
+  solution: [for (final ch in solution.join().split('')) int.parse(ch) - 1],
+);
 
 final List<TutorialStep> sudokuStrategies = [
   // Hidden single: the top-left box's 1 has one spot left.
@@ -67,7 +70,10 @@ final List<TutorialStep> sudokuStrategies = [
       ['123456', '456123', '231564', '564231', '312645', '645312'],
       ['....56', '...12.', '2315.4', '564.31', '31264.', '6.5312'],
     ),
-    focus: {for (var r = 0; r < 2; r++) for (var c = 0; c < 3; c++) Pos(r, c)},
+    focus: {
+      for (var r = 0; r < 2; r++)
+        for (var c = 0; c < 3; c++) Pos(r, c),
+    },
   ),
   // Needs pointing or pairs (checked: singles alone get stuck).
   TutorialStep.generated(

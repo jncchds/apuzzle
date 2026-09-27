@@ -43,10 +43,10 @@ class BlocksType extends ValueGridType<BlocksPuzzle> {
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(8),
+  };
   @override
   Day get dailySince => const Day(2026, 9, 28);
 
@@ -90,8 +90,9 @@ class BlocksType extends ValueGridType<BlocksPuzzle> {
       state.isFull && blocksConflicts(puzzle.rows, puzzle.cols, puzzle.regions, state.toFlat()).isEmpty;
 
   @override
-  Set<Pos> conflicts(BlocksPuzzle puzzle, ValueGrid state) =>
-      {for (final i in blocksConflicts(puzzle.rows, puzzle.cols, puzzle.regions, state.toFlat())) puzzle.size.pos(i)};
+  Set<Pos> conflicts(BlocksPuzzle puzzle, ValueGrid state) => {
+    for (final i in blocksConflicts(puzzle.rows, puzzle.cols, puzzle.regions, state.toFlat())) puzzle.size.pos(i),
+  };
 
   @override
   Widget buildValue(BuildContext context, BlocksPuzzle puzzle, ValueGrid state, Pos pos, CellValue cell, double size) {
@@ -110,8 +111,8 @@ class BlocksType extends ValueGridType<BlocksPuzzle> {
 
   @override
   List<Widget> buildOverlay(BuildContext context, BlocksPuzzle puzzle, BoardMetrics m) => [
-        RegionBorders(metrics: m, regionOf: (i) => puzzle.regions[i], color: Theme.of(context).colorScheme.onSurface),
-      ];
+    RegionBorders(metrics: m, regionOf: (i) => puzzle.regions[i], color: Theme.of(context).colorScheme.onSurface),
+  ];
 
   @override
   Map<String, dynamic> encodePuzzle(BlocksPuzzle puzzle) => puzzle.toJson();

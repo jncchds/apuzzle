@@ -84,15 +84,13 @@ class AppLocalizationsUk extends AppLocalizations {
   String get highlightErrors => 'Підсвічувати помилки під час гри';
 
   @override
-  String get highlightErrorsHint =>
-      'Вимкнено: помилки видно лише після натискання «Перевірити»';
+  String get highlightErrorsHint => 'Вимкнено: помилки видно лише після натискання «Перевірити»';
 
   @override
   String get autoClearMarks => 'Автоматично прибирати позначки';
 
   @override
-  String get autoClearMarksHint =>
-      'Поставлене число прибирає цю позначку з рядка, стовпця й блоку';
+  String get autoClearMarksHint => 'Поставлене число прибирає цю позначку з рядка, стовпця й блоку';
 
   @override
   String get haptics => 'Вібровідгук';
@@ -122,8 +120,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get linksTitle => 'Відкривати посилання на головоломки в застосунку';
 
   @override
-  String get linksOn =>
-      'Надіслані посилання на головоломки відкриваються в APuzzle';
+  String get linksOn => 'Надіслані посилання на головоломки відкриваються в APuzzle';
 
   @override
   String linksOff(Object host) {
@@ -136,8 +133,7 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
-  String get couldNotOpenSettings =>
-      'Не вдалося відкрити системні налаштування';
+  String get couldNotOpenSettings => 'Не вдалося відкрити системні налаштування';
 
   @override
   String get submitConflicts => 'Деякі клітинки порушують правила';
@@ -316,8 +312,7 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
-  String get codeOtherVersion =>
-      'Цей код з іншої версії застосунку, тож головоломка не збіглася б';
+  String get codeOtherVersion => 'Цей код з іншої версії застосунку, тож головоломка не збіглася б';
 
   @override
   String codeNoOption(Object choice, Object name) {
@@ -441,8 +436,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get blendName => 'Злиття';
 
   @override
-  String get blendTagline =>
-      'Перефарбовуйте плями, доки не лишиться один колір';
+  String get blendTagline => 'Перефарбовуйте плями, доки не лишиться один колір';
 
   @override
   String get blendRules =>
@@ -465,22 +459,19 @@ class AppLocalizationsUk extends AppLocalizations {
   String get popModeStandard => 'Звичайний';
 
   @override
-  String get popModeStandardHint =>
-      'Бульбашки падають униз; порожні стовпці зсуваються праворуч.';
+  String get popModeStandardHint => 'Бульбашки падають униз; порожні стовпці зсуваються праворуч.';
 
   @override
   String get popModeShifter => 'Зсув';
 
   @override
-  String get popModeShifterHint =>
-      'Рядки також зсуваються праворуч, закриваючи всі проміжки.';
+  String get popModeShifterHint => 'Рядки також зсуваються праворуч, закриваючи всі проміжки.';
 
   @override
   String get popModeContinuous => 'Безкінечний';
 
   @override
-  String get popModeContinuousHint =>
-      'Коли звільняється місце, зліва з\'являються нові стовпці.';
+  String get popModeContinuousHint => 'Коли звільняється місце, зліва з\'являються нові стовпці.';
 
   @override
   String get popModeMega => 'Мега';
@@ -501,15 +492,13 @@ class AppLocalizationsUk extends AppLocalizations {
   String get popGoalTarget => 'Цільовий рахунок';
 
   @override
-  String get popGoalTargetHint =>
-      'Наберіть потрібний рахунок, поки лишаються ходи.';
+  String get popGoalTargetHint => 'Наберіть потрібний рахунок, поки лишаються ходи.';
 
   @override
   String get popGoalFree => 'Вільна гра';
 
   @override
-  String get popGoalFreeHint =>
-      'Без мети: грайте до кінця й побийте свій рекорд.';
+  String get popGoalFreeHint => 'Без мети: грайте до кінця й побийте свій рекорд.';
 
   @override
   String get popCleared => 'Очищено!';
@@ -525,14 +514,10 @@ class AppLocalizationsUk extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other:
-          'Ходів немає, на полі $count бульбашки: скасуйте хід або почніть спочатку',
-      many:
-          'Ходів немає, на полі $count бульбашок: скасуйте хід або почніть спочатку',
-      few:
-          'Ходів немає, на полі $count бульбашки: скасуйте хід або почніть спочатку',
-      one:
-          'Ходів немає, на полі $count бульбашка: скасуйте хід або почніть спочатку',
+      other: 'Ходів немає, на полі $count бульбашки: скасуйте хід або почніть спочатку',
+      many: 'Ходів немає, на полі $count бульбашок: скасуйте хід або почніть спочатку',
+      few: 'Ходів немає, на полі $count бульбашки: скасуйте хід або почніть спочатку',
+      one: 'Ходів немає, на полі $count бульбашка: скасуйте хід або почніть спочатку',
     );
     return '$_temp0';
   }
@@ -542,10 +527,8 @@ class AppLocalizationsUk extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other:
-          'Ходів немає, бракує $count очка: скасуйте хід або почніть спочатку',
-      many:
-          'Ходів немає, бракує $count очок: скасуйте хід або почніть спочатку',
+      other: 'Ходів немає, бракує $count очка: скасуйте хід або почніть спочатку',
+      many: 'Ходів немає, бракує $count очок: скасуйте хід або почніть спочатку',
       few: 'Ходів немає, бракує $count очок: скасуйте хід або почніть спочатку',
       one: 'Ходів немає, бракує $count очка: скасуйте хід або почніть спочатку',
     );
@@ -581,12 +564,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get mergeGoalTarget => 'Збери плитку';
 
   @override
-  String get mergeGoalTargetHint =>
-      'Досягни цільової плитки, доки поле не заблоковане.';
+  String get mergeGoalTargetHint => 'Досягни цільової плитки, доки поле не заблоковане.';
 
   @override
-  String get mergeGoalFreeHint =>
-      'Без мети: грай, доки поле не заблокується, і побий свій рекорд.';
+  String get mergeGoalFreeHint => 'Без мети: грай, доки поле не заблокується, і побий свій рекорд.';
 
   @override
   String mergeReached(int tile) {
@@ -704,8 +685,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get lampsName => 'Лампи';
 
   @override
-  String get lampsTagline =>
-      'Освітіть усі клітинки, лампи не світять одна на одну';
+  String get lampsTagline => 'Освітіть усі клітинки, лампи не світять одна на одну';
 
   @override
   String get lampsRules =>
@@ -785,8 +765,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get arrowsName => 'Стрілки';
 
   @override
-  String get arrowsTagline =>
-      'Зафарбуйте те, що рахують стрілки, а решту обійдіть петлею';
+  String get arrowsTagline => 'Зафарбуйте те, що рахують стрілки, а решту обійдіть петлею';
 
   @override
   String get arrowsRules =>
@@ -796,8 +775,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get learnTitle => 'Як грати';
 
   @override
-  String get learnIntro =>
-      'Короткі інтерактивні уроки: кожен крок — маленьке поле, що показує одне правило чи прийом.';
+  String get learnIntro => 'Короткі інтерактивні уроки: кожен крок — маленьке поле, що показує одне правило чи прийом.';
 
   @override
   String learnSteps(int count) {
@@ -911,8 +889,7 @@ class AppLocalizationsUk extends AppLocalizations {
       '«=» між двома клітинками означає, що в них однаковий символ. Поставте у виділені клітинки те саме, що в сусідів.';
 
   @override
-  String get tutMambo4 =>
-      '«×» означає, що клітинки різні: одне сонце й один місяць.';
+  String get tutMambo4 => '«×» означає, що клітинки різні: одне сонце й один місяць.';
 
   @override
   String get tutMambo5 =>
@@ -987,8 +964,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'Числа зменшуються, коли ви фарбуєте: вони показують, скільки ще бракує. 0 означає, що жодна порожня сусідка не має його кольору, а клітинки з числами не рахуються. Почніть із синьої 3, а потім подивіться, чого ще бракує рожевій 2.';
 
   @override
-  String get tutHues3 =>
-      'Тепер справжнє поле. Почніть із чисел, яким потрібні всі порожні сусіди або жоден.';
+  String get tutHues3 => 'Тепер справжнє поле. Почніть із чисел, яким потрібні всі порожні сусіди або жоден.';
 
   @override
   String get tutHuesS1 =>
@@ -1022,8 +998,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'Один хід може злити багато плям. Середня пляма межує з чотирма іншими: перефарбуйте її, щоб їх об\'єднати, а потім завершіть. У вас лише 2 ходи.';
 
   @override
-  String get tutBlend3 =>
-      'Тепер справжнє поле. Вибраний колір лишається, тож можна фарбувати кілька плям поспіль.';
+  String get tutBlend3 => 'Тепер справжнє поле. Вибраний колір лишається, тож можна фарбувати кілька плям поспіль.';
 
   @override
   String get tutBlendS1 =>
@@ -1066,8 +1041,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'За хід плитка зливається лише раз: 4, 4, 8 стають 8, 8, а не 16. Після кожного ходу з\'являється нова 2 (іноді 4). Збери 16.';
 
   @override
-  String get tutMerge3 =>
-      'Тримай найбільшу плитку в куті й нарощуй її крок за кроком. Збери 32.';
+  String get tutMerge3 => 'Тримай найбільшу плитку в куті й нарощуй її крок за кроком. Збери 32.';
 
   @override
   String get tutMergeS1 =>
@@ -1101,8 +1075,7 @@ class AppLocalizationsUk extends AppLocalizations {
       '1 — це прямокутник сам по собі: просто торкніться його. Торкніться намальованого прямокутника, щоб прибрати його. Тут 6 вміщується лише одним способом.';
 
   @override
-  String get tutShikaku3 =>
-      'Тепер справжнє поле. Великі числа біля країв зазвичай мають найменше варіантів.';
+  String get tutShikaku3 => 'Тепер справжнє поле. Великі числа біля країв зазвичай мають найменше варіантів.';
 
   @override
   String get tutShikakuS1 =>
@@ -1157,8 +1130,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'Усі атоми мають утворити одну молекулу, а зв\'язки не перетинаються. Зв\'язок від лівої верхньої 1 униз лишив би дві окремі пари. Куди ж він іде?';
 
   @override
-  String get tutAtoms3 =>
-      'Тепер справжнє поле. Почніть з атомів, які можуть отримати зв\'язки лише одним способом.';
+  String get tutAtoms3 => 'Тепер справжнє поле. Почніть з атомів, які можуть отримати зв\'язки лише одним способом.';
 
   @override
   String get tutAtomsS1 =>
@@ -1221,8 +1193,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'Море має бути з\'єднаним і без басейнів 2×2. Виростіть 3 так, щоб не порушити жодне з цього. Торкніться двічі, щоб поставити крапку — позначку суходолу.';
 
   @override
-  String get tutIslands4 =>
-      'Тепер справжнє поле. На кожному острові рівно одне число.';
+  String get tutIslands4 => 'Тепер справжнє поле. На кожному острові рівно одне число.';
 
   @override
   String get tutIslandsS1 =>
@@ -1245,8 +1216,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'Лампи ніколи не світять одна на одну, а 0 означає, що поруч немає жодної лампи. Куди йде друга лампа?';
 
   @override
-  String get tutLamps4 =>
-      'Тепер справжнє поле. Крапками позначайте клітинки, де лампи бути не може.';
+  String get tutLamps4 => 'Тепер справжнє поле. Крапками позначайте клітинки, де лампи бути не може.';
 
   @override
   String get tutLampsS1 =>
@@ -1392,8 +1362,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'Шляхи не перетинаються, а разом заповнюють кожну клітинку, тож деяким доводиться йти в обхід.';
 
   @override
-  String get tutLinks3 =>
-      'Тепер справжнє поле. У кутах і на краях найменше варіантів, тож почніть звідти.';
+  String get tutLinks3 => 'Тепер справжнє поле. У кутах і на краях найменше варіантів, тож почніть звідти.';
 
   @override
   String get tutLinksS1 =>
@@ -1432,8 +1401,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'Міну цієї 1 уже позначено, тож усі інші клітинки навколо безпечні. Розкопайте їх або торкніться самої 1, щоб розкопати всі одразу.';
 
   @override
-  String get tutMines3 =>
-      'Клітинка без мін навколо сама відкриває своїх сусідів. Копайте виділений кут.';
+  String get tutMines3 => 'Клітинка без мін навколо сама відкриває своїх сусідів. Копайте виділений кут.';
 
   @override
   String get tutMines4 =>

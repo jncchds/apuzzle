@@ -30,7 +30,9 @@ void main() {
           expect(PlotsPuzzle.fromJson(p.toJson()).toJson(), p.toJson());
           expect(sw.elapsedMilliseconds, lessThan(3000));
           final lower = tier > 1 && s.solves(p.givens, tier - 1);
-          info.add('${sw.elapsedMilliseconds}ms givens ${p.givens.where((g) => g != null).length}${lower ? ' (easier)' : ''}');
+          info.add(
+            '${sw.elapsedMilliseconds}ms givens ${p.givens.where((g) => g != null).length}${lower ? ' (easier)' : ''}',
+          );
         }
         // ignore: avoid_print
         print('plots $n ${d.name}: $info');

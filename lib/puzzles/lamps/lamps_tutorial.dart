@@ -25,7 +25,10 @@ final List<TutorialStep> lampsTutorial = [
   TutorialStep(
     text: (l) => l.tutLamps3,
     puzzle: _zero,
-    state: ValueGrid.fromGivens(_zero.size, _zero.givenAt).set(const Pos(0, 0), const CellValue(value: lampsLamp, given: true)),
+    state: ValueGrid.fromGivens(
+      _zero.size,
+      _zero.givenAt,
+    ).set(const Pos(0, 0), const CellValue(value: lampsLamp, given: true)),
   ),
   TutorialStep.generated(
     text: (l) => l.tutLamps4,

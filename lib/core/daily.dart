@@ -26,7 +26,10 @@ int dailySeed(Day day) => hash31(day.toString());
 /// [PuzzleType.dailySince], so releasing one never changes earlier days.
 List<PuzzleType> dailyGames(Day day, [List<PuzzleType> types = puzzleTypes]) {
   // By id, so reordering the home screen doesn't reshuffle past days.
-  final pool = [for (final t in types) if (t.dailySince <= day) t]..sort((a, b) => a.id.compareTo(b.id));
+  final pool = [
+    for (final t in types)
+      if (t.dailySince <= day) t,
+  ]..sort((a, b) => a.id.compareTo(b.id));
   final rng = Random(dailySeed(day));
   final picked = <PuzzleType>[];
   while (picked.length < dailyGamesPerDay && pool.isNotEmpty) {
@@ -36,16 +39,16 @@ List<PuzzleType> dailyGames(Day day, [List<PuzzleType> types = puzzleTypes]) {
 }
 
 List<DailyPuzzle> dailyPuzzles(Day day) => [
-      for (final t in dailyGames(day))
-        for (final d in t.difficulties) (type: t, difficulty: d),
-    ];
+  for (final t in dailyGames(day))
+    for (final d in t.difficulties) (type: t, difficulty: d),
+];
 
 GenParams dailyParams(Day day, PuzzleType type, Difficulty difficulty) => GenParams(
-      size: type.dailySize(difficulty),
-      difficulty: difficulty,
-      seed: dailySeed(day),
-      options: type.resolveOptions(const {}),
-    );
+  size: type.dailySize(difficulty),
+  difficulty: difficulty,
+  seed: dailySeed(day),
+  options: type.resolveOptions(const {}),
+);
 
 /// Whether [code] is one of [day]'s puzzles and [day] is playable.
 bool isDailyPuzzle(Day day, PuzzleCode code, {Day? today}) =>

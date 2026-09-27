@@ -82,7 +82,10 @@ List<int>? _plots(int rows, int cols, Random rng, int maxValue, List<double> wei
 
   while (true) {
     var start = -1, best = 99;
-    for (final i in [for (var i = 0; i < n; i++) if (plots[i] < 0) i]..shuffle(rng)) {
+    for (final i in [
+      for (var i = 0; i < n; i++)
+        if (plots[i] < 0) i,
+    ]..shuffle(rng)) {
       final f = free(i);
       if (f < best) {
         best = f;
@@ -95,7 +98,11 @@ List<int>? _plots(int rows, int cols, Random rng, int maxValue, List<double> wei
     final order = [start];
     plots[start] = id;
     while (order.length < target) {
-      final frontier = {for (final c in order) for (final j in nb[c]) if (plots[j] < 0) j}.toList();
+      final frontier = {
+        for (final c in order)
+          for (final j in nb[c])
+            if (plots[j] < 0) j,
+      }.toList();
       if (frontier.isEmpty) break;
       frontier.sort((a, b) => free(a).compareTo(free(b)));
       final pick = rng.nextDouble() < 0.5 ? frontier.first : frontier[rng.nextInt(frontier.length)];
@@ -116,12 +123,20 @@ List<int>? _plots(int rows, int cols, Random rng, int maxValue, List<double> wei
       continue;
     }
     // Join a neighbouring plot, which grows by one.
-    final joins = {for (final j in nb[start]) if (plots[j] >= 0) plots[j]}.where((r) {
-      final s = sizes[r] + 1;
-      if (s > maxValue) return false;
-      final cells = [start, for (var i = 0; i < n; i++) if (plots[i] == r) i];
-      return !clashes(cells, r, s);
-    }).toList();
+    final joins =
+        {
+          for (final j in nb[start])
+            if (plots[j] >= 0) plots[j],
+        }.where((r) {
+          final s = sizes[r] + 1;
+          if (s > maxValue) return false;
+          final cells = [
+            start,
+            for (var i = 0; i < n; i++)
+              if (plots[i] == r) i,
+          ];
+          return !clashes(cells, r, s);
+        }).toList();
     if (joins.isEmpty) return null;
     final r = joins[rng.nextInt(joins.length)];
     plots[start] = r;

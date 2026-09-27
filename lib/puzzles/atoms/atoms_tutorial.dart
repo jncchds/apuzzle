@@ -12,7 +12,8 @@ AtomsPuzzle _board(int rows, int cols, List<(int, int)> atoms, List<(int, int, i
   final edges = atomEdges(rows, cols, islands);
   final solution = [
     for (final e in edges)
-      bonds.where((b) => (b.$1 == e.a && b.$2 == e.b) || (b.$1 == e.b && b.$2 == e.a)).map((b) => b.$3).firstOrNull ?? 0,
+      bonds.where((b) => (b.$1 == e.a && b.$2 == e.b) || (b.$1 == e.b && b.$2 == e.a)).map((b) => b.$3).firstOrNull ??
+          0,
   ];
   final numbers = List<int>.filled(islands.length, 0);
   for (var e = 0; e < edges.length; e++) {

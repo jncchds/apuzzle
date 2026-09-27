@@ -8,9 +8,7 @@ import '../../core/grid_graph.dart';
 /// to reach its size, and a cell may not join groups into one too big.
 /// Tier 2: + probing cells with up to three candidates.
 class PlotsSolver {
-  PlotsSolver(this.rows, this.cols, this.maxValue)
-      : n = rows * cols,
-        nb = orthNeighbors(rows, cols);
+  PlotsSolver(this.rows, this.cols, this.maxValue) : n = rows * cols, nb = orthNeighbors(rows, cols);
 
   final int rows;
   final int cols;

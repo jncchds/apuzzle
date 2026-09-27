@@ -42,10 +42,10 @@ class PipesType extends PuzzleType<PipesPuzzle, PipesState> {
   GridSize get defaultSize => const GridSize.square(6);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(5),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(9),
-      };
+    Difficulty.easy => const GridSize.square(5),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(9),
+  };
   @override
   bool get showSubmit => false;
   @override
@@ -63,8 +63,9 @@ class PipesType extends PuzzleType<PipesPuzzle, PipesState> {
   bool isSolved(PipesPuzzle puzzle, PipesState state) => pipesSolved(puzzle, currentMasks(puzzle, state));
 
   @override
-  Set<Pos> conflicts(PipesPuzzle puzzle, PipesState state) =>
-      {for (final i in looseTiles(puzzle, currentMasks(puzzle, state))) puzzle.size.pos(i)};
+  Set<Pos> conflicts(PipesPuzzle puzzle, PipesState state) => {
+    for (final i in looseTiles(puzzle, currentMasks(puzzle, state))) puzzle.size.pos(i),
+  };
 
   @override
   HintResult<PipesState>? hint(PipesPuzzle puzzle, PipesState state) {
@@ -115,8 +116,8 @@ class PipesType extends PuzzleType<PipesPuzzle, PipesState> {
             border: errors.contains(pos)
                 ? Border.all(color: scheme.error, width: 2)
                 : ctrl.flashHints.contains(pos)
-                    ? Border.all(color: scheme.tertiary, width: 2)
-                    : null,
+                ? Border.all(color: scheme.tertiary, width: 2)
+                : null,
           ),
           child: AnimatedRotation(
             turns: s.turns[i] / 4,
@@ -152,7 +153,13 @@ class PipesType extends PuzzleType<PipesPuzzle, PipesState> {
 }
 
 class _PipePainter extends CustomPainter {
-  _PipePainter({required this.mask, required this.color, required this.outline, required this.source, required this.locked});
+  _PipePainter({
+    required this.mask,
+    required this.color,
+    required this.outline,
+    required this.source,
+    required this.locked,
+  });
 
   final int mask;
   final Color color;

@@ -42,15 +42,21 @@ class RailsPuzzle {
   int stubs(int i) => (i == entry ? 1 : 0) + (i == exit ? 1 : 0);
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'entry': entry,
-        'exit': exit,
-        'rowCounts': rowCounts,
-        'colCounts': colCounts,
-        'given': [for (var i = 0; i < given.length; i++) if (given[i]) i],
-        'lines': [for (var e = 0; e < lines.length; e++) if (lines[e]) e],
-      };
+    'rows': rows,
+    'cols': cols,
+    'entry': entry,
+    'exit': exit,
+    'rowCounts': rowCounts,
+    'colCounts': colCounts,
+    'given': [
+      for (var i = 0; i < given.length; i++)
+        if (given[i]) i,
+    ],
+    'lines': [
+      for (var e = 0; e < lines.length; e++)
+        if (lines[e]) e,
+    ],
+  };
 
   factory RailsPuzzle.fromJson(Map<String, dynamic> j) {
     final rows = j['rows'] as int, cols = j['cols'] as int;
@@ -111,8 +117,9 @@ bool railsValid(RailsPuzzle p, List<bool> lines) {
 }
 
 /// Cells the [lines] (or a stub) pass through.
-List<bool> railsUsed(RailsPuzzle p, List<bool> lines) =>
-    [for (var i = 0; i < p.rows * p.cols; i++) railsDegree(p, lines, i) > 0];
+List<bool> railsUsed(RailsPuzzle p, List<bool> lines) => [
+  for (var i = 0; i < p.rows * p.cols; i++) railsDegree(p, lines, i) > 0,
+];
 
 bool railsCountsMet(RailsPuzzle p, List<bool> used) {
   for (var r = 0; r < p.rows; r++) {

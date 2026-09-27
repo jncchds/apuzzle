@@ -88,7 +88,10 @@ IslandsPuzzle generateIslands(GenParams params) {
         break;
       }
       // Splitting an island beats adding a one-cell island.
-      final splits = [for (final i in options) if (!sea[i]) i];
+      final splits = [
+        for (final i in options)
+          if (!sea[i]) i,
+      ];
       final pool = splits.isNotEmpty ? splits : options;
       final u = pool[rng.nextInt(pool.length)];
       sea[u] = !sea[u];
@@ -99,7 +102,8 @@ IslandsPuzzle generateIslands(GenParams params) {
       spot
         ..clear()
         ..addAll([
-          for (final c in comps) c.firstWhere(spots.contains, orElse: () => c.contains(u) ? u : c[rng.nextInt(c.length)]),
+          for (final c in comps)
+            c.firstWhere(spots.contains, orElse: () => c.contains(u) ? u : c[rng.nextInt(c.length)]),
         ]);
       repairs++;
     }
@@ -143,11 +147,11 @@ List<bool>? _layout(int rows, int cols, List<List<int>> nb, Random rng, int maxI
   }
 
   List<List<int>> pools() => [
-        for (var r = 0; r + 1 < rows; r++)
-          for (var c = 0; c + 1 < cols; c++)
-            if ([r * cols + c, r * cols + c + 1, (r + 1) * cols + c, (r + 1) * cols + c + 1].every((k) => sea[k]))
-              [r * cols + c, r * cols + c + 1, (r + 1) * cols + c, (r + 1) * cols + c + 1],
-      ];
+    for (var r = 0; r + 1 < rows; r++)
+      for (var c = 0; c + 1 < cols; c++)
+        if ([r * cols + c, r * cols + c + 1, (r + 1) * cols + c, (r + 1) * cols + c + 1].every((k) => sea[k]))
+          [r * cols + c, r * cols + c + 1, (r + 1) * cols + c, (r + 1) * cols + c + 1],
+  ];
 
   // Break every pool.
   while (true) {

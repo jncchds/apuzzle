@@ -40,15 +40,17 @@ class BlendType extends PuzzleType<BlendPuzzle, BlendState> {
   List<TutorialStep> strategies() => blendStrategies;
 
   @override
-  List<GridSize> get sizes => [for (final n in [5, 6, 8, 10, 12, 14]) GridSize.square(n)];
+  List<GridSize> get sizes => [
+    for (final n in [5, 6, 8, 10, 12, 14]) GridSize.square(n),
+  ];
   @override
   GridSize get defaultSize => const GridSize.square(8);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(8),
-        _ => const GridSize.square(10),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(8),
+    _ => const GridSize.square(10),
+  };
   @override
   double get minCellSize => 24;
   @override
@@ -57,10 +59,10 @@ class BlendType extends PuzzleType<BlendPuzzle, BlendState> {
   bool get showSubmit => false;
 
   int colorsFor(Difficulty d) => switch (d) {
-        Difficulty.easy => 3,
-        Difficulty.medium => 4,
-        _ => 5,
-      };
+    Difficulty.easy => 3,
+    Difficulty.medium => 4,
+    _ => 5,
+  };
 
   @override
   BlendPuzzle generate(GenParams params) {
@@ -96,8 +98,14 @@ class BlendType extends PuzzleType<BlendPuzzle, BlendState> {
     if (blendDone(state.cells)) return null;
     final (cell, color) = blendSolve(state.cells, puzzle.rows, puzzle.cols, puzzle.colors, Random(state.moves)).first;
     final comp = blendComponents(state.cells, puzzle.rows, puzzle.cols);
-    final patch = {for (var i = 0; i < comp.length; i++) if (comp[i] == comp[cell]) puzzle.size.pos(i)};
-    return HintResult(BlendState(blendApply(state.cells, puzzle.rows, puzzle.cols, cell, color), state.moves + 1), patch);
+    final patch = {
+      for (var i = 0; i < comp.length; i++)
+        if (comp[i] == comp[cell]) puzzle.size.pos(i),
+    };
+    return HintResult(
+      BlendState(blendApply(state.cells, puzzle.rows, puzzle.cols, cell, color), state.moves + 1),
+      patch,
+    );
   }
 
   int _color(GameController ctrl) => (ctrl.tool == null || ctrl.tool! < 0) ? 0 : ctrl.tool!;
@@ -154,36 +162,52 @@ class BlendType extends PuzzleType<BlendPuzzle, BlendState> {
     final s = ctrl.state as BlendState;
     final theme = Theme.of(context);
     final selected = _color(ctrl);
-    return Column(mainAxisSize: MainAxisSize.min, children: [
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: s.moves >= p.limit ? theme.colorScheme.error : theme.colorScheme.outline, width: 2),
-        ),
-        child: Text(context.l10n.movesOfLimit(s.moves, p.limit),
-            style: theme.textTheme.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()])),
-      ),
-      const SizedBox(height: 10),
-      Wrap(spacing: 10, runSpacing: 10, alignment: WrapAlignment.center, children: [
-        for (var c = 0; c < p.colors; c++)
-          GestureDetector(
-            onTap: () => ctrl.setTool(c),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 160),
-              width: 48,
-              height: 48,
-              transform: Matrix4.diagonal3Values(selected == c ? 1.12 : 1, selected == c ? 1.12 : 1, 1),
-              transformAlignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: palette[c],
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: selected == c ? theme.colorScheme.onSurface : Colors.transparent, width: 3),
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: s.moves >= p.limit ? theme.colorScheme.error : theme.colorScheme.outline,
+              width: 2,
             ),
           ),
-      ]),
-    ]);
+          child: Text(
+            context.l10n.movesOfLimit(s.moves, p.limit),
+            style: theme.textTheme.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()]),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          alignment: WrapAlignment.center,
+          children: [
+            for (var c = 0; c < p.colors; c++)
+              GestureDetector(
+                onTap: () => ctrl.setTool(c),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 160),
+                  width: 48,
+                  height: 48,
+                  transform: Matrix4.diagonal3Values(selected == c ? 1.12 : 1, selected == c ? 1.12 : 1, 1),
+                  transformAlignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: palette[c],
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: selected == c ? theme.colorScheme.onSurface : Colors.transparent,
+                      width: 3,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ],
+    );
   }
 
   @override

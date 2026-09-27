@@ -44,17 +44,20 @@ class LampsType extends ValueGridType<LampsPuzzle> {
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(8),
-        _ => const GridSize.square(9),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(8),
+    _ => const GridSize.square(9),
+  };
 
   @override
   List<ValueSpec> get values => [
-        ValueSpec.custom((context, size) => DotSymbol(size: size), label: 'dot'),
-        ValueSpec.custom((context, size) => Icon(Icons.lightbulb_rounded, size: size * 0.72, color: lampColor), label: 'lamp'),
-        ValueSpec.custom((context, size) => const SizedBox.shrink(), label: 'wall'),
-      ];
+    ValueSpec.custom((context, size) => DotSymbol(size: size), label: 'dot'),
+    ValueSpec.custom(
+      (context, size) => Icon(Icons.lightbulb_rounded, size: size * 0.72, color: lampColor),
+      label: 'lamp',
+    ),
+    ValueSpec.custom((context, size) => const SizedBox.shrink(), label: 'wall'),
+  ];
 
   @override
   List<ValueSpec> valuesFor(LampsPuzzle puzzle) => values.sublist(0, 2);
@@ -85,13 +88,12 @@ class LampsType extends ValueGridType<LampsPuzzle> {
   }
 
   @override
-  bool isSolved(LampsPuzzle puzzle, ValueGrid state) =>
-      lampsConflicts(puzzle, _lamps(state), complete: true).isEmpty;
+  bool isSolved(LampsPuzzle puzzle, ValueGrid state) => lampsConflicts(puzzle, _lamps(state), complete: true).isEmpty;
 
   @override
   Set<Pos> conflicts(LampsPuzzle puzzle, ValueGrid state) => {
-        for (final i in lampsConflicts(puzzle, _lamps(state), complete: isComplete(puzzle, state))) puzzle.size.pos(i),
-      };
+    for (final i in lampsConflicts(puzzle, _lamps(state), complete: isComplete(puzzle, state))) puzzle.size.pos(i),
+  };
 
   @override
   HintResult<ValueGrid>? hint(LampsPuzzle puzzle, ValueGrid state) {

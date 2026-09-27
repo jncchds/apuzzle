@@ -25,7 +25,10 @@ Object playHints(PuzzleType type, Object puzzle, Object state) {
 /// the board, found by backtracking (a partial grid with rule conflicts is a
 /// dead end). Stops at [limit]; null when the search is too big to finish.
 int? countFillings(ValueGridType type, ValueGridPuzzle puzzle, ValueGrid start, {int limit = 2}) {
-  final empty = [for (var i = 0; i < start.cells.length; i++) if (start.cells[i].value == null) i];
+  final empty = [
+    for (var i = 0; i < start.cells.length; i++)
+      if (start.cells[i].value == null) i,
+  ];
   final n = type.valuesFor(puzzle).length;
   final cells = List.of(start.cells);
   var found = 0, nodes = 0;
@@ -83,9 +86,17 @@ void main() {
               expect(done(step.answer!), isTrue, reason: 'the answer does not meet the goal');
               return;
             }
-            expect(type.isComplete(puzzle, start) && type.isSolved(puzzle, start), isFalse, reason: 'solved at the start');
+            expect(
+              type.isComplete(puzzle, start) && type.isSolved(puzzle, start),
+              isFalse,
+              reason: 'solved at the start',
+            );
             final end = playHints(type, puzzle, start);
-            expect(type.isComplete(puzzle, end) && type.isSolved(puzzle, end), isTrue, reason: '"Show me" does not solve it');
+            expect(
+              type.isComplete(puzzle, end) && type.isSolved(puzzle, end),
+              isTrue,
+              reason: '"Show me" does not solve it',
+            );
             if (type is ValueGridType && !step.openEnded) {
               // Big generated boards are unique by construction (their own tests).
               final count = countFillings(type, puzzle as ValueGridPuzzle, start as ValueGrid);

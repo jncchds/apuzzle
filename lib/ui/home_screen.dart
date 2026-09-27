@@ -61,29 +61,31 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: CustomScrollView(slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-          sliver: SliverToBoxAdapter(
-            child: ValueListenableBuilder(
-              valueListenable: store.dailyRevision,
-              builder: (context, _, _) => const _DailyBanner(),
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+            sliver: SliverToBoxAdapter(
+              child: ValueListenableBuilder(
+                valueListenable: store.dailyRevision,
+                builder: (context, _, _) => const _DailyBanner(),
+              ),
             ),
           ),
-        ),
-        SliverPadding(
-          padding: const EdgeInsets.all(16),
-          sliver: SliverGrid.extent(
-            maxCrossAxisExtent: 240,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 0.95,
-            children: [
-              for (final t in puzzleTypes) _TypeCard(type: t, inProgress: store.hasSave(t.id), onTap: () => _open(t)),
-            ],
+          SliverPadding(
+            padding: const EdgeInsets.all(16),
+            sliver: SliverGrid.extent(
+              maxCrossAxisExtent: 240,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              childAspectRatio: 0.95,
+              children: [
+                for (final t in puzzleTypes) _TypeCard(type: t, inProgress: store.hasSave(t.id), onTap: () => _open(t)),
+              ],
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }
@@ -128,13 +130,20 @@ class _TypeCard extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              Text(type.name(l),
-                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis),
+              Text(
+                type.name(l),
+                style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
               const SizedBox(height: 4),
               Flexible(
-                child: Text(type.tagline(l), style: theme.textTheme.bodySmall, maxLines: 2, overflow: TextOverflow.ellipsis),
+                child: Text(
+                  type.tagline(l),
+                  style: theme.textTheme.bodySmall,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
@@ -162,40 +171,54 @@ class _DailyBanner extends StatelessWidget {
         onTap: () => AppRouterDelegate.of(context).openDaily(),
         child: Padding(
           padding: const EdgeInsets.all(14),
-          child: Row(children: [
-            SizedBox.square(
-              dimension: 44,
-              child: Stack(alignment: Alignment.center, children: [
-                CircularProgressIndicator(
-                  value: p.total == 0 ? 0 : p.done / p.total,
-                  strokeWidth: 4,
-                  backgroundColor: theme.colorScheme.onPrimaryContainer.withValues(alpha: 0.15),
+          child: Row(
+            children: [
+              SizedBox.square(
+                dimension: 44,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                      value: p.total == 0 ? 0 : p.done / p.total,
+                      strokeWidth: 4,
+                      backgroundColor: theme.colorScheme.onPrimaryContainer.withValues(alpha: 0.15),
+                    ),
+                    Icon(
+                      complete ? Icons.emoji_events_rounded : Icons.calendar_month_rounded,
+                      color: theme.colorScheme.onPrimaryContainer,
+                    ),
+                  ],
                 ),
-                Icon(complete ? Icons.emoji_events_rounded : Icons.calendar_month_rounded,
-                    color: theme.colorScheme.onPrimaryContainer),
-              ]),
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(l.dailyTitle,
-                    style: theme.textTheme.titleMedium
-                        ?.copyWith(fontWeight: FontWeight.w700, color: theme.colorScheme.onPrimaryContainer)),
-                const SizedBox(height: 2),
-                Text(
-                  [for (final t in dailyGames(today)) t.name(l)].join(' · '),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onPrimaryContainer),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l.dailyTitle,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: theme.colorScheme.onPrimaryContainer,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      [for (final t in dailyGames(today)) t.name(l)].join(' · '),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onPrimaryContainer),
+                    ),
+                    Text(
+                      complete ? l.dailyDayComplete : l.dailyProgress(p.done, p.total),
+                      style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.onPrimaryContainer),
+                    ),
+                  ],
                 ),
-                Text(
-                  complete ? l.dailyDayComplete : l.dailyProgress(p.done, p.total),
-                  style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.onPrimaryContainer),
-                ),
-              ]),
-            ),
-            Icon(Icons.chevron_right_rounded, color: theme.colorScheme.onPrimaryContainer),
-          ]),
+              ),
+              Icon(Icons.chevron_right_rounded, color: theme.colorScheme.onPrimaryContainer),
+            ],
+          ),
         ),
       ),
     );

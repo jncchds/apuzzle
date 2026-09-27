@@ -43,10 +43,10 @@ class FenceType extends PuzzleType<FencePuzzle, LoopMarks> {
   GridSize get defaultSize => const GridSize.square(6);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(5),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(8),
-      };
+    Difficulty.easy => const GridSize.square(5),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(8),
+  };
   @override
   double get controlsHeight => 40;
 
@@ -85,7 +85,8 @@ class FenceType extends PuzzleType<FencePuzzle, LoopMarks> {
   @override
   HintResult<LoopMarks>? hint(FencePuzzle puzzle, LoopMarks state) {
     final g = puzzle.lattice;
-    HintResult<LoopMarks> fix(int e, int v) => HintResult(LoopMarks(List.of(state.marks)..[e] = v), _cellsBy(puzzle, g, e));
+    HintResult<LoopMarks> fix(int e, int v) =>
+        HintResult(LoopMarks(List.of(state.marks)..[e] = v), _cellsBy(puzzle, g, e));
     for (var e = 0; e < g.edgeCount; e++) {
       if (state.marks[e] == 1 && !puzzle.lines[e]) return fix(e, 2);
     }
@@ -100,7 +101,10 @@ class FenceType extends PuzzleType<FencePuzzle, LoopMarks> {
     final (a, _) = g.ends(e);
     final r = a ~/ g.vc, c = a % g.vc;
     final sides = g.isHorizontal(e) ? [Pos(r - 1, c), Pos(r, c)] : [Pos(r, c - 1), Pos(r, c)];
-    return {for (final q in sides) if (p.size.contains(q)) q};
+    return {
+      for (final q in sides)
+        if (p.size.contains(q)) q,
+    };
   }
 
   @override

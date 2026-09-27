@@ -65,9 +65,9 @@ ArrowsPuzzle generateArrows(GenParams params) {
 
     final arrows = b.arrows, shaded = b.shaded;
     List<int> countsFor() => [
-          for (var i = 0; i < n; i++)
-            if (arrows[i] < 0) 0 else arrowsRay(rows, cols, arrows, i).where((j) => shaded[j]).length,
-        ];
+      for (var i = 0; i < n; i++)
+        if (arrows[i] < 0) 0 else arrowsRay(rows, cols, arrows, i).where((j) => shaded[j]).length,
+    ];
     bool solvesAt(int t) => ArrowsSolver(rows, cols, arrows, countsFor()).slack(t) == 0;
     // Tier-1 logic is much cheaper, so try it first.
     bool solvable() => solvesAt(1) || (tier > 1 && solvesAt(tier));
@@ -104,7 +104,10 @@ ArrowsPuzzle generateArrows(GenParams params) {
       Difficulty.medium => 0.15,
       _ => 0.0,
     };
-    for (final i in [for (var i = 0; i < n; i++) if (arrows[i] >= 0) i]..shuffle(rng)) {
+    for (final i in [
+      for (var i = 0; i < n; i++)
+        if (arrows[i] >= 0) i,
+    ]..shuffle(rng)) {
       if (rng.nextDouble() < keep || _orth(i, rows, cols).any((j) => shaded[j])) continue;
       final dir = arrows[i];
       arrows[i] = -1;
@@ -119,7 +122,10 @@ ArrowsPuzzle generateArrows(GenParams params) {
     if (tier > 1) {
       final goal = d == Difficulty.hard ? n : 1;
       var stuck = ArrowsSolver(rows, cols, arrows, countsFor()).slack(1);
-      for (final i in [for (var i = 0; i < n; i++) if (arrows[i] >= 0) i]..shuffle(rng)) {
+      for (final i in [
+        for (var i = 0; i < n; i++)
+          if (arrows[i] >= 0) i,
+      ]..shuffle(rng)) {
         if (stuck >= goal) break;
         final dir = arrows[i];
         for (final other in [0, 1, 2, 3]..shuffle(rng)) {

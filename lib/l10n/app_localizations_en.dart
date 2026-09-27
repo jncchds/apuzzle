@@ -84,15 +84,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get highlightErrors => 'Highlight errors while playing';
 
   @override
-  String get highlightErrorsHint =>
-      'Off: mistakes are only shown when you press Submit';
+  String get highlightErrorsHint => 'Off: mistakes are only shown when you press Submit';
 
   @override
   String get autoClearMarks => 'Auto-remove pencil marks';
 
   @override
-  String get autoClearMarksHint =>
-      'Placing a number clears that note from its row, column and box';
+  String get autoClearMarksHint => 'Placing a number clears that note from its row, column and box';
 
   @override
   String get haptics => 'Haptic feedback';
@@ -150,8 +148,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get restartTitle => 'Restart puzzle?';
 
   @override
-  String get restartBody =>
-      'All your entries will be cleared. You can still undo.';
+  String get restartBody => 'All your entries will be cleared. You can still undo.';
 
   @override
   String get cancel => 'Cancel';
@@ -309,8 +306,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get codeOtherVersion =>
-      'This code comes from a different app version, so the puzzle would not match';
+  String get codeOtherVersion => 'This code comes from a different app version, so the puzzle would not match';
 
   @override
   String codeNoOption(Object choice, Object name) {
@@ -455,8 +451,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get popModeStandard => 'Standard';
 
   @override
-  String get popModeStandardHint =>
-      'Bubbles fall down; empty columns close up to the right.';
+  String get popModeStandardHint => 'Bubbles fall down; empty columns close up to the right.';
 
   @override
   String get popModeShifter => 'Shifter';
@@ -468,8 +463,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get popModeContinuous => 'Continuous';
 
   @override
-  String get popModeContinuousHint =>
-      'New columns roll in from the left as space frees up.';
+  String get popModeContinuousHint => 'New columns roll in from the left as space frees up.';
 
   @override
   String get popModeMega => 'Mega';
@@ -496,8 +490,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get popGoalFree => 'Free play';
 
   @override
-  String get popGoalFreeHint =>
-      'No target: play it out and beat your best score.';
+  String get popGoalFreeHint => 'No target: play it out and beat your best score.';
 
   @override
   String get popCleared => 'Cleared!';
@@ -549,8 +542,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mergeName => '2048';
 
   @override
-  String get mergeTagline =>
-      'Slide the tiles, merge the twins, build the big one';
+  String get mergeTagline => 'Slide the tiles, merge the twins, build the big one';
 
   @override
   String get mergeRules =>
@@ -560,12 +552,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mergeGoalTarget => 'Build the tile';
 
   @override
-  String get mergeGoalTargetHint =>
-      'Reach the target tile before the board locks up.';
+  String get mergeGoalTargetHint => 'Reach the target tile before the board locks up.';
 
   @override
-  String get mergeGoalFreeHint =>
-      'No target: play until the board locks up and beat your best score.';
+  String get mergeGoalFreeHint => 'No target: play until the board locks up and beat your best score.';
 
   @override
   String mergeReached(int tile) {
@@ -743,8 +733,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get plotsName => 'Plots';
 
   @override
-  String get plotsTagline =>
-      'Split the grid into plots as big as their numbers';
+  String get plotsTagline => 'Split the grid into plots as big as their numbers';
 
   @override
   String get plotsRules =>
@@ -764,8 +753,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get arrowsName => 'Arrows';
 
   @override
-  String get arrowsTagline =>
-      'Shade what the arrows count, loop through the rest';
+  String get arrowsTagline => 'Shade what the arrows count, loop through the rest';
 
   @override
   String get arrowsRules =>
@@ -775,8 +763,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get learnTitle => 'How to play';
 
   @override
-  String get learnIntro =>
-      'Short interactive lessons: every step is a tiny board that shows one rule or trick.';
+  String get learnIntro => 'Short interactive lessons: every step is a tiny board that shows one rule or trick.';
 
   @override
   String learnSteps(int count) {
@@ -798,8 +785,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get tutorialOfferBody =>
-      'Take a quick interactive lesson first? A few tiny boards show you every rule.';
+  String get tutorialOfferBody => 'Take a quick interactive lesson first? A few tiny boards show you every rule.';
 
   @override
   String get tutorialOfferNo => 'No, thanks';
@@ -888,8 +874,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'An = between two cells means they hold the same symbol. Match the highlighted cells to their neighbours.';
 
   @override
-  String get tutMambo4 =>
-      'A × means the two cells are different: one sun, one moon.';
+  String get tutMambo4 => 'A × means the two cells are different: one sun, one moon.';
 
   @override
   String get tutMambo5 =>
@@ -912,8 +897,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'By their row, these two cells could be 3 or 4. Their columns decide: each column is missing just one number.';
 
   @override
-  String get tutSudoku3 =>
-      'The boxes count too: every box needs 1 to 4 once. Finish the last box.';
+  String get tutSudoku3 => 'The boxes count too: every box needs 1 to 4 once. Finish the last box.';
 
   @override
   String get tutSudoku4 =>
@@ -1043,8 +1027,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'A tile merges only once per move: 4, 4, 8 slides into 8, 8, not 16. After every move a new 2 (sometimes a 4) appears. Build a 16.';
 
   @override
-  String get tutMerge3 =>
-      'Keep your biggest tile in a corner and feed it step by step. Build a 32.';
+  String get tutMerge3 => 'Keep your biggest tile in a corner and feed it step by step. Build a 32.';
 
   @override
   String get tutMergeS1 =>
@@ -1078,8 +1061,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'A 1 is a rectangle on its own: just tap it. Tap a drawn rectangle to remove it. Here the 6 fits only one way.';
 
   @override
-  String get tutShikaku3 =>
-      'Now a real board. Big numbers near the edges usually have the fewest ways to fit.';
+  String get tutShikaku3 => 'Now a real board. Big numbers near the edges usually have the fewest ways to fit.';
 
   @override
   String get tutShikakuS1 =>
@@ -1134,8 +1116,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'All atoms must join into one molecule, and bonds can\'t cross. Bonding the top-left 1 downwards would leave two separate pairs, so where does its bond go?';
 
   @override
-  String get tutAtoms3 =>
-      'Now a real board. Start with atoms that have only one way to get their bonds.';
+  String get tutAtoms3 => 'Now a real board. Start with atoms that have only one way to get their bonds.';
 
   @override
   String get tutAtomsS1 =>
@@ -1198,8 +1179,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'The sea must stay connected and may never form a 2×2 pool. Grow the 3 so that neither happens. Tap twice for a dot, your note for land.';
 
   @override
-  String get tutIslands4 =>
-      'Now a real board. Every island holds exactly one number.';
+  String get tutIslands4 => 'Now a real board. Every island holds exactly one number.';
 
   @override
   String get tutIslandsS1 =>
@@ -1222,8 +1202,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Lamps may never shine on each other, and a 0 means no lamp right next to it. Where does the second lamp go?';
 
   @override
-  String get tutLamps4 =>
-      'Now a real board. Dots help you mark cells that can\'t hold a lamp.';
+  String get tutLamps4 => 'Now a real board. Dots help you mark cells that can\'t hold a lamp.';
 
   @override
   String get tutLampsS1 =>
@@ -1329,8 +1308,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Pairs never touch each other side by side. The top pair is finished, so the highlighted cells next to it stay unshaded: put a dot there (tap twice), then finish the board.';
 
   @override
-  String get tutPairs3 =>
-      'Now a real board. Small regions and cells boxed in by dots are good places to start.';
+  String get tutPairs3 => 'Now a real board. Small regions and cells boxed in by dots are good places to start.';
 
   @override
   String get tutPairsS1 =>
@@ -1369,8 +1347,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Paths never cross, and together they fill every cell, so some have to take the long way round.';
 
   @override
-  String get tutLinks3 =>
-      'Now a real board. Corners and edges leave the fewest ways to go, so start there.';
+  String get tutLinks3 => 'Now a real board. Corners and edges leave the fewest ways to go, so start there.';
 
   @override
   String get tutLinksS1 =>
@@ -1409,8 +1386,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'This 1 already has its mine flagged, so every other cell around it is safe. Dig them, or tap the 1 itself to dig them all at once.';
 
   @override
-  String get tutMines3 =>
-      'A cell with no mines around it opens its neighbours for you. Dig the highlighted corner.';
+  String get tutMines3 => 'A cell with no mines around it opens its neighbours for you. Dig the highlighted corner.';
 
   @override
   String get tutMines4 =>

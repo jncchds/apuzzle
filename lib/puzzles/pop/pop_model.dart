@@ -78,32 +78,38 @@ class PopPuzzle {
   int reserveId(int k, int j) => rows * cols + k * rows + j;
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'colors': colors,
-        'mode': mode.id,
-        'goal': goal.id,
-        'start': start,
-        'reserve': reserve,
-        'target': target,
-        'plan': plan,
-      };
+    'rows': rows,
+    'cols': cols,
+    'colors': colors,
+    'mode': mode.id,
+    'goal': goal.id,
+    'start': start,
+    'reserve': reserve,
+    'target': target,
+    'plan': plan,
+  };
 
   factory PopPuzzle.fromJson(Map<String, dynamic> j) => PopPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        colors: j['colors'] as int,
-        mode: PopMode.byId(j['mode'] as String?),
-        goal: PopGoal.byId(j['goal'] as String?),
-        start: (j['start'] as List).cast<int>(),
-        reserve: [for (final c in j['reserve'] as List) (c as List).cast<int>()],
-        target: j['target'] as int,
-        plan: (j['plan'] as List).cast<int>(),
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    colors: j['colors'] as int,
+    mode: PopMode.byId(j['mode'] as String?),
+    goal: PopGoal.byId(j['goal'] as String?),
+    start: (j['start'] as List).cast<int>(),
+    reserve: [for (final c in j['reserve'] as List) (c as List).cast<int>()],
+    target: j['target'] as int,
+    plan: (j['plan'] as List).cast<int>(),
+  );
 }
 
 class PopState {
-  const PopState({required this.cells, required this.ids, required this.score, required this.moves, required this.used});
+  const PopState({
+    required this.cells,
+    required this.ids,
+    required this.score,
+    required this.moves,
+    required this.used,
+  });
 
   factory PopState.initial(PopPuzzle p) =>
       PopState(cells: p.start, ids: List.generate(p.start.length, (i) => i), score: 0, moves: 0, used: 0);
@@ -124,12 +130,12 @@ class PopState {
   Map<String, dynamic> toJson() => {'cells': cells, 'ids': ids, 'score': score, 'moves': moves, 'used': used};
 
   factory PopState.fromJson(Map<String, dynamic> j) => PopState(
-        cells: (j['cells'] as List).cast<int>(),
-        ids: (j['ids'] as List).cast<int>(),
-        score: j['score'] as int,
-        moves: j['moves'] as int,
-        used: j['used'] as int,
-      );
+    cells: (j['cells'] as List).cast<int>(),
+    ids: (j['ids'] as List).cast<int>(),
+    score: j['score'] as int,
+    moves: j['moves'] as int,
+    used: j['used'] as int,
+  );
 }
 
 /// Points for popping a group of [n].
@@ -199,7 +205,10 @@ PopState? popAt(PopPuzzle p, PopState s, int i) {
     // Each row slides right. Row lengths shrink going up, so nothing floats.
     final next = [for (var c = 0; c < cols; c++) <(int, int)>[]];
     for (var h = 0; h < rows; h++) {
-      final row = [for (final col in columns) if (col.length > h) col[h]];
+      final row = [
+        for (final col in columns)
+          if (col.length > h) col[h],
+      ];
       for (var k = 0; k < row.length; k++) {
         next[cols - row.length + k].add(row[k]);
       }

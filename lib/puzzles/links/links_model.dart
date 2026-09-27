@@ -17,22 +17,22 @@ class LinksPuzzle {
 
   /// Pair of the dot on each cell, or -1.
   List<int> get dots => _dots[this] ??= () {
-        final d = List<int>.filled(rows * cols, -1);
-        for (var k = 0; k < paths.length; k++) {
-          d[paths[k].first] = k;
-          d[paths[k].last] = k;
-        }
-        return d;
-      }();
+    final d = List<int>.filled(rows * cols, -1);
+    for (var k = 0; k < paths.length; k++) {
+      d[paths[k].first] = k;
+      d[paths[k].last] = k;
+    }
+    return d;
+  }();
   static final _dots = Expando<List<int>>();
 
   Map<String, dynamic> toJson() => {'rows': rows, 'cols': cols, 'paths': paths};
 
   factory LinksPuzzle.fromJson(Map<String, dynamic> j) => LinksPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        paths: [for (final p in j['paths'] as List) (p as List).cast<int>()],
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    paths: [for (final p in j['paths'] as List) (p as List).cast<int>()],
+  );
 }
 
 /// The player's paths, one per pair (empty, or starting at one of its dots).

@@ -45,10 +45,10 @@ class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(8),
+  };
   @override
   Day get dailySince => const Day(2026, 9, 28);
   @override
@@ -82,7 +82,10 @@ class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
   Set<Pos> conflicts(RailsPuzzle puzzle, LoopMarks state) {
     final lines = state.lines;
     final n = puzzle.rows * puzzle.cols;
-    final bad = {for (var i = 0; i < n; i++) if (railsDegree(puzzle, lines, i) > 2) i};
+    final bad = {
+      for (var i = 0; i < n; i++)
+        if (railsDegree(puzzle, lines, i) > 2) i,
+    };
     final walk = railsWalk(puzzle, lines);
     if (walk.done) {
       final used = railsUsed(puzzle, lines);

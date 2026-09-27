@@ -26,8 +26,10 @@ void main() {
           }
           ms.sort();
           final mean = ms.reduce((a, b) => a + b) / ms.length;
-          lines.add('${type.id.padRight(8)} ${size.label.padRight(6)} ${d.name.padRight(7)} '
-              'mean ${mean.toStringAsFixed(0).padLeft(6)}ms  max ${ms.last.toString().padLeft(6)}ms');
+          lines.add(
+            '${type.id.padRight(8)} ${size.label.padRight(6)} ${d.name.padRight(7)} '
+            'mean ${mean.toStringAsFixed(0).padLeft(6)}ms  max ${ms.last.toString().padLeft(6)}ms',
+          );
         }
       }
       // ignore: avoid_print

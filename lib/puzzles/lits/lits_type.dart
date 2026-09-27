@@ -50,18 +50,18 @@ class LitsType extends ValueGridType<LitsPuzzle> {
   GridSize get defaultSize => const GridSize.square(6);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(5),
-        Difficulty.medium => const GridSize.square(6),
-        _ => const GridSize.square(7),
-      };
+    Difficulty.easy => const GridSize.square(5),
+    Difficulty.medium => const GridSize.square(6),
+    _ => const GridSize.square(7),
+  };
   @override
   double get gapRatio => 0.06;
 
   @override
   List<ValueSpec> get values => [
-        ValueSpec.custom((context, size) => const SizedBox.shrink(), label: 'shade'),
-        ValueSpec.custom((context, size) => DotSymbol(size: size), label: 'dot'),
-      ];
+    ValueSpec.custom((context, size) => const SizedBox.shrink(), label: 'shade'),
+    ValueSpec.custom((context, size) => DotSymbol(size: size), label: 'dot'),
+  ];
 
   @override
   LitsPuzzle generate(GenParams params) => generateLits(params);
@@ -83,9 +83,9 @@ class LitsType extends ValueGridType<LitsPuzzle> {
 
   @override
   Set<Pos> conflicts(LitsPuzzle puzzle, ValueGrid state) => {
-        for (final i in litsConflicts(puzzle.n, puzzle.regions, _shaded(state), complete: isComplete(puzzle, state)))
-          puzzle.size.pos(i),
-      };
+    for (final i in litsConflicts(puzzle.n, puzzle.regions, _shaded(state), complete: isComplete(puzzle, state)))
+      puzzle.size.pos(i),
+  };
 
   @override
   HintResult<ValueGrid>? hint(LitsPuzzle puzzle, ValueGrid state) {
@@ -116,13 +116,16 @@ class LitsType extends ValueGridType<LitsPuzzle> {
       if (s.cells[i].value == litsShade) byRegion[p.regions[i]].add(i);
     }
     final shapes = [for (final cells in byRegion) cells.length == 4 ? classify(cells, p.n) : null];
-    return _ShapeScope(shapes: shapes, child: Builder(builder: (context) => super.buildBoard(context, controller)));
+    return _ShapeScope(
+      shapes: shapes,
+      child: Builder(builder: (context) => super.buildBoard(context, controller)),
+    );
   }
 
   @override
   List<Widget> buildOverlay(BuildContext context, LitsPuzzle puzzle, BoardMetrics m) => [
-        RegionBorders(metrics: m, regionOf: (i) => puzzle.regions[i], color: Theme.of(context).colorScheme.onSurface),
-      ];
+    RegionBorders(metrics: m, regionOf: (i) => puzzle.regions[i], color: Theme.of(context).colorScheme.onSurface),
+  ];
 
   @override
   Map<String, dynamic> encodePuzzle(LitsPuzzle puzzle) => puzzle.toJson();

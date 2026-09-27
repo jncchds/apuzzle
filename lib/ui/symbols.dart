@@ -11,9 +11,9 @@ class CrownSymbol extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-        size: Size.square(size),
-        painter: _CrownPainter(color ?? Theme.of(context).colorScheme.onSurface),
-      );
+    size: Size.square(size),
+    painter: _CrownPainter(color ?? Theme.of(context).colorScheme.onSurface),
+  );
 }
 
 class _CrownPainter extends CustomPainter {
@@ -51,25 +51,34 @@ class DotSymbol extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox.square(
-        dimension: size,
-        child: Center(
-          child: Container(
-            width: size * 0.2,
-            height: size * 0.2,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: color ?? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
-            ),
-          ),
+    dimension: size,
+    child: Center(
+      child: Container(
+        width: size * 0.2,
+        height: size * 0.2,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: color ?? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
         ),
-      );
+      ),
+    ),
+  );
 }
 
 /// Soft pastel palette for regions (works on light and dark backgrounds).
 const regionColors = <Color>[
-  Color(0xFFB39DDB), Color(0xFF90CAF9), Color(0xFFA5D6A7), Color(0xFFFFCC80), Color(0xFFEF9A9A),
-  Color(0xFF80DEEA), Color(0xFFF48FB1), Color(0xFFE6EE9C), Color(0xFFBCAAA4), Color(0xFFB0BEC5),
-  Color(0xFFFFAB91), Color(0xFFCE93D8),
+  Color(0xFFB39DDB),
+  Color(0xFF90CAF9),
+  Color(0xFFA5D6A7),
+  Color(0xFFFFCC80),
+  Color(0xFFEF9A9A),
+  Color(0xFF80DEEA),
+  Color(0xFFF48FB1),
+  Color(0xFFE6EE9C),
+  Color(0xFFBCAAA4),
+  Color(0xFFB0BEC5),
+  Color(0xFFFFAB91),
+  Color(0xFFCE93D8),
 ];
 
 /// A small ridge tent with a door flap.

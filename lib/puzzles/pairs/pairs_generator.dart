@@ -97,7 +97,10 @@ List<int>? _grow(int n, List<bool> shaded, int tier, Random rng) {
   for (var round = 0; round < 30; round++) {
     if (round > 0) {
       // Stuck cells: free the cells around one and grow again from there.
-      final left = [for (var i = 0; i < n * n; i++) if (regions[i] < 0) i];
+      final left = [
+        for (var i = 0; i < n * n; i++)
+          if (regions[i] < 0) i,
+      ];
       final x = left[rng.nextInt(left.length)];
       final xr = x ~/ n, xc = x % n;
       for (var i = 0; i < n * n; i++) {
@@ -133,13 +136,24 @@ List<int>? _grow(int n, List<bool> shaded, int tier, Random rng) {
   return null;
 }
 
-void _growFree(int n, List<int> regions, List<int> size, int count, Set<int> rejected, List<List<int>> nb,
-    bool Function() solvable, Random rng) {
+void _growFree(
+  int n,
+  List<int> regions,
+  List<int> size,
+  int count,
+  Set<int> rejected,
+  List<List<int>> nb,
+  bool Function() solvable,
+  Random rng,
+) {
   while (true) {
     final moves = <(int, int)>[
       for (var i = 0; i < n * n; i++)
         if (regions[i] < 0)
-          for (final r in {for (final j in nb[i]) if (regions[j] >= 0) regions[j]})
+          for (final r in {
+            for (final j in nb[i])
+              if (regions[j] >= 0) regions[j],
+          })
             if (!rejected.contains(i * count + r)) (i, r),
     ];
     if (moves.isEmpty) break;
@@ -172,4 +186,3 @@ void _growFree(int n, List<int> regions, List<int> size, int count, Set<int> rej
     }
   }
 }
-

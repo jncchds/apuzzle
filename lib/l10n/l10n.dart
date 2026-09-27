@@ -28,18 +28,18 @@ Locale resolveAppLocale(Iterable<Locale>? preferred) {
 /// Tooltip name of a palette value ([ValueSpec.label] is a key for
 /// non-text values, and the text itself for text ones).
 String valueName(AppLocalizations l, String key) => switch (key) {
-      'sun' => l.valueSun,
-      'moon' => l.valueMoon,
-      'dot' => l.valueDot,
-      'crown' => l.valueCrown,
-      'shade' => l.valueShade,
-      'grass' => l.valueGrass,
-      'tent' => l.valueTent,
-      'sea' => l.valueSea,
-      'lamp' => l.valueLamp,
-      'blue' => l.colorBlue,
-      'pink' => l.colorPink,
-      'yellow' => l.colorYellow,
-      'green' => l.colorGreen,
-      _ => key,
-    };
+  'sun' => l.valueSun,
+  'moon' => l.valueMoon,
+  'dot' => l.valueDot,
+  'crown' => l.valueCrown,
+  'shade' => l.valueShade,
+  'grass' => l.valueGrass,
+  'tent' => l.valueTent,
+  'sea' => l.valueSea,
+  'lamp' => l.valueLamp,
+  'blue' => l.colorBlue,
+  'pink' => l.colorPink,
+  'yellow' => l.colorYellow,
+  'green' => l.colorGreen,
+  _ => key,
+};

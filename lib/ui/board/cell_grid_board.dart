@@ -153,65 +153,71 @@ class CellGridBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, cons) {
-      final m = BoardMetrics.fit(
-        space: cons.biggest,
-        rows: rows,
-        cols: cols,
-        gapRatio: gapRatio,
-        sectionRows: sectionRows,
-        sectionCols: sectionCols,
-        sectionGapRatio: sectionGapRatio,
-        maxCell: maxCell,
-        headerCols: headerCols,
-        headerRows: headerRows,
-      );
-
-      final children = <Widget>[
-        if (underlayBuilder != null) ...underlayBuilder!(context, m),
-      ];
-      for (var r = 0; r < rows; r++) {
-        for (var c = 0; c < cols; c++) {
-          final pos = Pos(r, c);
-          final o = m.topLeft(pos);
-          Widget child = GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onTap == null ? null : () => onTap!(pos),
-            onLongPress: onSecondary == null ? null : () => onSecondary!(pos),
-            onSecondaryTap: onSecondary == null ? null : () => onSecondary!(pos),
-            child: cellBuilder(context, pos, m),
-          );
-          if (win != null) child = _WinBump(win: win!, pos: pos, rows: rows, cols: cols, child: child);
-          children.add(Positioned(left: o.dx, top: o.dy, width: m.cell, height: m.cell, child: child));
-        }
-      }
-      if (overlayBuilder != null) {
-        children.add(Positioned.fill(
-          child: IgnorePointer(child: Stack(clipBehavior: Clip.none, children: overlayBuilder!(context, m))),
-        ));
-      }
-      Widget board = SizedBox(
-        width: m.width,
-        height: m.height,
-        child: Stack(clipBehavior: Clip.none, children: children),
-      );
-      if (onDragStart != null) {
-        board = GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          // Start drags where the finger went down, not after the slop.
-          dragStartBehavior: DragStartBehavior.down,
-          onPanStart: (d) {
-            final p = m.cellAt(d.localPosition);
-            if (p != null) onDragStart!(p, d.localPosition);
-          },
-          onPanUpdate: (d) => onDragUpdate?.call(m.cellAt(d.localPosition), d.localPosition),
-          onPanEnd: (_) => onDragEnd?.call(),
-          onPanCancel: () => onDragEnd?.call(),
-          child: board,
+    return LayoutBuilder(
+      builder: (context, cons) {
+        final m = BoardMetrics.fit(
+          space: cons.biggest,
+          rows: rows,
+          cols: cols,
+          gapRatio: gapRatio,
+          sectionRows: sectionRows,
+          sectionCols: sectionCols,
+          sectionGapRatio: sectionGapRatio,
+          maxCell: maxCell,
+          headerCols: headerCols,
+          headerRows: headerRows,
         );
-      }
-      return Center(child: board);
-    });
+
+        final children = <Widget>[
+          if (underlayBuilder != null) ...underlayBuilder!(context, m),
+        ];
+        for (var r = 0; r < rows; r++) {
+          for (var c = 0; c < cols; c++) {
+            final pos = Pos(r, c);
+            final o = m.topLeft(pos);
+            Widget child = GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: onTap == null ? null : () => onTap!(pos),
+              onLongPress: onSecondary == null ? null : () => onSecondary!(pos),
+              onSecondaryTap: onSecondary == null ? null : () => onSecondary!(pos),
+              child: cellBuilder(context, pos, m),
+            );
+            if (win != null) child = _WinBump(win: win!, pos: pos, rows: rows, cols: cols, child: child);
+            children.add(Positioned(left: o.dx, top: o.dy, width: m.cell, height: m.cell, child: child));
+          }
+        }
+        if (overlayBuilder != null) {
+          children.add(
+            Positioned.fill(
+              child: IgnorePointer(
+                child: Stack(clipBehavior: Clip.none, children: overlayBuilder!(context, m)),
+              ),
+            ),
+          );
+        }
+        Widget board = SizedBox(
+          width: m.width,
+          height: m.height,
+          child: Stack(clipBehavior: Clip.none, children: children),
+        );
+        if (onDragStart != null) {
+          board = GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            // Start drags where the finger went down, not after the slop.
+            dragStartBehavior: DragStartBehavior.down,
+            onPanStart: (d) {
+              final p = m.cellAt(d.localPosition);
+              if (p != null) onDragStart!(p, d.localPosition);
+            },
+            onPanUpdate: (d) => onDragUpdate?.call(m.cellAt(d.localPosition), d.localPosition),
+            onPanEnd: (_) => onDragEnd?.call(),
+            onPanCancel: () => onDragEnd?.call(),
+            child: board,
+          );
+        }
+        return Center(child: board);
+      },
+    );
   }
 }
 

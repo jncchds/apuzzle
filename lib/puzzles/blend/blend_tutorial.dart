@@ -10,7 +10,14 @@ import 'blend_type.dart';
 BlendPuzzle _board(List<String> rows, {int colors = 3}) {
   final start = [for (final ch in rows.join().split('')) int.parse(ch)];
   final plan = blendSolve(start, rows.length, rows.first.length, colors, Random(0));
-  return BlendPuzzle(rows: rows.length, cols: rows.first.length, colors: colors, start: start, limit: plan.length, plan: plan);
+  return BlendPuzzle(
+    rows: rows.length,
+    cols: rows.first.length,
+    colors: colors,
+    start: start,
+    limit: plan.length,
+    plan: plan,
+  );
 }
 
 final List<TutorialStep> blendTutorial = [
@@ -18,13 +25,15 @@ final List<TutorialStep> blendTutorial = [
   TutorialStep(text: (l) => l.tutBlend2, puzzle: _board(['010', '121', '010']), focus: {const Pos(1, 1)}),
   TutorialStep.generated(
     text: (l) => l.tutBlend3,
-    make: () => const BlendType().generate(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 4)),
+    make: () =>
+        const BlendType().generate(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 4)),
   ),
 ];
 
 final List<TutorialStep> blendStrategies = [
   TutorialStep.generated(
     text: (l) => l.tutBlendS1,
-    make: () => const BlendType().generate(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
+    make: () =>
+        const BlendType().generate(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

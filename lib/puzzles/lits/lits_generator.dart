@@ -146,7 +146,10 @@ bool _unique(int n, List<int> regions) => LitsSolver(n, regions).solutions(budge
   final byCell = List.generate(n * n, (_) => <List<int>>[]);
   for (final t in _allTetros(n)) {
     for (final i in t) {
-      byCell[i].add([for (final j in t) if (j != i) j]);
+      byCell[i].add([
+        for (final j in t)
+          if (j != i) j,
+      ]);
     }
   }
 
@@ -167,12 +170,19 @@ bool _unique(int n, List<int> regions) => LitsSolver(n, regions).solutions(budge
     final pairs = <(double, int, int)>[];
     for (var u = 0; u < n * n; u++) {
       if (regions[u] >= 0) continue;
-      final opts = {for (final j in _nb(n, u)) if (regions[j] >= 0) regions[j]};
-      final live = [for (final r in opts) if (!failed.contains(u * 1000 + r)) r];
+      final opts = {
+        for (final j in _nb(n, u))
+          if (regions[j] >= 0) regions[j],
+      };
+      final live = [
+        for (final r in opts)
+          if (!failed.contains(u * 1000 + r)) r,
+      ];
       if (live.isEmpty && opts.isNotEmpty) return (null, u);
       final rank = first.indexOf(u);
       for (final r in live) {
-        final score = (rank >= 0 ? rank - 1000 : live.length * 100) +
+        final score =
+            (rank >= 0 ? rank - 1000 : live.length * 100) +
             newPlacements(u, r) * greed +
             size[r] * 0.35 +
             rng.nextDouble() * 1.5;

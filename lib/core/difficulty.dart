@@ -8,11 +8,11 @@ enum Difficulty {
   expert;
 
   String label(AppLocalizations l) => switch (this) {
-        easy => l.difficultyEasy,
-        medium => l.difficultyMedium,
-        hard => l.difficultyHard,
-        expert => l.difficultyExpert,
-      };
+    easy => l.difficultyEasy,
+    medium => l.difficultyMedium,
+    hard => l.difficultyHard,
+    expert => l.difficultyExpert,
+  };
 }
 
 /// Everything needed to (re)generate a puzzle deterministically.
@@ -33,16 +33,16 @@ class GenParams {
   String get variant => [difficulty.name, ...options.values].join('.');
 
   Map<String, dynamic> toJson() => {
-        'size': size.toJson(),
-        'difficulty': difficulty.name,
-        'seed': seed,
-        if (options.isNotEmpty) 'options': options,
-      };
+    'size': size.toJson(),
+    'difficulty': difficulty.name,
+    'seed': seed,
+    if (options.isNotEmpty) 'options': options,
+  };
 
   factory GenParams.fromJson(Map<String, dynamic> j) => GenParams(
-        size: GridSize.fromJson(j['size'] as Map<String, dynamic>),
-        difficulty: Difficulty.values.byName(j['difficulty'] as String),
-        seed: j['seed'] as int,
-        options: (j['options'] as Map<String, dynamic>?)?.cast<String, String>() ?? const {},
-      );
+    size: GridSize.fromJson(j['size'] as Map<String, dynamic>),
+    difficulty: Difficulty.values.byName(j['difficulty'] as String),
+    seed: j['seed'] as int,
+    options: (j['options'] as Map<String, dynamic>?)?.cast<String, String>() ?? const {},
+  );
 }

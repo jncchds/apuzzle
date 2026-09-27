@@ -19,7 +19,10 @@ bool playsThrough(MinesPuzzle p, int tier) {
       if (k[i] == 1) expect(p.mines[i], isTrue);
       if (k[i] == 0) expect(p.mines[i], isFalse);
     }
-    final fresh = [for (var i = 0; i < k.length; i++) if (k[i] == 0 && !open[i]) i];
+    final fresh = [
+      for (var i = 0; i < k.length; i++)
+        if (k[i] == 0 && !open[i]) i,
+    ];
     if (fresh.isEmpty) return false;
     openCells(open, fresh, p.mines, counts, kn);
     for (var i = 0; i < k.length; i++) {
@@ -30,7 +33,12 @@ bool playsThrough(MinesPuzzle p, int tier) {
 }
 
 void main() {
-  for (final size in [const GridSize.square(6), const GridSize.square(8), const GridSize(10, 8), const GridSize(14, 10)]) {
+  for (final size in [
+    const GridSize.square(6),
+    const GridSize.square(8),
+    const GridSize(10, 8),
+    const GridSize(14, 10),
+  ]) {
     for (final d in [Difficulty.easy, Difficulty.medium, Difficulty.hard]) {
       test('mines ${size.label} ${d.name}: no guessing, deterministic, fast', () {
         final info = <String>[];

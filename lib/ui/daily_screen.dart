@@ -51,8 +51,7 @@ class _DailyScreenState extends State<DailyScreen> {
       appBar: AppBar(
         title: Text(l.dailyTitle),
         actions: [
-          if (widget.day != today)
-            TextButton(onPressed: () => router.selectDailyDay(today), child: Text(l.dailyToday)),
+          if (widget.day != today) TextButton(onPressed: () => router.selectDailyDay(today), child: Text(l.dailyToday)),
         ],
       ),
       body: ValueListenableBuilder(
@@ -108,49 +107,54 @@ class _MonthCalendar extends StatelessWidget {
     final lead = (month.date.weekday % 7 - firstWeekday) % 7;
     final canBack = dailyLaunch.addMonths(0) < month;
     final canForward = month < today.addMonths(0);
-    return Column(children: [
-      Row(children: [
-        IconButton(
-          icon: const Icon(Icons.chevron_left_rounded),
-          tooltip: ml.previousMonthTooltip,
-          onPressed: canBack ? () => onMonth(month.addMonths(-1)) : null,
-        ),
-        Expanded(
-          child: Text(
-            ml.formatMonthYear(month.date),
-            textAlign: TextAlign.center,
-            style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
-          ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.chevron_right_rounded),
-          tooltip: ml.nextMonthTooltip,
-          onPressed: canForward ? () => onMonth(month.addMonths(1)) : null,
-        ),
-      ]),
-      const SizedBox(height: 4),
-      Row(children: [
-        for (var i = 0; i < 7; i++)
-          Expanded(
-            child: Text(
-              ml.narrowWeekdays[(firstWeekday + i) % 7],
-              textAlign: TextAlign.center,
-              style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+    return Column(
+      children: [
+        Row(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.chevron_left_rounded),
+              tooltip: ml.previousMonthTooltip,
+              onPressed: canBack ? () => onMonth(month.addMonths(-1)) : null,
             ),
-          ),
-      ]),
-      const SizedBox(height: 4),
-      GridView.count(
-        crossAxisCount: 7,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          for (var i = 0; i < lead; i++) const SizedBox.shrink(),
-          for (var d = 1; d <= month.daysInMonth; d++)
-            _dayCell(context, store, Day(month.year, month.month, d)),
-        ],
-      ),
-    ]);
+            Expanded(
+              child: Text(
+                ml.formatMonthYear(month.date),
+                textAlign: TextAlign.center,
+                style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.chevron_right_rounded),
+              tooltip: ml.nextMonthTooltip,
+              onPressed: canForward ? () => onMonth(month.addMonths(1)) : null,
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            for (var i = 0; i < 7; i++)
+              Expanded(
+                child: Text(
+                  ml.narrowWeekdays[(firstWeekday + i) % 7],
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                ),
+              ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        GridView.count(
+          crossAxisCount: 7,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            for (var i = 0; i < lead; i++) const SizedBox.shrink(),
+            for (var d = 1; d <= month.daysInMonth; d++) _dayCell(context, store, Day(month.year, month.month, d)),
+          ],
+        ),
+      ],
+    );
   }
 
   Widget _dayCell(BuildContext context, GameStore store, Day day) {
@@ -194,10 +198,10 @@ class _DayCell extends StatelessWidget {
     final color = !enabled
         ? scheme.onSurface.withValues(alpha: 0.3)
         : complete
-            ? scheme.onPrimary
-            : today
-                ? scheme.primary
-                : scheme.onSurface;
+        ? scheme.onPrimary
+        : today
+        ? scheme.primary
+        : scheme.onSurface;
     return Padding(
       padding: const EdgeInsets.all(2),
       child: Material(
@@ -248,8 +252,13 @@ class _RingPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
     canvas.drawCircle(center, radius, stroke..color = scheme.outlineVariant.withValues(alpha: 0.5));
     if (fraction > 0) {
-      canvas.drawArc(Rect.fromCircle(center: center, radius: radius), -pi / 2, 2 * pi * fraction, false,
-          stroke..color = scheme.primary);
+      canvas.drawArc(
+        Rect.fromCircle(center: center, radius: radius),
+        -pi / 2,
+        2 * pi * fraction,
+        false,
+        stroke..color = scheme.primary,
+      );
     }
   }
 
@@ -267,18 +276,20 @@ class _DayHeader extends StatelessWidget {
     final theme = Theme.of(context);
     final l = context.l10n;
     final p = dailyProgress(context.read<GameStore>(), day);
-    return Row(children: [
-      Expanded(
-        child: Text(
-          MaterialLocalizations.of(context).formatFullDate(day.date),
-          style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            MaterialLocalizations.of(context).formatFullDate(day.date),
+            style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+          ),
         ),
-      ),
-      Text(
-        p.done == p.total ? l.dailyDayComplete : l.dailyProgress(p.done, p.total),
-        style: theme.textTheme.labelLarge?.copyWith(color: p.done == p.total ? theme.colorScheme.primary : null),
-      ),
-    ]);
+        Text(
+          p.done == p.total ? l.dailyDayComplete : l.dailyProgress(p.done, p.total),
+          style: theme.textTheme.labelLarge?.copyWith(color: p.done == p.total ? theme.colorScheme.primary : null),
+        ),
+      ],
+    );
   }
 }
 
@@ -300,35 +311,52 @@ class _GameRow extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 6),
       child: Padding(
         padding: const EdgeInsets.all(12),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: type.accent.withValues(alpha: 0.18),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(type.icon, color: type.accent, size: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: type.accent.withValues(alpha: 0.18),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(type.icon, color: type.accent, size: 24),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(type.name(l), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+                      Text(
+                        type.tagline(l),
+                        style: theme.textTheme.bodySmall,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(type.name(l), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
-                Text(type.tagline(l), style: theme.textTheme.bodySmall, maxLines: 1, overflow: TextOverflow.ellipsis),
-              ]),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final d in type.difficulties)
+                  _DifficultyChip(
+                    label: d.label(l),
+                    result: results[GameStore.dailyEntry(type.id, d)],
+                    inProgress: store.hasSave(GameStore.dailySlot(PuzzleCode.format(type, dailyParams(day, type, d)))),
+                    onTap: () => offerTutorial(context, type, play: () => router.openDailyGame(day, type, d)),
+                  ),
+              ],
             ),
-          ]),
-          const SizedBox(height: 10),
-          Wrap(spacing: 8, runSpacing: 8, children: [
-            for (final d in type.difficulties)
-              _DifficultyChip(
-                label: d.label(l),
-                result: results[GameStore.dailyEntry(type.id, d)],
-                inProgress: store.hasSave(GameStore.dailySlot(PuzzleCode.format(type, dailyParams(day, type, d)))),
-                onTap: () => offerTutorial(context, type, play: () => router.openDailyGame(day, type, d)),
-              ),
-          ]),
-        ]),
+          ],
+        ),
       ),
     );
   }
@@ -349,8 +377,8 @@ class _DifficultyChip extends StatelessWidget {
     final avatar = r != null
         ? const Icon(Icons.check_circle_rounded)
         : inProgress
-            ? Tooltip(message: l.inProgress, child: const Icon(Icons.timelapse_rounded))
-            : const Icon(Icons.play_arrow_rounded);
+        ? Tooltip(message: l.inProgress, child: const Icon(Icons.timelapse_rounded))
+        : const Icon(Icons.play_arrow_rounded);
     return ActionChip(
       avatar: avatar,
       label: Text(r == null ? label : '$label · ${formatDuration(r.best)}'),

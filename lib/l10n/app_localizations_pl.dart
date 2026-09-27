@@ -84,15 +84,13 @@ class AppLocalizationsPl extends AppLocalizations {
   String get highlightErrors => 'Podświetlaj błędy podczas gry';
 
   @override
-  String get highlightErrorsHint =>
-      'Wyłączone: błędy widać dopiero po naciśnięciu „Sprawdź”';
+  String get highlightErrorsHint => 'Wyłączone: błędy widać dopiero po naciśnięciu „Sprawdź”';
 
   @override
   String get autoClearMarks => 'Automatycznie usuwaj notatki';
 
   @override
-  String get autoClearMarksHint =>
-      'Wpisanie liczby usuwa tę notatkę z jej wiersza, kolumny i bloku';
+  String get autoClearMarksHint => 'Wpisanie liczby usuwa tę notatkę z jej wiersza, kolumny i bloku';
 
   @override
   String get haptics => 'Wibracje';
@@ -122,8 +120,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get linksTitle => 'Otwieraj linki do łamigłówek w aplikacji';
 
   @override
-  String get linksOn =>
-      'Udostępnione linki do łamigłówek otwierają się w APuzzle';
+  String get linksOn => 'Udostępnione linki do łamigłówek otwierają się w APuzzle';
 
   @override
   String linksOff(Object host) {
@@ -151,8 +148,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get restartTitle => 'Zacząć od nowa?';
 
   @override
-  String get restartBody =>
-      'Wszystkie wpisy zostaną wyczyszczone. Nadal możesz to cofnąć.';
+  String get restartBody => 'Wszystkie wpisy zostaną wyczyszczone. Nadal możesz to cofnąć.';
 
   @override
   String get cancel => 'Anuluj';
@@ -316,8 +312,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get codeOtherVersion =>
-      'Ten kod pochodzi z innej wersji aplikacji, więc łamigłówka by się nie zgadzała';
+  String get codeOtherVersion => 'Ten kod pochodzi z innej wersji aplikacji, więc łamigłówka by się nie zgadzała';
 
   @override
   String codeNoOption(Object choice, Object name) {
@@ -464,22 +459,19 @@ class AppLocalizationsPl extends AppLocalizations {
   String get popModeStandard => 'Standardowy';
 
   @override
-  String get popModeStandardHint =>
-      'Bąbelki spadają w dół; puste kolumny przesuwają się w prawo.';
+  String get popModeStandardHint => 'Bąbelki spadają w dół; puste kolumny przesuwają się w prawo.';
 
   @override
   String get popModeShifter => 'Przesuwanie';
 
   @override
-  String get popModeShifterHint =>
-      'Wiersze też przesuwają się w prawo, zamykając każdą lukę.';
+  String get popModeShifterHint => 'Wiersze też przesuwają się w prawo, zamykając każdą lukę.';
 
   @override
   String get popModeContinuous => 'Ciągły';
 
   @override
-  String get popModeContinuousHint =>
-      'Gdy zwalnia się miejsce, z lewej wjeżdżają nowe kolumny.';
+  String get popModeContinuousHint => 'Gdy zwalnia się miejsce, z lewej wjeżdżają nowe kolumny.';
 
   @override
   String get popModeMega => 'Mega';
@@ -522,14 +514,10 @@ class AppLocalizationsPl extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other:
-          'Brak ruchów, na planszy zostało $count bąbelka: cofnij lub zacznij od nowa',
-      many:
-          'Brak ruchów, na planszy zostało $count bąbelków: cofnij lub zacznij od nowa',
-      few:
-          'Brak ruchów, na planszy zostały $count bąbelki: cofnij lub zacznij od nowa',
-      one:
-          'Brak ruchów, na planszy został $count bąbelek: cofnij lub zacznij od nowa',
+      other: 'Brak ruchów, na planszy zostało $count bąbelka: cofnij lub zacznij od nowa',
+      many: 'Brak ruchów, na planszy zostało $count bąbelków: cofnij lub zacznij od nowa',
+      few: 'Brak ruchów, na planszy zostały $count bąbelki: cofnij lub zacznij od nowa',
+      one: 'Brak ruchów, na planszy został $count bąbelek: cofnij lub zacznij od nowa',
     );
     return '$_temp0';
   }
@@ -576,12 +564,10 @@ class AppLocalizationsPl extends AppLocalizations {
   String get mergeGoalTarget => 'Zbuduj kafelek';
 
   @override
-  String get mergeGoalTargetHint =>
-      'Osiągnij docelowy kafelek, zanim plansza się zablokuje.';
+  String get mergeGoalTargetHint => 'Osiągnij docelowy kafelek, zanim plansza się zablokuje.';
 
   @override
-  String get mergeGoalFreeHint =>
-      'Bez celu: graj, aż plansza się zablokuje, i pobij swój rekord.';
+  String get mergeGoalFreeHint => 'Bez celu: graj, aż plansza się zablokuje, i pobij swój rekord.';
 
   @override
   String mergeReached(int tile) {
@@ -749,8 +735,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get pairsName => 'Pary';
 
   @override
-  String get pairsTagline =>
-      'Dwa zamalowane pola obok siebie w każdym obszarze';
+  String get pairsTagline => 'Dwa zamalowane pola obok siebie w każdym obszarze';
 
   @override
   String get pairsRules =>
@@ -760,8 +745,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get plotsName => 'Działki';
 
   @override
-  String get plotsTagline =>
-      'Podziel planszę na działki tak duże jak ich liczby';
+  String get plotsTagline => 'Podziel planszę na działki tak duże jak ich liczby';
 
   @override
   String get plotsRules =>
@@ -781,8 +765,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get arrowsName => 'Strzałki';
 
   @override
-  String get arrowsTagline =>
-      'Zamaluj, co liczą strzałki, a resztę obejdź pętlą';
+  String get arrowsTagline => 'Zamaluj, co liczą strzałki, a resztę obejdź pętlą';
 
   @override
   String get arrowsRules =>
@@ -817,8 +800,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get tutorialOfferBody =>
-      'Najpierw krótka interaktywna lekcja? Kilka małych plansz pokaże wszystkie zasady.';
+  String get tutorialOfferBody => 'Najpierw krótka interaktywna lekcja? Kilka małych plansz pokaże wszystkie zasady.';
 
   @override
   String get tutorialOfferNo => 'Nie, dziękuję';
@@ -907,8 +889,7 @@ class AppLocalizationsPl extends AppLocalizations {
       '„=” między dwoma polami oznacza, że mają ten sam symbol. Wstaw w zaznaczone pola to samo, co mają sąsiedzi.';
 
   @override
-  String get tutMambo4 =>
-      '„×” oznacza, że pola są różne: jedno słońce, jeden księżyc.';
+  String get tutMambo4 => '„×” oznacza, że pola są różne: jedno słońce, jeden księżyc.';
 
   @override
   String get tutMambo5 =>
@@ -931,8 +912,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'Według wiersza te dwa pola mogą mieć 3 lub 4. Rozstrzygają kolumny: w każdej brakuje tylko jednej liczby.';
 
   @override
-  String get tutSudoku3 =>
-      'Bloki też się liczą: w każdym bloku 1–4 występują raz. Dokończ ostatni blok.';
+  String get tutSudoku3 => 'Bloki też się liczą: w każdym bloku 1–4 występują raz. Dokończ ostatni blok.';
 
   @override
   String get tutSudoku4 =>
@@ -1003,8 +983,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'Uważaj na limit ruchów: wybieraj kolor, który najbardziej powiększy plamę. Dotknięcie pola na planszy też wybiera jego kolor.';
 
   @override
-  String get tutMosaic3 =>
-      'Teraz prawdziwa plansza, z kilkoma zapasowymi ruchami.';
+  String get tutMosaic3 => 'Teraz prawdziwa plansza, z kilkoma zapasowymi ruchami.';
 
   @override
   String get tutMosaicS1 =>
@@ -1019,8 +998,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'Jeden ruch może połączyć wiele plam. Środkowa plama styka się z czterema innymi: przemaluj ją, aby je połączyć, a potem dokończ. Masz tylko 2 ruchy.';
 
   @override
-  String get tutBlend3 =>
-      'Teraz prawdziwa plansza. Wybrany kolor zostaje, więc możesz malować kilka plam z rzędu.';
+  String get tutBlend3 => 'Teraz prawdziwa plansza. Wybrany kolor zostaje, więc możesz malować kilka plam z rzędu.';
 
   @override
   String get tutBlendS1 =>
@@ -1063,8 +1041,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'W jednym ruchu kafelek łączy się tylko raz: 4, 4, 8 zmienia się w 8, 8, a nie 16. Po każdym ruchu pojawia się nowa 2 (czasem 4). Zbuduj 16.';
 
   @override
-  String get tutMerge3 =>
-      'Trzymaj największy kafelek w rogu i dokarmiaj go krok po kroku. Zbuduj 32.';
+  String get tutMerge3 => 'Trzymaj największy kafelek w rogu i dokarmiaj go krok po kroku. Zbuduj 32.';
 
   @override
   String get tutMergeS1 =>
@@ -1079,8 +1056,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'Żaden koniec rury nie może zostać otwarty, więc żadna rura nie może wychodzić poza planszę. Kafelki z kropką w rogu są zablokowane i już dobrze ustawione. Zacznij od brzegów i rogów, gdzie kafelki mają najmniej możliwości.';
 
   @override
-  String get tutPipes3 =>
-      'Teraz prawdziwa plansza. Sieć nie może tworzyć pętli.';
+  String get tutPipes3 => 'Teraz prawdziwa plansza. Sieć nie może tworzyć pętli.';
 
   @override
   String get tutPipesS1 =>
@@ -1099,8 +1075,7 @@ class AppLocalizationsPl extends AppLocalizations {
       '1 to prostokąt sam w sobie: po prostu go dotknij. Dotknij narysowanego prostokąta, aby go usunąć. Tutaj 6 pasuje tylko na jeden sposób.';
 
   @override
-  String get tutShikaku3 =>
-      'Teraz prawdziwa plansza. Duże liczby przy brzegach zwykle mają najmniej możliwości.';
+  String get tutShikaku3 => 'Teraz prawdziwa plansza. Duże liczby przy brzegach zwykle mają najmniej możliwości.';
 
   @override
   String get tutShikakuS1 =>
@@ -1219,8 +1194,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'Morze musi być połączone i nie może tworzyć basenów 2×2. Powiększ 3 tak, aby nie złamać żadnej z tych zasad. Dotknij dwa razy, aby postawić kropkę, notatkę „ląd”.';
 
   @override
-  String get tutIslands4 =>
-      'Teraz prawdziwa plansza. Każda wyspa ma dokładnie jedną liczbę.';
+  String get tutIslands4 => 'Teraz prawdziwa plansza. Każda wyspa ma dokładnie jedną liczbę.';
 
   @override
   String get tutIslandsS1 =>
@@ -1243,8 +1217,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'Lampy nigdy nie świecą na siebie, a 0 oznacza brak lampy tuż obok. Gdzie stanie druga lampa?';
 
   @override
-  String get tutLamps4 =>
-      'Teraz prawdziwa plansza. Kropkami zaznaczaj pola, na których nie może stać lampa.';
+  String get tutLamps4 => 'Teraz prawdziwa plansza. Kropkami zaznaczaj pola, na których nie może stać lampa.';
 
   @override
   String get tutLampsS1 =>
@@ -1350,8 +1323,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'Pary nigdy nie stykają się ze sobą bokami. Górna para jest gotowa, więc zaznaczone pola obok niej zostają niezamalowane: postaw na nich kropki (dotknij dwa razy), a potem dokończ planszę.';
 
   @override
-  String get tutPairs3 =>
-      'Teraz prawdziwa plansza. Małe obszary i pola otoczone kropkami to dobre miejsca na start.';
+  String get tutPairs3 => 'Teraz prawdziwa plansza. Małe obszary i pola otoczone kropkami to dobre miejsca na start.';
 
   @override
   String get tutPairsS1 =>
@@ -1386,12 +1358,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'Przeciągnij od kółka do jego pary, aby je połączyć. Ścieżki biegną przez sąsiednie pola, nigdy po przekątnej.';
 
   @override
-  String get tutLinks2 =>
-      'Ścieżki się nie krzyżują, a razem wypełniają każde pole, więc niektóre muszą iść naokoło.';
+  String get tutLinks2 => 'Ścieżki się nie krzyżują, a razem wypełniają każde pole, więc niektóre muszą iść naokoło.';
 
   @override
-  String get tutLinks3 =>
-      'Teraz prawdziwa plansza. W rogach i przy krawędziach jest najmniej dróg, więc zacznij tam.';
+  String get tutLinks3 => 'Teraz prawdziwa plansza. W rogach i przy krawędziach jest najmniej dróg, więc zacznij tam.';
 
   @override
   String get tutLinksS1 =>
@@ -1430,8 +1400,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'Mina tej 1 ma już flagę, więc wszystkie inne pola wokół są bezpieczne. Odkop je albo dotknij samej 1, aby odkopać wszystkie naraz.';
 
   @override
-  String get tutMines3 =>
-      'Pole bez min wokół samo odkrywa swoich sąsiadów. Kop w zaznaczonym rogu.';
+  String get tutMines3 => 'Pole bez min wokół samo odkrywa swoich sąsiadów. Kop w zaznaczonym rogu.';
 
   @override
   String get tutMines4 =>

@@ -19,8 +19,14 @@ RailsPuzzle generateRails(GenParams params) {
   for (var attempt = 0; attempt < 40; attempt++) {
     final region = randomLoopRegion(rows - 1, cols - 1, rng, 0.45 + rng.nextDouble() * 0.25);
     final cycle = _cycle(g, g.boundary(region));
-    final lefts = [for (var k = 0; k < cycle.length; k++) if (cycle[k] % cols == 0) k];
-    final bottoms = [for (var k = 0; k < cycle.length; k++) if (cycle[k] ~/ cols == rows - 1) k];
+    final lefts = [
+      for (var k = 0; k < cycle.length; k++)
+        if (cycle[k] % cols == 0) k,
+    ];
+    final bottoms = [
+      for (var k = 0; k < cycle.length; k++)
+        if (cycle[k] ~/ cols == rows - 1) k,
+    ];
     if (lefts.isEmpty || bottoms.isEmpty) continue;
     final a = lefts[rng.nextInt(lefts.length)], b = bottoms[rng.nextInt(bottoms.length)];
     if (a == b) continue;
@@ -40,15 +46,15 @@ RailsPuzzle generateRails(GenParams params) {
       given[i] = true;
     }
     RailsPuzzle build() => RailsPuzzle(
-          rows: rows,
-          cols: cols,
-          entry: track.first,
-          exit: track.last,
-          rowCounts: [for (var r = 0; r < rows; r++) track.where((i) => i ~/ cols == r).length],
-          colCounts: [for (var c = 0; c < cols; c++) track.where((i) => i % cols == c).length],
-          given: List.of(given),
-          lines: lines,
-        );
+      rows: rows,
+      cols: cols,
+      entry: track.first,
+      exit: track.last,
+      rowCounts: [for (var r = 0; r < rows; r++) track.where((i) => i ~/ cols == r).length],
+      colCounts: [for (var c = 0; c < cols; c++) track.where((i) => i % cols == c).length],
+      given: List.of(given),
+      lines: lines,
+    );
 
     bool solvesAt(int t) {
       final s = RailsSolver(build());

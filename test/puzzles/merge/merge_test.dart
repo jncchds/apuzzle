@@ -110,7 +110,12 @@ void main() {
   });
 
   test('share codes carry the goal', () {
-    const params = GenParams(size: GridSize.square(5), difficulty: Difficulty.hard, seed: 77, options: {'goal': 'free'});
+    const params = GenParams(
+      size: GridSize.square(5),
+      difficulty: Difficulty.hard,
+      seed: 77,
+      options: {'goal': 'free'},
+    );
     final code = PuzzleCode.format(type, params);
     expect(code, 'merge-5x5-hard.free-25-v1');
     expect(PuzzleCode.parse(code, puzzleTypes).params.options, {'goal': 'free'});

@@ -42,10 +42,10 @@ class TrailType extends PuzzleType<TrailPuzzle, TrailState> {
   GridSize get defaultSize => const GridSize.square(6);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(5),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(9),
-      };
+    Difficulty.easy => const GridSize.square(5),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(9),
+  };
   @override
   double get controlsHeight => 40;
 
@@ -168,7 +168,9 @@ class _TrailBoardState extends State<_TrailBoard> {
       onDragEnd: _end,
       underlayBuilder: (context, m) => [
         Positioned.fill(
-          child: CustomPaint(painter: _PathPainter(path: path, m: m, color: TrailType.trailColor)),
+          child: CustomPaint(
+            painter: _PathPainter(path: path, m: m, color: TrailType.trailColor),
+          ),
         ),
       ],
       cellBuilder: (context, pos, m) {
@@ -183,8 +185,8 @@ class _TrailBoardState extends State<_TrailBoard> {
               color: errors.contains(pos)
                   ? scheme.error
                   : hinted
-                      ? scheme.tertiary
-                      : scheme.outlineVariant.withValues(alpha: 0.5),
+                  ? scheme.tertiary
+                  : scheme.outlineVariant.withValues(alpha: 0.5),
               width: errors.contains(pos) || hinted ? 2.5 : 1,
             ),
           ),
@@ -201,8 +203,10 @@ class _TrailBoardState extends State<_TrailBoard> {
                     border: Border.all(color: onPath.contains(i) ? TrailType.trailColor : Colors.black26, width: 2),
                   ),
                   alignment: Alignment.center,
-                  child: Text('$v',
-                      style: TextStyle(fontSize: m.cell * 0.3, fontWeight: FontWeight.w700, color: Colors.black87)),
+                  child: Text(
+                    '$v',
+                    style: TextStyle(fontSize: m.cell * 0.3, fontWeight: FontWeight.w700, color: Colors.black87),
+                  ),
                 ),
         );
       },

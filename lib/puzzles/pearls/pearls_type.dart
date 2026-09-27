@@ -43,10 +43,10 @@ class PearlsType extends PuzzleType<PearlsPuzzle, LoopMarks> {
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(8),
+  };
   @override
   double get controlsHeight => 40;
 
@@ -128,16 +128,24 @@ class PearlsType extends PuzzleType<PearlsPuzzle, LoopMarks> {
           final r = geo.cell * 0.28;
           if (kind == pearlBlack) {
             canvas.drawCircle(c, r, Paint()..color = ink);
-            canvas.drawCircle(c, r, Paint()
-              ..color = rim
-              ..style = PaintingStyle.stroke
-              ..strokeWidth = geo.cell * 0.04);
+            canvas.drawCircle(
+              c,
+              r,
+              Paint()
+                ..color = rim
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = geo.cell * 0.04,
+            );
           } else {
             canvas.drawCircle(c, r, Paint()..color = Colors.white);
-            canvas.drawCircle(c, r, Paint()
-              ..color = ink
-              ..style = PaintingStyle.stroke
-              ..strokeWidth = geo.cell * 0.06);
+            canvas.drawCircle(
+              c,
+              r,
+              Paint()
+                ..color = ink
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = geo.cell * 0.06,
+            );
           }
         }
       },

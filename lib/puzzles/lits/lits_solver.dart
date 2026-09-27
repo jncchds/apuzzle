@@ -106,37 +106,37 @@ class LitsSolver {
 
   /// Every L/I/T/S placement on an n×n board (shared, read-only).
   static List<Placement> _placementsOn(int n) => _allPlacements.putIfAbsent(n, () {
-        final seen = <String>{};
-        final out = <Placement>[];
-        List<int> nb(int i) {
-          final r = i ~/ n, c = i % n;
-          return [if (r > 0) i - n, if (r < n - 1) i + n, if (c > 0) i - 1, if (c < n - 1) i + 1];
-        }
+    final seen = <String>{};
+    final out = <Placement>[];
+    List<int> nb(int i) {
+      final r = i ~/ n, c = i % n;
+      return [if (r > 0) i - n, if (r < n - 1) i + n, if (c > 0) i - 1, if (c < n - 1) i + 1];
+    }
 
-        void grow(List<int> cur) {
-          if (cur.length == 4) {
-            final sorted = List.of(cur)..sort();
-            if (!seen.add(sorted.join(','))) return;
-            final shape = classify(sorted, n);
-            if (shape != null) out.add(Placement(sorted, shape, n * n));
-            return;
-          }
-          final frontier = <int>{};
-          for (final i in cur) {
-            for (final j in nb(i)) {
-              if (!cur.contains(j) && j > cur.first) frontier.add(j);
-            }
-          }
-          for (final j in frontier) {
-            grow([...cur, j]);
-          }
+    void grow(List<int> cur) {
+      if (cur.length == 4) {
+        final sorted = List.of(cur)..sort();
+        if (!seen.add(sorted.join(','))) return;
+        final shape = classify(sorted, n);
+        if (shape != null) out.add(Placement(sorted, shape, n * n));
+        return;
+      }
+      final frontier = <int>{};
+      for (final i in cur) {
+        for (final j in nb(i)) {
+          if (!cur.contains(j) && j > cur.first) frontier.add(j);
         }
+      }
+      for (final j in frontier) {
+        grow([...cur, j]);
+      }
+    }
 
-        for (var i = 0; i < n * n; i++) {
-          grow([i]);
-        }
-        return out;
-      });
+    for (var i = 0; i < n * n; i++) {
+      grow([i]);
+    }
+    return out;
+  });
   static final _allPlacements = <int, List<Placement>>{};
 
   /// Whether shading [pl] completes a 2×2 block together with known shaded cells.
@@ -184,7 +184,11 @@ class LitsSolver {
           for (final i in pl.cells) {
             for (final j in _nb(i)) {
               final o = regions[j];
-              if (o >= 0 && o != r && cand[o].length == 1 && cand[o].single.shape == pl.shape && cand[o].single.has(j)) {
+              if (o >= 0 &&
+                  o != r &&
+                  cand[o].length == 1 &&
+                  cand[o].single.shape == pl.shape &&
+                  cand[o].single.has(j)) {
                 return true;
               }
             }
@@ -220,7 +224,10 @@ class LitsSolver {
 
   /// Known shaded cells must be connectable through non-empty cells.
   bool _canConnect(List<int> known) {
-    final shaded = [for (var i = 0; i < n * n; i++) if (known[i] == 1) i];
+    final shaded = [
+      for (var i = 0; i < n * n; i++)
+        if (known[i] == 1) i,
+    ];
     if (shaded.isEmpty) return true;
     final seen = {shaded.first};
     final stack = [shaded.first];

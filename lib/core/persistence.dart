@@ -19,15 +19,19 @@ class PuzzleStats {
   Duration? get best => bestMs == null ? null : Duration(milliseconds: bestMs!);
   Duration? get average => solved == 0 ? null : Duration(milliseconds: totalMs ~/ solved);
 
-  Map<String, dynamic> toJson() =>
-      {'solved': solved, 'best': bestMs, 'total': totalMs, if (bestScore != null) 'bestScore': bestScore};
+  Map<String, dynamic> toJson() => {
+    'solved': solved,
+    'best': bestMs,
+    'total': totalMs,
+    if (bestScore != null) 'bestScore': bestScore,
+  };
 
   factory PuzzleStats.fromJson(Map<String, dynamic> j) => PuzzleStats(
-        solved: j['solved'] as int? ?? 0,
-        bestMs: j['best'] as int?,
-        totalMs: j['total'] as int? ?? 0,
-        bestScore: j['bestScore'] as int?,
-      );
+    solved: j['solved'] as int? ?? 0,
+    bestMs: j['best'] as int?,
+    totalMs: j['total'] as int? ?? 0,
+    bestScore: j['bestScore'] as int?,
+  );
 }
 
 /// A solved daily puzzle.

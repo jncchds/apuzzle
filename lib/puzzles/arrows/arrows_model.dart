@@ -45,13 +45,19 @@ class ArrowsPuzzle {
   List<int> seen(int i) => arrowsRay(rows, cols, arrows, i);
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'arrows': arrows,
-        'counts': counts,
-        'shaded': [for (var i = 0; i < shaded.length; i++) if (shaded[i]) i],
-        'lines': [for (var e = 0; e < lines.length; e++) if (lines[e]) e],
-      };
+    'rows': rows,
+    'cols': cols,
+    'arrows': arrows,
+    'counts': counts,
+    'shaded': [
+      for (var i = 0; i < shaded.length; i++)
+        if (shaded[i]) i,
+    ],
+    'lines': [
+      for (var e = 0; e < lines.length; e++)
+        if (lines[e]) e,
+    ],
+  };
 
   factory ArrowsPuzzle.fromJson(Map<String, dynamic> j) {
     final rows = j['rows'] as int, cols = j['cols'] as int;
@@ -108,7 +114,10 @@ Set<int> arrowsBad(ArrowsPuzzle p, List<bool> lines, {required bool complete}) {
   final g = p.lattice;
   final n = p.rows * p.cols;
   final used = [for (var i = 0; i < n; i++) g.incident[i].any((e) => lines[e])];
-  final bad = <int>{for (var i = 0; i < n; i++) if (p.isClue(i) && used[i]) i};
+  final bad = <int>{
+    for (var i = 0; i < n; i++)
+      if (p.isClue(i) && used[i]) i,
+  };
   if (!complete) return bad;
   final shaded = [for (var i = 0; i < n; i++) !p.isClue(i) && !used[i]];
   for (var i = 0; i < n; i++) {

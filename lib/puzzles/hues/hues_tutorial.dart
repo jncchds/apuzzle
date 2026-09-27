@@ -21,7 +21,10 @@ HuesPuzzle _board(List<List<String>> rows) {
   return HuesPuzzle(rows: r, cols: c, colors: 4, clues: clues, solution: solution);
 }
 
-Set<Pos> _open(HuesPuzzle p) => {for (var i = 0; i < p.clues.length; i++) if (p.clues[i] == null) p.size.pos(i)};
+Set<Pos> _open(HuesPuzzle p) => {
+  for (var i = 0; i < p.clues.length; i++)
+    if (p.clues[i] == null) p.size.pos(i),
+};
 
 final _small = _board([
   ['b3', 'b', 'p1'],

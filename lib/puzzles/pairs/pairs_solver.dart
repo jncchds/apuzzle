@@ -89,10 +89,15 @@ class PairsSolver {
   /// shaded, one shaded in none stays unshaded. False if there is no way.
   bool _finishRegion(List<int> st, int r, bool Function(int, int) set) {
     final cells = members[r];
-    final open = [for (final i in cells) if (st[i] == -1) i];
+    final open = [
+      for (final i in cells)
+        if (st[i] == -1) i,
+    ];
     final need = 2 - cells.where((i) => st[i] == 1).length;
     if (open.isEmpty || need <= 0 || open.length > 12) return true;
-    final around = {for (final i in cells) ...[i, ...nb[i]]};
+    final around = {
+      for (final i in cells) ...[i, ...nb[i]],
+    };
     var always = (1 << open.length) - 1, ever = 0, ways = 0;
     void tryPick(int mask) {
       for (var k = 0; k < open.length; k++) {
@@ -184,7 +189,10 @@ class PairsSolver {
     void rec(List<int> st) {
       if (total >= limit || ++nodes > budget) return;
       if (!propagate(st)) return;
-      final open = [for (var i = 0; i < st.length; i++) if (st[i] == -1) i];
+      final open = [
+        for (var i = 0; i < st.length; i++)
+          if (st[i] == -1) i,
+      ];
       if (open.isEmpty) {
         if (total == 0 && found != null) found.setAll(0, [for (final x in st) x == 1]);
         all?.add([for (final x in st) x == 1]);

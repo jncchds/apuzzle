@@ -6,9 +6,7 @@ import 'rails_model.dart';
 /// Tier 1: piece rules (0 or 2 ends per cell), row/column counts and no loops
 /// or early closing of the track. Tier 2: + probing.
 class RailsSolver {
-  RailsSolver(this.p)
-      : g = p.lattice,
-        n = p.rows * p.cols;
+  RailsSolver(this.p) : g = p.lattice, n = p.rows * p.cols;
 
   final RailsPuzzle p;
   final LatticeLoop g;

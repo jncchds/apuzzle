@@ -101,96 +101,107 @@ class _MergeBoardState extends State<MergeBoard> {
   Widget build(BuildContext context) {
     final w = widget;
     final scheme = Theme.of(context).colorScheme;
-    return LayoutBuilder(builder: (context, cons) {
-      // The header units reserve room for the frame (one gap on each side).
-      final m = BoardMetrics.fit(
-          space: cons.biggest, rows: w.rows, cols: w.cols, gapRatio: 0.1, maxCell: 110, headerCols: 0.2, headerRows: 0.2);
-      final pad = m.gap;
-      Offset at(int i) => m.topLeft(Pos(i ~/ w.cols, i % w.cols)) - Offset(m.ox - pad, m.oy - pad);
-      Widget placed(int i, Widget child) => SizedBox(width: m.cell, height: m.cell, child: child);
+    return LayoutBuilder(
+      builder: (context, cons) {
+        // The header units reserve room for the frame (one gap on each side).
+        final m = BoardMetrics.fit(
+          space: cons.biggest,
+          rows: w.rows,
+          cols: w.cols,
+          gapRatio: 0.1,
+          maxCell: 110,
+          headerCols: 0.2,
+          headerRows: 0.2,
+        );
+        final pad = m.gap;
+        Offset at(int i) => m.topLeft(Pos(i ~/ w.cols, i % w.cols)) - Offset(m.ox - pad, m.oy - pad);
+        Widget placed(int i, Widget child) => SizedBox(width: m.cell, height: m.cell, child: child);
 
-      final children = <Widget>[
-        for (var i = 0; i < w.cells.length; i++)
-          Positioned(
-            left: at(i).dx,
-            top: at(i).dy,
-            child: placed(
-              i,
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  color: scheme.onSurface.withValues(alpha: 0.07),
-                  borderRadius: BorderRadius.circular(m.cell * 0.12),
+        final children = <Widget>[
+          for (var i = 0; i < w.cells.length; i++)
+            Positioned(
+              left: at(i).dx,
+              top: at(i).dy,
+              child: placed(
+                i,
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: scheme.onSurface.withValues(alpha: 0.07),
+                    borderRadius: BorderRadius.circular(m.cell * 0.12),
+                  ),
                 ),
               ),
             ),
-          ),
-        for (final MapEntry(key: id, value: (from, to, value)) in _ghosts.entries)
-          TweenAnimationBuilder<double>(
-            key: ValueKey('g$id'),
-            tween: Tween(begin: 0, end: 1),
-            duration: _slide,
-            curve: Curves.easeOut,
-            onEnd: () => setState(() => _ghosts.remove(id)),
-            builder: (context, t, child) {
-              final o = Offset.lerp(at(from), at(to), t)!;
-              return Positioned(left: o.dx, top: o.dy, child: child!);
-            },
-            child: placed(from, _Tile(value: value, size: m.cell)),
-          ),
-        for (var i = 0; i < w.cells.length; i++)
-          if (w.ids[i] >= 0)
-            AnimatedPositioned(
-              key: ValueKey(w.ids[i]),
+          for (final MapEntry(key: id, value: (from, to, value)) in _ghosts.entries)
+            TweenAnimationBuilder<double>(
+              key: ValueKey('g$id'),
+              tween: Tween(begin: 0, end: 1),
               duration: _slide,
               curve: Curves.easeOut,
-              left: at(i).dx,
-              top: at(i).dy,
-              width: m.cell,
-              height: m.cell,
-              child: _WinBump(
-                win: w.win,
-                delay: (i ~/ w.cols + i % w.cols) / max(1, w.rows + w.cols - 2),
-                child: _Tile(value: w.cells[i], size: m.cell, ring: w.hinted.contains(i) ? scheme.onSurface : null),
-              ),
+              onEnd: () => setState(() => _ghosts.remove(id)),
+              builder: (context, t, child) {
+                final o = Offset.lerp(at(from), at(to), t)!;
+                return Positioned(left: o.dx, top: o.dy, child: child!);
+              },
+              child: placed(from, _Tile(value: value, size: m.cell)),
             ),
-      ];
-
-      return Center(
-        child: Focus(
-          focusNode: _focus,
-          autofocus: true,
-          onKeyEvent: _key,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _focus.requestFocus,
-            onPanStart: (_) {
-              _drag = Offset.zero;
-              _fired = false;
-            },
-            onPanUpdate: w.onMove == null
-                ? null
-                : (d) {
-                    if (_fired) return;
-                    _drag += d.delta;
-                    if (_drag.distance < max(18.0, m.cell * 0.3)) return;
-                    _fired = true;
-                    _move(_drag.dx.abs() > _drag.dy.abs()
-                        ? (_drag.dx > 0 ? MergeDir.right : MergeDir.left)
-                        : (_drag.dy > 0 ? MergeDir.down : MergeDir.up));
-                  },
-            child: Container(
-              width: m.width - m.ox + pad * 2,
-              height: m.height - m.oy + pad * 2,
-              decoration: BoxDecoration(
-                color: scheme.surfaceContainerHighest,
-                borderRadius: BorderRadius.circular(m.cell * 0.16),
+          for (var i = 0; i < w.cells.length; i++)
+            if (w.ids[i] >= 0)
+              AnimatedPositioned(
+                key: ValueKey(w.ids[i]),
+                duration: _slide,
+                curve: Curves.easeOut,
+                left: at(i).dx,
+                top: at(i).dy,
+                width: m.cell,
+                height: m.cell,
+                child: _WinBump(
+                  win: w.win,
+                  delay: (i ~/ w.cols + i % w.cols) / max(1, w.rows + w.cols - 2),
+                  child: _Tile(value: w.cells[i], size: m.cell, ring: w.hinted.contains(i) ? scheme.onSurface : null),
+                ),
               ),
-              child: Stack(clipBehavior: Clip.none, children: children),
+        ];
+
+        return Center(
+          child: Focus(
+            focusNode: _focus,
+            autofocus: true,
+            onKeyEvent: _key,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: _focus.requestFocus,
+              onPanStart: (_) {
+                _drag = Offset.zero;
+                _fired = false;
+              },
+              onPanUpdate: w.onMove == null
+                  ? null
+                  : (d) {
+                      if (_fired) return;
+                      _drag += d.delta;
+                      if (_drag.distance < max(18.0, m.cell * 0.3)) return;
+                      _fired = true;
+                      _move(
+                        _drag.dx.abs() > _drag.dy.abs()
+                            ? (_drag.dx > 0 ? MergeDir.right : MergeDir.left)
+                            : (_drag.dy > 0 ? MergeDir.down : MergeDir.up),
+                      );
+                    },
+              child: Container(
+                width: m.width - m.ox + pad * 2,
+                height: m.height - m.oy + pad * 2,
+                decoration: BoxDecoration(
+                  color: scheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(m.cell * 0.16),
+                ),
+                child: Stack(clipBehavior: Clip.none, children: children),
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
@@ -230,7 +241,14 @@ class _TileState extends State<_Tile> with SingleTickerProviderStateMixin {
     final color = MergeBoard.colorOf(widget.value);
     final text = '${widget.value}';
     final ink = color.computeLuminance() > 0.45 ? const Color(0xFF1B2230) : Colors.white;
-    final font = widget.size * switch (text.length) { 1 || 2 => 0.44, 3 => 0.36, 4 => 0.28, _ => 0.23 };
+    final font =
+        widget.size *
+        switch (text.length) {
+          1 || 2 => 0.44,
+          3 => 0.36,
+          4 => 0.28,
+          _ => 0.23,
+        };
     return AnimatedBuilder(
       animation: _anim,
       builder: (context, child) {
@@ -244,7 +262,9 @@ class _TileState extends State<_Tile> with SingleTickerProviderStateMixin {
           color: color,
           borderRadius: BorderRadius.circular(widget.size * 0.12),
           border: widget.ring == null ? null : Border.all(color: widget.ring!, width: 3),
-          boxShadow: widget.value >= 1024 ? [BoxShadow(color: color.withValues(alpha: 0.55), blurRadius: widget.size * 0.18)] : null,
+          boxShadow: widget.value >= 1024
+              ? [BoxShadow(color: color.withValues(alpha: 0.55), blurRadius: widget.size * 0.18)]
+              : null,
         ),
         alignment: Alignment.center,
         child: Text(

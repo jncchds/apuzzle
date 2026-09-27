@@ -43,16 +43,19 @@ class IslandsType extends ValueGridType<IslandsPuzzle> {
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(8),
-        _ => const GridSize.square(9),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(8),
+    _ => const GridSize.square(9),
+  };
 
   @override
   List<ValueSpec> get values => [
-        ValueSpec.custom((context, size) => const SizedBox.shrink(), label: 'sea'),
-        ValueSpec.custom((context, size) => DotSymbol(size: size, color: const Color(0xFF9A7B3C)), label: 'dot'),
-      ];
+    ValueSpec.custom((context, size) => const SizedBox.shrink(), label: 'sea'),
+    ValueSpec.custom(
+      (context, size) => DotSymbol(size: size, color: const Color(0xFF9A7B3C)),
+      label: 'dot',
+    ),
+  ];
 
   @override
   bool get showLockIcon => false;
@@ -74,10 +77,15 @@ class IslandsType extends ValueGridType<IslandsPuzzle> {
 
   @override
   Set<Pos> conflicts(IslandsPuzzle puzzle, ValueGrid state) => {
-        for (final i in islandsConflicts(puzzle.rows, puzzle.cols, puzzle.clues, _sea(state),
-            complete: isComplete(puzzle, state)))
-          puzzle.size.pos(i),
-      };
+    for (final i in islandsConflicts(
+      puzzle.rows,
+      puzzle.cols,
+      puzzle.clues,
+      _sea(state),
+      complete: isComplete(puzzle, state),
+    ))
+      puzzle.size.pos(i),
+  };
 
   @override
   HintResult<ValueGrid>? hint(IslandsPuzzle puzzle, ValueGrid state) {

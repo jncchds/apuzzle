@@ -36,7 +36,10 @@ class WinOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l = context.l10n;
-    final card = CurvedAnimation(parent: animation, curve: const Interval(0.45, 1, curve: Curves.easeOutBack));
+    final card = CurvedAnimation(
+      parent: animation,
+      curve: const Interval(0.45, 1, curve: Curves.easeOutBack),
+    );
     final stats = controller.winStats;
     final time = controller.elapsed;
     final isBest = stats?.bestMs == time.inMilliseconds;
@@ -50,82 +53,96 @@ class WinOverlay extends StatelessWidget {
         : l.shareScored(hints, score, name, formatDuration(time));
     final shareText = '$result ${l.shareChallenge} ${controller.link}';
 
-    return Stack(children: [
-      Positioned.fill(
-        child: IgnorePointer(
-          child: AnimatedBuilder(
-            animation: animation,
-            builder: (context, _) => CustomPaint(painter: _ConfettiPainter(animation.value, theme.colorScheme)),
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: IgnorePointer(
+            child: AnimatedBuilder(
+              animation: animation,
+              builder: (context, _) => CustomPaint(painter: _ConfettiPainter(animation.value, theme.colorScheme)),
+            ),
           ),
         ),
-      ),
-      Align(
-        alignment: Alignment.bottomCenter,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: ScaleTransition(
-              scale: card,
-              child: Card(
-                elevation: 8,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(title, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
-                      const SizedBox(height: 8),
-                      if (score != null) ...[
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: ScaleTransition(
+                scale: card,
+                child: Card(
+                  elevation: 8,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(title, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
+                        const SizedBox(height: 8),
+                        if (score != null) ...[
+                          Text(
+                            [
+                              l.scoreValue(score),
+                              if (stats?.bestScore == score)
+                                l.newBest
+                              else if (stats?.bestScore != null)
+                                l.bestValue(stats!.bestScore!),
+                            ].join(' · '),
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          const SizedBox(height: 4),
+                        ],
                         Text(
                           [
-                            l.scoreValue(score),
-                            if (stats?.bestScore == score) l.newBest else if (stats?.bestScore != null) l.bestValue(stats!.bestScore!),
+                            formatDuration(time),
+                            if (isBest)
+                              l.newBest
+                            else if (stats?.best != null)
+                              l.bestValue(formatDuration(stats!.best!)),
+                            if (hints > 0) l.hintsUsed(hints),
                           ].join(' · '),
-                          style: theme.textTheme.titleMedium,
+                          style: theme.textTheme.bodyMedium,
                         ),
                         const SizedBox(height: 4),
-                      ],
-                      Text(
-                        [
-                          formatDuration(time),
-                          if (isBest) l.newBest else if (stats?.best != null) l.bestValue(formatDuration(stats!.best!)),
-                          if (hints > 0) l.hintsUsed(hints),
-                        ].join(' · '),
-                        style: theme.textTheme.bodyMedium,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(controller.code, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
-                      if (note != null) ...[
-                        const SizedBox(height: 8),
-                        Text(note!, style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary)),
-                      ],
-                      const SizedBox(height: 16),
-                      Row(mainAxisSize: MainAxisSize.min, children: [
-                        IconButton(
-                          icon: const Icon(Icons.share_rounded),
-                          tooltip: l.copyResult,
-                          onPressed: () => copyWithToast(context, shareText, l.resultCopied),
+                        Text(
+                          controller.code,
+                          style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                         ),
-                        const SizedBox(width: 4),
-                        OutlinedButton(onPressed: onBack, child: Text(backLabel)),
-                        if (onNext != null) ...[
-                          const SizedBox(width: 12),
-                          FilledButton.icon(
-                            onPressed: onNext,
-                            icon: const Icon(Icons.auto_awesome_rounded),
-                            label: Text(nextLabel),
-                          ),
+                        if (note != null) ...[
+                          const SizedBox(height: 8),
+                          Text(note!, style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary)),
                         ],
-                      ]),
-                    ],
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.share_rounded),
+                              tooltip: l.copyResult,
+                              onPressed: () => copyWithToast(context, shareText, l.resultCopied),
+                            ),
+                            const SizedBox(width: 4),
+                            OutlinedButton(onPressed: onBack, child: Text(backLabel)),
+                            if (onNext != null) ...[
+                              const SizedBox(width: 12),
+                              FilledButton.icon(
+                                onPressed: onNext,
+                                icon: const Icon(Icons.auto_awesome_rounded),
+                                label: Text(nextLabel),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 }
 
@@ -139,7 +156,13 @@ class _ConfettiPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (t <= 0 || t >= 1) return;
     final rng = Random(7);
-    final colors = [scheme.primary, scheme.tertiary, scheme.secondary, const Color(0xFFF5A524), const Color(0xFFE85D75)];
+    final colors = [
+      scheme.primary,
+      scheme.tertiary,
+      scheme.secondary,
+      const Color(0xFFF5A524),
+      const Color(0xFFE85D75),
+    ];
     final paint = Paint();
     for (var i = 0; i < 90; i++) {
       final x0 = rng.nextDouble() * size.width;

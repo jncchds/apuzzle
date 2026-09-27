@@ -9,8 +9,8 @@ const int _unk = -1;
 /// light source. Tier 2: + probing (try a value, refute it by propagation).
 class LampsSolver {
   LampsSolver(this.rows, this.cols, this.walls, this.numbers)
-      : sight = lampsSight(rows, cols, walls),
-        nb = orthNeighbors(rows, cols);
+    : sight = lampsSight(rows, cols, walls),
+      nb = orthNeighbors(rows, cols);
 
   final int rows;
   final int cols;

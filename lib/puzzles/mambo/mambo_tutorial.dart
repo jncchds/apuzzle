@@ -21,11 +21,21 @@ TutorialStep _step(Tr text, List<String> rows, [List<String> signs = const []]) 
   ];
   final puzzle = MamboPuzzle(
     n: n,
-    givens: [for (final ch in cells.split('')) ch == 'S' ? sun : ch == 'M' ? moon : null],
+    givens: [
+      for (final ch in cells.split(''))
+        ch == 'S'
+            ? sun
+            : ch == 'M'
+            ? moon
+            : null,
+    ],
     solution: [for (final ch in cells.split('')) ch.toUpperCase() == 'S' ? sun : moon],
     edges: edges,
   );
-  final open = [for (var i = 0; i < n * n; i++) if (puzzle.givens[i] == null) GridSize.square(n).pos(i)];
+  final open = [
+    for (var i = 0; i < n * n; i++)
+      if (puzzle.givens[i] == null) GridSize.square(n).pos(i),
+  ];
   // Point at the cells to fill when there are just a few.
   return TutorialStep(text: text, puzzle: puzzle, focus: open.length <= 4 ? open.toSet() : const {});
 }

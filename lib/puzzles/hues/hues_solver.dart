@@ -2,13 +2,21 @@ import 'hues_model.dart';
 
 /// Domain-bitmask solver. Tier 1: per-clue counting; tier 2: + probing.
 class HuesSolver {
-  HuesSolver({required this.rows, required this.cols, required this.colors, required this.clueNum, required this.clueColor})
-      : nb = huesNeighbors(rows, cols),
-        full = (1 << colors) - 1 {
+  HuesSolver({
+    required this.rows,
+    required this.cols,
+    required this.colors,
+    required this.clueNum,
+    required this.clueColor,
+  }) : nb = huesNeighbors(rows, cols),
+       full = (1 << colors) - 1 {
     for (var i = 0; i < rows * cols; i++) {
       if (clueNum[i] != null) {
         clueCells.add(i);
-        clueNb[i] = [for (final j in nb[i]) if (clueNum[j] == null) j];
+        clueNb[i] = [
+          for (final j in nb[i])
+            if (clueNum[j] == null) j,
+        ];
       }
     }
   }

@@ -24,10 +24,10 @@ class KingsPuzzle implements ValueGridPuzzle {
 
   Map<String, dynamic> toJson() => {'n': n, 'regions': regions, 'solution': solution};
   factory KingsPuzzle.fromJson(Map<String, dynamic> j) => KingsPuzzle(
-        n: j['n'] as int,
-        regions: (j['regions'] as List).cast<int>(),
-        solution: (j['solution'] as List).cast<int>(),
-      );
+    n: j['n'] as int,
+    regions: (j['regions'] as List).cast<int>(),
+    solution: (j['solution'] as List).cast<int>(),
+  );
 }
 
 /// Kings that break a rule (flat indices). [kings] = flat indices of kings.

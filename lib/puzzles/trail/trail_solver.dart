@@ -2,11 +2,11 @@
 /// dead-end and connectivity pruning.
 class TrailSolver {
   TrailSolver(this.rows, this.cols, this.numbers)
-      : n = rows * cols,
-        nb = List.generate(rows * cols, (i) {
-          final r = i ~/ cols, c = i % cols;
-          return [if (r > 0) i - cols, if (r < rows - 1) i + cols, if (c > 0) i - 1, if (c < cols - 1) i + 1];
-        }) {
+    : n = rows * cols,
+      nb = List.generate(rows * cols, (i) {
+        final r = i ~/ cols, c = i % cols;
+        return [if (r > 0) i - cols, if (r < rows - 1) i + cols, if (c > 0) i - 1, if (c < cols - 1) i + 1];
+      }) {
     for (var i = 0; i < n; i++) {
       final v = numbers[i];
       if (v != null) {

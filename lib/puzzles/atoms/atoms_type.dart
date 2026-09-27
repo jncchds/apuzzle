@@ -37,15 +37,17 @@ class AtomsType extends PuzzleType<AtomsPuzzle, AtomsState> {
   List<TutorialStep> strategies() => atomsStrategies;
 
   @override
-  List<GridSize> get sizes => [for (final n in [5, 6, 7, 8, 9, 10]) GridSize.square(n)];
+  List<GridSize> get sizes => [
+    for (final n in [5, 6, 7, 8, 9, 10]) GridSize.square(n),
+  ];
   @override
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(9),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(9),
+  };
   @override
   double get controlsHeight => 40;
 
@@ -90,7 +92,10 @@ class AtomsType extends PuzzleType<AtomsPuzzle, AtomsState> {
       if (state.bonds[e] != puzzle.solution[e]) {
         final b = List.of(state.bonds)..[e] = puzzle.solution[e];
         final ed = puzzle.edges[e];
-        return HintResult(AtomsState(b), {puzzle.size.pos(puzzle.islands[ed.a]), puzzle.size.pos(puzzle.islands[ed.b])});
+        return HintResult(AtomsState(b), {
+          puzzle.size.pos(puzzle.islands[ed.a]),
+          puzzle.size.pos(puzzle.islands[ed.b]),
+        });
       }
     }
     return null;
@@ -242,8 +247,8 @@ class _AtomsBoardState extends State<_AtomsBoard> {
                 color: err
                     ? scheme.error
                     : hinted
-                        ? scheme.tertiary
-                        : scheme.onSurface,
+                    ? scheme.tertiary
+                    : scheme.onSurface,
                 width: err || hinted ? 3.5 : 2.5,
               ),
             ),

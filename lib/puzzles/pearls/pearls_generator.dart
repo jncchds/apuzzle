@@ -73,7 +73,10 @@ PearlsPuzzle generatePearls(GenParams params) {
       Difficulty.medium => 0.15,
       _ => 0.0,
     };
-    for (final p in [for (var p = 0; p < n; p++) if (pearls[p] != pearlNone) p]..shuffle(rng)) {
+    for (final p in [
+      for (var p = 0; p < n; p++)
+        if (pearls[p] != pearlNone) p,
+    ]..shuffle(rng)) {
       if (rng.nextDouble() < keep) continue;
       final v = pearls[p];
       pearls[p] = pearlNone;
@@ -91,21 +94,24 @@ PearlsPuzzle generatePearls(GenParams params) {
 
 /// A pearl on every loop cell that allows one.
 List<int> _allPearls(LatticeLoop g, List<bool> lines) => [
-      for (var p = 0; p < g.vertexCount; p++)
-        if (!g.incident[p].any((e) => lines[e]))
-          pearlNone
-        else if (pearlMet(g, lines, p, pearlBlack))
-          pearlBlack
-        else if (pearlMet(g, lines, p, pearlWhite))
-          pearlWhite
-        else
-          pearlNone,
-    ];
+  for (var p = 0; p < g.vertexCount; p++)
+    if (!g.incident[p].any((e) => lines[e]))
+      pearlNone
+    else if (pearlMet(g, lines, p, pearlBlack))
+      pearlBlack
+    else if (pearlMet(g, lines, p, pearlWhite))
+      pearlWhite
+    else
+      pearlNone,
+];
 
 /// The (up to two) unit squares on either side of edge [e].
 List<int> _faces(LatticeLoop g, int e, int fr, int fc) {
   final (a, _) = g.ends(e);
   final r = a ~/ g.vc, c = a % g.vc;
   final sides = g.isHorizontal(e) ? [(r - 1, c), (r, c)] : [(r, c - 1), (r, c)];
-  return [for (final (fr0, fc0) in sides) if (fr0 >= 0 && fc0 >= 0 && fr0 < fr && fc0 < fc) fr0 * fc + fc0];
+  return [
+    for (final (fr0, fc0) in sides)
+      if (fr0 >= 0 && fc0 >= 0 && fr0 < fr && fc0 < fc) fr0 * fc + fc0,
+  ];
 }

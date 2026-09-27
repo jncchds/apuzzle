@@ -9,10 +9,10 @@ const popColors = 5;
 
 /// Share of the best found score to reach, per difficulty.
 double _targetShare(Difficulty d) => switch (d) {
-      Difficulty.easy => 0.6,
-      Difficulty.medium => 0.8,
-      _ => 1.0,
-    };
+  Difficulty.easy => 0.6,
+  Difficulty.medium => 0.8,
+  _ => 1.0,
+};
 
 PopPuzzle generatePop(GenParams params, PopMode mode, PopGoal goal) {
   final rows = params.size.rows, cols = params.size.cols;
@@ -22,7 +22,16 @@ PopPuzzle generatePop(GenParams params, PopMode mode, PopGoal goal) {
   if (goal == PopGoal.clear) {
     final (start, plan) = _clearable(rows, cols, colors, params.difficulty, rng);
     return PopPuzzle(
-        rows: rows, cols: cols, colors: colors, mode: mode, goal: goal, start: start, reserve: const [], target: 0, plan: plan);
+      rows: rows,
+      cols: cols,
+      colors: colors,
+      mode: mode,
+      goal: goal,
+      start: start,
+      reserve: const [],
+      target: 0,
+      plan: plan,
+    );
   }
 
   final start = List.generate(rows * cols, (_) => rng.nextInt(colors));
@@ -33,13 +42,31 @@ PopPuzzle generatePop(GenParams params, PopMode mode, PopGoal goal) {
             List.generate(rows ~/ 2 + rng.nextInt(rows - rows ~/ 2 + 1), (_) => rng.nextInt(colors)),
         ];
   var p = PopPuzzle(
-      rows: rows, cols: cols, colors: colors, mode: mode, goal: goal, start: start, reserve: reserve, target: 0, plan: const []);
+    rows: rows,
+    cols: cols,
+    colors: colors,
+    mode: mode,
+    goal: goal,
+    start: start,
+    reserve: reserve,
+    target: 0,
+    plan: const [],
+  );
   if (goal == PopGoal.free) return p;
 
   final best = _bestPlayout(p, PopState.initial(p), 40, rng);
   final target = max(10, (best.score * _targetShare(params.difficulty)) ~/ 10 * 10);
   p = PopPuzzle(
-      rows: rows, cols: cols, colors: colors, mode: mode, goal: goal, start: start, reserve: reserve, target: target, plan: best.ids);
+    rows: rows,
+    cols: cols,
+    colors: colors,
+    mode: mode,
+    goal: goal,
+    start: start,
+    reserve: reserve,
+    target: target,
+    plan: best.ids,
+  );
   return p;
 }
 
@@ -104,13 +131,19 @@ _Line _playout(PopPuzzle p, PopState from, int policy, Random rng) {
       for (var c = 1; c < p.colors; c++) {
         if (counts[c] > counts[top]) top = c;
       }
-      final others = [for (final g in groups) if (s.cells[g.first] != top) g];
+      final others = [
+        for (final g in groups)
+          if (s.cells[g.first] != top) g,
+      ];
       if (others.isNotEmpty) pool = others;
     }
     final List<int> g;
     if (policy == 2 || policy == 3) {
       final want = policy == 2 ? pool.map((g) => g.length).reduce(min) : pool.map((g) => g.length).reduce(max);
-      final ties = [for (final g in pool) if (g.length == want) g];
+      final ties = [
+        for (final g in pool)
+          if (g.length == want) g,
+      ];
       g = ties[rng.nextInt(ties.length)];
     } else {
       g = pool[rng.nextInt(pool.length)];
@@ -162,7 +195,11 @@ const _newColumn = 0, _vertical = 1, _horizontal = 2;
       case _newColumn:
         if (m >= cols || k > rows || s.at > m) return null;
         return (
-          [...columns.sublist(0, s.at), [for (var j = 0; j < k; j++) (-1, token + j)], ...columns.sublist(s.at)],
+          [
+            ...columns.sublist(0, s.at),
+            [for (var j = 0; j < k; j++) (-1, token + j)],
+            ...columns.sublist(s.at),
+          ],
           [for (var j = 0; j < k; j++) (s.at, j)],
         );
       case _vertical:
@@ -198,7 +235,10 @@ const _newColumn = 0, _vertical = 1, _horizontal = 2;
         if (color >= 0) banned.add(color);
       }
     }
-    final free = [for (var c = 0; c < colors; c++) if (!banned.contains(c)) c];
+    final free = [
+      for (var c = 0; c < colors; c++)
+        if (!banned.contains(c)) c,
+    ];
     if (free.isEmpty) return false;
     final color = free[rng.nextInt(free.length)];
     for (final (c, h) in cells) {
@@ -225,8 +265,8 @@ const _newColumn = 0, _vertical = 1, _horizontal = 2;
       final kind = m < cols && roll < 0.15 + 0.5 * (cols - m) / cols
           ? _newColumn
           : roll < 0.75 || m < k
-              ? _vertical
-              : _horizontal;
+          ? _vertical
+          : _horizontal;
       final at = rng.nextInt(kind == _newColumn ? m + 1 : max(1, m));
       final h = kind == _newColumn || at >= m ? 0 : rng.nextInt(columns[at].length + 1);
       placed = place((kind: kind, at: at, h: h, k: k));

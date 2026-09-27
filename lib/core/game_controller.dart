@@ -27,9 +27,9 @@ class GameController extends ChangeNotifier {
     this.hintsUsed = 0,
     this.daily,
     this.practice = false,
-  })  : _state = state, // ignore: prefer_initializing_formals
-        _banked = elapsed,
-        inputMode = type.defaultInputMode;
+  }) : _state = state, // ignore: prefer_initializing_formals
+       _banked = elapsed,
+       inputMode = type.defaultInputMode;
 
   final PuzzleType type;
   final GenParams params;
@@ -235,13 +235,13 @@ class GameController extends ChangeNotifier {
 
   // ---- persistence ----
   Map<String, dynamic> toSave() => {
-        'params': params.toJson(),
-        'puzzle': type.encodePuzzle(puzzle),
-        'state': type.encodeState(_state),
-        'elapsed': elapsed.inMilliseconds,
-        'hints': hintsUsed,
-        if (daily != null) 'daily': daily.toString(),
-      };
+    'params': params.toJson(),
+    'puzzle': type.encodePuzzle(puzzle),
+    'state': type.encodeState(_state),
+    'elapsed': elapsed.inMilliseconds,
+    'hints': hintsUsed,
+    if (daily != null) 'daily': daily.toString(),
+  };
 
   Future<void> save() async {
     if (solved || practice) return;

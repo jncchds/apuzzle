@@ -24,8 +24,14 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
   static const flagTool = 1;
 
   static const _numberColors = [
-    Color(0xFF2F6FD6), Color(0xFF2E8B57), Color(0xFFD64545), Color(0xFF5B3FB0),
-    Color(0xFF9C3D12), Color(0xFF138086), Color(0xFF333333), Color(0xFF777777),
+    Color(0xFF2F6FD6),
+    Color(0xFF2E8B57),
+    Color(0xFFD64545),
+    Color(0xFF5B3FB0),
+    Color(0xFF9C3D12),
+    Color(0xFF138086),
+    Color(0xFF333333),
+    Color(0xFF777777),
   ];
 
   @override
@@ -49,21 +55,21 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
 
   @override
   List<GridSize> get sizes => const [
-        GridSize.square(6),
-        GridSize.square(8),
-        GridSize(10, 8),
-        GridSize(12, 9),
-        GridSize(14, 10),
-        GridSize(16, 10),
-      ];
+    GridSize.square(6),
+    GridSize.square(8),
+    GridSize(10, 8),
+    GridSize(12, 9),
+    GridSize(14, 10),
+    GridSize(16, 10),
+  ];
   @override
   GridSize get defaultSize => const GridSize(10, 8);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(8),
-        _ => const GridSize(10, 8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(8),
+    _ => const GridSize(10, 8),
+  };
   @override
   double get minCellSize => 32;
   @override
@@ -85,9 +91,9 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
 
   @override
   Set<Pos> conflicts(MinesPuzzle puzzle, MinesState state) => {
-        for (var i = 0; i < state.flags.length; i++)
-          if (state.flags[i] && !puzzle.mines[i]) puzzle.size.pos(i),
-      };
+    for (var i = 0; i < state.flags.length; i++)
+      if (state.flags[i] && !puzzle.mines[i]) puzzle.size.pos(i),
+  };
 
   @override
   HintResult<MinesState>? hint(MinesPuzzle puzzle, MinesState state) {
@@ -110,9 +116,15 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
       }
     }
     final kn = kingNeighbors(puzzle.rows, puzzle.cols);
-    final safe = [for (var i = 0; i < n; i++) if (!state.open[i] && !puzzle.mines[i]) i];
+    final safe = [
+      for (var i = 0; i < n; i++)
+        if (!state.open[i] && !puzzle.mines[i]) i,
+    ];
     if (safe.isEmpty) return null;
-    final edge = [for (final i in safe) if (kn[i].any((j) => state.open[j])) i];
+    final edge = [
+      for (final i in safe)
+        if (kn[i].any((j) => state.open[j])) i,
+    ];
     final pick = (edge.isEmpty ? safe : edge)[Random().nextInt(edge.isEmpty ? safe.length : edge.length)];
     return HintResult(_dig(puzzle, state, [pick]), {puzzle.size.pos(pick)});
   }
@@ -151,7 +163,10 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
       final kn = kingNeighbors(p.rows, p.cols)[i];
       final flagged = kn.where((j) => s.flags[j]).length;
       if (flagged == 0 || flagged != mineCounts(p)[i]) return;
-      final rest = [for (final j in kn) if (!s.open[j] && !s.flags[j]) j];
+      final rest = [
+        for (final j in kn)
+          if (!s.open[j] && !s.flags[j]) j,
+      ];
       if (rest.isEmpty) return;
       _apply(ctrl, s, _dig(p, s, rest));
       return;
@@ -202,7 +217,12 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
         if (boom) {
           content = MineSymbol(key: const ValueKey('boom'), size: m.cell * 0.66, color: scheme.onErrorContainer);
         } else if (flagged) {
-          content = Icon(Icons.flag_rounded, key: const ValueKey('flag'), size: m.cell * 0.6, color: const Color(0xFFE0503C));
+          content = Icon(
+            Icons.flag_rounded,
+            key: const ValueKey('flag'),
+            size: m.cell * 0.6,
+            color: const Color(0xFFE0503C),
+          );
         } else if (open && counts[i] > 0) {
           final c = _numberColors[counts[i] - 1];
           content = Text(
@@ -221,13 +241,13 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
         final bg = boom
             ? scheme.errorContainer
             : open
-                ? (dark ? scheme.surfaceContainerLowest : scheme.surfaceContainerLow)
-                : Color.alphaBlend(scheme.primary.withValues(alpha: dark ? 0.2 : 0.14), scheme.surfaceContainerHighest);
+            ? (dark ? scheme.surfaceContainerLowest : scheme.surfaceContainerLow)
+            : Color.alphaBlend(scheme.primary.withValues(alpha: dark ? 0.2 : 0.14), scheme.surfaceContainerHighest);
         final ring = errors.contains(pos)
             ? scheme.error
             : ctrl.flashHints.contains(pos)
-                ? scheme.tertiary
-                : null;
+            ? scheme.tertiary
+            : null;
         return AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
@@ -243,7 +263,10 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
           alignment: Alignment.center,
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
-            transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: FadeTransition(opacity: anim, child: child)),
+            transitionBuilder: (child, anim) => ScaleTransition(
+              scale: anim,
+              child: FadeTransition(opacity: anim, child: child),
+            ),
             child: content,
           ),
         );

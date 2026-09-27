@@ -18,7 +18,12 @@ class MosaicType extends PuzzleType<MosaicPuzzle, MosaicState> {
   const MosaicType();
 
   static const palette = [
-    Color(0xFFE0605A), Color(0xFF6FE8C4), Color(0xFF5B8DEF), Color(0xFFFFC15E), Color(0xFFB57EDC), Color(0xFFF28DB2),
+    Color(0xFFE0605A),
+    Color(0xFF6FE8C4),
+    Color(0xFF5B8DEF),
+    Color(0xFFFFC15E),
+    Color(0xFFB57EDC),
+    Color(0xFFF28DB2),
   ];
 
   @override
@@ -41,15 +46,17 @@ class MosaicType extends PuzzleType<MosaicPuzzle, MosaicState> {
   List<TutorialStep> strategies() => mosaicStrategies;
 
   @override
-  List<GridSize> get sizes => [for (final n in [6, 8, 10, 12, 14, 16, 18]) GridSize.square(n)];
+  List<GridSize> get sizes => [
+    for (final n in [6, 8, 10, 12, 14, 16, 18]) GridSize.square(n),
+  ];
   @override
   GridSize get defaultSize => const GridSize.square(12);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(8),
-        Difficulty.medium => const GridSize.square(12),
-        _ => const GridSize.square(14),
-      };
+    Difficulty.easy => const GridSize.square(8),
+    Difficulty.medium => const GridSize.square(12),
+    _ => const GridSize.square(14),
+  };
   @override
   double get minCellSize => 20;
   @override
@@ -58,10 +65,10 @@ class MosaicType extends PuzzleType<MosaicPuzzle, MosaicState> {
   bool get showSubmit => false;
 
   int colorsFor(Difficulty d) => switch (d) {
-        Difficulty.easy => 4,
-        Difficulty.medium => 5,
-        _ => 6,
-      };
+    Difficulty.easy => 4,
+    Difficulty.medium => 5,
+    _ => 6,
+  };
 
   @override
   MosaicPuzzle generate(GenParams params) {
@@ -148,37 +155,47 @@ class MosaicType extends PuzzleType<MosaicPuzzle, MosaicState> {
     final s = ctrl.state as MosaicState;
     final theme = Theme.of(context);
     final left = p.limit - s.moves;
-    return Column(mainAxisSize: MainAxisSize.min, children: [
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: left <= 0 ? theme.colorScheme.error : theme.colorScheme.outline, width: 2),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: left <= 0 ? theme.colorScheme.error : theme.colorScheme.outline, width: 2),
+          ),
+          child: Text(
+            context.l10n.movesOfLimit(s.moves, p.limit),
+            style: theme.textTheme.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()]),
+          ),
         ),
-        child: Text(context.l10n.movesOfLimit(s.moves, p.limit),
-            style: theme.textTheme.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()])),
-      ),
-      const SizedBox(height: 10),
-      Wrap(spacing: 10, runSpacing: 10, alignment: WrapAlignment.center, children: [
-        for (var c = 0; c < p.colors; c++)
-          GestureDetector(
-            onTap: () => _play(ctrl, c),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 160),
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: palette[c],
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: s.cells[0] == c ? theme.colorScheme.onSurface : Colors.transparent,
-                  width: 3,
+        const SizedBox(height: 10),
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          alignment: WrapAlignment.center,
+          children: [
+            for (var c = 0; c < p.colors; c++)
+              GestureDetector(
+                onTap: () => _play(ctrl, c),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 160),
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: palette[c],
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: s.cells[0] == c ? theme.colorScheme.onSurface : Colors.transparent,
+                      width: 3,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-      ]),
-    ]);
+          ],
+        ),
+      ],
+    );
   }
 
   @override

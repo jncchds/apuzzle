@@ -100,8 +100,9 @@ class SudokuType extends ValueGridType<SudokuPuzzle> {
       state.isFull && sudokuConflicts(puzzle.n, state.toFlat()).isEmpty;
 
   @override
-  Set<Pos> conflicts(SudokuPuzzle puzzle, ValueGrid state) =>
-      {for (final i in sudokuConflicts(puzzle.n, state.toFlat())) puzzle.size.pos(i)};
+  Set<Pos> conflicts(SudokuPuzzle puzzle, ValueGrid state) => {
+    for (final i in sudokuConflicts(puzzle.n, state.toFlat())) puzzle.size.pos(i),
+  };
 
   @override
   Map<String, dynamic> encodePuzzle(SudokuPuzzle puzzle) => puzzle.toJson();

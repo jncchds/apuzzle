@@ -9,28 +9,30 @@ void main() {
   late List<int> marks;
 
   Future<void> pump(WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: SizedBox(
-            width: 400,
-            height: 400,
-            child: StatefulBuilder(
-              builder: (context, setState) => LoopBoard(
-                g: g,
-                rows: 6,
-                cols: 6,
-                centered: false,
-                marks: marks,
-                lineColor: Colors.blue,
-                paintClues: (_, _) {},
-                onCommit: (m) => setState(() => marks = m),
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: SizedBox(
+              width: 400,
+              height: 400,
+              child: StatefulBuilder(
+                builder: (context, setState) => LoopBoard(
+                  g: g,
+                  rows: 6,
+                  cols: 6,
+                  centered: false,
+                  marks: marks,
+                  lineColor: Colors.blue,
+                  paintClues: (_, _) {},
+                  onCommit: (m) => setState(() => marks = m),
+                ),
               ),
             ),
           ),
         ),
       ),
-    ));
+    );
   }
 
   Offset point(WidgetTester tester, int r, int c) {

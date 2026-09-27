@@ -3,12 +3,12 @@ import '../../core/value_grid.dart';
 
 /// Box shape for an n×n Sudoku: (box rows, box cols).
 (int, int) sudokuBox(int n) => switch (n) {
-      4 => (2, 2),
-      6 => (2, 3),
-      8 => (2, 4),
-      9 => (3, 3),
-      _ => throw ArgumentError('unsupported sudoku size $n'),
-    };
+  4 => (2, 2),
+  6 => (2, 3),
+  8 => (2, 4),
+  9 => (3, 3),
+  _ => throw ArgumentError('unsupported sudoku size $n'),
+};
 
 /// Precomputed units/peers for an n×n Sudoku.
 class SudokuGeometry {
@@ -77,10 +77,10 @@ class SudokuPuzzle implements ValueGridPuzzle {
   Map<String, dynamic> toJson() => {'n': n, 'givens': givens, 'solution': solution};
 
   factory SudokuPuzzle.fromJson(Map<String, dynamic> j) => SudokuPuzzle(
-        n: j['n'] as int,
-        givens: (j['givens'] as List).cast<int?>(),
-        solution: (j['solution'] as List).cast<int>(),
-      );
+    n: j['n'] as int,
+    givens: (j['givens'] as List).cast<int?>(),
+    solution: (j['solution'] as List).cast<int>(),
+  );
 }
 
 /// Cells involved in a duplicate within any unit (-1 = empty).

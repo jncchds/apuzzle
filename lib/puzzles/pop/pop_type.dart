@@ -40,21 +40,21 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
 
   @override
   List<GridSize> get sizes => const [
-        GridSize.square(6),
-        GridSize.square(8),
-        GridSize(10, 8),
-        GridSize.square(10),
-        GridSize(12, 10),
-        GridSize(15, 12),
-      ];
+    GridSize.square(6),
+    GridSize.square(8),
+    GridSize(10, 8),
+    GridSize.square(10),
+    GridSize(12, 10),
+    GridSize(15, 12),
+  ];
   @override
   GridSize get defaultSize => const GridSize(10, 8);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(8),
-        _ => const GridSize(10, 8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(8),
+    _ => const GridSize(10, 8),
+  };
   @override
   double get minCellSize => 28;
   @override
@@ -66,36 +66,36 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
 
   @override
   List<GameOption> optionsFor(Map<String, String> chosen) => [
-        _modes,
-        GameOption('goal', [if (PopMode.byId(chosen['mode']) == PopMode.standard) 'clear', 'target', 'free']),
-      ];
+    _modes,
+    GameOption('goal', [if (PopMode.byId(chosen['mode']) == PopMode.standard) 'clear', 'target', 'free']),
+  ];
 
   @override
   String optionLabel(AppLocalizations l, String option) => option == 'mode' ? l.popMode : l.popGoal;
 
   @override
   String choiceLabel(AppLocalizations l, String option, String choice) => switch (choice) {
-        'std' => l.popModeStandard,
-        'shift' => l.popModeShifter,
-        'cont' => l.popModeContinuous,
-        'mega' => l.popModeMega,
-        'clear' => l.popGoalClear,
-        'target' => l.popGoalTarget,
-        'free' => l.popGoalFree,
-        _ => choice,
-      };
+    'std' => l.popModeStandard,
+    'shift' => l.popModeShifter,
+    'cont' => l.popModeContinuous,
+    'mega' => l.popModeMega,
+    'clear' => l.popGoalClear,
+    'target' => l.popGoalTarget,
+    'free' => l.popGoalFree,
+    _ => choice,
+  };
 
   @override
   String? choiceDescription(AppLocalizations l, String option, String choice) => switch (choice) {
-        'std' => l.popModeStandardHint,
-        'shift' => l.popModeShifterHint,
-        'cont' => l.popModeContinuousHint,
-        'mega' => l.popModeMegaHint,
-        'clear' => l.popGoalClearHint,
-        'target' => l.popGoalTargetHint,
-        'free' => l.popGoalFreeHint,
-        _ => null,
-      };
+    'std' => l.popModeStandardHint,
+    'shift' => l.popModeShifterHint,
+    'cont' => l.popModeContinuousHint,
+    'mega' => l.popModeMegaHint,
+    'clear' => l.popGoalClearHint,
+    'target' => l.popGoalTargetHint,
+    'free' => l.popGoalFreeHint,
+    _ => null,
+  };
 
   /// Bump when [generate] changes what a seed produces.
   @override
@@ -115,10 +115,10 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
 
   @override
   bool isSolved(PopPuzzle puzzle, PopState state) => switch (puzzle.goal) {
-        PopGoal.clear => state.left == 0,
-        PopGoal.target => state.score >= puzzle.target,
-        PopGoal.free => true,
-      };
+    PopGoal.clear => state.left == 0,
+    PopGoal.target => state.score >= puzzle.target,
+    PopGoal.free => true,
+  };
 
   @override
   Set<Pos> conflicts(PopPuzzle puzzle, PopState state) => const {};
@@ -134,10 +134,10 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
 
   @override
   String finishTitle(AppLocalizations l, PopPuzzle puzzle, PopState state) => switch (puzzle.goal) {
-        PopGoal.clear => l.popCleared,
-        PopGoal.target => l.popTargetReached,
-        PopGoal.free => l.popGameOver,
-      };
+    PopGoal.clear => l.popCleared,
+    PopGoal.target => l.popTargetReached,
+    PopGoal.free => l.popGameOver,
+  };
 
   void _tap(GameController ctrl, Pos pos) {
     final p = ctrl.puzzle as PopPuzzle;
@@ -157,10 +157,12 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
     ctrl.apply(popAt(p, s, i)!);
     final after = ctrl.state as PopState;
     if (!ctrl.solved && isComplete(p, after)) {
-      ctrl.showToast((l) => switch (p.goal) {
-            PopGoal.clear => l.popStuckBubbles(after.left),
-            _ => l.popStuckPoints(p.target - after.score),
-          });
+      ctrl.showToast(
+        (l) => switch (p.goal) {
+          PopGoal.clear => l.popStuckBubbles(after.left),
+          _ => l.popStuckPoints(p.target - after.score),
+        },
+      );
     }
   }
 
@@ -193,19 +195,27 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
     final group = sel == null ? 0 : popGroup(s.cells, p.rows, p.cols, p.size.index(sel)).length;
     final numbers = theme.textTheme.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()]);
     Widget pill(String text, {bool strong = false}) => Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: strong ? theme.colorScheme.primary : theme.colorScheme.outline, width: 2),
-          ),
-          child: Text(text, style: numbers),
-        );
-    return Wrap(spacing: 10, runSpacing: 8, alignment: WrapAlignment.center, children: [
-      pill(p.goal == PopGoal.target ? '${s.score} / ${p.target}' : l.popPoints(s.score), strong: p.goal == PopGoal.target && s.score >= p.target),
-      if (p.goal == PopGoal.clear) pill(l.popLeft(s.left)),
-      if (p.mode.refills) pill(l.popColumns(p.reserve.length - s.used)),
-      if (group > 1) pill('+${popPoints(group)}', strong: true),
-    ]);
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: strong ? theme.colorScheme.primary : theme.colorScheme.outline, width: 2),
+      ),
+      child: Text(text, style: numbers),
+    );
+    return Wrap(
+      spacing: 10,
+      runSpacing: 8,
+      alignment: WrapAlignment.center,
+      children: [
+        pill(
+          p.goal == PopGoal.target ? '${s.score} / ${p.target}' : l.popPoints(s.score),
+          strong: p.goal == PopGoal.target && s.score >= p.target,
+        ),
+        if (p.goal == PopGoal.clear) pill(l.popLeft(s.left)),
+        if (p.mode.refills) pill(l.popColumns(p.reserve.length - s.used)),
+        if (group > 1) pill('+${popPoints(group)}', strong: true),
+      ],
+    );
   }
 
   @override

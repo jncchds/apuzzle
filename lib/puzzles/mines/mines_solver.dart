@@ -18,13 +18,13 @@ class MinesSolver {
 
   /// Knowledge for the given open cells and flagged-as-known mines.
   List<int> knowledge(List<bool> open, [List<bool>? mines]) => [
-        for (var i = 0; i < open.length; i++)
-          open[i]
-              ? 0
-              : mines != null && mines[i]
-                  ? 1
-                  : -1,
-      ];
+    for (var i = 0; i < open.length; i++)
+      open[i]
+          ? 0
+          : mines != null && mines[i]
+          ? 1
+          : -1,
+  ];
 
   /// Extends [k] with everything [tier] logic proves; false on a contradiction.
   bool deduce(List<bool> open, List<int> k, int tier) {
@@ -95,7 +95,10 @@ class MinesSolver {
         final left = mineCount - mines;
         if (left < 0 || left > unknown) return false;
         if (unknown > 0 && (left == 0 || left == unknown)) {
-          _set(k, [for (var i = 0; i < k.length; i++) if (k[i] == -1) i], left == 0 ? 0 : 1);
+          _set(k, [
+            for (var i = 0; i < k.length; i++)
+              if (k[i] == -1) i,
+          ], left == 0 ? 0 : 1);
           changed = true;
           continue;
         }
@@ -111,9 +114,18 @@ class MinesSolver {
         final others = <int>{for (final c in cells[a]) ...byCell[c]!}..remove(a);
         for (final b in others) {
           final setA = cells[a].toSet();
-          final both = [for (final c in cells[b]) if (setA.contains(c)) c];
-          final onlyA = [for (final c in cells[a]) if (!both.contains(c)) c];
-          final onlyB = [for (final c in cells[b]) if (!setA.contains(c)) c];
+          final both = [
+            for (final c in cells[b])
+              if (setA.contains(c)) c,
+          ];
+          final onlyA = [
+            for (final c in cells[a])
+              if (!both.contains(c)) c,
+          ];
+          final onlyB = [
+            for (final c in cells[b])
+              if (!setA.contains(c)) c,
+          ];
           final lo = [0, need[a] - onlyA.length, need[b] - onlyB.length].reduce((x, y) => x > y ? x : y);
           final hi = [both.length, need[a], need[b]].reduce((x, y) => x < y ? x : y);
           if (lo > hi) return false;

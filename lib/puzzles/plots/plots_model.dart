@@ -31,16 +31,21 @@ class PlotsPuzzle implements ValueGridPuzzle {
   @override
   int solutionAt(int index) => solution[index];
 
-  Map<String, dynamic> toJson() =>
-      {'rows': rows, 'cols': cols, 'max': maxValue, 'givens': givens, 'solution': solution};
+  Map<String, dynamic> toJson() => {
+    'rows': rows,
+    'cols': cols,
+    'max': maxValue,
+    'givens': givens,
+    'solution': solution,
+  };
 
   factory PlotsPuzzle.fromJson(Map<String, dynamic> j) => PlotsPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        maxValue: j['max'] as int,
-        givens: (j['givens'] as List).cast<int?>(),
-        solution: (j['solution'] as List).cast<int>(),
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    maxValue: j['max'] as int,
+    givens: (j['givens'] as List).cast<int?>(),
+    solution: (j['solution'] as List).cast<int>(),
+  );
 }
 
 /// Cells breaking a rule. [values] holds -1 for empty cells. A group is

@@ -25,11 +25,14 @@ class PearlsPuzzle {
   static final _lattices = Expando<LatticeLoop>();
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'pearls': pearls,
-        'lines': [for (var e = 0; e < lines.length; e++) if (lines[e]) e],
-      };
+    'rows': rows,
+    'cols': cols,
+    'pearls': pearls,
+    'lines': [
+      for (var e = 0; e < lines.length; e++)
+        if (lines[e]) e,
+    ],
+  };
 
   factory PearlsPuzzle.fromJson(Map<String, dynamic> j) {
     final rows = j['rows'] as int, cols = j['cols'] as int;

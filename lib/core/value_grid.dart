@@ -29,16 +29,16 @@ class CellValue {
   CellValue cleared() => CellValue(given: given);
 
   Map<String, dynamic> toJson() => {
-        if (value != null) 'v': value,
-        if (marks.isNotEmpty) 'm': marks.toList()..sort(),
-        if (given) 'g': true,
-      };
+    if (value != null) 'v': value,
+    if (marks.isNotEmpty) 'm': marks.toList()..sort(),
+    if (given) 'g': true,
+  };
 
   factory CellValue.fromJson(Map<String, dynamic> j) => CellValue(
-        value: j['v'] as int?,
-        marks: {...((j['m'] as List?) ?? const []).cast<int>()},
-        given: j['g'] as bool? ?? false,
-      );
+    value: j['v'] as int?,
+    marks: {...((j['m'] as List?) ?? const []).cast<int>()},
+    given: j['g'] as bool? ?? false,
+  );
 }
 
 /// Immutable player state for grids where each cell holds one value.
@@ -47,12 +47,12 @@ class ValueGrid {
   const ValueGrid(this.size, this.cells);
 
   factory ValueGrid.fromGivens(GridSize size, int? Function(int index) givenAt) => ValueGrid(
-        size,
-        List.generate(size.cellCount, (i) {
-          final g = givenAt(i);
-          return g == null ? const CellValue() : CellValue(value: g, given: true);
-        }, growable: false),
-      );
+    size,
+    List.generate(size.cellCount, (i) {
+      final g = givenAt(i);
+      return g == null ? const CellValue() : CellValue(value: g, given: true);
+    }, growable: false),
+  );
 
   final GridSize size;
   final List<CellValue> cells;
@@ -71,31 +71,23 @@ class ValueGrid {
   /// Values as a flat list with -1 for empty (handy for solvers/rules).
   List<int> toFlat() => [for (final c in cells) c.value ?? -1];
 
-  Map<String, dynamic> toJson() => {'size': size.toJson(), 'cells': [for (final c in cells) c.toJson()]};
+  Map<String, dynamic> toJson() => {
+    'size': size.toJson(),
+    'cells': [for (final c in cells) c.toJson()],
+  };
 
   factory ValueGrid.fromJson(Map<String, dynamic> j) => ValueGrid(
-        GridSize.fromJson(j['size'] as Map<String, dynamic>),
-        [for (final c in j['cells'] as List) CellValue.fromJson(c as Map<String, dynamic>)],
-      );
+    GridSize.fromJson(j['size'] as Map<String, dynamic>),
+    [for (final c in j['cells'] as List) CellValue.fromJson(c as Map<String, dynamic>)],
+  );
 }
 
 /// How a value is displayed (in cells, pencil marks and the palette).
 class ValueSpec {
-  const ValueSpec.text(this.label, {this.color})
-      : icon = null,
-        fill = null,
-        builder = null;
-  const ValueSpec.icon(this.icon, {required this.color, required this.label})
-      : fill = null,
-        builder = null;
-  const ValueSpec.fill(this.fill, {required this.label})
-      : icon = null,
-        color = null,
-        builder = null;
-  const ValueSpec.custom(this.builder, {required this.label})
-      : icon = null,
-        color = null,
-        fill = null;
+  const ValueSpec.text(this.label, {this.color}) : icon = null, fill = null, builder = null;
+  const ValueSpec.icon(this.icon, {required this.color, required this.label}) : fill = null, builder = null;
+  const ValueSpec.fill(this.fill, {required this.label}) : icon = null, color = null, builder = null;
+  const ValueSpec.custom(this.builder, {required this.label}) : icon = null, color = null, fill = null;
 
   final String label;
   final IconData? icon;
@@ -230,16 +222,20 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
     return SizedBox(
       width: size,
       height: size,
-      child: Stack(children: [
-        for (final m in marks)
-          Positioned(
-            left: (m % per) * s,
-            top: (m ~/ per) * s,
-            width: s,
-            height: s,
-            child: Center(child: FittedBox(child: Opacity(opacity: 0.85, child: values[m].build(context, s * 1.3)))),
-          ),
-      ]),
+      child: Stack(
+        children: [
+          for (final m in marks)
+            Positioned(
+              left: (m % per) * s,
+              top: (m ~/ per) * s,
+              width: s,
+              height: s,
+              child: Center(
+                child: FittedBox(child: Opacity(opacity: 0.85, child: values[m].build(context, s * 1.3))),
+              ),
+            ),
+        ],
+      ),
     );
   }
 
@@ -300,7 +296,6 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
       },
     );
   }
-
 
   @override
   Widget? buildControls(BuildContext context, GameController controller) {

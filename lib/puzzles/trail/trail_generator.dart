@@ -39,8 +39,16 @@ TrailPuzzle generateTrail(GenParams params) {
   while (true) {
     final open = logic(marks).openCells(tier);
     if (open.isEmpty) break;
-    var pick = [for (final c in open) if (!marks.contains(pos[c])) pos[c]];
-    if (pick.isEmpty) pick = [for (var i = 1; i < n - 1; i++) if (!marks.contains(i)) i];
+    var pick = [
+      for (final c in open)
+        if (!marks.contains(pos[c])) pos[c],
+    ];
+    if (pick.isEmpty) {
+      pick = [
+        for (var i = 1; i < n - 1; i++)
+          if (!marks.contains(i)) i,
+      ];
+    }
     marks.add(pick[rng.nextInt(pick.length)]);
   }
 
@@ -57,7 +65,10 @@ TrailPuzzle generateTrail(GenParams params) {
     Difficulty.medium => marks.length + (n * 0.06).round(),
     _ => 0,
   };
-  final free = [for (var i = 1; i < n - 1; i++) if (!marks.contains(i)) i]..shuffle(rng);
+  final free = [
+    for (var i = 1; i < n - 1; i++)
+      if (!marks.contains(i)) i,
+  ]..shuffle(rng);
   for (final i in free) {
     if (marks.length >= target) break;
     marks.add(i);

@@ -8,11 +8,14 @@ import 'dart:math';
 /// move, so every region keeps its part of the solution.
 class RegionSearch {
   RegionSearch(this.n, this.regions, this.pinned, this.rng)
-      : nb = List.generate(n * n, (i) {
-          final r = i ~/ n, c = i % n;
-          return [if (r > 0) i - n, if (r < n - 1) i + n, if (c > 0) i - 1, if (c < n - 1) i + 1];
-        }),
-        movable = [for (var i = 0; i < n * n; i++) if (!pinned[i]) i];
+    : nb = List.generate(n * n, (i) {
+        final r = i ~/ n, c = i % n;
+        return [if (r > 0) i - n, if (r < n - 1) i + n, if (c > 0) i - 1, if (c < n - 1) i + 1];
+      }),
+      movable = [
+        for (var i = 0; i < n * n; i++)
+          if (!pinned[i]) i,
+      ];
 
   final int n;
   final List<int> regions;
@@ -35,7 +38,10 @@ class RegionSearch {
   bool moveCell(int x) {
     if (pinned[x]) return false;
     final from = regions[x];
-    final targets = {for (final j in nb[x]) if (regions[j] != from && regions[j] >= 0) regions[j]}.toList();
+    final targets = {
+      for (final j in nb[x])
+        if (regions[j] != from && regions[j] >= 0) regions[j],
+    }.toList();
     if (targets.isEmpty || !_connectedWithout(from, x)) return false;
     regions[x] = targets[rng.nextInt(targets.length)];
     return true;

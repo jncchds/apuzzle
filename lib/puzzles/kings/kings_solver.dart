@@ -51,7 +51,10 @@ class KingsSolver {
     final cand = startCand ?? [for (final r in regions) r >= 0];
     final king = List<bool>.filled(n * n, false);
     if (!_propagate(cand, king, tier)) return null;
-    final kings = [for (var i = 0; i < n * n; i++) if (king[i]) i];
+    final kings = [
+      for (var i = 0; i < n * n; i++)
+        if (king[i]) i,
+    ];
     return kings.length == n ? kings : null;
   }
 
@@ -105,7 +108,10 @@ class KingsSolver {
       // Confinement: all candidates of a unit inside another unit.
       for (var u = 0; u < units.length && !progress; u++) {
         if (_unitHasKing(king, u)) continue;
-        final cs = [for (final i in units[u]) if (cand[i]) i];
+        final cs = [
+          for (final i in units[u])
+            if (cand[i]) i,
+        ];
         if (cs.isEmpty) return false;
         for (var kind = 0; kind < 3; kind++) {
           final other = unitsOf[cs.first][kind];

@@ -41,18 +41,18 @@ class HuesType extends ValueGridType<HuesPuzzle> {
   GridSize get defaultSize => const GridSize.square(6);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(8),
+  };
 
   @override
   InputMode get defaultInputMode => InputMode.palette;
 
   @override
   List<ValueSpec> get values => [
-        for (var i = 0; i < huesColorCount; i++) ValueSpec.fill(palette[i], label: ['blue', 'pink', 'yellow', 'green'][i]),
-      ];
+    for (var i = 0; i < huesColorCount; i++) ValueSpec.fill(palette[i], label: ['blue', 'pink', 'yellow', 'green'][i]),
+  ];
 
   @override
   bool get showLockIcon => false;
@@ -77,7 +77,10 @@ class HuesType extends ValueGridType<HuesPuzzle> {
     final left = n - placed;
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 200),
-      transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: FadeTransition(opacity: anim, child: child)),
+      transitionBuilder: (child, anim) => ScaleTransition(
+        scale: anim,
+        child: FadeTransition(opacity: anim, child: child),
+      ),
       child: Text(
         '$left',
         key: ValueKey(left),
@@ -99,8 +102,9 @@ class HuesType extends ValueGridType<HuesPuzzle> {
   bool isSolved(HuesPuzzle puzzle, ValueGrid state) => state.isFull && huesConflicts(puzzle, state.toFlat()).isEmpty;
 
   @override
-  Set<Pos> conflicts(HuesPuzzle puzzle, ValueGrid state) =>
-      {for (final i in huesConflicts(puzzle, state.toFlat())) puzzle.size.pos(i)};
+  Set<Pos> conflicts(HuesPuzzle puzzle, ValueGrid state) => {
+    for (final i in huesConflicts(puzzle, state.toFlat())) puzzle.size.pos(i),
+  };
 
   @override
   Map<String, dynamic> encodePuzzle(HuesPuzzle puzzle) => puzzle.toJson();

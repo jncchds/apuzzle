@@ -36,15 +36,17 @@ class ShikakuType extends PuzzleType<ShikakuPuzzle, ShikakuState> {
   List<TutorialStep> strategies() => shikakuStrategies;
 
   @override
-  List<GridSize> get sizes => [for (final n in [5, 6, 7, 8, 9, 10, 12]) GridSize.square(n)];
+  List<GridSize> get sizes => [
+    for (final n in [5, 6, 7, 8, 9, 10, 12]) GridSize.square(n),
+  ];
   @override
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(8),
-        _ => const GridSize.square(9),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(8),
+    _ => const GridSize.square(9),
+  };
   @override
   double get controlsHeight => 40;
 
@@ -63,9 +65,9 @@ class ShikakuType extends PuzzleType<ShikakuPuzzle, ShikakuState> {
 
   @override
   Set<Pos> conflicts(ShikakuPuzzle puzzle, ShikakuState state) => {
-        for (final r in shikakuBadRects(puzzle, state.rects))
-          for (final i in r.cells(puzzle.cols)) puzzle.size.pos(i),
-      };
+    for (final r in shikakuBadRects(puzzle, state.rects))
+      for (final i in r.cells(puzzle.cols)) puzzle.size.pos(i),
+  };
 
   @override
   HintResult<ShikakuState>? hint(ShikakuPuzzle puzzle, ShikakuState state) {
@@ -85,11 +87,13 @@ class ShikakuType extends PuzzleType<ShikakuPuzzle, ShikakuState> {
 
   static void place(GameController ctrl, CellRect rect) {
     final s = ctrl.state as ShikakuState;
-    ctrl.apply(ShikakuState([
-      for (final r in s.rects)
-        if (!r.overlaps(rect)) r,
-      rect,
-    ]));
+    ctrl.apply(
+      ShikakuState([
+        for (final r in s.rects)
+          if (!r.overlaps(rect)) r,
+        rect,
+      ]),
+    );
   }
 
   static void removeAt(GameController ctrl, Pos pos) {
@@ -195,7 +199,10 @@ class _ShikakuBoardState extends State<_ShikakuBoard> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(color: scheme.primary, borderRadius: BorderRadius.circular(10)),
-                child: Text('${preview.area}', style: TextStyle(color: scheme.onPrimary, fontWeight: FontWeight.w700)),
+                child: Text(
+                  '${preview.area}',
+                  style: TextStyle(color: scheme.onPrimary, fontWeight: FontWeight.w700),
+                ),
               ),
             ),
           ),
@@ -212,8 +219,8 @@ class _ShikakuBoardState extends State<_ShikakuBoard> {
             border: errors.contains(pos)
                 ? Border.all(color: scheme.error, width: 2.5)
                 : ctrl.flashHints.contains(pos)
-                    ? Border.all(color: scheme.tertiary, width: 2.5)
-                    : null,
+                ? Border.all(color: scheme.tertiary, width: 2.5)
+                : null,
           ),
           alignment: Alignment.center,
           child: clue == null

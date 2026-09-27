@@ -89,8 +89,8 @@ class AppRoute {
       : daily != null
       ? Uri(path: '/daily', queryParameters: {'d': daily.toString(), if (game != null) 'p': game.toString()})
       : game != null
-          ? Uri(path: '/', queryParameters: {'p': game.toString()})
-          : Uri(path: settings ? '/settings' : '/');
+      ? Uri(path: '/', queryParameters: {'p': game.toString()})
+      : Uri(path: settings ? '/settings' : '/');
 }
 
 class AppRouteParser extends RouteInformationParser<AppRoute> {
@@ -118,7 +118,8 @@ class _Game {
 }
 
 /// Home, with settings or daily challenges, then one game on top. Dialogs and sheets stay pageless.
-class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, PopNavigatorRouterDelegateMixin<AppRoute> {
+class AppRouterDelegate extends RouterDelegate<AppRoute>
+    with ChangeNotifier, PopNavigatorRouterDelegateMixin<AppRoute> {
   AppRouterDelegate({this.messengerKey});
 
   final GlobalKey<ScaffoldMessengerState>? messengerKey;
@@ -140,15 +141,14 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
   VoidCallback? _tutorialPlay;
 
   @override
-  AppRoute get currentConfiguration =>
-      AppRoute(
-        settings: _settings,
-        learn: _learn,
-        tutorial: _tutorial,
-        strategies: _strategies,
-        daily: _daily,
-        game: _game?.code,
-      );
+  AppRoute get currentConfiguration => AppRoute(
+    settings: _settings,
+    learn: _learn,
+    tutorial: _tutorial,
+    strategies: _strategies,
+    daily: _daily,
+    game: _game?.code,
+  );
 
   @override
   Future<void> setNewRoutePath(AppRoute configuration) {
@@ -165,7 +165,12 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
     if (configuration.tutorial case final type?) {
       openTutorial(type, strategies: configuration.strategies);
     } else {
-      _show(settings: configuration.settings, learn: configuration.learn, daily: configuration.daily, game: configuration.game);
+      _show(
+        settings: configuration.settings,
+        learn: configuration.learn,
+        daily: configuration.daily,
+        game: configuration.game,
+      );
     }
     return SynchronousFuture(null);
   }
@@ -240,7 +245,11 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
         const MaterialPage(key: ValueKey('home'), child: HomeScreen()),
         if (_settings) const MaterialPage(key: ValueKey('settings'), child: SettingsScreen()),
         if (_learn) const MaterialPage(key: ValueKey('learn'), child: LearnScreen()),
-        if (_daily case final day?) MaterialPage(key: const ValueKey('daily'), child: DailyScreen(day: day)),
+        if (_daily case final day?)
+          MaterialPage(
+            key: const ValueKey('daily'),
+            child: DailyScreen(day: day),
+          ),
         if (game != null)
           MaterialPage(
             key: ValueKey(game.id),

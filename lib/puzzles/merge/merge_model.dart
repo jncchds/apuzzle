@@ -43,16 +43,23 @@ class MergePuzzle {
 
   GridSize get size => GridSize(rows, cols);
 
-  Map<String, dynamic> toJson() => {'rows': rows, 'cols': cols, 'goal': goal.id, 'target': target, 'seed': seed, 'start': start};
+  Map<String, dynamic> toJson() => {
+    'rows': rows,
+    'cols': cols,
+    'goal': goal.id,
+    'target': target,
+    'seed': seed,
+    'start': start,
+  };
 
   factory MergePuzzle.fromJson(Map<String, dynamic> j) => MergePuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        goal: MergeGoal.byId(j['goal'] as String?),
-        target: j['target'] as int,
-        seed: j['seed'] as int,
-        start: (j['start'] as List).cast<int>(),
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    goal: MergeGoal.byId(j['goal'] as String?),
+    target: j['target'] as int,
+    seed: j['seed'] as int,
+    start: (j['start'] as List).cast<int>(),
+  );
 }
 
 class MergeState {
@@ -94,21 +101,29 @@ class MergeState {
   Map<String, dynamic> toJson() => {'cells': cells, 'ids': ids, 'score': score, 'moves': moves, 'next': nextId};
 
   factory MergeState.fromJson(Map<String, dynamic> j) => MergeState(
-        cells: (j['cells'] as List).cast<int>(),
-        ids: (j['ids'] as List).cast<int>(),
-        score: j['score'] as int,
-        moves: j['moves'] as int,
-        nextId: j['next'] as int,
-      );
+    cells: (j['cells'] as List).cast<int>(),
+    ids: (j['ids'] as List).cast<int>(),
+    score: j['score'] as int,
+    moves: j['moves'] as int,
+    nextId: j['next'] as int,
+  );
 }
 
 /// Cell indices of each line along [dir], leading edge first.
 List<List<int>> mergeLines(int rows, int cols, MergeDir dir) => switch (dir) {
-      MergeDir.left => [for (var r = 0; r < rows; r++) [for (var c = 0; c < cols; c++) r * cols + c]],
-      MergeDir.right => [for (var r = 0; r < rows; r++) [for (var c = cols - 1; c >= 0; c--) r * cols + c]],
-      MergeDir.up => [for (var c = 0; c < cols; c++) [for (var r = 0; r < rows; r++) r * cols + c]],
-      MergeDir.down => [for (var c = 0; c < cols; c++) [for (var r = rows - 1; r >= 0; r--) r * cols + c]],
-    };
+  MergeDir.left => [
+    for (var r = 0; r < rows; r++) [for (var c = 0; c < cols; c++) r * cols + c],
+  ],
+  MergeDir.right => [
+    for (var r = 0; r < rows; r++) [for (var c = cols - 1; c >= 0; c--) r * cols + c],
+  ],
+  MergeDir.up => [
+    for (var c = 0; c < cols; c++) [for (var r = 0; r < rows; r++) r * cols + c],
+  ],
+  MergeDir.down => [
+    for (var c = 0; c < cols; c++) [for (var r = rows - 1; r >= 0; r--) r * cols + c],
+  ],
+};
 
 /// Slides and merges [cells] toward [dir] without spawning. Returns the new
 /// cells, the points gained and whether anything moved.
@@ -151,7 +166,10 @@ bool mergeCanMove(List<int> cells, int rows, int cols) {
 /// A new tile: 2 nine times in ten, else 4, on a random empty cell. Seeded by
 /// the puzzle and the move number, so replays and share codes match.
 (int, int)? mergeSpawn(List<int> cells, int seed, int move) {
-  final empty = [for (var i = 0; i < cells.length; i++) if (cells[i] == 0) i];
+  final empty = [
+    for (var i = 0; i < cells.length; i++)
+      if (cells[i] == 0) i,
+  ];
   if (empty.isEmpty) return null;
   final rng = Random((seed * 1000003 + move * 7919) & 0x7fffffff);
   return (empty[rng.nextInt(empty.length)], rng.nextInt(10) == 0 ? 4 : 2);

@@ -5,6 +5,7 @@ Platforms: Android (the priority), Windows desktop (the main dev loop), web, iOS
 
 ## Commands
 Run them through the output condenser (see the global CLAUDE.md):
+- `node ~/.claude/tools/run.mjs dart format .` before every commit (page width 120, trailing commas kept; the settings are in `analysis_options.yaml`, and the release workflow fails on unformatted code). `flutter gen-l10n` writes formatted files (`format: true`).
 - `node ~/.claude/tools/run.mjs flutter analyze`
 - `node ~/.claude/tools/run.mjs flutter test`
 - `node ~/.claude/tools/run.mjs flutter build web --debug`, then preview with the `web` launch config (`tools/serve.mjs` serves `build/web` on :8080)

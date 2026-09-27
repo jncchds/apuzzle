@@ -51,7 +51,11 @@ final List<TutorialStep> islandsTutorial = [
 final _reach = _board(['3~~~', '.~.2', '.~~~', '~~1~']);
 
 final List<TutorialStep> islandsStrategies = [
-  TutorialStep(text: (l) => l.tutIslandsS1, puzzle: _reach, focus: {const Pos(2, 1), const Pos(2, 2), const Pos(3, 0), const Pos(3, 1), const Pos(3, 3)}),
+  TutorialStep(
+    text: (l) => l.tutIslandsS1,
+    puzzle: _reach,
+    focus: {const Pos(2, 1), const Pos(2, 2), const Pos(3, 0), const Pos(3, 1), const Pos(3, 3)},
+  ),
   TutorialStep.generated(
     text: (l) => l.tutIslandsS2,
     make: () => generateIslands(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),

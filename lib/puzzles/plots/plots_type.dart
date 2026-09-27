@@ -43,10 +43,10 @@ class PlotsType extends ValueGridType<PlotsPuzzle> {
   GridSize get defaultSize => const GridSize.square(7);
   @override
   GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
-        Difficulty.easy => const GridSize.square(6),
-        Difficulty.medium => const GridSize.square(7),
-        _ => const GridSize.square(8),
-      };
+    Difficulty.easy => const GridSize.square(6),
+    Difficulty.medium => const GridSize.square(7),
+    _ => const GridSize.square(8),
+  };
   @override
   Day get dailySince => const Day(2026, 9, 28);
 
@@ -82,9 +82,9 @@ class PlotsType extends ValueGridType<PlotsPuzzle> {
 
   @override
   Set<Pos> conflicts(PlotsPuzzle puzzle, ValueGrid state) => {
-        for (final i in plotsConflicts(puzzle.rows, puzzle.cols, state.toFlat(), complete: state.isFull))
-          puzzle.size.pos(i),
-      };
+    for (final i in plotsConflicts(puzzle.rows, puzzle.cols, state.toFlat(), complete: state.isFull))
+      puzzle.size.pos(i),
+  };
 
   @override
   Color? cellColor(BuildContext context, PlotsPuzzle puzzle, Pos pos, CellValue cell) {
@@ -112,15 +112,15 @@ class PlotsType extends ValueGridType<PlotsPuzzle> {
   /// Lines between filled cells with different numbers: the plots so far.
   @override
   List<Widget> buildOverlayIn(BuildContext context, PlotsPuzzle puzzle, ValueGrid state, BoardMetrics m) => [
-        RegionBorders(
-          metrics: m,
-          split: (a, b) {
-            final va = state.cells[a].value, vb = state.cells[b].value;
-            return va != null && vb != null && va != vb;
-          },
-          color: Theme.of(context).colorScheme.onSurface,
-        ),
-      ];
+    RegionBorders(
+      metrics: m,
+      split: (a, b) {
+        final va = state.cells[a].value, vb = state.cells[b].value;
+        return va != null && vb != null && va != vb;
+      },
+      color: Theme.of(context).colorScheme.onSurface,
+    ),
+  ];
 
   @override
   Map<String, dynamic> encodePuzzle(PlotsPuzzle puzzle) => puzzle.toJson();

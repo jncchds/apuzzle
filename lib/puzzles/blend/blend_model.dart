@@ -28,22 +28,24 @@ class BlendPuzzle {
   GridSize get size => GridSize(rows, cols);
 
   Map<String, dynamic> toJson() => {
-        'rows': rows,
-        'cols': cols,
-        'colors': colors,
-        'start': start,
-        'limit': limit,
-        'plan': [for (final (c, k) in plan) [c, k]],
-      };
+    'rows': rows,
+    'cols': cols,
+    'colors': colors,
+    'start': start,
+    'limit': limit,
+    'plan': [
+      for (final (c, k) in plan) [c, k],
+    ],
+  };
 
   factory BlendPuzzle.fromJson(Map<String, dynamic> j) => BlendPuzzle(
-        rows: j['rows'] as int,
-        cols: j['cols'] as int,
-        colors: j['colors'] as int,
-        start: (j['start'] as List).cast<int>(),
-        limit: j['limit'] as int,
-        plan: [for (final m in j['plan'] as List) ((m as List)[0] as int, m[1] as int)],
-      );
+    rows: j['rows'] as int,
+    cols: j['cols'] as int,
+    colors: j['colors'] as int,
+    start: (j['start'] as List).cast<int>(),
+    limit: j['limit'] as int,
+    plan: [for (final m in j['plan'] as List) ((m as List)[0] as int, m[1] as int)],
+  );
 }
 
 class BlendState {
@@ -52,7 +54,8 @@ class BlendState {
   final int moves;
 
   Map<String, dynamic> toJson() => {'cells': cells, 'moves': moves};
-  factory BlendState.fromJson(Map<String, dynamic> j) => BlendState((j['cells'] as List).cast<int>(), j['moves'] as int);
+  factory BlendState.fromJson(Map<String, dynamic> j) =>
+      BlendState((j['cells'] as List).cast<int>(), j['moves'] as int);
 }
 
 List<int> _nb(int i, int rows, int cols) {

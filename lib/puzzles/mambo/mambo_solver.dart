@@ -9,9 +9,7 @@ import 'mambo_model.dart';
 ///  2. probing: assume a value, propagate tier 1, reject on contradiction.
 /// Both tiers are sound, so "solved by logic" implies a unique solution.
 class MamboSolver {
-  MamboSolver(this.n, this.edges)
-      : half = n ~/ 2,
-        lines = mamboLines(n);
+  MamboSolver(this.n, this.edges) : half = n ~/ 2, lines = mamboLines(n);
 
   final int n;
   final int half;
@@ -117,7 +115,10 @@ class MamboSolver {
   List<int>? randomSolution(Random rng, [List<int>? start]) {
     final t = List.of(start ?? List.filled(n * n, -1));
     if (!propagate(t)) return null;
-    final empties = [for (var i = 0; i < t.length; i++) if (t[i] == -1) i];
+    final empties = [
+      for (var i = 0; i < t.length; i++)
+        if (t[i] == -1) i,
+    ];
     if (empties.isEmpty) return t;
     final i = empties[rng.nextInt(empties.length)];
     final first = rng.nextInt(2);

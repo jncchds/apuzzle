@@ -16,8 +16,12 @@ CampPuzzle _board(List<String> rows, {bool counts = true, List<int> given = cons
     cols: c,
     trees: [for (final ch in cells) ch == 'T'],
     tents: tents,
-    rowCounts: [for (var y = 0; y < r; y++) counts ? count([for (var x = 0; x < c; x++) y * c + x]) : null],
-    colCounts: [for (var x = 0; x < c; x++) counts ? count([for (var y = 0; y < r; y++) y * c + x]) : null],
+    rowCounts: [
+      for (var y = 0; y < r; y++) counts ? count([for (var x = 0; x < c; x++) y * c + x]) : null,
+    ],
+    colCounts: [
+      for (var x = 0; x < c; x++) counts ? count([for (var y = 0; y < r; y++) y * c + x]) : null,
+    ],
     givenTents: given,
   );
 }
