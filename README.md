@@ -1,5 +1,10 @@
 # APuzzle
 
+> ### ▶ [Play in your browser: jncchds.github.io/apuzzle](https://jncchds.github.io/apuzzle/)
+> No install needed: the web version has every game, the daily challenges and the tutorials, and it saves your progress in the browser.
+>
+> **Prefer an app?** Download it from the [latest release](https://github.com/jncchds/apuzzle/releases/latest): an `.apk` for Android and a `.zip` for Windows.
+
 A collection of grid logic puzzles for Android, Windows, iOS and the web, built with Flutter.
 Every puzzle is **generated on the device**, and a solver checks that it has **exactly one solution**.
 Mines is solved by logic without guessing. The color-flood games, Pop and 2048 are move-based instead: their limits and targets come from solver playthroughs or the board size, so they are always reachable.
