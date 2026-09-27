@@ -1,0 +1,13 @@
+{
+  "name": "apuzzle-nonogram-tools",
+  "private": true,
+  "type": "module",
+  "description": "Offline build of the nonogram picture catalog (see tools/nonogram/README.md).",
+  "dependencies": {
+    "@iconify-json/game-icons": "1.2.4",
+    "@iconify-json/material-symbols": "1.2.93",
+    "@iconify-json/openmoji": "1.2.29",
+    "@iconify-json/twemoji": "1.2.5",
+    "@resvg/resvg-js": "2.6.2"
+  }
+}

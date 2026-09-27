@@ -46,3 +46,7 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Nonogram catalog tool: npm deps and render cache
+/tools/nonogram/node_modules/
+/tools/nonogram/cache/

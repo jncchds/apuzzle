@@ -16,6 +16,7 @@ Run them through the output condenser (see the global CLAUDE.md):
 - App icons (Android incl. adaptive/monochrome, iOS, web, Windows) are generated from one design ("pixel A", colors at the top of the script): `node tools/make_icons.mjs`
 - Generator timings (all types, or `BENCH_TYPES=kings,lits`): `flutter test test/bench/generator_bench_test.dart --run-skipped --tags bench -r expanded`
 - Daily puzzle timings (every type at its daily sizes): `flutter test test/bench/daily_probe_test.dart --run-skipped --tags bench -r expanded`
+- Nonogram picture catalog (offline, output committed): see `tools/nonogram/README.md` (render.mjs → judge.mjs with the LM Studio vision model → `dart run tools/nonogram/build.dart --since=<date>`).
 - Per-type probes (time plus achieved tier/uniqueness): `PROBE=trail PROBE_SIZES=6,8,10 flutter test test/bench/probe_test.dart --run-skipped --tags bench -r expanded`
 
 ## Architecture

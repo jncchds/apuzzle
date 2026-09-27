@@ -4,8 +4,22 @@
     {
       "name": "web",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["tools/serve.mjs", "build/web", "8080"],
+      "runtimeArgs": [
+        "tools/serve.mjs",
+        "build/web",
+        "8080"
+      ],
       "port": 8080
+    },
+    {
+      "name": "nonogram-review",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "tools/serve.mjs",
+        "tools/nonogram/cache",
+        "8091"
+      ],
+      "port": 8091
     }
   ]
 }
