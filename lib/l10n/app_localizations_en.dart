@@ -136,6 +136,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get couldNotOpenSettings => 'Could not open the system settings';
 
   @override
+  String get installApp => 'Install app';
+
+  @override
+  String get installAppHint => 'Add APuzzle to your home screen; it opens in its own window';
+
+  @override
+  String get installAppIos => 'Tap Share in the browser, then “Add to Home Screen”.';
+
+  @override
   String get submitConflicts => 'Some cells break the rules';
 
   @override

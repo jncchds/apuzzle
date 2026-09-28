@@ -42,6 +42,9 @@
   "linksOff": "Wyłączone: dotknij i dodaj {host} w „Otwieraj obsługiwane linki”",
   "linksUnknown": "Wybierz APuzzle dla linków {host}",
   "couldNotOpenSettings": "Nie udało się otworzyć ustawień systemu",
+  "installApp": "Zainstaluj aplikację",
+  "installAppHint": "Dodaj APuzzle do ekranu głównego; otworzy się we własnym oknie",
+  "installAppIos": "Dotknij przycisku Udostępnij w przeglądarce, a potem „Do ekranu początkowego”.",
 
   "submitConflicts": "Niektóre pola łamią zasady",
   "submitIncomplete": "Jeszcze nie skończone",

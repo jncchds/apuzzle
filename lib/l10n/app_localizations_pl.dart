@@ -136,6 +136,15 @@ class AppLocalizationsPl extends AppLocalizations {
   String get couldNotOpenSettings => 'Nie udało się otworzyć ustawień systemu';
 
   @override
+  String get installApp => 'Zainstaluj aplikację';
+
+  @override
+  String get installAppHint => 'Dodaj APuzzle do ekranu głównego; otworzy się we własnym oknie';
+
+  @override
+  String get installAppIos => 'Dotknij przycisku Udostępnij w przeglądarce, a potem „Do ekranu początkowego”.';
+
+  @override
   String get submitConflicts => 'Niektóre pola łamią zasady';
 
   @override

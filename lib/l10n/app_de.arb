@@ -42,6 +42,9 @@
   "linksOff": "Aus: Tippen und {host} unter „Unterstützte Links öffnen“ hinzufügen",
   "linksUnknown": "APuzzle für Links von {host} wählen",
   "couldNotOpenSettings": "Die Systemeinstellungen konnten nicht geöffnet werden",
+  "installApp": "App installieren",
+  "installAppHint": "APuzzle zum Home-Bildschirm hinzufügen; es öffnet sich in einem eigenen Fenster",
+  "installAppIos": "Tippe im Browser auf „Teilen“ und dann auf „Zum Home-Bildschirm“.",
 
   "submitConflicts": "Einige Felder verletzen die Regeln",
   "submitIncomplete": "Noch nicht fertig",

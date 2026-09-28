@@ -9,6 +9,7 @@ import '../core/registry.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
 import 'daily_screen.dart';
+import 'install_app.dart';
 import 'new_game_sheet.dart';
 import 'puzzle_code_ui.dart';
 import 'version_pill.dart';
@@ -41,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         actions: [
+          const InstallAppButton(),
           IconButton(
             icon: const Icon(Icons.pin_outlined),
             tooltip: l.playCode,

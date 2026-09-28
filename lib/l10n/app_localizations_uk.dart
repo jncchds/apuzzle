@@ -136,6 +136,15 @@ class AppLocalizationsUk extends AppLocalizations {
   String get couldNotOpenSettings => 'Не вдалося відкрити системні налаштування';
 
   @override
+  String get installApp => 'Встановити застосунок';
+
+  @override
+  String get installAppHint => 'Додайте APuzzle на головний екран; він відкриватиметься в окремому вікні';
+
+  @override
+  String get installAppIos => 'Торкніться кнопки «Поділитися» в браузері, а потім «На початковий екран».';
+
+  @override
   String get submitConflicts => 'Деякі клітинки порушують правила';
 
   @override

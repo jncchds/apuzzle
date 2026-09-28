@@ -322,6 +322,24 @@ abstract class AppLocalizations {
   /// **'Could not open the system settings'**
   String get couldNotOpenSettings;
 
+  /// No description provided for @installApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Install app'**
+  String get installApp;
+
+  /// No description provided for @installAppHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add APuzzle to your home screen; it opens in its own window'**
+  String get installAppHint;
+
+  /// No description provided for @installAppIos.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap Share in the browser, then “Add to Home Screen”.'**
+  String get installAppIos;
+
   /// No description provided for @submitConflicts.
   ///
   /// In en, this message translates to:

@@ -43,6 +43,9 @@
   "linksOff": "Off: tap, then add {host} under \"Open supported links\"",
   "linksUnknown": "Choose APuzzle for {host} links",
   "couldNotOpenSettings": "Could not open the system settings",
+  "installApp": "Install app",
+  "installAppHint": "Add APuzzle to your home screen; it opens in its own window",
+  "installAppIos": "Tap Share in the browser, then “Add to Home Screen”.",
 
   "submitConflicts": "Some cells break the rules",
   "submitIncomplete": "Not finished yet",

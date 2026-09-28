@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../core/puzzle_code.dart';
 import '../core/settings.dart';
 import '../l10n/l10n.dart';
+import 'install_app.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -69,6 +70,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) const _LinksTile(),
+          if (kIsWeb) const InstallAppTile(),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.info_outline),

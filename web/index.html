@@ -68,6 +68,32 @@
       s.style.opacity = '0';
       setTimeout(function () { s.remove(); }, 300);
     });
+    // "Install app": Chromium browsers fire beforeinstallprompt (possibly before
+    // Flutter starts, so it is kept here); iOS has no API, only Share → Add to
+    // Home Screen. Read by lib/ui/install_app_web.dart.
+    (function () {
+      var deferred = null;
+      var standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+      var ios = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      function changed() { if (window.apuzzleInstallChanged) window.apuzzleInstallChanged(); }
+      window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; changed(); });
+      window.addEventListener('appinstalled', function () { deferred = null; standalone = true; changed(); });
+      window.apuzzleInstallState = function () {
+        if (standalone) return 'none';
+        if (deferred) return 'prompt';
+        return ios ? 'ios' : 'none';
+      };
+      window.apuzzleInstall = function () {
+        var e = deferred;
+        deferred = null; // a prompt can only be shown once
+        changed();
+        if (!e) return Promise.resolve(false);
+        return e.prompt()
+          .then(function () { return e.userChoice; })
+          .then(function (c) { return c.outcome === 'accepted'; });
+      };
+    })();
   </script>
   <!--
     You can customize the "flutter_bootstrap.js" script.
