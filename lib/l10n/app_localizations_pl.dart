@@ -728,7 +728,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get railsRules =>
-      '• Ułóż jeden tor przez środki pól, od wjazdu na lewej krawędzi do wyjazdu na dolnej.\n• Tor się nie rozgałęzia, nie krzyżuje ani nie zamyka w pętlę i nie musi przechodzić przez każde pole.\n• Liczby nad planszą i po jej prawej stronie mówią, przez ile pól każdej kolumny i wiersza biegnie tor.\n• Odcinki, które już są na planszy, są stałe: tor biegnie przez nie dokładnie tak, jak pokazano.\n\nPrzeciągaj po polach, aby układać tor, albo wzdłuż niego, aby go ścierać. Dotknij między dwoma polami, aby przełączać: tor → krzyżyk → puste.';
+      '• Ułóż jeden tor przez środki pól, od wjazdu na lewej krawędzi do wyjazdu na dolnej.\n• Tor się nie rozgałęzia, nie krzyżuje ani nie zamyka w pętlę i nie musi przechodzić przez każde pole.\n• Liczby nad planszą i po jej prawej stronie mówią, przez ile pól każdej kolumny i wiersza biegnie tor.\n• Odcinki, które już są na planszy, są stałe: tor biegnie przez nie dokładnie tak, jak pokazano.\n\nPrzeciągaj po polach, aby układać tor, albo wzdłuż niego, aby go ścierać. Dotknij środka pola, aby przełączać: puste → notatka toru → kropka (twoja notatka „tu nie ma toru”), albo dotknij między dwoma polami, aby przełączać: tor → krzyżyk → puste.';
 
   @override
   String get blocksName => 'Bloki';

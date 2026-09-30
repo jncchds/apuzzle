@@ -18,6 +18,7 @@ import 'package:apuzzle/core/registry.dart';
 import 'package:apuzzle/core/settings.dart';
 import 'package:apuzzle/l10n/l10n.dart';
 import 'package:apuzzle/puzzles/pop/pop_model.dart';
+import 'package:apuzzle/puzzles/rails/rails_model.dart';
 import 'package:apuzzle/ui/game_screen.dart';
 import 'package:apuzzle/ui/tutorial_screen.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,23 @@ void main() {
           state = h.state as Object;
           // Pointer-only hints (Pop): play the pointed-at group.
           if (puzzle is PopPuzzle) state = popAt(puzzle, state as PopState, puzzle.size.index(h.cells.first))!;
+        }
+        // Some cell notes on Rails: two "track here", three "no track".
+        if (puzzle is RailsPuzzle && state is RailsState) {
+          final track = railsUsed(puzzle, puzzle.lines), laid = railsUsed(puzzle, state.lines);
+          final cells = state.notes(track.length);
+          var t = 0, d = 0;
+          for (var i = 0; i < cells.length; i++) {
+            if (track[i] && !laid[i] && !puzzle.given[i] && t < 2) {
+              cells[i] = railsNoteTrack;
+              t++;
+            }
+            if (!track[i] && d < 3) {
+              cells[i] = railsNoteDot;
+              d++;
+            }
+          }
+          state = RailsState(state.marks, cells);
         }
 
         final key = GlobalKey();

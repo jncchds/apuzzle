@@ -54,6 +54,7 @@ class LoopBoard extends StatefulWidget {
     this.locked,
     this.margins,
     this.onCellTap,
+    this.paintNotes,
   });
 
   final LatticeLoop g;
@@ -88,6 +89,9 @@ class LoopBoard extends StatefulWidget {
   /// Taps near a cell centre go here instead of to the edges (for boards
   /// that also mark cells). [secondary]: long-press or right-click.
   final void Function(Pos pos, bool secondary)? onCellTap;
+
+  /// Draws the player's cell notes, always under the lines.
+  final void Function(Canvas canvas, LoopGeom geo)? paintNotes;
 
   @override
   State<LoopBoard> createState() => _LoopBoardState();
@@ -238,6 +242,7 @@ class _LoopBoardState extends State<LoopBoard> {
             hintCells: widget.hintCells,
             errorCells: widget.errorCells,
             paintClues: widget.paintClues,
+            paintNotes: widget.paintNotes,
             cluesOnTop: widget.cluesOnTop,
             pulse: pulse,
           ),
@@ -279,6 +284,7 @@ class _LoopPainter extends CustomPainter {
     required this.hintCells,
     required this.errorCells,
     required this.paintClues,
+    required this.paintNotes,
     required this.cluesOnTop,
     required this.pulse,
   });
@@ -295,6 +301,7 @@ class _LoopPainter extends CustomPainter {
   final Set<Pos> hintCells;
   final Set<Pos> errorCells;
   final void Function(Canvas canvas, LoopGeom geo) paintClues;
+  final void Function(Canvas canvas, LoopGeom geo)? paintNotes;
   final bool cluesOnTop;
   final double pulse;
 
@@ -312,6 +319,7 @@ class _LoopPainter extends CustomPainter {
         if (errorCells.contains(Pos(r, c))) canvas.drawRRect(rr, Paint()..color = errorColor);
       }
     }
+    paintNotes?.call(canvas, geo);
     if (!cluesOnTop) paintClues(canvas, geo);
 
     final line = Paint()

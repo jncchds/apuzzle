@@ -1279,7 +1279,7 @@ abstract class AppLocalizations {
   /// No description provided for @railsRules.
   ///
   /// In en, this message translates to:
-  /// **'• Lay one track through the centers of the cells, from the entry on the left edge to the exit on the bottom edge.\n• The track never branches, crosses itself or closes into a loop, and it doesn\'t have to visit every cell.\n• The numbers above and to the right of the grid tell how many cells of each column and row the track passes through.\n• Pieces already on the board are fixed: the track runs through them exactly as shown.\n\nDrag through cells to lay track, or drag along it to erase. Tap between two cells to cycle track → cross → empty.'**
+  /// **'• Lay one track through the centers of the cells, from the entry on the left edge to the exit on the bottom edge.\n• The track never branches, crosses itself or closes into a loop, and it doesn\'t have to visit every cell.\n• The numbers above and to the right of the grid tell how many cells of each column and row the track passes through.\n• Pieces already on the board are fixed: the track runs through them exactly as shown.\n\nDrag through cells to lay track, or drag along it to erase. Tap the center of a cell to cycle empty → track note → dot (your \"no track here\" note), or tap between two cells to cycle track → cross → empty.'**
   String get railsRules;
 
   /// No description provided for @blocksName.

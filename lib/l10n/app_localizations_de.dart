@@ -717,7 +717,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get railsRules =>
-      '• Verlege ein Gleis durch die Mitten der Felder, von der Einfahrt am linken Rand zur Ausfahrt am unteren Rand.\n• Das Gleis verzweigt sich nicht, kreuzt sich nicht und schließt sich nicht zu einer Schleife. Es muss nicht durch jedes Feld laufen.\n• Die Zahlen über und rechts neben dem Gitter geben an, durch wie viele Felder jeder Spalte und Zeile das Gleis läuft.\n• Stücke, die schon auf dem Gitter liegen, sind fest: Das Gleis läuft genau so hindurch, wie gezeigt.\n\nZiehe durch Felder, um Gleis zu verlegen, oder an ihm entlang, um es zu löschen. Tippe zwischen zwei Felder, um zu wechseln: Gleis → Kreuz → leer.';
+      '• Verlege ein Gleis durch die Mitten der Felder, von der Einfahrt am linken Rand zur Ausfahrt am unteren Rand.\n• Das Gleis verzweigt sich nicht, kreuzt sich nicht und schließt sich nicht zu einer Schleife. Es muss nicht durch jedes Feld laufen.\n• Die Zahlen über und rechts neben dem Gitter geben an, durch wie viele Felder jeder Spalte und Zeile das Gleis läuft.\n• Stücke, die schon auf dem Gitter liegen, sind fest: Das Gleis läuft genau so hindurch, wie gezeigt.\n\nZiehe durch Felder, um Gleis zu verlegen, oder an ihm entlang, um es zu löschen. Tippe auf die Mitte eines Felds, um zu wechseln: leer → Gleisnotiz → Punkt (deine Notiz „hier kein Gleis“), oder zwischen zwei Felder, um zu wechseln: Gleis → Kreuz → leer.';
 
   @override
   String get blocksName => 'Blöcke';

@@ -4,7 +4,6 @@ import '../../core/day.dart';
 import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
-import '../../core/lattice_loop.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
@@ -15,7 +14,7 @@ import 'rails_tutorial.dart';
 
 /// Train tracks: lay one track from the entry to the exit, matching the
 /// row and column counts.
-class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
+class RailsType extends PuzzleType<RailsPuzzle, RailsState> {
   const RailsType();
 
   static const railColor = Color(0xFFB88A6A);
@@ -67,19 +66,19 @@ class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
   }
 
   @override
-  LoopMarks initialState(RailsPuzzle puzzle) {
+  RailsState initialState(RailsPuzzle puzzle) {
     final fixed = locked(puzzle);
-    return LoopMarks([for (var e = 0; e < fixed.length; e++) fixed[e] && puzzle.lines[e] ? 1 : 0]);
+    return RailsState([for (var e = 0; e < fixed.length; e++) fixed[e] && puzzle.lines[e] ? 1 : 0]);
   }
 
   @override
-  bool isComplete(RailsPuzzle puzzle, LoopMarks state) => railsWalk(puzzle, state.lines).done;
+  bool isComplete(RailsPuzzle puzzle, RailsState state) => railsWalk(puzzle, state.lines).done;
 
   @override
-  bool isSolved(RailsPuzzle puzzle, LoopMarks state) => railsValid(puzzle, state.lines);
+  bool isSolved(RailsPuzzle puzzle, RailsState state) => railsValid(puzzle, state.lines);
 
   @override
-  Set<Pos> conflicts(RailsPuzzle puzzle, LoopMarks state) {
+  Set<Pos> conflicts(RailsPuzzle puzzle, RailsState state) {
     final lines = state.lines;
     final n = puzzle.rows * puzzle.cols;
     final bad = {
@@ -106,11 +105,25 @@ class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
   }
 
   @override
-  HintResult<LoopMarks>? hint(RailsPuzzle puzzle, LoopMarks state) {
+  HintResult<RailsState>? hint(RailsPuzzle puzzle, RailsState state) {
     final g = puzzle.lattice;
-    HintResult<LoopMarks> fix(int e, int v) {
+    HintResult<RailsState> fix(int e, int v) {
       final (a, b) = g.ends(e);
-      return HintResult(LoopMarks(List.of(state.marks)..[e] = v), {puzzle.size.pos(a), puzzle.size.pos(b)});
+      return HintResult(RailsState(List.of(state.marks)..[e] = v, state.cells), {
+        puzzle.size.pos(a),
+        puzzle.size.pos(b),
+      });
+    }
+
+    // Wrong cell notes first.
+    final track = railsUsed(puzzle, puzzle.lines);
+    for (var i = 0; i < track.length; i++) {
+      final note = state.note(i);
+      if (note == railsNoteTrack && !track[i] || note == railsNoteDot && track[i]) {
+        return HintResult(RailsState(state.marks, state.notes(track.length)..[i] = railsNoteNone), {
+          puzzle.size.pos(i),
+        });
+      }
     }
 
     for (var e = 0; e < g.edgeCount; e++) {
@@ -132,7 +145,7 @@ class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
   @override
   Widget buildBoard(BuildContext context, GameController controller) {
     final p = controller.puzzle as RailsPuzzle;
-    final s = controller.state as LoopMarks;
+    final s = controller.state as RailsState;
     final scheme = Theme.of(context).colorScheme;
     final textStyle = Theme.of(context).textTheme.bodyLarge!;
     final dark = Theme.of(context).brightness == Brightness.dark;
@@ -140,6 +153,32 @@ class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
     final tie = dark ? const Color(0xFF6B5647) : const Color(0xFF8A6A52);
     final g = p.lattice;
     final used = railsUsed(p, s.lines);
+    final n = p.rows * p.cols;
+    // Track notes count toward the row and column numbers too.
+    final counted = [for (var i = 0; i < n; i++) used[i] || s.note(i) == railsNoteTrack];
+
+    void tapCell(Pos pos, bool secondary) {
+      final i = p.size.index(pos);
+      if (p.given[i]) return;
+      final cur = s.note(i);
+      final next = secondary
+          ? (cur == railsNoteDot ? railsNoteNone : railsNoteDot)
+          : switch (cur) {
+              railsNoteNone => railsNoteTrack,
+              railsNoteTrack => railsNoteDot,
+              _ => railsNoteNone,
+            };
+      final marks = List.of(s.marks);
+      // "No track here" clears the track through the cell.
+      if (next == railsNoteDot) {
+        final fixed = locked(p);
+        for (final e in g.incident[i]) {
+          if (marks[e] == 1 && !fixed[e]) marks[e] = 0;
+        }
+      }
+      controller.apply(RailsState(marks, s.notes(n)..[i] = next));
+    }
+
     return LoopBoard(
       g: g,
       rows: p.rows,
@@ -155,7 +194,30 @@ class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
       lineColor: railColor,
       hintCells: controller.flashHints,
       errorCells: controller.errorCells,
-      onCommit: (m) => controller.apply(LoopMarks(m)),
+      onCellTap: tapCell,
+      onCommit: (m) {
+        // Track through a cell clears its "no track" dot.
+        final cells = s.notes(n);
+        for (var i = 0; i < n; i++) {
+          if (cells[i] == railsNoteDot && g.incident[i].any((e) => m[e] == 1)) cells[i] = railsNoteNone;
+        }
+        controller.apply(RailsState(m, cells));
+      },
+      paintNotes: (canvas, geo) {
+        final cell = geo.cell;
+        for (var i = 0; i < n; i++) {
+          final rect = geo.cellRect(i ~/ p.cols, i % p.cols);
+          switch (s.note(i)) {
+            case railsNoteTrack:
+              canvas.drawRRect(
+                RRect.fromRectAndRadius(rect.deflate(cell * 0.14), Radius.circular(cell * 0.1)),
+                Paint()..color = railColor.withValues(alpha: 0.28),
+              );
+            case railsNoteDot:
+              canvas.drawCircle(rect.center, cell * 0.07, Paint()..color = ink.withValues(alpha: 0.5));
+          }
+        }
+      },
       paintClues: (canvas, geo) {
         final cell = geo.cell;
         // Sleepers across every piece of track, so lines read as rails.
@@ -222,11 +284,11 @@ class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
         }
 
         for (var c = 0; c < p.cols; c++) {
-          final have = [for (var r = 0; r < p.rows; r++) used[r * p.cols + c]].where((u) => u).length;
+          final have = [for (var r = 0; r < p.rows; r++) counted[r * p.cols + c]].where((u) => u).length;
           label(p.colCounts[c], have, Offset(geo.point(0, c).dx, geo.origin.dy - cell * 0.35));
         }
         for (var r = 0; r < p.rows; r++) {
-          final have = [for (var c = 0; c < p.cols; c++) used[r * p.cols + c]].where((u) => u).length;
+          final have = [for (var c = 0; c < p.cols; c++) counted[r * p.cols + c]].where((u) => u).length;
           label(p.rowCounts[r], have, Offset(geo.origin.dx + (p.cols + 0.35) * cell, geo.point(r, 0).dy));
         }
       },
@@ -238,7 +300,7 @@ class RailsType extends PuzzleType<RailsPuzzle, LoopMarks> {
   @override
   RailsPuzzle decodePuzzle(Map<String, dynamic> json) => RailsPuzzle.fromJson(json);
   @override
-  Map<String, dynamic> encodeState(LoopMarks state) => state.toJson();
+  Map<String, dynamic> encodeState(RailsState state) => state.toJson();
   @override
-  LoopMarks decodeState(Map<String, dynamic> json) => LoopMarks.fromJson(json);
+  RailsState decodeState(Map<String, dynamic> json) => RailsState.fromJson(json);
 }

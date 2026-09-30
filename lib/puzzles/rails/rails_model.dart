@@ -130,3 +130,26 @@ bool railsCountsMet(RailsPuzzle p, List<bool> used) {
   }
   return true;
 }
+
+/// Cell notes: none, "track goes here", "no track here".
+const railsNoteNone = 0, railsNoteTrack = 1, railsNoteDot = 2;
+
+/// The player's edge marks (0 empty, 1 track, 2 cross) and cell notes
+/// ([cells] is empty when there are none, as in saves from before notes).
+class RailsState {
+  const RailsState(this.marks, [this.cells = const []]);
+
+  final List<int> marks;
+  final List<int> cells;
+
+  List<bool> get lines => [for (final m in marks) m == 1];
+
+  int note(int i) => i < cells.length ? cells[i] : railsNoteNone;
+
+  /// Cell notes of a board with [n] cells, as a new list.
+  List<int> notes(int n) => [for (var i = 0; i < n; i++) note(i)];
+
+  Map<String, dynamic> toJson() => {'m': marks, if (cells.any((c) => c != railsNoteNone)) 'c': cells};
+  factory RailsState.fromJson(Map<String, dynamic> j) =>
+      RailsState((j['m'] as List).cast<int>(), (j['c'] as List?)?.cast<int>() ?? const []);
+}
