@@ -37,6 +37,8 @@
   "language": "Sprache",
   "languageSystem": "Systemsprache",
   "aboutLicenses": "Info & Lizenzen",
+  "releaseNotes": "Versionshinweise",
+  "aboutCredits": "Geschrieben mit Claude Code und dem Modell Claude Opus\u00a05.5",
   "linksTitle": "Rätsel-Links in der App öffnen",
   "linksOn": "Geteilte Rätsel-Links öffnen sich in APuzzle",
   "linksOff": "Aus: Tippen und {host} unter „Unterstützte Links öffnen“ hinzufügen",

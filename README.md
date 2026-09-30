@@ -144,4 +144,4 @@ APuzzle was written with [Claude Code](https://claude.com/claude-code), using An
 
 ## License
 
-No license has been chosen yet. All rights reserved until one is added.
+[MIT](LICENSE) © 2026 Kirill Chekanov.

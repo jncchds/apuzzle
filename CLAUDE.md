@@ -19,6 +19,13 @@ Run them through the output condenser (see the global CLAUDE.md):
 - Daily puzzle timings (every type at its daily sizes): `flutter test test/bench/daily_probe_test.dart --run-skipped --tags bench -r expanded`
 - Per-type probes (time plus achieved tier/uniqueness): `PROBE=trail PROBE_SIZES=6,8,10 flutter test test/bench/probe_test.dart --run-skipped --tags bench -r expanded`
 
+## Releases and release notes
+Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/workflows/release.yml`; the version comes from the branch name, not pubspec). `RELEASE_NOTES.md` has one `## X.Y.Z - YYYY-MM-DD` header per release, newest first, with short user-facing bullets; it is bundled as an asset and shown under Settings → Release notes (`/release-notes`). With every commit:
+1. `git fetch`, then check whether the top version in `RELEASE_NOTES.md` exists as `origin/release/<version>`.
+2. If it does, add a new version on top (usually the next minor; a patch for fixes only) with the commit's notes.
+3. If it doesn't, add the commit's notes to that top version.
+4. Either way, set the top version's date to today.
+
 ## Architecture
 - `lib/core/puzzle_type.dart`: the `PuzzleType<P, S>` plug-in contract. P is the immutable puzzle (clues and solution), S is the immutable play state.
 - `lib/core/value_grid.dart`:

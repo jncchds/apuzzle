@@ -38,6 +38,8 @@
   "language": "Language",
   "languageSystem": "System default",
   "aboutLicenses": "About & licenses",
+  "releaseNotes": "Release notes",
+  "aboutCredits": "Written with Claude Code, using Claude Opus\u00a05.5",
   "linksTitle": "Open puzzle links in the app",
   "linksOn": "Shared puzzle links open in APuzzle",
   "linksOff": "Off: tap, then add {host} under \"Open supported links\"",

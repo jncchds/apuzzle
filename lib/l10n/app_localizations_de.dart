@@ -117,6 +117,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutLicenses => 'Info & Lizenzen';
 
   @override
+  String get releaseNotes => 'Versionshinweise';
+
+  @override
+  String get aboutCredits => 'Geschrieben mit Claude Code und dem Modell Claude Opus 5.5';
+
+  @override
   String get linksTitle => 'Rätsel-Links in der App öffnen';
 
   @override

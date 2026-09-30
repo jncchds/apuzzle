@@ -117,6 +117,12 @@ class AppLocalizationsUk extends AppLocalizations {
   String get aboutLicenses => 'Про застосунок і ліцензії';
 
   @override
+  String get releaseNotes => 'Що нового';
+
+  @override
+  String get aboutCredits => 'Написано за допомогою Claude Code і моделі Claude Opus 5.5';
+
+  @override
   String get linksTitle => 'Відкривати посилання на головоломки в застосунку';
 
   @override

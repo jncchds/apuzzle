@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../core/puzzle_code.dart';
 import '../core/settings.dart';
 import '../l10n/l10n.dart';
+import 'app_router.dart';
 import 'install_app.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -73,9 +75,23 @@ class SettingsScreen extends StatelessWidget {
           if (kIsWeb) const InstallAppTile(),
           const Divider(),
           ListTile(
+            leading: const Icon(Icons.new_releases_outlined),
+            title: Text(l.releaseNotes),
+            onTap: () => AppRouterDelegate.of(context).openReleaseNotes(),
+          ),
+          ListTile(
             leading: const Icon(Icons.info_outline),
             title: Text(l.aboutLicenses),
-            onTap: () => showLicensePage(context: context, applicationName: 'APuzzle'),
+            onTap: () async {
+              final info = await PackageInfo.fromPlatform();
+              if (!context.mounted) return;
+              showLicensePage(
+                context: context,
+                applicationName: 'APuzzle',
+                applicationVersion: info.version,
+                applicationLegalese: '© 2026 Kirill Chekanov\n${l.aboutCredits}',
+              );
+            },
           ),
         ],
       ),

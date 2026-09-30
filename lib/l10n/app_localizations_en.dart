@@ -117,6 +117,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutLicenses => 'About & licenses';
 
   @override
+  String get releaseNotes => 'Release notes';
+
+  @override
+  String get aboutCredits => 'Written with Claude Code, using Claude Opus 5.5';
+
+  @override
   String get linksTitle => 'Open puzzle links in the app';
 
   @override

@@ -292,6 +292,18 @@ abstract class AppLocalizations {
   /// **'About & licenses'**
   String get aboutLicenses;
 
+  /// No description provided for @releaseNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Release notes'**
+  String get releaseNotes;
+
+  /// No description provided for @aboutCredits.
+  ///
+  /// In en, this message translates to:
+  /// **'Written with Claude Code, using Claude Opus 5.5'**
+  String get aboutCredits;
+
   /// No description provided for @linksTitle.
   ///
   /// In en, this message translates to:

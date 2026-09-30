@@ -117,6 +117,12 @@ class AppLocalizationsPl extends AppLocalizations {
   String get aboutLicenses => 'O aplikacji i licencje';
 
   @override
+  String get releaseNotes => 'Informacje o wydaniach';
+
+  @override
+  String get aboutCredits => 'Napisano przy pomocy Claude Code i modelu Claude Opus 5.5';
+
+  @override
   String get linksTitle => 'Otwieraj linki do łamigłówek w aplikacji';
 
   @override

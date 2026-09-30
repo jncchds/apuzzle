@@ -12,10 +12,12 @@ import 'daily_screen.dart';
 import 'game_screen.dart';
 import 'home_screen.dart';
 import 'learn_screen.dart';
+import 'release_notes_screen.dart';
 import 'settings_screen.dart';
 import 'tutorial_screen.dart';
 
 /// What the address bar shows: home (`/`), settings (`/settings`), the
+/// release notes (`/release-notes`, over settings), the
 /// tutorials (`/learn`; one game's is `/learn?t=mambo`, its strategy
 /// lessons `/learn?t=mambo&s=1`), daily
 /// challenges (`/daily?d=2026-09-25`) or a puzzle by its share code
@@ -25,6 +27,7 @@ import 'tutorial_screen.dart';
 class AppRoute {
   const AppRoute({
     this.settings = false,
+    this.releaseNotes = false,
     this.learn = false,
     this.tutorial,
     this.strategies = false,
@@ -34,6 +37,9 @@ class AppRoute {
   });
 
   final bool settings;
+
+  /// RELEASE_NOTES.md, opened from settings.
+  final bool releaseNotes;
 
   /// The list of tutorials.
   final bool learn;
@@ -81,6 +87,7 @@ class AppRoute {
       if (game != null && !isDailyPuzzle(day, game, today: today)) return AppRoute(game: game);
       return AppRoute(daily: day, game: game);
     }
+    if (page == 'release-notes') return const AppRoute(settings: true, releaseNotes: true);
     return game != null ? AppRoute(game: game) : AppRoute(settings: page == 'settings');
   }
 
@@ -90,7 +97,7 @@ class AppRoute {
       ? Uri(path: '/daily', queryParameters: {'d': daily.toString(), if (game != null) 'p': game.toString()})
       : game != null
       ? Uri(path: '/', queryParameters: {'p': game.toString()})
-      : Uri(path: settings ? '/settings' : '/');
+      : Uri(path: releaseNotes ? '/release-notes' : (settings ? '/settings' : '/'));
 }
 
 class AppRouteParser extends RouteInformationParser<AppRoute> {
@@ -130,6 +137,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
   static AppRouterDelegate of(BuildContext context) => Router.of(context).routerDelegate as AppRouterDelegate;
 
   bool _settings = false;
+  bool _releaseNotes = false;
   bool _learn = false;
   Day? _daily;
   _Game? _game;
@@ -143,6 +151,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
   @override
   AppRoute get currentConfiguration => AppRoute(
     settings: _settings,
+    releaseNotes: _releaseNotes,
     learn: _learn,
     tutorial: _tutorial,
     strategies: _strategies,
@@ -167,6 +176,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
     } else {
       _show(
         settings: configuration.settings,
+        releaseNotes: configuration.releaseNotes,
         learn: configuration.learn,
         daily: configuration.daily,
         game: configuration.game,
@@ -176,8 +186,9 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
   }
 
   /// With [daily] and [game], the game is that day's challenge.
-  void _show({bool settings = false, bool learn = false, Day? daily, PuzzleCode? game}) {
-    _settings = settings;
+  void _show({bool settings = false, bool releaseNotes = false, bool learn = false, Day? daily, PuzzleCode? game}) {
+    _settings = settings || releaseNotes;
+    _releaseNotes = releaseNotes;
     _learn = learn;
     _daily = daily;
     _tutorial = null;
@@ -190,6 +201,9 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
   }
 
   void openSettings() => _show(settings: true);
+
+  /// The release notes, over settings.
+  void openReleaseNotes() => _show(releaseNotes: true);
 
   /// The list of tutorials.
   void openLearn() => _show(learn: true);
@@ -244,6 +258,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
       pages: [
         const MaterialPage(key: ValueKey('home'), child: HomeScreen()),
         if (_settings) const MaterialPage(key: ValueKey('settings'), child: SettingsScreen()),
+        if (_releaseNotes) const MaterialPage(key: ValueKey('release-notes'), child: ReleaseNotesScreen()),
         if (_learn) const MaterialPage(key: ValueKey('learn'), child: LearnScreen()),
         if (_daily case final day?)
           MaterialPage(
@@ -268,6 +283,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
       ],
       onDidRemovePage: (page) {
         if (page.key == const ValueKey('settings')) _settings = false;
+        if (page.key == const ValueKey('release-notes')) _releaseNotes = false;
         if (page.key == const ValueKey('learn')) _learn = false;
         if (page.key == ValueKey('tutorial.${_tutorial?.id}.$_strategies')) {
           _tutorial = null;

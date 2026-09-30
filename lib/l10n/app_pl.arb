@@ -37,6 +37,8 @@
   "language": "Język",
   "languageSystem": "Język systemu",
   "aboutLicenses": "O aplikacji i licencje",
+  "releaseNotes": "Informacje o wydaniach",
+  "aboutCredits": "Napisano przy pomocy Claude Code i modelu Claude Opus\u00a05.5",
   "linksTitle": "Otwieraj linki do łamigłówek w aplikacji",
   "linksOn": "Udostępnione linki do łamigłówek otwierają się w APuzzle",
   "linksOff": "Wyłączone: dotknij i dodaj {host} w „Otwieraj obsługiwane linki”",
