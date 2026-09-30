@@ -195,14 +195,8 @@ class RailsType extends PuzzleType<RailsPuzzle, RailsState> {
       hintCells: controller.flashHints,
       errorCells: controller.errorCells,
       onCellTap: tapCell,
-      onCommit: (m) {
-        // Track through a cell clears its "no track" dot.
-        final cells = s.notes(n);
-        for (var i = 0; i < n; i++) {
-          if (cells[i] == railsNoteDot && g.incident[i].any((e) => m[e] == 1)) cells[i] = railsNoteNone;
-        }
-        controller.apply(RailsState(m, cells));
-      },
+      // Notes stay under the track and show again once it's gone.
+      onCommit: (m) => controller.apply(RailsState(m, s.cells)),
       paintNotes: (canvas, geo) {
         final cell = geo.cell;
         for (var i = 0; i < n; i++) {
@@ -213,7 +207,7 @@ class RailsType extends PuzzleType<RailsPuzzle, RailsState> {
                 RRect.fromRectAndRadius(rect.deflate(cell * 0.14), Radius.circular(cell * 0.1)),
                 Paint()..color = railColor.withValues(alpha: 0.28),
               );
-            case railsNoteDot:
+            case railsNoteDot when !used[i]:
               canvas.drawCircle(rect.center, cell * 0.07, Paint()..color = ink.withValues(alpha: 0.5));
           }
         }

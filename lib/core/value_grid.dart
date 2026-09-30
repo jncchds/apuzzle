@@ -10,6 +10,7 @@ import 'grid.dart';
 import 'puzzle_type.dart';
 
 /// One cell of a value grid: a value index (or null), pencil marks, given flag.
+/// The marks stay under a value: they show again once the value is removed.
 @immutable
 class CellValue {
   const CellValue({this.value, this.marks = const {}, this.given = false});
@@ -18,15 +19,16 @@ class CellValue {
   final Set<int> marks;
   final bool given;
 
-  CellValue withValue(int? v) => CellValue(value: v, given: given);
+  CellValue withValue(int? v) => CellValue(value: v, marks: marks, given: given);
 
   CellValue toggleMark(int m) {
     final next = {...marks};
     if (!next.remove(m)) next.add(m);
-    return CellValue(marks: next, given: given);
+    return CellValue(value: value, marks: next, given: given);
   }
 
-  CellValue cleared() => CellValue(given: given);
+  /// The eraser: the value first (showing the marks under it), then the marks.
+  CellValue erased() => value != null ? withValue(null) : CellValue(given: given);
 
   Map<String, dynamic> toJson() => {
     if (value != null) 'v': value,
@@ -340,7 +342,7 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
       final i = order.indexOf(cell.value);
       ctrl.apply(s.set(pos, cell.withValue(order[(i - 1 + order.length) % order.length])));
     } else {
-      ctrl.apply(s.set(pos, cell.cleared()));
+      ctrl.apply(s.set(pos, cell.erased()));
     }
   }
 
@@ -360,17 +362,22 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
     final cell = s.at(pos);
     if (cell.given) return;
     if (tool == GameController.eraser) {
-      s = s.set(pos, cell.cleared());
+      s = s.set(pos, cell.erased());
     } else if (ctrl.pencil && supportsPencil) {
-      s = s.set(pos, (cell.value == null ? cell : cell.cleared()).toggleMark(tool));
+      // On a value: take it off, showing the marks under it plus this one.
+      s = s.set(
+        pos,
+        cell.value == null ? cell.toggleMark(tool) : CellValue(marks: {...cell.marks, tool}, given: cell.given),
+      );
     } else if (cell.value == tool) {
-      s = s.set(pos, cell.cleared());
+      s = s.set(pos, cell.withValue(null));
     } else {
       s = s.set(pos, cell.withValue(tool));
       final p = ctrl.puzzle as P;
       for (final q in ctrl.settings.autoClearMarks ? markPeers(p, pos) : const <Pos>[]) {
         final c = s.at(q);
-        if (c.value == null && c.marks.contains(tool)) s = s.set(q, c.toggleMark(tool));
+        // Marks under values too, so they don't come back stale.
+        if (c.marks.contains(tool)) s = s.set(q, c.toggleMark(tool));
       }
     }
     ctrl.apply(s);
