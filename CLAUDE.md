@@ -79,7 +79,7 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 | mambo | Sun & Moon | ValueGridType | tiers: propagation / probing |
 | sudoku | Sudoku | ValueGridType | 4/6/9, pencil marks (auto-removal is a setting, off by default), peer + same-value highlight, tiers: singles / locked+pairs / unique-only |
 | kings | Crowns | ValueGridType | balanced regions + counterexample repair for uniqueness, then `RegionSearch` (lib/core/region_search.dart) tunes borders to the target logic tier |
-| hues | Hues | ValueGridType | 8-neighbour same-colour counts of blank cells; numbers count down as matching cells are painted |
+| hues | Hues | ValueGridType | 8-neighbour same-colour counts of blank cells; numbers count down as matching cells are painted; pencil marks (inset color squares) |
 | mosaic | Mosaic | PuzzleType | flood-it, limit = greedy plan + slack |
 | blend | Blend | PuzzleType | free flood-it (repaint any patch), limit = best of 4 greedy runs + slack |
 | pipes | Pipes | PuzzleType | spanning tree, rule-based win (any valid tree) |

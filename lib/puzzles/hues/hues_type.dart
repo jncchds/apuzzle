@@ -58,6 +58,16 @@ class HuesType extends ValueGridType<HuesPuzzle> {
   bool get showLockIcon => false;
 
   @override
+  bool get supportsPencil => true;
+
+  // Inset, so the color marks don't read as a painted cell.
+  @override
+  Widget buildMarks(BuildContext context, Set<int> marks, double size) => Padding(
+    padding: EdgeInsets.all(size * 0.1),
+    child: super.buildMarks(context, marks, size * 0.8),
+  );
+
+  @override
   HuesPuzzle generate(GenParams params) => generateHues(params);
 
   @override

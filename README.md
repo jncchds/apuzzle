@@ -25,7 +25,7 @@ You choose the grid size and the difficulty.
 | <img src="docs/screenshots/kings_dark.png" width="90"> | **Crowns** | Place one crown in every row, column and colored region. Crowns can't touch, not even diagonally. |
 | <img src="docs/screenshots/blocks_dark.png" width="90"> | **Blocks** | Fill every region of k cells with the numbers 1 to k. Equal numbers never touch, not even diagonally. Supports pencil marks. |
 | <img src="docs/screenshots/pairs_dark.png" width="90"> | **Pairs** | Shade exactly two cells in every region. Shaded cells come in side-by-side pairs, and pairs never touch each other. |
-| <img src="docs/screenshots/hues_light.png" width="90"> | **Hues** | Color the blank cells. Each number counts the blank cells around it (all 8 neighbors) that end up in its color. |
+| <img src="docs/screenshots/hues_light.png" width="90"> | **Hues** | Color the blank cells. Each number counts the blank cells around it (all 8 neighbors) that end up in its color. Supports pencil marks. |
 | <img src="docs/screenshots/mosaic_dark.png" width="90"> | **Mosaic** | Flood the board with one color from the top-left corner, within the move limit. |
 | <img src="docs/screenshots/blend_dark.png" width="90"> | **Blend** | Pick a color and repaint any patch; it merges with touching patches of that color. Make the board one color within the move limit. |
 | <img src="docs/screenshots/pop_dark.png" width="90"> | **Pop** | Tap a group of touching same-colored bubbles to select it, tap again to pop it: n bubbles score n×(n−1). Modes: Standard, Shifter (rows slide right), Continuous (new columns roll in) and Mega (both). Goals: clear the board (Standard only, always possible), reach a target score, or free play for a best score. |

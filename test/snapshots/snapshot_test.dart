@@ -17,6 +17,9 @@ import 'package:apuzzle/core/puzzle_type.dart';
 import 'package:apuzzle/core/registry.dart';
 import 'package:apuzzle/core/settings.dart';
 import 'package:apuzzle/l10n/l10n.dart';
+import 'package:apuzzle/core/value_grid.dart';
+import 'package:apuzzle/puzzles/hues/hues_generator.dart';
+import 'package:apuzzle/puzzles/hues/hues_model.dart';
 import 'package:apuzzle/puzzles/pop/pop_model.dart';
 import 'package:apuzzle/puzzles/rails/rails_model.dart';
 import 'package:apuzzle/ui/game_screen.dart';
@@ -102,6 +105,19 @@ void main() {
             }
           }
           state = RailsState(state.marks, cells);
+        }
+        // Some pencil marks on Hues: two or three candidate colors in a few empty cells.
+        if (puzzle is HuesPuzzle && state is ValueGrid) {
+          var grid = state;
+          var n = 0;
+          for (var i = 0; i < puzzle.clues.length && n < 4; i++) {
+            if (puzzle.clues[i] != null || grid.cells[i].value != null) continue;
+            final marks = {puzzle.solution[i], (puzzle.solution[i] + 1) % huesColorCount};
+            if (n.isOdd) marks.add((puzzle.solution[i] + 2) % huesColorCount);
+            grid = grid.set(puzzle.size.pos(i), CellValue(marks: marks));
+            n++;
+          }
+          state = grid;
         }
 
         final key = GlobalKey();
