@@ -138,6 +138,10 @@ To add a puzzle:
 
 The Tetra generator is currently limited to 7×7. At larger sizes, proving the solution is unique is still too slow to do on the device.
 
+## Credits
+
+APuzzle was written with [Claude Code](https://claude.com/claude-code), using Anthropic's Claude Opus 5.5 model.
+
 ## License
 
 No license has been chosen yet. All rights reserved until one is added.
