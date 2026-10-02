@@ -2334,4 +2334,437 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get exLitsFailCut => 'Ale wtedy zamalowane pola nie łączą się w całość.';
+
+  @override
+  String exLoopSupposeLine(Object edge) {
+    return 'Załóżmy, że $edge to linia.';
+  }
+
+  @override
+  String exLoopSupposeCross(Object edge) {
+    return 'Załóżmy, że $edge jest skreślona.';
+  }
+
+  @override
+  String exLoopRefutedLine(Object edge) {
+    return '$edge to linia: skreślenie jej prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exLoopRefutedCross(Object edge) {
+    return '$edge skreślamy: linia prowadzi tam do sprzeczności.';
+  }
+
+  @override
+  String exLoopFull(Object edge) {
+    return '$edge skreślamy: na jej końcu spotykają się już dwie linie, a pętla się nie rozgałęzia.';
+  }
+
+  @override
+  String exLoopDeadEnd(Object edge) {
+    return '$edge skreślamy: z jej końca linia nie miałaby dokąd iść.';
+  }
+
+  @override
+  String exLoopOnlyWay(Object edge) {
+    return '$edge to linia: linia, która dotarła do jej końca, może iść dalej tylko tędy.';
+  }
+
+  @override
+  String exLoopCloseEarly(Object edge) {
+    return '$edge skreślamy: zamknęłaby pętlę, zanim łamigłówka jest rozwiązana.';
+  }
+
+  @override
+  String exLoopDone(Object edge) {
+    return '$edge skreślamy: pętla jest już zamknięta.';
+  }
+
+  @override
+  String get exLoopFailBranch => 'Ale wtedy w jednym punkcie spotykają się trzy linie.';
+
+  @override
+  String get exLoopFailDeadEnd => 'Ale wtedy linia trafia w ślepy zaułek.';
+
+  @override
+  String get exLoopFailSubloop => 'Ale wtedy linie tworzą więcej niż jedną pętlę.';
+
+  @override
+  String get exLoopFailClues => 'Ale wtedy zamknięta pętla łamie wskazówkę.';
+
+  @override
+  String exFenceDone(Object edge, Object cell) {
+    return '$edge skreślamy: wokół $cell jest już tyle linii, ile mówi jego liczba.';
+  }
+
+  @override
+  String exFenceNeed(Object edge, Object cell) {
+    return '$edge to linia: $cell potrzebuje linii na każdym boku, który jest jeszcze otwarty.';
+  }
+
+  @override
+  String exFenceFailMany(Object cell) {
+    return 'Ale wtedy wokół $cell jest więcej linii, niż mówi jego liczba.';
+  }
+
+  @override
+  String exFenceFailFew(Object cell) {
+    return 'Ale wtedy wokół $cell nie zmieści się tyle linii, ile mówi jego liczba.';
+  }
+
+  @override
+  String exLoopFailClash(Object edge) {
+    return 'Ale wtedy $edge musiałaby być jednocześnie linią i skreślona.';
+  }
+
+  @override
+  String get exLoopFailOffBoard => 'Ale wtedy pętla musiałaby wyjść poza planszę.';
+
+  @override
+  String exPearlsPass(Object edge, Object cell) {
+    return '$edge to linia: pętla przechodzi przez perłę w $cell, a zostały tam tylko dwie drogi.';
+  }
+
+  @override
+  String exPearlsBlackFar(Object edge, Object cell) {
+    return '$edge skreślamy: od czarnej perły w $cell pętla nie przeszłaby tędy dwóch pól prosto.';
+  }
+
+  @override
+  String exPearlsBlackStraight(Object edge, Object cell) {
+    return '$edge to linia: za czarną perłą w $cell pętla biegnie prosto jeszcze jedno pole.';
+  }
+
+  @override
+  String exPearlsBlackThrough(Object edge, Object cell) {
+    return '$edge skreślamy: na czarnej perle w $cell pętla skręca, więc nie przejdzie prosto.';
+  }
+
+  @override
+  String exPearlsBlackTurn(Object edge, Object cell) {
+    return '$edge to linia: na czarnej perle w $cell pętla skręca, a druga strona jest skreślona.';
+  }
+
+  @override
+  String exPearlsWhiteLine(Object edge, Object cell) {
+    return '$edge to linia: pętla przechodzi prosto przez białą perłę w $cell właśnie tędy.';
+  }
+
+  @override
+  String exPearlsWhiteCross(Object edge, Object cell) {
+    return '$edge skreślamy: pętla przechodzi prosto przez białą perłę w $cell w drugą stronę.';
+  }
+
+  @override
+  String exPearlsWhiteTurnLine(Object edge, Object cell) {
+    return '$edge to linia: pętla musi skręcić tuż przed białą perłą w $cell albo tuż za nią.';
+  }
+
+  @override
+  String exPearlsWhiteTurnCross(Object edge, Object cell) {
+    return '$edge skreślamy: pętla musi skręcić tuż przed białą perłą w $cell albo tuż za nią.';
+  }
+
+  @override
+  String exPearlsFailPass(Object cell) {
+    return 'Ale wtedy pętla nie przejdzie przez perłę w $cell.';
+  }
+
+  @override
+  String exRailsSupposeOn(Object cell) {
+    return 'Załóżmy, że tor biegnie przez $cell.';
+  }
+
+  @override
+  String exRailsSupposeOff(Object cell) {
+    return 'Załóżmy, że w $cell nie ma toru.';
+  }
+
+  @override
+  String exRailsRefutedOn(Object cell) {
+    return 'Tor biegnie przez $cell: bez niego powstaje sprzeczność.';
+  }
+
+  @override
+  String exRailsRefutedOff(Object cell) {
+    return 'W $cell nie ma toru: tor prowadzi tam do sprzeczności.';
+  }
+
+  @override
+  String exRailsCellUsed(Object cell) {
+    return 'Tor biegnie przez $cell: dochodzi już do niego kawałek toru.';
+  }
+
+  @override
+  String exRailsCellEmpty(Object cell) {
+    return 'W $cell nie ma toru: tor nie mógłby przez nie przejść.';
+  }
+
+  @override
+  String exRailsPieceFull(Object edge, Object cell) {
+    return '$edge skreślamy: tor już wchodzi do $cell i z niego wychodzi.';
+  }
+
+  @override
+  String exRailsPieceEmpty(Object edge, Object cell) {
+    return '$edge skreślamy: w $cell nie ma toru.';
+  }
+
+  @override
+  String exRailsPieceNeed(Object edge, Object cell) {
+    return '$edge to tor: tor przez $cell nie ma innej drogi.';
+  }
+
+  @override
+  String exRailsRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'wszystkie $count pola toru',
+      many: 'wszystkie $count pól toru',
+      few: 'wszystkie $count pola toru',
+      one: 'swoje jedno pole toru',
+    );
+    return 'W $cell nie ma toru: wiersz $row ma już $_temp0.';
+  }
+
+  @override
+  String exRailsColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'wszystkie $count pola toru',
+      many: 'wszystkie $count pól toru',
+      few: 'wszystkie $count pola toru',
+      one: 'swoje jedno pole toru',
+    );
+    return 'W $cell nie ma toru: kolumna $col ma już $_temp0.';
+  }
+
+  @override
+  String exRailsRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól toru',
+      one: 'jednego pola toru',
+    );
+    return 'Tor biegnie przez $cell: wiersz $row potrzebuje $_temp0, a zostało dokładnie tyle.';
+  }
+
+  @override
+  String exRailsColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól toru',
+      one: 'jednego pola toru',
+    );
+    return 'Tor biegnie przez $cell: kolumna $col potrzebuje $_temp0, a zostało dokładnie tyle.';
+  }
+
+  @override
+  String exRailsDoneEdge(Object edge) {
+    return '$edge skreślamy: tor jest już kompletny.';
+  }
+
+  @override
+  String exRailsDoneOn(Object cell) {
+    return 'Tor biegnie przez $cell: to część gotowego toru.';
+  }
+
+  @override
+  String exRailsDoneOff(Object cell) {
+    return 'W $cell nie ma toru: tor jest już kompletny.';
+  }
+
+  @override
+  String exRailsCloseEarly(Object edge) {
+    return '$edge skreślamy: zamknęłaby pętlę albo skończyła tor za wcześnie.';
+  }
+
+  @override
+  String exRailsFailBranch(Object cell) {
+    return 'Ale wtedy tor rozgałęzia się w $cell.';
+  }
+
+  @override
+  String exRailsFailDeadEnd(Object cell) {
+    return 'Ale wtedy tor trafia w ślepy zaułek w $cell.';
+  }
+
+  @override
+  String exRailsFailRowMany(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola toru',
+      many: '$count pól toru',
+      few: '$count pola toru',
+      one: 'jedno pole toru',
+    );
+    return 'Ale wtedy wiersz $row ma więcej niż $_temp0.';
+  }
+
+  @override
+  String exRailsFailColMany(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola toru',
+      many: '$count pól toru',
+      few: '$count pola toru',
+      one: 'jedno pole toru',
+    );
+    return 'Ale wtedy kolumna $col ma więcej niż $_temp0.';
+  }
+
+  @override
+  String exRailsFailRowFew(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'swoich $count pól toru',
+      one: 'swojego pola toru',
+    );
+    return 'Ale wtedy wiersz $row nie uzbiera $_temp0.';
+  }
+
+  @override
+  String exRailsFailColFew(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'swoich $count pól toru',
+      one: 'swojego pola toru',
+    );
+    return 'Ale wtedy kolumna $col nie uzbiera $_temp0.';
+  }
+
+  @override
+  String get exRailsFailLoop => 'Ale wtedy poza torem powstaje pętla.';
+
+  @override
+  String get exRailsFailClosed => 'Ale wtedy tor kończy się za wcześnie.';
+
+  @override
+  String exRailsFailClash(Object cell) {
+    return 'Ale wtedy $cell musiałoby mieć tor i go nie mieć.';
+  }
+
+  @override
+  String exArrowsSupposeShade(Object cell) {
+    return 'Załóżmy, że $cell jest zamalowane.';
+  }
+
+  @override
+  String exArrowsSupposeOn(Object cell) {
+    return 'Załóżmy, że pętla przechodzi przez $cell.';
+  }
+
+  @override
+  String exArrowsRefutedShade(Object cell) {
+    return '$cell jest zamalowane: pętla przez nie prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exArrowsRefutedOn(Object cell) {
+    return 'Pętla przechodzi przez $cell: zamalowanie go prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exArrowsCellOn(Object cell) {
+    return 'Pętla przechodzi przez $cell: dochodzi już do niego linia.';
+  }
+
+  @override
+  String exArrowsCellShaded(Object cell) {
+    return '$cell jest zamalowane: pętla nie mogłaby przez nie przejść, a wszystkie inne pola są na pętli.';
+  }
+
+  @override
+  String exArrowsShadeNoLine(Object edge, Object cell) {
+    return '$edge skreślamy: $cell jest zamalowane, więc pętla je omija.';
+  }
+
+  @override
+  String exArrowsShadeNeighbours(Object cell, Object a) {
+    return 'Pętla przechodzi przez $cell: styka się z zamalowanym $a, a zamalowane pola się nie stykają.';
+  }
+
+  @override
+  String exArrowsOnNeed(Object edge, Object cell) {
+    return '$edge to linia: pętla przez $cell nie ma innej drogi.';
+  }
+
+  @override
+  String exArrowsClueDone(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'wszystkie $count zamalowanego pola',
+      many: 'wszystkie $count zamalowanych pól',
+      few: 'wszystkie $count zamalowane pola',
+      one: 'swoje jedno zamalowane pole',
+      zero: 'zero zamalowanych pól, tak jak trzeba',
+    );
+    return 'Pętla przechodzi przez $cell: strzałka w $clue widzi już $_temp0.';
+  }
+
+  @override
+  String exArrowsClueNeedShade(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count zamalowanych pól',
+      one: 'jednego zamalowanego pola',
+    );
+    return '$cell jest zamalowane: strzałka w $clue potrzebuje $_temp0, a mieszczą się tylko co drugie pole.';
+  }
+
+  @override
+  String exArrowsClueNeedOn(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count zamalowanych pól',
+      one: 'jednego zamalowanego pola',
+    );
+    return 'Pętla przechodzi przez $cell: strzałka w $clue potrzebuje $_temp0, a mieszczą się tylko co drugie pole.';
+  }
+
+  @override
+  String exArrowsFailStuck(Object cell) {
+    return 'Ale wtedy pętla utyka w $cell.';
+  }
+
+  @override
+  String exArrowsFailClueMany(Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count zamalowanego pola',
+      many: '$count zamalowanych pól',
+      few: '$count zamalowane pola',
+      one: 'jedno zamalowane pole',
+      zero: 'zero zamalowanych pól',
+    );
+    return 'Ale wtedy strzałka w $clue widzi więcej niż $_temp0.';
+  }
+
+  @override
+  String exArrowsFailClueFew(Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'swoich $count zamalowanych pól',
+      one: 'swojego zamalowanego pola',
+    );
+    return 'Ale wtedy strzałka w $clue nie uzbiera $_temp0.';
+  }
+
+  @override
+  String exArrowsFailClash(Object cell) {
+    return 'Ale wtedy $cell musiałoby być zamalowane i na pętli.';
+  }
 }

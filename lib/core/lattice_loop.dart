@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'explain.dart';
+
 /// A lattice of [vr] × [vc] points joined by unit edges, for "draw one loop"
 /// puzzles. Edge ids: horizontal edges row by row, then vertical ones.
 class LatticeLoop {
@@ -220,6 +222,27 @@ class LoopRegion {
 List<bool> randomLoopRegion(int fr, int fc, Random rng, double share, {bool compact = false}) =>
     (LoopRegion(fr, fc)..grow(rng, share, compact: compact)).inside;
 
+/// What a traced [LoopSolver.propagate] records ([Fact.rule]) for the loop
+/// itself; puzzle rules number on from [loopRuleCount]. Point rules have the
+/// point as arg, [Fact.value] is 1 (line) or 0 (cross).
+/// [failClash]: a rule wants an edge the other way (arg: the edge, or -1 for
+/// one off the board).
+enum LoopRule {
+  full,
+  deadEnd,
+  onlyWay,
+  closeEarly,
+  loopDone,
+  failBranch,
+  failDeadEnd,
+  failSubloop,
+  failClues,
+  failClash,
+}
+
+/// The first rule id a [LoopSolver] subclass may use.
+final int loopRuleCount = LoopRule.values.length;
+
 /// Edge knowledge: -1 unknown, 0 no line (cross), 1 line.
 /// Tier 1: point degrees (0 or 2), the puzzle's clue rules and no early
 /// sub-loops. Tier 2: + probing (try an edge, refute it by propagation).
@@ -228,6 +251,31 @@ abstract class LoopSolver {
 
   final LatticeLoop g;
   bool _changed = false;
+
+  /// Where a traced [propagate] records (null otherwise).
+  ExplainTrace? trace;
+  int _why = 0, _whyArg = -1;
+  List<int>? _whyPremises;
+
+  /// The rule (and its point, clue, cell…) behind the next [set]s, with its
+  /// [premises] if [premisesOf] can't tell them. Cheap, so rules call it
+  /// whether or not anyone traces (pass premises only when [trace] is set).
+  void because(int rule, int arg, [List<int>? premises]) {
+    _why = rule;
+    _whyArg = arg;
+    _whyPremises = premises;
+  }
+
+  /// Records a contradiction by [rule] about [arg]; returns false.
+  bool fail(int rule, int arg) {
+    trace?.fail(rule, premises: premisesOf(rule, arg), args: [arg]);
+    return false;
+  }
+
+  /// The knowledge [rule] about [arg] looked at (edges, or cells after them).
+  /// Subclasses handle their own rules and call super for the loop's.
+  List<int> premisesOf(int rule, int arg) =>
+      arg >= 0 && rule < loopRuleCount ? g.incident[arg] : [for (var e = 0; e < g.edgeCount; e++) e];
 
   /// Applies the clue rules (using [set]); false on a contradiction.
   bool clues(List<int> st);
@@ -240,15 +288,38 @@ abstract class LoopSolver {
 
   /// Fixes edge [e] to [v]; false if it is already the other way.
   bool set(List<int> st, int e, int v) {
-    if (e < 0) return v == 0;
+    if (e < 0) return v == 0 || _clash(-1);
     if (st[e] == v) return true;
-    if (st[e] != -1) return false;
+    if (st[e] != -1) return _clash(e);
     st[e] = v;
     _changed = true;
+    trace?.fact(e, v, _why, premises: _whyPremises ?? premisesOf(_why, _whyArg), args: [_whyArg]);
     return true;
   }
 
-  bool propagate(List<int> st) {
+  /// A rule wants edge [e] the other way (-1: off the board); returns false.
+  bool _clash(int e) {
+    trace?.fail(
+      LoopRule.failClash.index,
+      premises: [if (e >= 0) e, ...(_whyPremises ?? premisesOf(_why, _whyArg))],
+      args: [e],
+    );
+    return false;
+  }
+
+  /// Applies tier-1 logic until nothing changes; false on a contradiction.
+  /// With [t], every deduction is recorded ([LoopRule] and the puzzle's own).
+  bool propagate(List<int> st, [ExplainTrace? t]) {
+    final outer = trace;
+    trace = t;
+    try {
+      return _propagate(st);
+    } finally {
+      trace = outer;
+    }
+  }
+
+  bool _propagate(List<int> st) {
     do {
       _changed = false;
       for (var p = 0; p < g.vertexCount; p++) {
@@ -257,13 +328,17 @@ abstract class LoopSolver {
           if (st[e] == 1) lines++;
           if (st[e] == -1) open++;
         }
-        if (lines > 2 || (lines == 1 && open == 0)) return false;
+        if (lines > 2 || (lines == 1 && open == 0)) {
+          return fail((lines > 2 ? LoopRule.failBranch : LoopRule.failDeadEnd).index, p);
+        }
         if (open == 0) continue;
         if (lines == 2 || (lines == 0 && open == 1)) {
+          because((lines == 2 ? LoopRule.full : LoopRule.deadEnd).index, p);
           for (final e in g.incident[p]) {
             if (st[e] == -1) set(st, e, 0);
           }
         } else if (lines == 1 && open == 1) {
+          because(LoopRule.onlyWay.index, p);
           for (final e in g.incident[p]) {
             if (st[e] == -1) set(st, e, 1);
           }
@@ -305,9 +380,10 @@ abstract class LoopSolver {
     }
     if (cycle >= 0) {
       // A closed loop must be the whole answer.
-      if (size.length > 1) return false;
+      if (size.length > 1) return fail(LoopRule.failSubloop.index, -1);
       final lines = [for (final x in st) x == 1];
-      if (!cluesMet(lines)) return false;
+      if (!cluesMet(lines)) return fail(LoopRule.failClues.index, -1);
+      because(LoopRule.loopDone.index, -1);
       for (var e = 0; e < g.edgeCount; e++) {
         if (st[e] == -1) set(st, e, 0);
       }
@@ -324,7 +400,19 @@ abstract class LoopSolver {
         final lines = [for (final x in st) x == 1]..[e] = true;
         ok = g.isSingleLoop(lines) && cluesMet(lines);
       }
-      if (!ok) set(st, e, 0);
+      if (!ok) {
+        because(
+          LoopRule.closeEarly.index,
+          -1,
+          trace == null
+              ? null
+              : [
+                  for (var f = 0; f < g.edgeCount; f++)
+                    if (st[f] == 1) f,
+                ],
+        );
+        set(st, e, 0);
+      }
     }
     return true;
   }

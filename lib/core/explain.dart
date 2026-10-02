@@ -366,7 +366,8 @@ String valTok(int v) => '⟦v:$v⟧';
 /// A rectangle of cells, shown as "A1–C3".
 String areaTok(Pos from, Pos to) => '⟦a:${from.r}:${from.c}:${to.r}:${to.c}⟧';
 
-/// One side of a cell ([dir]: 0 top, 1 bottom, 2 left, 3 right), shown as "C4↑".
+/// One side of a cell ([dir]: 0 top, 1 bottom, 2 left, 3 right), shown as
+/// "C4" with an arrow to that side.
 String sideTok(Pos cell, int dir) => '⟦s:${cell.r}:${cell.c}:$dir⟧';
 
 /// The link between two neighbouring cells' centres, shown as "C3–C4".
@@ -401,10 +402,14 @@ class ExplainChip extends ExplainPart {
     'k' => colName(args[0]),
     'a' => '${cellName(Pos(args[0], args[1]))}–${cellName(Pos(args[2], args[3]))}',
     'l' => [for (var k = 0; k + 1 < args.length; k += 2) cellName(Pos(args[k], args[k + 1]))].join(' '),
-    's' => '${cellName(Pos(args[0], args[1]))}${const ['↑', '↓', '←', '→'][args[2]]}',
+    's' => cellName(Pos(args[0], args[1])),
     'j' => '${cellName(Pos(args[0], args[1]))}–${cellName(Pos(args[2], args[3]))}',
     _ => '',
   };
+
+  /// For a cell side: which one (0 top, 1 bottom, 2 left, 3 right), drawn
+  /// as an arrow after the label.
+  int? get side => kind == 's' ? args[2] : null;
 
   /// The cells the chip stands for.
   Set<Pos> cells(GridSize size) => switch (kind) {

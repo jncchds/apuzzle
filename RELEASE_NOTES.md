@@ -1,7 +1,7 @@
 # Release notes
 
 ## 0.6.0 - 2026-10-02
-- Explain mode (Sun & Moon, Sudoku, Crowns, Hues, Blocks, Plots, Pairs, Campsite, Islands, Lamps, Tetra): the new button next to Hint explains the next step in words, cell by cell, with the reasons behind it; "Do it" plays the step, and you can switch back to playing any time. Entering the mode and each step count as hints
+- Explain mode (Sun & Moon, Sudoku, Crowns, Hues, Blocks, Plots, Pairs, Campsite, Islands, Lamps, Tetra, Fence, Pearls, Rails, Arrows): the new button next to Hint explains the next step in words, cell by cell, with the reasons behind it; "Do it" plays the step, and you can switch back to playing any time. Entering the mode and each step count as hints
 - Hint now plays the next logical step instead of a random cell
 
 ## 0.5.1 - 2026-10-02

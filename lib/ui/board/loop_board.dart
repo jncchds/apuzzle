@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/explain.dart' show colName;
 import '../../core/grid.dart';
 import '../../core/lattice_loop.dart';
+import 'explain_overlay.dart';
 
 /// Where things are on a laid-out [LoopBoard].
 class LoopGeom {
@@ -55,6 +57,7 @@ class LoopBoard extends StatefulWidget {
     this.margins,
     this.onCellTap,
     this.paintNotes,
+    this.explain,
   });
 
   final LatticeLoop g;
@@ -93,6 +96,9 @@ class LoopBoard extends StatefulWidget {
   /// Draws the player's cell notes, always under the lines.
   final void Function(Canvas canvas, LoopGeom geo)? paintNotes;
 
+  /// Explain mode: highlights plus coordinate labels around the grid.
+  final ExplainView? explain;
+
   @override
   State<LoopBoard> createState() => _LoopBoardState();
 }
@@ -105,7 +111,13 @@ class _LoopBoardState extends State<LoopBoard> {
   LatticeLoop get g => widget.g;
   List<int> get _marks => _draft ?? widget.marks;
 
-  EdgeInsets get _margins => widget.margins ?? EdgeInsets.all(widget.centered ? 0 : 0.4);
+  EdgeInsets get _margins {
+    final m = widget.margins ?? EdgeInsets.all(widget.centered ? 0 : 0.4);
+    // Explain mode puts coordinate labels in a band left of and above the rest.
+    return widget.explain == null ? m : m + const EdgeInsets.only(left: _band, top: _band);
+  }
+
+  static const _band = 0.45;
 
   bool _locked(int e) => widget.locked?[e] ?? false;
 
@@ -245,6 +257,14 @@ class _LoopBoardState extends State<LoopBoard> {
             paintNotes: widget.paintNotes,
             cluesOnTop: widget.cluesOnTop,
             pulse: pulse,
+            explain: widget.explain,
+            explainColor: scheme.tertiary,
+            labelStyle: Theme.of(context).textTheme.labelSmall!.copyWith(
+              color: scheme.onSurfaceVariant,
+              fontSize: (geo.cell * _band * 0.62).clamp(9.0, 13.0),
+              height: 1,
+            ),
+            band: _band * geo.cell,
           ),
         );
         final win = widget.win;
@@ -287,6 +307,10 @@ class _LoopPainter extends CustomPainter {
     required this.paintNotes,
     required this.cluesOnTop,
     required this.pulse,
+    required this.explain,
+    required this.explainColor,
+    required this.labelStyle,
+    required this.band,
   });
 
   final LatticeLoop g;
@@ -304,6 +328,10 @@ class _LoopPainter extends CustomPainter {
   final void Function(Canvas canvas, LoopGeom geo)? paintNotes;
   final bool cluesOnTop;
   final double pulse;
+  final ExplainView? explain;
+  final Color explainColor;
+  final TextStyle labelStyle;
+  final double band;
 
   Offset _pos(int p) => geo.point(p ~/ g.vc, p % g.vc);
 
@@ -317,8 +345,14 @@ class _LoopPainter extends CustomPainter {
         if (tileColor != null) canvas.drawRRect(rr, Paint()..color = tileColor!);
         if (hintCells.contains(Pos(r, c))) canvas.drawRRect(rr, Paint()..color = hintColor);
         if (errorCells.contains(Pos(r, c))) canvas.drawRRect(rr, Paint()..color = errorColor);
+        if (explain case final x?) {
+          final p = Pos(r, c);
+          final tint = x.focus.contains(p) ? 0.45 : (x.involved.contains(p) || x.targets.contains(p) ? 0.22 : 0.0);
+          if (tint > 0) canvas.drawRRect(rr, Paint()..color = explainColor.withValues(alpha: tint));
+        }
       }
     }
+    if (explain != null) _labels(canvas);
     paintNotes?.call(canvas, geo);
     if (!cluesOnTop) paintClues(canvas, geo);
 
@@ -357,6 +391,34 @@ class _LoopPainter extends CustomPainter {
       }
     }
     if (cluesOnTop) paintClues(canvas, geo);
+    if (explain case final x?) {
+      final glow = Paint()
+        ..color = explainColor.withValues(alpha: 0.55)
+        ..strokeWidth = cell * 0.3
+        ..strokeCap = StrokeCap.round;
+      for (final e in x.edges) {
+        final (a, b) = g.ends(e);
+        canvas.drawLine(_pos(a), _pos(b), glow);
+      }
+    }
+  }
+
+  /// Column letters above and row numbers left of the cells.
+  void _labels(Canvas canvas) {
+    void put(String text, Offset center) {
+      final tp = TextPainter(
+        text: TextSpan(text: text, style: labelStyle),
+        textDirection: TextDirection.ltr,
+      )..layout();
+      tp.paint(canvas, center - Offset(tp.width / 2, tp.height / 2));
+    }
+
+    for (var c = 0; c < geo.cols; c++) {
+      put(colName(c), Offset(geo.cellRect(0, c).center.dx, band / 2));
+    }
+    for (var r = 0; r < geo.rows; r++) {
+      put('${r + 1}', Offset(band / 2, geo.cellRect(r, 0).center.dy));
+    }
   }
 
   @override

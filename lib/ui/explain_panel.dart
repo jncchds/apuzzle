@@ -212,9 +212,25 @@ class ExplainText extends StatelessWidget {
                       color: theme.colorScheme.tertiary.withValues(alpha: 0.16),
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Text(
-                      chip.label,
-                      style: base.copyWith(fontWeight: FontWeight.w700, color: theme.colorScheme.tertiary),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          chip.label,
+                          style: base.copyWith(fontWeight: FontWeight.w700, color: theme.colorScheme.tertiary),
+                        ),
+                        if (chip.side case final side?)
+                          Icon(
+                            const [
+                              Icons.north_rounded,
+                              Icons.south_rounded,
+                              Icons.west_rounded,
+                              Icons.east_rounded,
+                            ][side],
+                            size: fontSize,
+                            color: theme.colorScheme.tertiary,
+                          ),
+                      ],
                     ),
                   ),
                 ),

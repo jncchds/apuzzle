@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/lattice_loop.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
+import '../../ui/board/explain_overlay.dart';
 import '../../ui/board/loop_board.dart';
+import 'fence_explain.dart';
 import 'fence_generator.dart';
 import 'fence_model.dart';
 import 'fence_tutorial.dart';
@@ -126,6 +129,7 @@ class FenceType extends PuzzleType<FencePuzzle, LoopMarks> {
       lineColor: lineColor,
       hintCells: controller.flashHints,
       errorCells: controller.errorCells,
+      explain: ExplainView.of(controller),
       onCommit: (m) => controller.apply(LoopMarks(m)),
       paintClues: (canvas, geo) {
         for (var i = 0; i < p.numbers.length; i++) {
@@ -153,6 +157,12 @@ class FenceType extends PuzzleType<FencePuzzle, LoopMarks> {
       },
     );
   }
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(FencePuzzle puzzle, LoopMarks state) => explainStep(const FenceExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(FencePuzzle puzzle) => puzzle.toJson();

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/lattice_loop.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
+import '../../ui/board/explain_overlay.dart';
 import '../../ui/board/loop_board.dart';
+import 'pearls_explain.dart';
 import 'pearls_generator.dart';
 import 'pearls_model.dart';
 import 'pearls_tutorial.dart';
@@ -118,6 +121,7 @@ class PearlsType extends PuzzleType<PearlsPuzzle, LoopMarks> {
       win: controller.winAnimation,
       lineColor: lineColor,
       hintCells: controller.flashHints,
+      explain: ExplainView.of(controller),
       errorCells: controller.errorCells,
       onCommit: (m) => controller.apply(LoopMarks(m)),
       paintClues: (canvas, geo) {
@@ -151,6 +155,12 @@ class PearlsType extends PuzzleType<PearlsPuzzle, LoopMarks> {
       },
     );
   }
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(PearlsPuzzle puzzle, LoopMarks state) => explainStep(const PearlsExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(PearlsPuzzle puzzle) => puzzle.toJson();

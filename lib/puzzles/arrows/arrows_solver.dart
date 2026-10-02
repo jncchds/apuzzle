@@ -1,6 +1,22 @@
 import '../../core/lattice_loop.dart';
 import 'arrows_model.dart';
 
+/// Arrows' own rules for a traced [ArrowsSolver] (ids from [loopRuleCount]).
+/// Cell slots follow the edges ([Fact.value] 0 shaded, 1 on the loop); the
+/// arg is the cell, or the clue for clue rules.
+enum ArrowsRule {
+  cellOn,
+  cellShaded,
+  shadeNoLine,
+  shadeNeighbours,
+  onNeed,
+  clueDone,
+  clueNeed,
+  failStuck,
+  failClueMany,
+  failClueFew,
+}
+
 /// Loop logic plus shading. The state holds every edge, then one entry per
 /// cell: -1 unknown, 0 shaded, 1 on the loop (clue cells: 2). Tier 1: loop
 /// degrees and sub-loops, shaded cells keep the loop away and their
@@ -56,18 +72,23 @@ class ArrowsSolver extends LoopSolver {
         if (st[e] == 1) lines++;
         if (st[e] == -1) open++;
       }
+      because(_rule(ArrowsRule.cellOn), i);
       if (lines > 0 && !set(st, _e + i, 1)) return false;
+      because(_rule(ArrowsRule.cellShaded), i);
       if (lines + open < 2 && !set(st, _e + i, 0)) return false;
       if (st[_e + i] == 0) {
+        because(_rule(ArrowsRule.shadeNoLine), i);
         for (final e in g.incident[i]) {
           if (!set(st, e, 0)) return false;
         }
+        because(_rule(ArrowsRule.shadeNeighbours), i);
         for (final j in _orth(i)) {
           if (st[_e + j] != 2 && !set(st, _e + j, 1)) return false;
         }
       } else if (st[_e + i] == 1) {
-        if (lines + open < 2) return false;
+        if (lines + open < 2) return fail(_rule(ArrowsRule.failStuck), i);
         if (lines + open == 2) {
+          because(_rule(ArrowsRule.onNeed), i);
           for (final e in g.incident[i]) {
             if (st[e] == -1 && !set(st, e, 1)) return false;
           }
@@ -92,7 +113,10 @@ class ArrowsSolver extends LoopSolver {
       }
       final room = runs.fold(0, (a, r) => a + (r.length + 1) ~/ 2);
       final want = counts[c];
-      if (shaded > want || shaded + room < want) return false;
+      if (shaded > want || shaded + room < want) {
+        return fail(_rule(shaded > want ? ArrowsRule.failClueMany : ArrowsRule.failClueFew), c);
+      }
+      because(_rule(shaded == want ? ArrowsRule.clueDone : ArrowsRule.clueNeed), c);
       if (shaded == want) {
         for (final r in runs) {
           for (final i in r) {
@@ -109,6 +133,27 @@ class ArrowsSolver extends LoopSolver {
       }
     }
     return true;
+  }
+
+  static int _rule(ArrowsRule r) => loopRuleCount + r.index;
+
+  /// Clue cells, in the order the rules visit them.
+  List<int> get clueCells => _clues;
+
+  /// Cells a clue's arrow looks along.
+  List<int> rayOf(int clue) => _rays[clue]!;
+
+  @override
+  List<int> premisesOf(int rule, int arg) {
+    if (rule < loopRuleCount) return super.premisesOf(rule, arg);
+    final r = ArrowsRule.values[rule - loopRuleCount];
+    if (r == ArrowsRule.clueDone ||
+        r == ArrowsRule.clueNeed ||
+        r == ArrowsRule.failClueMany ||
+        r == ArrowsRule.failClueFew) {
+      return [for (final j in _rays[arg]!) _e + j];
+    }
+    return [...g.incident[arg], _e + arg, for (final j in _orth(arg)) _e + j];
   }
 
   bool _next(int a, int b) {

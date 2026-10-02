@@ -2311,4 +2311,425 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get exLitsFailCut => 'Dann ließen sich die schattierten Felder aber nicht mehr verbinden.';
+
+  @override
+  String exLoopSupposeLine(Object edge) {
+    return 'Angenommen, $edge wäre eine Linie.';
+  }
+
+  @override
+  String exLoopSupposeCross(Object edge) {
+    return 'Angenommen, $edge wäre durchgestrichen.';
+  }
+
+  @override
+  String exLoopRefutedLine(Object edge) {
+    return '$edge ist eine Linie: sie durchzustreichen führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exLoopRefutedCross(Object edge) {
+    return '$edge wird durchgestrichen: eine Linie dort führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exLoopFull(Object edge) {
+    return '$edge wird durchgestrichen: an ihrem Ende treffen sich schon zwei Linien, und die Schleife verzweigt sich nie.';
+  }
+
+  @override
+  String exLoopDeadEnd(Object edge) {
+    return '$edge wird durchgestrichen: von ihrem Ende aus käme die Linie nicht weiter.';
+  }
+
+  @override
+  String exLoopOnlyWay(Object edge) {
+    return '$edge ist eine Linie: die Linie, die ihr Ende erreicht, kann nur hier weiter.';
+  }
+
+  @override
+  String exLoopCloseEarly(Object edge) {
+    return '$edge wird durchgestrichen: sie schlösse eine Schleife, bevor das Rätsel gelöst ist.';
+  }
+
+  @override
+  String exLoopDone(Object edge) {
+    return '$edge wird durchgestrichen: die Schleife ist schon geschlossen.';
+  }
+
+  @override
+  String get exLoopFailBranch => 'Dann träfen sich aber drei Linien in einem Punkt.';
+
+  @override
+  String get exLoopFailDeadEnd => 'Dann liefe eine Linie aber in eine Sackgasse.';
+
+  @override
+  String get exLoopFailSubloop => 'Dann ergäben die Linien aber mehr als eine Schleife.';
+
+  @override
+  String get exLoopFailClues => 'Dann bräche die geschlossene Schleife aber einen Hinweis.';
+
+  @override
+  String exFenceDone(Object edge, Object cell) {
+    return '$edge wird durchgestrichen: um $cell liegen schon so viele Linien, wie seine Zahl sagt.';
+  }
+
+  @override
+  String exFenceNeed(Object edge, Object cell) {
+    return '$edge ist eine Linie: $cell braucht an jeder noch offenen Seite eine Linie.';
+  }
+
+  @override
+  String exFenceFailMany(Object cell) {
+    return 'Dann lägen um $cell aber mehr Linien, als seine Zahl sagt.';
+  }
+
+  @override
+  String exFenceFailFew(Object cell) {
+    return 'Dann kämen um $cell aber nicht so viele Linien zusammen, wie seine Zahl sagt.';
+  }
+
+  @override
+  String exLoopFailClash(Object edge) {
+    return 'Dann müsste $edge aber zugleich Linie und durchgestrichen sein.';
+  }
+
+  @override
+  String get exLoopFailOffBoard => 'Dann müsste die Schleife aber das Feld verlassen.';
+
+  @override
+  String exPearlsPass(Object edge, Object cell) {
+    return '$edge ist eine Linie: die Schleife läuft durch die Perle in $cell, und dort sind nur noch zwei Wege frei.';
+  }
+
+  @override
+  String exPearlsBlackFar(Object edge, Object cell) {
+    return '$edge wird durchgestrichen: von der schwarzen Perle in $cell käme die Schleife hier nicht zwei Felder geradeaus.';
+  }
+
+  @override
+  String exPearlsBlackStraight(Object edge, Object cell) {
+    return '$edge ist eine Linie: nach der schwarzen Perle in $cell läuft die Schleife noch ein Feld geradeaus.';
+  }
+
+  @override
+  String exPearlsBlackThrough(Object edge, Object cell) {
+    return '$edge wird durchgestrichen: an der schwarzen Perle in $cell biegt die Schleife ab, also nicht geradeaus hindurch.';
+  }
+
+  @override
+  String exPearlsBlackTurn(Object edge, Object cell) {
+    return '$edge ist eine Linie: an der schwarzen Perle in $cell biegt die Schleife ab, und die andere Seite ist durchgestrichen.';
+  }
+
+  @override
+  String exPearlsWhiteLine(Object edge, Object cell) {
+    return '$edge ist eine Linie: die Schleife läuft genau so geradeaus durch die weiße Perle in $cell.';
+  }
+
+  @override
+  String exPearlsWhiteCross(Object edge, Object cell) {
+    return '$edge wird durchgestrichen: die Schleife läuft in der anderen Richtung geradeaus durch die weiße Perle in $cell.';
+  }
+
+  @override
+  String exPearlsWhiteTurnLine(Object edge, Object cell) {
+    return '$edge ist eine Linie: die Schleife muss direkt vor oder nach der weißen Perle in $cell abbiegen.';
+  }
+
+  @override
+  String exPearlsWhiteTurnCross(Object edge, Object cell) {
+    return '$edge wird durchgestrichen: die Schleife muss direkt vor oder nach der weißen Perle in $cell abbiegen.';
+  }
+
+  @override
+  String exPearlsFailPass(Object cell) {
+    return 'Dann käme die Schleife aber nicht durch die Perle in $cell.';
+  }
+
+  @override
+  String exRailsSupposeOn(Object cell) {
+    return 'Angenommen, das Gleis liefe durch $cell.';
+  }
+
+  @override
+  String exRailsSupposeOff(Object cell) {
+    return 'Angenommen, $cell hätte kein Gleis.';
+  }
+
+  @override
+  String exRailsRefutedOn(Object cell) {
+    return 'Das Gleis läuft durch $cell: ohne es entsteht ein Widerspruch.';
+  }
+
+  @override
+  String exRailsRefutedOff(Object cell) {
+    return '$cell hat kein Gleis: ein Gleis dort führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exRailsCellUsed(Object cell) {
+    return 'Das Gleis läuft durch $cell: ein Stück Gleis reicht schon hinein.';
+  }
+
+  @override
+  String exRailsCellEmpty(Object cell) {
+    return '$cell hat kein Gleis: das Gleis käme nicht hindurch.';
+  }
+
+  @override
+  String exRailsPieceFull(Object edge, Object cell) {
+    return '$edge wird durchgestrichen: das Gleis läuft schon in $cell hinein und wieder hinaus.';
+  }
+
+  @override
+  String exRailsPieceEmpty(Object edge, Object cell) {
+    return '$edge wird durchgestrichen: $cell hat kein Gleis.';
+  }
+
+  @override
+  String exRailsPieceNeed(Object edge, Object cell) {
+    return '$edge ist Gleis: das Gleis durch $cell hat keinen anderen Weg.';
+  }
+
+  @override
+  String exRailsRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'alle ihre $count Gleisfelder',
+      one: 'ihr eines Gleisfeld',
+    );
+    return '$cell hat kein Gleis: Zeile $row hat schon $_temp0.';
+  }
+
+  @override
+  String exRailsColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'alle ihre $count Gleisfelder',
+      one: 'ihr eines Gleisfeld',
+    );
+    return '$cell hat kein Gleis: Spalte $col hat schon $_temp0.';
+  }
+
+  @override
+  String exRailsRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Gleisfelder',
+      one: 'ein Gleisfeld',
+    );
+    return 'Das Gleis läuft durch $cell: Zeile $row braucht $_temp0, und genau so viele sind übrig.';
+  }
+
+  @override
+  String exRailsColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Gleisfelder',
+      one: 'ein Gleisfeld',
+    );
+    return 'Das Gleis läuft durch $cell: Spalte $col braucht $_temp0, und genau so viele sind übrig.';
+  }
+
+  @override
+  String exRailsDoneEdge(Object edge) {
+    return '$edge wird durchgestrichen: das Gleis ist schon vollständig.';
+  }
+
+  @override
+  String exRailsDoneOn(Object cell) {
+    return 'Das Gleis läuft durch $cell: es gehört zum fertigen Gleis.';
+  }
+
+  @override
+  String exRailsDoneOff(Object cell) {
+    return '$cell hat kein Gleis: das Gleis ist schon vollständig.';
+  }
+
+  @override
+  String exRailsCloseEarly(Object edge) {
+    return '$edge wird durchgestrichen: sie schlösse eine Schleife oder beendete das Gleis zu früh.';
+  }
+
+  @override
+  String exRailsFailBranch(Object cell) {
+    return 'Dann verzweigte sich das Gleis aber in $cell.';
+  }
+
+  @override
+  String exRailsFailDeadEnd(Object cell) {
+    return 'Dann liefe das Gleis aber in $cell in eine Sackgasse.';
+  }
+
+  @override
+  String exRailsFailRowMany(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Gleisfelder',
+      one: 'ein Gleisfeld',
+    );
+    return 'Dann hätte Zeile $row aber mehr als $_temp0.';
+  }
+
+  @override
+  String exRailsFailColMany(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Gleisfelder',
+      one: 'ein Gleisfeld',
+    );
+    return 'Dann hätte Spalte $col aber mehr als $_temp0.';
+  }
+
+  @override
+  String exRailsFailRowFew(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ihre $count Gleisfelder',
+      one: 'ihr Gleisfeld',
+    );
+    return 'Dann käme Zeile $row aber nicht auf $_temp0.';
+  }
+
+  @override
+  String exRailsFailColFew(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ihre $count Gleisfelder',
+      one: 'ihr Gleisfeld',
+    );
+    return 'Dann käme Spalte $col aber nicht auf $_temp0.';
+  }
+
+  @override
+  String get exRailsFailLoop => 'Dann entstünde abseits des Gleises aber eine Schleife.';
+
+  @override
+  String get exRailsFailClosed => 'Dann wäre das Gleis aber zu früh fertig.';
+
+  @override
+  String exRailsFailClash(Object cell) {
+    return 'Dann müsste $cell aber zugleich Gleis haben und keins.';
+  }
+
+  @override
+  String exArrowsSupposeShade(Object cell) {
+    return 'Angenommen, $cell wäre schattiert.';
+  }
+
+  @override
+  String exArrowsSupposeOn(Object cell) {
+    return 'Angenommen, die Schleife liefe durch $cell.';
+  }
+
+  @override
+  String exArrowsRefutedShade(Object cell) {
+    return '$cell ist schattiert: die Schleife hindurch führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exArrowsRefutedOn(Object cell) {
+    return 'Die Schleife läuft durch $cell: es zu schattieren führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exArrowsCellOn(Object cell) {
+    return 'Die Schleife läuft durch $cell: eine Linie reicht schon hinein.';
+  }
+
+  @override
+  String exArrowsCellShaded(Object cell) {
+    return '$cell ist schattiert: die Schleife käme nicht hindurch, und alle anderen Felder liegen auf ihr.';
+  }
+
+  @override
+  String exArrowsShadeNoLine(Object edge, Object cell) {
+    return '$edge wird durchgestrichen: $cell ist schattiert, also bleibt die Schleife draußen.';
+  }
+
+  @override
+  String exArrowsShadeNeighbours(Object cell, Object a) {
+    return 'Die Schleife läuft durch $cell: es berührt das schattierte $a, und schattierte Felder berühren sich nie.';
+  }
+
+  @override
+  String exArrowsOnNeed(Object edge, Object cell) {
+    return '$edge ist eine Linie: die Schleife durch $cell hat keinen anderen Weg.';
+  }
+
+  @override
+  String exArrowsClueDone(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'alle seine $count schattierten Felder',
+      one: 'sein eines schattiertes Feld',
+      zero: 'keine schattierten Felder, wie es sein soll',
+    );
+    return 'Die Schleife läuft durch $cell: der Pfeil in $clue sieht schon $_temp0.';
+  }
+
+  @override
+  String exArrowsClueNeedShade(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count schattierte Felder',
+      one: 'ein schattiertes Feld',
+    );
+    return '$cell ist schattiert: der Pfeil in $clue braucht $_temp0, und die passen nur, wenn jedes zweite Feld schattiert ist.';
+  }
+
+  @override
+  String exArrowsClueNeedOn(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count schattierte Felder',
+      one: 'ein schattiertes Feld',
+    );
+    return 'Die Schleife läuft durch $cell: der Pfeil in $clue braucht $_temp0, und die passen nur, wenn jedes zweite Feld schattiert ist.';
+  }
+
+  @override
+  String exArrowsFailStuck(Object cell) {
+    return 'Dann säße die Schleife in $cell aber fest.';
+  }
+
+  @override
+  String exArrowsFailClueMany(Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count schattierte Felder',
+      one: 'ein schattiertes Feld',
+      zero: 'null schattierte Felder',
+    );
+    return 'Dann sähe der Pfeil in $clue aber mehr als $_temp0.';
+  }
+
+  @override
+  String exArrowsFailClueFew(Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'seine $count schattierten Felder',
+      one: 'sein schattiertes Feld',
+    );
+    return 'Dann käme der Pfeil in $clue aber nicht auf $_temp0.';
+  }
+
+  @override
+  String exArrowsFailClash(Object cell) {
+    return 'Dann müsste $cell aber schattiert und zugleich auf der Schleife sein.';
+  }
 }

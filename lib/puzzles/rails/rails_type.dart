@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../core/day.dart';
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
+import '../../ui/board/explain_overlay.dart';
 import '../../ui/board/loop_board.dart';
+import 'rails_explain.dart';
 import 'rails_generator.dart';
 import 'rails_model.dart';
 import 'rails_tutorial.dart';
@@ -193,6 +196,7 @@ class RailsType extends PuzzleType<RailsPuzzle, RailsState> {
       win: controller.winAnimation,
       lineColor: railColor,
       hintCells: controller.flashHints,
+      explain: ExplainView.of(controller),
       errorCells: controller.errorCells,
       onCellTap: tapCell,
       // Notes stay under the track and show again once it's gone.
@@ -288,6 +292,12 @@ class RailsType extends PuzzleType<RailsPuzzle, RailsState> {
       },
     );
   }
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(RailsPuzzle puzzle, RailsState state) => explainStep(const RailsExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(RailsPuzzle puzzle) => puzzle.toJson();

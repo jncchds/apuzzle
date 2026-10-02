@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../core/day.dart';
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
+import '../../ui/board/explain_overlay.dart';
 import '../../ui/board/loop_board.dart';
+import 'arrows_explain.dart';
 import 'arrows_generator.dart';
 import 'arrows_model.dart';
 import 'arrows_tutorial.dart';
@@ -174,6 +177,7 @@ class ArrowsType extends PuzzleType<ArrowsPuzzle, ArrowsState> {
       win: controller.winAnimation,
       lineColor: lineColor,
       hintCells: controller.flashHints,
+      explain: ExplainView.of(controller),
       errorCells: controller.errorCells,
       onCellTap: tapCell,
       onCommit: (m) {
@@ -230,6 +234,12 @@ class ArrowsType extends PuzzleType<ArrowsPuzzle, ArrowsState> {
       Paint()..color = ink,
     );
   }
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(ArrowsPuzzle puzzle, ArrowsState state) => explainStep(const ArrowsExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(ArrowsPuzzle puzzle) => puzzle.toJson();

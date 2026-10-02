@@ -2339,4 +2339,445 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get exLitsFailCut => 'Але тоді зафарбовані клітинки не з\'єднуються.';
+
+  @override
+  String exLoopSupposeLine(Object edge) {
+    return 'Припустімо, що $edge — лінія.';
+  }
+
+  @override
+  String exLoopSupposeCross(Object edge) {
+    return 'Припустімо, що $edge закреслено.';
+  }
+
+  @override
+  String exLoopRefutedLine(Object edge) {
+    return '$edge — лінія: якщо закреслити, виникає суперечність.';
+  }
+
+  @override
+  String exLoopRefutedCross(Object edge) {
+    return '$edge закреслюємо: лінія там веде до суперечності.';
+  }
+
+  @override
+  String exLoopFull(Object edge) {
+    return '$edge закреслюємо: на її кінці вже сходяться дві лінії, а петля не розгалужується.';
+  }
+
+  @override
+  String exLoopDeadEnd(Object edge) {
+    return '$edge закреслюємо: від її кінця лінії нікуди йти далі.';
+  }
+
+  @override
+  String exLoopOnlyWay(Object edge) {
+    return '$edge — лінія: лінія, що дійшла до її кінця, може йти далі лише так.';
+  }
+
+  @override
+  String exLoopCloseEarly(Object edge) {
+    return '$edge закреслюємо: вона замкнула б петлю раніше, ніж головоломка розв\'язана.';
+  }
+
+  @override
+  String exLoopDone(Object edge) {
+    return '$edge закреслюємо: петля вже замкнена.';
+  }
+
+  @override
+  String get exLoopFailBranch => 'Але тоді в одній точці сходяться три лінії.';
+
+  @override
+  String get exLoopFailDeadEnd => 'Але тоді лінія впирається в глухий кут.';
+
+  @override
+  String get exLoopFailSubloop => 'Але тоді лінії утворюють більше ніж одну петлю.';
+
+  @override
+  String get exLoopFailClues => 'Але тоді замкнена петля порушує підказку.';
+
+  @override
+  String exFenceDone(Object edge, Object cell) {
+    return '$edge закреслюємо: довкола $cell уже стільки ліній, скільки каже її число.';
+  }
+
+  @override
+  String exFenceNeed(Object edge, Object cell) {
+    return '$edge — лінія: $cell потребує лінії на кожній ще відкритій стороні.';
+  }
+
+  @override
+  String exFenceFailMany(Object cell) {
+    return 'Але тоді довкола $cell більше ліній, ніж каже її число.';
+  }
+
+  @override
+  String exFenceFailFew(Object cell) {
+    return 'Але тоді довкола $cell не набереться стільки ліній, скільки каже її число.';
+  }
+
+  @override
+  String exLoopFailClash(Object edge) {
+    return 'Але тоді $edge мала б бути водночас лінією і закресленою.';
+  }
+
+  @override
+  String get exLoopFailOffBoard => 'Але тоді петля мала б вийти за межі поля.';
+
+  @override
+  String exPearlsPass(Object edge, Object cell) {
+    return '$edge — лінія: петля проходить через перлину в $cell, а там лишилося лише два шляхи.';
+  }
+
+  @override
+  String exPearlsBlackFar(Object edge, Object cell) {
+    return '$edge закреслюємо: від чорної перлини в $cell петля не пройшла б тут дві клітинки прямо.';
+  }
+
+  @override
+  String exPearlsBlackStraight(Object edge, Object cell) {
+    return '$edge — лінія: після чорної перлини в $cell петля йде прямо ще одну клітинку.';
+  }
+
+  @override
+  String exPearlsBlackThrough(Object edge, Object cell) {
+    return '$edge закреслюємо: на чорній перлині в $cell петля повертає, тож прямо не пройде.';
+  }
+
+  @override
+  String exPearlsBlackTurn(Object edge, Object cell) {
+    return '$edge — лінія: на чорній перлині в $cell петля повертає, а інший бік закреслено.';
+  }
+
+  @override
+  String exPearlsWhiteLine(Object edge, Object cell) {
+    return '$edge — лінія: петля йде прямо через білу перлину в $cell саме так.';
+  }
+
+  @override
+  String exPearlsWhiteCross(Object edge, Object cell) {
+    return '$edge закреслюємо: петля йде прямо через білу перлину в $cell іншим напрямком.';
+  }
+
+  @override
+  String exPearlsWhiteTurnLine(Object edge, Object cell) {
+    return '$edge — лінія: петля мусить повернути одразу перед білою перлиною в $cell або після неї.';
+  }
+
+  @override
+  String exPearlsWhiteTurnCross(Object edge, Object cell) {
+    return '$edge закреслюємо: петля мусить повернути одразу перед білою перлиною в $cell або після неї.';
+  }
+
+  @override
+  String exPearlsFailPass(Object cell) {
+    return 'Але тоді петля не пройде через перлину в $cell.';
+  }
+
+  @override
+  String exRailsSupposeOn(Object cell) {
+    return 'Припустімо, що колія проходить через $cell.';
+  }
+
+  @override
+  String exRailsSupposeOff(Object cell) {
+    return 'Припустімо, що в $cell немає колії.';
+  }
+
+  @override
+  String exRailsRefutedOn(Object cell) {
+    return 'Колія проходить через $cell: без неї виникає суперечність.';
+  }
+
+  @override
+  String exRailsRefutedOff(Object cell) {
+    return 'У $cell немає колії: колія там веде до суперечності.';
+  }
+
+  @override
+  String exRailsCellUsed(Object cell) {
+    return 'Колія проходить через $cell: до неї вже веде шматок колії.';
+  }
+
+  @override
+  String exRailsCellEmpty(Object cell) {
+    return 'У $cell немає колії: колія не змогла б через неї пройти.';
+  }
+
+  @override
+  String exRailsPieceFull(Object edge, Object cell) {
+    return '$edge закреслюємо: колія вже входить у $cell і виходить з неї.';
+  }
+
+  @override
+  String exRailsPieceEmpty(Object edge, Object cell) {
+    return '$edge закреслюємо: у $cell немає колії.';
+  }
+
+  @override
+  String exRailsPieceNeed(Object edge, Object cell) {
+    return '$edge — колія: колії через $cell більше нікуди йти.';
+  }
+
+  @override
+  String exRailsRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'має всі $count клітинки колії',
+      many: 'має всі $count клітинок колії',
+      few: 'має всі $count клітинки колії',
+      one: 'має свою одну клітинку колії',
+    );
+    return 'У $cell немає колії: рядок $row уже $_temp0.';
+  }
+
+  @override
+  String exRailsColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'має всі $count клітинки колії',
+      many: 'має всі $count клітинок колії',
+      few: 'має всі $count клітинки колії',
+      one: 'має свою одну клітинку колії',
+    );
+    return 'У $cell немає колії: стовпець $col уже $_temp0.';
+  }
+
+  @override
+  String exRailsRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки колії',
+      many: '$count клітинок колії',
+      few: '$count клітинки колії',
+      one: 'одну клітинку колії',
+    );
+    return 'Колія проходить через $cell: рядку $row потрібно $_temp0, і саме стільки лишилося.';
+  }
+
+  @override
+  String exRailsColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки колії',
+      many: '$count клітинок колії',
+      few: '$count клітинки колії',
+      one: 'одну клітинку колії',
+    );
+    return 'Колія проходить через $cell: стовпцю $col потрібно $_temp0, і саме стільки лишилося.';
+  }
+
+  @override
+  String exRailsDoneEdge(Object edge) {
+    return '$edge закреслюємо: колія вже завершена.';
+  }
+
+  @override
+  String exRailsDoneOn(Object cell) {
+    return 'Колія проходить через $cell: це частина завершеної колії.';
+  }
+
+  @override
+  String exRailsDoneOff(Object cell) {
+    return 'У $cell немає колії: колія вже завершена.';
+  }
+
+  @override
+  String exRailsCloseEarly(Object edge) {
+    return '$edge закреслюємо: вона замкнула б петлю або завершила б колію зарано.';
+  }
+
+  @override
+  String exRailsFailBranch(Object cell) {
+    return 'Але тоді колія розгалужується в $cell.';
+  }
+
+  @override
+  String exRailsFailDeadEnd(Object cell) {
+    return 'Але тоді колія впирається в глухий кут у $cell.';
+  }
+
+  @override
+  String exRailsFailRowMany(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки колії',
+      many: '$count клітинок колії',
+      few: '$count клітинки колії',
+      one: 'одна клітинка колії',
+    );
+    return 'Але тоді в рядку $row більше ніж $_temp0.';
+  }
+
+  @override
+  String exRailsFailColMany(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки колії',
+      many: '$count клітинок колії',
+      few: '$count клітинки колії',
+      one: 'одна клітинка колії',
+    );
+    return 'Але тоді в стовпці $col більше ніж $_temp0.';
+  }
+
+  @override
+  String exRailsFailRowFew(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'своїх $count клітинок колії',
+      one: 'своєї клітинки колії',
+    );
+    return 'Але тоді рядок $row не набере $_temp0.';
+  }
+
+  @override
+  String exRailsFailColFew(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'своїх $count клітинок колії',
+      one: 'своєї клітинки колії',
+    );
+    return 'Але тоді стовпець $col не набере $_temp0.';
+  }
+
+  @override
+  String get exRailsFailLoop => 'Але тоді окремо від колії утворюється петля.';
+
+  @override
+  String get exRailsFailClosed => 'Але тоді колія завершується зарано.';
+
+  @override
+  String exRailsFailClash(Object cell) {
+    return 'Але тоді в $cell мала б бути колія і водночас не бути.';
+  }
+
+  @override
+  String exArrowsSupposeShade(Object cell) {
+    return 'Припустімо, що $cell зафарбована.';
+  }
+
+  @override
+  String exArrowsSupposeOn(Object cell) {
+    return 'Припустімо, що петля проходить через $cell.';
+  }
+
+  @override
+  String exArrowsRefutedShade(Object cell) {
+    return '$cell зафарбована: петля через неї веде до суперечності.';
+  }
+
+  @override
+  String exArrowsRefutedOn(Object cell) {
+    return 'Петля проходить через $cell: якщо її зафарбувати, виникає суперечність.';
+  }
+
+  @override
+  String exArrowsCellOn(Object cell) {
+    return 'Петля проходить через $cell: до неї вже веде лінія.';
+  }
+
+  @override
+  String exArrowsCellShaded(Object cell) {
+    return '$cell зафарбована: петля не пройшла б через неї, а всі інші клітинки на петлі.';
+  }
+
+  @override
+  String exArrowsShadeNoLine(Object edge, Object cell) {
+    return '$edge закреслюємо: $cell зафарбована, тож петля її оминає.';
+  }
+
+  @override
+  String exArrowsShadeNeighbours(Object cell, Object a) {
+    return 'Петля проходить через $cell: вона торкається зафарбованої $a, а зафарбовані клітинки не торкаються.';
+  }
+
+  @override
+  String exArrowsOnNeed(Object edge, Object cell) {
+    return '$edge — лінія: петлі через $cell більше нікуди йти.';
+  }
+
+  @override
+  String exArrowsClueDone(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'бачить усі $count зафарбованої',
+      many: 'бачить усі $count зафарбованих',
+      few: 'бачить усі $count зафарбовані',
+      one: 'бачить свою одну зафарбовану',
+      zero: 'не бачить жодної зафарбованої, як і має бути',
+    );
+    return 'Петля проходить через $cell: стрілка в $clue уже $_temp0.';
+  }
+
+  @override
+  String exArrowsClueNeedShade(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count зафарбованої',
+      many: '$count зафарбованих',
+      few: '$count зафарбовані',
+      one: 'одну зафарбовану',
+    );
+    return '$cell зафарбована: стрілці в $clue потрібно $_temp0, і вони вміщаються, лише якщо фарбувати через клітинку.';
+  }
+
+  @override
+  String exArrowsClueNeedOn(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count зафарбованої',
+      many: '$count зафарбованих',
+      few: '$count зафарбовані',
+      one: 'одну зафарбовану',
+    );
+    return 'Петля проходить через $cell: стрілці в $clue потрібно $_temp0, і вони вміщаються, лише якщо фарбувати через клітинку.';
+  }
+
+  @override
+  String exArrowsFailStuck(Object cell) {
+    return 'Але тоді петля застрягає в $cell.';
+  }
+
+  @override
+  String exArrowsFailClueMany(Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count зафарбованої',
+      many: '$count зафарбованих',
+      few: '$count зафарбовані',
+      one: 'одну зафарбовану',
+      zero: 'нуль зафарбованих',
+    );
+    return 'Але тоді стрілка в $clue бачить більше ніж $_temp0.';
+  }
+
+  @override
+  String exArrowsFailClueFew(Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'своїх $count зафарбованих',
+      one: 'своєї зафарбованої',
+    );
+    return 'Але тоді стрілка в $clue не набере $_temp0.';
+  }
+
+  @override
+  String exArrowsFailClash(Object cell) {
+    return 'Але тоді $cell мала б бути і зафарбованою, і на петлі.';
+  }
 }

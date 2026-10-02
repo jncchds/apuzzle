@@ -1,6 +1,10 @@
 import '../../core/lattice_loop.dart';
 import 'pearls_model.dart';
 
+/// Pearls' own rules for a traced [PearlsSolver] (ids from [loopRuleCount]);
+/// the arg is the pearl's cell.
+enum PearlsRule { pass, blackFar, blackStraight, blackTurn, whiteAxis, whiteTurn, failPass }
+
 /// Loop logic plus the pearl rules.
 class PearlsSolver extends LoopSolver {
   PearlsSolver(this.rows, this.cols, this.pearls) : super(LatticeLoop(rows, cols)) {
@@ -27,8 +31,9 @@ class PearlsSolver extends LoopSolver {
         if (v == 1) lines++;
         if (v == -1) open++;
       }
-      if (lines + open < 2) return false;
+      if (lines + open < 2) return fail(loopRuleCount + PearlsRule.failPass.index, p);
       if (lines + open == 2) {
+        because(loopRuleCount + PearlsRule.pass.index, p);
         for (final x in e) {
           if (_val(st, x) == -1 && !set(st, x, 1)) return false;
         }
@@ -43,8 +48,11 @@ class PearlsSolver extends LoopSolver {
           final opposite = e[k ^ 1];
           final here = e[k];
           final beyond = here < 0 ? -1 : g.step(p + dr * cols + dc, dr, dc);
+          because(loopRuleCount + PearlsRule.blackFar.index, p);
           if (_val(st, beyond) == 0 && !set(st, here, 0)) return false;
+          because(loopRuleCount + PearlsRule.blackStraight.index, p);
           if (_val(st, here) == 1 && (!set(st, beyond, 1) || !set(st, opposite, 0))) return false;
+          because(loopRuleCount + PearlsRule.blackTurn.index, p);
           if (_val(st, here) == 0 && !set(st, opposite, 1)) return false;
         }
       }
@@ -56,6 +64,7 @@ class PearlsSolver extends LoopSolver {
   /// across edges [x], [y]; (dr, dc) points towards [a].
   bool _white(List<int> st, int p, int a, int b, int x, int y, int dr, int dc) {
     final va = _val(st, a), vb = _val(st, b);
+    because(loopRuleCount + PearlsRule.whiteAxis.index, p);
     if (va == 1 || vb == 1) {
       if (!set(st, a, 1) || !set(st, b, 1) || !set(st, x, 0) || !set(st, y, 0)) return false;
     } else if (va == 0 || vb == 0) {
@@ -66,12 +75,25 @@ class PearlsSolver extends LoopSolver {
     final before = g.step(p + dr * cols + dc, dr, dc);
     final after = g.step(p - dr * cols - dc, -dr, -dc);
     final sa = _val(st, before), sb = _val(st, after);
+    because(loopRuleCount + PearlsRule.whiteTurn.index, p);
     if (sa == 1 && sb == 1) return set(st, a, 0) && set(st, b, 0) && set(st, x, 1) && set(st, y, 1);
     if (_val(st, a) == 1) {
       if (sa == 1 && !set(st, after, 0)) return false;
       if (sb == 1 && !set(st, before, 0)) return false;
     }
     return true;
+  }
+
+  /// Edges a pearl's rules look at: around its cell and one step beyond.
+  @override
+  List<int> premisesOf(int rule, int arg) {
+    if (rule < loopRuleCount) return super.premisesOf(rule, arg);
+    return [
+      for (final (dr, dc) in pearlDirs) ...[
+        g.step(arg, dr, dc),
+        if (g.step(arg, dr, dc) >= 0) g.step(arg + dr * cols + dc, dr, dc),
+      ],
+    ].where((e) => e >= 0).toList();
   }
 
   @override

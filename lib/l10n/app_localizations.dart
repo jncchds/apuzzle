@@ -3411,6 +3411,432 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then the shaded cells can\'t all connect.'**
   String get exLitsFailCut;
+
+  /// No description provided for @exLoopSupposeLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {edge} were a line.'**
+  String exLoopSupposeLine(Object edge);
+
+  /// No description provided for @exLoopSupposeCross.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {edge} were crossed out.'**
+  String exLoopSupposeCross(Object edge);
+
+  /// No description provided for @exLoopRefutedLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a line: crossing it out leads to a contradiction.'**
+  String exLoopRefutedLine(Object edge);
+
+  /// No description provided for @exLoopRefutedCross.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: a line there leads to a contradiction.'**
+  String exLoopRefutedCross(Object edge);
+
+  /// No description provided for @exLoopFull.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: two lines already meet at its end, and the loop never branches.'**
+  String exLoopFull(Object edge);
+
+  /// No description provided for @exLoopDeadEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: the line couldn\'t go on from its end.'**
+  String exLoopDeadEnd(Object edge);
+
+  /// No description provided for @exLoopOnlyWay.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a line: the line reaching its end can only go on this way.'**
+  String exLoopOnlyWay(Object edge);
+
+  /// No description provided for @exLoopCloseEarly.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: it would close a loop before the puzzle is done.'**
+  String exLoopCloseEarly(Object edge);
+
+  /// No description provided for @exLoopDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: the loop is already closed.'**
+  String exLoopDone(Object edge);
+
+  /// No description provided for @exLoopFailBranch.
+  ///
+  /// In en, this message translates to:
+  /// **'But then three lines meet in one point.'**
+  String get exLoopFailBranch;
+
+  /// No description provided for @exLoopFailDeadEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'But then a line runs into a dead end.'**
+  String get exLoopFailDeadEnd;
+
+  /// No description provided for @exLoopFailSubloop.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the lines make more than one loop.'**
+  String get exLoopFailSubloop;
+
+  /// No description provided for @exLoopFailClues.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the closed loop breaks a clue.'**
+  String get exLoopFailClues;
+
+  /// No description provided for @exFenceDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: {cell} already has as many lines around it as its number.'**
+  String exFenceDone(Object edge, Object cell);
+
+  /// No description provided for @exFenceNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a line: {cell} needs a line on every side still open.'**
+  String exFenceNeed(Object edge, Object cell);
+
+  /// No description provided for @exFenceFailMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cell} has more lines around it than its number.'**
+  String exFenceFailMany(Object cell);
+
+  /// No description provided for @exFenceFailFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cell} can\'t get as many lines as its number.'**
+  String exFenceFailFew(Object cell);
+
+  /// No description provided for @exLoopFailClash.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {edge} would have to be both a line and crossed out.'**
+  String exLoopFailClash(Object edge);
+
+  /// No description provided for @exLoopFailOffBoard.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the loop would have to leave the board.'**
+  String get exLoopFailOffBoard;
+
+  /// No description provided for @exPearlsPass.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a line: the loop passes the pearl in {cell}, and only two ways are left there.'**
+  String exPearlsPass(Object edge, Object cell);
+
+  /// No description provided for @exPearlsBlackFar.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: from the black pearl in {cell} the loop couldn\'t go two cells straight this way.'**
+  String exPearlsBlackFar(Object edge, Object cell);
+
+  /// No description provided for @exPearlsBlackStraight.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a line: after the black pearl in {cell} the loop goes on straight for one more cell.'**
+  String exPearlsBlackStraight(Object edge, Object cell);
+
+  /// No description provided for @exPearlsBlackThrough.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: the loop turns at the black pearl in {cell}, so it can\'t go straight through.'**
+  String exPearlsBlackThrough(Object edge, Object cell);
+
+  /// No description provided for @exPearlsBlackTurn.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a line: the loop turns at the black pearl in {cell}, and the other way is crossed out.'**
+  String exPearlsBlackTurn(Object edge, Object cell);
+
+  /// No description provided for @exPearlsWhiteLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a line: the loop goes straight through the white pearl in {cell} this way.'**
+  String exPearlsWhiteLine(Object edge, Object cell);
+
+  /// No description provided for @exPearlsWhiteCross.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: the loop goes straight through the white pearl in {cell} the other way.'**
+  String exPearlsWhiteCross(Object edge, Object cell);
+
+  /// No description provided for @exPearlsWhiteTurnLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a line: the loop must turn right before or after the white pearl in {cell}.'**
+  String exPearlsWhiteTurnLine(Object edge, Object cell);
+
+  /// No description provided for @exPearlsWhiteTurnCross.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: the loop must turn right before or after the white pearl in {cell}.'**
+  String exPearlsWhiteTurnCross(Object edge, Object cell);
+
+  /// No description provided for @exPearlsFailPass.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the loop can\'t pass the pearl in {cell}.'**
+  String exPearlsFailPass(Object cell);
+
+  /// No description provided for @exRailsSupposeOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose the track ran through {cell}.'**
+  String exRailsSupposeOn(Object cell);
+
+  /// No description provided for @exRailsSupposeOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} had no track.'**
+  String exRailsSupposeOff(Object cell);
+
+  /// No description provided for @exRailsRefutedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'The track runs through {cell}: leaving it out leads to a contradiction.'**
+  String exRailsRefutedOn(Object cell);
+
+  /// No description provided for @exRailsRefutedOff.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} has no track: track there leads to a contradiction.'**
+  String exRailsRefutedOff(Object cell);
+
+  /// No description provided for @exRailsCellUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'The track runs through {cell}: a piece of track already reaches it.'**
+  String exRailsCellUsed(Object cell);
+
+  /// No description provided for @exRailsCellEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} has no track: the track couldn\'t pass through it.'**
+  String exRailsCellEmpty(Object cell);
+
+  /// No description provided for @exRailsPieceFull.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: the track already enters and leaves {cell}.'**
+  String exRailsPieceFull(Object edge, Object cell);
+
+  /// No description provided for @exRailsPieceEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: {cell} has no track.'**
+  String exRailsPieceEmpty(Object edge, Object cell);
+
+  /// No description provided for @exRailsPieceNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is track: the track through {cell} has no other way to go.'**
+  String exRailsPieceNeed(Object edge, Object cell);
+
+  /// No description provided for @exRailsRowDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} has no track: row {row} already has {count, plural, =1{its one track cell} other{all its {count} track cells}}.'**
+  String exRailsRowDone(Object cell, Object row, int count);
+
+  /// No description provided for @exRailsColDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} has no track: column {col} already has {count, plural, =1{its one track cell} other{all its {count} track cells}}.'**
+  String exRailsColDone(Object cell, Object col, int count);
+
+  /// No description provided for @exRailsRowNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'The track runs through {cell}: row {row} needs {count, plural, =1{one track cell} other{{count} track cells}}, and only that many are left.'**
+  String exRailsRowNeed(Object cell, Object row, int count);
+
+  /// No description provided for @exRailsColNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'The track runs through {cell}: column {col} needs {count, plural, =1{one track cell} other{{count} track cells}}, and only that many are left.'**
+  String exRailsColNeed(Object cell, Object col, int count);
+
+  /// No description provided for @exRailsDoneEdge.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: the track is already complete.'**
+  String exRailsDoneEdge(Object edge);
+
+  /// No description provided for @exRailsDoneOn.
+  ///
+  /// In en, this message translates to:
+  /// **'The track runs through {cell}: it\'s part of the finished track.'**
+  String exRailsDoneOn(Object cell);
+
+  /// No description provided for @exRailsDoneOff.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} has no track: the track is already complete.'**
+  String exRailsDoneOff(Object cell);
+
+  /// No description provided for @exRailsCloseEarly.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: it would close a loop or finish the track too early.'**
+  String exRailsCloseEarly(Object edge);
+
+  /// No description provided for @exRailsFailBranch.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the track branches in {cell}.'**
+  String exRailsFailBranch(Object cell);
+
+  /// No description provided for @exRailsFailDeadEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the track runs into a dead end in {cell}.'**
+  String exRailsFailDeadEnd(Object cell);
+
+  /// No description provided for @exRailsFailRowMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} has more than {count, plural, =1{one track cell} other{{count} track cells}}.'**
+  String exRailsFailRowMany(Object row, int count);
+
+  /// No description provided for @exRailsFailColMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} has more than {count, plural, =1{one track cell} other{{count} track cells}}.'**
+  String exRailsFailColMany(Object col, int count);
+
+  /// No description provided for @exRailsFailRowFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} can\'t get {count, plural, =1{its track cell} other{its {count} track cells}}.'**
+  String exRailsFailRowFew(Object row, int count);
+
+  /// No description provided for @exRailsFailColFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} can\'t get {count, plural, =1{its track cell} other{its {count} track cells}}.'**
+  String exRailsFailColFew(Object col, int count);
+
+  /// No description provided for @exRailsFailLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'But then a loop forms apart from the track.'**
+  String get exRailsFailLoop;
+
+  /// No description provided for @exRailsFailClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the track is finished too early.'**
+  String get exRailsFailClosed;
+
+  /// No description provided for @exRailsFailClash.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cell} would have to have track and no track.'**
+  String exRailsFailClash(Object cell);
+
+  /// No description provided for @exArrowsSupposeShade.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were shaded.'**
+  String exArrowsSupposeShade(Object cell);
+
+  /// No description provided for @exArrowsSupposeOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose the loop went through {cell}.'**
+  String exArrowsSupposeOn(Object cell);
+
+  /// No description provided for @exArrowsRefutedShade.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: the loop through it leads to a contradiction.'**
+  String exArrowsRefutedShade(Object cell);
+
+  /// No description provided for @exArrowsRefutedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'The loop goes through {cell}: shading it leads to a contradiction.'**
+  String exArrowsRefutedOn(Object cell);
+
+  /// No description provided for @exArrowsCellOn.
+  ///
+  /// In en, this message translates to:
+  /// **'The loop goes through {cell}: a line already reaches it.'**
+  String exArrowsCellOn(Object cell);
+
+  /// No description provided for @exArrowsCellShaded.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: the loop couldn\'t pass through it, and every other cell is on the loop.'**
+  String exArrowsCellShaded(Object cell);
+
+  /// No description provided for @exArrowsShadeNoLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets a cross: {cell} is shaded, so the loop stays out of it.'**
+  String exArrowsShadeNoLine(Object edge, Object cell);
+
+  /// No description provided for @exArrowsShadeNeighbours.
+  ///
+  /// In en, this message translates to:
+  /// **'The loop goes through {cell}: it touches the shaded {a}, and shaded cells never touch.'**
+  String exArrowsShadeNeighbours(Object cell, Object a);
+
+  /// No description provided for @exArrowsOnNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a line: the loop through {cell} has no other way to go.'**
+  String exArrowsOnNeed(Object edge, Object cell);
+
+  /// No description provided for @exArrowsClueDone.
+  ///
+  /// In en, this message translates to:
+  /// **'The loop goes through {cell}: the arrow in {clue} already sees {count, plural, =0{no shaded cells, as it should} =1{its one shaded cell} other{all its {count} shaded cells}}.'**
+  String exArrowsClueDone(Object cell, Object clue, int count);
+
+  /// No description provided for @exArrowsClueNeedShade.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: the arrow in {clue} needs {count, plural, =1{a shaded cell} other{{count} shaded cells}}, and they only fit by shading every other cell.'**
+  String exArrowsClueNeedShade(Object cell, Object clue, int count);
+
+  /// No description provided for @exArrowsClueNeedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'The loop goes through {cell}: the arrow in {clue} needs {count, plural, =1{a shaded cell} other{{count} shaded cells}}, and they only fit by shading every other cell.'**
+  String exArrowsClueNeedOn(Object cell, Object clue, int count);
+
+  /// No description provided for @exArrowsFailStuck.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the loop gets stuck in {cell}.'**
+  String exArrowsFailStuck(Object cell);
+
+  /// No description provided for @exArrowsFailClueMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the arrow in {clue} sees more than {count, plural, =0{no shaded cells} =1{one shaded cell} other{{count} shaded cells}}.'**
+  String exArrowsFailClueMany(Object clue, int count);
+
+  /// No description provided for @exArrowsFailClueFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the arrow in {clue} can\'t see {count, plural, =1{its shaded cell} other{its {count} shaded cells}}.'**
+  String exArrowsFailClueFew(Object clue, int count);
+
+  /// No description provided for @exArrowsFailClash.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cell} would have to be shaded and on the loop.'**
+  String exArrowsFailClash(Object cell);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

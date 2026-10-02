@@ -2306,4 +2306,425 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exLitsFailCut => 'But then the shaded cells can\'t all connect.';
+
+  @override
+  String exLoopSupposeLine(Object edge) {
+    return 'Suppose $edge were a line.';
+  }
+
+  @override
+  String exLoopSupposeCross(Object edge) {
+    return 'Suppose $edge were crossed out.';
+  }
+
+  @override
+  String exLoopRefutedLine(Object edge) {
+    return '$edge is a line: crossing it out leads to a contradiction.';
+  }
+
+  @override
+  String exLoopRefutedCross(Object edge) {
+    return '$edge gets a cross: a line there leads to a contradiction.';
+  }
+
+  @override
+  String exLoopFull(Object edge) {
+    return '$edge gets a cross: two lines already meet at its end, and the loop never branches.';
+  }
+
+  @override
+  String exLoopDeadEnd(Object edge) {
+    return '$edge gets a cross: the line couldn\'t go on from its end.';
+  }
+
+  @override
+  String exLoopOnlyWay(Object edge) {
+    return '$edge is a line: the line reaching its end can only go on this way.';
+  }
+
+  @override
+  String exLoopCloseEarly(Object edge) {
+    return '$edge gets a cross: it would close a loop before the puzzle is done.';
+  }
+
+  @override
+  String exLoopDone(Object edge) {
+    return '$edge gets a cross: the loop is already closed.';
+  }
+
+  @override
+  String get exLoopFailBranch => 'But then three lines meet in one point.';
+
+  @override
+  String get exLoopFailDeadEnd => 'But then a line runs into a dead end.';
+
+  @override
+  String get exLoopFailSubloop => 'But then the lines make more than one loop.';
+
+  @override
+  String get exLoopFailClues => 'But then the closed loop breaks a clue.';
+
+  @override
+  String exFenceDone(Object edge, Object cell) {
+    return '$edge gets a cross: $cell already has as many lines around it as its number.';
+  }
+
+  @override
+  String exFenceNeed(Object edge, Object cell) {
+    return '$edge is a line: $cell needs a line on every side still open.';
+  }
+
+  @override
+  String exFenceFailMany(Object cell) {
+    return 'But then $cell has more lines around it than its number.';
+  }
+
+  @override
+  String exFenceFailFew(Object cell) {
+    return 'But then $cell can\'t get as many lines as its number.';
+  }
+
+  @override
+  String exLoopFailClash(Object edge) {
+    return 'But then $edge would have to be both a line and crossed out.';
+  }
+
+  @override
+  String get exLoopFailOffBoard => 'But then the loop would have to leave the board.';
+
+  @override
+  String exPearlsPass(Object edge, Object cell) {
+    return '$edge is a line: the loop passes the pearl in $cell, and only two ways are left there.';
+  }
+
+  @override
+  String exPearlsBlackFar(Object edge, Object cell) {
+    return '$edge gets a cross: from the black pearl in $cell the loop couldn\'t go two cells straight this way.';
+  }
+
+  @override
+  String exPearlsBlackStraight(Object edge, Object cell) {
+    return '$edge is a line: after the black pearl in $cell the loop goes on straight for one more cell.';
+  }
+
+  @override
+  String exPearlsBlackThrough(Object edge, Object cell) {
+    return '$edge gets a cross: the loop turns at the black pearl in $cell, so it can\'t go straight through.';
+  }
+
+  @override
+  String exPearlsBlackTurn(Object edge, Object cell) {
+    return '$edge is a line: the loop turns at the black pearl in $cell, and the other way is crossed out.';
+  }
+
+  @override
+  String exPearlsWhiteLine(Object edge, Object cell) {
+    return '$edge is a line: the loop goes straight through the white pearl in $cell this way.';
+  }
+
+  @override
+  String exPearlsWhiteCross(Object edge, Object cell) {
+    return '$edge gets a cross: the loop goes straight through the white pearl in $cell the other way.';
+  }
+
+  @override
+  String exPearlsWhiteTurnLine(Object edge, Object cell) {
+    return '$edge is a line: the loop must turn right before or after the white pearl in $cell.';
+  }
+
+  @override
+  String exPearlsWhiteTurnCross(Object edge, Object cell) {
+    return '$edge gets a cross: the loop must turn right before or after the white pearl in $cell.';
+  }
+
+  @override
+  String exPearlsFailPass(Object cell) {
+    return 'But then the loop can\'t pass the pearl in $cell.';
+  }
+
+  @override
+  String exRailsSupposeOn(Object cell) {
+    return 'Suppose the track ran through $cell.';
+  }
+
+  @override
+  String exRailsSupposeOff(Object cell) {
+    return 'Suppose $cell had no track.';
+  }
+
+  @override
+  String exRailsRefutedOn(Object cell) {
+    return 'The track runs through $cell: leaving it out leads to a contradiction.';
+  }
+
+  @override
+  String exRailsRefutedOff(Object cell) {
+    return '$cell has no track: track there leads to a contradiction.';
+  }
+
+  @override
+  String exRailsCellUsed(Object cell) {
+    return 'The track runs through $cell: a piece of track already reaches it.';
+  }
+
+  @override
+  String exRailsCellEmpty(Object cell) {
+    return '$cell has no track: the track couldn\'t pass through it.';
+  }
+
+  @override
+  String exRailsPieceFull(Object edge, Object cell) {
+    return '$edge gets a cross: the track already enters and leaves $cell.';
+  }
+
+  @override
+  String exRailsPieceEmpty(Object edge, Object cell) {
+    return '$edge gets a cross: $cell has no track.';
+  }
+
+  @override
+  String exRailsPieceNeed(Object edge, Object cell) {
+    return '$edge is track: the track through $cell has no other way to go.';
+  }
+
+  @override
+  String exRailsRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'all its $count track cells',
+      one: 'its one track cell',
+    );
+    return '$cell has no track: row $row already has $_temp0.';
+  }
+
+  @override
+  String exRailsColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'all its $count track cells',
+      one: 'its one track cell',
+    );
+    return '$cell has no track: column $col already has $_temp0.';
+  }
+
+  @override
+  String exRailsRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count track cells',
+      one: 'one track cell',
+    );
+    return 'The track runs through $cell: row $row needs $_temp0, and only that many are left.';
+  }
+
+  @override
+  String exRailsColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count track cells',
+      one: 'one track cell',
+    );
+    return 'The track runs through $cell: column $col needs $_temp0, and only that many are left.';
+  }
+
+  @override
+  String exRailsDoneEdge(Object edge) {
+    return '$edge gets a cross: the track is already complete.';
+  }
+
+  @override
+  String exRailsDoneOn(Object cell) {
+    return 'The track runs through $cell: it\'s part of the finished track.';
+  }
+
+  @override
+  String exRailsDoneOff(Object cell) {
+    return '$cell has no track: the track is already complete.';
+  }
+
+  @override
+  String exRailsCloseEarly(Object edge) {
+    return '$edge gets a cross: it would close a loop or finish the track too early.';
+  }
+
+  @override
+  String exRailsFailBranch(Object cell) {
+    return 'But then the track branches in $cell.';
+  }
+
+  @override
+  String exRailsFailDeadEnd(Object cell) {
+    return 'But then the track runs into a dead end in $cell.';
+  }
+
+  @override
+  String exRailsFailRowMany(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count track cells',
+      one: 'one track cell',
+    );
+    return 'But then row $row has more than $_temp0.';
+  }
+
+  @override
+  String exRailsFailColMany(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count track cells',
+      one: 'one track cell',
+    );
+    return 'But then column $col has more than $_temp0.';
+  }
+
+  @override
+  String exRailsFailRowFew(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'its $count track cells',
+      one: 'its track cell',
+    );
+    return 'But then row $row can\'t get $_temp0.';
+  }
+
+  @override
+  String exRailsFailColFew(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'its $count track cells',
+      one: 'its track cell',
+    );
+    return 'But then column $col can\'t get $_temp0.';
+  }
+
+  @override
+  String get exRailsFailLoop => 'But then a loop forms apart from the track.';
+
+  @override
+  String get exRailsFailClosed => 'But then the track is finished too early.';
+
+  @override
+  String exRailsFailClash(Object cell) {
+    return 'But then $cell would have to have track and no track.';
+  }
+
+  @override
+  String exArrowsSupposeShade(Object cell) {
+    return 'Suppose $cell were shaded.';
+  }
+
+  @override
+  String exArrowsSupposeOn(Object cell) {
+    return 'Suppose the loop went through $cell.';
+  }
+
+  @override
+  String exArrowsRefutedShade(Object cell) {
+    return '$cell is shaded: the loop through it leads to a contradiction.';
+  }
+
+  @override
+  String exArrowsRefutedOn(Object cell) {
+    return 'The loop goes through $cell: shading it leads to a contradiction.';
+  }
+
+  @override
+  String exArrowsCellOn(Object cell) {
+    return 'The loop goes through $cell: a line already reaches it.';
+  }
+
+  @override
+  String exArrowsCellShaded(Object cell) {
+    return '$cell is shaded: the loop couldn\'t pass through it, and every other cell is on the loop.';
+  }
+
+  @override
+  String exArrowsShadeNoLine(Object edge, Object cell) {
+    return '$edge gets a cross: $cell is shaded, so the loop stays out of it.';
+  }
+
+  @override
+  String exArrowsShadeNeighbours(Object cell, Object a) {
+    return 'The loop goes through $cell: it touches the shaded $a, and shaded cells never touch.';
+  }
+
+  @override
+  String exArrowsOnNeed(Object edge, Object cell) {
+    return '$edge is a line: the loop through $cell has no other way to go.';
+  }
+
+  @override
+  String exArrowsClueDone(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'all its $count shaded cells',
+      one: 'its one shaded cell',
+      zero: 'no shaded cells, as it should',
+    );
+    return 'The loop goes through $cell: the arrow in $clue already sees $_temp0.';
+  }
+
+  @override
+  String exArrowsClueNeedShade(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count shaded cells',
+      one: 'a shaded cell',
+    );
+    return '$cell is shaded: the arrow in $clue needs $_temp0, and they only fit by shading every other cell.';
+  }
+
+  @override
+  String exArrowsClueNeedOn(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count shaded cells',
+      one: 'a shaded cell',
+    );
+    return 'The loop goes through $cell: the arrow in $clue needs $_temp0, and they only fit by shading every other cell.';
+  }
+
+  @override
+  String exArrowsFailStuck(Object cell) {
+    return 'But then the loop gets stuck in $cell.';
+  }
+
+  @override
+  String exArrowsFailClueMany(Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count shaded cells',
+      one: 'one shaded cell',
+      zero: 'no shaded cells',
+    );
+    return 'But then the arrow in $clue sees more than $_temp0.';
+  }
+
+  @override
+  String exArrowsFailClueFew(Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'its $count shaded cells',
+      one: 'its shaded cell',
+    );
+    return 'But then the arrow in $clue can\'t see $_temp0.';
+  }
+
+  @override
+  String exArrowsFailClash(Object cell) {
+    return 'But then $cell would have to be shaded and on the loop.';
+  }
 }

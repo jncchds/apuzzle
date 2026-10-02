@@ -3,7 +3,10 @@ import 'package:apuzzle/core/explain.dart';
 import 'package:apuzzle/core/grid.dart';
 import 'package:apuzzle/core/registry.dart';
 import 'package:apuzzle/core/value_grid.dart';
+import 'package:apuzzle/core/lattice_loop.dart';
 import 'package:apuzzle/l10n/l10n.dart';
+import 'package:apuzzle/puzzles/arrows/arrows_model.dart';
+import 'package:apuzzle/puzzles/rails/rails_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -14,6 +17,20 @@ Iterable<String> texts(Explanation e, AppLocalizations l) => [
   ?e.suppose?.text(l),
   for (final x in e.probe) x.text(l),
 ];
+
+List<int> marksOf(Object s) => switch (s) {
+  LoopMarks() => s.marks,
+  RailsState() => s.marks,
+  ArrowsState() => s.marks,
+  _ => throw ArgumentError(s),
+};
+
+Object withMark(Object s, int e, int m) => switch (s) {
+  LoopMarks() => LoopMarks(List.of(s.marks)..[e] = m),
+  RailsState() => RailsState(List.of(s.marks)..[e] = m, s.cells),
+  ArrowsState() => ArrowsState(List.of(s.marks)..[e] = m, s.cells),
+  _ => throw ArgumentError(s),
+};
 
 void checkText(String text) {
   expect(text.trim(), isNotEmpty);
@@ -72,6 +89,16 @@ void main() {
         final puzzle = type.generate(GenParams(size: type.defaultSize, difficulty: Difficulty.easy, seed: 7)) as Object;
         final start = type.initialState(puzzle) as Object;
         final e = type.explain(puzzle, start)!;
+        if (e.edges.isNotEmpty) {
+          // Loops: flip the first step's edge the wrong way.
+          final edge = e.edges.first;
+          final want = marksOf(e.next!)[edge];
+          final bad = withMark(start, edge, want == 1 ? 2 : 1);
+          final fix = type.explain(puzzle, bad)!;
+          expect(fix.fix, isTrue);
+          expect(marksOf(fix.next!)[edge], 0);
+          return;
+        }
         if (start is! ValueGrid || puzzle is! ValueGridPuzzle) return;
         // Put a wrong value where the first step would go.
         final i = start.size.index(e.targets.first);
