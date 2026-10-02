@@ -1,4 +1,9 @@
+import '../../core/explain.dart';
 import 'hues_model.dart';
+
+/// What a traced [HuesSolver.propagate] records ([Fact.rule]). [full] rules
+/// a color out ([Fact.value] is its bit); [need] and [single] place a color.
+enum HuesRule { full, need, single, failEmpty, failMany, failFew }
 
 /// Domain-bitmask solver. Tier 1: per-clue counting; tier 2: + probing.
 class HuesSolver {
@@ -36,7 +41,9 @@ class HuesSolver {
   /// Domains: bitmask per empty cell (clue cells are ignored).
   List<int> initialDomains() => [for (var i = 0; i < rows * cols; i++) clueNum[i] == null ? full : 0];
 
-  bool propagate(List<int> dom) {
+  /// Clue counting until nothing changes; false on a contradiction. With
+  /// [t], every deduction is recorded (see [HuesRule]).
+  bool propagate(List<int> dom, [ExplainTrace? t]) {
     var changed = true;
     while (changed) {
       changed = false;
@@ -47,24 +54,38 @@ class HuesSolver {
         final open = <int>[];
         for (final j in clueNb[c]!) {
           final d = dom[j];
-          if (d == 0) return false;
+          if (d == 0) {
+            t?.fail(HuesRule.failEmpty.index, premises: [j], args: [j]);
+            return false;
+          }
           if (d == bit) {
             a++;
           } else if (d & bit != 0) {
             open.add(j);
           }
         }
-        if (a > m || a + open.length < m) return false;
+        if (a > m || a + open.length < m) {
+          t?.fail((a > m ? HuesRule.failMany : HuesRule.failFew).index, premises: clueNb[c]!, args: [c]);
+          return false;
+        }
         if (open.isEmpty) continue;
         if (a == m) {
           for (final j in open) {
             dom[j] &= ~bit;
-            if (dom[j] == 0) return false;
+            if (t != null) {
+              t.fact(j, bit, HuesRule.full.index, premises: clueNb[c]!, args: [c]);
+              if (_single(dom[j])) t.fact(j, dom[j].bitLength - 1, HuesRule.single.index, premises: [j]);
+            }
+            if (dom[j] == 0) {
+              t?.fail(HuesRule.failEmpty.index, premises: [j], args: [j]);
+              return false;
+            }
           }
           changed = true;
         } else if (a + open.length == m) {
           for (final j in open) {
             dom[j] = bit;
+            t?.fact(j, clueColor[c], HuesRule.need.index, premises: clueNb[c]!, args: [c]);
           }
           changed = true;
         }

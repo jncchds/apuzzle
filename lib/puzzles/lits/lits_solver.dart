@@ -1,6 +1,14 @@
 import 'dart:typed_data';
 
+import '../../core/explain.dart';
 import 'lits_model.dart';
+
+/// What a traced [LitsSolver.propagate] records ([Fact.rule]). A placement
+/// ruled out ([overEmpty] … [twin]) is a fact on slot n² + region with the
+/// placement's index in [LitsSolver.candidates] as value and (region, other
+/// region) as args; cells are shaded ([allShapes], value 1) or empty
+/// ([noShape], value -1) with the region as arg.
+enum LitsRule { overEmpty, missesShaded, pool, clash, cut, twin, allShapes, noShape, failNoShape, failCut }
 
 class Placement {
   Placement(this.cells, this.shape, int size) : mask = Uint8List(size) {
@@ -49,6 +57,7 @@ class LitsSolver {
   }
 
   /// Starting knowledge: region-less cells are unshaded.
+  List<int> initialKnown() => _initialKnown();
   List<int> _initialKnown() => [for (final r in regions) r < 0 ? -1 : 0];
 
   late final List<Set<int>> neighbours;
@@ -154,10 +163,55 @@ class LitsSolver {
     return false;
   }
 
+  /// Why placement [pl] of region [r] is out ([LitsRule], as an index), or -1
+  /// if it stays. [o] gets the other region a clash or a twin is with.
+  int _reject(
+    Placement pl,
+    int r,
+    List<List<Placement>> cand,
+    List<int> known,
+    List<int> shadedIn,
+    bool deep,
+    List<int> o,
+  ) {
+    var hits = 0;
+    for (final i in pl.cells) {
+      final k = known[i];
+      if (k == -1) return LitsRule.overEmpty.index;
+      if (k == 1) hits++;
+    }
+    if (hits != shadedIn[r]) return LitsRule.missesShaded.index;
+    if (_makes2x2(pl, known)) return LitsRule.pool.index;
+    for (final x in neighbours[r]) {
+      final others = cand[x];
+      if (others.length <= (deep ? 60 : 10) && others.every((q) => _clash(pl, q, known))) {
+        o[0] = x;
+        return LitsRule.clash.index;
+      }
+    }
+    if (deep && !_placementConnects(pl, r, known)) return LitsRule.cut.index;
+    for (final i in pl.cells) {
+      for (final j in _nb(i)) {
+        final x = regions[j];
+        if (x >= 0 && x != r && cand[x].length == 1 && cand[x].single.shape == pl.shape && cand[x].single.has(j)) {
+          o[0] = x;
+          return LitsRule.twin.index;
+        }
+      }
+    }
+    return -1;
+  }
+
+  /// Applies tier-1 logic in place; false on a contradiction. With [t], every
+  /// deduction is recorded (see [LitsRule]).
+  bool propagate(List<List<Placement>> cand, List<int> known, [ExplainTrace? t]) => _propagate(cand, known, t: t);
+
   /// known: 1 shaded, -1 empty, 0 unknown.
-  bool _propagate(List<List<Placement>> cand, List<int> known, {bool deep = true}) {
+  bool _propagate(List<List<Placement>> cand, List<int> known, {bool deep = true, ExplainTrace? t}) {
     final shadedIn = List<int>.filled(regionCount, 0);
     final cover = Int32List(n * n);
+    final other = [-1];
+    final cells = n * n;
     var changed = true;
     while (changed) {
       changed = false;
@@ -168,35 +222,27 @@ class LitsSolver {
       for (var r = 0; r < regionCount; r++) {
         final before = cand[r].length;
         cand[r].removeWhere((pl) {
-          var hits = 0;
-          for (final i in pl.cells) {
-            final k = known[i];
-            if (k == -1) return true;
-            if (k == 1) hits++;
+          final why = _reject(pl, r, cand, known, shadedIn, deep, other);
+          if (why < 0) return false;
+          if (t != null) {
+            final rule = LitsRule.values[why];
+            final premises = switch (rule) {
+              LitsRule.overEmpty || LitsRule.pool => [
+                for (final i in pl.cells) ...[i, ..._nb(i)],
+              ],
+              LitsRule.missesShaded => cellsOf[r],
+              LitsRule.clash || LitsRule.twin => [cells + other[0], ...cellsOf[other[0]]],
+              _ => [for (var i = 0; i < cells; i++) i],
+            };
+            t.fact(cells + r, candidates[r].indexOf(pl), why, premises: premises, args: [r, other[0]]);
           }
-          if (hits != shadedIn[r]) return true;
-          if (_makes2x2(pl, known)) return true;
-          for (final o in neighbours[r]) {
-            final others = cand[o];
-            if (others.length <= (deep ? 60 : 10) && others.every((q) => _clash(pl, q, known))) return true;
-          }
-          if (deep && !_placementConnects(pl, r, known)) return true;
-          for (final i in pl.cells) {
-            for (final j in _nb(i)) {
-              final o = regions[j];
-              if (o >= 0 &&
-                  o != r &&
-                  cand[o].length == 1 &&
-                  cand[o].single.shape == pl.shape &&
-                  cand[o].single.has(j)) {
-                return true;
-              }
-            }
-          }
-          return false;
+          return true;
         });
         final list = cand[r];
-        if (list.isEmpty) return false;
+        if (list.isEmpty) {
+          t?.fail(LitsRule.failNoShape.index, premises: [cells + r, ...cellsOf[r]], args: [r]);
+          return false;
+        }
         if (list.length != before) changed = true;
         for (final pl in list) {
           for (final i in pl.cells) {
@@ -210,14 +256,19 @@ class LitsSolver {
           if (count == list.length) {
             known[i] = 1;
             shadedIn[r]++;
+            t?.fact(i, 1, LitsRule.allShapes.index, premises: [cells + r], args: [r]);
             changed = true;
           } else if (count == 0) {
             known[i] = -1;
+            t?.fact(i, -1, LitsRule.noShape.index, premises: [cells + r], args: [r]);
             changed = true;
           }
         }
       }
-      if (!changed && !_canConnect(known)) return false;
+      if (!changed && !_canConnect(known)) {
+        t?.fail(LitsRule.failCut.index, premises: [for (var i = 0; i < cells; i++) i]);
+        return false;
+      }
     }
     return true;
   }
@@ -240,6 +291,9 @@ class LitsSolver {
   }
 
   List<List<Placement>> _copy(List<List<Placement>> c) => [for (final l in c) List.of(l)];
+
+  /// A copy of candidate lists to narrow down.
+  List<List<Placement>> copyCandidates([List<List<Placement>>? c]) => _copy(c ?? candidates);
 
   /// Shading if solved by logic up to [tier].
   List<bool>? solveLogic(int tier) {

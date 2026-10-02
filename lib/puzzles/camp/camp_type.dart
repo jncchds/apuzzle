@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
@@ -8,6 +9,7 @@ import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/symbols.dart';
+import 'camp_explain.dart';
 import 'camp_generator.dart';
 import 'camp_model.dart';
 import 'camp_tutorial.dart';
@@ -158,6 +160,12 @@ class CampType extends ValueGridType<CampPuzzle> {
         ),
     ];
   }
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(CampPuzzle puzzle, ValueGrid state) => explainStep(const CampExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(CampPuzzle puzzle) => puzzle.toJson();

@@ -1,6 +1,13 @@
 import 'dart:math';
 
+import '../../core/explain.dart';
 import '../../core/grid_graph.dart';
+
+/// What a traced [BlocksSolver.propagate] records ([Fact.rule]). Eliminations
+/// ([touch], [region], [pointing], [pair]) carry the removed bits as
+/// [Fact.value], placements ([naked], [hidden]) the value.
+/// [alone] is a one-cell region (recorded by the explainer, not the solver).
+enum BlocksRule { touch, region, pointing, pair, naked, hidden, alone, failEmpty, failNoPlace }
 
 /// Candidate logic for Suguru. Candidates are bit masks (bit v: value v).
 /// Tier 1: singles (naked, and hidden per region) and the touching rule.
@@ -48,12 +55,26 @@ class BlocksSolver {
   }
 
   /// Applies logic up to [tier] (1 or 2) in place; false on a contradiction.
-  bool propagate(List<int> c, int tier) {
+  /// With [t], every deduction is recorded (see [BlocksRule]).
+  bool propagate(List<int> c, int tier, [ExplainTrace? t]) {
     var changed = true;
-    bool remove(int i, int mask) {
+    // Rules out [mask] in [i] by [rule]: from cell [x] (touch, region), region
+    // [x] for value [y] (pointing), or the pair [x], [y].
+    bool remove(int i, int mask, BlocksRule rule, int x, [int y = -1]) {
       if (c[i] & mask == 0) return true;
+      final gone = c[i] & mask;
       c[i] &= ~mask;
       changed = true;
+      if (t != null) {
+        final (premises, args) = switch (rule) {
+          BlocksRule.pointing => (members[x], [y, x]),
+          BlocksRule.pair => ([x, y], [x, y, mask]),
+          _ => ([x], [x]),
+        };
+        t.fact(i, gone, rule.index, premises: premises, args: args);
+        if (single(c[i])) t.fact(i, valueOf(c[i]), BlocksRule.naked.index, premises: [i]);
+        if (c[i] == 0) t.fail(BlocksRule.failEmpty.index, premises: [i], args: [i]);
+      }
       return c[i] != 0;
     }
 
@@ -61,16 +82,20 @@ class BlocksSolver {
       changed = false;
       for (var i = 0; i < n; i++) {
         final m = c[i];
-        if (m == 0) return false;
+        if (m == 0) {
+          t?.fail(BlocksRule.failEmpty.index, premises: [i], args: [i]);
+          return false;
+        }
         if (!single(m)) continue;
         for (final j in kn[i]) {
-          if (!remove(j, m)) return false;
+          if (!remove(j, m, BlocksRule.touch, i)) return false;
         }
         for (final j in members[regions[i]]) {
-          if (j != i && !remove(j, m)) return false;
+          if (j != i && !remove(j, m, BlocksRule.region, i)) return false;
         }
       }
-      for (final cells in members) {
+      for (var r = 0; r < members.length; r++) {
+        final cells = members[r];
         final k = cells.length;
         for (var v = 0; v < k; v++) {
           final bit = 1 << v;
@@ -81,10 +106,14 @@ class BlocksSolver {
               if (first < 0) first = i;
             }
           }
-          if (spots == 0) return false;
+          if (spots == 0) {
+            t?.fail(BlocksRule.failNoPlace.index, premises: cells, args: [v, r]);
+            return false;
+          }
           if (spots == 1) {
             if (c[first] != bit) {
               c[first] = bit;
+              t?.fact(first, v, BlocksRule.hidden.index, premises: cells, args: [r]);
               changed = true;
             }
             continue;
@@ -93,7 +122,10 @@ class BlocksSolver {
           // Pointing: a cell outside the region touching every spot.
           for (final j in kn[first]) {
             if (regions[j] == regions[first] || c[j] & bit == 0) continue;
-            if (cells.every((s) => c[s] & bit == 0 || kset[s].contains(j)) && !remove(j, bit)) return false;
+            if (cells.every((s) => c[s] & bit == 0 || kset[s].contains(j)) &&
+                !remove(j, bit, BlocksRule.pointing, r, v)) {
+              return false;
+            }
           }
         }
         if (tier >= 2) {
@@ -104,7 +136,7 @@ class BlocksSolver {
             for (var b = a + 1; b < k; b++) {
               if (c[cells[b]] != m) continue;
               for (final x in cells) {
-                if (x != cells[a] && x != cells[b] && !remove(x, m)) return false;
+                if (x != cells[a] && x != cells[b] && !remove(x, m, BlocksRule.pair, cells[a], cells[b])) return false;
               }
             }
           }

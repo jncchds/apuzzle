@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
@@ -9,6 +10,7 @@ import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/board/region_borders.dart';
 import '../../ui/symbols.dart';
+import 'kings_explain.dart';
 import 'kings_generator.dart';
 import 'kings_model.dart';
 import 'kings_tutorial.dart';
@@ -113,6 +115,12 @@ class KingsType extends ValueGridType<KingsPuzzle> {
   List<Widget> buildOverlay(BuildContext context, KingsPuzzle puzzle, BoardMetrics m) => [
     RegionBorders(metrics: m, regionOf: (i) => puzzle.regions[i], color: Theme.of(context).colorScheme.onSurface),
   ];
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(KingsPuzzle puzzle, ValueGrid state) => explainStep(const KingsExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(KingsPuzzle puzzle) => puzzle.toJson();

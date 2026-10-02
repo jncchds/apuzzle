@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'explain.dart';
 import 'grid.dart';
 import 'value_grid.dart';
@@ -22,11 +24,9 @@ abstract class ValueGridExplainer<P extends ValueGridPuzzle, K> extends Explaine
 
   @override
   ValueGrid? move(P p, ValueGrid s, Fact f) {
-    if (f.slot < 0) return null;
-    final v = placed(p, f);
-    final cell = s.cells[f.slot];
-    if (v == null || cell.value == v) return null;
-    return s.set(p.size.pos(f.slot), cell.withValue(v));
+    final v = f.slot < 0 ? null : placed(p, f);
+    if (v == null || s.cells[f.slot].value == v) return null;
+    return s.set(p.size.pos(f.slot), s.cells[f.slot].withValue(v));
   }
 
   @override
@@ -55,10 +55,15 @@ abstract class ValueGridExplainer<P extends ValueGridPuzzle, K> extends Explaine
     return null;
   }
 
+  /// Solution values the board may leave out (a dot that only notes "no
+  /// crown here"): the puzzle is done without them.
+  Set<int> get optionalValues => const {};
+
   @override
   bool done(P p, ValueGrid s) {
     for (var i = 0; i < s.cells.length; i++) {
-      if (s.cells[i].value != p.solutionAt(i)) return false;
+      final v = s.cells[i].value, want = p.solutionAt(i);
+      if (v != want && !(v == null && optionalValues.contains(want))) return false;
     }
     return true;
   }
@@ -68,6 +73,12 @@ abstract class ValueGridExplainer<P extends ValueGridPuzzle, K> extends Explaine
 /// probing either value of every open cell.
 abstract class BinaryGridExplainer<P extends ValueGridPuzzle> extends ValueGridExplainer<P, List<int>> {
   const BinaryGridExplainer();
+
+  /// The board value for each solver value (0, 1).
+  List<int> get boardValues => const [0, 1];
+
+  /// The board's entries that agree with the solution, as solver values.
+  List<int> knownStates(P p, ValueGrid s) => [for (final v in knownValues(p, s)) v < 0 ? -1 : boardValues.indexOf(v)];
 
   @override
   List<int> copy(List<int> k) => List.of(k);
@@ -89,12 +100,65 @@ abstract class BinaryGridExplainer<P extends ValueGridPuzzle> extends ValueGridE
   }
 
   @override
-  void refute(P p, List<int> k, int slot, int value) => k[slot] = 1 - value;
+  void refute(P p, List<int> k, int slot, int value, ExplainTrace t) => k[slot] = 1 - value;
 
   @override
   int? placed(P p, Fact f) => switch (f.rule) {
     ruleAssume => null,
-    ruleRefuted => 1 - f.value,
-    _ => f.value,
+    ruleRefuted => boardValues[1 - f.value],
+    _ => boardValues[f.value],
   };
+}
+
+/// [ValueGridExplainer] for candidate masks (bit v: value v) on a flat list,
+/// probing cells with the fewest candidates first.
+abstract class MaskGridExplainer<P extends ValueGridPuzzle> extends ValueGridExplainer<P, List<int>> {
+  const MaskGridExplainer();
+
+  /// The rule that places the last candidate left in a cell.
+  int get lastCandidateRule;
+
+  /// Rules that place a value ([Fact.value]); the others rule bits out.
+  Set<int> get placingRules;
+
+  static bool _single(int m) => m != 0 && m & (m - 1) == 0;
+
+  static int _count(int m) {
+    var k = 0;
+    for (; m != 0; m &= m - 1) {
+      k++;
+    }
+    return k;
+  }
+
+  @override
+  List<int> copy(List<int> k) => List.of(k);
+
+  @override
+  Iterable<(int, int)> probeCandidates(P p, List<int> k) sync* {
+    final most = k.fold(0, (m, x) => max(m, _count(x)));
+    for (var want = 2; want <= most; want++) {
+      for (var i = 0; i < k.length; i++) {
+        if (_count(k[i]) != want) continue;
+        for (var v = 0; v < k[i].bitLength; v++) {
+          if (k[i] & (1 << v) != 0) yield (i, v);
+        }
+      }
+    }
+  }
+
+  @override
+  void assume(P p, List<int> k, int slot, int value, ExplainTrace? t) {
+    k[slot] = 1 << value;
+    t?.fact(slot, value, ruleAssume);
+  }
+
+  @override
+  void refute(P p, List<int> k, int slot, int value, ExplainTrace t) {
+    k[slot] &= ~(1 << value);
+    if (_single(k[slot])) t.fact(slot, k[slot].bitLength - 1, lastCandidateRule, premises: [slot]);
+  }
+
+  @override
+  int? placed(P p, Fact f) => placingRules.contains(f.rule) ? f.value : null;
 }

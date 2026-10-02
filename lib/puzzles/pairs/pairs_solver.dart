@@ -1,6 +1,25 @@
 import 'dart:math';
 
+import '../../core/explain.dart';
 import '../../core/grid_graph.dart';
+
+/// What a traced [PairsSolver.propagate] records ([Fact.rule]); [Fact.value]
+/// is 1 for shaded, 0 for unshaded, and the arg is the region or cell the
+/// rule looked at.
+enum PairsRule {
+  regionDone,
+  regionNeed,
+  partnered,
+  oneWay,
+  crowd,
+  alone,
+  everyWay,
+  failMany,
+  failFew,
+  failCrowd,
+  failAlone,
+  failNoWay,
+}
 
 /// Norinori logic on cell states: -1 unknown, 0 unshaded, 1 shaded.
 /// Tier 1: region counts and domino rules (a shaded cell with a partner
@@ -24,29 +43,37 @@ class PairsSolver {
   List<int> start() => [for (final r in regions) r < 0 ? 0 : -1];
 
   /// Applies logic up to [tier] (1 or 2) in place; false on a contradiction.
-  bool propagate(List<int> st, [int tier = 2]) {
+  /// With [t], every deduction is recorded (see [PairsRule]).
+  bool propagate(List<int> st, [int tier = 2, ExplainTrace? t]) {
     var changed = true;
-    bool set(int i, int v) {
+    // Fixes cell [i] to [v] by [rule], about region [x] (region rules) or
+    // around cell [x] (domino rules).
+    bool set(int i, int v, PairsRule rule, int x) {
       if (st[i] == v) return true;
       if (st[i] != -1) return false;
       st[i] = v;
       changed = true;
+      t?.fact(i, v, rule.index, premises: _premises(rule, x), args: [x]);
       return true;
     }
 
     while (changed) {
       changed = false;
-      for (final cells in members) {
+      for (var r = 0; r < members.length; r++) {
+        final cells = members[r];
         var s = 0, u = 0;
         for (final i in cells) {
           if (st[i] == 1) s++;
           if (st[i] == -1) u++;
         }
-        if (s > 2 || s + u < 2) return false;
+        if (s > 2 || s + u < 2) {
+          t?.fail((s > 2 ? PairsRule.failMany : PairsRule.failFew).index, premises: cells, args: [r]);
+          return false;
+        }
         if (u == 0 || (s < 2 && s + u > 2)) continue;
         final v = s == 2 ? 0 : 1;
         for (final i in cells) {
-          if (st[i] == -1) set(i, v);
+          if (st[i] == -1) set(i, v, v == 0 ? PairsRule.regionDone : PairsRule.regionNeed, r);
         }
       }
       for (var i = 0; i < n * n; i++) {
@@ -59,35 +86,47 @@ class PairsSolver {
           }
         }
         if (st[i] == 1) {
-          if (sn > 1 || sn + un == 0) return false;
+          if (sn > 1 || sn + un == 0) {
+            t?.fail((sn > 1 ? PairsRule.failCrowd : PairsRule.failAlone).index, premises: [i, ...nb[i]], args: [i]);
+            return false;
+          }
           if (sn == 1) {
             for (final j in nb[i]) {
-              if (st[j] == -1) set(j, 0);
+              if (st[j] == -1) set(j, 0, PairsRule.partnered, i);
             }
           } else if (un == 1) {
-            set(open, 1);
+            set(open, 1, PairsRule.oneWay, i);
           }
         } else if (st[i] == -1) {
           if (sn >= 2 || sn + un == 0) {
-            set(i, 0);
+            set(i, 0, sn >= 2 ? PairsRule.crowd : PairsRule.alone, i);
           } else if (sn == 1) {
             // The shaded neighbour must have no partner yet.
             final j = nb[i].firstWhere((j) => st[j] == 1);
-            if (nb[j].any((k) => k != i && st[k] == 1)) set(i, 0);
+            if (nb[j].any((k) => k != i && st[k] == 1)) set(i, 0, PairsRule.partnered, j);
           }
         }
       }
       if (changed || tier < 2) continue;
       for (var r = 0; r < members.length; r++) {
-        if (!_finishRegion(st, r, set)) return false;
+        if (!_finishRegion(st, r, set, t)) return false;
       }
     }
     return true;
   }
 
+  /// What a [PairsRule] about region or cell [x] looked at.
+  List<int> _premises(PairsRule rule, int x) => switch (rule) {
+    PairsRule.regionDone || PairsRule.regionNeed => members[x],
+    PairsRule.everyWay => {
+      for (final i in members[x]) ...[i, ...nb[i]],
+    }.toList(),
+    _ => [x, ...nb[x]],
+  };
+
   /// Tries every way to finish region [r]: a cell shaded in all of them is
   /// shaded, one shaded in none stays unshaded. False if there is no way.
-  bool _finishRegion(List<int> st, int r, bool Function(int, int) set) {
+  bool _finishRegion(List<int> st, int r, bool Function(int, int, PairsRule, int) set, ExplainTrace? t) {
     final cells = members[r];
     final open = [
       for (final i in cells)
@@ -135,10 +174,13 @@ class PairsSolver {
     for (final i in open) {
       st[i] = -1;
     }
-    if (ways == 0) return false;
+    if (ways == 0) {
+      t?.fail(PairsRule.failNoWay.index, premises: _premises(PairsRule.everyWay, r), args: [r]);
+      return false;
+    }
     for (var k = 0; k < open.length; k++) {
-      if (always & (1 << k) != 0) set(open[k], 1);
-      if (ever & (1 << k) == 0) set(open[k], 0);
+      if (always & (1 << k) != 0) set(open[k], 1, PairsRule.everyWay, r);
+      if (ever & (1 << k) == 0) set(open[k], 0, PairsRule.everyWay, r);
     }
     return true;
   }

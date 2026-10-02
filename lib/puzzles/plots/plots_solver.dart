@@ -1,6 +1,13 @@
 import 'dart:math';
 
+import '../../core/explain.dart';
 import '../../core/grid_graph.dart';
+
+/// What a traced [PlotsSolver.propagate] records ([Fact.rule]). Eliminations
+/// ([closed], [merge], [room]) carry the removed bit as [Fact.value],
+/// placements ([exit], [only]) the value. Group rules have the group's
+/// first cell and value as args.
+enum PlotsRule { closed, exit, merge, room, only, failEmpty, failBig, failShut, failRoom }
 
 /// Candidate logic for Fillomino. Candidates are bit masks (bit v: the
 /// number v + 1). Tier 1: finished groups close their borders, a group with
@@ -48,16 +55,37 @@ class PlotsSolver {
     return queue.length;
   }
 
-  /// Applies tier-1 logic in place; false on a contradiction.
-  bool propagate(List<int> c) {
+  /// Applies tier-1 logic in place; false on a contradiction. With [t],
+  /// every deduction is recorded (see [PlotsRule]).
+  bool propagate(List<int> c, [ExplainTrace? t]) {
     final group = List<int>.filled(n, -1);
     final mark = List<int>.filled(n, 0);
     var stamp = 0;
     var changed = true;
+    // A group and the cells around it, as premises.
+    List<int> around(List<int> g) => {
+      ...g,
+      for (final i in g) ...nb[i],
+    }.toList();
+    // The cells the last [_reach] marked, and their neighbours.
+    List<int> reached() => {
+      for (var i = 0; i < n; i++)
+        if (mark[i] == stamp) ...[i, ...nb[i]],
+    }.toList();
+    // Records that [bit] left [j], and what that leaves.
+    void ruledOut(int j, int bit, PlotsRule rule, List<int> premises, List<int> args) {
+      t!.fact(j, bit, rule.index, premises: premises, args: args);
+      if (single(c[j])) t.fact(j, valueOf(c[j]), PlotsRule.only.index, premises: [j]);
+      if (c[j] == 0) t.fail(PlotsRule.failEmpty.index, premises: [j], args: [j]);
+    }
+
     while (changed) {
       changed = false;
-      for (final m in c) {
-        if (m == 0) return false;
+      for (var i = 0; i < n; i++) {
+        if (c[i] == 0) {
+          t?.fail(PlotsRule.failEmpty.index, premises: [i], args: [i]);
+          return false;
+        }
       }
       // Groups of decided cells.
       group.fillRange(0, n, -1);
@@ -79,7 +107,10 @@ class PlotsSolver {
       }
       for (final g in groups) {
         final v = valueOf(c[g.first]), want = v + 1, bit = 1 << v;
-        if (g.length > want) return false;
+        if (g.length > want) {
+          t?.fail(PlotsRule.failBig.index, premises: g, args: [g.first, v]);
+          return false;
+        }
         final exits = <int>{
           for (final i in g)
             for (final j in nb[i])
@@ -88,15 +119,19 @@ class PlotsSolver {
         if (g.length == want) {
           for (final j in exits) {
             c[j] &= ~bit;
+            if (t != null) ruledOut(j, bit, PlotsRule.closed, g, [g.first, v]);
             changed = true;
             if (c[j] == 0) return false;
           }
         } else if (exits.isEmpty) {
+          t?.fail(PlotsRule.failShut.index, premises: around(g), args: [g.first, v]);
           return false;
         } else if (exits.length == 1) {
           c[exits.first] = bit;
+          t?.fact(exits.first, v, PlotsRule.exit.index, premises: around(g), args: [g.first, v]);
           changed = true;
         } else if (_reach(c, g, v, want, mark, ++stamp) < want) {
+          t?.fail(PlotsRule.failRoom.index, premises: reached(), args: [g.first, v]);
           return false;
         }
         // Decided cells change the groups: regroup first.
@@ -115,8 +150,13 @@ class PlotsSolver {
           for (final j in nb[i]) {
             if (group[j] >= 0 && c[j] == bit && joined.add(group[j])) size += groups[group[j]].length;
           }
-          if (size > v + 1 || _reach(c, [i], v, v + 1, mark, ++stamp) < v + 1) {
+          if (size > v + 1) {
             c[i] &= ~bit;
+            if (t != null) ruledOut(i, bit, PlotsRule.merge, [i, for (final k in joined) ...groups[k]], [v]);
+            changed = true;
+          } else if (_reach(c, [i], v, v + 1, mark, ++stamp) < v + 1) {
+            c[i] &= ~bit;
+            if (t != null) ruledOut(i, bit, PlotsRule.room, reached(), [v]);
             changed = true;
           }
         }

@@ -68,7 +68,7 @@ class SudokuExplainer extends ValueGridExplainer<SudokuPuzzle, SudokuKnowledge> 
   }
 
   @override
-  void refute(SudokuPuzzle p, SudokuKnowledge k, int slot, int value) {
+  void refute(SudokuPuzzle p, SudokuKnowledge k, int slot, int value, ExplainTrace t) {
     k.cand[slot] &= ~(1 << value);
     if (k.cand[slot] == 0) k.ok = false;
   }

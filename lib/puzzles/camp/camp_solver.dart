@@ -1,5 +1,23 @@
+import '../../core/explain.dart';
 import '../../core/grid_graph.dart';
 import 'camp_model.dart';
+
+/// What a traced [CampSolver.propagate] records ([Fact.rule]); [Fact.value]
+/// is [campGrass] or [campTent]. Line rules have the line (rows, then
+/// columns) and its count as args.
+enum CampRule {
+  nearTent,
+  lineDone,
+  lineNeed,
+  total,
+  treeOnly,
+  failTouch,
+  failLineMany,
+  failLineFew,
+  failTotal,
+  failTree,
+  failPairing,
+}
 
 const int _unk = -1;
 
@@ -53,21 +71,28 @@ class CampSolver {
   }
 
   /// Applies tier-1 rules until nothing changes. False on a contradiction.
-  bool propagate(List<int> st) {
+  /// With [tr], every deduction is recorded (see [CampRule]).
+  bool propagate(List<int> st, [ExplainTrace? tr]) {
+    List<int> all() => [for (var i = 0; i < st.length; i++) i];
     var changed = true;
     while (changed) {
       changed = false;
       for (var i = 0; i < st.length; i++) {
         if (st[i] != campTent) continue;
         for (final j in kn[i]) {
-          if (st[j] == campTent) return false;
+          if (st[j] == campTent) {
+            tr?.fail(CampRule.failTouch.index, premises: [i, j], args: [i, j]);
+            return false;
+          }
           if (st[j] == _unk) {
             st[j] = campGrass;
+            tr?.fact(j, campGrass, CampRule.nearTent.index, premises: [i], args: [i]);
             changed = true;
           }
         }
       }
-      for (final (cells, want) in lines) {
+      for (var li = 0; li < lines.length; li++) {
+        final (cells, want) = lines[li];
         if (want == null) continue;
         var t = 0;
         final u = <int>[];
@@ -75,7 +100,10 @@ class CampSolver {
           if (st[i] == campTent) t++;
           if (st[i] == _unk) u.add(i);
         }
-        if (t > want || t + u.length < want) return false;
+        if (t > want || t + u.length < want) {
+          tr?.fail((t > want ? CampRule.failLineMany : CampRule.failLineFew).index, premises: cells, args: [li, want]);
+          return false;
+        }
         if (u.isEmpty) continue;
         // At most ceil(len/2) tents fit in a run of free cells.
         var room = 0, run = 0;
@@ -88,10 +116,20 @@ class CampSolver {
           }
         }
         room += (run + 1) ~/ 2;
-        if (t + room < want) return false;
+        if (t + room < want) {
+          tr?.fail(CampRule.failLineFew.index, premises: cells, args: [li, want]);
+          return false;
+        }
         if (t == want || t + u.length == want) {
           for (final i in u) {
             st[i] = t == want ? campGrass : campTent;
+            tr?.fact(
+              i,
+              st[i],
+              (t == want ? CampRule.lineDone : CampRule.lineNeed).index,
+              premises: cells,
+              args: [li, want],
+            );
           }
           changed = true;
         }
@@ -101,10 +139,16 @@ class CampSolver {
         if (v == campTent) tents++;
         if (v == _unk) unknown++;
       }
-      if (tents > treeList.length || tents + unknown < treeList.length) return false;
+      if (tents > treeList.length || tents + unknown < treeList.length) {
+        tr?.fail(CampRule.failTotal.index, premises: all());
+        return false;
+      }
       if (unknown > 0 && (tents == treeList.length || tents + unknown == treeList.length)) {
         for (var i = 0; i < st.length; i++) {
-          if (st[i] == _unk) st[i] = tents == treeList.length ? campGrass : campTent;
+          if (st[i] == _unk) {
+            st[i] = tents == treeList.length ? campGrass : campTent;
+            tr?.fact(i, st[i], CampRule.total.index, premises: all());
+          }
         }
         changed = true;
         continue;
@@ -114,16 +158,26 @@ class CampSolver {
           for (final j in on[t])
             if (st[j] == campTent || st[j] == _unk) j,
         ];
-        if (free.isEmpty) return false;
+        if (free.isEmpty) {
+          tr?.fail(CampRule.failTree.index, premises: [t, ...on[t]], args: [t]);
+          return false;
+        }
         if (free.length == 1 && st[free.first] == _unk) {
           st[free.first] = campTent;
+          tr?.fact(free.first, campTent, CampRule.treeOnly.index, premises: [t, ...on[t]], args: [t]);
           changed = true;
         }
       }
       for (var i = 0; i < st.length; i++) {
-        if (st[i] == campTent && !on[i].any((j) => trees[j])) return false;
+        if (st[i] == campTent && !on[i].any((j) => trees[j])) {
+          tr?.fail(CampRule.failPairing.index, premises: [i, ...on[i]]);
+          return false;
+        }
       }
-      if (!changed && !_pairable(st)) return false;
+      if (!changed && !_pairable(st)) {
+        tr?.fail(CampRule.failPairing.index, premises: all());
+        return false;
+      }
     }
     return true;
   }

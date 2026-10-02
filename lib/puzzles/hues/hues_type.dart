@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
+import 'hues_explain.dart';
 import 'hues_generator.dart';
 import 'hues_model.dart';
 import 'hues_tutorial.dart';
@@ -115,6 +117,12 @@ class HuesType extends ValueGridType<HuesPuzzle> {
   Set<Pos> conflicts(HuesPuzzle puzzle, ValueGrid state) => {
     for (final i in huesConflicts(puzzle, state.toFlat())) puzzle.size.pos(i),
   };
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(HuesPuzzle puzzle, ValueGrid state) => explainStep(const HuesExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(HuesPuzzle puzzle) => puzzle.toJson();

@@ -1649,4 +1649,694 @@ class AppLocalizationsUk extends AppLocalizations {
   String exSudokuFailClash(Object a, Object b, Object value) {
     return 'Але тоді і в $a, і в $b стоїть $value.';
   }
+
+  @override
+  String exKingsSuppose(Object cell) {
+    return 'Припустімо, що в $cell корона.';
+  }
+
+  @override
+  String exKingsRefuted(Object cell) {
+    return 'У $cell крапка: корона там веде до суперечності.';
+  }
+
+  @override
+  String exKingsSingleRow(Object cell, Object row) {
+    return 'У $cell корона: це остання вільна клітинка в рядку $row.';
+  }
+
+  @override
+  String exKingsSingleCol(Object cell, Object col) {
+    return 'У $cell корона: це остання вільна клітинка в стовпці $col.';
+  }
+
+  @override
+  String exKingsSingleRegion(Object cell) {
+    return 'У $cell корона: це остання вільна клітинка її області.';
+  }
+
+  @override
+  String exKingsRuledOut(Object cell, Object a) {
+    return 'У $cell крапка: вона торкається корони в $a або має з нею спільний рядок, стовпець чи область.';
+  }
+
+  @override
+  String exKingsConfineRow(Object cell, Object row, Object region) {
+    return 'У $cell крапка: корона рядка $row мусить бути в області з $region, тож іншої корони в цій області немає.';
+  }
+
+  @override
+  String exKingsConfineCol(Object cell, Object col, Object region) {
+    return 'У $cell крапка: корона стовпця $col мусить бути в області з $region, тож іншої корони в цій області немає.';
+  }
+
+  @override
+  String exKingsConfineRegionRow(Object cell, Object region, Object row) {
+    return 'У $cell крапка: корона області з $region мусить бути в рядку $row, тож іншої корони в рядку $row немає.';
+  }
+
+  @override
+  String exKingsConfineRegionCol(Object cell, Object region, Object col) {
+    return 'У $cell крапка: корона області з $region мусить бути в стовпці $col, тож іншої корони в стовпці $col немає.';
+  }
+
+  @override
+  String exKingsAttackRow(Object cell, Object row) {
+    return 'У $cell крапка: корона там не лишила б жодної вільної клітинки в рядку $row.';
+  }
+
+  @override
+  String exKingsAttackCol(Object cell, Object col) {
+    return 'У $cell крапка: корона там не лишила б жодної вільної клітинки в стовпці $col.';
+  }
+
+  @override
+  String exKingsAttackRegion(Object cell, Object region) {
+    return 'У $cell крапка: корона там не лишила б жодної вільної клітинки в області з $region.';
+  }
+
+  @override
+  String exKingsFailRow(Object row) {
+    return 'Але тоді в рядку $row не лишається місця для корони.';
+  }
+
+  @override
+  String exKingsFailCol(Object col) {
+    return 'Але тоді в стовпці $col не лишається місця для корони.';
+  }
+
+  @override
+  String exKingsFailRegion(Object region) {
+    return 'Але тоді в області з $region не лишається місця для корони.';
+  }
+
+  @override
+  String exKingsFailClash(Object a, Object b) {
+    return 'Але тоді корони в $a і $b конфліктують.';
+  }
+
+  @override
+  String exHuesFull(Object cell, Object value, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'є всі $count сусіда кольору $value',
+      many: 'є всі $count сусідів кольору $value',
+      few: 'є всі $count сусіди кольору $value',
+      one: 'є її один сусід кольору $value',
+    );
+    return '$cell не може бути $value: у $clue вже $_temp0.';
+  }
+
+  @override
+  String exHuesNeed(Object cell, Object value, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count сусідів кольору $value',
+      one: 'одного сусіда кольору $value',
+    );
+    return '$cell має бути $value: $clue потребує $_temp0, і саме стільки клітинок ще можуть ним бути.';
+  }
+
+  @override
+  String exHuesSingle(Object cell, Object value) {
+    return '$cell має бути $value: усі інші кольори тут виключено.';
+  }
+
+  @override
+  String exHuesFailEmpty(Object cell) {
+    return 'Але тоді для $cell не лишається жодного кольору.';
+  }
+
+  @override
+  String exHuesFailMany(Object clue, Object value) {
+    return 'Але тоді в $clue забагато сусідів кольору $value.';
+  }
+
+  @override
+  String exHuesFailFew(Object clue, Object value) {
+    return 'Але тоді $clue не набере досить сусідів кольору $value.';
+  }
+
+  @override
+  String exBlocksNaked(Object cell, Object value) {
+    return 'У $cell має бути $value: усі інші числа вже є в її області або в клітинках, яких вона торкається.';
+  }
+
+  @override
+  String exBlocksHidden(Object cell, Object value) {
+    return 'У $cell має бути $value: це єдине місце для $value в її області.';
+  }
+
+  @override
+  String exBlocksPointing(Object cell, Object value, Object region) {
+    return 'У $cell не може бути $value: вона торкається всіх клітинок, де область з $region ще може мати $value.';
+  }
+
+  @override
+  String exBlocksPair(Object a, Object b, Object v1, Object v2) {
+    return '$a і $b ділять між собою $v1 і $v2, тож інші клітинки їхньої області їх не мають.';
+  }
+
+  @override
+  String exBlocksFailEmpty(Object cell) {
+    return 'Але тоді для $cell не лишається жодного числа.';
+  }
+
+  @override
+  String exBlocksFailNoPlace(Object region, Object value) {
+    return 'Але тоді в області з $region не лишається місця для $value.';
+  }
+
+  @override
+  String exBlocksAlone(Object cell) {
+    return 'У $cell має бути 1: її область — лише ця одна клітинка.';
+  }
+
+  @override
+  String exPlotsClosed(Object cell, Object value, Object group) {
+    return 'У $cell не може бути $value: ділянка $value з $group уже завершена.';
+  }
+
+  @override
+  String exPlotsExit(Object cell, Object value, Object group) {
+    return 'У $cell має бути $value: ділянці $value з $group ще бракує клітинок, і це її єдиний вихід.';
+  }
+
+  @override
+  String exPlotsMerge(Object cell, Object value) {
+    return 'У $cell не може бути $value: вона з\'єднала б ділянки $value в одну, завелику.';
+  }
+
+  @override
+  String exPlotsRoom(Object cell, Object value) {
+    return 'У $cell не може бути $value: довкола немає місця для ділянки з $value клітинок.';
+  }
+
+  @override
+  String exPlotsOnly(Object cell, Object value) {
+    return 'У $cell має бути $value: усі інші числа тут виключено.';
+  }
+
+  @override
+  String exPlotsFailEmpty(Object cell) {
+    return 'Але тоді для $cell не лишається жодного числа.';
+  }
+
+  @override
+  String exPlotsFailBig(Object value, Object group) {
+    return 'Але тоді в ділянці $value з $group забагато клітинок.';
+  }
+
+  @override
+  String exPlotsFailShut(Object value, Object group) {
+    return 'Але тоді ділянка $value з $group замкнена, ще не завершившись.';
+  }
+
+  @override
+  String exPlotsFailRoom(Object value, Object group) {
+    return 'Але тоді ділянці $value з $group нікуди рости.';
+  }
+
+  @override
+  String exPairsSupposeShade(Object cell) {
+    return 'Припустімо, що $cell зафарбована.';
+  }
+
+  @override
+  String exPairsSupposeDot(Object cell) {
+    return 'Припустімо, що $cell не зафарбована.';
+  }
+
+  @override
+  String exPairsRefutedShade(Object cell) {
+    return '$cell зафарбована: якщо її не зафарбувати, виникає суперечність.';
+  }
+
+  @override
+  String exPairsRefutedDot(Object cell) {
+    return 'У $cell крапка: зафарбувати її означає дійти суперечності.';
+  }
+
+  @override
+  String exPairsRegionDone(Object cell, Object region) {
+    return 'У $cell крапка: в області з $region уже є дві зафарбовані клітинки.';
+  }
+
+  @override
+  String exPairsRegionNeed(Object cell, Object region) {
+    return '$cell зафарбована: в області з $region лишилося лише дві клітинки, які можна зафарбувати.';
+  }
+
+  @override
+  String exPairsPartnered(Object cell, Object a) {
+    return 'У $cell крапка: сусідня $a вже має пару, а пари не торкаються.';
+  }
+
+  @override
+  String exPairsOneWay(Object cell, Object a) {
+    return '$cell зафарбована: лише тут $a ще може знайти собі пару.';
+  }
+
+  @override
+  String exPairsCrowd(Object cell) {
+    return 'У $cell крапка: вона торкається двох зафарбованих, і зафарбувавши її, ми отримали б більше ніж пару.';
+  }
+
+  @override
+  String exPairsAlone(Object cell) {
+    return 'У $cell крапка: поруч не лишилося клітинки, з якою вона склала б пару.';
+  }
+
+  @override
+  String exPairsEveryShade(Object cell, Object region) {
+    return '$cell зафарбована: її зафарбовує кожен спосіб завершити область з $region.';
+  }
+
+  @override
+  String exPairsEveryDot(Object cell, Object region) {
+    return 'У $cell крапка: жоден спосіб завершити область з $region її не зафарбовує.';
+  }
+
+  @override
+  String exPairsFailMany(Object region) {
+    return 'Але тоді в області з $region більше ніж дві зафарбовані клітинки.';
+  }
+
+  @override
+  String exPairsFailFew(Object region) {
+    return 'Але тоді в області з $region не набереться двох зафарбованих клітинок.';
+  }
+
+  @override
+  String exPairsFailCrowd(Object cell) {
+    return 'Але тоді зафарбована $cell торкається двох зафарбованих.';
+  }
+
+  @override
+  String exPairsFailAlone(Object cell) {
+    return 'Але тоді зафарбованій $cell не лишається пари.';
+  }
+
+  @override
+  String exPairsFailNoWay(Object region) {
+    return 'Але тоді область з $region вже ніяк не завершити.';
+  }
+
+  @override
+  String exCampSupposeTent(Object cell) {
+    return 'Припустімо, що в $cell намет.';
+  }
+
+  @override
+  String exCampSupposeGrass(Object cell) {
+    return 'Припустімо, що в $cell трава.';
+  }
+
+  @override
+  String exCampRefutedTent(Object cell) {
+    return 'У $cell намет: трава там веде до суперечності.';
+  }
+
+  @override
+  String exCampRefutedGrass(Object cell) {
+    return 'У $cell трава: намет там веде до суперечності.';
+  }
+
+  @override
+  String exCampNearTent(Object cell, Object a) {
+    return 'У $cell трава: вона торкається намету в $a, а намети не торкаються.';
+  }
+
+  @override
+  String exCampRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'є всі $count намету',
+      many: 'є всі $count наметів',
+      few: 'є всі $count намети',
+      one: 'є його намет',
+    );
+    return 'У $cell трава: у рядку $row уже $_temp0.';
+  }
+
+  @override
+  String exCampColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'є всі $count намету',
+      many: 'є всі $count наметів',
+      few: 'є всі $count намети',
+      one: 'є його намет',
+    );
+    return 'У $cell трава: у стовпці $col уже $_temp0.';
+  }
+
+  @override
+  String exCampRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count намету',
+      many: '$count наметів',
+      few: '$count намети',
+      one: 'один намет',
+    );
+    return 'У $cell намет: рядку $row потрібно $_temp0, і саме стільки клітинок лишилося.';
+  }
+
+  @override
+  String exCampColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count намету',
+      many: '$count наметів',
+      few: '$count намети',
+      one: 'один намет',
+    );
+    return 'У $cell намет: стовпцю $col потрібно $_temp0, і саме стільки клітинок лишилося.';
+  }
+
+  @override
+  String exCampTotalDone(Object cell) {
+    return 'У $cell трава: кожне дерево вже має свій намет.';
+  }
+
+  @override
+  String exCampTotalNeed(Object cell) {
+    return 'У $cell намет: деревам потрібні всі клітинки, що лишилися.';
+  }
+
+  @override
+  String exCampTreeOnly(Object cell, Object tree) {
+    return 'У $cell намет: це єдина вільна клітинка біля дерева в $tree.';
+  }
+
+  @override
+  String exCampFailTouch(Object a, Object b) {
+    return 'Але тоді намети в $a і $b торкаються.';
+  }
+
+  @override
+  String exCampFailRowMany(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count намету',
+      many: '$count наметів',
+      few: '$count намети',
+      one: 'один намет',
+    );
+    return 'Але тоді в рядку $row більше ніж $_temp0.';
+  }
+
+  @override
+  String exCampFailColMany(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count намету',
+      many: '$count наметів',
+      few: '$count намети',
+      one: 'один намет',
+    );
+    return 'Але тоді в стовпці $col більше ніж $_temp0.';
+  }
+
+  @override
+  String exCampFailRowFew(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'своїх $count наметів',
+      one: 'свого намету',
+    );
+    return 'Але тоді рядок $row не набере $_temp0.';
+  }
+
+  @override
+  String exCampFailColFew(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'своїх $count наметів',
+      one: 'свого намету',
+    );
+    return 'Але тоді стовпець $col не набере $_temp0.';
+  }
+
+  @override
+  String get exCampFailTotal => 'Але тоді наметів не буде стільки ж, скільки дерев.';
+
+  @override
+  String exCampFailTree(Object tree) {
+    return 'Але тоді дереву в $tree не лишається вільної клітинки для намету.';
+  }
+
+  @override
+  String get exCampFailPairing => 'Але тоді дерева й намети не розбиваються на пари.';
+
+  @override
+  String exIslandsSupposeSea(Object cell) {
+    return 'Припустімо, що $cell — море.';
+  }
+
+  @override
+  String exIslandsSupposeLand(Object cell) {
+    return 'Припустімо, що $cell — суходіл.';
+  }
+
+  @override
+  String exIslandsRefutedSea(Object cell) {
+    return '$cell — море: суходіл там веде до суперечності.';
+  }
+
+  @override
+  String exIslandsRefutedLand(Object cell) {
+    return '$cell — суходіл: море там веде до суперечності.';
+  }
+
+  @override
+  String exIslandsTotalSea(Object cell) {
+    return '$cell — море: острови вже мають увесь свій суходіл.';
+  }
+
+  @override
+  String exIslandsTotalLand(Object cell) {
+    return '$cell — суходіл: море більше не може прийняти клітинок.';
+  }
+
+  @override
+  String exIslandsPool(Object cell) {
+    return '$cell — суходіл: море там утворило б басейн 2×2.';
+  }
+
+  @override
+  String exIslandsComplete(Object cell, Object island, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'має всі $count клітинки',
+      many: 'має всі $count клітинок',
+      few: 'має всі $count клітинки',
+      one: 'має свою одну клітинку',
+    );
+    return '$cell — море: острів з $island уже $_temp0.';
+  }
+
+  @override
+  String exIslandsExit(Object cell, Object island) {
+    return '$cell — суходіл: острову з $island ще бракує клітинок, і це його єдиний вихід.';
+  }
+
+  @override
+  String exIslandsBetween(Object cell) {
+    return '$cell — море: вона торкається двох різних островів із числами.';
+  }
+
+  @override
+  String exIslandsUnreachable(Object cell) {
+    return '$cell — море: жоден острів до неї не дотягнеться.';
+  }
+
+  @override
+  String exIslandsSeaExit(Object cell, Object sea) {
+    return '$cell — море: у моря з $sea немає іншого виходу, а море з\'єднане в одне ціле.';
+  }
+
+  @override
+  String get exIslandsFailTotal => 'Але тоді суходіл і море не сходяться.';
+
+  @override
+  String get exIslandsFailInvalid => 'Але тоді заповнене поле порушує правило.';
+
+  @override
+  String exIslandsFailPool(Object cell) {
+    return 'Але тоді море утворює басейн 2×2 у $cell.';
+  }
+
+  @override
+  String exIslandsFailTwoClues(Object a, Object b) {
+    return 'Але тоді числа в $a і $b опиняються на одному острові.';
+  }
+
+  @override
+  String exIslandsFailBig(Object island, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинки',
+      one: 'одну клітинку',
+    );
+    return 'Але тоді острів з $island має більше ніж $_temp0.';
+  }
+
+  @override
+  String exIslandsFailShut(Object island) {
+    return 'Але тоді острів з $island замкнений, ще не завершившись.';
+  }
+
+  @override
+  String exIslandsFailOrphan(Object island) {
+    return 'Але тоді суходіл з $island відрізаний від усіх чисел.';
+  }
+
+  @override
+  String exIslandsFailUnreachable(Object cell) {
+    return 'Але тоді жоден острів не дотягнеться до суходолу в $cell.';
+  }
+
+  @override
+  String exIslandsFailSeaShut(Object sea) {
+    return 'Але тоді море з $sea відрізане від решти.';
+  }
+
+  @override
+  String exLampsSupposeLamp(Object cell) {
+    return 'Припустімо, що в $cell лампа.';
+  }
+
+  @override
+  String exLampsSupposeDot(Object cell) {
+    return 'Припустімо, що в $cell немає лампи.';
+  }
+
+  @override
+  String exLampsRefutedLamp(Object cell) {
+    return 'У $cell лампа: без неї виникає суперечність.';
+  }
+
+  @override
+  String exLampsRefutedDot(Object cell) {
+    return 'У $cell крапка: лампа там веде до суперечності.';
+  }
+
+  @override
+  String exLampsLit(Object cell, Object a) {
+    return 'У $cell крапка: на неї світить лампа в $a, а лампи не світять одна на одну.';
+  }
+
+  @override
+  String exLampsWallDone(Object cell, Object wall) {
+    return 'У $cell крапка: біля стіни $wall уже стільки ламп, скільки каже її число.';
+  }
+
+  @override
+  String exLampsWallNeed(Object cell, Object wall) {
+    return 'У $cell лампа: стіні $wall потрібна лампа в кожній вільній клітинці поруч.';
+  }
+
+  @override
+  String exLampsOnlySource(Object cell, Object a) {
+    return 'У $cell лампа: це єдина клітинка, що ще може освітити $a.';
+  }
+
+  @override
+  String exLampsSelf(Object cell) {
+    return 'У $cell лампа: більше ніщо її не освітить.';
+  }
+
+  @override
+  String exLampsFailSee(Object a, Object b) {
+    return 'Але тоді лампи в $a і $b світять одна на одну.';
+  }
+
+  @override
+  String exLampsFailMany(Object wall) {
+    return 'Але тоді біля стіни $wall забагато ламп.';
+  }
+
+  @override
+  String exLampsFailFew(Object wall) {
+    return 'Але тоді біля стіни $wall не набереться досить ламп.';
+  }
+
+  @override
+  String exLampsFailDark(Object cell) {
+    return 'Але тоді ніщо не освітить $cell.';
+  }
+
+  @override
+  String exLitsSuppose(Object region, Object cells) {
+    return 'Припустімо, що в області з $region зафарбовано $cells.';
+  }
+
+  @override
+  String exLitsRefuted(Object region, Object cells) {
+    return 'В області з $region не можна зафарбувати $cells: це веде до суперечності.';
+  }
+
+  @override
+  String exLitsOverEmpty(Object region) {
+    return 'Фігури в області з $region, що накривають порожню клітинку, відпадають.';
+  }
+
+  @override
+  String exLitsMisses(Object region) {
+    return 'Фігури в області з $region, що оминають її зафарбовану клітинку, відпадають.';
+  }
+
+  @override
+  String exLitsPool(Object region) {
+    return 'Фігури в області з $region, що утворили б зафарбований квадрат 2×2, відпадають.';
+  }
+
+  @override
+  String exLitsClash(Object region, Object other) {
+    return 'Фігури в області з $region, що конфліктують з кожним варіантом області з $other, відпадають.';
+  }
+
+  @override
+  String exLitsCut(Object region) {
+    return 'Фігури в області з $region, що розрізали б зафарбоване на частини, відпадають.';
+  }
+
+  @override
+  String exLitsTwin(Object region, Object other) {
+    return 'Фігури в області з $region, що торкалися б такої самої фігури в області з $other, відпадають.';
+  }
+
+  @override
+  String exLitsAll(Object cell, Object region) {
+    return '$cell зафарбована: її накриває кожна можлива фігура області з $region.';
+  }
+
+  @override
+  String exLitsNone(Object cell, Object region) {
+    return 'У $cell крапка: жодна можлива фігура області з $region її не накриває.';
+  }
+
+  @override
+  String exLitsFailNoShape(Object region) {
+    return 'Але тоді в область з $region не вміщається жодна фігура.';
+  }
+
+  @override
+  String get exLitsFailCut => 'Але тоді зафарбовані клітинки не з\'єднуються.';
 }

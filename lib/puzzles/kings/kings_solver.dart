@@ -1,3 +1,10 @@
+import '../../core/explain.dart';
+import 'kings_model.dart';
+
+/// What a traced [KingsSolver.propagate] records ([Fact.rule]): a king
+/// ([kKing]) or a ruled-out cell ([kDot]) per fact, by unit index args.
+enum KingsRule { single, ruledOut, confine, attack, failEmpty, failClash }
+
 /// Solver for "one king per row, column and region, kings never touch".
 ///
 /// Tiers:
@@ -68,22 +75,33 @@ class KingsSolver {
     return missing == 0 ? 0 : missing * n * n + cand.where((c) => c).length;
   }
 
-  bool _place(List<bool> cand, List<bool> king, int i) {
+  bool _place(List<bool> cand, List<bool> king, int i, [ExplainTrace? t]) {
     if (!cand[i]) return false;
     king[i] = true;
     cand[i] = false;
     for (final j in attacked[i]) {
-      if (king[j]) return false;
+      if (king[j]) {
+        t?.fail(KingsRule.failClash.index, premises: [i, j], args: [i, j]);
+        return false;
+      }
+      if (cand[j]) t?.fact(j, kDot, KingsRule.ruledOut.index, premises: [i], args: [i]);
       cand[j] = false;
     }
     return true;
   }
 
+  /// Places a king on [i] (an assumption); false on a contradiction.
+  bool place(List<bool> cand, List<bool> king, int i, [ExplainTrace? t]) => _place(cand, king, i, t);
+
+  /// Logic up to [tier] (1 or 2) in place; false on a contradiction. With
+  /// [t], every deduction is recorded (see [KingsRule]).
+  bool propagate(List<bool> cand, List<bool> king, int tier, [ExplainTrace? t]) => _propagate(cand, king, tier, t);
+
   bool _unitHasKing(List<bool> king, int u) => units[u].any((i) => king[i]);
 
   /// Applies logic up to [tier] in place. False only on a contradiction; a
   /// stall returns true with kings still missing.
-  bool _propagate(List<bool> cand, List<bool> king, int tier) {
+  bool _propagate(List<bool> cand, List<bool> king, int tier, [ExplainTrace? t]) {
     while (true) {
       var progress = false;
       for (var u = 0; u < units.length; u++) {
@@ -95,9 +113,13 @@ class KingsSolver {
             where = i;
           }
         }
-        if (count == 0) return false;
+        if (count == 0) {
+          t?.fail(KingsRule.failEmpty.index, premises: units[u], args: [u]);
+          return false;
+        }
         if (count == 1) {
-          if (!_place(cand, king, where)) return false;
+          t?.fact(where, kKing, KingsRule.single.index, premises: units[u], args: [u]);
+          if (!_place(cand, king, where, t)) return false;
           progress = true;
         }
       }
@@ -112,13 +134,17 @@ class KingsSolver {
           for (final i in units[u])
             if (cand[i]) i,
         ];
-        if (cs.isEmpty) return false;
+        if (cs.isEmpty) {
+          t?.fail(KingsRule.failEmpty.index, premises: units[u], args: [u]);
+          return false;
+        }
         for (var kind = 0; kind < 3; kind++) {
           final other = unitsOf[cs.first][kind];
           if (other == u || !cs.every((i) => unitsOf[i][kind] == other)) continue;
           for (final j in units[other]) {
             if (cand[j] && !units[u].contains(j)) {
               cand[j] = false;
+              t?.fact(j, kDot, KingsRule.confine.index, premises: units[u], args: [u, other]);
               progress = true;
             }
           }
@@ -134,6 +160,7 @@ class KingsSolver {
           if (unitsOf[i].contains(u) || _unitHasKing(king, u)) continue;
           if (units[u].every((j) => !cand[j] || hit.contains(j))) {
             cand[i] = false;
+            t?.fact(i, kDot, KingsRule.attack.index, premises: units[u], args: [u]);
             progress = true;
             break;
           }

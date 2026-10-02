@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/symbols.dart';
+import 'islands_explain.dart';
 import 'islands_generator.dart';
 import 'islands_model.dart';
 import 'islands_tutorial.dart';
@@ -130,6 +132,12 @@ class IslandsType extends ValueGridType<IslandsPuzzle> {
       ),
     );
   }
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(IslandsPuzzle puzzle, ValueGrid state) => explainStep(const IslandsExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(IslandsPuzzle puzzle) => puzzle.toJson();

@@ -94,6 +94,7 @@ class Explanation {
     this.next,
     this.targets = const {},
     this.involved = const {},
+    this.edges = const {},
     this.fix = false,
     this.fallback = false,
   });
@@ -110,6 +111,9 @@ class Explanation {
   /// Cells the step changes, and cells its reason looks at.
   final Set<Pos> targets;
   final Set<Pos> involved;
+
+  /// Loop edges the step changes (types drawn with lines).
+  final Set<int> edges;
 
   /// Removes a wrong entry.
   final bool fix;
@@ -138,6 +142,10 @@ abstract class Explainer<P, S, K> {
   K seed(P p, S s);
   K copy(K k);
 
+  /// Records what [k] knows from the start without the board saying so (a
+  /// one-cell region holds a 1), so those cells can be steps too.
+  void start(P p, K k, ExplainTrace t) {}
+
   /// Applies the rules of [level] until nothing changes; false on a contradiction.
   bool propagate(P p, K k, int level, ExplainTrace? t);
 
@@ -147,8 +155,10 @@ abstract class Explainer<P, S, K> {
   /// Puts the assumption into [k] (recorded in [t] as rule [ruleAssume]).
   void assume(P p, K k, int slot, int value, ExplainTrace? t) {}
 
-  /// Records in [k] that [slot] can't be [value] (the assumption failed).
-  void refute(P p, K k, int slot, int value) {}
+  /// Records in [k] that [slot] can't be [value] (the assumption failed,
+  /// already recorded in [t]); follow-ups the solver wouldn't notice by
+  /// itself (a single color left) go to [t] too.
+  void refute(P p, K k, int slot, int value, ExplainTrace t) {}
 
   /// The board after [f], or null if the board can't show it (an
   /// elimination, say). Only called for facts that changed [k].
@@ -156,6 +166,13 @@ abstract class Explainer<P, S, K> {
 
   /// Cells [move] changes.
   Set<Pos> targets(P p, Fact f);
+
+  /// Loop edges [move] changes, for boards drawn with lines.
+  Set<int> targetEdges(P p, Fact f) => const {};
+
+  /// Facts that go without saying in a chain of reasons (a cell ruled out
+  /// next to a placed crown), though they can still be a step of their own.
+  bool quiet(P p, Fact f) => false;
 
   /// Which shown facts to prefer (lower first), e.g. placing a crown over
   /// marking a dot it implies.
@@ -202,6 +219,7 @@ Explanation? explainStep<P, S, K>(Explainer<P, S, K> x, P p, S s) {
 
   final k = x.seed(p, s);
   final t = ExplainTrace();
+  x.start(p, k, t);
   // Refuted assumptions: fact id → (the probe's trace, where it forked).
   final refutedBy = <int, (ExplainTrace, int)>{};
   for (var level = 1; level <= x.levels; level++) {
@@ -222,7 +240,7 @@ Explanation? explainStep<P, S, K>(Explainer<P, S, K> x, P p, S s) {
           if (f.id < base) f.id,
       ]);
       refutedBy[t.facts.last.id] = (fork, base);
-      x.refute(p, k, slot, value);
+      x.refute(p, k, slot, value, t);
     }
   }
   final r = x.reveal(p, s);
@@ -289,7 +307,10 @@ Explanation _build<P, S, K>(
 ) {
   final headline = x.describe(p, f) ?? const ExplainLine(_empty);
   final chain = t.chainOf(f);
-  final why = [for (final c in chain) ?x.describe(p, c)];
+  final why = [
+    for (final c in chain)
+      if (!x.quiet(p, c)) ?x.describe(p, c),
+  ];
   // The assumption behind the step: its own, or the latest one it rests on.
   final refuted = refutedBy[f.id] ?? [for (final c in chain.reversed) ?refutedBy[c.id]].firstOrNull;
   ExplainLine? suppose;
@@ -298,6 +319,7 @@ Explanation _build<P, S, K>(
     final (fork, base) = refuted;
     for (final c in fork.chainOf(fork.failure!)) {
       if (c.id < base) continue; // known before the assumption: told in [why]
+      if (c.rule != ruleAssume && x.quiet(p, c)) continue;
       final line = x.describe(p, c);
       if (line == null) continue;
       if (c.rule == ruleAssume) {
@@ -319,6 +341,7 @@ Explanation _build<P, S, K>(
     next: x.move(p, s, f),
     targets: targets,
     involved: {...headline.cells, for (final l in why) ...l.cells}.difference(targets),
+    edges: x.targetEdges(p, f),
   );
 }
 
@@ -343,6 +366,15 @@ String valTok(int v) => '⟦v:$v⟧';
 /// A rectangle of cells, shown as "A1–C3".
 String areaTok(Pos from, Pos to) => '⟦a:${from.r}:${from.c}:${to.r}:${to.c}⟧';
 
+/// One side of a cell ([dir]: 0 top, 1 bottom, 2 left, 3 right), shown as "C4↑".
+String sideTok(Pos cell, int dir) => '⟦s:${cell.r}:${cell.c}:$dir⟧';
+
+/// The link between two neighbouring cells' centres, shown as "C3–C4".
+String linkTok(Pos a, Pos b) => '⟦j:${a.r}:${a.c}:${b.r}:${b.c}⟧';
+
+/// A few cells (a piece's shape), shown as "A1 A2 B2".
+String cellsTok(Iterable<Pos> cells) => '⟦l:${[for (final p in cells) '${p.r}:${p.c}'].join(':')}⟧';
+
 String colName(int c) => String.fromCharCode(0x41 + c);
 String cellName(Pos p) => '${colName(p.c)}${p.r + 1}';
 
@@ -358,7 +390,8 @@ class ExplainWords extends ExplainPart {
 class ExplainChip extends ExplainPart {
   const ExplainChip(this.kind, this.args);
 
-  /// c (cell), r (row), k (column), v (value), a (area).
+  /// c (cell), r (row), k (column), v (value), a (area), l (cell list),
+  /// s (cell side), j (link between cells).
   final String kind;
   final List<int> args;
 
@@ -367,6 +400,9 @@ class ExplainChip extends ExplainPart {
     'r' => '${args[0] + 1}',
     'k' => colName(args[0]),
     'a' => '${cellName(Pos(args[0], args[1]))}–${cellName(Pos(args[2], args[3]))}',
+    'l' => [for (var k = 0; k + 1 < args.length; k += 2) cellName(Pos(args[k], args[k + 1]))].join(' '),
+    's' => '${cellName(Pos(args[0], args[1]))}${const ['↑', '↓', '←', '→'][args[2]]}',
+    'j' => '${cellName(Pos(args[0], args[1]))}–${cellName(Pos(args[2], args[3]))}',
     _ => '',
   };
 
@@ -379,6 +415,9 @@ class ExplainChip extends ExplainPart {
       for (var r = args[0]; r <= args[2]; r++)
         for (var c = args[1]; c <= args[3]; c++) Pos(r, c),
     },
+    'l' => {for (var k = 0; k + 1 < args.length; k += 2) Pos(args[k], args[k + 1])},
+    's' => {Pos(args[0], args[1])},
+    'j' => {Pos(args[0], args[1]), Pos(args[2], args[3])},
     _ => const {},
   };
 }

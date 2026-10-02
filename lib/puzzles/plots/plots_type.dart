@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/day.dart';
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
@@ -10,6 +11,7 @@ import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/board/region_borders.dart';
 import '../../ui/symbols.dart';
+import 'plots_explain.dart';
 import 'plots_generator.dart';
 import 'plots_model.dart';
 import 'plots_tutorial.dart';
@@ -121,6 +123,12 @@ class PlotsType extends ValueGridType<PlotsPuzzle> {
       color: Theme.of(context).colorScheme.onSurface,
     ),
   ];
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(PlotsPuzzle puzzle, ValueGrid state) => explainStep(const PlotsExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(PlotsPuzzle puzzle) => puzzle.toJson();

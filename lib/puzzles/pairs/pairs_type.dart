@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/day.dart';
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
@@ -10,6 +11,7 @@ import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
 import '../../ui/board/region_borders.dart';
 import '../../ui/symbols.dart';
+import 'pairs_explain.dart';
 import 'pairs_generator.dart';
 import 'pairs_model.dart';
 import 'pairs_tutorial.dart';
@@ -135,6 +137,12 @@ class PairsType extends ValueGridType<PairsPuzzle> {
   List<Widget> buildOverlay(BuildContext context, PairsPuzzle puzzle, BoardMetrics m) => [
     RegionBorders(metrics: m, regionOf: (i) => puzzle.regions[i], color: Theme.of(context).colorScheme.onSurface),
   ];
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(PairsPuzzle puzzle, ValueGrid state) => explainStep(const PairsExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(PairsPuzzle puzzle) => puzzle.toJson();

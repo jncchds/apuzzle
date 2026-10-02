@@ -7,13 +7,23 @@ import 'cell_grid_board.dart';
 
 /// What explain mode marks on a board.
 class ExplainView {
-  const ExplainView({this.targets = const {}, this.involved = const {}, this.focus = const {}});
+  const ExplainView({
+    this.targets = const {},
+    this.involved = const {},
+    this.focus = const {},
+    this.edges = const {},
+  });
 
   /// The explain-mode marks of [c], or null when the mode is off.
   static ExplainView? of(GameController c) {
     if (!c.explaining) return null;
     final e = c.explanation;
-    return ExplainView(targets: e?.targets ?? const {}, involved: e?.involved ?? const {}, focus: c.explainFocus);
+    return ExplainView(
+      targets: e?.targets ?? const {},
+      involved: e?.involved ?? const {},
+      focus: c.explainFocus,
+      edges: e?.edges ?? const {},
+    );
   }
 
   /// Cells the step changes.
@@ -24,6 +34,9 @@ class ExplainView {
 
   /// Cells of the line or chip the player tapped.
   final Set<Pos> focus;
+
+  /// Loop edges the step changes.
+  final Set<int> edges;
 }
 
 /// Tints and outlines for [view], to put in a board's stack above the cells.

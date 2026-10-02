@@ -1,5 +1,10 @@
+import '../../core/explain.dart';
 import '../../core/grid_graph.dart';
 import 'lamps_model.dart';
+
+/// What a traced [LampsSolver.propagate] records ([Fact.rule]); [Fact.value]
+/// is [lampsDot] or [lampsLamp], the arg the lamp, wall or dark cell it's about.
+enum LampsRule { lit, wallDone, wallNeed, onlySource, failSee, failMany, failFew, failDark }
 
 const int _unk = -1;
 
@@ -22,7 +27,8 @@ class LampsSolver {
   List<int> initial() => [for (var i = 0; i < walls.length; i++) walls[i] ? lampsWall : _unk];
 
   /// Applies tier-1 rules until nothing changes. False on a contradiction.
-  bool propagate(List<int> st) {
+  /// With [t], every deduction is recorded (see [LampsRule]).
+  bool propagate(List<int> st, [ExplainTrace? t]) {
     var changed = true;
     while (changed) {
       changed = false;
@@ -31,10 +37,14 @@ class LampsSolver {
         if (st[i] != lampsLamp) continue;
         lit[i] = true;
         for (final j in sight[i]) {
-          if (st[j] == lampsLamp) return false;
+          if (st[j] == lampsLamp) {
+            t?.fail(LampsRule.failSee.index, premises: [i, j], args: [i, j]);
+            return false;
+          }
           lit[j] = true;
           if (st[j] == _unk) {
             st[j] = lampsDot;
+            t?.fact(j, lampsDot, LampsRule.lit.index, premises: [i], args: [i]);
             changed = true;
           }
         }
@@ -48,11 +58,21 @@ class LampsSolver {
           if (st[j] == lampsLamp) have++;
           if (st[j] == _unk) open.add(j);
         }
-        if (have > want || have + open.length < want) return false;
+        if (have > want || have + open.length < want) {
+          t?.fail((have > want ? LampsRule.failMany : LampsRule.failFew).index, premises: [i, ...nb[i]], args: [i]);
+          return false;
+        }
         if (open.isEmpty) continue;
         if (have == want || have + open.length == want) {
           for (final j in open) {
             st[j] = have == want ? lampsDot : lampsLamp;
+            t?.fact(
+              j,
+              st[j],
+              (have == want ? LampsRule.wallDone : LampsRule.wallNeed).index,
+              premises: [i, ...nb[i]],
+              args: [i],
+            );
           }
           changed = true;
         }
@@ -71,9 +91,13 @@ class LampsSolver {
             sources++;
           }
         }
-        if (sources == 0) return false;
+        if (sources == 0) {
+          t?.fail(LampsRule.failDark.index, premises: [i, ...sight[i]], args: [i]);
+          return false;
+        }
         if (sources == 1) {
           st[source] = lampsLamp;
+          t?.fact(source, lampsLamp, LampsRule.onlySource.index, premises: [i, ...sight[i]], args: [i]);
           changed = true;
           break;
         }

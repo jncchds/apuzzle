@@ -1,5 +1,27 @@
+import '../../core/explain.dart';
 import '../../core/grid_graph.dart';
 import 'islands_model.dart';
+
+/// What a traced [IslandsSolver.propagate] records ([Fact.rule]); [Fact.value]
+/// is [islandsSea] or [islandsLand]. Island rules have the island's number
+/// cell (or first cell) as their first arg.
+enum IslandsRule {
+  total,
+  pool,
+  complete,
+  exit,
+  between,
+  unreachable,
+  seaExit,
+  failTotal,
+  failInvalid,
+  failPool,
+  failTwoClues,
+  failBig,
+  failShut,
+  failUnreachable,
+  failSeaShut,
+}
 
 const int _unk = -1;
 
@@ -23,20 +45,35 @@ class IslandsSolver {
   List<int> initial() => [for (final c in clues) c == null ? _unk : islandsLand];
 
   /// Applies tier-1 rules until nothing changes. False on a contradiction.
-  bool propagate(List<int> st) {
+  /// With [t], every deduction is recorded (see [IslandsRule]).
+  bool propagate(List<int> st, [ExplainTrace? t]) {
+    List<int> all() => [for (var i = 0; i < n; i++) i];
+    List<int> around(List<int> cells) => {
+      for (final i in cells) ...[i, ...nb[i]],
+    }.toList();
     while (true) {
       var landCount = 0, seaCount = 0;
       for (final v in st) {
         if (v == islandsLand) landCount++;
         if (v == islandsSea) seaCount++;
       }
-      if (landCount > totalLand || seaCount > n - totalLand) return false;
+      if (landCount > totalLand || seaCount > n - totalLand) {
+        t?.fail(IslandsRule.failTotal.index, premises: all());
+        return false;
+      }
       final unknown = n - landCount - seaCount;
-      if (unknown == 0) return _valid(st);
+      if (unknown == 0) {
+        if (_valid(st)) return true;
+        t?.fail(IslandsRule.failInvalid.index, premises: all());
+        return false;
+      }
       if (landCount == totalLand || seaCount == n - totalLand) {
         final v = landCount == totalLand ? islandsSea : islandsLand;
         for (var i = 0; i < n; i++) {
-          if (st[i] == _unk) st[i] = v;
+          if (st[i] == _unk) {
+            st[i] = v;
+            t?.fact(i, v, IslandsRule.total.index, premises: all());
+          }
         }
         continue;
       }
@@ -55,9 +92,13 @@ class IslandsSolver {
               us++;
             }
           }
-          if (s == 4) return false;
+          if (s == 4) {
+            t?.fail(IslandsRule.failPool.index, premises: block, args: [i]);
+            return false;
+          }
           if (s == 3 && us == 1) {
             st[u] = islandsLand;
+            t?.fact(u, islandsLand, IslandsRule.pool.index, premises: block, args: [i]);
             changed = true;
           }
         }
@@ -72,7 +113,10 @@ class IslandsSolver {
         for (final i in comps[k]) {
           compOf[i] = k;
           if (clues[i] != null) {
-            if (clueOf[k] >= 0) return false;
+            if (clueOf[k] >= 0) {
+              t?.fail(IslandsRule.failTwoClues.index, premises: comps[k], args: [clueOf[k], i]);
+              return false;
+            }
             clueOf[k] = i;
           }
         }
@@ -84,17 +128,25 @@ class IslandsSolver {
               if (st[j] == _unk) j,
         };
         final want = clueOf[k] >= 0 ? clues[clueOf[k]]! : null;
-        if (want != null && comps[k].length > want) return false;
+        // The island's name: its number, or its first cell.
+        final anchor = clueOf[k] >= 0 ? clueOf[k] : comps[k].first;
+        if (want != null && comps[k].length > want) {
+          t?.fail(IslandsRule.failBig.index, premises: comps[k], args: [anchor, want]);
+          return false;
+        }
         if (want != null && comps[k].length == want) {
           if (exits.isEmpty) continue;
           for (final j in exits) {
             st[j] = islandsSea;
+            t?.fact(j, islandsSea, IslandsRule.complete.index, premises: comps[k], args: [anchor, want]);
           }
           changed = true;
         } else if (exits.isEmpty) {
+          t?.fail(IslandsRule.failShut.index, premises: around(comps[k]), args: [anchor, want ?? -1]);
           return false;
         } else if (exits.length == 1) {
           st[exits.first] = islandsLand;
+          t?.fact(exits.first, islandsLand, IslandsRule.exit.index, premises: around(comps[k]), args: [anchor]);
           changed = true;
         }
       }
@@ -116,6 +168,15 @@ class IslandsSolver {
         }
         if (near[i] == -2 && st[i] == _unk) {
           st[i] = islandsSea;
+          t?.fact(
+            i,
+            islandsSea,
+            IslandsRule.between.index,
+            premises: [
+              for (final x in nb[i])
+                if (compOf[x] >= 0) ...comps[compOf[x]],
+            ],
+          );
           changed = true;
         }
       }
@@ -147,11 +208,20 @@ class IslandsSolver {
           dist[i] = -1;
         }
       }
+      // What reaching looked at: the numbered islands and the sea.
+      List<int> reachPremises() => [
+        for (var i = 0; i < n; i++)
+          if (st[i] == islandsSea || (compOf[i] >= 0 && clueOf[compOf[i]] >= 0)) i,
+      ];
       for (var i = 0; i < n; i++) {
         if (reach[i]) continue;
-        if (st[i] == islandsLand) return false;
+        if (st[i] == islandsLand) {
+          t?.fail(IslandsRule.failUnreachable.index, premises: [i, ...reachPremises()], args: [i]);
+          return false;
+        }
         if (st[i] == _unk) {
           st[i] = islandsSea;
+          t?.fact(i, islandsSea, IslandsRule.unreachable.index, premises: reachPremises());
           changed = true;
         }
       }
@@ -166,9 +236,13 @@ class IslandsSolver {
               for (final j in nb[i])
                 if (st[j] == _unk) j,
           };
-          if (exits.isEmpty) return false;
+          if (exits.isEmpty) {
+            t?.fail(IslandsRule.failSeaShut.index, premises: around(s), args: [s.first]);
+            return false;
+          }
           if (exits.length == 1) {
             st[exits.first] = islandsSea;
+            t?.fact(exits.first, islandsSea, IslandsRule.seaExit.index, premises: around(s), args: [s.first]);
             changed = true;
             break;
           }

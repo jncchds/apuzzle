@@ -2679,6 +2679,738 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then {a} and {b} both hold {value}.'**
   String exSudokuFailClash(Object a, Object b, Object value);
+
+  /// No description provided for @exKingsSuppose.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} had a crown.'**
+  String exKingsSuppose(Object cell);
+
+  /// No description provided for @exKingsRefuted.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: a crown there leads to a contradiction.'**
+  String exKingsRefuted(Object cell);
+
+  /// No description provided for @exKingsSingleRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a crown: it\'s the last free cell in row {row}.'**
+  String exKingsSingleRow(Object cell, Object row);
+
+  /// No description provided for @exKingsSingleCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a crown: it\'s the last free cell in column {col}.'**
+  String exKingsSingleCol(Object cell, Object col);
+
+  /// No description provided for @exKingsSingleRegion.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a crown: it\'s the last free cell in its region.'**
+  String exKingsSingleRegion(Object cell);
+
+  /// No description provided for @exKingsRuledOut.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: it touches the crown in {a} or shares its row, column or region.'**
+  String exKingsRuledOut(Object cell, Object a);
+
+  /// No description provided for @exKingsConfineRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: the crown of row {row} must be in the region at {region}, so that region has no other crown.'**
+  String exKingsConfineRow(Object cell, Object row, Object region);
+
+  /// No description provided for @exKingsConfineCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: the crown of column {col} must be in the region at {region}, so that region has no other crown.'**
+  String exKingsConfineCol(Object cell, Object col, Object region);
+
+  /// No description provided for @exKingsConfineRegionRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: the crown of the region at {region} must be in row {row}, so row {row} has no other crown.'**
+  String exKingsConfineRegionRow(Object cell, Object region, Object row);
+
+  /// No description provided for @exKingsConfineRegionCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: the crown of the region at {region} must be in column {col}, so column {col} has no other crown.'**
+  String exKingsConfineRegionCol(Object cell, Object region, Object col);
+
+  /// No description provided for @exKingsAttackRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: a crown there would leave no free cell in row {row}.'**
+  String exKingsAttackRow(Object cell, Object row);
+
+  /// No description provided for @exKingsAttackCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: a crown there would leave no free cell in column {col}.'**
+  String exKingsAttackCol(Object cell, Object col);
+
+  /// No description provided for @exKingsAttackRegion.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: a crown there would leave no free cell in the region at {region}.'**
+  String exKingsAttackRegion(Object cell, Object region);
+
+  /// No description provided for @exKingsFailRow.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} has no free cell left for its crown.'**
+  String exKingsFailRow(Object row);
+
+  /// No description provided for @exKingsFailCol.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} has no free cell left for its crown.'**
+  String exKingsFailCol(Object col);
+
+  /// No description provided for @exKingsFailRegion.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the region at {region} has no free cell left for its crown.'**
+  String exKingsFailRegion(Object region);
+
+  /// No description provided for @exKingsFailClash.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the crowns in {a} and {b} clash.'**
+  String exKingsFailClash(Object a, Object b);
+
+  /// No description provided for @exHuesFull.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: {clue} already has {count, plural, =1{its one {value} neighbour} other{all {count} of its {value} neighbours}}.'**
+  String exHuesFull(Object cell, Object value, Object clue, int count);
+
+  /// No description provided for @exHuesNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: {clue} needs {count, plural, =1{one {value} neighbour} other{{count} {value} neighbours}}, and only that many cells can still be {value}.'**
+  String exHuesNeed(Object cell, Object value, Object clue, int count);
+
+  /// No description provided for @exHuesSingle.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: every other color is ruled out there.'**
+  String exHuesSingle(Object cell, Object value);
+
+  /// No description provided for @exHuesFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no color is left for {cell}.'**
+  String exHuesFailEmpty(Object cell);
+
+  /// No description provided for @exHuesFailMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {clue} has too many {value} neighbours.'**
+  String exHuesFailMany(Object clue, Object value);
+
+  /// No description provided for @exHuesFailFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {clue} can\'t get enough {value} neighbours.'**
+  String exHuesFailFew(Object clue, Object value);
+
+  /// No description provided for @exBlocksNaked.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: every other number is already in its region or in a cell it touches.'**
+  String exBlocksNaked(Object cell, Object value);
+
+  /// No description provided for @exBlocksHidden.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: it\'s the only place left for {value} in its region.'**
+  String exBlocksHidden(Object cell, Object value);
+
+  /// No description provided for @exBlocksPointing.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: it touches every cell where the region at {region} can still put its {value}.'**
+  String exBlocksPointing(Object cell, Object value, Object region);
+
+  /// No description provided for @exBlocksPair.
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {b} share {v1} and {v2}, so no other cell of their region can hold them.'**
+  String exBlocksPair(Object a, Object b, Object v1, Object v2);
+
+  /// No description provided for @exBlocksFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no number is left for {cell}.'**
+  String exBlocksFailEmpty(Object cell);
+
+  /// No description provided for @exBlocksFailNoPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the region at {region} has no place left for {value}.'**
+  String exBlocksFailNoPlace(Object region, Object value);
+
+  /// No description provided for @exBlocksAlone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be 1: its region is just this one cell.'**
+  String exBlocksAlone(Object cell);
+
+  /// No description provided for @exPlotsClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: the plot of {value} at {group} is already complete.'**
+  String exPlotsClosed(Object cell, Object value, Object group);
+
+  /// No description provided for @exPlotsExit.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: the plot of {value} at {group} still needs cells, and this is its only way out.'**
+  String exPlotsExit(Object cell, Object value, Object group);
+
+  /// No description provided for @exPlotsMerge.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: it would join plots of {value} into one that is too big.'**
+  String exPlotsMerge(Object cell, Object value);
+
+  /// No description provided for @exPlotsRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: there\'s no room around it for a plot of {value} cells.'**
+  String exPlotsRoom(Object cell, Object value);
+
+  /// No description provided for @exPlotsOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: every other number is ruled out there.'**
+  String exPlotsOnly(Object cell, Object value);
+
+  /// No description provided for @exPlotsFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no number is left for {cell}.'**
+  String exPlotsFailEmpty(Object cell);
+
+  /// No description provided for @exPlotsFailBig.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the plot of {value} at {group} has too many cells.'**
+  String exPlotsFailBig(Object value, Object group);
+
+  /// No description provided for @exPlotsFailShut.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the plot of {value} at {group} is shut in before it\'s complete.'**
+  String exPlotsFailShut(Object value, Object group);
+
+  /// No description provided for @exPlotsFailRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the plot of {value} at {group} has no room to grow.'**
+  String exPlotsFailRoom(Object value, Object group);
+
+  /// No description provided for @exPairsSupposeShade.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were shaded.'**
+  String exPairsSupposeShade(Object cell);
+
+  /// No description provided for @exPairsSupposeDot.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} weren\'t shaded.'**
+  String exPairsSupposeDot(Object cell);
+
+  /// No description provided for @exPairsRefutedShade.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: leaving it unshaded leads to a contradiction.'**
+  String exPairsRefutedShade(Object cell);
+
+  /// No description provided for @exPairsRefutedDot.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: shading it leads to a contradiction.'**
+  String exPairsRefutedDot(Object cell);
+
+  /// No description provided for @exPairsRegionDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: the region at {region} already has its two shaded cells.'**
+  String exPairsRegionDone(Object cell, Object region);
+
+  /// No description provided for @exPairsRegionNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: the region at {region} has just two cells left that can be shaded.'**
+  String exPairsRegionNeed(Object cell, Object region);
+
+  /// No description provided for @exPairsPartnered.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: {a} next to it already has its partner, and pairs never touch.'**
+  String exPairsPartnered(Object cell, Object a);
+
+  /// No description provided for @exPairsOneWay.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: it\'s the only cell left where {a} can find its partner.'**
+  String exPairsOneWay(Object cell, Object a);
+
+  /// No description provided for @exPairsCrowd.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: it touches two shaded cells, and shading it would join them into more than a pair.'**
+  String exPairsCrowd(Object cell);
+
+  /// No description provided for @exPairsAlone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: no cell next to it is left to pair it with.'**
+  String exPairsAlone(Object cell);
+
+  /// No description provided for @exPairsEveryShade.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: every way to finish the region at {region} shades it.'**
+  String exPairsEveryShade(Object cell, Object region);
+
+  /// No description provided for @exPairsEveryDot.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: no way to finish the region at {region} shades it.'**
+  String exPairsEveryDot(Object cell, Object region);
+
+  /// No description provided for @exPairsFailMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the region at {region} has more than two shaded cells.'**
+  String exPairsFailMany(Object region);
+
+  /// No description provided for @exPairsFailFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the region at {region} can\'t get two shaded cells.'**
+  String exPairsFailFew(Object region);
+
+  /// No description provided for @exPairsFailCrowd.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the shaded {cell} touches two shaded cells.'**
+  String exPairsFailCrowd(Object cell);
+
+  /// No description provided for @exPairsFailAlone.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the shaded {cell} has no partner left.'**
+  String exPairsFailAlone(Object cell);
+
+  /// No description provided for @exPairsFailNoWay.
+  ///
+  /// In en, this message translates to:
+  /// **'But then there\'s no way left to finish the region at {region}.'**
+  String exPairsFailNoWay(Object region);
+
+  /// No description provided for @exCampSupposeTent.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} held a tent.'**
+  String exCampSupposeTent(Object cell);
+
+  /// No description provided for @exCampSupposeGrass.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were grass.'**
+  String exCampSupposeGrass(Object cell);
+
+  /// No description provided for @exCampRefutedTent.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is a tent: grass there leads to a contradiction.'**
+  String exCampRefutedTent(Object cell);
+
+  /// No description provided for @exCampRefutedGrass.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is grass: a tent there leads to a contradiction.'**
+  String exCampRefutedGrass(Object cell);
+
+  /// No description provided for @exCampNearTent.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is grass: it touches the tent in {a}, and tents never touch.'**
+  String exCampNearTent(Object cell, Object a);
+
+  /// No description provided for @exCampRowDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is grass: row {row} already has {count, plural, =1{its tent} other{all its {count} tents}}.'**
+  String exCampRowDone(Object cell, Object row, int count);
+
+  /// No description provided for @exCampColDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is grass: column {col} already has {count, plural, =1{its tent} other{all its {count} tents}}.'**
+  String exCampColDone(Object cell, Object col, int count);
+
+  /// No description provided for @exCampRowNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is a tent: row {row} needs {count, plural, =1{a tent} other{{count} tents}}, and only that many cells are left.'**
+  String exCampRowNeed(Object cell, Object row, int count);
+
+  /// No description provided for @exCampColNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is a tent: column {col} needs {count, plural, =1{a tent} other{{count} tents}}, and only that many cells are left.'**
+  String exCampColNeed(Object cell, Object col, int count);
+
+  /// No description provided for @exCampTotalDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is grass: every tree already has its tent.'**
+  String exCampTotalDone(Object cell);
+
+  /// No description provided for @exCampTotalNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is a tent: the trees still need every cell that\'s left.'**
+  String exCampTotalNeed(Object cell);
+
+  /// No description provided for @exCampTreeOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is a tent: it\'s the only free cell next to the tree in {tree}.'**
+  String exCampTreeOnly(Object cell, Object tree);
+
+  /// No description provided for @exCampFailTouch.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the tents in {a} and {b} touch.'**
+  String exCampFailTouch(Object a, Object b);
+
+  /// No description provided for @exCampFailRowMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} has more than {count, plural, =1{one tent} other{{count} tents}}.'**
+  String exCampFailRowMany(Object row, int count);
+
+  /// No description provided for @exCampFailColMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} has more than {count, plural, =1{one tent} other{{count} tents}}.'**
+  String exCampFailColMany(Object col, int count);
+
+  /// No description provided for @exCampFailRowFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} can\'t get {count, plural, =1{its tent} other{its {count} tents}}.'**
+  String exCampFailRowFew(Object row, int count);
+
+  /// No description provided for @exCampFailColFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} can\'t get {count, plural, =1{its tent} other{its {count} tents}}.'**
+  String exCampFailColFew(Object col, int count);
+
+  /// No description provided for @exCampFailTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the tents can\'t match the trees in number.'**
+  String get exCampFailTotal;
+
+  /// No description provided for @exCampFailTree.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the tree in {tree} has no free cell left for its tent.'**
+  String exCampFailTree(Object tree);
+
+  /// No description provided for @exCampFailPairing.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the trees and tents can\'t all be paired up.'**
+  String get exCampFailPairing;
+
+  /// No description provided for @exIslandsSupposeSea.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were sea.'**
+  String exIslandsSupposeSea(Object cell);
+
+  /// No description provided for @exIslandsSupposeLand.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were land.'**
+  String exIslandsSupposeLand(Object cell);
+
+  /// No description provided for @exIslandsRefutedSea.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is sea: land there leads to a contradiction.'**
+  String exIslandsRefutedSea(Object cell);
+
+  /// No description provided for @exIslandsRefutedLand.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is land: sea there leads to a contradiction.'**
+  String exIslandsRefutedLand(Object cell);
+
+  /// No description provided for @exIslandsTotalSea.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is sea: the islands already have all their land.'**
+  String exIslandsTotalSea(Object cell);
+
+  /// No description provided for @exIslandsTotalLand.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is land: the sea can\'t take any more cells.'**
+  String exIslandsTotalLand(Object cell);
+
+  /// No description provided for @exIslandsPool.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is land: sea there would make a 2×2 pool.'**
+  String exIslandsPool(Object cell);
+
+  /// No description provided for @exIslandsComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is sea: the island at {island} already has {count, plural, =1{its one cell} other{all its {count} cells}}.'**
+  String exIslandsComplete(Object cell, Object island, int count);
+
+  /// No description provided for @exIslandsExit.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is land: the island at {island} still needs cells, and this is its only way out.'**
+  String exIslandsExit(Object cell, Object island);
+
+  /// No description provided for @exIslandsBetween.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is sea: it touches two different numbered islands.'**
+  String exIslandsBetween(Object cell);
+
+  /// No description provided for @exIslandsUnreachable.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is sea: no island can reach it.'**
+  String exIslandsUnreachable(Object cell);
+
+  /// No description provided for @exIslandsSeaExit.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is sea: the sea at {sea} has no other way out, and the whole sea is connected.'**
+  String exIslandsSeaExit(Object cell, Object sea);
+
+  /// No description provided for @exIslandsFailTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the land and sea can\'t add up.'**
+  String get exIslandsFailTotal;
+
+  /// No description provided for @exIslandsFailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the finished board breaks a rule.'**
+  String get exIslandsFailInvalid;
+
+  /// No description provided for @exIslandsFailPool.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the sea makes a 2×2 pool at {cell}.'**
+  String exIslandsFailPool(Object cell);
+
+  /// No description provided for @exIslandsFailTwoClues.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the numbers in {a} and {b} end up on one island.'**
+  String exIslandsFailTwoClues(Object a, Object b);
+
+  /// No description provided for @exIslandsFailBig.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the island at {island} has more than {count, plural, =1{one cell} other{{count} cells}}.'**
+  String exIslandsFailBig(Object island, int count);
+
+  /// No description provided for @exIslandsFailShut.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the island at {island} is shut in before it\'s complete.'**
+  String exIslandsFailShut(Object island);
+
+  /// No description provided for @exIslandsFailOrphan.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the land at {island} is cut off from every number.'**
+  String exIslandsFailOrphan(Object island);
+
+  /// No description provided for @exIslandsFailUnreachable.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no island can reach the land in {cell}.'**
+  String exIslandsFailUnreachable(Object cell);
+
+  /// No description provided for @exIslandsFailSeaShut.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the sea at {sea} is cut off from the rest.'**
+  String exIslandsFailSeaShut(Object sea);
+
+  /// No description provided for @exLampsSupposeLamp.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} had a lamp.'**
+  String exLampsSupposeLamp(Object cell);
+
+  /// No description provided for @exLampsSupposeDot.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} had no lamp.'**
+  String exLampsSupposeDot(Object cell);
+
+  /// No description provided for @exLampsRefutedLamp.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} has a lamp: leaving it dark leads to a contradiction.'**
+  String exLampsRefutedLamp(Object cell);
+
+  /// No description provided for @exLampsRefutedDot.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: a lamp there leads to a contradiction.'**
+  String exLampsRefutedDot(Object cell);
+
+  /// No description provided for @exLampsLit.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: the lamp in {a} shines on it, and lamps never shine on each other.'**
+  String exLampsLit(Object cell, Object a);
+
+  /// No description provided for @exLampsWallDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: the wall {wall} already has as many lamps next to it as its number says.'**
+  String exLampsWallDone(Object cell, Object wall);
+
+  /// No description provided for @exLampsWallNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} has a lamp: the wall {wall} needs a lamp in every free cell next to it.'**
+  String exLampsWallNeed(Object cell, Object wall);
+
+  /// No description provided for @exLampsOnlySource.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} has a lamp: it\'s the only cell left that can light {a}.'**
+  String exLampsOnlySource(Object cell, Object a);
+
+  /// No description provided for @exLampsSelf.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} has a lamp: nothing else can light it.'**
+  String exLampsSelf(Object cell);
+
+  /// No description provided for @exLampsFailSee.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the lamps in {a} and {b} shine on each other.'**
+  String exLampsFailSee(Object a, Object b);
+
+  /// No description provided for @exLampsFailMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the wall {wall} has too many lamps next to it.'**
+  String exLampsFailMany(Object wall);
+
+  /// No description provided for @exLampsFailFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the wall {wall} can\'t get enough lamps next to it.'**
+  String exLampsFailFew(Object wall);
+
+  /// No description provided for @exLampsFailDark.
+  ///
+  /// In en, this message translates to:
+  /// **'But then nothing can light {cell}.'**
+  String exLampsFailDark(Object cell);
+
+  /// No description provided for @exLitsSuppose.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose the region at {region} were shaded at {cells}.'**
+  String exLitsSuppose(Object region, Object cells);
+
+  /// No description provided for @exLitsRefuted.
+  ///
+  /// In en, this message translates to:
+  /// **'The region at {region} can\'t be shaded at {cells}: that leads to a contradiction.'**
+  String exLitsRefuted(Object region, Object cells);
+
+  /// No description provided for @exLitsOverEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Shapes in the region at {region} that cover a cell staying empty are out.'**
+  String exLitsOverEmpty(Object region);
+
+  /// No description provided for @exLitsMisses.
+  ///
+  /// In en, this message translates to:
+  /// **'Shapes in the region at {region} that miss one of its shaded cells are out.'**
+  String exLitsMisses(Object region);
+
+  /// No description provided for @exLitsPool.
+  ///
+  /// In en, this message translates to:
+  /// **'Shapes in the region at {region} that would finish a 2×2 shaded block are out.'**
+  String exLitsPool(Object region);
+
+  /// No description provided for @exLitsClash.
+  ///
+  /// In en, this message translates to:
+  /// **'Shapes in the region at {region} that clash with every option left for the region at {other} are out.'**
+  String exLitsClash(Object region, Object other);
+
+  /// No description provided for @exLitsCut.
+  ///
+  /// In en, this message translates to:
+  /// **'Shapes in the region at {region} that would cut the shading in two are out.'**
+  String exLitsCut(Object region);
+
+  /// No description provided for @exLitsTwin.
+  ///
+  /// In en, this message translates to:
+  /// **'Shapes in the region at {region} that would touch the same shape in the region at {other} are out.'**
+  String exLitsTwin(Object region, Object other);
+
+  /// No description provided for @exLitsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: every shape still possible for the region at {region} covers it.'**
+  String exLitsAll(Object cell, Object region);
+
+  /// No description provided for @exLitsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: no shape still possible for the region at {region} covers it.'**
+  String exLitsNone(Object cell, Object region);
+
+  /// No description provided for @exLitsFailNoShape.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no shape fits the region at {region}.'**
+  String exLitsFailNoShape(Object region);
+
+  /// No description provided for @exLitsFailCut.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the shaded cells can\'t all connect.'**
+  String get exLitsFailCut;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

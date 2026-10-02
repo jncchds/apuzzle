@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/symbols.dart';
+import 'lamps_explain.dart';
 import 'lamps_generator.dart';
 import 'lamps_model.dart';
 import 'lamps_tutorial.dart';
@@ -135,6 +137,12 @@ class LampsType extends ValueGridType<LampsPuzzle> {
       style: TextStyle(fontSize: size * 0.52, height: 1, fontWeight: FontWeight.w700, color: Colors.white),
     );
   }
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(LampsPuzzle puzzle, ValueGrid state) => explainStep(const LampsExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(LampsPuzzle puzzle) => puzzle.toJson();
