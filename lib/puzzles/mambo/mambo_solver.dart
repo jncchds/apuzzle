@@ -1,6 +1,10 @@
 import 'dart:math';
 
+import '../../core/explain.dart';
 import 'mambo_model.dart';
+
+/// What a traced [MamboSolver.propagate] records ([Fact.rule]).
+enum MamboRule { pair, gap, half, edge, failThree, failHalf, failEdge }
 
 /// Grid solver on flat lists (-1 = unknown, 0 = sun, 1 = moon).
 ///
@@ -16,12 +20,14 @@ class MamboSolver {
   final List<MamboEdge> edges;
   final List<List<int>> lines;
 
-  /// Tier-1 propagation in place. Returns false on contradiction.
-  bool propagate(List<int> g) {
+  /// Tier-1 propagation in place. Returns false on contradiction. With [t],
+  /// every deduction is recorded (see [MamboRule]).
+  bool propagate(List<int> g, [ExplainTrace? t]) {
     var changed = true;
     while (changed) {
       changed = false;
-      for (final line in lines) {
+      for (var li = 0; li < lines.length; li++) {
+        final line = lines[li];
         var c0 = 0, c1 = 0;
         for (final i in line) {
           if (g[i] == 0) {
@@ -30,26 +36,55 @@ class MamboSolver {
             c1++;
           }
         }
-        if (c0 > half || c1 > half) return false;
+        if (c0 > half || c1 > half) {
+          final v = c0 > half ? 0 : 1;
+          t?.fail(
+            MamboRule.failHalf.index,
+            premises: [
+              for (final i in line)
+                if (g[i] == v) i,
+            ],
+            args: [li, v],
+          );
+          return false;
+        }
         if (c0 + c1 < n && (c0 == half || c1 == half)) {
           final fill = c0 == half ? 1 : 0;
           for (final i in line) {
-            if (g[i] == -1) g[i] = fill;
+            if (g[i] == -1) {
+              g[i] = fill;
+              t?.fact(
+                i,
+                fill,
+                MamboRule.half.index,
+                premises: [
+                  for (final j in line)
+                    if (g[j] == 1 - fill) j,
+                ],
+                args: [li],
+              );
+            }
           }
           changed = true;
         }
         for (var k = 0; k + 2 < n; k++) {
           final i0 = line[k], i1 = line[k + 1], i2 = line[k + 2];
           final a = g[i0], b = g[i1], c = g[i2];
-          if (a != -1 && a == b && b == c) return false;
+          if (a != -1 && a == b && b == c) {
+            t?.fail(MamboRule.failThree.index, premises: [i0, i1, i2], args: [i0, i1, i2, a]);
+            return false;
+          }
           if (a != -1 && a == b && c == -1) {
             g[i2] = 1 - a;
+            t?.fact(i2, 1 - a, MamboRule.pair.index, premises: [i0, i1], args: [i0, i1]);
             changed = true;
           } else if (b != -1 && b == c && a == -1) {
             g[i0] = 1 - b;
+            t?.fact(i0, 1 - b, MamboRule.pair.index, premises: [i1, i2], args: [i1, i2]);
             changed = true;
           } else if (a != -1 && a == c && b == -1) {
             g[i1] = 1 - a;
+            t?.fact(i1, 1 - a, MamboRule.gap.index, premises: [i0, i2], args: [i0, i2]);
             changed = true;
           }
         }
@@ -57,12 +92,17 @@ class MamboSolver {
       for (final e in edges) {
         final va = g[e.a], vb = g[e.b];
         if (va != -1 && vb != -1) {
-          if ((va == vb) != e.same) return false;
+          if ((va == vb) != e.same) {
+            t?.fail(MamboRule.failEdge.index, premises: [e.a, e.b], args: [e.a, e.b, e.same ? 1 : 0]);
+            return false;
+          }
         } else if (va != -1) {
           g[e.b] = e.same ? va : 1 - va;
+          t?.fact(e.b, g[e.b], MamboRule.edge.index, premises: [e.a], args: [e.a, e.same ? 1 : 0]);
           changed = true;
         } else if (vb != -1) {
           g[e.a] = e.same ? vb : 1 - vb;
+          t?.fact(e.a, g[e.a], MamboRule.edge.index, premises: [e.b], args: [e.b, e.same ? 1 : 0]);
           changed = true;
         }
       }

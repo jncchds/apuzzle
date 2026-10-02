@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/grid.dart';
+import 'explain_overlay.dart';
 
 /// Geometry of a laid-out board. Optional sections (e.g. Sudoku boxes) add an
 /// extra gap every [sectionCols] columns / [sectionRows] rows. An optional
@@ -120,6 +121,7 @@ class CellGridBoard extends StatelessWidget {
     this.maxCell = 88,
     this.headerCols = 0,
     this.headerRows = 0,
+    this.explain,
   });
 
   final int rows;
@@ -151,12 +153,16 @@ class CellGridBoard extends StatelessWidget {
   final double headerCols;
   final double headerRows;
 
+  /// Explain mode: highlights plus coordinate labels around the board.
+  final ExplainView? explain;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, cons) {
+        final band = explain == null ? 0.0 : CoordinateLabels.bandFor(cons.biggest, rows, cols);
         final m = BoardMetrics.fit(
-          space: cons.biggest,
+          space: Size(cons.maxWidth - band, cons.maxHeight - band),
           rows: rows,
           cols: cols,
           gapRatio: gapRatio,
@@ -186,11 +192,17 @@ class CellGridBoard extends StatelessWidget {
             children.add(Positioned(left: o.dx, top: o.dy, width: m.cell, height: m.cell, child: child));
           }
         }
-        if (overlayBuilder != null) {
+        if (overlayBuilder != null || explain != null) {
           children.add(
             Positioned.fill(
               child: IgnorePointer(
-                child: Stack(clipBehavior: Clip.none, children: overlayBuilder!(context, m)),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    ...?overlayBuilder?.call(context, m),
+                    if (explain != null) ...explainHighlights(context, m, explain!),
+                  ],
+                ),
               ),
             ),
           );
@@ -215,6 +227,7 @@ class CellGridBoard extends StatelessWidget {
             child: board,
           );
         }
+        if (explain != null) board = CoordinateLabels(m: m, band: band, child: board);
         return Center(child: board);
       },
     );

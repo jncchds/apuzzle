@@ -3,6 +3,7 @@
 //
 //   flutter test test/snapshots --run-skipped --tags snapshot
 //
+// Types with explain mode also get explain_<id>_<brightness>.png.
 // SNAPSHOT_LANG=uk (or pl, de) renders that language, with the code in the file names.
 @Tags(['snapshot'])
 library;
@@ -153,12 +154,23 @@ void main() {
         await tester.pump(const Duration(seconds: 1));
         await tester.pump(const Duration(seconds: 1));
 
-        await tester.runAsync(() async {
+        Future<void> capture(String name) => tester.runAsync(() async {
           final boundary = key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
           final image = await boundary.toImage(pixelRatio: 1);
           final png = await image.toByteData(format: ui.ImageByteFormat.png);
-          File('${outDir.path}/${type.id}_${brightness.name}$_suffix.png').writeAsBytesSync(png!.buffer.asUint8List());
+          File('${outDir.path}/$name${brightness.name}$_suffix.png').writeAsBytesSync(png!.buffer.asUint8List());
         });
+        await capture('${type.id}_');
+
+        // Explain mode with its reasons open, as explain_<id>_<brightness>.png.
+        if (type.canExplain) {
+          await tester.tap(find.byIcon(Icons.psychology_alt_outlined));
+          await tester.pump(const Duration(seconds: 1));
+          final why = find.byIcon(Icons.expand_more_rounded);
+          if (why.evaluate().isNotEmpty) await tester.tap(why);
+          await tester.pump(const Duration(seconds: 1));
+          await capture('explain_${type.id}_');
+        }
         // Leave the screen so its timers are cancelled.
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 2));

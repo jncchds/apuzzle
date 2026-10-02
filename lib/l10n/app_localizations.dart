@@ -2451,6 +2451,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A hard board. Keep comparing numbers that share closed cells. Near the end, count what\'s left: the mine counter can settle the last closed cells.'**
   String get tutMinesS2;
+
+  /// No description provided for @explain.
+  ///
+  /// In en, this message translates to:
+  /// **'Explain'**
+  String get explain;
+
+  /// No description provided for @explainTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Explain the next step'**
+  String get explainTooltip;
+
+  /// No description provided for @explainClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get explainClose;
+
+  /// No description provided for @explainApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Do it'**
+  String get explainApply;
+
+  /// No description provided for @explainWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Why?'**
+  String get explainWhy;
+
+  /// No description provided for @explainNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing left to explain.'**
+  String get explainNone;
+
+  /// No description provided for @exWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} doesn\'t match the solution. Clear it first.'**
+  String exWrong(Object cell);
+
+  /// No description provided for @exFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'No logical step found here, so {cell} is filled in from the solution.'**
+  String exFallback(Object cell);
+
+  /// No description provided for @exSuppose.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were {value}.'**
+  String exSuppose(Object cell, Object value);
+
+  /// No description provided for @exRefutedBinary.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: {other} there leads to a contradiction.'**
+  String exRefutedBinary(Object cell, Object value, Object other);
+
+  /// No description provided for @exRefuted.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: it leads to a contradiction.'**
+  String exRefuted(Object cell, Object value);
+
+  /// No description provided for @exMamboPair.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: otherwise {a}, {b} and {cell} would be three {other} in a row.'**
+  String exMamboPair(Object cell, Object value, Object a, Object b, Object other);
+
+  /// No description provided for @exMamboGap.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: it sits between {a} and {b}, which are both {other}.'**
+  String exMamboGap(Object cell, Object value, Object a, Object b, Object other);
+
+  /// No description provided for @exMamboHalfRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: row {row} already has all its {count} {other}.'**
+  String exMamboHalfRow(Object cell, Object value, Object row, Object count, Object other);
+
+  /// No description provided for @exMamboHalfCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: column {col} already has all its {count} {other}.'**
+  String exMamboHalfCol(Object cell, Object value, Object col, Object count, Object other);
+
+  /// No description provided for @exMamboSame.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: the = sign links it to {a}, which is {value}.'**
+  String exMamboSame(Object cell, Object value, Object a);
+
+  /// No description provided for @exMamboDiff.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: the × sign links it to {a}, which is {other}.'**
+  String exMamboDiff(Object cell, Object value, Object a, Object other);
+
+  /// No description provided for @exMamboFailThree.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {a}, {b} and {c} are three {value} in a row.'**
+  String exMamboFailThree(Object a, Object b, Object c, Object value);
+
+  /// No description provided for @exMamboFailHalfRow.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} has more than {count} {value}.'**
+  String exMamboFailHalfRow(Object row, Object count, Object value);
+
+  /// No description provided for @exMamboFailHalfCol.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} has more than {count} {value}.'**
+  String exMamboFailHalfCol(Object col, Object count, Object value);
+
+  /// No description provided for @exMamboFailSame.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {a} and {b} differ, despite the = sign between them.'**
+  String exMamboFailSame(Object a, Object b);
+
+  /// No description provided for @exMamboFailDiff.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {a} and {b} match, despite the × sign between them.'**
+  String exMamboFailDiff(Object a, Object b);
+
+  /// No description provided for @exSudokuNaked.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: every other digit is already in its row, column or box.'**
+  String exSudokuNaked(Object cell, Object value);
+
+  /// No description provided for @exSudokuHiddenRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: it\'s the only place left for {value} in row {row}.'**
+  String exSudokuHiddenRow(Object cell, Object value, Object row);
+
+  /// No description provided for @exSudokuHiddenCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: it\'s the only place left for {value} in column {col}.'**
+  String exSudokuHiddenCol(Object cell, Object value, Object col);
+
+  /// No description provided for @exSudokuHiddenBox.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: it\'s the only place left for {value} in box {box}.'**
+  String exSudokuHiddenBox(Object cell, Object value, Object box);
+
+  /// No description provided for @exSudokuPointingRow.
+  ///
+  /// In en, this message translates to:
+  /// **'In box {box}, {value} can only go in row {row}, so it\'s ruled out in the rest of row {row}.'**
+  String exSudokuPointingRow(Object box, Object value, Object row);
+
+  /// No description provided for @exSudokuPointingCol.
+  ///
+  /// In en, this message translates to:
+  /// **'In box {box}, {value} can only go in column {col}, so it\'s ruled out in the rest of column {col}.'**
+  String exSudokuPointingCol(Object box, Object value, Object col);
+
+  /// No description provided for @exSudokuClaimingRow.
+  ///
+  /// In en, this message translates to:
+  /// **'In row {row}, {value} can only go in box {box}, so it\'s ruled out in the rest of that box.'**
+  String exSudokuClaimingRow(Object row, Object value, Object box);
+
+  /// No description provided for @exSudokuClaimingCol.
+  ///
+  /// In en, this message translates to:
+  /// **'In column {col}, {value} can only go in box {box}, so it\'s ruled out in the rest of that box.'**
+  String exSudokuClaimingCol(Object col, Object value, Object box);
+
+  /// No description provided for @exSudokuPairRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {b} can only hold {v1} and {v2}, so those digits are ruled out in the rest of row {row}.'**
+  String exSudokuPairRow(Object a, Object b, Object v1, Object v2, Object row);
+
+  /// No description provided for @exSudokuPairCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {b} can only hold {v1} and {v2}, so those digits are ruled out in the rest of column {col}.'**
+  String exSudokuPairCol(Object a, Object b, Object v1, Object v2, Object col);
+
+  /// No description provided for @exSudokuPairBox.
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {b} can only hold {v1} and {v2}, so those digits are ruled out in the rest of box {box}.'**
+  String exSudokuPairBox(Object a, Object b, Object v1, Object v2, Object box);
+
+  /// No description provided for @exSudokuFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no digit is left for {cell}.'**
+  String exSudokuFailEmpty(Object cell);
+
+  /// No description provided for @exSudokuFailNoPlaceRow.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {value} has no place left in row {row}.'**
+  String exSudokuFailNoPlaceRow(Object value, Object row);
+
+  /// No description provided for @exSudokuFailNoPlaceCol.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {value} has no place left in column {col}.'**
+  String exSudokuFailNoPlaceCol(Object value, Object col);
+
+  /// No description provided for @exSudokuFailNoPlaceBox.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {value} has no place left in box {box}.'**
+  String exSudokuFailNoPlaceBox(Object value, Object box);
+
+  /// No description provided for @exSudokuFailClash.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {a} and {b} both hold {value}.'**
+  String exSudokuFailClash(Object a, Object b, Object value);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1456,4 +1456,182 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutMinesS2 =>
       'A hard board. Keep comparing numbers that share closed cells. Near the end, count what\'s left: the mine counter can settle the last closed cells.';
+
+  @override
+  String get explain => 'Explain';
+
+  @override
+  String get explainTooltip => 'Explain the next step';
+
+  @override
+  String get explainClose => 'Close';
+
+  @override
+  String get explainApply => 'Do it';
+
+  @override
+  String get explainWhy => 'Why?';
+
+  @override
+  String get explainNone => 'Nothing left to explain.';
+
+  @override
+  String exWrong(Object cell) {
+    return '$cell doesn\'t match the solution. Clear it first.';
+  }
+
+  @override
+  String exFallback(Object cell) {
+    return 'No logical step found here, so $cell is filled in from the solution.';
+  }
+
+  @override
+  String exSuppose(Object cell, Object value) {
+    return 'Suppose $cell were $value.';
+  }
+
+  @override
+  String exRefutedBinary(Object cell, Object value, Object other) {
+    return '$cell must be $value: $other there leads to a contradiction.';
+  }
+
+  @override
+  String exRefuted(Object cell, Object value) {
+    return '$cell can\'t be $value: it leads to a contradiction.';
+  }
+
+  @override
+  String exMamboPair(Object cell, Object value, Object a, Object b, Object other) {
+    return '$cell must be $value: otherwise $a, $b and $cell would be three $other in a row.';
+  }
+
+  @override
+  String exMamboGap(Object cell, Object value, Object a, Object b, Object other) {
+    return '$cell must be $value: it sits between $a and $b, which are both $other.';
+  }
+
+  @override
+  String exMamboHalfRow(Object cell, Object value, Object row, Object count, Object other) {
+    return '$cell must be $value: row $row already has all its $count $other.';
+  }
+
+  @override
+  String exMamboHalfCol(Object cell, Object value, Object col, Object count, Object other) {
+    return '$cell must be $value: column $col already has all its $count $other.';
+  }
+
+  @override
+  String exMamboSame(Object cell, Object value, Object a) {
+    return '$cell must be $value: the = sign links it to $a, which is $value.';
+  }
+
+  @override
+  String exMamboDiff(Object cell, Object value, Object a, Object other) {
+    return '$cell must be $value: the × sign links it to $a, which is $other.';
+  }
+
+  @override
+  String exMamboFailThree(Object a, Object b, Object c, Object value) {
+    return 'But then $a, $b and $c are three $value in a row.';
+  }
+
+  @override
+  String exMamboFailHalfRow(Object row, Object count, Object value) {
+    return 'But then row $row has more than $count $value.';
+  }
+
+  @override
+  String exMamboFailHalfCol(Object col, Object count, Object value) {
+    return 'But then column $col has more than $count $value.';
+  }
+
+  @override
+  String exMamboFailSame(Object a, Object b) {
+    return 'But then $a and $b differ, despite the = sign between them.';
+  }
+
+  @override
+  String exMamboFailDiff(Object a, Object b) {
+    return 'But then $a and $b match, despite the × sign between them.';
+  }
+
+  @override
+  String exSudokuNaked(Object cell, Object value) {
+    return '$cell must be $value: every other digit is already in its row, column or box.';
+  }
+
+  @override
+  String exSudokuHiddenRow(Object cell, Object value, Object row) {
+    return '$cell must be $value: it\'s the only place left for $value in row $row.';
+  }
+
+  @override
+  String exSudokuHiddenCol(Object cell, Object value, Object col) {
+    return '$cell must be $value: it\'s the only place left for $value in column $col.';
+  }
+
+  @override
+  String exSudokuHiddenBox(Object cell, Object value, Object box) {
+    return '$cell must be $value: it\'s the only place left for $value in box $box.';
+  }
+
+  @override
+  String exSudokuPointingRow(Object box, Object value, Object row) {
+    return 'In box $box, $value can only go in row $row, so it\'s ruled out in the rest of row $row.';
+  }
+
+  @override
+  String exSudokuPointingCol(Object box, Object value, Object col) {
+    return 'In box $box, $value can only go in column $col, so it\'s ruled out in the rest of column $col.';
+  }
+
+  @override
+  String exSudokuClaimingRow(Object row, Object value, Object box) {
+    return 'In row $row, $value can only go in box $box, so it\'s ruled out in the rest of that box.';
+  }
+
+  @override
+  String exSudokuClaimingCol(Object col, Object value, Object box) {
+    return 'In column $col, $value can only go in box $box, so it\'s ruled out in the rest of that box.';
+  }
+
+  @override
+  String exSudokuPairRow(Object a, Object b, Object v1, Object v2, Object row) {
+    return '$a and $b can only hold $v1 and $v2, so those digits are ruled out in the rest of row $row.';
+  }
+
+  @override
+  String exSudokuPairCol(Object a, Object b, Object v1, Object v2, Object col) {
+    return '$a and $b can only hold $v1 and $v2, so those digits are ruled out in the rest of column $col.';
+  }
+
+  @override
+  String exSudokuPairBox(Object a, Object b, Object v1, Object v2, Object box) {
+    return '$a and $b can only hold $v1 and $v2, so those digits are ruled out in the rest of box $box.';
+  }
+
+  @override
+  String exSudokuFailEmpty(Object cell) {
+    return 'But then no digit is left for $cell.';
+  }
+
+  @override
+  String exSudokuFailNoPlaceRow(Object value, Object row) {
+    return 'But then $value has no place left in row $row.';
+  }
+
+  @override
+  String exSudokuFailNoPlaceCol(Object value, Object col) {
+    return 'But then $value has no place left in column $col.';
+  }
+
+  @override
+  String exSudokuFailNoPlaceBox(Object value, Object box) {
+    return 'But then $value has no place left in box $box.';
+  }
+
+  @override
+  String exSudokuFailClash(Object a, Object b, Object value) {
+    return 'But then $a and $b both hold $value.';
+  }
 }

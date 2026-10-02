@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
+import 'sudoku_explain.dart';
 import 'sudoku_generator.dart';
 import 'sudoku_model.dart';
 import 'sudoku_tutorial.dart';
@@ -103,6 +105,12 @@ class SudokuType extends ValueGridType<SudokuPuzzle> {
   Set<Pos> conflicts(SudokuPuzzle puzzle, ValueGrid state) => {
     for (final i in sudokuConflicts(puzzle.n, state.toFlat())) puzzle.size.pos(i),
   };
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(SudokuPuzzle puzzle, ValueGrid state) => explainStep(const SudokuExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(SudokuPuzzle puzzle) => puzzle.toJson();

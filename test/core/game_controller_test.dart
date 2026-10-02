@@ -120,6 +120,40 @@ void main() {
     expect((c.state as ValueGrid).valueAt(p), puzzle.solution[puzzle.size.index(p)]);
   });
 
+  test('hint plays the explained step', () {
+    final c = make();
+    final e = type.explain(puzzle, c.state as ValueGrid)!;
+    c.hint();
+    expect(c.flashHints, e.targets);
+    expect((c.state as ValueGrid).toFlat(), (e.next! as ValueGrid).toFlat());
+  });
+
+  test('explain mode: keeps the board, counts entering and each step', () {
+    final c = make();
+    final p = firstEmpty(c);
+    type.onCellTap(c, p);
+    final before = c.state;
+    c.toggleExplain();
+    expect(c.explaining, isTrue);
+    expect(c.hintsUsed, 1);
+    expect(identical(c.state, before), isTrue);
+    expect(c.explanation, isNotNull);
+    c.toggleExplain();
+    expect(c.explaining, isFalse);
+    expect(c.explanation, isNull);
+    expect(identical(c.state, before), isTrue);
+
+    c.toggleExplain();
+    expect(c.hintsUsed, 2);
+    final e = c.explanation!;
+    c.applyExplanation();
+    expect(c.hintsUsed, 3);
+    expect((c.state as ValueGrid).toFlat(), (e.next! as ValueGrid).toFlat());
+    expect(identical(c.explanation, e), isFalse, reason: 'the explanation follows the board');
+    c.undo();
+    expect(identical(c.state, before), isTrue);
+  });
+
   test('save and resume', () async {
     final c = make();
     final p = firstEmpty(c);

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -5,6 +6,7 @@ import '../l10n/l10n.dart';
 import 'day.dart';
 import 'daily.dart';
 import 'difficulty.dart';
+import 'explain.dart';
 import 'grid.dart';
 import 'persistence.dart';
 import 'puzzle_code.dart';
@@ -136,8 +138,65 @@ class GameController extends ChangeNotifier {
     apply(type.initialState(puzzle));
   }
 
+  // ---- explain mode ----
+
+  /// Explain mode is on: [explanation] follows the board.
+  bool explaining = false;
+
+  /// The next step, or null when nothing is left to explain.
+  Explanation? explanation;
+
+  /// Cells of the explanation line or chip the player tapped.
+  Set<Pos> explainFocus = const {};
+
+  bool get canExplain => type.canExplain && !practice;
+
+  /// Entering the mode counts as a hint, and so does every step it applies.
+  void toggleExplain() {
+    if (solved || !canExplain) return;
+    explaining = !explaining;
+    if (explaining) {
+      hintsUsed++;
+      _explain();
+      save();
+    } else {
+      explanation = null;
+      explainFocus = const {};
+    }
+    notifyListeners();
+  }
+
+  void _explain() {
+    explanation = type.explain(puzzle, _state);
+    explainFocus = const {};
+  }
+
+  void applyExplanation() {
+    final next = explanation?.next;
+    if (solved || next == null) return;
+    hintsUsed++;
+    flashHints = explanation!.targets;
+    flashTick++;
+    apply(next);
+  }
+
+  void focusExplain(Set<Pos> cells) {
+    explainFocus = setEquals(explainFocus, cells) ? const {} : cells;
+    notifyListeners();
+  }
+
   void hint() {
     if (solved) return;
+    if (type.canExplain) {
+      final e = type.explain(puzzle, _state);
+      if (e?.next != null) {
+        hintsUsed++;
+        flashHints = e!.targets;
+        flashTick++;
+        apply(e.next!);
+        return;
+      }
+    }
     final h = type.hint(puzzle, _state);
     if (h == null) return;
     hintsUsed++;
@@ -217,6 +276,7 @@ class GameController extends ChangeNotifier {
       _win();
       return;
     }
+    if (explaining) _explain();
     save();
     notifyListeners();
   }
@@ -224,6 +284,9 @@ class GameController extends ChangeNotifier {
   Future<void> _win() async {
     solved = true;
     selectedCell = null;
+    explaining = false;
+    explanation = null;
+    explainFocus = const {};
     pause();
     if (settings.haptics) HapticFeedback.mediumImpact();
     notifyListeners();

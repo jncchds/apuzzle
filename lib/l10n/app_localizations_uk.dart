@@ -1471,4 +1471,182 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get tutMinesS2 =>
       'Складне поле. Далі порівнюйте числа зі спільними закритими клітинками. Під кінець рахуйте, що лишилося: лічильник мін може розв\'язати останні закриті клітинки.';
+
+  @override
+  String get explain => 'Пояснити';
+
+  @override
+  String get explainTooltip => 'Пояснити наступний крок';
+
+  @override
+  String get explainClose => 'Закрити';
+
+  @override
+  String get explainApply => 'Зробити';
+
+  @override
+  String get explainWhy => 'Чому?';
+
+  @override
+  String get explainNone => 'Пояснювати більше нічого.';
+
+  @override
+  String exWrong(Object cell) {
+    return '$cell не збігається з розв\'язком. Спершу очистьте цю клітинку.';
+  }
+
+  @override
+  String exFallback(Object cell) {
+    return 'Логічного кроку тут не знайдено, тож $cell заповнено з розв\'язку.';
+  }
+
+  @override
+  String exSuppose(Object cell, Object value) {
+    return 'Припустімо, що в $cell стоїть $value.';
+  }
+
+  @override
+  String exRefutedBinary(Object cell, Object value, Object other) {
+    return 'У $cell має бути $value: $other там веде до суперечності.';
+  }
+
+  @override
+  String exRefuted(Object cell, Object value) {
+    return 'У $cell не може бути $value: це веде до суперечності.';
+  }
+
+  @override
+  String exMamboPair(Object cell, Object value, Object a, Object b, Object other) {
+    return 'У $cell має бути $value: інакше $a, $b і $cell були б трьома $other поспіль.';
+  }
+
+  @override
+  String exMamboGap(Object cell, Object value, Object a, Object b, Object other) {
+    return 'У $cell має бути $value: вона між $a і $b, а там обидві $other.';
+  }
+
+  @override
+  String exMamboHalfRow(Object cell, Object value, Object row, Object count, Object other) {
+    return 'У $cell має бути $value: у рядку $row уже є всі $count $other.';
+  }
+
+  @override
+  String exMamboHalfCol(Object cell, Object value, Object col, Object count, Object other) {
+    return 'У $cell має бути $value: у стовпці $col уже є всі $count $other.';
+  }
+
+  @override
+  String exMamboSame(Object cell, Object value, Object a) {
+    return 'У $cell має бути $value: знак = пов\'язує її з $a, де $value.';
+  }
+
+  @override
+  String exMamboDiff(Object cell, Object value, Object a, Object other) {
+    return 'У $cell має бути $value: знак × пов\'язує її з $a, де $other.';
+  }
+
+  @override
+  String exMamboFailThree(Object a, Object b, Object c, Object value) {
+    return 'Але тоді $a, $b і $c — три $value поспіль.';
+  }
+
+  @override
+  String exMamboFailHalfRow(Object row, Object count, Object value) {
+    return 'Але тоді в рядку $row більше ніж $count $value.';
+  }
+
+  @override
+  String exMamboFailHalfCol(Object col, Object count, Object value) {
+    return 'Але тоді в стовпці $col більше ніж $count $value.';
+  }
+
+  @override
+  String exMamboFailSame(Object a, Object b) {
+    return 'Але тоді $a і $b різні, хоча між ними знак =.';
+  }
+
+  @override
+  String exMamboFailDiff(Object a, Object b) {
+    return 'Але тоді $a і $b однакові, хоча між ними знак ×.';
+  }
+
+  @override
+  String exSudokuNaked(Object cell, Object value) {
+    return 'У $cell має бути $value: усі інші цифри вже є в її рядку, стовпці чи блоці.';
+  }
+
+  @override
+  String exSudokuHiddenRow(Object cell, Object value, Object row) {
+    return 'У $cell має бути $value: це єдине місце для $value у рядку $row.';
+  }
+
+  @override
+  String exSudokuHiddenCol(Object cell, Object value, Object col) {
+    return 'У $cell має бути $value: це єдине місце для $value у стовпці $col.';
+  }
+
+  @override
+  String exSudokuHiddenBox(Object cell, Object value, Object box) {
+    return 'У $cell має бути $value: це єдине місце для $value у блоці $box.';
+  }
+
+  @override
+  String exSudokuPointingRow(Object box, Object value, Object row) {
+    return 'У блоці $box цифра $value може бути лише в рядку $row, тож в решті рядка $row її бути не може.';
+  }
+
+  @override
+  String exSudokuPointingCol(Object box, Object value, Object col) {
+    return 'У блоці $box цифра $value може бути лише в стовпці $col, тож в решті стовпця $col її бути не може.';
+  }
+
+  @override
+  String exSudokuClaimingRow(Object row, Object value, Object box) {
+    return 'У рядку $row цифра $value може бути лише в блоці $box, тож в решті цього блоку її бути не може.';
+  }
+
+  @override
+  String exSudokuClaimingCol(Object col, Object value, Object box) {
+    return 'У стовпці $col цифра $value може бути лише в блоці $box, тож в решті цього блоку її бути не може.';
+  }
+
+  @override
+  String exSudokuPairRow(Object a, Object b, Object v1, Object v2, Object row) {
+    return 'У $a і $b можуть бути лише $v1 і $v2, тож в решті рядка $row цих цифр бути не може.';
+  }
+
+  @override
+  String exSudokuPairCol(Object a, Object b, Object v1, Object v2, Object col) {
+    return 'У $a і $b можуть бути лише $v1 і $v2, тож в решті стовпця $col цих цифр бути не може.';
+  }
+
+  @override
+  String exSudokuPairBox(Object a, Object b, Object v1, Object v2, Object box) {
+    return 'У $a і $b можуть бути лише $v1 і $v2, тож в решті блоку $box цих цифр бути не може.';
+  }
+
+  @override
+  String exSudokuFailEmpty(Object cell) {
+    return 'Але тоді для $cell не лишається жодної цифри.';
+  }
+
+  @override
+  String exSudokuFailNoPlaceRow(Object value, Object row) {
+    return 'Але тоді для $value не лишається місця в рядку $row.';
+  }
+
+  @override
+  String exSudokuFailNoPlaceCol(Object value, Object col) {
+    return 'Але тоді для $value не лишається місця в стовпці $col.';
+  }
+
+  @override
+  String exSudokuFailNoPlaceBox(Object value, Object box) {
+    return 'Але тоді для $value не лишається місця в блоці $box.';
+  }
+
+  @override
+  String exSudokuFailClash(Object a, Object b, Object value) {
+    return 'Але тоді і в $a, і в $b стоїть $value.';
+  }
 }

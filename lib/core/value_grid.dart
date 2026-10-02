@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../ui/board/cell_grid_board.dart';
 import '../ui/board/cell_tile.dart';
+import '../ui/board/explain_overlay.dart';
 import '../ui/input_palette.dart';
 import 'game_controller.dart';
 import 'grid.dart';
@@ -184,6 +185,10 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
   Widget buildValue(BuildContext context, P puzzle, ValueGrid state, Pos pos, CellValue cell, double size) =>
       values[cell.value!].build(context, size);
 
+  @override
+  Widget buildValueChip(BuildContext context, P puzzle, int value, double size) =>
+      valuesFor(puzzle)[value].build(context, size);
+
   Color? cellColor(BuildContext context, P puzzle, Pos pos, CellValue cell) => null;
 
   /// Like [cellColor], for colors that depend on the whole state (lit cells...).
@@ -269,6 +274,7 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
       sectionRows: secR,
       sectionCols: secC,
       win: ctrl.winAnimation,
+      explain: ExplainView.of(ctrl),
       onTap: ctrl.solved ? null : (pos) => onCellTap(ctrl, pos),
       onSecondary: ctrl.solved ? null : (pos) => onCellSecondary(ctrl, pos),
       overlayBuilder: (context, m) => buildOverlayIn(context, p, s, m),

@@ -4,6 +4,7 @@ import '../l10n/l10n.dart';
 import 'daily.dart' show dailyLaunch;
 import 'day.dart';
 import 'difficulty.dart';
+import 'explain.dart';
 import 'game_controller.dart';
 import 'grid.dart';
 import 'tutorial.dart';
@@ -106,6 +107,16 @@ abstract class PuzzleType<P, S> {
 
   /// The next state, or [state] itself to only point at [HintResult.cells].
   HintResult<S>? hint(P puzzle, S state);
+
+  /// Whether explain mode is offered (see [explain]).
+  bool get canExplain => false;
+
+  /// The next logical step and its reasons, or null when nothing is left.
+  /// Types usually return `explainStep(theirExplainer, puzzle, state)`.
+  Explanation? explain(P puzzle, S state) => null;
+
+  /// A value as a chip inside explanation texts (see [valTok]).
+  Widget buildValueChip(BuildContext context, P puzzle, int value, double size) => const SizedBox.shrink();
 
   /// Score of a score-based game (kept as a best score in stats), or null.
   int? score(P puzzle, S state) => null;

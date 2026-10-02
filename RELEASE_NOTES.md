@@ -1,5 +1,9 @@
 # Release notes
 
+## 0.6.0 - 2026-10-02
+- Explain mode (Sun & Moon, Sudoku): the new button next to Hint explains the next step in words, cell by cell, with the reasons behind it; "Do it" plays the step, and you can switch back to playing any time. Entering the mode and each step count as hints
+- Hint now plays the next logical step instead of a random cell
+
 ## 0.5.1 - 2026-10-02
 - Settings: move your progress to another device as a file or as copied text; importing merges, so wins, best times and daily results from both devices are kept
 - Solving a daily puzzle as a free game (for example from a shared link) now counts for that day too

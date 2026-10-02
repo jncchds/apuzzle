@@ -16,6 +16,7 @@ import '../core/puzzle_type.dart';
 import '../core/settings.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
+import 'explain_panel.dart';
 import 'new_game_sheet.dart' show formatDuration;
 import 'puzzle_code_ui.dart';
 import 'win_overlay.dart';
@@ -347,7 +348,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   Widget _game(BuildContext context, GameController c) {
     final theme = Theme.of(context);
     final l = context.l10n;
-    final controls = type.buildControls(context, c);
+    final controls = c.explaining && !c.solved ? ExplainPanel(controller: c) : type.buildControls(context, c);
     return Stack(
       children: [
         SafeArea(
@@ -477,8 +478,8 @@ class _Toolbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = controller;
     final l = context.l10n;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+    final row = Padding(
+      padding: EdgeInsets.symmetric(horizontal: c.canExplain ? 4 : 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -486,10 +487,24 @@ class _Toolbar extends StatelessWidget {
           IconButton(icon: const Icon(Icons.redo_rounded), tooltip: l.redo, onPressed: c.canRedo ? c.redo : null),
           IconButton(icon: const Icon(Icons.restart_alt_rounded), tooltip: l.restart, onPressed: onRestart),
           IconButton(icon: const Icon(Icons.lightbulb_outline_rounded), tooltip: l.hint, onPressed: c.hint),
+          if (c.canExplain)
+            IconButton(
+              icon: const Icon(Icons.psychology_alt_outlined),
+              selectedIcon: const Icon(Icons.psychology_alt_rounded),
+              isSelected: c.explaining,
+              tooltip: l.explainTooltip,
+              onPressed: c.toggleExplain,
+            ),
           if (onSubmit != null)
             FilledButton.icon(onPressed: onSubmit, icon: const Icon(Icons.check_rounded), label: Text(l.submit)),
         ],
       ),
+    );
+    if (!c.canExplain) return row;
+    // One more button: keep it on a small phone.
+    return IconButtonTheme(
+      data: IconButtonThemeData(style: IconButton.styleFrom(visualDensity: VisualDensity.compact)),
+      child: row,
     );
   }
 }

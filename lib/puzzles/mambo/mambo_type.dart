@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
+import 'mambo_explain.dart';
 import 'mambo_generator.dart';
 import 'mambo_model.dart';
 import 'mambo_tutorial.dart';
@@ -61,6 +63,12 @@ class MamboType extends ValueGridType<MamboPuzzle> {
   Set<Pos> conflicts(MamboPuzzle puzzle, ValueGrid state) => {
     for (final i in mamboConflicts(puzzle.n, state.toFlat(), puzzle.edges)) puzzle.size.pos(i),
   };
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(MamboPuzzle puzzle, ValueGrid state) => explainStep(const MamboExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(MamboPuzzle puzzle) => puzzle.toJson();
