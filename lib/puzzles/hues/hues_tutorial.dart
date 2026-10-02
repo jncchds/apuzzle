@@ -18,7 +18,7 @@ HuesPuzzle _board(List<List<String>> rows) {
   for (var i = 0; i < flat.length; i++) {
     assert(!isClue[i] || clues[i] == int.parse(flat[i].substring(1)), 'clue $i should be ${clues[i]}');
   }
-  return HuesPuzzle(rows: r, cols: c, colors: 4, clues: clues, solution: solution);
+  return HuesPuzzle(rows: r, cols: c, colors: huesColorCount, clues: clues, solution: solution);
 }
 
 Set<Pos> _open(HuesPuzzle p) => {

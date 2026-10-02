@@ -1,4 +1,10 @@
+import '../../core/explain.dart';
 import 'atoms_model.dart';
+
+/// What a traced [AtomsSolver.propagate] records ([Fact.rule]). Slots are
+/// 2e (edge e's least bonds) and 2e + 1 (its most); [Fact.value] is the new
+/// bound. Island rules have the island as arg, [cross] the crossing edge.
+enum AtomsRule { atLeast, atMost, cross, failSum, failCross, failConnect }
 
 /// Interval solver: every edge has [lo, hi] bonds (0..2).
 ///  Tier 1: island sums + crossings.
@@ -25,7 +31,17 @@ class AtomsSolver {
     for (final e in p.edges) [2, p.numbers[e.a], p.numbers[e.b]].reduce((a, b) => a < b ? a : b),
   ];
 
-  bool _propagate(List<int> lo, List<int> hi, bool conn) {
+  /// Applies the island and crossing rules (with [conn], connectivity too)
+  /// until nothing changes; false on a contradiction. With [t], every
+  /// deduction is recorded (see [AtomsRule]).
+  bool propagate(List<int> lo, List<int> hi, bool conn, [ExplainTrace? t]) => _propagate(lo, hi, conn, t);
+
+  /// Both bound slots of every edge of island [k].
+  List<int> _around(int k) => [
+    for (final e in edgesOf[k]) ...[2 * e, 2 * e + 1],
+  ];
+
+  bool _propagate(List<int> lo, List<int> hi, bool conn, [ExplainTrace? t]) {
     var changed = true;
     while (changed) {
       changed = false;
@@ -36,32 +52,47 @@ class AtomsSolver {
           sHi += hi[e];
         }
         final num = p.numbers[k];
-        if (sLo > num || sHi < num) return false;
+        if (sLo > num || sHi < num) {
+          t?.fail(AtomsRule.failSum.index, premises: _around(k), args: [k]);
+          return false;
+        }
         for (final e in edgesOf[k]) {
           final newLo = num - (sHi - hi[e]);
           final newHi = num - (sLo - lo[e]);
           if (newLo > lo[e]) {
             lo[e] = newLo;
+            t?.fact(2 * e, newLo, AtomsRule.atLeast.index, premises: _around(k), args: [k]);
             changed = true;
           }
           if (newHi < hi[e]) {
             hi[e] = newHi;
+            t?.fact(2 * e + 1, newHi, AtomsRule.atMost.index, premises: _around(k), args: [k]);
             changed = true;
           }
-          if (lo[e] > hi[e]) return false;
+          if (lo[e] > hi[e]) {
+            t?.fail(AtomsRule.failSum.index, premises: _around(k), args: [k]);
+            return false;
+          }
         }
       }
       for (var e = 0; e < p.edges.length; e++) {
         if (lo[e] == 0) continue;
         for (final f in cross[e]) {
-          if (lo[f] > 0) return false;
+          if (lo[f] > 0) {
+            t?.fail(AtomsRule.failCross.index, premises: [2 * e, 2 * f], args: [e, f]);
+            return false;
+          }
           if (hi[f] > 0) {
             hi[f] = 0;
+            t?.fact(2 * f + 1, 0, AtomsRule.cross.index, premises: [2 * e], args: [e]);
             changed = true;
           }
         }
       }
-      if (conn && !changed && !_connectivityOk(lo, hi)) return false;
+      if (conn && !changed && !_connectivityOk(lo, hi)) {
+        t?.fail(AtomsRule.failConnect.index, premises: [for (var x = 0; x < 2 * lo.length; x++) x]);
+        return false;
+      }
     }
     return true;
   }

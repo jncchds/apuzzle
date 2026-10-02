@@ -2732,4 +2732,318 @@ class AppLocalizationsDe extends AppLocalizations {
   String exArrowsFailClash(Object cell) {
     return 'Dann müsste $cell aber schattiert und zugleich auf der Schleife sein.';
   }
+
+  @override
+  String exMinesSupposeMine(Object cell) {
+    return 'Angenommen, in $cell läge eine Mine.';
+  }
+
+  @override
+  String exMinesSupposeSafe(Object cell) {
+    return 'Angenommen, $cell wäre sicher.';
+  }
+
+  @override
+  String exMinesRefutedMine(Object cell) {
+    return '$cell ist sicher: eine Mine dort führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exMinesRefutedSafe(Object cell) {
+    return 'In $cell liegt eine Mine: wäre es sicher, entstünde ein Widerspruch.';
+  }
+
+  @override
+  String exMinesNumberSafe(Object cell, Object number) {
+    return '$cell ist sicher: die Zahl in $number hat schon alle ihre Minen um sich.';
+  }
+
+  @override
+  String exMinesNumberMine(Object cell, Object number) {
+    return 'In $cell liegt eine Mine: die Zahl in $number braucht in jedem geschlossenen Feld um sich eine Mine.';
+  }
+
+  @override
+  String exMinesTotalSafe(Object cell) {
+    return '$cell ist sicher: alle Minen sind gefunden.';
+  }
+
+  @override
+  String exMinesTotalMine(Object cell) {
+    return 'In $cell liegt eine Mine: die übrigen Minen füllen jedes geschlossene Feld.';
+  }
+
+  @override
+  String exMinesPairSafe(Object cell, Object a, Object b) {
+    return '$cell ist sicher: vergleicht man die Zahlen in $a und $b, liegen ihre Minen woanders.';
+  }
+
+  @override
+  String exMinesPairMine(Object cell, Object a, Object b) {
+    return 'In $cell liegt eine Mine: vergleicht man die Zahlen in $a und $b, müssen die übrigen Minen hier liegen.';
+  }
+
+  @override
+  String exMinesFailNumber(Object number) {
+    return 'Dann könnte die Zahl in $number aber nicht stimmen.';
+  }
+
+  @override
+  String get exMinesFailTotal => 'Dann ginge die Zahl der Minen aber nicht auf.';
+
+  @override
+  String exMinesFailPair(Object a, Object b) {
+    return 'Dann könnten die Zahlen in $a und $b aber nicht beide stimmen.';
+  }
+
+  @override
+  String exShikakuSuppose(Object clue, Object rect) {
+    return 'Angenommen, die Zahl in $clue nähme $rect.';
+  }
+
+  @override
+  String exShikakuRefuted(Object clue, Object rect) {
+    return 'Die Zahl in $clue kann $rect nicht nehmen: das führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exShikakuOverlap(Object clue, Object other) {
+    return 'Rechtecke für $clue, die das von $other überlappen, fallen weg.';
+  }
+
+  @override
+  String exShikakuOwner(Object clue, Object cell) {
+    return 'Nur die Zahl in $clue kann $cell noch abdecken, also muss ihr Rechteck es einschließen.';
+  }
+
+  @override
+  String exShikakuCommon(Object clue, Object cell, Object other) {
+    return 'Jedes Rechteck, das für $clue bleibt, deckt $cell ab, also fallen Rechtecke für $other, die es abdecken, weg.';
+  }
+
+  @override
+  String exShikakuFixed(Object clue, Object rect) {
+    return 'Die Zahl in $clue nimmt $rect: es ist das einzige Rechteck, das ihr bleibt.';
+  }
+
+  @override
+  String exShikakuFailNone(Object clue) {
+    return 'Dann bliebe für die Zahl in $clue aber kein Rechteck übrig.';
+  }
+
+  @override
+  String exShikakuFailUncovered(Object cell) {
+    return 'Dann könnte $cell aber nichts mehr abdecken.';
+  }
+
+  @override
+  String exAtomsSuppose(Object edge, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Bindungen',
+      one: 'eine Bindung',
+      zero: 'keine Bindung',
+    );
+    return 'Angenommen, $edge hätte $_temp0.';
+  }
+
+  @override
+  String exAtomsRefutedMore(Object edge, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Bindungen',
+      one: 'eine Bindung',
+    );
+    return '$edge bekommt mindestens $_temp0: weniger führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exAtomsRefutedLess(int count, Object edge) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$edge bekommt höchstens $count Bindungen: mehr führt zu einem Widerspruch.',
+      one: '$edge bekommt höchstens eine Bindung: mehr führt zu einem Widerspruch.',
+      zero: '$edge bekommt keine Bindung: jede Bindung dort führt zu einem Widerspruch.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exAtomsAtLeast(Object edge, int count, Object atom) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Bindungen',
+      one: 'eine Bindung',
+    );
+    return '$edge bekommt mindestens $_temp0: sonst erreicht das Atom in $atom seine Zahl nicht.';
+  }
+
+  @override
+  String exAtomsAtMost(int count, Object edge, Object atom) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$edge bekommt höchstens $count Bindungen: mehr überschritte die Zahl des Atoms in $atom.',
+      one: '$edge bekommt höchstens eine Bindung: mehr überschritte die Zahl des Atoms in $atom.',
+      zero: '$edge bekommt keine Bindung: jede überschritte die Zahl des Atoms in $atom.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exAtomsCross(Object edge, Object other) {
+    return '$edge bekommt keine Bindung: sie kreuzte die Bindung $other.';
+  }
+
+  @override
+  String exAtomsFailSum(Object atom) {
+    return 'Dann bekäme das Atom in $atom aber nicht seine Zahl an Bindungen.';
+  }
+
+  @override
+  String exAtomsFailCross(Object a, Object b) {
+    return 'Dann kreuzten sich die Bindungen $a und $b aber.';
+  }
+
+  @override
+  String get exAtomsFailConnect => 'Dann ließen sich die Atome aber nicht zu einem Molekül verbinden.';
+
+  @override
+  String exTrailSupposeOn(Object edge) {
+    return 'Angenommen, der Pfad nähme $edge.';
+  }
+
+  @override
+  String exTrailSupposeOff(Object edge) {
+    return 'Angenommen, der Pfad nähme $edge nicht.';
+  }
+
+  @override
+  String exTrailRefutedOn(Object edge) {
+    return 'Der Pfad nimmt $edge: sonst entsteht ein Widerspruch.';
+  }
+
+  @override
+  String exTrailRefutedOff(Object edge) {
+    return 'Der Pfad nimmt $edge nicht: sonst entsteht ein Widerspruch.';
+  }
+
+  @override
+  String exTrailDegreeDone(Object edge, Object cell) {
+    return 'Der Pfad nimmt $edge nicht: er läuft schon in $cell hinein und wieder hinaus.';
+  }
+
+  @override
+  String exTrailEndDone(Object edge, Object cell) {
+    return 'Der Pfad nimmt $edge nicht: sein Ende in $cell ist schon angeschlossen.';
+  }
+
+  @override
+  String exTrailDegreeNeed(Object edge, Object cell) {
+    return 'Der Pfad nimmt $edge: der Pfad durch $cell hat keinen anderen Weg.';
+  }
+
+  @override
+  String exTrailLoop(Object edge) {
+    return 'Der Pfad nimmt $edge nicht: das schlösse eine Schleife.';
+  }
+
+  @override
+  String exTrailOrder(Object edge) {
+    return 'Der Pfad nimmt $edge nicht: das verbände die Zahlen in falscher Reihenfolge.';
+  }
+
+  @override
+  String exTrailEarly(Object edge) {
+    return 'Der Pfad nimmt $edge nicht: das verbände Anfang und Ende, bevor jedes Feld besucht ist.';
+  }
+
+  @override
+  String exTrailFailBranch(Object cell) {
+    return 'Dann verzweigte sich der Pfad aber in $cell.';
+  }
+
+  @override
+  String exTrailFailStuck(Object cell) {
+    return 'Dann säße der Pfad in $cell aber fest.';
+  }
+
+  @override
+  String get exTrailFailOrder => 'Dann kämen die Zahlen aber in falscher Reihenfolge.';
+
+  @override
+  String get exTrailFailLoop => 'Dann schlössen sich einige Felder aber zu einer eigenen Schleife.';
+
+  @override
+  String get exTrailFailConnect => 'Dann erreichte der Pfad aber nicht jedes Feld.';
+
+  @override
+  String exLinksSupposeOn(Object edge) {
+    return 'Angenommen, ein Pfad liefe über $edge.';
+  }
+
+  @override
+  String exLinksSupposeOff(Object edge) {
+    return 'Angenommen, kein Pfad liefe über $edge.';
+  }
+
+  @override
+  String exLinksRefutedOn(Object edge) {
+    return 'Ein Pfad läuft über $edge: sonst entsteht ein Widerspruch.';
+  }
+
+  @override
+  String exLinksRefutedOff(Object edge) {
+    return 'Kein Pfad läuft über $edge: ein Pfad dort führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exLinksDegreeDone(Object edge, Object cell) {
+    return 'Kein Pfad läuft über $edge: ein Pfad läuft schon in $cell hinein und wieder hinaus.';
+  }
+
+  @override
+  String exLinksDotDone(Object edge, Object cell) {
+    return 'Kein Pfad läuft über $edge: der Pfad vom Punkt in $cell verlässt ihn schon.';
+  }
+
+  @override
+  String exLinksDegreeNeed(Object edge, Object cell) {
+    return 'Ein Pfad läuft über $edge: der Pfad durch $cell hat keinen anderen Weg.';
+  }
+
+  @override
+  String exLinksDotNeed(Object edge, Object cell) {
+    return 'Ein Pfad läuft über $edge: es ist der einzige Weg, der vom Punkt in $cell noch bleibt.';
+  }
+
+  @override
+  String exLinksLoop(Object edge) {
+    return 'Kein Pfad läuft über $edge: das schlösse eine Schleife.';
+  }
+
+  @override
+  String exLinksMixed(Object edge) {
+    return 'Kein Pfad läuft über $edge: das verbände Pfade zweier verschiedener Paare.';
+  }
+
+  @override
+  String exLinksFailBranch(Object cell) {
+    return 'Dann verzweigte sich ein Pfad aber in $cell.';
+  }
+
+  @override
+  String exLinksFailStuck(Object cell) {
+    return 'Dann säße ein Pfad in $cell aber fest.';
+  }
+
+  @override
+  String get exLinksFailLoop => 'Dann schlösse sich ein Pfad aber zu einer Schleife.';
+
+  @override
+  String get exLinksFailMixed => 'Dann verbände ein Pfad aber zwei verschiedene Paare.';
 }

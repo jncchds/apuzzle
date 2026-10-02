@@ -2727,4 +2727,318 @@ class AppLocalizationsEn extends AppLocalizations {
   String exArrowsFailClash(Object cell) {
     return 'But then $cell would have to be shaded and on the loop.';
   }
+
+  @override
+  String exMinesSupposeMine(Object cell) {
+    return 'Suppose $cell were a mine.';
+  }
+
+  @override
+  String exMinesSupposeSafe(Object cell) {
+    return 'Suppose $cell were safe.';
+  }
+
+  @override
+  String exMinesRefutedMine(Object cell) {
+    return '$cell is safe: a mine there leads to a contradiction.';
+  }
+
+  @override
+  String exMinesRefutedSafe(Object cell) {
+    return '$cell is a mine: if it were safe, that would lead to a contradiction.';
+  }
+
+  @override
+  String exMinesNumberSafe(Object cell, Object number) {
+    return '$cell is safe: the number in $number already has all its mines around it.';
+  }
+
+  @override
+  String exMinesNumberMine(Object cell, Object number) {
+    return '$cell is a mine: the number in $number needs a mine in every closed cell around it.';
+  }
+
+  @override
+  String exMinesTotalSafe(Object cell) {
+    return '$cell is safe: every mine has been found.';
+  }
+
+  @override
+  String exMinesTotalMine(Object cell) {
+    return '$cell is a mine: the mines left fill every closed cell.';
+  }
+
+  @override
+  String exMinesPairSafe(Object cell, Object a, Object b) {
+    return '$cell is safe: comparing the numbers in $a and $b, their mines must lie elsewhere.';
+  }
+
+  @override
+  String exMinesPairMine(Object cell, Object a, Object b) {
+    return '$cell is a mine: comparing the numbers in $a and $b, the extra mines must lie here.';
+  }
+
+  @override
+  String exMinesFailNumber(Object number) {
+    return 'But then the number in $number can\'t be right.';
+  }
+
+  @override
+  String get exMinesFailTotal => 'But then the number of mines doesn\'t add up.';
+
+  @override
+  String exMinesFailPair(Object a, Object b) {
+    return 'But then the numbers in $a and $b can\'t both be right.';
+  }
+
+  @override
+  String exShikakuSuppose(Object clue, Object rect) {
+    return 'Suppose the number in $clue took $rect.';
+  }
+
+  @override
+  String exShikakuRefuted(Object clue, Object rect) {
+    return 'The number in $clue can\'t take $rect: it leads to a contradiction.';
+  }
+
+  @override
+  String exShikakuOverlap(Object clue, Object other) {
+    return 'Rectangles for $clue that overlap the one of $other are out.';
+  }
+
+  @override
+  String exShikakuOwner(Object clue, Object cell) {
+    return 'Only the number in $clue can still cover $cell, so its rectangle must include it.';
+  }
+
+  @override
+  String exShikakuCommon(Object clue, Object cell, Object other) {
+    return 'Every rectangle left for $clue covers $cell, so rectangles for $other that cover it are out.';
+  }
+
+  @override
+  String exShikakuFixed(Object clue, Object rect) {
+    return 'The number in $clue takes $rect: it\'s the only rectangle left for it.';
+  }
+
+  @override
+  String exShikakuFailNone(Object clue) {
+    return 'But then no rectangle is left for the number in $clue.';
+  }
+
+  @override
+  String exShikakuFailUncovered(Object cell) {
+    return 'But then nothing can cover $cell.';
+  }
+
+  @override
+  String exAtomsSuppose(Object edge, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count bonds',
+      one: 'one bond',
+      zero: 'no bonds',
+    );
+    return 'Suppose $edge had $_temp0.';
+  }
+
+  @override
+  String exAtomsRefutedMore(Object edge, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count bonds',
+      one: 'one bond',
+    );
+    return '$edge gets at least $_temp0: fewer leads to a contradiction.';
+  }
+
+  @override
+  String exAtomsRefutedLess(int count, Object edge) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$edge gets at most $count bonds: more leads to a contradiction.',
+      one: '$edge gets at most one bond: more leads to a contradiction.',
+      zero: '$edge gets no bonds: any bond there leads to a contradiction.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exAtomsAtLeast(Object edge, int count, Object atom) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count bonds',
+      one: 'one bond',
+    );
+    return '$edge gets at least $_temp0: the atom in $atom can\'t reach its number otherwise.';
+  }
+
+  @override
+  String exAtomsAtMost(int count, Object edge, Object atom) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$edge gets at most $count bonds: more would overshoot the number of the atom in $atom.',
+      one: '$edge gets at most one bond: more would overshoot the number of the atom in $atom.',
+      zero: '$edge gets no bonds: any would overshoot the number of the atom in $atom.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exAtomsCross(Object edge, Object other) {
+    return '$edge gets no bonds: they would cross the bond $other.';
+  }
+
+  @override
+  String exAtomsFailSum(Object atom) {
+    return 'But then the atom in $atom can\'t get its number of bonds.';
+  }
+
+  @override
+  String exAtomsFailCross(Object a, Object b) {
+    return 'But then the bonds $a and $b cross.';
+  }
+
+  @override
+  String get exAtomsFailConnect => 'But then the atoms can\'t all join into one molecule.';
+
+  @override
+  String exTrailSupposeOn(Object edge) {
+    return 'Suppose the path took $edge.';
+  }
+
+  @override
+  String exTrailSupposeOff(Object edge) {
+    return 'Suppose the path didn\'t take $edge.';
+  }
+
+  @override
+  String exTrailRefutedOn(Object edge) {
+    return 'The path takes $edge: leaving it out leads to a contradiction.';
+  }
+
+  @override
+  String exTrailRefutedOff(Object edge) {
+    return 'The path doesn\'t take $edge: taking it leads to a contradiction.';
+  }
+
+  @override
+  String exTrailDegreeDone(Object edge, Object cell) {
+    return 'The path doesn\'t take $edge: it already enters and leaves $cell.';
+  }
+
+  @override
+  String exTrailEndDone(Object edge, Object cell) {
+    return 'The path doesn\'t take $edge: its end in $cell is already joined.';
+  }
+
+  @override
+  String exTrailDegreeNeed(Object edge, Object cell) {
+    return 'The path takes $edge: the path through $cell has no other way.';
+  }
+
+  @override
+  String exTrailLoop(Object edge) {
+    return 'The path doesn\'t take $edge: it would close a loop.';
+  }
+
+  @override
+  String exTrailOrder(Object edge) {
+    return 'The path doesn\'t take $edge: it would join the numbers out of order.';
+  }
+
+  @override
+  String exTrailEarly(Object edge) {
+    return 'The path doesn\'t take $edge: it would join the start to the end before every cell is visited.';
+  }
+
+  @override
+  String exTrailFailBranch(Object cell) {
+    return 'But then the path branches in $cell.';
+  }
+
+  @override
+  String exTrailFailStuck(Object cell) {
+    return 'But then the path gets stuck in $cell.';
+  }
+
+  @override
+  String get exTrailFailOrder => 'But then the numbers come out of order.';
+
+  @override
+  String get exTrailFailLoop => 'But then some cells close into a loop of their own.';
+
+  @override
+  String get exTrailFailConnect => 'But then the path can\'t reach every cell.';
+
+  @override
+  String exLinksSupposeOn(Object edge) {
+    return 'Suppose a path ran along $edge.';
+  }
+
+  @override
+  String exLinksSupposeOff(Object edge) {
+    return 'Suppose no path ran along $edge.';
+  }
+
+  @override
+  String exLinksRefutedOn(Object edge) {
+    return 'A path runs along $edge: leaving it out leads to a contradiction.';
+  }
+
+  @override
+  String exLinksRefutedOff(Object edge) {
+    return 'No path runs along $edge: a path there leads to a contradiction.';
+  }
+
+  @override
+  String exLinksDegreeDone(Object edge, Object cell) {
+    return 'No path runs along $edge: a path already enters and leaves $cell.';
+  }
+
+  @override
+  String exLinksDotDone(Object edge, Object cell) {
+    return 'No path runs along $edge: the path from the dot in $cell already leaves it.';
+  }
+
+  @override
+  String exLinksDegreeNeed(Object edge, Object cell) {
+    return 'A path runs along $edge: the path through $cell has no other way.';
+  }
+
+  @override
+  String exLinksDotNeed(Object edge, Object cell) {
+    return 'A path runs along $edge: it\'s the only way left out of the dot in $cell.';
+  }
+
+  @override
+  String exLinksLoop(Object edge) {
+    return 'No path runs along $edge: it would close a loop.';
+  }
+
+  @override
+  String exLinksMixed(Object edge) {
+    return 'No path runs along $edge: it would join paths of two different pairs.';
+  }
+
+  @override
+  String exLinksFailBranch(Object cell) {
+    return 'But then a path branches in $cell.';
+  }
+
+  @override
+  String exLinksFailStuck(Object cell) {
+    return 'But then a path gets stuck in $cell.';
+  }
+
+  @override
+  String get exLinksFailLoop => 'But then a path closes into a loop.';
+
+  @override
+  String get exLinksFailMixed => 'But then one path joins two different pairs.';
 }

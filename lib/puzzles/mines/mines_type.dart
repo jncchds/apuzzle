@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/grid_graph.dart';
@@ -10,7 +11,9 @@ import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
+import '../../ui/board/explain_overlay.dart';
 import '../../ui/symbols.dart';
+import 'mines_explain.dart';
 import 'mines_generator.dart';
 import 'mines_model.dart';
 import 'mines_solver.dart';
@@ -108,7 +111,7 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
     final k = s.knowledge(state.open, state.flags);
     s.deduce(state.open, k, 3);
     for (var i = 0; i < n; i++) {
-      if (k[i] == 0 && !state.open[i]) return HintResult(_dig(puzzle, state, [i]), {puzzle.size.pos(i)});
+      if (k[i] == 0 && !state.open[i]) return HintResult(minesDig(puzzle, state, [i]), {puzzle.size.pos(i)});
     }
     for (var i = 0; i < n; i++) {
       if (k[i] == 1 && !state.flags[i]) {
@@ -126,33 +129,11 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
         if (kn[i].any((j) => state.open[j])) i,
     ];
     final pick = (edge.isEmpty ? safe : edge)[Random().nextInt(edge.isEmpty ? safe.length : edge.length)];
-    return HintResult(_dig(puzzle, state, [pick]), {puzzle.size.pos(pick)});
+    return HintResult(minesDig(puzzle, state, [pick]), {puzzle.size.pos(pick)});
   }
 
   MinesState _copy(MinesState s, {List<bool>? open, List<bool>? flags, List<int>? booms}) =>
       MinesState(open: open ?? s.open, flags: flags ?? s.flags, booms: booms ?? s.booms);
-
-  /// Digs [cells]: safe ones open (spreading from blanks), mines go off and
-  /// get flagged.
-  MinesState _dig(MinesPuzzle p, MinesState s, List<int> cells) {
-    final open = List.of(s.open);
-    final flags = List.of(s.flags);
-    final booms = [...s.booms];
-    final safe = <int>[];
-    for (final i in cells) {
-      if (p.mines[i]) {
-        flags[i] = true;
-        if (!booms.contains(i)) booms.add(i);
-      } else {
-        safe.add(i);
-      }
-    }
-    openCells(open, safe, p.mines, mineCounts(p), kingNeighbors(p.rows, p.cols));
-    for (var i = 0; i < open.length; i++) {
-      if (open[i]) flags[i] = false;
-    }
-    return MinesState(open: open, flags: flags, booms: booms);
-  }
 
   void _tap(GameController ctrl, Pos pos) {
     final p = ctrl.puzzle as MinesPuzzle;
@@ -168,7 +149,7 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
           if (!s.open[j] && !s.flags[j]) j,
       ];
       if (rest.isEmpty) return;
-      _apply(ctrl, s, _dig(p, s, rest));
+      _apply(ctrl, s, minesDig(p, s, rest));
       return;
     }
     if (ctrl.tool == flagTool) {
@@ -176,7 +157,7 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
       return;
     }
     if (s.flags[i]) return;
-    _apply(ctrl, s, _dig(p, s, [i]));
+    _apply(ctrl, s, minesDig(p, s, [i]));
   }
 
   void _apply(GameController ctrl, MinesState before, MinesState after) {
@@ -201,6 +182,7 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
     final scheme = Theme.of(context).colorScheme;
     final dark = Theme.of(context).brightness == Brightness.dark;
     return CellGridBoard(
+      explain: ExplainView.of(ctrl),
       rows: p.rows,
       cols: p.cols,
       gapRatio: 0.06,
@@ -300,6 +282,12 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
       ],
     );
   }
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(MinesPuzzle puzzle, MinesState state) => explainStep(const MinesExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(MinesPuzzle puzzle) => puzzle.toJson();

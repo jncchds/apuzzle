@@ -230,17 +230,22 @@ Explanation? explainStep<P, S, K>(Explainer<P, S, K> x, P p, S s) {
       final best = _best(x, p, s, t);
       if (best != null) return _build(x, p, s, t, best, refutedBy);
       if (!ok || !probing) break;
-      final probe = _probe(x, p, k, inner, t);
-      if (probe == null) break;
-      final (slot, value, fork) = probe;
-      final base = t.facts.length;
-      final chain = fork.chainOf(fork.failure!);
-      t.factWithDeps(slot, value, ruleRefuted, [
-        for (final f in chain)
-          if (f.id < base) f.id,
-      ]);
-      refutedBy[t.facts.last.id] = (fork, base);
-      x.refute(p, k, slot, value, t);
+      final probes = _probe(x, p, s, k, inner, t);
+      if (probes.isEmpty) break;
+      for (final (slot, value, traced) in probes) {
+        // Later ones were found before the earlier refutations: trace them
+        // again on what is known now (they still fail, maybe sooner).
+        final fork = traced ?? _trace(x, p, k, inner, t, slot, value);
+        if (fork == null) continue;
+        final base = t.facts.length;
+        final chain = fork.chainOf(fork.failure!);
+        t.factWithDeps(slot, value, ruleRefuted, [
+          for (final f in chain)
+            if (f.id < base) f.id,
+        ]);
+        refutedBy[t.facts.last.id] = (fork, base);
+        x.refute(p, k, slot, value, t);
+      }
     }
   }
   final r = x.reveal(p, s);
@@ -274,27 +279,50 @@ Fact? _best<P, S, K>(Explainer<P, S, K> x, P p, S s, ExplainTrace t) {
   return best;
 }
 
-/// A refuting assumption with the shortest contradiction: (slot, value, its trace).
-(int, int, ExplainTrace)? _probe<P, S, K>(Explainer<P, S, K> x, P p, K k, int level, ExplainTrace t) {
+/// Refuting assumptions as (slot, value, trace or null to trace later):
+/// one the board can show, with the shortest contradiction of a few, or
+/// else every refuting one (the board shows none of them, they only lead on).
+List<(int, int, ExplainTrace?)> _probe<P, S, K>(Explainer<P, S, K> x, P p, S s, K k, int level, ExplainTrace t) {
+  final all = x.probeCandidates(p, k).toList();
+  bool shown((int, int) c) => x.move(p, s, Fact(-1, c.$1, c.$2, ruleRefuted, const [], const [], const [])) != null;
   (int, int, ExplainTrace)? best;
   var bestLen = 0, tries = 0;
-  for (final (slot, value) in x.probeCandidates(p, k)) {
-    final kk = x.copy(k);
-    x.assume(p, kk, slot, value, null);
-    if (x.propagate(p, kk, level, null)) continue;
-    final fork = ExplainTrace.fork(t);
-    final kt = x.copy(k);
-    x.assume(p, kt, slot, value, fork);
-    x.propagate(p, kt, level, fork);
-    if (fork.failure == null) continue; // shouldn't happen: the same rules ran
-    final len = fork.chainOf(fork.failure!).length;
-    if (best == null || len < bestLen) {
-      best = (slot, value, fork);
-      bestLen = len;
+  final hidden = <(int, int, ExplainTrace?)>[];
+  for (final shownFirst in const [true, false]) {
+    for (final c in all) {
+      if (shown(c) != shownFirst || !_refutes(x, p, k, level, c.$1, c.$2)) continue;
+      if (!shownFirst) {
+        hidden.add((c.$1, c.$2, null));
+        continue;
+      }
+      final fork = _trace(x, p, k, level, t, c.$1, c.$2);
+      if (fork == null) continue;
+      final len = fork.chainOf(fork.failure!).length;
+      if (best == null || len < bestLen) {
+        best = (c.$1, c.$2, fork);
+        bestLen = len;
+      }
+      if (++tries >= _probeTries) break;
     }
-    if (++tries >= _probeTries) break;
+    if (best != null) return [best];
   }
-  return best;
+  return hidden;
+}
+
+/// Whether assuming [value] at [slot] contradicts the rules of [level].
+bool _refutes<P, S, K>(Explainer<P, S, K> x, P p, K k, int level, int slot, int value) {
+  final kk = x.copy(k);
+  x.assume(p, kk, slot, value, null);
+  return !x.propagate(p, kk, level, null);
+}
+
+/// The trace of a refuting assumption, or null if it doesn't refute (now).
+ExplainTrace? _trace<P, S, K>(Explainer<P, S, K> x, P p, K k, int level, ExplainTrace t, int slot, int value) {
+  final fork = ExplainTrace.fork(t);
+  final kt = x.copy(k);
+  x.assume(p, kt, slot, value, fork);
+  x.propagate(p, kt, level, fork);
+  return fork.failure == null ? null : fork;
 }
 
 Explanation _build<P, S, K>(

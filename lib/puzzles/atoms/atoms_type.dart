@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
+import '../../ui/board/explain_overlay.dart';
+import 'atoms_explain.dart';
 import 'atoms_generator.dart';
 import 'atoms_model.dart';
 import 'atoms_tutorial.dart';
@@ -119,6 +122,12 @@ class AtomsType extends PuzzleType<AtomsPuzzle, AtomsState> {
   Widget buildBoard(BuildContext context, GameController controller) => _AtomsBoard(controller: controller);
 
   @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(AtomsPuzzle puzzle, AtomsState state) => explainStep(const AtomsExplainer(), puzzle, state);
+
+  @override
   Map<String, dynamic> encodePuzzle(AtomsPuzzle puzzle) => puzzle.toJson();
   @override
   AtomsPuzzle decodePuzzle(Map<String, dynamic> json) => AtomsPuzzle.fromJson(json);
@@ -184,6 +193,7 @@ class _AtomsBoardState extends State<_AtomsBoard> {
     final errors = ctrl.errorCells;
 
     return CellGridBoard(
+      explain: ExplainView.of(ctrl),
       rows: p.rows,
       cols: p.cols,
       gapRatio: 0,

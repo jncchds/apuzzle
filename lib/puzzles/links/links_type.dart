@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../core/day.dart';
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
+import '../../ui/board/explain_overlay.dart';
+import 'links_explain.dart';
 import 'links_generator.dart';
 import 'links_model.dart';
 import 'links_tutorial.dart';
@@ -117,6 +120,12 @@ class LinksType extends PuzzleType<LinksPuzzle, LinksState> {
 
   @override
   Widget buildBoard(BuildContext context, GameController controller) => _LinksBoard(controller: controller);
+
+  @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(LinksPuzzle puzzle, LinksState state) => explainStep(const LinksExplainer(), puzzle, state);
 
   @override
   Map<String, dynamic> encodePuzzle(LinksPuzzle puzzle) => puzzle.toJson();
@@ -259,6 +268,7 @@ class _LinksBoardState extends State<_LinksBoard> {
     }
     final errors = ctrl.errorCells;
     return CellGridBoard(
+      explain: ExplainView.of(ctrl),
       rows: p.rows,
       cols: p.cols,
       gapRatio: 0.04,

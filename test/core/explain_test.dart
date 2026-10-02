@@ -6,6 +6,11 @@ import 'package:apuzzle/core/value_grid.dart';
 import 'package:apuzzle/core/lattice_loop.dart';
 import 'package:apuzzle/l10n/l10n.dart';
 import 'package:apuzzle/puzzles/arrows/arrows_model.dart';
+import 'package:apuzzle/puzzles/atoms/atoms_model.dart';
+import 'package:apuzzle/puzzles/links/links_model.dart';
+import 'package:apuzzle/puzzles/mines/mines_model.dart';
+import 'package:apuzzle/puzzles/shikaku/shikaku_model.dart';
+import 'package:apuzzle/puzzles/trail/trail_model.dart';
 import 'package:apuzzle/puzzles/rails/rails_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -31,6 +36,42 @@ Object withMark(Object s, int e, int m) => switch (s) {
   ArrowsState() => ArrowsState(List.of(s.marks)..[e] = m, s.cells),
   _ => throw ArgumentError(s),
 };
+
+/// A board with one wrong entry, for the types that aren't value grids or
+/// loops of edge marks.
+Object? wrongOther(Object puzzle, Object start) {
+  switch ((puzzle, start)) {
+    case (final MinesPuzzle p, final MinesState s):
+      final i = [
+        for (var i = 0; i < p.mines.length; i++)
+          if (!p.mines[i] && !s.open[i]) i,
+      ].first;
+      return MinesState(open: s.open, flags: List.of(s.flags)..[i] = true);
+    case (final ShikakuPuzzle p, final ShikakuState s):
+      const r = CellRect(0, 0, 0, 0);
+      return p.solution.contains(r) ? null : ShikakuState([...s.rects, r]);
+    case (final AtomsPuzzle p, final AtomsState s):
+      final e = p.solution.indexWhere((b) => b < 2);
+      return AtomsState(List.of(s.bonds)..[e] = p.solution[e] + 1);
+    case (final TrailPuzzle p, TrailState _):
+      final start = p.startCell, cols = p.cols;
+      final next = [start + 1, start - 1, start + cols, start - cols].firstWhere(
+        (j) => j >= 0 && j < p.rows * cols && trailAdjacent(start, j, cols) && j != p.solution[1],
+      );
+      return TrailState([start, next]);
+    case (final LinksPuzzle p, final LinksState s):
+      final path = p.paths.first;
+      final g = LatticeLoop(p.rows, p.cols);
+      final wrong = [
+        for (final e in g.incident[path.first]) ...[g.ends(e).$1, g.ends(e).$2],
+      ].firstWhere((j) => j != path.first && j != path[1]);
+      return LinksState([
+        [path.first, wrong],
+        ...s.paths.skip(1),
+      ]);
+  }
+  return null;
+}
 
 void checkText(String text) {
   expect(text.trim(), isNotEmpty);
@@ -99,6 +140,12 @@ void main() {
           expect(marksOf(fix.next!)[edge], 0);
           return;
         }
+        if (wrongOther(puzzle, start) case final bad?) {
+          final fix = type.explain(puzzle, bad)!;
+          expect(fix.fix, isTrue, reason: 'the wrong entry is fixed first');
+          expect(type.explain(puzzle, fix.next!)!.fix, isFalse);
+          return;
+        }
         if (start is! ValueGrid || puzzle is! ValueGridPuzzle) return;
         // Put a wrong value where the first step would go.
         final i = start.size.index(e.targets.first);
@@ -109,6 +156,29 @@ void main() {
         expect(fix.targets, {e.targets.first});
         expect((fix.next! as ValueGrid).cells[i].value, isNull);
       });
+    });
+  }
+
+  // Tutorial and strategy boards are hand-made or pinned. Value-grid ones
+  // have one answer (tutorial_test), so logic carries them to the end; other
+  // small boards may have more answers, or teach a move rather than a
+  // deduction, so there a step may come from the solution.
+  for (final type in types) {
+    test('${type.id}: tutorial and strategy boards are explained to the end', () {
+      for (final step in [...type.tutorial(), ...type.strategies()]) {
+        if (step.openEnded) continue;
+        final puzzle = step.puzzle;
+        var state = step.state ?? type.initialState(puzzle) as Object;
+        for (var k = 0; k < 500 && !(type.isComplete(puzzle, state) && type.isSolved(puzzle, state)); k++) {
+          final e = type.explain(puzzle, state);
+          if (e == null) break;
+          if (type is ValueGridType) {
+            expect(e.fallback, isFalse, reason: 'no logic at step $k of ${step.text(langs['en']!)}');
+          }
+          state = e.next!;
+        }
+        expect(type.isComplete(puzzle, state) && type.isSolved(puzzle, state), isTrue);
+      }
     });
   }
 

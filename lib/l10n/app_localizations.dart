@@ -3837,6 +3837,360 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then {cell} would have to be shaded and on the loop.'**
   String exArrowsFailClash(Object cell);
+
+  /// No description provided for @exMinesSupposeMine.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were a mine.'**
+  String exMinesSupposeMine(Object cell);
+
+  /// No description provided for @exMinesSupposeSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were safe.'**
+  String exMinesSupposeSafe(Object cell);
+
+  /// No description provided for @exMinesRefutedMine.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is safe: a mine there leads to a contradiction.'**
+  String exMinesRefutedMine(Object cell);
+
+  /// No description provided for @exMinesRefutedSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is a mine: if it were safe, that would lead to a contradiction.'**
+  String exMinesRefutedSafe(Object cell);
+
+  /// No description provided for @exMinesNumberSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is safe: the number in {number} already has all its mines around it.'**
+  String exMinesNumberSafe(Object cell, Object number);
+
+  /// No description provided for @exMinesNumberMine.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is a mine: the number in {number} needs a mine in every closed cell around it.'**
+  String exMinesNumberMine(Object cell, Object number);
+
+  /// No description provided for @exMinesTotalSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is safe: every mine has been found.'**
+  String exMinesTotalSafe(Object cell);
+
+  /// No description provided for @exMinesTotalMine.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is a mine: the mines left fill every closed cell.'**
+  String exMinesTotalMine(Object cell);
+
+  /// No description provided for @exMinesPairSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is safe: comparing the numbers in {a} and {b}, their mines must lie elsewhere.'**
+  String exMinesPairSafe(Object cell, Object a, Object b);
+
+  /// No description provided for @exMinesPairMine.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is a mine: comparing the numbers in {a} and {b}, the extra mines must lie here.'**
+  String exMinesPairMine(Object cell, Object a, Object b);
+
+  /// No description provided for @exMinesFailNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the number in {number} can\'t be right.'**
+  String exMinesFailNumber(Object number);
+
+  /// No description provided for @exMinesFailTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the number of mines doesn\'t add up.'**
+  String get exMinesFailTotal;
+
+  /// No description provided for @exMinesFailPair.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the numbers in {a} and {b} can\'t both be right.'**
+  String exMinesFailPair(Object a, Object b);
+
+  /// No description provided for @exShikakuSuppose.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose the number in {clue} took {rect}.'**
+  String exShikakuSuppose(Object clue, Object rect);
+
+  /// No description provided for @exShikakuRefuted.
+  ///
+  /// In en, this message translates to:
+  /// **'The number in {clue} can\'t take {rect}: it leads to a contradiction.'**
+  String exShikakuRefuted(Object clue, Object rect);
+
+  /// No description provided for @exShikakuOverlap.
+  ///
+  /// In en, this message translates to:
+  /// **'Rectangles for {clue} that overlap the one of {other} are out.'**
+  String exShikakuOverlap(Object clue, Object other);
+
+  /// No description provided for @exShikakuOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Only the number in {clue} can still cover {cell}, so its rectangle must include it.'**
+  String exShikakuOwner(Object clue, Object cell);
+
+  /// No description provided for @exShikakuCommon.
+  ///
+  /// In en, this message translates to:
+  /// **'Every rectangle left for {clue} covers {cell}, so rectangles for {other} that cover it are out.'**
+  String exShikakuCommon(Object clue, Object cell, Object other);
+
+  /// No description provided for @exShikakuFixed.
+  ///
+  /// In en, this message translates to:
+  /// **'The number in {clue} takes {rect}: it\'s the only rectangle left for it.'**
+  String exShikakuFixed(Object clue, Object rect);
+
+  /// No description provided for @exShikakuFailNone.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no rectangle is left for the number in {clue}.'**
+  String exShikakuFailNone(Object clue);
+
+  /// No description provided for @exShikakuFailUncovered.
+  ///
+  /// In en, this message translates to:
+  /// **'But then nothing can cover {cell}.'**
+  String exShikakuFailUncovered(Object cell);
+
+  /// No description provided for @exAtomsSuppose.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {edge} had {count, plural, =0{no bonds} =1{one bond} other{{count} bonds}}.'**
+  String exAtomsSuppose(Object edge, int count);
+
+  /// No description provided for @exAtomsRefutedMore.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets at least {count, plural, =1{one bond} other{{count} bonds}}: fewer leads to a contradiction.'**
+  String exAtomsRefutedMore(Object edge, int count);
+
+  /// No description provided for @exAtomsRefutedLess.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{{edge} gets no bonds: any bond there leads to a contradiction.} =1{{edge} gets at most one bond: more leads to a contradiction.} other{{edge} gets at most {count} bonds: more leads to a contradiction.}}'**
+  String exAtomsRefutedLess(int count, Object edge);
+
+  /// No description provided for @exAtomsAtLeast.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets at least {count, plural, =1{one bond} other{{count} bonds}}: the atom in {atom} can\'t reach its number otherwise.'**
+  String exAtomsAtLeast(Object edge, int count, Object atom);
+
+  /// No description provided for @exAtomsAtMost.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{{edge} gets no bonds: any would overshoot the number of the atom in {atom}.} =1{{edge} gets at most one bond: more would overshoot the number of the atom in {atom}.} other{{edge} gets at most {count} bonds: more would overshoot the number of the atom in {atom}.}}'**
+  String exAtomsAtMost(int count, Object edge, Object atom);
+
+  /// No description provided for @exAtomsCross.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} gets no bonds: they would cross the bond {other}.'**
+  String exAtomsCross(Object edge, Object other);
+
+  /// No description provided for @exAtomsFailSum.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the atom in {atom} can\'t get its number of bonds.'**
+  String exAtomsFailSum(Object atom);
+
+  /// No description provided for @exAtomsFailCross.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the bonds {a} and {b} cross.'**
+  String exAtomsFailCross(Object a, Object b);
+
+  /// No description provided for @exAtomsFailConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the atoms can\'t all join into one molecule.'**
+  String get exAtomsFailConnect;
+
+  /// No description provided for @exTrailSupposeOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose the path took {edge}.'**
+  String exTrailSupposeOn(Object edge);
+
+  /// No description provided for @exTrailSupposeOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose the path didn\'t take {edge}.'**
+  String exTrailSupposeOff(Object edge);
+
+  /// No description provided for @exTrailRefutedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'The path takes {edge}: leaving it out leads to a contradiction.'**
+  String exTrailRefutedOn(Object edge);
+
+  /// No description provided for @exTrailRefutedOff.
+  ///
+  /// In en, this message translates to:
+  /// **'The path doesn\'t take {edge}: taking it leads to a contradiction.'**
+  String exTrailRefutedOff(Object edge);
+
+  /// No description provided for @exTrailDegreeDone.
+  ///
+  /// In en, this message translates to:
+  /// **'The path doesn\'t take {edge}: it already enters and leaves {cell}.'**
+  String exTrailDegreeDone(Object edge, Object cell);
+
+  /// No description provided for @exTrailEndDone.
+  ///
+  /// In en, this message translates to:
+  /// **'The path doesn\'t take {edge}: its end in {cell} is already joined.'**
+  String exTrailEndDone(Object edge, Object cell);
+
+  /// No description provided for @exTrailDegreeNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'The path takes {edge}: the path through {cell} has no other way.'**
+  String exTrailDegreeNeed(Object edge, Object cell);
+
+  /// No description provided for @exTrailLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'The path doesn\'t take {edge}: it would close a loop.'**
+  String exTrailLoop(Object edge);
+
+  /// No description provided for @exTrailOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'The path doesn\'t take {edge}: it would join the numbers out of order.'**
+  String exTrailOrder(Object edge);
+
+  /// No description provided for @exTrailEarly.
+  ///
+  /// In en, this message translates to:
+  /// **'The path doesn\'t take {edge}: it would join the start to the end before every cell is visited.'**
+  String exTrailEarly(Object edge);
+
+  /// No description provided for @exTrailFailBranch.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the path branches in {cell}.'**
+  String exTrailFailBranch(Object cell);
+
+  /// No description provided for @exTrailFailStuck.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the path gets stuck in {cell}.'**
+  String exTrailFailStuck(Object cell);
+
+  /// No description provided for @exTrailFailOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the numbers come out of order.'**
+  String get exTrailFailOrder;
+
+  /// No description provided for @exTrailFailLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'But then some cells close into a loop of their own.'**
+  String get exTrailFailLoop;
+
+  /// No description provided for @exTrailFailConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the path can\'t reach every cell.'**
+  String get exTrailFailConnect;
+
+  /// No description provided for @exLinksSupposeOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose a path ran along {edge}.'**
+  String exLinksSupposeOn(Object edge);
+
+  /// No description provided for @exLinksSupposeOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose no path ran along {edge}.'**
+  String exLinksSupposeOff(Object edge);
+
+  /// No description provided for @exLinksRefutedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'A path runs along {edge}: leaving it out leads to a contradiction.'**
+  String exLinksRefutedOn(Object edge);
+
+  /// No description provided for @exLinksRefutedOff.
+  ///
+  /// In en, this message translates to:
+  /// **'No path runs along {edge}: a path there leads to a contradiction.'**
+  String exLinksRefutedOff(Object edge);
+
+  /// No description provided for @exLinksDegreeDone.
+  ///
+  /// In en, this message translates to:
+  /// **'No path runs along {edge}: a path already enters and leaves {cell}.'**
+  String exLinksDegreeDone(Object edge, Object cell);
+
+  /// No description provided for @exLinksDotDone.
+  ///
+  /// In en, this message translates to:
+  /// **'No path runs along {edge}: the path from the dot in {cell} already leaves it.'**
+  String exLinksDotDone(Object edge, Object cell);
+
+  /// No description provided for @exLinksDegreeNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'A path runs along {edge}: the path through {cell} has no other way.'**
+  String exLinksDegreeNeed(Object edge, Object cell);
+
+  /// No description provided for @exLinksDotNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'A path runs along {edge}: it\'s the only way left out of the dot in {cell}.'**
+  String exLinksDotNeed(Object edge, Object cell);
+
+  /// No description provided for @exLinksLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'No path runs along {edge}: it would close a loop.'**
+  String exLinksLoop(Object edge);
+
+  /// No description provided for @exLinksMixed.
+  ///
+  /// In en, this message translates to:
+  /// **'No path runs along {edge}: it would join paths of two different pairs.'**
+  String exLinksMixed(Object edge);
+
+  /// No description provided for @exLinksFailBranch.
+  ///
+  /// In en, this message translates to:
+  /// **'But then a path branches in {cell}.'**
+  String exLinksFailBranch(Object cell);
+
+  /// No description provided for @exLinksFailStuck.
+  ///
+  /// In en, this message translates to:
+  /// **'But then a path gets stuck in {cell}.'**
+  String exLinksFailStuck(Object cell);
+
+  /// No description provided for @exLinksFailLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'But then a path closes into a loop.'**
+  String get exLinksFailLoop;
+
+  /// No description provided for @exLinksFailMixed.
+  ///
+  /// In en, this message translates to:
+  /// **'But then one path joins two different pairs.'**
+  String get exLinksFailMixed;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

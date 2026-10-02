@@ -2767,4 +2767,328 @@ class AppLocalizationsPl extends AppLocalizations {
   String exArrowsFailClash(Object cell) {
     return 'Ale wtedy $cell musiałoby być zamalowane i na pętli.';
   }
+
+  @override
+  String exMinesSupposeMine(Object cell) {
+    return 'Załóżmy, że w $cell jest mina.';
+  }
+
+  @override
+  String exMinesSupposeSafe(Object cell) {
+    return 'Załóżmy, że $cell jest bezpieczne.';
+  }
+
+  @override
+  String exMinesRefutedMine(Object cell) {
+    return '$cell jest bezpieczne: mina prowadzi tam do sprzeczności.';
+  }
+
+  @override
+  String exMinesRefutedSafe(Object cell) {
+    return 'W $cell jest mina: gdyby było bezpieczne, powstałaby sprzeczność.';
+  }
+
+  @override
+  String exMinesNumberSafe(Object cell, Object number) {
+    return '$cell jest bezpieczne: liczba w $number ma już wokół wszystkie swoje miny.';
+  }
+
+  @override
+  String exMinesNumberMine(Object cell, Object number) {
+    return 'W $cell jest mina: liczba w $number potrzebuje miny w każdym zakrytym polu wokół.';
+  }
+
+  @override
+  String exMinesTotalSafe(Object cell) {
+    return '$cell jest bezpieczne: wszystkie miny są już znalezione.';
+  }
+
+  @override
+  String exMinesTotalMine(Object cell) {
+    return 'W $cell jest mina: pozostałe miny zajmują wszystkie zakryte pola.';
+  }
+
+  @override
+  String exMinesPairSafe(Object cell, Object a, Object b) {
+    return '$cell jest bezpieczne: z porównania liczb w $a i $b wynika, że ich miny leżą gdzie indziej.';
+  }
+
+  @override
+  String exMinesPairMine(Object cell, Object a, Object b) {
+    return 'W $cell jest mina: z porównania liczb w $a i $b wynika, że brakujące miny leżą właśnie tu.';
+  }
+
+  @override
+  String exMinesFailNumber(Object number) {
+    return 'Ale wtedy liczba w $number nie może się zgadzać.';
+  }
+
+  @override
+  String get exMinesFailTotal => 'Ale wtedy liczba min się nie zgadza.';
+
+  @override
+  String exMinesFailPair(Object a, Object b) {
+    return 'Ale wtedy liczby w $a i $b nie mogą się obie zgadzać.';
+  }
+
+  @override
+  String exShikakuSuppose(Object clue, Object rect) {
+    return 'Załóżmy, że liczba w $clue zajmuje $rect.';
+  }
+
+  @override
+  String exShikakuRefuted(Object clue, Object rect) {
+    return 'Liczba w $clue nie może zajmować $rect: to prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exShikakuOverlap(Object clue, Object other) {
+    return 'Prostokąty dla $clue, które nachodzą na prostokąt $other, odpadają.';
+  }
+
+  @override
+  String exShikakuOwner(Object clue, Object cell) {
+    return 'Tylko liczba w $clue może jeszcze pokryć $cell, więc jej prostokąt musi je objąć.';
+  }
+
+  @override
+  String exShikakuCommon(Object clue, Object cell, Object other) {
+    return 'Każdy prostokąt pozostały dla $clue pokrywa $cell, więc prostokąty dla $other, które je pokrywają, odpadają.';
+  }
+
+  @override
+  String exShikakuFixed(Object clue, Object rect) {
+    return 'Liczba w $clue zajmuje $rect: to jedyny prostokąt, jaki jej został.';
+  }
+
+  @override
+  String exShikakuFailNone(Object clue) {
+    return 'Ale wtedy dla liczby w $clue nie zostaje żaden prostokąt.';
+  }
+
+  @override
+  String exShikakuFailUncovered(Object cell) {
+    return 'Ale wtedy nic nie pokryje $cell.';
+  }
+
+  @override
+  String exAtomsSuppose(Object edge, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count wiązania',
+      many: '$count wiązań',
+      few: '$count wiązania',
+      one: 'jedno wiązanie',
+      zero: 'zero wiązań',
+    );
+    return 'Załóżmy, że $edge ma $_temp0.';
+  }
+
+  @override
+  String exAtomsRefutedMore(Object edge, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count wiązania',
+      many: '$count wiązań',
+      few: '$count wiązania',
+      one: 'jedno wiązanie',
+    );
+    return '$edge ma co najmniej $_temp0: mniej prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exAtomsRefutedLess(int count, Object edge) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$edge ma co najwyżej $count wiązania: więcej prowadzi do sprzeczności.',
+      many: '$edge ma co najwyżej $count wiązań: więcej prowadzi do sprzeczności.',
+      few: '$edge ma co najwyżej $count wiązania: więcej prowadzi do sprzeczności.',
+      one: '$edge ma co najwyżej jedno wiązanie: więcej prowadzi do sprzeczności.',
+      zero: '$edge nie ma wiązań: każde wiązanie prowadzi tam do sprzeczności.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exAtomsAtLeast(Object edge, int count, Object atom) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count wiązania',
+      many: '$count wiązań',
+      few: '$count wiązania',
+      one: 'jedno wiązanie',
+    );
+    return '$edge ma co najmniej $_temp0: inaczej atom w $atom nie osiągnie swojej liczby.';
+  }
+
+  @override
+  String exAtomsAtMost(int count, Object edge, Object atom) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$edge ma co najwyżej $count wiązania: więcej przekroczyłoby liczbę atomu w $atom.',
+      many: '$edge ma co najwyżej $count wiązań: więcej przekroczyłoby liczbę atomu w $atom.',
+      few: '$edge ma co najwyżej $count wiązania: więcej przekroczyłoby liczbę atomu w $atom.',
+      one: '$edge ma co najwyżej jedno wiązanie: więcej przekroczyłoby liczbę atomu w $atom.',
+      zero: '$edge nie ma wiązań: każde przekroczyłoby liczbę atomu w $atom.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exAtomsCross(Object edge, Object other) {
+    return '$edge nie ma wiązań: przecięłyby wiązanie $other.';
+  }
+
+  @override
+  String exAtomsFailSum(Object atom) {
+    return 'Ale wtedy atom w $atom nie dostanie swojej liczby wiązań.';
+  }
+
+  @override
+  String exAtomsFailCross(Object a, Object b) {
+    return 'Ale wtedy wiązania $a i $b się krzyżują.';
+  }
+
+  @override
+  String get exAtomsFailConnect => 'Ale wtedy atomy nie połączą się w jedną cząsteczkę.';
+
+  @override
+  String exTrailSupposeOn(Object edge) {
+    return 'Załóżmy, że ścieżka przechodzi $edge.';
+  }
+
+  @override
+  String exTrailSupposeOff(Object edge) {
+    return 'Załóżmy, że ścieżka nie przechodzi $edge.';
+  }
+
+  @override
+  String exTrailRefutedOn(Object edge) {
+    return 'Ścieżka przechodzi $edge: inaczej powstaje sprzeczność.';
+  }
+
+  @override
+  String exTrailRefutedOff(Object edge) {
+    return 'Ścieżka nie przechodzi $edge: inaczej powstaje sprzeczność.';
+  }
+
+  @override
+  String exTrailDegreeDone(Object edge, Object cell) {
+    return 'Ścieżka nie przechodzi $edge: już wchodzi do $cell i z niego wychodzi.';
+  }
+
+  @override
+  String exTrailEndDone(Object edge, Object cell) {
+    return 'Ścieżka nie przechodzi $edge: jej koniec w $cell jest już połączony.';
+  }
+
+  @override
+  String exTrailDegreeNeed(Object edge, Object cell) {
+    return 'Ścieżka przechodzi $edge: ścieżka przez $cell nie ma innej drogi.';
+  }
+
+  @override
+  String exTrailLoop(Object edge) {
+    return 'Ścieżka nie przechodzi $edge: zamknęłoby to pętlę.';
+  }
+
+  @override
+  String exTrailOrder(Object edge) {
+    return 'Ścieżka nie przechodzi $edge: połączyłoby to liczby nie po kolei.';
+  }
+
+  @override
+  String exTrailEarly(Object edge) {
+    return 'Ścieżka nie przechodzi $edge: połączyłoby to początek z końcem, zanim odwiedzi wszystkie pola.';
+  }
+
+  @override
+  String exTrailFailBranch(Object cell) {
+    return 'Ale wtedy ścieżka rozgałęzia się w $cell.';
+  }
+
+  @override
+  String exTrailFailStuck(Object cell) {
+    return 'Ale wtedy ścieżka utyka w $cell.';
+  }
+
+  @override
+  String get exTrailFailOrder => 'Ale wtedy liczby idą nie po kolei.';
+
+  @override
+  String get exTrailFailLoop => 'Ale wtedy część pól zamyka się w osobną pętlę.';
+
+  @override
+  String get exTrailFailConnect => 'Ale wtedy ścieżka nie dotrze do każdego pola.';
+
+  @override
+  String exLinksSupposeOn(Object edge) {
+    return 'Załóżmy, że ścieżka biegnie $edge.';
+  }
+
+  @override
+  String exLinksSupposeOff(Object edge) {
+    return 'Załóżmy, że żadna ścieżka nie biegnie $edge.';
+  }
+
+  @override
+  String exLinksRefutedOn(Object edge) {
+    return 'Ścieżka biegnie $edge: inaczej powstaje sprzeczność.';
+  }
+
+  @override
+  String exLinksRefutedOff(Object edge) {
+    return 'Żadna ścieżka nie biegnie $edge: ścieżka tam prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exLinksDegreeDone(Object edge, Object cell) {
+    return 'Żadna ścieżka nie biegnie $edge: ścieżka już wchodzi do $cell i z niego wychodzi.';
+  }
+
+  @override
+  String exLinksDotDone(Object edge, Object cell) {
+    return 'Żadna ścieżka nie biegnie $edge: ścieżka z kropki w $cell już z niej wychodzi.';
+  }
+
+  @override
+  String exLinksDegreeNeed(Object edge, Object cell) {
+    return 'Ścieżka biegnie $edge: ścieżka przez $cell nie ma innej drogi.';
+  }
+
+  @override
+  String exLinksDotNeed(Object edge, Object cell) {
+    return 'Ścieżka biegnie $edge: to jedyne wyjście, jakie zostało z kropki w $cell.';
+  }
+
+  @override
+  String exLinksLoop(Object edge) {
+    return 'Żadna ścieżka nie biegnie $edge: zamknęłoby to pętlę.';
+  }
+
+  @override
+  String exLinksMixed(Object edge) {
+    return 'Żadna ścieżka nie biegnie $edge: połączyłoby to ścieżki dwóch różnych par.';
+  }
+
+  @override
+  String exLinksFailBranch(Object cell) {
+    return 'Ale wtedy ścieżka rozgałęzia się w $cell.';
+  }
+
+  @override
+  String exLinksFailStuck(Object cell) {
+    return 'Ale wtedy ścieżka utyka w $cell.';
+  }
+
+  @override
+  String get exLinksFailLoop => 'Ale wtedy ścieżka zamyka się w pętlę.';
+
+  @override
+  String get exLinksFailMixed => 'Ale wtedy jedna ścieżka łączy dwie różne pary.';
 }

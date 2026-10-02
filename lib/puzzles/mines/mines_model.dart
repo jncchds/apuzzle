@@ -113,3 +113,25 @@ bool minesCleared(MinesPuzzle p, List<bool> open) {
   }
   return true;
 }
+
+/// Digs [cells]: safe ones open (spreading from blanks), mines go off and
+/// get flagged.
+MinesState minesDig(MinesPuzzle p, MinesState s, List<int> cells) {
+  final open = List.of(s.open);
+  final flags = List.of(s.flags);
+  final booms = [...s.booms];
+  final safe = <int>[];
+  for (final i in cells) {
+    if (p.mines[i]) {
+      flags[i] = true;
+      if (!booms.contains(i)) booms.add(i);
+    } else {
+      safe.add(i);
+    }
+  }
+  openCells(open, safe, p.mines, mineCounts(p), kingNeighbors(p.rows, p.cols));
+  for (var i = 0; i < open.length; i++) {
+    if (open[i]) flags[i] = false;
+  }
+  return MinesState(open: open, flags: flags, booms: booms);
+}

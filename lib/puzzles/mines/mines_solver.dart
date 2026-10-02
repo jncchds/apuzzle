@@ -1,4 +1,10 @@
+import '../../core/explain.dart';
 import '../../core/grid_graph.dart';
+
+/// What a traced [MinesSolver] records ([Fact.rule]); [Fact.value] is 0
+/// (safe) or 1 (mine). Number rules have the number's cell as arg, pair
+/// rules both numbers' cells.
+enum MinesRule { numberSafe, numberMines, totalSafe, totalMines, pairSafe, pairMines, failNumber, failTotal, failPair }
 
 /// Deductions from the open cells' numbers. Knowledge per cell: -1 unknown,
 /// 0 safe, 1 mine.
@@ -26,6 +32,12 @@ class MinesSolver {
           : -1,
   ];
 
+  /// Applies the rules of [tier] (1 numbers, 2 + pairs, 3 + the mine total)
+  /// until nothing changes, without probing; false on a contradiction. With
+  /// [t], every deduction is recorded (see [MinesRule]).
+  bool propagate(List<bool> open, List<int> k, int tier, [ExplainTrace? t]) =>
+      _propagate(open, k, pairs: tier >= 2, global: tier >= 3, t: t);
+
   /// Extends [k] with everything [tier] logic proves; false on a contradiction.
   bool deduce(List<bool> open, List<int> k, int tier) {
     if (!_propagate(open, k, pairs: tier >= 2, global: tier >= 3)) return false;
@@ -49,24 +61,41 @@ class MinesSolver {
     return true;
   }
 
-  bool _set(List<int> k, Iterable<int> cells, int v) {
+  bool _set(List<int> k, Iterable<int> cells, int v, [ExplainTrace? t, MinesRule? rule, int a = -1, int b = -1]) {
     var changed = false;
     for (final c in cells) {
       if (k[c] == -1) {
         k[c] = v;
         changed = true;
+        t?.fact(c, v, rule!.index, premises: _premises(rule, a, b, k.length), args: [a, b]);
       }
     }
     return changed;
   }
 
-  bool _propagate(List<bool> open, List<int> k, {required bool pairs, required bool global}) {
+  /// What a rule about numbers [a] (and [b]) looked at.
+  List<int> _premises(MinesRule rule, int a, int b, int n) => switch (rule) {
+    MinesRule.totalSafe || MinesRule.totalMines || MinesRule.failTotal => [for (var i = 0; i < n; i++) i],
+    _ => [
+      a,
+      ...kn[a],
+      if (b >= 0) ...[b, ...kn[b]],
+    ],
+  };
+
+  bool _fail(ExplainTrace? t, MinesRule rule, int n, [int a = -1, int b = -1]) {
+    t?.fail(rule.index, premises: _premises(rule, a, b, n), args: [a, b]);
+    return false;
+  }
+
+  bool _propagate(List<bool> open, List<int> k, {required bool pairs, required bool global, ExplainTrace? t}) {
     var changed = true;
     while (changed) {
       changed = false;
       // Constraints: unknown cells around an open number and the mines left there.
       final cells = <List<int>>[];
       final need = <int>[];
+      final from = <int>[];
       for (var i = 0; i < k.length; i++) {
         if (!open[i]) continue;
         final u = <int>[];
@@ -76,14 +105,15 @@ class MinesSolver {
           if (k[j] == 1) m++;
         }
         final left = counts[i] - m;
-        if (left < 0 || left > u.length) return false;
+        if (left < 0 || left > u.length) return _fail(t, MinesRule.failNumber, k.length, i);
         if (u.isEmpty) continue;
         if (left == 0 || left == u.length) {
-          changed |= _set(k, u, left == 0 ? 0 : 1);
+          changed |= _set(k, u, left == 0 ? 0 : 1, t, left == 0 ? MinesRule.numberSafe : MinesRule.numberMines, i);
           continue;
         }
         cells.add(u);
         need.add(left);
+        from.add(i);
       }
       if (changed) continue;
       if (global) {
@@ -93,12 +123,18 @@ class MinesSolver {
           if (v == -1) unknown++;
         }
         final left = mineCount - mines;
-        if (left < 0 || left > unknown) return false;
+        if (left < 0 || left > unknown) return _fail(t, MinesRule.failTotal, k.length);
         if (unknown > 0 && (left == 0 || left == unknown)) {
-          _set(k, [
-            for (var i = 0; i < k.length; i++)
-              if (k[i] == -1) i,
-          ], left == 0 ? 0 : 1);
+          _set(
+            k,
+            [
+              for (var i = 0; i < k.length; i++)
+                if (k[i] == -1) i,
+            ],
+            left == 0 ? 0 : 1,
+            t,
+            left == 0 ? MinesRule.totalSafe : MinesRule.totalMines,
+          );
           changed = true;
           continue;
         }
@@ -128,11 +164,16 @@ class MinesSolver {
           ];
           final lo = [0, need[a] - onlyA.length, need[b] - onlyB.length].reduce((x, y) => x > y ? x : y);
           final hi = [both.length, need[a], need[b]].reduce((x, y) => x < y ? x : y);
-          if (lo > hi) return false;
-          if (onlyB.isNotEmpty && need[b] - hi == onlyB.length) changed |= _set(k, onlyB, 1);
-          if (onlyB.isNotEmpty && need[b] - lo == 0) changed |= _set(k, onlyB, 0);
-          if (onlyA.isNotEmpty && need[a] - hi == onlyA.length) changed |= _set(k, onlyA, 1);
-          if (onlyA.isNotEmpty && need[a] - lo == 0) changed |= _set(k, onlyA, 0);
+          if (lo > hi) return _fail(t, MinesRule.failPair, k.length, from[a], from[b]);
+          final fa = from[a], fb = from[b];
+          if (onlyB.isNotEmpty && need[b] - hi == onlyB.length) {
+            changed |= _set(k, onlyB, 1, t, MinesRule.pairMines, fa, fb);
+          }
+          if (onlyB.isNotEmpty && need[b] - lo == 0) changed |= _set(k, onlyB, 0, t, MinesRule.pairSafe, fa, fb);
+          if (onlyA.isNotEmpty && need[a] - hi == onlyA.length) {
+            changed |= _set(k, onlyA, 1, t, MinesRule.pairMines, fa, fb);
+          }
+          if (onlyA.isNotEmpty && need[a] - lo == 0) changed |= _set(k, onlyA, 0, t, MinesRule.pairSafe, fa, fb);
           if (changed) break;
         }
       }

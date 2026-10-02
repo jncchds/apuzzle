@@ -1,5 +1,10 @@
+import '../../core/explain.dart';
 import '../../core/lattice_loop.dart';
 import 'links_model.dart';
+
+/// What a traced [LinksSolver.propagate] records ([Fact.rule]). Slots are
+/// edges ([Fact.value] 1 link, 0 none); degree rules have the cell as arg.
+enum LinksRule { degreeDone, degreeNeed, loop, mixed, failBranch, failStuck, failLoop, failMixed }
 
 /// Edge logic for Numberlink on the lattice of cell centres. Edge states:
 /// -1 unknown, 0 no link, 1 link. Tier 1: degrees (1 at dots, 2 elsewhere,
@@ -19,8 +24,14 @@ class LinksSolver {
 
   int _degree(int p) => dots[p] >= 0 ? 1 : 2;
 
-  bool propagate(List<int> st) {
+  /// Tier-1 logic in place; false on a contradiction. With [t], every
+  /// deduction is recorded (see [LinksRule]).
+  bool propagate(List<int> st, [ExplainTrace? t]) {
     final n = rows * cols;
+    List<int> linked() => [
+      for (var e = 0; e < g.edgeCount; e++)
+        if (st[e] == 1) e,
+    ];
     final parent = List<int>.filled(n, 0);
     final pair = List<int>.filled(n, -1);
     int find(int x) {
@@ -33,11 +44,23 @@ class LinksSolver {
     var changed = true;
     while (changed) {
       changed = false;
-      bool set(int e, int v) {
+      // [arg]: the cell of a degree rule, or -1 for the paths at [e]'s ends.
+      bool set(int e, int v, LinksRule rule, int arg) {
         if (st[e] == v) return true;
         if (st[e] != -1) return false;
         st[e] = v;
         changed = true;
+        if (t != null) {
+          final (a, b) = g.ends(e);
+          final ra = find(a), rb = find(b);
+          final premises = arg >= 0
+              ? g.incident[arg]
+              : [
+                  for (final x in linked())
+                    if (find(g.ends(x).$1) == ra || find(g.ends(x).$1) == rb) x,
+                ];
+          t.fact(e, v, rule.index, premises: premises, args: [arg]);
+        }
         return true;
       }
 
@@ -48,15 +71,22 @@ class LinksSolver {
           if (st[e] == -1) open++;
         }
         final want = _degree(p);
-        if (lines > want || lines + open < want) return false;
+        if (lines > want || lines + open < want) {
+          t?.fail(
+            (lines > want ? LinksRule.failBranch : LinksRule.failStuck).index,
+            premises: g.incident[p],
+            args: [p],
+          );
+          return false;
+        }
         if (open == 0) continue;
         if (lines == want) {
           for (final e in g.incident[p]) {
-            if (st[e] == -1) set(e, 0);
+            if (st[e] == -1) set(e, 0, LinksRule.degreeDone, p);
           }
         } else if (lines + open == want) {
           for (final e in g.incident[p]) {
-            if (st[e] == -1) set(e, 1);
+            if (st[e] == -1) set(e, 1, LinksRule.degreeNeed, p);
           }
         }
       }
@@ -69,8 +99,14 @@ class LinksSolver {
         if (st[e] != 1) continue;
         final (a, b) = g.ends(e);
         final ra = find(a), rb = find(b);
-        if (ra == rb) return false;
-        if (pair[ra] >= 0 && pair[rb] >= 0 && pair[ra] != pair[rb]) return false;
+        if (ra == rb) {
+          t?.fail(LinksRule.failLoop.index, premises: linked());
+          return false;
+        }
+        if (pair[ra] >= 0 && pair[rb] >= 0 && pair[ra] != pair[rb]) {
+          t?.fail(LinksRule.failMixed.index, premises: linked());
+          return false;
+        }
         parent[ra] = rb;
         if (pair[rb] < 0) pair[rb] = pair[ra];
       }
@@ -78,7 +114,11 @@ class LinksSolver {
         if (st[e] != -1) continue;
         final (a, b) = g.ends(e);
         final ra = find(a), rb = find(b);
-        if (ra == rb || (pair[ra] >= 0 && pair[rb] >= 0 && pair[ra] != pair[rb])) set(e, 0);
+        if (ra == rb) {
+          set(e, 0, LinksRule.loop, -1);
+        } else if (pair[ra] >= 0 && pair[rb] >= 0 && pair[ra] != pair[rb]) {
+          set(e, 0, LinksRule.mixed, -1);
+        }
       }
     }
     return true;

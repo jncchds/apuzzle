@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../core/difficulty.dart';
+import '../../core/explain.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/board/cell_grid_board.dart';
+import '../../ui/board/explain_overlay.dart';
 import '../../ui/symbols.dart';
+import 'shikaku_explain.dart';
 import 'shikaku_generator.dart';
 import 'shikaku_model.dart';
 import 'shikaku_tutorial.dart';
@@ -107,6 +110,13 @@ class ShikakuType extends PuzzleType<ShikakuPuzzle, ShikakuState> {
   Widget buildBoard(BuildContext context, GameController controller) => _ShikakuBoard(controller: controller);
 
   @override
+  bool get canExplain => true;
+
+  @override
+  Explanation? explain(ShikakuPuzzle puzzle, ShikakuState state) =>
+      explainStep(const ShikakuExplainer(), puzzle, state);
+
+  @override
   Map<String, dynamic> encodePuzzle(ShikakuPuzzle puzzle) => puzzle.toJson();
   @override
   ShikakuPuzzle decodePuzzle(Map<String, dynamic> json) => ShikakuPuzzle.fromJson(json);
@@ -142,6 +152,7 @@ class _ShikakuBoardState extends State<_ShikakuBoard> {
         Rect.fromLTRB(m.x(r.c0), m.y(r.r0), m.x(r.c1) + m.cell, m.y(r.r1) + m.cell);
 
     return CellGridBoard(
+      explain: ExplainView.of(ctrl),
       rows: p.rows,
       cols: p.cols,
       gapRatio: 0.04,

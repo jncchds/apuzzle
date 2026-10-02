@@ -1,4 +1,11 @@
+import '../../core/explain.dart';
 import 'shikaku_model.dart';
+
+/// What a traced [ShikakuSolver.propagate] records ([Fact.rule]). Slots are
+/// clues (by index in [ShikakuSolver.clueCells]); eliminations carry how many
+/// rectangles went, [fixed] the index of the last one in
+/// [ShikakuSolver.candidates].
+enum ShikakuRule { overlap, owner, common, fixed, failNone, failUncovered }
 
 /// Candidate-rectangle solver.
 ///  Tier 1: single-candidate clues, cells coverable by only one clue, cells
@@ -48,20 +55,40 @@ class ShikakuSolver {
     return cand.fold(0, (s, c) => s + c.length - 1);
   }
 
-  bool _propagate(List<List<CellRect>> cand, int tier) {
+  /// Tier-1 logic in place; false on a contradiction. With [t], every
+  /// deduction is recorded (see [ShikakuRule]).
+  bool propagate(List<List<CellRect>> cand, [ExplainTrace? t]) => _propagate(cand, 1, t);
+
+  bool _propagate(List<List<CellRect>> cand, int tier, [ExplainTrace? t]) {
     final n = rows * cols;
+    final everyClue = t == null ? const <int>[] : [for (var k = 0; k < cand.length; k++) k];
+    // Records that clue [o] lost rectangles (it had [before]) by [rule].
+    void lost(int o, int before, ShikakuRule rule, List<int> premises, List<int> args) {
+      if (t == null || cand[o].length == before) return;
+      t.fact(o, before - cand[o].length, rule.index, premises: premises, args: args);
+      if (cand[o].length == 1) {
+        t.fact(o, candidates[o].indexOf(cand[o].single), ShikakuRule.fixed.index, premises: [o]);
+      }
+    }
+
+    bool none(int o) {
+      t?.fail(ShikakuRule.failNone.index, premises: [o], args: [o]);
+      return false;
+    }
+
     while (true) {
       var progress = false;
       // Placed rectangles exclude overlapping candidates of other clues.
       for (var k = 0; k < cand.length; k++) {
-        if (cand[k].isEmpty) return false;
+        if (cand[k].isEmpty) return none(k);
         if (cand[k].length != 1) continue;
         final fixed = cand[k].single;
         for (var o = 0; o < cand.length; o++) {
           if (o == k) continue;
           final before = cand[o].length;
           cand[o].removeWhere((r) => r.overlaps(fixed));
-          if (cand[o].isEmpty) return false;
+          lost(o, before, ShikakuRule.overlap, [k], [k]);
+          if (cand[o].isEmpty) return none(o);
           if (cand[o].length != before) progress = true;
         }
       }
@@ -77,13 +104,17 @@ class ShikakuSolver {
         }
       }
       for (var i = 0; i < n; i++) {
-        if (coverers[i].isEmpty) return false;
+        if (coverers[i].isEmpty) {
+          t?.fail(ShikakuRule.failUncovered.index, premises: everyClue, args: [i]);
+          return false;
+        }
         if (coverers[i].length == 1) {
           final k = coverers[i].single;
           final rr = i ~/ cols, cc = i % cols;
           final before = cand[k].length;
           cand[k].removeWhere((r) => !r.contains(rr, cc));
-          if (cand[k].isEmpty) return false;
+          lost(k, before, ShikakuRule.owner, everyClue, [k, i]);
+          if (cand[k].isEmpty) return none(k);
           if (cand[k].length != before) progress = true;
         }
       }
@@ -100,7 +131,8 @@ class ShikakuSolver {
             if (o == k) continue;
             final before = cand[o].length;
             cand[o].removeWhere((r) => r.contains(rr, cc));
-            if (cand[o].isEmpty) return false;
+            lost(o, before, ShikakuRule.common, [k], [k, i]);
+            if (cand[o].isEmpty) return none(o);
             if (cand[o].length != before) progress = true;
           }
         }

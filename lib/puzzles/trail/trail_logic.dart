@@ -1,3 +1,21 @@
+import '../../core/explain.dart';
+
+/// What a traced [TrailLogic.propagate] records ([Fact.rule]). Slots are
+/// edges ([Fact.value] 1 on the path, -1 not); degree rules have the cell
+/// as arg.
+enum TrailRule {
+  degreeDone,
+  degreeNeed,
+  loop,
+  order,
+  early,
+  failBranch,
+  failStuck,
+  failOrder,
+  failLoop,
+  failConnect,
+}
+
 /// Sound edge logic for Trail (a Hamiltonian path through ordered waypoints).
 ///
 /// Every pair of neighbouring cells is an edge that is on, off or unknown.
@@ -97,7 +115,16 @@ class TrailLogic {
     ];
   }
 
-  bool _propagate(List<int> e) {
+  /// Tier-1 logic in place (1 on, -1 off, 0 unknown); false on a
+  /// contradiction. With [t], every deduction is recorded (see [TrailRule]).
+  bool propagate(List<int> e, [ExplainTrace? t]) => _propagate(e, t);
+
+  bool _propagate(List<int> e, [ExplainTrace? t]) {
+    List<int> on() => [
+      for (var k = 0; k < edgeCount; k++)
+        if (e[k] == 1) k,
+    ];
+    List<int> all() => [for (var k = 0; k < edgeCount; k++) k];
     final comp = List<int>.filled(n, -1);
     final endA = <int>[], endB = <int>[];
     final nums = <List<int>>[];
@@ -112,17 +139,26 @@ class TrailLogic {
           if (e[k] == 1) on++;
           if (e[k] == 0) open++;
         }
-        final t = target[i];
-        if (on > t || on + open < t) return false;
+        final want = target[i];
+        if (on > want || on + open < want) {
+          t?.fail((on > want ? TrailRule.failBranch : TrailRule.failStuck).index, premises: edgesOf[i], args: [i]);
+          return false;
+        }
         if (open == 0) continue;
-        if (on == t) {
+        if (on == want) {
           for (final k in edgesOf[i]) {
-            if (e[k] == 0) e[k] = -1;
+            if (e[k] == 0) {
+              e[k] = -1;
+              t?.fact(k, -1, TrailRule.degreeDone.index, premises: edgesOf[i], args: [i]);
+            }
           }
           changed = true;
-        } else if (on + open == t) {
+        } else if (on + open == want) {
           for (final k in edgesOf[i]) {
-            if (e[k] == 0) e[k] = 1;
+            if (e[k] == 0) {
+              e[k] = 1;
+              t?.fact(k, 1, TrailRule.degreeNeed.index, premises: edgesOf[i], args: [i]);
+            }
           }
           changed = true;
         }
@@ -159,31 +195,51 @@ class TrailLogic {
         endB.add(cur);
         nums.add(seq);
         size.add(len);
-        if (!_consecutive(seq)) return false;
+        if (!_consecutive(seq)) {
+          t?.fail(TrailRule.failOrder.index, premises: on());
+          return false;
+        }
       }
       // Cells left without a component lie on a closed loop.
-      if (comp.contains(-1)) return false;
+      if (comp.contains(-1)) {
+        t?.fail(TrailRule.failLoop.index, premises: on());
+        return false;
+      }
 
       for (var k = 0; k < edgeCount; k++) {
         if (e[k] != 0) continue;
         final a = ea[k], b = eb[k], ca = comp[a], cb = comp[b];
-        var bad = ca == cb;
-        if (!bad) {
+        TrailRule? why = ca == cb ? TrailRule.loop : null;
+        if (why == null) {
           final sa = a == endB[ca] ? nums[ca] : nums[ca].reversed.toList();
           final sb = b == endA[cb] ? nums[cb] : nums[cb].reversed.toList();
           final joined = [...sa, ...sb];
-          bad =
-              !_consecutive(joined) ||
-              (size[ca] + size[cb] < n && joined.contains(1) && joined.contains(last) && last > 1);
+          if (!_consecutive(joined)) {
+            why = TrailRule.order;
+          } else if (size[ca] + size[cb] < n && joined.contains(1) && joined.contains(last) && last > 1) {
+            why = TrailRule.early;
+          }
         }
-        if (bad) {
+        if (why != null) {
           e[k] = -1;
+          // The two chains it would join.
+          t?.fact(
+            k,
+            -1,
+            why.index,
+            premises: [
+              for (var x = 0; x < edgeCount; x++)
+                if (e[x] == 1 && (comp[ea[x]] == ca || comp[ea[x]] == cb)) x,
+            ],
+          );
           changed = true;
         }
       }
       if (changed) continue;
 
-      return _connected(e);
+      if (_connected(e)) return true;
+      t?.fail(TrailRule.failConnect.index, premises: all());
+      return false;
     }
   }
 
