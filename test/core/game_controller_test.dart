@@ -1,3 +1,4 @@
+import 'package:apuzzle/core/daily.dart';
 import 'package:apuzzle/core/day.dart';
 import 'package:apuzzle/core/difficulty.dart';
 import 'package:apuzzle/core/game_controller.dart';
@@ -164,5 +165,34 @@ void main() {
     expect(store.hasSave(type.id), isTrue, reason: 'the free game is untouched');
     expect(store.dailyResults(day)[GameStore.dailyEntry(type.id, params.difficulty)]?.code, c.code);
     expect(store.stats(type.id, params.variant).solved, 1, reason: 'daily wins count in the stats');
+  });
+
+  test('a free game that is a daily puzzle counts for its day', () async {
+    var day = dailyLaunch;
+    while (!dailyGames(day).contains(type)) {
+      day = day.addDays(1);
+    }
+    final daily = dailyParams(day, type, Difficulty.medium);
+    final p = type.generate(daily);
+    final c = GameController(
+      type: type,
+      params: daily,
+      puzzle: p,
+      state: type.initialState(p),
+      settings: settings,
+      store: store,
+    );
+    expect(c.saveSlot, type.id, reason: 'a free game');
+    var s = c.state as ValueGrid;
+    for (var i = 0; i < p.size.cellCount; i++) {
+      final pos = p.size.pos(i);
+      s = s.set(pos, s.at(pos).withValue(p.solution[i]));
+    }
+    c.apply(s);
+    for (var i = 0; i < 4; i++) {
+      await Future<void>.delayed(Duration.zero);
+    }
+    expect(c.solved, isTrue);
+    expect(store.dailyResults(day)[GameStore.dailyEntry(type.id, Difficulty.medium)]?.code, c.code);
   });
 }

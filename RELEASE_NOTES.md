@@ -2,6 +2,7 @@
 
 ## 0.5.1 - 2026-10-02
 - Settings: move your progress to another device as a file or as copied text; importing merges, so wins, best times and daily results from both devices are kept
+- Solving a daily puzzle as a free game (for example from a shared link) now counts for that day too
 
 ## 0.5.0 - 2026-09-30
 - Rails: tap a cell to mark it as track or put a "no track" dot on it; track notes count toward the row and column numbers

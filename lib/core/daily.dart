@@ -57,6 +57,19 @@ bool isDailyPuzzle(Day day, PuzzleCode code, {Day? today}) =>
     dailyGames(day).contains(code.type) &&
     code.toString() == PuzzleCode.format(code.type, dailyParams(day, code.type, code.params.difficulty));
 
+/// The day whose puzzle [code] is (up to [today]), or null. A free game can
+/// be a daily one too, opened from a plain share link or (rarely) by chance.
+Day? dailyDayOf(PuzzleCode code, {Day? today}) {
+  final p = code.params;
+  // Most free games differ in size, so the days aren't even looked at.
+  if (p.size != code.type.dailySize(p.difficulty)) return null;
+  final last = today ?? Day.today();
+  for (var d = dailyLaunch; d <= last; d = d.addDays(1)) {
+    if (dailySeed(d) == p.seed && isDailyPuzzle(d, code, today: last)) return d;
+  }
+  return null;
+}
+
 /// 31-bit FNV-1a hash of [s] that gives the same result on native and web
 /// (products stay below 2^53).
 int hash31(String s) {

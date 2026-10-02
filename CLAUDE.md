@@ -45,6 +45,7 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
   - every puzzle of the day uses the same seed, with the type's fixed `dailySize(difficulty)` and default options, so it is a normal share code;
   - `GameStore`: results in `daily.<date>` (`type.difficulty` → code, best ms, hints), in-progress dailies in their own save slot (`save.daily.<code>`), so they never replace the free game. Daily wins also count in the regular stats;
   - the router only treats a code as a daily one if it really is that day's puzzle (`isDailyPuzzle`), and never for future days.
+  - a free game that wins with a daily puzzle's code (a shared link, or by chance) is recorded for that day too (`dailyDayOf`, in `GameController._win`).
 - Moving progress between devices (`lib/core/backup.dart`, `lib/ui/transfer_tiles.dart`, Settings): `exportProgress` packs the `stats.`/`daily.`/`save.`/`tutorial.`/`strategies.`/`last.` prefs (settings stay on the device), and `ProgressCode` turns them into `APUZZLE1:` text scrambled with a fixed key that's committed here. It isn't a secret, just a speed bump against editing times. The same text goes to a file (`file_picker`) or the clipboard. `importProgress` merges and never replaces:
   - stats keep per-device win counts (`PuzzleStats.devices`, keyed by the random `device.id`) and take the larger count per device, so repeated imports and round trips never count a win twice;
   - best time/score and per-puzzle daily times take the better value, and `done`/`true` beats `skipped` for tutorial and strategy marks;

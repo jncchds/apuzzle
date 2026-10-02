@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import '../l10n/l10n.dart';
 import 'day.dart';
+import 'daily.dart';
 import 'difficulty.dart';
 import 'grid.dart';
 import 'persistence.dart';
@@ -229,7 +230,9 @@ class GameController extends ChangeNotifier {
     if (practice) return;
     await store.clearSave(saveSlot);
     winStats = await store.recordWin(type.id, params.variant, elapsed, score: type.score(puzzle, _state));
-    if (daily case final day?) await store.recordDaily(day, type.id, params.difficulty, code, elapsed, hintsUsed);
+    // A free game that happens to be a daily puzzle counts for its day too.
+    final day = daily ?? dailyDayOf(PuzzleCode(type, params));
+    if (day != null) await store.recordDaily(day, type.id, params.difficulty, code, elapsed, hintsUsed);
     notifyListeners();
   }
 

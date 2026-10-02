@@ -3,6 +3,7 @@ import 'package:apuzzle/core/day.dart';
 import 'package:apuzzle/core/difficulty.dart';
 import 'package:apuzzle/core/persistence.dart';
 import 'package:apuzzle/core/puzzle_code.dart';
+import 'package:apuzzle/core/puzzle_type.dart';
 import 'package:apuzzle/core/registry.dart';
 import 'package:apuzzle/ui/app_router.dart';
 import 'package:apuzzle/ui/new_game_sheet.dart';
@@ -89,6 +90,24 @@ void main() {
     }
     final other = puzzleTypes.firstWhere((t) => !dailyGames(day).contains(t));
     expect(isDailyPuzzle(day, PuzzleCode(other, dailyParams(day, other, Difficulty.easy)), today: today), isFalse);
+  });
+
+  test('a code finds its day, and only up to today', () {
+    const day = Day(2026, 9, 20);
+    const today = Day(2026, 9, 25);
+    for (final p in dailyPuzzles(day)) {
+      final code = PuzzleCode(p.type, dailyParams(day, p.type, p.difficulty));
+      expect(dailyDayOf(code, today: today), day);
+      expect(dailyDayOf(code, today: day.addDays(-1)), isNull);
+      final params = code.params;
+      final free = GenParams(
+        size: params.size,
+        difficulty: params.difficulty,
+        seed: params.seed + 1,
+        options: params.options,
+      );
+      expect(dailyDayOf(PuzzleCode(p.type, free), today: today), isNull);
+    }
   });
 
   test('daily routes', () {
