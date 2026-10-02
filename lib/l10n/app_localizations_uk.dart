@@ -142,6 +142,48 @@ class AppLocalizationsUk extends AppLocalizations {
   String get couldNotOpenSettings => 'Не вдалося відкрити системні налаштування';
 
   @override
+  String get transferTitle => 'Перенести на інший пристрій';
+
+  @override
+  String get transferHint =>
+      'Експортуйте тут, імпортуйте на іншому пристрої. Імпорт об’єднує дані: перемоги, найкращий час і щоденні результати обох пристроїв зберігаються, а з двох збережених ігор лишається новіша.';
+
+  @override
+  String get transferExportFile => 'Експорт у файл';
+
+  @override
+  String get transferImportFile => 'Імпорт із файлу';
+
+  @override
+  String get transferCopy => 'Скопіювати як текст';
+
+  @override
+  String get transferPaste => 'Вставити текст';
+
+  @override
+  String get transferCopied => 'Прогрес скопійовано. Вставте його на іншому пристрої.';
+
+  @override
+  String get transferSaved => 'Прогрес збережено у файл';
+
+  @override
+  String transferImported(int count) {
+    return 'Прогрес об’єднано. Оновлено записів: $count';
+  }
+
+  @override
+  String get transferNothingNew => 'Нічого нового: на цьому пристрої вже все є';
+
+  @override
+  String get transferBadData => 'Це не прогрес APuzzle, або дані пошкоджені';
+
+  @override
+  String get transferSaveFailed => 'Не вдалося зберегти файл';
+
+  @override
+  String get transferCopyFailed => 'Не вдалося скопіювати в буфер обміну';
+
+  @override
   String get installApp => 'Встановити застосунок';
 
   @override

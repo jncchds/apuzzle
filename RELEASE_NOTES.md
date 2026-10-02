@@ -1,5 +1,8 @@
 # Release notes
 
+## 0.5.1 - 2026-10-02
+- Settings: move your progress to another device as a file or as copied text; importing merges, so wins, best times and daily results from both devices are kept
+
 ## 0.5.0 - 2026-09-30
 - Rails: tap a cell to mark it as track or put a "no track" dot on it; track notes count toward the row and column numbers
 - Sudoku, Blocks and Plots: pencil marks stay under a placed value and come back when the value is removed

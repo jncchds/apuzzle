@@ -142,6 +142,48 @@ class AppLocalizationsDe extends AppLocalizations {
   String get couldNotOpenSettings => 'Die Systemeinstellungen konnten nicht geöffnet werden';
 
   @override
+  String get transferTitle => 'Auf ein anderes Gerät übertragen';
+
+  @override
+  String get transferHint =>
+      'Hier exportieren, auf dem anderen Gerät importieren. Der Import führt zusammen: Siege, Bestzeiten und Tagesergebnisse beider Geräte bleiben erhalten, von zwei gespeicherten Spielen gewinnt das neuere.';
+
+  @override
+  String get transferExportFile => 'In eine Datei exportieren';
+
+  @override
+  String get transferImportFile => 'Aus einer Datei importieren';
+
+  @override
+  String get transferCopy => 'Als Text kopieren';
+
+  @override
+  String get transferPaste => 'Text einfügen';
+
+  @override
+  String get transferCopied => 'Fortschritt kopiert. Füge ihn auf dem anderen Gerät ein.';
+
+  @override
+  String get transferSaved => 'Fortschritt in einer Datei gespeichert';
+
+  @override
+  String transferImported(int count) {
+    return 'Fortschritt zusammengeführt. Aktualisierte Einträge: $count';
+  }
+
+  @override
+  String get transferNothingNew => 'Nichts Neues: Dieses Gerät hat schon alles';
+
+  @override
+  String get transferBadData => 'Das ist kein APuzzle-Fortschritt, oder die Daten sind beschädigt';
+
+  @override
+  String get transferSaveFailed => 'Die Datei konnte nicht gespeichert werden';
+
+  @override
+  String get transferCopyFailed => 'Kopieren in die Zwischenablage fehlgeschlagen';
+
+  @override
   String get installApp => 'App installieren';
 
   @override

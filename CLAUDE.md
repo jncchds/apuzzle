@@ -22,7 +22,7 @@ Run them through the output condenser (see the global CLAUDE.md):
 ## Releases and release notes
 Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/workflows/release.yml`; the version comes from the branch name, not pubspec). `RELEASE_NOTES.md` has one `## X.Y.Z - YYYY-MM-DD` header per release, newest first, with short user-facing bullets; it is bundled as an asset and shown under Settings → Release notes (`/release-notes`). With every commit:
 1. `git fetch`, then check whether the top version in `RELEASE_NOTES.md` exists as `origin/release/<version>`.
-2. If it does, add a new version on top (usually the next minor; a patch for fixes only) with the commit's notes.
+2. If it does, add a new version on top (always the next patch, unless the user says otherwise) with the commit's notes.
 3. If it doesn't, add the commit's notes to that top version.
 4. Either way, set the top version's date to today.
 
@@ -45,6 +45,10 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
   - every puzzle of the day uses the same seed, with the type's fixed `dailySize(difficulty)` and default options, so it is a normal share code;
   - `GameStore`: results in `daily.<date>` (`type.difficulty` → code, best ms, hints), in-progress dailies in their own save slot (`save.daily.<code>`), so they never replace the free game. Daily wins also count in the regular stats;
   - the router only treats a code as a daily one if it really is that day's puzzle (`isDailyPuzzle`), and never for future days.
+- Moving progress between devices (`lib/core/backup.dart`, `lib/ui/transfer_tiles.dart`, Settings): `exportProgress` packs the `stats.`/`daily.`/`save.`/`tutorial.`/`strategies.`/`last.` prefs (settings stay on the device), and `ProgressCode` turns them into `APUZZLE1:` text scrambled with a fixed key that's committed here. It isn't a secret, just a speed bump against editing times. The same text goes to a file (`file_picker`) or the clipboard. `importProgress` merges and never replaces:
+  - stats keep per-device win counts (`PuzzleStats.devices`, keyed by the random `device.id`) and take the larger count per device, so repeated imports and round trips never count a win twice;
+  - best time/score and per-puzzle daily times take the better value, and `done`/`true` beats `skipped` for tutorial and strategy marks;
+  - saves carry an `at` stamp (`writeSave`), and the newer one wins. A daily save is dropped if that puzzle is already solved here. Last choices stay local.
 - `lib/core/grid_graph.dart`: neighbour lists and connected components for flat grids.
 - Tutorials (`lib/core/tutorial.dart`, `lib/ui/tutorial_screen.dart`, `lib/ui/learn_screen.dart`, routes `/learn`, `/learn?t=<id>` and `/learn?t=<id>&s=1`):
   - each type's `tutorial()` returns `TutorialStep`s from `lib/puzzles/<id>/<id>_tutorial.dart`: a tiny hand-made board (or `TutorialStep.generated` for the final "real board"), a text (`tut<Type><n>` ARB keys), cells to point at, and either "solve it" or a custom `done` goal with an `answer` state;

@@ -9,6 +9,7 @@ import '../core/settings.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
 import 'install_app.dart';
+import 'transfer_tiles.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -73,6 +74,8 @@ class SettingsScreen extends StatelessWidget {
           ),
           if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) const _LinksTile(),
           if (kIsWeb) const InstallAppTile(),
+          const Divider(),
+          const TransferTiles(),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.new_releases_outlined),

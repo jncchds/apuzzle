@@ -142,6 +142,48 @@ class AppLocalizationsEn extends AppLocalizations {
   String get couldNotOpenSettings => 'Could not open the system settings';
 
   @override
+  String get transferTitle => 'Move to another device';
+
+  @override
+  String get transferHint =>
+      'Export here, import on the other device. Importing merges: wins, best times and daily results of both devices are kept, and the newer saved game wins.';
+
+  @override
+  String get transferExportFile => 'Export to a file';
+
+  @override
+  String get transferImportFile => 'Import from a file';
+
+  @override
+  String get transferCopy => 'Copy as text';
+
+  @override
+  String get transferPaste => 'Paste text';
+
+  @override
+  String get transferCopied => 'Progress copied. Paste it on the other device.';
+
+  @override
+  String get transferSaved => 'Progress saved to a file';
+
+  @override
+  String transferImported(int count) {
+    return 'Progress merged. Updated records: $count';
+  }
+
+  @override
+  String get transferNothingNew => 'Nothing new: this device already has it all';
+
+  @override
+  String get transferBadData => 'This is not APuzzle progress, or it is damaged';
+
+  @override
+  String get transferSaveFailed => 'Could not save the file';
+
+  @override
+  String get transferCopyFailed => 'Could not copy to the clipboard';
+
+  @override
   String get installApp => 'Install app';
 
   @override

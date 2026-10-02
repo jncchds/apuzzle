@@ -334,6 +334,84 @@ abstract class AppLocalizations {
   /// **'Could not open the system settings'**
   String get couldNotOpenSettings;
 
+  /// No description provided for @transferTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to another device'**
+  String get transferTitle;
+
+  /// No description provided for @transferHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Export here, import on the other device. Importing merges: wins, best times and daily results of both devices are kept, and the newer saved game wins.'**
+  String get transferHint;
+
+  /// No description provided for @transferExportFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Export to a file'**
+  String get transferExportFile;
+
+  /// No description provided for @transferImportFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Import from a file'**
+  String get transferImportFile;
+
+  /// No description provided for @transferCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy as text'**
+  String get transferCopy;
+
+  /// No description provided for @transferPaste.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste text'**
+  String get transferPaste;
+
+  /// No description provided for @transferCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress copied. Paste it on the other device.'**
+  String get transferCopied;
+
+  /// No description provided for @transferSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress saved to a file'**
+  String get transferSaved;
+
+  /// No description provided for @transferImported.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress merged. Updated records: {count}'**
+  String transferImported(int count);
+
+  /// No description provided for @transferNothingNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing new: this device already has it all'**
+  String get transferNothingNew;
+
+  /// No description provided for @transferBadData.
+  ///
+  /// In en, this message translates to:
+  /// **'This is not APuzzle progress, or it is damaged'**
+  String get transferBadData;
+
+  /// No description provided for @transferSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save the file'**
+  String get transferSaveFailed;
+
+  /// No description provided for @transferCopyFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not copy to the clipboard'**
+  String get transferCopyFailed;
+
   /// No description provided for @installApp.
   ///
   /// In en, this message translates to:

@@ -142,6 +142,48 @@ class AppLocalizationsPl extends AppLocalizations {
   String get couldNotOpenSettings => 'Nie udało się otworzyć ustawień systemu';
 
   @override
+  String get transferTitle => 'Przenieś na inne urządzenie';
+
+  @override
+  String get transferHint =>
+      'Wyeksportuj tutaj, zaimportuj na drugim urządzeniu. Import łączy dane: wygrane, najlepsze czasy i wyniki dzienne z obu urządzeń zostają, a z dwóch zapisanych gier zostaje nowsza.';
+
+  @override
+  String get transferExportFile => 'Eksportuj do pliku';
+
+  @override
+  String get transferImportFile => 'Importuj z pliku';
+
+  @override
+  String get transferCopy => 'Kopiuj jako tekst';
+
+  @override
+  String get transferPaste => 'Wklej tekst';
+
+  @override
+  String get transferCopied => 'Postęp skopiowany. Wklej go na drugim urządzeniu.';
+
+  @override
+  String get transferSaved => 'Postęp zapisany do pliku';
+
+  @override
+  String transferImported(int count) {
+    return 'Postęp połączony. Zaktualizowane wpisy: $count';
+  }
+
+  @override
+  String get transferNothingNew => 'Nic nowego: to urządzenie ma już wszystko';
+
+  @override
+  String get transferBadData => 'To nie jest postęp APuzzle albo dane są uszkodzone';
+
+  @override
+  String get transferSaveFailed => 'Nie udało się zapisać pliku';
+
+  @override
+  String get transferCopyFailed => 'Nie udało się skopiować do schowka';
+
+  @override
   String get installApp => 'Zainstaluj aplikację';
 
   @override
