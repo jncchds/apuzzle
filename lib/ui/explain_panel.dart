@@ -45,21 +45,26 @@ class _ExplainPanelState extends State<ExplainPanel> {
           Flexible(
             child: SingleChildScrollView(
               padding: const EdgeInsets.only(right: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  if (e == null)
-                    Text(l.explainNone, style: theme.textTheme.bodyMedium)
-                  else
-                    ExplainText(controller: c, line: e.headline, style: theme.textTheme.bodyMedium),
-                  if (details && _why) ...[
-                    const SizedBox(height: 6),
-                    for (final line in why) _Reason(controller: c, line: line),
-                    if (e.suppose case final s?) _Reason(controller: c, line: s, strong: true),
-                    for (final (i, line) in e.probe.indexed)
-                      _Reason(controller: c, line: line, indent: true, last: i == e.probe.length - 1),
+              child: AnimatedSize(
+                duration: const Duration(milliseconds: 220),
+                curve: Curves.easeOutCubic,
+                alignment: Alignment.topCenter,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (e == null)
+                      Text(l.explainNone, style: theme.textTheme.bodyMedium)
+                    else
+                      ExplainText(controller: c, line: e.headline, style: theme.textTheme.bodyMedium),
+                    if (details && _why) ...[
+                      const SizedBox(height: 6),
+                      for (final line in why) _Reason(controller: c, line: line),
+                      if (e.suppose case final s?) _Reason(controller: c, line: s, strong: true),
+                      for (final (i, line) in e.probe.indexed)
+                        _Reason(controller: c, line: line, indent: true, last: i == e.probe.length - 1),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ),

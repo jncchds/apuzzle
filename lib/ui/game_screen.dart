@@ -426,8 +426,26 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
               ),
               if (!c.solved) ...[
                 _Toolbar(controller: c, onRestart: _confirmRestart, onSubmit: type.showSubmit ? _submit : null),
-                if (controls != null) Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 12), child: controls),
-                if (controls == null) const SizedBox(height: 8),
+                // The board makes room smoothly as the panel or palette comes and goes.
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 260),
+                  curve: Curves.easeOutCubic,
+                  alignment: Alignment.topCenter,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    layoutBuilder: (current, previous) => Stack(
+                      alignment: Alignment.topCenter,
+                      children: [...previous, ?current],
+                    ),
+                    child: controls == null
+                        ? const SizedBox(key: ValueKey('none'), height: 8)
+                        : Padding(
+                            key: ValueKey(c.explaining ? 'explain' : 'controls'),
+                            padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
+                            child: controls,
+                          ),
+                  ),
+                ),
               ],
             ],
           ),

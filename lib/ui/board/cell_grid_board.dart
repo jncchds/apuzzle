@@ -158,9 +158,20 @@ class CellGridBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Explain mode opens a band for coordinates: the board eases aside.
+    return TweenAnimationBuilder<double>(
+      tween: Tween(end: explain == null ? 0 : 1),
+      duration: CoordinateLabels.duration,
+      curve: Curves.easeOutCubic,
+      builder: (context, shown, _) => _build(context, shown),
+    );
+  }
+
+  Widget _build(BuildContext context, double shown) {
     return LayoutBuilder(
       builder: (context, cons) {
-        final band = explain == null ? 0.0 : CoordinateLabels.bandFor(cons.biggest, rows, cols);
+        final fullBand = CoordinateLabels.bandFor(cons.biggest, rows, cols);
+        final band = (fullBand * shown).roundToDouble();
         final m = BoardMetrics.fit(
           space: Size(cons.maxWidth - band, cons.maxHeight - band),
           rows: rows,
@@ -227,7 +238,7 @@ class CellGridBoard extends StatelessWidget {
             child: board,
           );
         }
-        if (explain != null) board = CoordinateLabels(m: m, band: band, child: board);
+        board = CoordinateLabels(m: m, band: band, fullBand: fullBand, shown: shown, child: board);
         return Center(child: board);
       },
     );

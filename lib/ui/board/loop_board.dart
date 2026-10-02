@@ -111,10 +111,13 @@ class _LoopBoardState extends State<LoopBoard> {
   LatticeLoop get g => widget.g;
   List<int> get _marks => _draft ?? widget.marks;
 
+  /// How far explain mode's coordinate band is open (0..1), while it animates.
+  double _shown = 0;
+
   EdgeInsets get _margins {
     final m = widget.margins ?? EdgeInsets.all(widget.centered ? 0 : 0.4);
     // Explain mode puts coordinate labels in a band left of and above the rest.
-    return widget.explain == null ? m : m + const EdgeInsets.only(left: _band, top: _band);
+    return m + EdgeInsets.only(left: _band * _shown, top: _band * _shown);
   }
 
   static const _band = 0.45;
@@ -229,7 +232,17 @@ class _LoopBoardState extends State<LoopBoard> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => TweenAnimationBuilder<double>(
+    tween: Tween(end: widget.explain == null ? 0 : 1),
+    duration: CoordinateLabels.duration,
+    curve: Curves.easeOutCubic,
+    builder: (context, shown, _) {
+      _shown = shown;
+      return _build(context);
+    },
+  );
+
+  Widget _build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     return LayoutBuilder(
       builder: (context, cons) {
@@ -260,11 +273,12 @@ class _LoopBoardState extends State<LoopBoard> {
             explain: widget.explain,
             explainColor: scheme.tertiary,
             labelStyle: Theme.of(context).textTheme.labelSmall!.copyWith(
-              color: scheme.onSurfaceVariant,
+              color: scheme.onSurfaceVariant.withValues(alpha: _shown),
               fontSize: (geo.cell * _band * 0.62).clamp(9.0, 13.0),
               height: 1,
             ),
             band: _band * geo.cell,
+            shown: _shown,
           ),
         );
         final win = widget.win;
@@ -311,6 +325,7 @@ class _LoopPainter extends CustomPainter {
     required this.explainColor,
     required this.labelStyle,
     required this.band,
+    required this.shown,
   });
 
   final LatticeLoop g;
@@ -333,6 +348,9 @@ class _LoopPainter extends CustomPainter {
   final TextStyle labelStyle;
   final double band;
 
+  /// How far the coordinate band is open (0..1).
+  final double shown;
+
   Offset _pos(int p) => geo.point(p ~/ g.vc, p % g.vc);
 
   @override
@@ -352,7 +370,7 @@ class _LoopPainter extends CustomPainter {
         }
       }
     }
-    if (explain != null) _labels(canvas);
+    if (shown > 0) _labels(canvas);
     paintNotes?.call(canvas, geo);
     if (!cluesOnTop) paintClues(canvas, geo);
 
@@ -414,10 +432,10 @@ class _LoopPainter extends CustomPainter {
     }
 
     for (var c = 0; c < geo.cols; c++) {
-      put(colName(c), Offset(geo.cellRect(0, c).center.dx, band / 2));
+      put(colName(c), Offset(geo.cellRect(0, c).center.dx, band * (shown - 0.5)));
     }
     for (var r = 0; r < geo.rows; r++) {
-      put('${r + 1}', Offset(band / 2, geo.cellRect(r, 0).center.dy));
+      put('${r + 1}', Offset(band * (shown - 0.5), geo.cellRect(r, 0).center.dy));
     }
   }
 

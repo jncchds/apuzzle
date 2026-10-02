@@ -66,21 +66,32 @@ List<Widget> explainHighlights(BuildContext context, BoardMetrics m, ExplainView
 }
 
 /// Column letters above and row numbers left of a board, in a band of
-/// [band] px: [child] is laid out at ([band], [band]).
+/// [band] px: [child] is laid out at ([band], [band]). [shown] (0..1) fades
+/// the labels while the band grows or shrinks; [fullBand] sizes the text.
 class CoordinateLabels extends StatelessWidget {
-  const CoordinateLabels({super.key, required this.m, required this.band, required this.child});
+  const CoordinateLabels({
+    super.key,
+    required this.m,
+    required this.band,
+    required this.child,
+    this.shown = 1,
+    double? fullBand,
+  }) : fullBand = fullBand ?? band;
 
   final BoardMetrics m;
   final double band;
+  final double fullBand;
+  final double shown;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.labelSmall?.copyWith(
-      color: Theme.of(context).colorScheme.onSurfaceVariant,
-      fontSize: (band * 0.62).clamp(9.0, 13.0),
+      color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: shown.clamp(0.0, 1.0)),
+      fontSize: (fullBand * 0.62).clamp(9.0, 13.0),
       height: 1,
     );
+    // The board stays the first child, so it keeps its state as labels come and go.
     return SizedBox(
       width: m.width + band,
       height: m.height + band,
@@ -88,26 +99,31 @@ class CoordinateLabels extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Positioned(left: band, top: band, width: m.width, height: m.height, child: child),
-          for (var c = 0; c < m.cols; c++)
-            Positioned(
-              left: band + m.x(c),
-              top: 0,
-              width: m.cell,
-              height: band,
-              child: Center(child: Text(colName(c), style: style)),
-            ),
-          for (var r = 0; r < m.rows; r++)
-            Positioned(
-              left: 0,
-              top: band + m.y(r),
-              width: band,
-              height: m.cell,
-              child: Center(child: Text('${r + 1}', style: style)),
-            ),
+          if (shown > 0) ...[
+            for (var c = 0; c < m.cols; c++)
+              Positioned(
+                left: band + m.x(c),
+                top: band - fullBand,
+                width: m.cell,
+                height: fullBand,
+                child: Center(child: Text(colName(c), style: style)),
+              ),
+            for (var r = 0; r < m.rows; r++)
+              Positioned(
+                left: band - fullBand,
+                top: band + m.y(r),
+                width: fullBand,
+                height: m.cell,
+                child: Center(child: Text('${r + 1}', style: style)),
+              ),
+          ],
         ],
       ),
     );
   }
+
+  /// How long the band takes to open or close.
+  static const duration = Duration(milliseconds: 260);
 
   /// Band size for a board of [rows] × [cols] in [space].
   static double bandFor(Size space, int rows, int cols) =>
