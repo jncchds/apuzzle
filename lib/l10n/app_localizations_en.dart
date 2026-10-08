@@ -628,6 +628,64 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get snakeName => 'Snake';
+
+  @override
+  String get snakeTagline => 'Eat the apples, grow longer, don\'t bite your tail';
+
+  @override
+  String get snakeRules =>
+      '• The snake moves on its own. Swipe (or press an arrow key) to turn it.\n• Each apple makes it one cell longer and scores a point. It gets a little faster as it grows.\n• Running into a wall or into itself ends the run.\n• Tap the board (or press space) to pause, and swipe to go on.\n\nGoals\n• Free play: eat as many apples as you can, and beat your best score.\n• Apple target: eat the set number of apples (more on bigger boards and harder levels) without crashing.\n\nThe difficulty sets the speed.';
+
+  @override
+  String get snakeGoalTarget => 'Apple target';
+
+  @override
+  String get snakeGoalTargetHint => 'Eat a set number of apples without crashing.';
+
+  @override
+  String get snakeGoalFreeHint => 'No target: eat as many apples as you can before you crash.';
+
+  @override
+  String snakeFed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count apples!',
+      one: '1 apple!',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get snakeFull => 'The board is full!';
+
+  @override
+  String snakeApples(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count apples',
+      one: '1 apple',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String snakeLength(int count) {
+    return 'Length $count';
+  }
+
+  @override
+  String get snakeStart => 'Swipe to start';
+
+  @override
+  String get snakePaused => 'Paused: swipe to go on';
+
+  @override
+  String get snakeCrashed => 'Crashed! Tap to try again';
+
+  @override
   String get pipesName => 'Pipes';
 
   @override
@@ -1089,6 +1147,21 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutMergeS1 =>
       'Build a chain: keep your tiles in order along one row with the biggest in the corner, like 64, 32, 16, 8. Then one new 8 at the end rolls all the way up. Make 128.';
+
+  @override
+  String get tutSnake1 =>
+      'The snake moves on its own: swipe (or press an arrow key) to turn it. It can\'t turn right back. Lead it to the apple.';
+
+  @override
+  String get tutSnake2 =>
+      'Every apple makes the snake one cell longer. Don\'t run into a wall or into your own body. Eat 3 apples.';
+
+  @override
+  String get tutSnake3 => 'A real board: eat 5 apples. Tap the board to pause, and swipe to go on.';
+
+  @override
+  String get tutSnakeS1 =>
+      'A long snake needs room. Before you grab an apple, make sure you can get out again: the cells your tail leaves are always free, so following your tail is the safe way. Eat 3 apples.';
 
   @override
   String get tutPipes1 =>

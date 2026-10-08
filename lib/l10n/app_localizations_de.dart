@@ -629,6 +629,64 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get snakeName => 'Schlange';
+
+  @override
+  String get snakeTagline => 'Friss die Äpfel, wachse und beiß dir nicht in den Schwanz';
+
+  @override
+  String get snakeRules =>
+      '• Die Schlange bewegt sich von selbst. Wische (oder drück eine Pfeiltaste), um sie zu lenken.\n• Jeder Apfel macht sie ein Feld länger und bringt einen Punkt. Mit der Länge wird sie etwas schneller.\n• Ein Zusammenstoß mit einer Wand oder mit sich selbst beendet das Spiel.\n• Tippe aufs Feld (oder drück die Leertaste) für eine Pause und wische, um weiterzuspielen.\n\nZiele\n• Freies Spiel: Friss so viele Äpfel wie möglich und schlag deinen Rekord.\n• Apfelziel: Friss die vorgegebene Zahl an Äpfeln (mehr auf größeren Feldern und höheren Stufen), ohne zu verunglücken.\n\nDie Schwierigkeit bestimmt das Tempo.';
+
+  @override
+  String get snakeGoalTarget => 'Apfelziel';
+
+  @override
+  String get snakeGoalTargetHint => 'Friss eine vorgegebene Zahl an Äpfeln, ohne zu verunglücken.';
+
+  @override
+  String get snakeGoalFreeHint => 'Ohne Ziel: Friss so viele Äpfel wie möglich, bevor du verunglückst.';
+
+  @override
+  String snakeFed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Äpfel!',
+      one: '$count Apfel!',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get snakeFull => 'Das Feld ist voll!';
+
+  @override
+  String snakeApples(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Äpfel',
+      one: '$count Apfel',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String snakeLength(int count) {
+    return 'Länge $count';
+  }
+
+  @override
+  String get snakeStart => 'Wische zum Starten';
+
+  @override
+  String get snakePaused => 'Pause: Wische zum Weiterspielen';
+
+  @override
+  String get snakeCrashed => 'Zusammenstoß! Tippe für einen neuen Versuch';
+
+  @override
   String get pipesName => 'Rohre';
 
   @override
@@ -1091,6 +1149,22 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutMergeS1 =>
       'Bau eine Kette: Halt deine Kacheln der Reihe nach in einer Zeile, die größte in der Ecke, etwa 64, 32, 16, 8. Dann rollt eine neue 8 am Ende ganz nach vorn. Bau eine 128.';
+
+  @override
+  String get tutSnake1 =>
+      'Die Schlange bewegt sich von selbst: Wische (oder drück eine Pfeiltaste), um sie zu lenken. Direkt umkehren kann sie nicht. Führe sie zum Apfel.';
+
+  @override
+  String get tutSnake2 =>
+      'Jeder Apfel macht die Schlange ein Feld länger. Stoß nicht gegen eine Wand oder deinen eigenen Körper. Friss 3 Äpfel.';
+
+  @override
+  String get tutSnake3 =>
+      'Ein echtes Feld: Friss 5 Äpfel. Tippe aufs Feld für eine Pause und wische, um weiterzuspielen.';
+
+  @override
+  String get tutSnakeS1 =>
+      'Eine lange Schlange braucht Platz. Bevor du einen Apfel holst, sorg dafür, dass du wieder herauskommst: Die Felder, die dein Schwanz verlässt, sind immer frei, also ist es sicher, ihm zu folgen. Friss 3 Äpfel.';
 
   @override
   String get tutPipes1 =>

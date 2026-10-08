@@ -142,6 +142,9 @@ abstract class PuzzleType<P, S> {
 
   bool get supportsModeSwitch => false;
 
+  /// A real-time game: no undo, redo or hints.
+  bool get realTime => false;
+
   /// Smallest comfortable cell size for this type (used to cap grid sizes).
   double get minCellSize => 34;
 

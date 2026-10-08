@@ -123,6 +123,7 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 | mines | Mines (Minesweeper) | PuzzleType | no guessing: generator plays with tier logic (1 single numbers, 2 pairs, 3 + mine count & probing) and opens a safe cell where stuck; digging a mine flags it with a toast (no game over); tap a satisfied number to chord |
 | pop | Pop | PuzzleType | bubble breaker; game options (mode: standard/shifter/continuous/mega, goal: clear (standard only, reverse-built so always clearable)/target (share of best playout)/free). Custom animated `PopBoard` |
 | merge | 2048 | PuzzleType | slide and merge; tiles spawn from (seed, move number) so share codes replay; goal option: build the tile (target by size and difficulty, 2048 on 4×4 hard) or free play; hint = depth-2 expectimax, plays the move; swipe or arrow keys/WASD; custom animated `MergeBoard` |
+| snake | Snake | PuzzleType | real time (`realTime`: no undo, redo, hints or "Show me"); `SnakeBoard` runs a ticker and calls `GameController.advance` each step (no undo entry, saved only on turns, apples and crashes); waits for the first swipe, tap or space pauses; apples spawn from (seed, apples eaten) so share codes replay; difficulty = speed; goal option: free (a crash is the finish, best score) or apple target; `snakeSuggest` (BFS to the apple if the tail stays reachable, else follow the tail) only drives tests and snapshots; daily from 2026-10-08 |
 
 ## Known follow-ups
 - A faster LITS uniqueness check (or logic-tier construction) to re-enable 8×8+ boards.

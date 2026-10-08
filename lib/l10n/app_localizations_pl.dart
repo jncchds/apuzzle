@@ -640,6 +640,68 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
+  String get snakeName => 'Wąż';
+
+  @override
+  String get snakeTagline => 'Jedz jabłka, rośnij i nie gryź własnego ogona';
+
+  @override
+  String get snakeRules =>
+      '• Wąż porusza się sam. Przesuń palcem (lub naciśnij strzałkę), aby go skręcić.\n• Każde jabłko wydłuża go o jedno pole i daje punkt. Gdy rośnie, trochę przyspiesza.\n• Uderzenie w ścianę lub w siebie kończy grę.\n• Dotknij planszy (lub naciśnij spację), aby zatrzymać grę, i przesuń palcem, aby grać dalej.\n\nCele\n• Gra swobodna: zjedz jak najwięcej jabłek i pobij swój rekord.\n• Cel w jabłkach: zjedz zadaną liczbę jabłek (więcej na większych planszach i wyższych poziomach), nie rozbijając się.\n\nPoziom trudności ustala prędkość.';
+
+  @override
+  String get snakeGoalTarget => 'Cel w jabłkach';
+
+  @override
+  String get snakeGoalTargetHint => 'Zjedz zadaną liczbę jabłek, nie rozbijając się.';
+
+  @override
+  String get snakeGoalFreeHint => 'Bez celu: zjedz jak najwięcej jabłek, zanim się rozbijesz.';
+
+  @override
+  String snakeFed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count jabłka!',
+      many: '$count jabłek!',
+      few: '$count jabłka!',
+      one: '$count jabłko!',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get snakeFull => 'Plansza jest pełna!';
+
+  @override
+  String snakeApples(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count jabłka',
+      many: '$count jabłek',
+      few: '$count jabłka',
+      one: '$count jabłko',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String snakeLength(int count) {
+    return 'Długość $count';
+  }
+
+  @override
+  String get snakeStart => 'Przesuń palcem, aby zacząć';
+
+  @override
+  String get snakePaused => 'Pauza: przesuń palcem, aby grać dalej';
+
+  @override
+  String get snakeCrashed => 'Kraksa! Dotknij, aby spróbować ponownie';
+
+  @override
   String get pipesName => 'Rury';
 
   @override
@@ -1103,6 +1165,22 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutMergeS1 =>
       'Buduj łańcuch: trzymaj kafelki po kolei wzdłuż jednego wiersza, największy w rogu, jak 64, 32, 16, 8. Wtedy jedna nowa 8 na końcu toczy się aż do początku. Zbuduj 128.';
+
+  @override
+  String get tutSnake1 =>
+      'Wąż porusza się sam: przesuń palcem (lub naciśnij strzałkę), aby go skręcić. Nie zawróci w miejscu. Doprowadź go do jabłka.';
+
+  @override
+  String get tutSnake2 =>
+      'Każde jabłko wydłuża węża o jedno pole. Nie wjedź w ścianę ani we własne ciało. Zjedz 3 jabłka.';
+
+  @override
+  String get tutSnake3 =>
+      'Prawdziwa plansza: zjedz 5 jabłek. Dotknij planszy, aby zatrzymać grę, i przesuń palcem, aby grać dalej.';
+
+  @override
+  String get tutSnakeS1 =>
+      'Długi wąż potrzebuje miejsca. Zanim złapiesz jabłko, upewnij się, że zdołasz się wydostać: pola zwalniane przez ogon są zawsze wolne, więc podążanie za ogonem jest bezpieczne. Zjedz 3 jabłka.';
 
   @override
   String get tutPipes1 =>

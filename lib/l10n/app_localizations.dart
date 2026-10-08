@@ -1120,6 +1120,84 @@ abstract class AppLocalizations {
   /// **'Best {tile}'**
   String mergeBest(int tile);
 
+  /// No description provided for @snakeName.
+  ///
+  /// In en, this message translates to:
+  /// **'Snake'**
+  String get snakeName;
+
+  /// No description provided for @snakeTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Eat the apples, grow longer, don\'t bite your tail'**
+  String get snakeTagline;
+
+  /// No description provided for @snakeRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• The snake moves on its own. Swipe (or press an arrow key) to turn it.\n• Each apple makes it one cell longer and scores a point. It gets a little faster as it grows.\n• Running into a wall or into itself ends the run.\n• Tap the board (or press space) to pause, and swipe to go on.\n\nGoals\n• Free play: eat as many apples as you can, and beat your best score.\n• Apple target: eat the set number of apples (more on bigger boards and harder levels) without crashing.\n\nThe difficulty sets the speed.'**
+  String get snakeRules;
+
+  /// No description provided for @snakeGoalTarget.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple target'**
+  String get snakeGoalTarget;
+
+  /// No description provided for @snakeGoalTargetHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Eat a set number of apples without crashing.'**
+  String get snakeGoalTargetHint;
+
+  /// No description provided for @snakeGoalFreeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'No target: eat as many apples as you can before you crash.'**
+  String get snakeGoalFreeHint;
+
+  /// No description provided for @snakeFed.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{1 apple!} other{{count} apples!}}'**
+  String snakeFed(int count);
+
+  /// No description provided for @snakeFull.
+  ///
+  /// In en, this message translates to:
+  /// **'The board is full!'**
+  String get snakeFull;
+
+  /// No description provided for @snakeApples.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{1 apple} other{{count} apples}}'**
+  String snakeApples(int count);
+
+  /// No description provided for @snakeLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Length {count}'**
+  String snakeLength(int count);
+
+  /// No description provided for @snakeStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe to start'**
+  String get snakeStart;
+
+  /// No description provided for @snakePaused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused: swipe to go on'**
+  String get snakePaused;
+
+  /// No description provided for @snakeCrashed.
+  ///
+  /// In en, this message translates to:
+  /// **'Crashed! Tap to try again'**
+  String get snakeCrashed;
+
   /// No description provided for @pipesName.
   ///
   /// In en, this message translates to:
@@ -1887,6 +1965,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Build a chain: keep your tiles in order along one row with the biggest in the corner, like 64, 32, 16, 8. Then one new 8 at the end rolls all the way up. Make 128.'**
   String get tutMergeS1;
+
+  /// No description provided for @tutSnake1.
+  ///
+  /// In en, this message translates to:
+  /// **'The snake moves on its own: swipe (or press an arrow key) to turn it. It can\'t turn right back. Lead it to the apple.'**
+  String get tutSnake1;
+
+  /// No description provided for @tutSnake2.
+  ///
+  /// In en, this message translates to:
+  /// **'Every apple makes the snake one cell longer. Don\'t run into a wall or into your own body. Eat 3 apples.'**
+  String get tutSnake2;
+
+  /// No description provided for @tutSnake3.
+  ///
+  /// In en, this message translates to:
+  /// **'A real board: eat 5 apples. Tap the board to pause, and swipe to go on.'**
+  String get tutSnake3;
+
+  /// No description provided for @tutSnakeS1.
+  ///
+  /// In en, this message translates to:
+  /// **'A long snake needs room. Before you grab an apple, make sure you can get out again: the cells your tail leaves are always free, so following your tail is the safe way. Eat 3 apples.'**
+  String get tutSnakeS1;
 
   /// No description provided for @tutPipes1.
   ///

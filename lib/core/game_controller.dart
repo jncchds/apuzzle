@@ -58,8 +58,8 @@ class GameController extends ChangeNotifier {
 
   final List<Object> _undo = [];
   final List<Object> _redo = [];
-  bool get canUndo => _undo.isNotEmpty && !solved;
-  bool get canRedo => _redo.isNotEmpty && !solved;
+  bool get canUndo => !type.realTime && _undo.isNotEmpty && !solved;
+  bool get canRedo => !type.realTime && _redo.isNotEmpty && !solved;
 
   // ---- input tools (used by value-grid types) ----
   InputMode inputMode;
@@ -117,6 +117,13 @@ class GameController extends ChangeNotifier {
     _state = next;
     if (settings.haptics) HapticFeedback.selectionClick();
     _afterChange();
+  }
+
+  /// A real-time step: no undo entry or haptics, saved only if [persist].
+  void advance(Object next, {bool persist = true}) {
+    if (solved || identical(next, _state)) return;
+    _state = next;
+    _afterChange(persist: persist);
   }
 
   void undo() {
@@ -186,7 +193,7 @@ class GameController extends ChangeNotifier {
   }
 
   void hint() {
-    if (solved) return;
+    if (solved || type.realTime) return;
     if (type.canExplain) {
       final e = type.explain(puzzle, _state);
       if (e?.next != null) {
@@ -270,14 +277,14 @@ class GameController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _afterChange() {
+  void _afterChange({bool persist = true}) {
     if (flashErrors.isNotEmpty) flashErrors = const {};
     if (type.isComplete(puzzle, _state) && type.isSolved(puzzle, _state)) {
       _win();
       return;
     }
     if (explaining) _explain();
-    save();
+    if (persist) save();
     notifyListeners();
   }
 

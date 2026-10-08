@@ -22,6 +22,7 @@ import '../puzzles/pop/pop_type.dart';
 import '../puzzles/pipes/pipes_type.dart';
 import '../puzzles/rails/rails_type.dart';
 import '../puzzles/shikaku/shikaku_type.dart';
+import '../puzzles/snake/snake_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
 import '../puzzles/trail/trail_type.dart';
 import 'puzzle_type.dart';
@@ -38,6 +39,7 @@ const List<PuzzleType> puzzleTypes = [
   BlendType(),
   PopType(),
   MergeType(),
+  SnakeType(),
   PipesType(),
   ShikakuType(),
   PlotsType(),

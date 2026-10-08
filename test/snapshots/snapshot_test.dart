@@ -50,6 +50,7 @@ int _progressSteps(PuzzleType t) => switch (t.id) {
   'blend' => 2,
   'pop' => 12,
   'merge' => 120,
+  'snake' => 40,
   'trail' => 8,
   'labyrinth' => 3,
   _ => 6,

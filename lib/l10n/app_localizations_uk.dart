@@ -640,6 +640,68 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
+  String get snakeName => 'Змійка';
+
+  @override
+  String get snakeTagline => 'Їж яблука, рости й не кусай себе за хвіст';
+
+  @override
+  String get snakeRules =>
+      '• Змійка повзе сама. Проведи пальцем (або натисни стрілку), щоб повернути її.\n• Кожне яблуко подовжує її на одну клітинку і дає очко. Що довша змійка, то вона трохи швидша.\n• Удар об стіну чи об себе завершує гру.\n• Торкнися поля (або натисни пробіл), щоб поставити паузу, і проведи пальцем, щоб продовжити.\n\nЦілі\n• Вільна гра: з’їж якомога більше яблук і побий свій рекорд.\n• Ціль за яблуками: з’їж задану кількість яблук (більше на великих полях і вищій складності) і не розбийся.\n\nСкладність задає швидкість.';
+
+  @override
+  String get snakeGoalTarget => 'Ціль за яблуками';
+
+  @override
+  String get snakeGoalTargetHint => 'З’їж задану кількість яблук і не розбийся.';
+
+  @override
+  String get snakeGoalFreeHint => 'Без мети: з’їж якомога більше яблук, поки не розіб’єшся.';
+
+  @override
+  String snakeFed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count яблука!',
+      many: '$count яблук!',
+      few: '$count яблука!',
+      one: '$count яблуко!',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get snakeFull => 'Поле заповнене!';
+
+  @override
+  String snakeApples(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count яблука',
+      many: '$count яблук',
+      few: '$count яблука',
+      one: '$count яблуко',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String snakeLength(int count) {
+    return 'Довжина $count';
+  }
+
+  @override
+  String get snakeStart => 'Проведи пальцем, щоб почати';
+
+  @override
+  String get snakePaused => 'Пауза: проведи пальцем, щоб продовжити';
+
+  @override
+  String get snakeCrashed => 'Аварія! Торкнися, щоб спробувати ще';
+
+  @override
   String get pipesName => 'Труби';
 
   @override
@@ -1103,6 +1165,22 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get tutMergeS1 =>
       'Будуйте ланцюжок: тримайте плитки по порядку вздовж одного рядка, найбільшу в куті, як 64, 32, 16, 8. Тоді одна нова 8 у кінці котиться аж до початку. Зберіть 128.';
+
+  @override
+  String get tutSnake1 =>
+      'Змійка повзе сама: проведи пальцем (або натисни стрілку), щоб повернути її. Розвернутися назад вона не може. Доведи її до яблука.';
+
+  @override
+  String get tutSnake2 =>
+      'Кожне яблуко подовжує змійку на одну клітинку. Не врізайся в стіну чи у власне тіло. З’їж 3 яблука.';
+
+  @override
+  String get tutSnake3 =>
+      'Справжнє поле: з’їж 5 яблук. Торкнися поля, щоб поставити паузу, і проведи пальцем, щоб продовжити.';
+
+  @override
+  String get tutSnakeS1 =>
+      'Довгій змійці потрібне місце. Перш ніж хапати яблуко, переконайся, що зможеш вибратися: клітинки, які звільняє хвіст, завжди вільні, тож повзти за хвостом безпечно. З’їж 3 яблука.';
 
   @override
   String get tutPipes1 =>

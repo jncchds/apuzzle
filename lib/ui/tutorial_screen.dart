@@ -345,7 +345,12 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
           child: Row(
             children: [
               if (!step.look) ...[
-                IconButton(icon: const Icon(Icons.undo_rounded), tooltip: l.undo, onPressed: c.canUndo ? c.undo : null),
+                if (!type.realTime)
+                  IconButton(
+                    icon: const Icon(Icons.undo_rounded),
+                    tooltip: l.undo,
+                    onPressed: c.canUndo ? c.undo : null,
+                  ),
                 IconButton(
                   icon: const Icon(Icons.restart_alt_rounded),
                   tooltip: l.tutorialReset,
@@ -356,7 +361,7 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
               Expanded(
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: playing
+                  child: playing && !type.realTime
                       ? TextButton(
                           onPressed: _showMe,
                           child: Row(

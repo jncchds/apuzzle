@@ -501,10 +501,13 @@ class _Toolbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          IconButton(icon: const Icon(Icons.undo_rounded), tooltip: l.undo, onPressed: c.canUndo ? c.undo : null),
-          IconButton(icon: const Icon(Icons.redo_rounded), tooltip: l.redo, onPressed: c.canRedo ? c.redo : null),
+          if (!c.type.realTime) ...[
+            IconButton(icon: const Icon(Icons.undo_rounded), tooltip: l.undo, onPressed: c.canUndo ? c.undo : null),
+            IconButton(icon: const Icon(Icons.redo_rounded), tooltip: l.redo, onPressed: c.canRedo ? c.redo : null),
+          ],
           IconButton(icon: const Icon(Icons.restart_alt_rounded), tooltip: l.restart, onPressed: onRestart),
-          IconButton(icon: const Icon(Icons.lightbulb_outline_rounded), tooltip: l.hint, onPressed: c.hint),
+          if (!c.type.realTime)
+            IconButton(icon: const Icon(Icons.lightbulb_outline_rounded), tooltip: l.hint, onPressed: c.hint),
           if (c.canExplain)
             IconButton(
               icon: const Icon(Icons.psychology_alt_outlined),
