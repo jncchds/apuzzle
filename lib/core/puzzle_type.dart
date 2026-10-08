@@ -52,6 +52,9 @@ abstract class PuzzleType<P, S> {
   /// fitting a small phone).
   GridSize dailySize(Difficulty difficulty);
 
+  /// The difficulties played in daily challenges.
+  List<Difficulty> get dailyDifficulties => difficulties;
+
   /// First day this type can appear in daily challenges. A new type
   /// overrides it with its release date, so earlier days keep their games.
   Day get dailySince => dailyLaunch;

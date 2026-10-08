@@ -11,7 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('daily generation times', () {
     for (final type in puzzleTypes) {
-      for (final d in type.difficulties) {
+      for (final d in type.dailyDifficulties) {
         final times = <int>[];
         var slowest = 0;
         for (var i = 0; i < 5; i++) {

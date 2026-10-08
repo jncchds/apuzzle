@@ -7,7 +7,7 @@ import 'puzzle_type.dart';
 import 'registry.dart';
 
 /// Daily challenges: every date picks [dailyGamesPerDay] games from the ones
-/// released by then, each played at all its difficulties with a fixed size
+/// released by then, each played at its [PuzzleType.dailyDifficulties] with a fixed size
 /// ([PuzzleType.dailySize]) and one seed per date. The puzzles are plain
 /// [GenParams], so they have ordinary share codes.
 
@@ -40,7 +40,7 @@ List<PuzzleType> dailyGames(Day day, [List<PuzzleType> types = puzzleTypes]) {
 
 List<DailyPuzzle> dailyPuzzles(Day day) => [
   for (final t in dailyGames(day))
-    for (final d in t.difficulties) (type: t, difficulty: d),
+    for (final d in t.dailyDifficulties) (type: t, difficulty: d),
 ];
 
 GenParams dailyParams(Day day, PuzzleType type, Difficulty difficulty) => GenParams(
@@ -55,6 +55,7 @@ bool isDailyPuzzle(Day day, PuzzleCode code, {Day? today}) =>
     dailyLaunch <= day &&
     day <= (today ?? Day.today()) &&
     dailyGames(day).contains(code.type) &&
+    code.type.dailyDifficulties.contains(code.params.difficulty) &&
     code.toString() == PuzzleCode.format(code.type, dailyParams(day, code.type, code.params.difficulty));
 
 /// The day whose puzzle [code] is (up to [today]), or null. A free game can

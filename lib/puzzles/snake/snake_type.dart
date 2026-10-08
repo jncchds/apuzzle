@@ -49,7 +49,11 @@ class SnakeType extends PuzzleType<SnakePuzzle, SnakeState> {
   @override
   GridSize get defaultSize => const GridSize.square(10);
   @override
-  GridSize dailySize(Difficulty difficulty) => const GridSize.square(10);
+  GridSize dailySize(Difficulty difficulty) => switch (difficulty) {
+    Difficulty.easy => const GridSize.square(8),
+    Difficulty.medium => const GridSize.square(10),
+    _ => const GridSize.square(12),
+  };
   @override
   Day get dailySince => const Day(2026, 10, 8);
   @override

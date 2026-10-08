@@ -1,7 +1,8 @@
 # Release notes
 
 ## 0.6.1 - 2026-10-08
-- New game: Snake. Swipe (or use the arrow keys) to steer the snake to the apples, grow longer and don't crash. Free play chases a best score, or pick an apple target; the difficulty sets the speed. Tap the board to pause. With a tutorial, and in the daily challenges from 2026-10-08
+- New game: Snake. Swipe (or use the arrow keys) to steer the snake to the apples, grow longer and don't crash. Free play chases a best score, or pick an apple target; the difficulty sets the speed. Tap the board to pause. With a tutorial, and in the daily challenges from 2026-10-08 on a bigger board at each level
+- Daily challenges: 2048 is now one puzzle a day (build 1024) instead of three
 
 ## 0.6.0 - 2026-10-02
 - Explain mode for every logic puzzle (all but Mosaic, Blend, Pop, 2048, Pipes and Labyrinth): the new button next to Hint explains the next step in words, naming cells like "E4" and showing the board's own symbols, with the reasons behind it (and, for harder steps, the "suppose…" that leads to a contradiction). "Do it" plays the step, and you can switch back to playing any time. Entering the mode and each step count as hints

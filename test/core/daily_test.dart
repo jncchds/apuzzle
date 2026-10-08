@@ -70,7 +70,7 @@ void main() {
   test('daily sizes are offered and fit a small phone', () {
     for (final t in puzzleTypes) {
       final fits = fittingSizes(t, const Size(360, 760));
-      for (final d in t.difficulties) {
+      for (final d in t.dailyDifficulties) {
         final size = t.dailySize(d);
         expect(t.sizes, contains(size), reason: '${t.id} ${d.name}');
         expect(fits, contains(size), reason: '${t.id} ${d.name} ${size.label} does not fit');
@@ -137,5 +137,18 @@ void main() {
     expect(r.bestMs, 60000);
     expect(r.hints, 0);
     expect(store.dailyResults(day.addDays(1)), isEmpty);
+  });
+
+  test('2048 is played at one difficulty, Snake at a size per difficulty', () {
+    final merge = puzzleTypeById('merge'), snake = puzzleTypeById('snake');
+    expect(merge.dailyDifficulties, [Difficulty.medium]);
+    var d = dailyLaunch;
+    while (!dailyGames(d).contains(merge)) {
+      d = d.addDays(1);
+    }
+    expect(dailyPuzzles(d).where((p) => p.type == merge).map((p) => p.difficulty), [Difficulty.medium]);
+    final easy = PuzzleCode(merge, dailyParams(d, merge, Difficulty.easy));
+    expect(isDailyPuzzle(d, easy, today: d), isFalse);
+    expect({for (final x in snake.dailyDifficulties) snake.dailySize(x)}.length, 3);
   });
 }

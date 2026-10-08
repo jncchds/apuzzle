@@ -346,7 +346,7 @@ class _GameRow extends StatelessWidget {
               spacing: 8,
               runSpacing: 8,
               children: [
-                for (final d in type.difficulties)
+                for (final d in type.dailyDifficulties)
                   _DifficultyChip(
                     label: d.label(l),
                     result: results[GameStore.dailyEntry(type.id, d)],

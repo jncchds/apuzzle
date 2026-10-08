@@ -41,6 +41,10 @@ class MergeType extends PuzzleType<MergePuzzle, MergeState> {
   GridSize get defaultSize => const GridSize.square(4);
   @override
   GridSize dailySize(Difficulty difficulty) => const GridSize.square(4);
+
+  /// Only the target tile changes with difficulty, so one daily (build 1024) is enough.
+  @override
+  List<Difficulty> get dailyDifficulties => const [Difficulty.medium];
   @override
   double get controlsHeight => 56;
   @override
