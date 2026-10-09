@@ -185,6 +185,9 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
   Widget buildValue(BuildContext context, P puzzle, ValueGrid state, Pos pos, CellValue cell, double size) =>
       values[cell.value!].build(context, size);
 
+  /// Content of an empty cell (a printed digit...), or null for none.
+  Widget? buildEmpty(BuildContext context, P puzzle, Pos pos, double size) => null;
+
   @override
   Widget buildValueChip(BuildContext context, P puzzle, int value, double size) =>
       valuesFor(puzzle)[value].build(context, size);
@@ -287,7 +290,10 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
         } else if (cell.marks.isNotEmpty) {
           content = KeyedSubtree(key: const ValueKey('marks'), child: buildMarks(context, cell.marks, m.cell * 0.92));
         } else {
-          content = const SizedBox.shrink(key: ValueKey('empty'));
+          content = KeyedSubtree(
+            key: const ValueKey('empty'),
+            child: buildEmpty(context, p, pos, m.cell) ?? const SizedBox.shrink(),
+          );
         }
         return CellTile(
           size: m.cell,

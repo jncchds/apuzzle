@@ -3169,4 +3169,140 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get exLinksFailMixed => 'Ale wtedy jedna ścieżka łączy dwie różne pary.';
+
+  @override
+  String get tallyName => 'Sumy';
+
+  @override
+  String get tallyTagline => 'Skreślaj liczby, aż każda linia się zsumuje';
+
+  @override
+  String get tallyRules =>
+      '• W każdym polu jest liczba. Skreśl niektóre z nich.\n• Liczby, które zostaną w każdym wierszu i kolumnie, muszą dać w sumie liczbę poza siatką.\n\nDotknij pola, aby przełączać: skreślone → w kółku (twoja notatka „zostaje”) → puste. Długie naciśnięcie / prawy przycisk przełącza wstecz. Kółka są opcjonalne: zagadka jest rozwiązana, gdy właściwe liczby są skreślone.';
+
+  @override
+  String get tutTally1 =>
+      'Skreślaj liczby tak, aby pozostałe w każdym wierszu i kolumnie dawały w sumie liczbę na zewnątrz. Dotknij liczby raz, aby ją skreślić. Siódemka nie może zostać w wierszu o sumie 2.';
+
+  @override
+  String get tutTally2 =>
+      'Liczba większa niż suma jej wiersza lub kolumny zawsze odpada. Zaznaczona 8 stoi w wierszu o sumie 6: skreśl ją, a potem dokończ planszę.';
+
+  @override
+  String get tutTally3 =>
+      'Liczby górnego wiersza dają razem 15, a potrzeba 12, więc odpaść może tylko 3: 8 i 4 muszą zostać. Dotknij dwa razy, aby wziąć w kółko liczbę, która zostaje, a potem dokończ planszę.';
+
+  @override
+  String get tutTally4 =>
+      'Teraz prawdziwa plansza. Zacznij od linii o małej sumie albo bliskiej sumie wszystkich ich liczb.';
+
+  @override
+  String get tutTallyS1 =>
+      'Wypróbuj każdy sposób na uzyskanie sumy linii. Liczba użyta w każdym sposobie zostaje, a nieużyta w żadnym odpada: 7 z 5, 4 i 3 to tylko 4 + 3, więc 5 odpada.';
+
+  @override
+  String get tutTallyS2 =>
+      'Trudna plansza. Gdy utkniesz, skreśl liczbę i śledź sumy: jeśli jakiś wiersz lub kolumna nie może się już zgodzić, ta liczba zostaje.';
+
+  @override
+  String exTallySupposeKeep(Object cell) {
+    return 'Załóżmy, że $cell zostaje.';
+  }
+
+  @override
+  String exTallySupposeCross(Object cell) {
+    return 'Załóżmy, że $cell jest skreślone.';
+  }
+
+  @override
+  String exTallyRefutedKeep(Object cell) {
+    return '$cell zostaje: skreślenie prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exTallyRefutedCross(Object cell) {
+    return '$cell jest skreślone: pozostawienie prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exTallyRowTooBig(Object cell, Object row, int digit, int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: 'jego $digit to więcej, niż wierszowi $row jeszcze brakuje ($left)',
+      zero: 'wiersz $row ma już swoją sumę',
+    );
+    return '$cell jest skreślone: $_temp0.';
+  }
+
+  @override
+  String exTallyColTooBig(Object cell, Object col, int digit, int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: 'jego $digit to więcej, niż kolumnie $col jeszcze brakuje ($left)',
+      zero: 'kolumna $col ma już swoją sumę',
+    );
+    return '$cell jest skreślone: $_temp0.';
+  }
+
+  @override
+  String exTallyRowNeeded(Object cell, Object row, int digit, int sum) {
+    return '$cell zostaje: bez jego $digit wiersz $row nie osiągnie $sum.';
+  }
+
+  @override
+  String exTallyColNeeded(Object cell, Object col, int digit, int sum) {
+    return '$cell zostaje: bez jego $digit kolumna $col nie osiągnie $sum.';
+  }
+
+  @override
+  String exTallyRowEveryKeep(Object cell, Object row, int sum) {
+    return '$cell zostaje: każdy sposób na $sum w wierszu $row go używa.';
+  }
+
+  @override
+  String exTallyColEveryKeep(Object cell, Object col, int sum) {
+    return '$cell zostaje: każdy sposób na $sum w kolumnie $col go używa.';
+  }
+
+  @override
+  String exTallyRowEveryCross(Object cell, Object row, int sum) {
+    return '$cell jest skreślone: żaden sposób na $sum w wierszu $row go nie używa.';
+  }
+
+  @override
+  String exTallyColEveryCross(Object cell, Object col, int sum) {
+    return '$cell jest skreślone: żaden sposób na $sum w kolumnie $col go nie używa.';
+  }
+
+  @override
+  String exTallyFailRowOver(Object row, int sum) {
+    return 'Ale wtedy wiersz $row daje więcej niż $sum.';
+  }
+
+  @override
+  String exTallyFailColOver(Object col, int sum) {
+    return 'Ale wtedy kolumna $col daje więcej niż $sum.';
+  }
+
+  @override
+  String exTallyFailRowShort(Object row, int sum) {
+    return 'Ale wtedy wiersz $row nie osiągnie już $sum.';
+  }
+
+  @override
+  String exTallyFailColShort(Object col, int sum) {
+    return 'Ale wtedy kolumna $col nie osiągnie już $sum.';
+  }
+
+  @override
+  String exTallyFailRowNoWay(Object row, int sum) {
+    return 'Ale wtedy żaden wybór liczb z wiersza $row nie daje $sum.';
+  }
+
+  @override
+  String exTallyFailColNoWay(Object col, int sum) {
+    return 'Ale wtedy żaden wybór liczb z kolumny $col nie daje $sum.';
+  }
 }

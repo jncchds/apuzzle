@@ -3114,4 +3114,140 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exLinksFailMixed => 'But then one path joins two different pairs.';
+
+  @override
+  String get tallyName => 'Tally';
+
+  @override
+  String get tallyTagline => 'Cross out numbers until every line adds up';
+
+  @override
+  String get tallyRules =>
+      '• Every cell holds a number. Cross some of them out.\n• The numbers left in each row and column must add up to the number outside the grid.\n\nTap a cell to cycle: crossed out → circled (your \"this one stays\" note) → empty. Long-press / right-click cycles back. Circles are optional: the puzzle is done once the right numbers are crossed out.';
+
+  @override
+  String get tutTally1 =>
+      'Cross out numbers so that the ones left in each row and column add up to the number outside. Tap a number once to cross it out. A 7 can\'t stay in a row that adds up to 2.';
+
+  @override
+  String get tutTally2 =>
+      'A number bigger than its row\'s or column\'s sum always goes. The highlighted 8 sits in a row that adds up to 6: cross it out, then finish the board.';
+
+  @override
+  String get tutTally3 =>
+      'The top row\'s numbers make 15, but it needs 12, so only the 3 can go: the 8 and the 4 must stay. Tap twice to circle a number that stays, then finish the board.';
+
+  @override
+  String get tutTally4 =>
+      'Now a real board. Start with lines whose sum is small, or close to the total of all their numbers.';
+
+  @override
+  String get tutTallyS1 =>
+      'Try every way to make a line\'s sum. A number used in every way stays, one used in none goes: 7 from 5, 4 and 3 can only be 4 + 3, so the 5 goes.';
+
+  @override
+  String get tutTallyS2 =>
+      'A hard board. When stuck, cross a number out and follow the sums: if some row or column can no longer add up, that number stays.';
+
+  @override
+  String exTallySupposeKeep(Object cell) {
+    return 'Suppose $cell stayed.';
+  }
+
+  @override
+  String exTallySupposeCross(Object cell) {
+    return 'Suppose $cell were crossed out.';
+  }
+
+  @override
+  String exTallyRefutedKeep(Object cell) {
+    return '$cell stays: crossing it out leads to a contradiction.';
+  }
+
+  @override
+  String exTallyRefutedCross(Object cell) {
+    return '$cell is crossed out: keeping it leads to a contradiction.';
+  }
+
+  @override
+  String exTallyRowTooBig(Object cell, Object row, int digit, int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: 'its $digit is more than the $left row $row still needs',
+      zero: 'row $row already adds up to its number',
+    );
+    return '$cell is crossed out: $_temp0.';
+  }
+
+  @override
+  String exTallyColTooBig(Object cell, Object col, int digit, int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: 'its $digit is more than the $left column $col still needs',
+      zero: 'column $col already adds up to its number',
+    );
+    return '$cell is crossed out: $_temp0.';
+  }
+
+  @override
+  String exTallyRowNeeded(Object cell, Object row, int digit, int sum) {
+    return '$cell stays: without its $digit, row $row can\'t reach $sum.';
+  }
+
+  @override
+  String exTallyColNeeded(Object cell, Object col, int digit, int sum) {
+    return '$cell stays: without its $digit, column $col can\'t reach $sum.';
+  }
+
+  @override
+  String exTallyRowEveryKeep(Object cell, Object row, int sum) {
+    return '$cell stays: every way to make $sum in row $row uses it.';
+  }
+
+  @override
+  String exTallyColEveryKeep(Object cell, Object col, int sum) {
+    return '$cell stays: every way to make $sum in column $col uses it.';
+  }
+
+  @override
+  String exTallyRowEveryCross(Object cell, Object row, int sum) {
+    return '$cell is crossed out: no way to make $sum in row $row uses it.';
+  }
+
+  @override
+  String exTallyColEveryCross(Object cell, Object col, int sum) {
+    return '$cell is crossed out: no way to make $sum in column $col uses it.';
+  }
+
+  @override
+  String exTallyFailRowOver(Object row, int sum) {
+    return 'But then row $row adds up to more than $sum.';
+  }
+
+  @override
+  String exTallyFailColOver(Object col, int sum) {
+    return 'But then column $col adds up to more than $sum.';
+  }
+
+  @override
+  String exTallyFailRowShort(Object row, int sum) {
+    return 'But then row $row can\'t reach $sum any more.';
+  }
+
+  @override
+  String exTallyFailColShort(Object col, int sum) {
+    return 'But then column $col can\'t reach $sum any more.';
+  }
+
+  @override
+  String exTallyFailRowNoWay(Object row, int sum) {
+    return 'But then no choice of numbers in row $row adds up to $sum.';
+  }
+
+  @override
+  String exTallyFailColNoWay(Object col, int sum) {
+    return 'But then no choice of numbers in column $col adds up to $sum.';
+  }
 }

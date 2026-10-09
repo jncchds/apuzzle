@@ -32,7 +32,7 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
   - `ValueGridType` is the base for "one value per cell" puzzles. It gives you:
     - the board, cycle/palette input, pencil marks and palette;
     - hints and state serialization.
-  - Subclasses supply `values`, rules (`isSolved`, `conflicts`), `generate`, and optionally `buildOverlay`, `cellColor` and `buildValue`.
+  - Subclasses supply `values`, rules (`isSolved`, `conflicts`), `generate`, and optionally `buildOverlay`, `cellColor`, `buildValue` and `buildEmpty` (content of an empty cell).
 - `lib/core/game_controller.dart`: the generic session. It handles:
   - undo/redo (full-state snapshots), timer, submit/hint;
   - saving and resuming (shared_preferences), and win detection and stats.
@@ -120,6 +120,7 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 | plots | Plots (Fillomino) | ValueGridType | plots grown so no two of the same size touch, then givens stripped; tiers: group logic (closed, one exit, reach, merge size) / + probing cells with ≤3 candidates; lines between different numbers via `RegionBorders.split`; daily from 2026-09-28 |
 | links | Links (Numberlink) | PuzzleType | paths fill the grid; `randomHamiltonianPath` (grid_graph) cut into pieces, cut again where edge logic stalls, rejoined end to end toward a pair count per difficulty; drag from a dot, drawing across a path cuts it; daily from 2026-09-28 |
 | arrows | Arrows (Yajilin) | PuzzleType | `ArrowsSolver` extends `LoopSolver` with one state entry per cell (shaded / on the loop); loop reshaped where tier-1 logic stalls, a shaded cell becomes a clue where still stuck, medium/hard re-aim clues; `LoopBoard.onCellTap` shades cells; daily from 2026-09-28 |
+| tally | Tally (Sumplete/Rullo) | ValueGridType | a digit in every cell (drawn by `buildEmpty`), cross some out so rows/columns hit the edge sums; tap cycles cross → circle (optional) → empty; tiers: too big / needed, every way to make a line's sum (subset-sum DP), probing; generator mutates digits/sides of stuck cells while the tier gets no worse, medium/hard then push the tier below to stall; daily from 2026-10-10 |
 | mines | Mines (Minesweeper) | PuzzleType | no guessing: generator plays with tier logic (1 single numbers, 2 pairs, 3 + mine count & probing) and opens a safe cell where stuck; digging a mine flags it with a toast (no game over); tap a satisfied number to chord |
 | pop | Pop | PuzzleType | bubble breaker; game options (mode: standard/shifter/continuous/mega, goal: clear (standard only, reverse-built so always clearable)/target (share of best playout)/free). Custom animated `PopBoard` |
 | merge | 2048 | PuzzleType | slide and merge; tiles spawn from (seed, move number) so share codes replay; goal option: build the tile (target by size and difficulty, 2048 on 4×4 hard) or free play; hint = depth-2 expectimax, plays the move; swipe or arrow keys/WASD; custom animated `MergeBoard` |

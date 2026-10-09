@@ -3182,4 +3182,140 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get exLinksFailMixed => 'Але тоді один шлях з\'єднує дві різні пари.';
+
+  @override
+  String get tallyName => 'Суми';
+
+  @override
+  String get tallyTagline => 'Закреслюйте числа, доки кожна лінія не зійдеться';
+
+  @override
+  String get tallyRules =>
+      '• У кожній клітинці стоїть число. Закресліть деякі з них.\n• Числа, що залишилися в кожному рядку та стовпці, мають у сумі давати число за межами сітки.\n\nТоркніться клітинки, щоб перебрати: закреслено → обведено (ваша позначка «залишається») → порожньо. Довге натискання / правий клік — у зворотному порядку. Кружечки необов\'язкові: головоломку розв\'язано, щойно потрібні числа закреслено.';
+
+  @override
+  String get tutTally1 =>
+      'Закресліть числа так, щоб ті, що залишилися в кожному рядку й стовпці, давали в сумі число ззовні. Торкніться числа один раз, щоб закреслити його. Сімка не може залишитися в рядку із сумою 2.';
+
+  @override
+  String get tutTally2 =>
+      'Число, більше за суму свого рядка чи стовпця, завжди зайве. Позначена 8 стоїть у рядку із сумою 6: закресліть її, а потім розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutTally3 =>
+      'Числа верхнього рядка разом дають 15, а потрібно 12, тож зайвою може бути лише 3: 8 і 4 залишаються. Торкніться двічі, щоб обвести число, яке залишається, а потім розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutTally4 =>
+      'Тепер справжнє поле. Почніть із ліній, сума яких мала або майже така, як усі їхні числа разом.';
+
+  @override
+  String get tutTallyS1 =>
+      'Переберіть усі способи скласти суму лінії. Число, що є в кожному способі, залишається, а те, якого немає в жодному, зайве: 7 із 5, 4 і 3 — це лише 4 + 3, тож 5 закреслюємо.';
+
+  @override
+  String get tutTallyS2 =>
+      'Складне поле. Коли застрягнете, закресліть число й стежте за сумами: якщо якийсь рядок чи стовпець уже не може зійтися, це число залишається.';
+
+  @override
+  String exTallySupposeKeep(Object cell) {
+    return 'Припустімо, $cell залишається.';
+  }
+
+  @override
+  String exTallySupposeCross(Object cell) {
+    return 'Припустімо, $cell закреслено.';
+  }
+
+  @override
+  String exTallyRefutedKeep(Object cell) {
+    return '$cell залишається: якщо закреслити, виникне суперечність.';
+  }
+
+  @override
+  String exTallyRefutedCross(Object cell) {
+    return '$cell закреслюємо: якщо залишити, виникне суперечність.';
+  }
+
+  @override
+  String exTallyRowTooBig(Object cell, Object row, int digit, int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: '$digit більше, ніж бракує рядку $row ($left)',
+      zero: 'рядок $row уже має свою суму',
+    );
+    return '$cell закреслюємо: $_temp0.';
+  }
+
+  @override
+  String exTallyColTooBig(Object cell, Object col, int digit, int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: '$digit більше, ніж бракує стовпцю $col ($left)',
+      zero: 'стовпець $col уже має свою суму',
+    );
+    return '$cell закреслюємо: $_temp0.';
+  }
+
+  @override
+  String exTallyRowNeeded(Object cell, Object row, int digit, int sum) {
+    return '$cell залишається: без $digit рядок $row не набере $sum.';
+  }
+
+  @override
+  String exTallyColNeeded(Object cell, Object col, int digit, int sum) {
+    return '$cell залишається: без $digit стовпець $col не набере $sum.';
+  }
+
+  @override
+  String exTallyRowEveryKeep(Object cell, Object row, int sum) {
+    return '$cell залишається: кожен спосіб набрати $sum у рядку $row використовує це число.';
+  }
+
+  @override
+  String exTallyColEveryKeep(Object cell, Object col, int sum) {
+    return '$cell залишається: кожен спосіб набрати $sum у стовпці $col використовує це число.';
+  }
+
+  @override
+  String exTallyRowEveryCross(Object cell, Object row, int sum) {
+    return '$cell закреслюємо: жоден спосіб набрати $sum у рядку $row не використовує це число.';
+  }
+
+  @override
+  String exTallyColEveryCross(Object cell, Object col, int sum) {
+    return '$cell закреслюємо: жоден спосіб набрати $sum у стовпці $col не використовує це число.';
+  }
+
+  @override
+  String exTallyFailRowOver(Object row, int sum) {
+    return 'Але тоді рядок $row дає більше за $sum.';
+  }
+
+  @override
+  String exTallyFailColOver(Object col, int sum) {
+    return 'Але тоді стовпець $col дає більше за $sum.';
+  }
+
+  @override
+  String exTallyFailRowShort(Object row, int sum) {
+    return 'Але тоді рядок $row уже не набере $sum.';
+  }
+
+  @override
+  String exTallyFailColShort(Object col, int sum) {
+    return 'Але тоді стовпець $col уже не набере $sum.';
+  }
+
+  @override
+  String exTallyFailRowNoWay(Object row, int sum) {
+    return 'Але тоді жоден вибір чисел рядка $row не дає $sum.';
+  }
+
+  @override
+  String exTallyFailColNoWay(Object col, int sum) {
+    return 'Але тоді жоден вибір чисел стовпця $col не дає $sum.';
+  }
 }

@@ -4293,6 +4293,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then one path joins two different pairs.'**
   String get exLinksFailMixed;
+
+  /// No description provided for @tallyName.
+  ///
+  /// In en, this message translates to:
+  /// **'Tally'**
+  String get tallyName;
+
+  /// No description provided for @tallyTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Cross out numbers until every line adds up'**
+  String get tallyTagline;
+
+  /// No description provided for @tallyRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Every cell holds a number. Cross some of them out.\n• The numbers left in each row and column must add up to the number outside the grid.\n\nTap a cell to cycle: crossed out → circled (your \"this one stays\" note) → empty. Long-press / right-click cycles back. Circles are optional: the puzzle is done once the right numbers are crossed out.'**
+  String get tallyRules;
+
+  /// No description provided for @tutTally1.
+  ///
+  /// In en, this message translates to:
+  /// **'Cross out numbers so that the ones left in each row and column add up to the number outside. Tap a number once to cross it out. A 7 can\'t stay in a row that adds up to 2.'**
+  String get tutTally1;
+
+  /// No description provided for @tutTally2.
+  ///
+  /// In en, this message translates to:
+  /// **'A number bigger than its row\'s or column\'s sum always goes. The highlighted 8 sits in a row that adds up to 6: cross it out, then finish the board.'**
+  String get tutTally2;
+
+  /// No description provided for @tutTally3.
+  ///
+  /// In en, this message translates to:
+  /// **'The top row\'s numbers make 15, but it needs 12, so only the 3 can go: the 8 and the 4 must stay. Tap twice to circle a number that stays, then finish the board.'**
+  String get tutTally3;
+
+  /// No description provided for @tutTally4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with lines whose sum is small, or close to the total of all their numbers.'**
+  String get tutTally4;
+
+  /// No description provided for @tutTallyS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Try every way to make a line\'s sum. A number used in every way stays, one used in none goes: 7 from 5, 4 and 3 can only be 4 + 3, so the 5 goes.'**
+  String get tutTallyS1;
+
+  /// No description provided for @tutTallyS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When stuck, cross a number out and follow the sums: if some row or column can no longer add up, that number stays.'**
+  String get tutTallyS2;
+
+  /// No description provided for @exTallySupposeKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} stayed.'**
+  String exTallySupposeKeep(Object cell);
+
+  /// No description provided for @exTallySupposeCross.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were crossed out.'**
+  String exTallySupposeCross(Object cell);
+
+  /// No description provided for @exTallyRefutedKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: crossing it out leads to a contradiction.'**
+  String exTallyRefutedKeep(Object cell);
+
+  /// No description provided for @exTallyRefutedCross.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is crossed out: keeping it leads to a contradiction.'**
+  String exTallyRefutedCross(Object cell);
+
+  /// No description provided for @exTallyRowTooBig.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is crossed out: {left, plural, =0{row {row} already adds up to its number} other{its {digit} is more than the {left} row {row} still needs}}.'**
+  String exTallyRowTooBig(Object cell, Object row, int digit, int left);
+
+  /// No description provided for @exTallyColTooBig.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is crossed out: {left, plural, =0{column {col} already adds up to its number} other{its {digit} is more than the {left} column {col} still needs}}.'**
+  String exTallyColTooBig(Object cell, Object col, int digit, int left);
+
+  /// No description provided for @exTallyRowNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: without its {digit}, row {row} can\'t reach {sum}.'**
+  String exTallyRowNeeded(Object cell, Object row, int digit, int sum);
+
+  /// No description provided for @exTallyColNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: without its {digit}, column {col} can\'t reach {sum}.'**
+  String exTallyColNeeded(Object cell, Object col, int digit, int sum);
+
+  /// No description provided for @exTallyRowEveryKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: every way to make {sum} in row {row} uses it.'**
+  String exTallyRowEveryKeep(Object cell, Object row, int sum);
+
+  /// No description provided for @exTallyColEveryKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: every way to make {sum} in column {col} uses it.'**
+  String exTallyColEveryKeep(Object cell, Object col, int sum);
+
+  /// No description provided for @exTallyRowEveryCross.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is crossed out: no way to make {sum} in row {row} uses it.'**
+  String exTallyRowEveryCross(Object cell, Object row, int sum);
+
+  /// No description provided for @exTallyColEveryCross.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is crossed out: no way to make {sum} in column {col} uses it.'**
+  String exTallyColEveryCross(Object cell, Object col, int sum);
+
+  /// No description provided for @exTallyFailRowOver.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} adds up to more than {sum}.'**
+  String exTallyFailRowOver(Object row, int sum);
+
+  /// No description provided for @exTallyFailColOver.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} adds up to more than {sum}.'**
+  String exTallyFailColOver(Object col, int sum);
+
+  /// No description provided for @exTallyFailRowShort.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} can\'t reach {sum} any more.'**
+  String exTallyFailRowShort(Object row, int sum);
+
+  /// No description provided for @exTallyFailColShort.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} can\'t reach {sum} any more.'**
+  String exTallyFailColShort(Object col, int sum);
+
+  /// No description provided for @exTallyFailRowNoWay.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no choice of numbers in row {row} adds up to {sum}.'**
+  String exTallyFailRowNoWay(Object row, int sum);
+
+  /// No description provided for @exTallyFailColNoWay.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no choice of numbers in column {col} adds up to {sum}.'**
+  String exTallyFailColNoWay(Object col, int sum);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

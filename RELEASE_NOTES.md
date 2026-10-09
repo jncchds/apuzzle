@@ -1,5 +1,8 @@
 # Release notes
 
+## 0.6.2 - 2026-10-10
+- New game: Tally. Every cell holds a number: cross some out so the numbers left in each row and column add up to the sums outside the grid. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-10
+
 ## 0.6.1 - 2026-10-08
 - New game: Snake. Swipe (or use the arrow keys) to steer the snake to the apples, grow longer and don't crash. Free play chases a best score, or pick an apple target; the difficulty sets the speed. Tap the board to pause. With a tutorial, and in the daily challenges from 2026-10-08 on a bigger board at each level
 - Daily challenges: 2048 is now one puzzle a day (build 1024) instead of three

@@ -3120,4 +3120,140 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get exLinksFailMixed => 'Dann verbände ein Pfad aber zwei verschiedene Paare.';
+
+  @override
+  String get tallyName => 'Summen';
+
+  @override
+  String get tallyTagline => 'Streich Zahlen, bis jede Reihe aufgeht';
+
+  @override
+  String get tallyRules =>
+      '• In jedem Feld steht eine Zahl. Streich einige davon durch.\n• Die übrigen Zahlen jeder Zeile und Spalte ergeben zusammen die Zahl außerhalb des Gitters.\n\nTippe auf ein Feld, um zu wechseln: durchgestrichen → eingekreist (deine Notiz „bleibt“) → leer. Langes Drücken / Rechtsklick wechselt zurück. Kreise sind freiwillig: Das Rätsel ist gelöst, sobald die richtigen Zahlen durchgestrichen sind.';
+
+  @override
+  String get tutTally1 =>
+      'Streich Zahlen durch, sodass die übrigen in jeder Zeile und Spalte zusammen die Zahl außen ergeben. Tippe einmal auf eine Zahl, um sie durchzustreichen. Eine 7 kann nicht in einer Zeile mit der Summe 2 bleiben.';
+
+  @override
+  String get tutTally2 =>
+      'Eine Zahl, die größer ist als die Summe ihrer Zeile oder Spalte, muss immer weg. Die markierte 8 steht in einer Zeile mit der Summe 6: Streich sie durch und löse dann das Gitter.';
+
+  @override
+  String get tutTally3 =>
+      'Die Zahlen der oberen Zeile ergeben 15, sie braucht aber 12, also darf nur die 3 weg: Die 8 und die 4 bleiben. Tippe zweimal, um eine bleibende Zahl einzukreisen, und löse dann das Gitter.';
+
+  @override
+  String get tutTally4 =>
+      'Jetzt ein echtes Gitter. Fang mit Reihen an, deren Summe klein ist oder fast so groß wie alle ihre Zahlen zusammen.';
+
+  @override
+  String get tutTallyS1 =>
+      'Probier alle Wege, die Summe einer Reihe zu bilden. Eine Zahl, die in jedem Weg vorkommt, bleibt; eine, die in keinem vorkommt, muss weg: 7 aus 5, 4 und 3 geht nur als 4 + 3, also muss die 5 weg.';
+
+  @override
+  String get tutTallyS2 =>
+      'Ein schweres Gitter. Wenn du feststeckst, streich eine Zahl durch und folge den Summen: Kann eine Zeile oder Spalte dann nicht mehr aufgehen, bleibt diese Zahl.';
+
+  @override
+  String exTallySupposeKeep(Object cell) {
+    return 'Angenommen, $cell bliebe.';
+  }
+
+  @override
+  String exTallySupposeCross(Object cell) {
+    return 'Angenommen, $cell wäre durchgestrichen.';
+  }
+
+  @override
+  String exTallyRefutedKeep(Object cell) {
+    return '$cell bleibt: Durchstreichen führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exTallyRefutedCross(Object cell) {
+    return '$cell wird durchgestrichen: Behalten führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exTallyRowTooBig(Object cell, Object row, int digit, int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: 'die $digit ist mehr als die $left, die Zeile $row noch fehlen',
+      zero: 'Zeile $row hat ihre Summe schon erreicht',
+    );
+    return '$cell wird durchgestrichen: $_temp0.';
+  }
+
+  @override
+  String exTallyColTooBig(Object cell, Object col, int digit, int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: 'die $digit ist mehr als die $left, die Spalte $col noch fehlen',
+      zero: 'Spalte $col hat ihre Summe schon erreicht',
+    );
+    return '$cell wird durchgestrichen: $_temp0.';
+  }
+
+  @override
+  String exTallyRowNeeded(Object cell, Object row, int digit, int sum) {
+    return '$cell bleibt: Ohne die $digit erreicht Zeile $row ihre $sum nicht.';
+  }
+
+  @override
+  String exTallyColNeeded(Object cell, Object col, int digit, int sum) {
+    return '$cell bleibt: Ohne die $digit erreicht Spalte $col ihre $sum nicht.';
+  }
+
+  @override
+  String exTallyRowEveryKeep(Object cell, Object row, int sum) {
+    return '$cell bleibt: Jeder Weg, in Zeile $row $sum zu bilden, nutzt diese Zahl.';
+  }
+
+  @override
+  String exTallyColEveryKeep(Object cell, Object col, int sum) {
+    return '$cell bleibt: Jeder Weg, in Spalte $col $sum zu bilden, nutzt diese Zahl.';
+  }
+
+  @override
+  String exTallyRowEveryCross(Object cell, Object row, int sum) {
+    return '$cell wird durchgestrichen: Kein Weg, in Zeile $row $sum zu bilden, nutzt diese Zahl.';
+  }
+
+  @override
+  String exTallyColEveryCross(Object cell, Object col, int sum) {
+    return '$cell wird durchgestrichen: Kein Weg, in Spalte $col $sum zu bilden, nutzt diese Zahl.';
+  }
+
+  @override
+  String exTallyFailRowOver(Object row, int sum) {
+    return 'Dann ergäbe Zeile $row aber mehr als $sum.';
+  }
+
+  @override
+  String exTallyFailColOver(Object col, int sum) {
+    return 'Dann ergäbe Spalte $col aber mehr als $sum.';
+  }
+
+  @override
+  String exTallyFailRowShort(Object row, int sum) {
+    return 'Dann erreicht Zeile $row ihre $sum aber nicht mehr.';
+  }
+
+  @override
+  String exTallyFailColShort(Object col, int sum) {
+    return 'Dann erreicht Spalte $col ihre $sum aber nicht mehr.';
+  }
+
+  @override
+  String exTallyFailRowNoWay(Object row, int sum) {
+    return 'Dann ergibt aber keine Auswahl der Zahlen in Zeile $row $sum.';
+  }
+
+  @override
+  String exTallyFailColNoWay(Object col, int sum) {
+    return 'Dann ergibt aber keine Auswahl der Zahlen in Spalte $col $sum.';
+  }
 }
