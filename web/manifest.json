@@ -6,7 +6,7 @@
     "background_color": "#1B1F3B",
     "theme_color": "#1B1F3B",
     "description": "Endless grid logic puzzles generated on your device: Sudoku, Crowns, Pearls, Mines and more, each with exactly one solution.",
-    "orientation": "portrait-primary",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {

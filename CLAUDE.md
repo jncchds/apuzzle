@@ -13,6 +13,7 @@ Run them through the output condenser (see the global CLAUDE.md):
 - Visual snapshots of every puzzle (phone size, dark and light) and every tutorial step go to `build/snapshots/*.png`; view the PNGs afterwards. Tutorial steps are `tutorial_<id>_<n>.png` (dark), `…_light.png` and `…_done.png` (after "Show me" until the step is done); strategy lessons are `tutorial_<id>_s<n>*.png`. Filter with `--name`, e.g. `--name 'tutorial kings'`:
   `node ~/.claude/tools/run.mjs flutter test test/snapshots --run-skipped --tags snapshot`
   Add `SNAPSHOT_LANG=uk` (or pl, de) to render another language (`*_uk.png`).
+  Add `SNAPSHOT_LANDSCAPE=1` to render a landscape phone (`*_land.png`): in landscape the game and tutorial screens put the board left and a side panel (`landscapePanelWidth`) right.
   (The in-app browser pane crops screenshots on high-DPI displays, so prefer these PNGs for layout checks.)
 - App icons (Android incl. adaptive/monochrome, iOS, web, Windows) are generated from one design ("pixel A", colors at the top of the script): `node tools/make_icons.mjs`
 - Generator timings (all types, or `BENCH_TYPES=kings,lits`): `flutter test test/bench/generator_bench_test.dart --run-skipped --tags bench -r expanded`

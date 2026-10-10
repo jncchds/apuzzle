@@ -17,7 +17,7 @@ import '../core/settings.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
 import 'explain_panel.dart';
-import 'new_game_sheet.dart' show formatDuration;
+import 'new_game_sheet.dart' show formatDuration, landscapePanelWidth;
 import 'puzzle_code_ui.dart';
 import 'win_overlay.dart';
 
@@ -348,108 +348,125 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   Widget _game(BuildContext context, GameController c) {
     final theme = Theme.of(context);
     final l = context.l10n;
+    final landscape = MediaQuery.orientationOf(context) == Orientation.landscape;
     final controls = c.explaining && !c.solved ? ExplainPanel(controller: c) : type.buildControls(context, c);
-    return Stack(
+    final info = Row(
       children: [
-        SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-                child: Row(
-                  children: [
-                    Flexible(
-                      flex: 8,
-                      child: Text(
-                        [
-                          c.params.size.label,
-                          c.params.difficulty.label(l),
-                          if (type.optionsLabel(l, c.params) case final o when o.isNotEmpty) o,
-                        ].join(' · '),
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.labelLarge,
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    Flexible(
-                      child: Tooltip(
-                        message: l.copyShareLink,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(6),
-                          onTap: () => copyWithToast(context, c.link, l.shareLinkCopied),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-                            child: Text(
-                              '#${c.params.seed.toRadixString(36).toUpperCase()}',
-                              overflow: TextOverflow.ellipsis,
-                              style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    if (type.supportsModeSwitch && !c.solved)
-                      SegmentedButton<InputMode>(
-                        style: const ButtonStyle(visualDensity: VisualDensity.compact),
-                        segments: [
-                          ButtonSegment(
-                            value: InputMode.cycle,
-                            icon: const Icon(Icons.touch_app_outlined),
-                            tooltip: l.tapToCycle,
-                          ),
-                          ButtonSegment(
-                            value: InputMode.palette,
-                            icon: const Icon(Icons.palette_outlined),
-                            tooltip: l.palette,
-                          ),
-                        ],
-                        selected: {c.inputMode},
-                        showSelectedIcon: false,
-                        onSelectionChanged: (s) => c.setInputMode(s.first),
-                      ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: AnimatedBuilder(
-                    animation: _shake,
-                    builder: (context, child) => Transform.translate(
-                      offset: Offset(sin(_shake.value * pi * 6) * 10 * (1 - _shake.value), 0),
-                      child: child,
-                    ),
-                    child: type.buildBoard(context, c),
-                  ),
-                ),
-              ),
-              if (!c.solved) ...[
-                _Toolbar(controller: c, onRestart: _confirmRestart, onSubmit: type.showSubmit ? _submit : null),
-                // The board makes room smoothly as the panel or palette comes and goes.
-                AnimatedSize(
-                  duration: const Duration(milliseconds: 260),
-                  curve: Curves.easeOutCubic,
-                  alignment: Alignment.topCenter,
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 200),
-                    layoutBuilder: (current, previous) => Stack(
-                      alignment: Alignment.topCenter,
-                      children: [...previous, ?current],
-                    ),
-                    child: controls == null
-                        ? const SizedBox(key: ValueKey('none'), height: 8)
-                        : Padding(
-                            key: ValueKey(c.explaining ? 'explain' : 'controls'),
-                            padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
-                            child: controls,
-                          ),
-                  ),
-                ),
-              ],
-            ],
+        Flexible(
+          flex: 8,
+          child: Text(
+            [
+              c.params.size.label,
+              c.params.difficulty.label(l),
+              if (type.optionsLabel(l, c.params) case final o when o.isNotEmpty) o,
+            ].join(' · '),
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.labelLarge,
           ),
         ),
+        const SizedBox(width: 4),
+        Flexible(
+          child: Tooltip(
+            message: l.copyShareLink,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(6),
+              onTap: () => copyWithToast(context, c.link, l.shareLinkCopied),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                child: Text(
+                  '#${c.params.seed.toRadixString(36).toUpperCase()}',
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const Spacer(),
+        if (type.supportsModeSwitch && !c.solved)
+          SegmentedButton<InputMode>(
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            segments: [
+              ButtonSegment(value: InputMode.cycle, icon: const Icon(Icons.touch_app_outlined), tooltip: l.tapToCycle),
+              ButtonSegment(value: InputMode.palette, icon: const Icon(Icons.palette_outlined), tooltip: l.palette),
+            ],
+            selected: {c.inputMode},
+            showSelectedIcon: false,
+            onSelectionChanged: (s) => c.setInputMode(s.first),
+          ),
+      ],
+    );
+    final board = Padding(
+      padding: const EdgeInsets.all(12),
+      child: AnimatedBuilder(
+        animation: _shake,
+        builder: (context, child) => Transform.translate(
+          offset: Offset(sin(_shake.value * pi * 6) * 10 * (1 - _shake.value), 0),
+          child: child,
+        ),
+        child: type.buildBoard(context, c),
+      ),
+    );
+    final toolbar = _Toolbar(controller: c, onRestart: _confirmRestart, onSubmit: type.showSubmit ? _submit : null);
+    final switcher = AnimatedSwitcher(
+      duration: const Duration(milliseconds: 200),
+      layoutBuilder: (current, previous) => Stack(
+        alignment: landscape ? Alignment.center : Alignment.topCenter,
+        children: [...previous, ?current],
+      ),
+      child: controls == null
+          ? const SizedBox(key: ValueKey('none'), height: 8)
+          : Padding(
+              key: ValueKey(c.explaining ? 'explain' : 'controls'),
+              padding: landscape ? const EdgeInsets.symmetric(vertical: 8) : const EdgeInsets.fromLTRB(16, 4, 16, 12),
+              child: controls,
+            ),
+    );
+    final Widget layout;
+    if (landscape) {
+      // Board on the left at full height, everything else in a side panel.
+      final panel = landscapePanelWidth(MediaQuery.sizeOf(context).width);
+      layout = Row(
+        children: [
+          Expanded(child: board),
+          SizedBox(
+            width: panel,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(4, 4, 12, 8),
+              child: Column(
+                children: [
+                  info,
+                  Expanded(
+                    child: c.solved ? const SizedBox.shrink() : Center(child: SingleChildScrollView(child: switcher)),
+                  ),
+                  if (!c.solved) toolbar,
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      layout = Column(
+        children: [
+          Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 0), child: info),
+          Expanded(child: board),
+          if (!c.solved) ...[
+            toolbar,
+            // The board makes room smoothly as the panel or palette comes and goes.
+            AnimatedSize(
+              duration: const Duration(milliseconds: 260),
+              curve: Curves.easeOutCubic,
+              alignment: Alignment.topCenter,
+              child: switcher,
+            ),
+          ],
+        ],
+      );
+    }
+    return Stack(
+      children: [
+        SafeArea(child: layout),
         if (c.solved) Positioned.fill(child: c.daily != null ? _dailyWin(c, c.daily!) : _freeWin(c)),
       ],
     );

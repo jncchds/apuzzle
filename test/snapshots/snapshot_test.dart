@@ -5,6 +5,7 @@
 //
 // Types with explain mode also get explain_<id>_<brightness>.png.
 // SNAPSHOT_LANG=uk (or pl, de) renders that language, with the code in the file names.
+// SNAPSHOT_LANDSCAPE=1 renders a landscape phone, with _land in the file names.
 @Tags(['snapshot'])
 library;
 
@@ -58,7 +59,9 @@ int _progressSteps(PuzzleType t) => switch (t.id) {
 
 /// Language to render (SNAPSHOT_LANG), or null for English.
 final _lang = Platform.environment['SNAPSHOT_LANG'];
-final _suffix = _lang == null ? '' : '_$_lang';
+final _landscape = Platform.environment['SNAPSHOT_LANDSCAPE'] == '1';
+final _suffix = '${_lang == null ? '' : '_$_lang'}${_landscape ? '_land' : ''}';
+final _phone = _landscape ? const Size(2280, 1080) : const Size(1080, 2280);
 
 void main() {
   setUpAll(() async {
@@ -71,7 +74,7 @@ void main() {
   for (final brightness in [Brightness.dark, Brightness.light]) {
     for (final type in puzzleTypes) {
       testWidgets('snapshot ${type.id} ${brightness.name}', (tester) async {
-        tester.view.physicalSize = const Size(1080, 2280);
+        tester.view.physicalSize = _phone;
         tester.view.devicePixelRatio = 3;
         addTearDown(tester.view.reset);
 
@@ -189,7 +192,7 @@ void main() {
         final name = '${type.id}_${strategies ? 's' : ''}${k + 1}';
         for (final (mode, tag) in [(ThemeMode.dark, ''), (ThemeMode.light, '_light'), (ThemeMode.dark, '_done')]) {
           testWidgets('snapshot tutorial $name$tag', (tester) async {
-            tester.view.physicalSize = const Size(1080, 2280);
+            tester.view.physicalSize = _phone;
             tester.view.devicePixelRatio = 3;
             addTearDown(tester.view.reset);
             SharedPreferences.setMockInitialValues({
@@ -252,7 +255,7 @@ void main() {
 
   // Keep the app import used (home screen snapshot).
   testWidgets('snapshot home', (tester) async {
-    tester.view.physicalSize = const Size(1080, 2280);
+    tester.view.physicalSize = _phone;
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
     SharedPreferences.setMockInitialValues({'set.theme': 'dark', 'set.language': ?_lang});

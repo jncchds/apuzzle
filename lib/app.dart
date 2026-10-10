@@ -38,6 +38,11 @@ class _APuzzleAppState extends State<APuzzleApp> {
       localeListResolutionCallback: (locales, _) => resolveAppLocale(locales),
       theme: _theme(Brightness.light),
       darkTheme: _theme(Brightness.dark),
+      // A turned phone's camera cutout sits at the side: keep every screen clear of it.
+      builder: (context, child) => ColoredBox(
+        color: Theme.of(context).colorScheme.surface,
+        child: SafeArea(top: false, bottom: false, child: child!),
+      ),
     );
   }
 }

@@ -77,7 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverPadding(
             padding: const EdgeInsets.all(16),
             sliver: SliverGrid.extent(
-              maxCrossAxisExtent: 240,
+              // Smaller cards on a turned phone, so more than one row shows.
+              maxCrossAxisExtent: MediaQuery.sizeOf(context).height < 480 ? 200 : 240,
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
               childAspectRatio: 0.95,

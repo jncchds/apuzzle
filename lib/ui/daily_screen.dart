@@ -56,28 +56,52 @@ class _DailyScreenState extends State<DailyScreen> {
       ),
       body: ValueListenableBuilder(
         valueListenable: store.dailyRevision,
-        builder: (context, _, _) => Align(
-          alignment: Alignment.topCenter,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 480),
-            child: ListView(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-              children: [
-                _MonthCalendar(
-                  month: _month,
-                  selected: widget.day,
-                  today: today,
-                  onMonth: (m) => setState(() => _month = m),
-                  onDay: router.selectDailyDay,
+        builder: (context, _, _) {
+          final calendar = _MonthCalendar(
+            month: _month,
+            selected: widget.day,
+            today: today,
+            onMonth: (m) => setState(() => _month = m),
+            onDay: router.selectDailyDay,
+          );
+          final games = [
+            _DayHeader(day: widget.day),
+            const SizedBox(height: 8),
+            for (final type in dailyGames(widget.day)) _GameRow(day: widget.day, type: type),
+          ];
+          const padding = EdgeInsets.fromLTRB(16, 8, 16, 24);
+          if (MediaQuery.orientationOf(context) == Orientation.landscape) {
+            // The calendar alone is taller than a turned phone: the day goes beside it.
+            return Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 960),
+                child: SafeArea(
+                  top: false,
+                  bottom: false,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: ListView(padding: padding, children: [calendar]),
+                      ),
+                      Expanded(
+                        child: ListView(padding: padding, children: games),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 16),
-                _DayHeader(day: widget.day),
-                const SizedBox(height: 8),
-                for (final type in dailyGames(widget.day)) _GameRow(day: widget.day, type: type),
-              ],
+              ),
+            );
+          }
+          return Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 480),
+              child: ListView(padding: padding, children: [calendar, const SizedBox(height: 16), ...games]),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

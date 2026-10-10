@@ -1,6 +1,7 @@
 # Release notes
 
-## 0.6.2 - 2026-10-10
+## 0.7.0 - 2026-10-10
+- Landscape: turn your phone (or widen the window) and the board fills the height, with the controls in a side panel; tutorials and the daily calendar too
 - New game: Tally. Every cell holds a number: cross some out so the numbers left in each row and column add up to the sums outside the grid. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-10
 
 ## 0.6.1 - 2026-10-08

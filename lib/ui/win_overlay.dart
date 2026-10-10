@@ -64,7 +64,10 @@ class WinOverlay extends StatelessWidget {
           ),
         ),
         Align(
-          alignment: Alignment.bottomCenter,
+          // In landscape the card covers the side panel, not the solved board.
+          alignment: MediaQuery.orientationOf(context) == Orientation.landscape
+              ? Alignment.centerRight
+              : Alignment.bottomCenter,
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),

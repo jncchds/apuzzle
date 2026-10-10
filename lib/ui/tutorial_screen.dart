@@ -13,6 +13,7 @@ import '../core/settings.dart';
 import '../core/tutorial.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
+import 'new_game_sheet.dart' show landscapePanelWidth;
 
 /// Before a first game of [type], offers its tutorial. [play] starts the
 /// game: right away, after "No, thanks", or from the tutorial's last page.
@@ -246,145 +247,179 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
     final playing = !step.look && !_done;
     final controls = playing ? type.buildControls(context, c) : null;
     final last = _index == _steps.length - 1;
-    return Column(
-      children: [
-        LinearProgressIndicator(value: (_index + (_done ? 1 : 0)) / _steps.length, minHeight: 3),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(4, 4, 16, 0),
-          child: Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back_rounded),
-                visualDensity: VisualDensity.compact,
-                tooltip: l.tutorialPrevious,
-                onPressed: _index > 0 ? () => _open(_index - 1) : null,
-              ),
-              Text(l.tutorialStep(_index + 1, _steps.length), style: theme.textTheme.labelLarge),
-              const Spacer(),
-              if (type.supportsModeSwitch && playing)
-                SegmentedButton<InputMode>(
-                  style: const ButtonStyle(visualDensity: VisualDensity.compact),
-                  segments: [
-                    ButtonSegment(
-                      value: InputMode.cycle,
-                      icon: const Icon(Icons.touch_app_outlined),
-                      tooltip: l.tapToCycle,
-                    ),
-                    ButtonSegment(
-                      value: InputMode.palette,
-                      icon: const Icon(Icons.palette_outlined),
-                      tooltip: l.palette,
-                    ),
-                  ],
-                  selected: {c.inputMode},
-                  showSelectedIcon: false,
-                  onSelectionChanged: (s) => c.setInputMode(s.first),
+    final progress = LinearProgressIndicator(value: (_index + (_done ? 1 : 0)) / _steps.length, minHeight: 3);
+    final header = Padding(
+      padding: const EdgeInsets.fromLTRB(4, 4, 16, 0),
+      child: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.arrow_back_rounded),
+            visualDensity: VisualDensity.compact,
+            tooltip: l.tutorialPrevious,
+            onPressed: _index > 0 ? () => _open(_index - 1) : null,
+          ),
+          Text(l.tutorialStep(_index + 1, _steps.length), style: theme.textTheme.labelLarge),
+          const Spacer(),
+          if (type.supportsModeSwitch && playing)
+            SegmentedButton<InputMode>(
+              style: const ButtonStyle(visualDensity: VisualDensity.compact),
+              segments: [
+                ButtonSegment(
+                  value: InputMode.cycle,
+                  icon: const Icon(Icons.touch_app_outlined),
+                  tooltip: l.tapToCycle,
                 ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 250),
-            child: Container(
-              key: ValueKey(_index),
-              width: double.infinity,
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.surfaceContainerHigh,
-                borderRadius: BorderRadius.circular(16),
-                border: Border(left: BorderSide(color: type.accent, width: 4)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(step.text(l), style: theme.textTheme.bodyLarge),
-                  AnimatedSize(
-                    duration: const Duration(milliseconds: 200),
-                    child: _done && !step.look
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 8),
-                            child: Row(
-                              children: [
-                                Icon(Icons.check_circle_rounded, color: theme.colorScheme.primary, size: 20),
-                                const SizedBox(width: 6),
-                                Text(
-                                  l.tutorialNice,
-                                  style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary),
-                                ),
-                              ],
-                            ),
-                          )
-                        : const SizedBox(width: double.infinity),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
-            child: AnimatedBuilder(
-              animation: _shake,
-              builder: (context, child) => Transform.translate(
-                offset: Offset(sin(_shake.value * pi * 6) * 10 * (1 - _shake.value), 0),
-                child: child,
-              ),
-              child: IgnorePointer(
-                ignoring: !playing,
-                child: KeyedSubtree(key: ValueKey(_index), child: type.buildBoard(context, c)),
-              ),
-            ),
-          ),
-        ),
-        if (controls != null) Padding(padding: const EdgeInsets.fromLTRB(16, 0, 16, 8), child: controls),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(8, 0, 12, 12),
-          child: Row(
-            children: [
-              if (!step.look) ...[
-                if (!type.realTime)
-                  IconButton(
-                    icon: const Icon(Icons.undo_rounded),
-                    tooltip: l.undo,
-                    onPressed: c.canUndo ? c.undo : null,
-                  ),
-                IconButton(
-                  icon: const Icon(Icons.restart_alt_rounded),
-                  tooltip: l.tutorialReset,
-                  onPressed: () => _open(_index),
+                ButtonSegment(
+                  value: InputMode.palette,
+                  icon: const Icon(Icons.palette_outlined),
+                  tooltip: l.palette,
                 ),
               ],
-              // "Show me" takes the free space and shortens its label if it must.
-              Expanded(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: playing && !type.realTime
-                      ? TextButton(
-                          onPressed: _showMe,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Icon(Icons.lightbulb_outline_rounded, size: 18),
-                              const SizedBox(width: 6),
-                              Flexible(child: Text(l.tutorialShowMe, maxLines: 1, overflow: TextOverflow.ellipsis)),
-                            ],
-                          ),
-                        )
-                      : null,
-                ),
-              ),
-              const SizedBox(width: 8),
-              FilledButton.icon(
-                onPressed: _done ? _next : null,
-                icon: Icon(last ? Icons.check_rounded : Icons.arrow_forward_rounded),
-                label: Text(last ? l.tutorialFinish : l.tutorialNext),
+              selected: {c.inputMode},
+              showSelectedIcon: false,
+              onSelectionChanged: (s) => c.setInputMode(s.first),
+            ),
+        ],
+      ),
+    );
+    final card = Padding(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 250),
+        child: Container(
+          key: ValueKey(_index),
+          width: double.infinity,
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surfaceContainerHigh,
+            borderRadius: BorderRadius.circular(16),
+            border: Border(left: BorderSide(color: type.accent, width: 4)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(step.text(l), style: theme.textTheme.bodyLarge),
+              AnimatedSize(
+                duration: const Duration(milliseconds: 200),
+                child: _done && !step.look
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Row(
+                          children: [
+                            Icon(Icons.check_circle_rounded, color: theme.colorScheme.primary, size: 20),
+                            const SizedBox(width: 6),
+                            Text(
+                              l.tutorialNice,
+                              style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary),
+                            ),
+                          ],
+                        ),
+                      )
+                    : const SizedBox(width: double.infinity),
               ),
             ],
           ),
         ),
+      ),
+    );
+    final board = Padding(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
+      child: AnimatedBuilder(
+        animation: _shake,
+        builder: (context, child) => Transform.translate(
+          offset: Offset(sin(_shake.value * pi * 6) * 10 * (1 - _shake.value), 0),
+          child: child,
+        ),
+        child: IgnorePointer(
+          ignoring: !playing,
+          child: KeyedSubtree(key: ValueKey(_index), child: type.buildBoard(context, c)),
+        ),
+      ),
+    );
+    final buttons = Padding(
+      padding: const EdgeInsets.fromLTRB(8, 0, 12, 12),
+      child: Row(
+        children: [
+          if (!step.look) ...[
+            if (!type.realTime)
+              IconButton(
+                icon: const Icon(Icons.undo_rounded),
+                tooltip: l.undo,
+                onPressed: c.canUndo ? c.undo : null,
+              ),
+            IconButton(
+              icon: const Icon(Icons.restart_alt_rounded),
+              tooltip: l.tutorialReset,
+              onPressed: () => _open(_index),
+            ),
+          ],
+          // "Show me" takes the free space and shortens its label if it must.
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: playing && !type.realTime
+                  ? TextButton(
+                      onPressed: _showMe,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.lightbulb_outline_rounded, size: 18),
+                          const SizedBox(width: 6),
+                          Flexible(child: Text(l.tutorialShowMe, maxLines: 1, overflow: TextOverflow.ellipsis)),
+                        ],
+                      ),
+                    )
+                  : null,
+            ),
+          ),
+          const SizedBox(width: 8),
+          FilledButton.icon(
+            onPressed: _done ? _next : null,
+            icon: Icon(last ? Icons.check_rounded : Icons.arrow_forward_rounded),
+            label: Text(last ? l.tutorialFinish : l.tutorialNext),
+          ),
+        ],
+      ),
+    );
+    if (MediaQuery.orientationOf(context) == Orientation.landscape) {
+      // Board on the left at full height, the lesson in a side panel.
+      return Column(
+        children: [
+          progress,
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(child: board),
+                SizedBox(
+                  width: landscapePanelWidth(MediaQuery.sizeOf(context).width),
+                  child: Column(
+                    children: [
+                      header,
+                      Expanded(
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: card,
+                        ),
+                      ),
+                      if (controls != null) Padding(padding: const EdgeInsets.fromLTRB(16, 0, 16, 8), child: controls),
+                      buttons,
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
+    return Column(
+      children: [
+        progress,
+        header,
+        card,
+        Expanded(child: board),
+        if (controls != null) Padding(padding: const EdgeInsets.fromLTRB(16, 0, 16, 8), child: controls),
+        buttons,
       ],
     );
   }

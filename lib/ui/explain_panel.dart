@@ -32,7 +32,11 @@ class _ExplainPanelState extends State<ExplainPanel> {
         if (seen.add(line.text(l))) line,
     ];
     return Container(
-      constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * 0.36),
+      constraints: BoxConstraints(
+        maxHeight:
+            MediaQuery.sizeOf(context).height *
+            (MediaQuery.orientationOf(context) == Orientation.landscape ? 0.5 : 0.36),
+      ),
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(16),

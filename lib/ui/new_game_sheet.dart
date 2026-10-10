@@ -11,15 +11,24 @@ import '../l10n/l10n.dart';
 import 'app_router.dart';
 import 'tutorial_screen.dart';
 
-/// Sizes of [type] whose board fits [screen] without zoom.
+/// Sizes of [type] whose board fits [screen] without zoom. A phone can turn,
+/// so its sizes are the ones that fit either way it is held.
 List<GridSize> fittingSizes(PuzzleType type, Size screen) {
-  const gapFactor = 1.06;
-  final cell = type.minCellSize * gapFactor;
-  final maxCols = ((screen.width - 24) / cell).floor();
-  final maxRows = ((screen.height - 160 - type.controlsHeight) / cell).floor();
-  final fit = type.sizes.where((s) => s.cols <= maxCols && s.rows <= maxRows).toList();
+  bool fits(GridSize s, Size screen) {
+    final cell = type.minCellSize * 1.06;
+    final (width, height) = screen.width > screen.height
+        ? (screen.width - landscapePanelWidth(screen.width) - 24, screen.height - 110)
+        : (screen.width - 24, screen.height - 160 - type.controlsHeight);
+    return s.cols * cell <= width && s.rows * cell <= height;
+  }
+
+  final turned = screen.shortestSide < 600 ? screen.flipped : null;
+  final fit = type.sizes.where((s) => fits(s, screen) || (turned != null && fits(s, turned))).toList();
   return fit.isEmpty ? [type.sizes.first] : fit;
 }
+
+/// Width of the game screen's side panel in landscape.
+double landscapePanelWidth(double screenWidth) => (screenWidth * 0.42).clamp(344.0, 420.0);
 
 /// A new game with the last choices for [type] (or its defaults), without
 /// asking: the size that fits [screen], a fresh seed.
