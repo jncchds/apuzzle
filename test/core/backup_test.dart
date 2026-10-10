@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:apuzzle/core/backup.dart';
+import 'package:apuzzle/core/daily.dart';
 import 'package:apuzzle/core/day.dart';
 import 'package:apuzzle/core/difficulty.dart';
 import 'package:apuzzle/core/persistence.dart';
@@ -126,6 +127,21 @@ void main() {
       expect(b.strategiesDone('kings'), isTrue);
       expect(b.prefs.getString('set.theme'), isNull);
       expect(b.prefs.getString('last.kings'), '{"size":6}');
+    });
+
+    test('chosen daily games come along unless this device has its own', () async {
+      const choice = '[{"from":"2026-09-10","off":["kings"]}]';
+      final a = await device('a', {GameStore.dailyChoicesKey: choice});
+      final b = await device('b');
+      expect(dailyExcluded(const Day(2026, 9, 12)), isEmpty);
+      await b.importProgress(carry(a));
+      expect(dailyExcluded(const Day(2026, 9, 12)), {'kings'});
+      expect(dailyExcluded(const Day(2026, 9, 9)), isEmpty);
+
+      final c = await device('c', {GameStore.dailyChoicesKey: '[{"from":"2026-09-11","off":["lits"]}]'});
+      await c.importProgress(carry(a));
+      expect(dailyExcluded(const Day(2026, 9, 12)), {'lits'});
+      dailyChoices = const [];
     });
 
     test('rejects data that is not progress', () async {

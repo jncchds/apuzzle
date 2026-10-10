@@ -87,7 +87,7 @@ extension ProgressTransfer on GameStore {
   /// are usually about the device (theme, haptics, language).
   static const _prefixes = ['stats.', 'daily.', 'save.', 'tutorial.', 'strategies.', 'last.'];
 
-  static bool _travels(String key) => _prefixes.any(key.startsWith);
+  static bool _travels(String key) => key == GameStore.dailyChoicesKey || _prefixes.any(key.startsWith);
 
   /// All progress of this device, for [ProgressCode.encode].
   Map<String, dynamic> exportProgress() {
@@ -139,13 +139,14 @@ extension ProgressTransfer on GameStore {
           _ when k.startsWith('save.') => _newer(local as String, v as String),
           _ when k.startsWith('tutorial.') => v == 'done' ? v : null,
           _ when k.startsWith('strategies.') => v == true ? v : null,
-          _ => null, // last choices: this device's own win
+          _ => null, // last choices and daily games: this device's own win
         };
       } on Object {
         continue; // a damaged entry
       }
       if (merged != null && merged != local) await put(k, merged);
     }
+    loadDailyChoices();
     dailyRevision.value++;
     tutorialRevision.value++;
     return changed;

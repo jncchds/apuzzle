@@ -8,6 +8,11 @@
   "dailyDayComplete": "Dzień ukończony!",
   "dailyNext": "Następna",
   "dailyToday": "Dziś",
+  "dailyChoose": "Wybierz gry",
+  "dailyChooseHint": "Każdego dnia losowane są {count} z wybranych gier. Zmiana działa od dziś, wcześniejsze dni zachowują swoje gry.",
+  "dailyChooseMin": "Wybierz co najmniej {count} gry",
+  "dailyChooseAll": "Wszystkie gry",
+  "save": "Zapisz",
 
   "playCode": "Zagraj według kodu łamigłówki",
   "playCodeMenu": "Zagraj według kodu…",

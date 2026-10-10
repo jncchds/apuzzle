@@ -2,6 +2,7 @@
 
 ## 0.7.1 - 2026-10-10
 - New game: Formula. Guess the hidden equation in six tries: every guess is a true equation, and each tile is marked as in place, elsewhere or not there. Six, eight or ten tiles wide; easy boards add and subtract, medium ones multiply and divide too, hard ones have brackets, squares and cubes. With a tutorial and strategy lessons, and in the daily challenges from 2026-10-10
+- Daily challenges: choose which games they draw from (the new button on the calendar screen; at least three). A change counts from today, and earlier days keep their games and results
 
 ## 0.7.0 - 2026-10-10
 - Landscape: turn your phone (or widen the window) and the board fills the height, with the controls in a side panel; tutorials and the daily calendar too

@@ -30,6 +30,9 @@ int _reference(String s) {
 }
 
 void main() {
+  setUp(() => dailyChoices = const []);
+  tearDown(() => dailyChoices = const []);
+
   test('Day parses, prints and steps', () {
     expect(Day.tryParse('2026-09-25'), const Day(2026, 9, 25));
     expect(Day.tryParse('2026-02-31'), isNull);
@@ -150,5 +153,53 @@ void main() {
     final easy = PuzzleCode(merge, dailyParams(d, merge, Difficulty.easy));
     expect(isDailyPuzzle(d, easy, today: d), isFalse);
     expect({for (final x in snake.dailyDifficulties) snake.dailySize(x)}.length, 3);
+  });
+
+  test('chosen games count from their day on and never change earlier days', () async {
+    SharedPreferences.setMockInitialValues({});
+    final store = await GameStore.open();
+    const first = Day(2026, 9, 10);
+    const second = Day(2026, 9, 20);
+    final before = [for (var d = dailyLaunch; d < dailyLaunch.addDays(40); d = d.addDays(1)) dailyGames(d)];
+
+    final keep = {'kings', 'sudoku', 'mambo', 'lits'};
+    final off = {
+      for (final t in puzzleTypes)
+        if (!keep.contains(t.id)) t.id,
+    };
+    await store.setDailyExcluded(off, today: first);
+    await store.setDailyExcluded({'kings'}, today: second);
+
+    for (var i = 0; i < before.length; i++) {
+      final d = dailyLaunch.addDays(i);
+      final games = dailyGames(d);
+      expect(games.length, dailyGamesPerDay);
+      if (d < first) {
+        expect(games, before[i], reason: '$d');
+      } else if (d < second) {
+        expect(games.every((t) => keep.contains(t.id)), isTrue, reason: '$d');
+      } else {
+        expect(games.any((t) => t.id == 'kings'), isFalse, reason: '$d');
+      }
+    }
+    // A puzzle of a game that was left out is no daily one.
+    final out = puzzleTypes.firstWhere((t) => t.id == 'pipes');
+    expect(isDailyPuzzle(first, PuzzleCode(out, dailyParams(first, out, Difficulty.easy)), today: second), isFalse);
+
+    // The history survives a restart.
+    dailyChoices = const [];
+    final again = GameStore(store.prefs);
+    expect(dailyExcluded(first), off);
+    expect(dailyExcluded(second.addDays(5)), {'kings'});
+    expect(dailyExcluded(first.addDays(-1)), isEmpty);
+
+    // Changing the same day again replaces that day's choice; going back to
+    // the choice before it drops the entry.
+    await again.setDailyExcluded({'sudoku'}, today: second);
+    expect(dailyChoices.length, 2);
+    expect(dailyExcluded(second), {'sudoku'});
+    await again.setDailyExcluded(off, today: second);
+    expect(dailyChoices.length, 1);
+    expect(dailyExcluded(second), off);
   });
 }

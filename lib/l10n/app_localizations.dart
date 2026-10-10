@@ -136,6 +136,36 @@ abstract class AppLocalizations {
   /// **'Today'**
   String get dailyToday;
 
+  /// No description provided for @dailyChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose games'**
+  String get dailyChoose;
+
+  /// No description provided for @dailyChooseHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Each day draws {count} of the chosen games. A change counts from today; earlier days keep their games.'**
+  String dailyChooseHint(int count);
+
+  /// No description provided for @dailyChooseMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose at least {count} games'**
+  String dailyChooseMin(int count);
+
+  /// No description provided for @dailyChooseAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All games'**
+  String get dailyChooseAll;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
   /// No description provided for @playCode.
   ///
   /// In en, this message translates to:

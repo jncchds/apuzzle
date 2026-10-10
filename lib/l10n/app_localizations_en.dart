@@ -33,6 +33,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dailyToday => 'Today';
 
   @override
+  String get dailyChoose => 'Choose games';
+
+  @override
+  String dailyChooseHint(int count) {
+    return 'Each day draws $count of the chosen games. A change counts from today; earlier days keep their games.';
+  }
+
+  @override
+  String dailyChooseMin(int count) {
+    return 'Choose at least $count games';
+  }
+
+  @override
+  String get dailyChooseAll => 'All games';
+
+  @override
+  String get save => 'Save';
+
+  @override
   String get playCode => 'Play a puzzle code';
 
   @override

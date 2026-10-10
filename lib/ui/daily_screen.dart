@@ -21,6 +21,89 @@ import 'tutorial_screen.dart';
   return (done: done, total: puzzles.length);
 }
 
+/// Lets the player choose which games daily challenges draw from.
+Future<void> showDailyGamesSheet(BuildContext context) => showModalBottomSheet<void>(
+  context: context,
+  showDragHandle: true,
+  isScrollControlled: true,
+  builder: (_) => const _DailyGamesSheet(),
+);
+
+class _DailyGamesSheet extends StatefulWidget {
+  const _DailyGamesSheet();
+
+  @override
+  State<_DailyGamesSheet> createState() => _DailyGamesSheetState();
+}
+
+class _DailyGamesSheetState extends State<_DailyGamesSheet> {
+  final _today = Day.today();
+  late final List<PuzzleType> _pool = dailyPool(_today);
+  late final Set<String> _excluded = {...dailyExcluded(_today)};
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l = context.l10n;
+    final chosen = _pool.where((t) => !_excluded.contains(t.id)).length;
+    final enough = chosen >= dailyGamesPerDay;
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(l.dailyChoose, style: theme.textTheme.titleLarge),
+            const SizedBox(height: 8),
+            Text(l.dailyChooseHint(dailyGamesPerDay), style: theme.textTheme.bodyMedium),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final t in _pool)
+                  FilterChip(
+                    avatar: _excluded.contains(t.id) ? Icon(t.icon, color: t.accent) : null,
+                    label: Text(t.name(l)),
+                    selected: !_excluded.contains(t.id),
+                    onSelected: (on) => setState(() => on ? _excluded.remove(t.id) : _excluded.add(t.id)),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            if (!enough) ...[
+              Text(
+                l.dailyChooseMin(dailyGamesPerDay),
+                style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.error),
+              ),
+              const SizedBox(height: 8),
+            ],
+            Row(
+              children: [
+                TextButton(
+                  onPressed: _excluded.isEmpty ? null : () => setState(_excluded.clear),
+                  child: Text(l.dailyChooseAll),
+                ),
+                const Spacer(),
+                FilledButton(
+                  onPressed: enough
+                      ? () {
+                          context.read<GameStore>().setDailyExcluded(_excluded, today: _today);
+                          Navigator.of(context).pop();
+                        }
+                      : null,
+                  child: Text(l.save),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 /// A month calendar of daily challenges and the selected day's puzzles.
 class DailyScreen extends StatefulWidget {
   const DailyScreen({super.key, required this.day});
@@ -52,6 +135,11 @@ class _DailyScreenState extends State<DailyScreen> {
         title: Text(l.dailyTitle),
         actions: [
           if (widget.day != today) TextButton(onPressed: () => router.selectDailyDay(today), child: Text(l.dailyToday)),
+          IconButton(
+            icon: const Icon(Icons.tune_rounded),
+            tooltip: l.dailyChoose,
+            onPressed: () => showDailyGamesSheet(context),
+          ),
         ],
       ),
       body: ValueListenableBuilder(

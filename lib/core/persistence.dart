@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'daily.dart';
 import 'day.dart';
 import 'difficulty.dart';
 
@@ -112,7 +113,9 @@ class DailyResult {
 
 /// Saved games, stats, daily results and small per-type preferences.
 class GameStore {
-  GameStore(this.prefs);
+  GameStore(this.prefs) {
+    loadDailyChoices();
+  }
 
   final SharedPreferences prefs;
 
@@ -141,6 +144,42 @@ class GameStore {
   String _statsKey(String typeId, String variant) => 'stats.$typeId.$variant';
   String _lastKey(String typeId) => 'last.$typeId';
   String _dailyKey(Day day) => 'daily.$day';
+
+  static const dailyChoicesKey = 'dailyPool';
+
+  /// Reads the saved [dailyChoices].
+  void loadDailyChoices() {
+    final choices = <DailyChoice>[];
+    try {
+      for (final e in jsonDecode(prefs.getString(dailyChoicesKey) ?? '[]') as List) {
+        final from = Day.tryParse((e as Map<String, dynamic>)['from'] as String?);
+        if (from != null) choices.add((from: from, excluded: {...(e['off'] as List).cast<String>()}));
+      }
+    } on Object {
+      choices.clear(); // damaged: back to every game
+    }
+    dailyChoices = choices..sort((a, b) => a.from.compareTo(b.from));
+  }
+
+  /// Leaves [excluded] out of daily challenges from [today] on. Earlier days
+  /// keep their games.
+  Future<void> setDailyExcluded(Set<String> excluded, {Day? today}) async {
+    final from = today ?? Day.today();
+    final choices = [
+      for (final c in dailyChoices)
+        if (c.from < from) c,
+    ];
+    final before = choices.isEmpty ? const <String>{} : choices.last.excluded;
+    if (!setEquals(before, excluded)) choices.add((from: from, excluded: {...excluded}));
+    dailyChoices = choices;
+    await prefs.setString(
+      dailyChoicesKey,
+      jsonEncode([
+        for (final c in choices) {'from': c.from.toString(), 'off': c.excluded.toList()..sort()},
+      ]),
+    );
+    dailyRevision.value++;
+  }
 
   /// The save slot of a daily puzzle, apart from the type's free game.
   static String dailySlot(String code) => 'daily.$code';

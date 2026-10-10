@@ -8,6 +8,11 @@
   "dailyDayComplete": "День завершено!",
   "dailyNext": "Наступна",
   "dailyToday": "Сьогодні",
+  "dailyChoose": "Вибрати ігри",
+  "dailyChooseHint": "Щодня випадає {count} з вибраних ігор. Зміна діє від сьогодні, попередні дні зберігають свої ігри.",
+  "dailyChooseMin": "Виберіть щонайменше {count} гри",
+  "dailyChooseAll": "Усі ігри",
+  "save": "Зберегти",
 
   "playCode": "Грати за кодом головоломки",
   "playCodeMenu": "Грати за кодом…",

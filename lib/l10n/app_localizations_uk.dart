@@ -33,6 +33,25 @@ class AppLocalizationsUk extends AppLocalizations {
   String get dailyToday => 'Сьогодні';
 
   @override
+  String get dailyChoose => 'Вибрати ігри';
+
+  @override
+  String dailyChooseHint(int count) {
+    return 'Щодня випадає $count з вибраних ігор. Зміна діє від сьогодні, попередні дні зберігають свої ігри.';
+  }
+
+  @override
+  String dailyChooseMin(int count) {
+    return 'Виберіть щонайменше $count гри';
+  }
+
+  @override
+  String get dailyChooseAll => 'Усі ігри';
+
+  @override
+  String get save => 'Зберегти';
+
+  @override
   String get playCode => 'Грати за кодом головоломки';
 
   @override

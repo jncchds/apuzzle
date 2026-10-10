@@ -22,13 +22,38 @@ typedef DailyPuzzle = ({PuzzleType type, Difficulty difficulty});
 /// The seed of every puzzle of [day].
 int dailySeed(Day day) => hash31(day.toString());
 
+/// The games the player left out of daily challenges from [from] on, until
+/// the next choice.
+typedef DailyChoice = ({Day from, Set<String> excluded});
+
+/// The player's choices, oldest first; [GameStore] loads and saves them.
+/// Days before the first one draw from every game.
+List<DailyChoice> dailyChoices = const [];
+
+/// Type ids left out of [day]'s draw.
+Set<String> dailyExcluded(Day day) {
+  var excluded = const <String>{};
+  for (final c in dailyChoices) {
+    if (c.from <= day) excluded = c.excluded;
+  }
+  return excluded;
+}
+
+/// The games that can be chosen for daily challenges on [day].
+List<PuzzleType> dailyPool(Day day, [List<PuzzleType> types = puzzleTypes]) => [
+  for (final t in types)
+    if (t.dailySince <= day) t,
+];
+
 /// The games of [day], in pick order. A type only joins the pool from its
-/// [PuzzleType.dailySince], so releasing one never changes earlier days.
+/// [PuzzleType.dailySince], so releasing one never changes earlier days, and
+/// a [DailyChoice] only counts from its own day on.
 List<PuzzleType> dailyGames(Day day, [List<PuzzleType> types = puzzleTypes]) {
+  final excluded = dailyExcluded(day);
   // By id, so reordering the home screen doesn't reshuffle past days.
   final pool = [
-    for (final t in types)
-      if (t.dailySince <= day) t,
+    for (final t in dailyPool(day, types))
+      if (!excluded.contains(t.id)) t,
   ]..sort((a, b) => a.id.compareTo(b.id));
   final rng = Random(dailySeed(day));
   final picked = <PuzzleType>[];

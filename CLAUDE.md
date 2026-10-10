@@ -43,6 +43,7 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
 - `lib/core/registry.dart`: register new types here.
 - Daily challenges (`lib/core/daily.dart`, `lib/ui/daily_screen.dart`, route `/daily?d=2026-09-25[&p=<code>]`):
   - each day picks 3 games (seeded by `hash31(date)`, a web-safe FNV-1a) from the types whose `dailySince` is on or before it (launch: 2026-09-01), each at its `dailyDifficulties` (all by default; 2048 only medium);
+  - the player can leave games out (the tune button on the daily screen, at least 3 stay): `dailyChoices` is a history of `(from, excluded ids)` kept by `GameStore` in `dailyPool`, and a change counts from today, so earlier days keep their games. Excluded ids are stored (not chosen ones), so new releases join by default. It travels with the progress export, but a device that has its own history keeps it;
   - every puzzle of the day uses the same seed, with the type's fixed `dailySize(difficulty)` and default options, so it is a normal share code;
   - `GameStore`: results in `daily.<date>` (`type.difficulty` → code, best ms, hints), in-progress dailies in their own save slot (`save.daily.<code>`), so they never replace the free game. Daily wins also count in the regular stats;
   - the router only treats a code as a daily one if it really is that day's puzzle (`isDailyPuzzle`), and never for future days.

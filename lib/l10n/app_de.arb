@@ -8,6 +8,11 @@
   "dailyDayComplete": "Tag geschafft!",
   "dailyNext": "Nächstes Rätsel",
   "dailyToday": "Heute",
+  "dailyChoose": "Spiele auswählen",
+  "dailyChooseHint": "Jeden Tag werden {count} der gewählten Spiele gezogen. Eine Änderung gilt ab heute, frühere Tage behalten ihre Spiele.",
+  "dailyChooseMin": "Wähle mindestens {count} Spiele",
+  "dailyChooseAll": "Alle Spiele",
+  "save": "Speichern",
 
   "playCode": "Rätselcode spielen",
   "playCodeMenu": "Rätselcode spielen…",

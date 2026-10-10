@@ -9,6 +9,13 @@
   "dailyDayComplete": "Day complete!",
   "dailyNext": "Next puzzle",
   "dailyToday": "Today",
+  "dailyChoose": "Choose games",
+  "dailyChooseHint": "Each day draws {count} of the chosen games. A change counts from today; earlier days keep their games.",
+  "@dailyChooseHint": {"placeholders": {"count": {"type": "int"}}},
+  "dailyChooseMin": "Choose at least {count} games",
+  "@dailyChooseMin": {"placeholders": {"count": {"type": "int"}}},
+  "dailyChooseAll": "All games",
+  "save": "Save",
 
   "playCode": "Play a puzzle code",
   "playCodeMenu": "Play a puzzle code…",

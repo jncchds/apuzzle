@@ -33,6 +33,25 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dailyToday => 'Heute';
 
   @override
+  String get dailyChoose => 'Spiele auswählen';
+
+  @override
+  String dailyChooseHint(int count) {
+    return 'Jeden Tag werden $count der gewählten Spiele gezogen. Eine Änderung gilt ab heute, frühere Tage behalten ihre Spiele.';
+  }
+
+  @override
+  String dailyChooseMin(int count) {
+    return 'Wähle mindestens $count Spiele';
+  }
+
+  @override
+  String get dailyChooseAll => 'Alle Spiele';
+
+  @override
+  String get save => 'Speichern';
+
+  @override
   String get playCode => 'Rätselcode spielen';
 
   @override
