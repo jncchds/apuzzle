@@ -3256,4 +3256,65 @@ class AppLocalizationsDe extends AppLocalizations {
   String exTallyFailColNoWay(Object col, int sum) {
     return 'Dann ergibt aber keine Auswahl der Zahlen in Spalte $col $sum.';
   }
+
+  @override
+  String get formulaName => 'Formel';
+
+  @override
+  String get formulaTagline => 'Errate die versteckte Gleichung';
+
+  @override
+  String get formulaRules =>
+      '• Eine Gleichung ist versteckt. Finde sie in sechs Versuchen.\n• Jeder Versuch muss eine wahre Gleichung sein, die die Zeile füllt: eine Rechnung, dann = und ihr Ergebnis.\n• Jedes Feld eines Versuchs wird markiert. Gefüllt: richtiges Zeichen am richtigen Platz. Umrandet: kommt in der Gleichung vor, aber woanders. Blass: kommt nicht vor (oder nicht so oft).\n• Die übliche Reihenfolge: erst Klammern, dann Potenzen, dann × und ÷, dann + und −.\n\nLeichte Gleichungen addieren und subtrahieren nur, mittlere multiplizieren oder dividieren auch, schwere haben Klammern oder Potenzen (3² = 3 × 3, 2³ = 2 × 2 × 2). Die Tasten merken sich die Markierungen. Tippe ein Feld an, um dort zu schreiben. Ein Versuch lässt sich nicht zurücknehmen; sind die Zeilen voll, starte neu.';
+
+  @override
+  String get formulaIncomplete => 'Fülle erst die ganze Zeile';
+
+  @override
+  String get formulaMalformed => 'Keine Gleichung: eine Rechnung, dann = und eine Zahl';
+
+  @override
+  String get formulaUntrue => 'Die beiden Seiten sind nicht gleich';
+
+  @override
+  String get formulaOutOfGuesses => 'Keine Versuche mehr: starte neu';
+
+  @override
+  String formulaSolvedIn(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'In $count Versuchen gelöst',
+      one: 'Beim ersten Versuch!',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tutFormula1 =>
+      'Hinter diesem Brett steckt eine Gleichung. Jeder Versuch ist eine wahre Gleichung, die eine Zeile füllt. Tippe 1+4=5 (oder eine andere) und drücke „Prüfen“.';
+
+  @override
+  String get tutFormula2 =>
+      'Ein Versuch markiert seine Felder. Gefüllt: richtiges Zeichen am richtigen Platz. Umrandet: kommt vor, aber woanders. Blass: kommt nicht vor. Hier steht = richtig, 4, 5 und 9 gehören woandershin, und ein + gibt es nicht. Finde die Gleichung.';
+
+  @override
+  String get tutFormula3 =>
+      'Die erste 2 steht richtig, die zweite ist blass: Die Gleichung hat nur eine 2. Die Tasten unten merken sich jede Markierung. Löse das Brett.';
+
+  @override
+  String get tutFormula4 =>
+      'Jetzt ein echtes Brett: sechs Versuche für eine Gleichung aus sechs Feldern. Sie addiert oder subtrahiert nur.';
+
+  @override
+  String get tutFormulaS1 =>
+      'Beginne mit einem Versuch, der viele verschiedene Zeichen prüft: Je mehr Felder markiert werden, desto mehr erfährst du. Gib eine Gleichung mit mindestens sieben verschiedenen Zeichen ein, etwa 9×8−7=65.';
+
+  @override
+  String get tutFormulaS2 =>
+      'Schwere Bretter haben Klammern und Potenzen: 3² ist 3 × 3, 2³ ist 2 × 2 × 2. Erst werden Klammern gerechnet, dann Potenzen, dann × und ÷, dann + und −. Finde die Gleichung.';
+
+  @override
+  String get tutFormulaS3 =>
+      'Das große: zehn Felder mit einer Klammer oder Potenz. Finde zuerst, wo das = steht: Es verrät, wie lang das Ergebnis ist.';
 }

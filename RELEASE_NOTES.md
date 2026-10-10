@@ -1,5 +1,8 @@
 # Release notes
 
+## 0.7.1 - 2026-10-10
+- New game: Formula. Guess the hidden equation in six tries: every guess is a true equation, and each tile is marked as in place, elsewhere or not there. Six, eight or ten tiles wide; easy boards add and subtract, medium ones multiply and divide too, hard ones have brackets, squares and cubes. With a tutorial and strategy lessons, and in the daily challenges from 2026-10-10
+
 ## 0.7.0 - 2026-10-10
 - Landscape: turn your phone (or widen the window) and the board fills the height, with the controls in a side panel; tutorials and the daily calendar too
 - New game: Tally. Every cell holds a number: cross some out so the numbers left in each row and column add up to the sums outside the grid. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-10

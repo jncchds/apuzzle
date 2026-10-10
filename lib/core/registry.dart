@@ -4,6 +4,7 @@ import '../puzzles/blocks/blocks_type.dart';
 import '../puzzles/blend/blend_type.dart';
 import '../puzzles/camp/camp_type.dart';
 import '../puzzles/fence/fence_type.dart';
+import '../puzzles/formula/formula_type.dart';
 import '../puzzles/hues/hues_type.dart';
 import '../puzzles/islands/islands_type.dart';
 import '../puzzles/kings/kings_type.dart';
@@ -35,6 +36,7 @@ const List<PuzzleType> puzzleTypes = [
   KingsType(),
   BlocksType(),
   TallyType(),
+  FormulaType(),
   PairsType(),
   HuesType(),
   MosaicType(),

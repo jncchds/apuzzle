@@ -20,6 +20,7 @@ import 'package:apuzzle/core/registry.dart';
 import 'package:apuzzle/core/settings.dart';
 import 'package:apuzzle/l10n/l10n.dart';
 import 'package:apuzzle/core/value_grid.dart';
+import 'package:apuzzle/puzzles/formula/formula_model.dart';
 import 'package:apuzzle/puzzles/hues/hues_generator.dart';
 import 'package:apuzzle/puzzles/hues/hues_model.dart';
 import 'package:apuzzle/puzzles/pop/pop_model.dart';
@@ -52,6 +53,7 @@ int _progressSteps(PuzzleType t) => switch (t.id) {
   'pop' => 12,
   'merge' => 120,
   'snake' => 40,
+  'formula' => 3,
   'trail' => 8,
   'labyrinth' => 3,
   _ => 6,
@@ -87,6 +89,12 @@ void main() {
         final params = GenParams(size: type.defaultSize, difficulty: Difficulty.medium, seed: 7);
         final puzzle = await tester.runAsync(() async => type.generate(params) as Object);
         var state = type.initialState(puzzle) as Object;
+        // Two guesses on Formula, so the marks show.
+        if (puzzle is FormulaPuzzle) {
+          for (final guess in ['9*8-7=65', '12/4+5=8']) {
+            state = FormulaState(guesses: (state as FormulaState).guesses, row: guess, cursor: 0).enter();
+          }
+        }
         for (var i = 0; i < _progressSteps(type); i++) {
           final h = type.hint(puzzle, state);
           if (h == null) break;

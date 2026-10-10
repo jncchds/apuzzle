@@ -3250,4 +3250,64 @@ class AppLocalizationsEn extends AppLocalizations {
   String exTallyFailColNoWay(Object col, int sum) {
     return 'But then no choice of numbers in column $col adds up to $sum.';
   }
+
+  @override
+  String get formulaName => 'Formula';
+
+  @override
+  String get formulaTagline => 'Guess the hidden equation';
+
+  @override
+  String get formulaRules =>
+      '• An equation is hidden. Find it in six guesses.\n• Every guess must be a true equation that fills the row: a calculation, then = and its value.\n• Each tile of a guess gets a mark. Filled: the right symbol in the right place. Outlined: in the equation, but somewhere else. Faded: not in the equation, or not that many times.\n• The usual order: brackets first, then powers, then × and ÷, then + and −.\n\nEasy equations only add and subtract, medium ones multiply or divide too, hard ones have brackets or powers (3² = 3 × 3, 2³ = 2 × 2 × 2). The keys remember the marks. Tap a tile to type there. A guess can\'t be taken back; when the rows run out, restart to try again.';
+
+  @override
+  String get formulaIncomplete => 'Fill the whole row first';
+
+  @override
+  String get formulaMalformed => 'Not an equation: a calculation, then = and a number';
+
+  @override
+  String get formulaUntrue => 'The two sides aren\'t equal';
+
+  @override
+  String get formulaOutOfGuesses => 'Out of guesses: restart to try again';
+
+  @override
+  String formulaSolvedIn(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Solved in $count guesses',
+      one: 'Solved in one guess!',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tutFormula1 =>
+      'An equation is hidden behind this board. Every guess is a true equation that fills a row. Type 1+4=5 (or any other) and press Submit.';
+
+  @override
+  String get tutFormula2 =>
+      'A guess marks its tiles. Filled: right symbol, right place. Outlined: in the equation, but elsewhere. Faded: not in it. Here = is in place, 4, 5 and 9 belong elsewhere and there is no +. Find the equation.';
+
+  @override
+  String get tutFormula3 =>
+      'The first 2 is in place, but the second one is faded: the equation has only one 2. The keys below remember every mark. Finish the board.';
+
+  @override
+  String get tutFormula4 => 'Now a real board: six guesses for an equation of six tiles. It only adds or subtracts.';
+
+  @override
+  String get tutFormulaS1 =>
+      'Open with a guess that tests many different symbols: the more tiles get a mark, the more you learn. Enter an equation with at least seven different symbols, like 9×8−7=65.';
+
+  @override
+  String get tutFormulaS2 =>
+      'Hard boards add brackets and powers: 3² is 3 × 3, 2³ is 2 × 2 × 2. Brackets are worked out first, then powers, then × and ÷, then + and −. Find the equation.';
+
+  @override
+  String get tutFormulaS3 =>
+      'The big one: ten tiles with a bracket or a power. Start by finding where = stands: it tells how long the result is.';
 }

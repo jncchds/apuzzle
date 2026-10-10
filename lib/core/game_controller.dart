@@ -120,8 +120,13 @@ class GameController extends ChangeNotifier {
   }
 
   /// A real-time step: no undo entry or haptics, saved only if [persist].
-  void advance(Object next, {bool persist = true}) {
+  /// [forget] drops the undo history too (a step that can't be taken back).
+  void advance(Object next, {bool persist = true, bool forget = false}) {
     if (solved || identical(next, _state)) return;
+    if (forget) {
+      _undo.clear();
+      _redo.clear();
+    }
     _state = next;
     _afterChange(persist: persist);
   }

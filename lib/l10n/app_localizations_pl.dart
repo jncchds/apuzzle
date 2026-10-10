@@ -3305,4 +3305,65 @@ class AppLocalizationsPl extends AppLocalizations {
   String exTallyFailColNoWay(Object col, int sum) {
     return 'Ale wtedy żaden wybór liczb z kolumny $col nie daje $sum.';
   }
+
+  @override
+  String get formulaName => 'Formuła';
+
+  @override
+  String get formulaTagline => 'Odgadnij ukryte równanie';
+
+  @override
+  String get formulaRules =>
+      '• Ukryte jest równanie. Znajdź je w sześciu próbach.\n• Każda próba musi być prawdziwym równaniem na cały rząd: działanie, potem = i jego wynik.\n• Każda płytka próby dostaje oznaczenie. Wypełniona: właściwy symbol na właściwym miejscu. W ramce: jest w równaniu, ale gdzie indziej. Wyblakła: nie ma go w równaniu (albo nie aż tyle razy).\n• Zwykła kolejność działań: najpierw nawiasy, potem potęgi, potem × i ÷, potem + i −.\n\nŁatwe równania tylko dodają i odejmują, średnie także mnożą lub dzielą, trudne mają nawiasy lub potęgi (3² = 3 × 3, 2³ = 2 × 2 × 2). Klawisze pamiętają oznaczenia. Dotknij płytki, by w niej pisać. Próby nie da się cofnąć; gdy skończą się rzędy, zacznij od nowa.';
+
+  @override
+  String get formulaIncomplete => 'Najpierw wypełnij cały rząd';
+
+  @override
+  String get formulaMalformed => 'To nie równanie: działanie, potem = i liczba';
+
+  @override
+  String get formulaUntrue => 'Strony nie są równe';
+
+  @override
+  String get formulaOutOfGuesses => 'Koniec prób: zacznij od nowa';
+
+  @override
+  String formulaSolvedIn(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Rozwiązano w $count próbach',
+      one: 'Za pierwszym razem!',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tutFormula1 =>
+      'Za tą planszą kryje się równanie. Każda próba to prawdziwe równanie na cały rząd. Wpisz 1+4=5 (albo dowolne inne) i naciśnij „Sprawdź”.';
+
+  @override
+  String get tutFormula2 =>
+      'Próba oznacza swoje płytki. Wypełniona: właściwy symbol na właściwym miejscu. W ramce: jest w równaniu, ale gdzie indziej. Wyblakła: nie ma go. Tutaj = jest na miejscu, 4, 5 i 9 stoją gdzie indziej, a + nie ma. Znajdź równanie.';
+
+  @override
+  String get tutFormula3 =>
+      'Pierwsza 2 jest na miejscu, a druga wyblakła: w równaniu jest tylko jedna 2. Klawisze na dole pamiętają każde oznaczenie. Dokończ planszę.';
+
+  @override
+  String get tutFormula4 =>
+      'Teraz prawdziwa plansza: sześć prób na równanie z sześciu płytek. Jest w nim tylko dodawanie lub odejmowanie.';
+
+  @override
+  String get tutFormulaS1 =>
+      'Zacznij od próby, która sprawdza wiele różnych symboli: im więcej płytek dostanie oznaczenie, tym więcej wiesz. Wpisz równanie z co najmniej siedmioma różnymi symbolami, na przykład 9×8−7=65.';
+
+  @override
+  String get tutFormulaS2 =>
+      'Trudne plansze mają nawiasy i potęgi: 3² to 3 × 3, 2³ to 2 × 2 × 2. Najpierw liczy się nawiasy, potem potęgi, potem × i ÷, potem + i −. Znajdź równanie.';
+
+  @override
+  String get tutFormulaS3 =>
+      'Największa: dziesięć płytek z nawiasem lub potęgą. Najpierw znajdź miejsce znaku =: zdradza długość wyniku.';
 }

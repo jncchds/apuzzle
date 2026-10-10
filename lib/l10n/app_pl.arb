@@ -756,5 +756,20 @@
   "exTallyFailRowShort": "Ale wtedy wiersz {row} nie osiągnie już {sum}.",
   "exTallyFailColShort": "Ale wtedy kolumna {col} nie osiągnie już {sum}.",
   "exTallyFailRowNoWay": "Ale wtedy żaden wybór liczb z wiersza {row} nie daje {sum}.",
-  "exTallyFailColNoWay": "Ale wtedy żaden wybór liczb z kolumny {col} nie daje {sum}."
+  "exTallyFailColNoWay": "Ale wtedy żaden wybór liczb z kolumny {col} nie daje {sum}.",
+  "formulaName": "Formuła",
+  "formulaTagline": "Odgadnij ukryte równanie",
+  "formulaRules": "• Ukryte jest równanie. Znajdź je w sześciu próbach.\n• Każda próba musi być prawdziwym równaniem na cały rząd: działanie, potem = i jego wynik.\n• Każda płytka próby dostaje oznaczenie. Wypełniona: właściwy symbol na właściwym miejscu. W ramce: jest w równaniu, ale gdzie indziej. Wyblakła: nie ma go w równaniu (albo nie aż tyle razy).\n• Zwykła kolejność działań: najpierw nawiasy, potem potęgi, potem × i ÷, potem + i −.\n\nŁatwe równania tylko dodają i odejmują, średnie także mnożą lub dzielą, trudne mają nawiasy lub potęgi (3² = 3 × 3, 2³ = 2 × 2 × 2). Klawisze pamiętają oznaczenia. Dotknij płytki, by w niej pisać. Próby nie da się cofnąć; gdy skończą się rzędy, zacznij od nowa.",
+  "formulaIncomplete": "Najpierw wypełnij cały rząd",
+  "formulaMalformed": "To nie równanie: działanie, potem = i liczba",
+  "formulaUntrue": "Strony nie są równe",
+  "formulaOutOfGuesses": "Koniec prób: zacznij od nowa",
+  "formulaSolvedIn": "{count, plural, =1{Za pierwszym razem!} other{Rozwiązano w {count} próbach}}",
+  "tutFormula1": "Za tą planszą kryje się równanie. Każda próba to prawdziwe równanie na cały rząd. Wpisz 1+4=5 (albo dowolne inne) i naciśnij „Sprawdź”.",
+  "tutFormula2": "Próba oznacza swoje płytki. Wypełniona: właściwy symbol na właściwym miejscu. W ramce: jest w równaniu, ale gdzie indziej. Wyblakła: nie ma go. Tutaj = jest na miejscu, 4, 5 i 9 stoją gdzie indziej, a + nie ma. Znajdź równanie.",
+  "tutFormula3": "Pierwsza 2 jest na miejscu, a druga wyblakła: w równaniu jest tylko jedna 2. Klawisze na dole pamiętają każde oznaczenie. Dokończ planszę.",
+  "tutFormula4": "Teraz prawdziwa plansza: sześć prób na równanie z sześciu płytek. Jest w nim tylko dodawanie lub odejmowanie.",
+  "tutFormulaS1": "Zacznij od próby, która sprawdza wiele różnych symboli: im więcej płytek dostanie oznaczenie, tym więcej wiesz. Wpisz równanie z co najmniej siedmioma różnymi symbolami, na przykład 9×8−7=65.",
+  "tutFormulaS2": "Trudne plansze mają nawiasy i potęgi: 3² to 3 × 3, 2³ to 2 × 2 × 2. Najpierw liczy się nawiasy, potem potęgi, potem × i ÷, potem + i −. Znajdź równanie.",
+  "tutFormulaS3": "Największa: dziesięć płytek z nawiasem lub potęgą. Najpierw znajdź miejsce znaku =: zdradza długość wyniku."
 }

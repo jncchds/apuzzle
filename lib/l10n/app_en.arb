@@ -1053,5 +1053,21 @@
   "exTallyFailRowNoWay": "But then no choice of numbers in row {row} adds up to {sum}.",
   "@exTallyFailRowNoWay": {"placeholders": {"row": {}, "sum": {"type": "int"}}},
   "exTallyFailColNoWay": "But then no choice of numbers in column {col} adds up to {sum}.",
-  "@exTallyFailColNoWay": {"placeholders": {"col": {}, "sum": {"type": "int"}}}
+  "@exTallyFailColNoWay": {"placeholders": {"col": {}, "sum": {"type": "int"}}},
+  "formulaName": "Formula",
+  "formulaTagline": "Guess the hidden equation",
+  "formulaRules": "• An equation is hidden. Find it in six guesses.\n• Every guess must be a true equation that fills the row: a calculation, then = and its value.\n• Each tile of a guess gets a mark. Filled: the right symbol in the right place. Outlined: in the equation, but somewhere else. Faded: not in the equation, or not that many times.\n• The usual order: brackets first, then powers, then × and ÷, then + and −.\n\nEasy equations only add and subtract, medium ones multiply or divide too, hard ones have brackets or powers (3² = 3 × 3, 2³ = 2 × 2 × 2). The keys remember the marks. Tap a tile to type there. A guess can't be taken back; when the rows run out, restart to try again.",
+  "formulaIncomplete": "Fill the whole row first",
+  "formulaMalformed": "Not an equation: a calculation, then = and a number",
+  "formulaUntrue": "The two sides aren't equal",
+  "formulaOutOfGuesses": "Out of guesses: restart to try again",
+  "formulaSolvedIn": "{count, plural, =1{Solved in one guess!} other{Solved in {count} guesses}}",
+  "@formulaSolvedIn": {"placeholders": {"count": {"type": "int"}}},
+  "tutFormula1": "An equation is hidden behind this board. Every guess is a true equation that fills a row. Type 1+4=5 (or any other) and press Submit.",
+  "tutFormula2": "A guess marks its tiles. Filled: right symbol, right place. Outlined: in the equation, but elsewhere. Faded: not in it. Here = is in place, 4, 5 and 9 belong elsewhere and there is no +. Find the equation.",
+  "tutFormula3": "The first 2 is in place, but the second one is faded: the equation has only one 2. The keys below remember every mark. Finish the board.",
+  "tutFormula4": "Now a real board: six guesses for an equation of six tiles. It only adds or subtracts.",
+  "tutFormulaS1": "Open with a guess that tests many different symbols: the more tiles get a mark, the more you learn. Enter an equation with at least seven different symbols, like 9×8−7=65.",
+  "tutFormulaS2": "Hard boards add brackets and powers: 3² is 3 × 3, 2³ is 2 × 2 × 2. Brackets are worked out first, then powers, then × and ÷, then + and −. Find the equation.",
+  "tutFormulaS3": "The big one: ten tiles with a bracket or a power. Start by finding where = stands: it tells how long the result is."
 }
