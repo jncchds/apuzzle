@@ -61,6 +61,24 @@ class AppLocalizationsPl extends AppLocalizations {
   String get inProgress => 'W toku';
 
   @override
+  String get catNumbers => 'Liczby';
+
+  @override
+  String get catGrids => 'Siatki logiczne';
+
+  @override
+  String get catPaths => 'Ścieżki i pętle';
+
+  @override
+  String get catCasual => 'Na luzie';
+
+  @override
+  String get collapse => 'Zwiń';
+
+  @override
+  String get expand => 'Rozwiń';
+
+  @override
   String get size => 'Rozmiar';
 
   @override

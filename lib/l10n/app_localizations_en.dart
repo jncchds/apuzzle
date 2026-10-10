@@ -61,6 +61,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inProgress => 'In progress';
 
   @override
+  String get catNumbers => 'Numbers';
+
+  @override
+  String get catGrids => 'Logic grids';
+
+  @override
+  String get catPaths => 'Paths & loops';
+
+  @override
+  String get catCasual => 'Casual';
+
+  @override
+  String get collapse => 'Collapse';
+
+  @override
+  String get expand => 'Expand';
+
+  @override
   String get size => 'Size';
 
   @override

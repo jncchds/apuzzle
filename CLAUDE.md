@@ -40,7 +40,7 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
 - `lib/core/generator_runner.dart`: runs `type.generate(params)` via `compute`, which is an isolate on native platforms.
 - `lib/ui/board/cell_grid_board.dart`: a fit-to-screen grid with no zoom, and the win ripple. `cell_tile.dart` is the standard animated cell.
 - `lib/ui/app_router.dart`: `MaterialApp.router`. The route is the URL: `/`, `/settings`, or `/?p=<share code>`, so the web gets browser back/forward and Android share links use the same parser. The web build uses path URLs, and the Pages deploy copies `index.html` to `404.html`. Open screens through `AppRouterDelegate.of(context)`, not `Navigator.push` (dialogs and sheets are fine).
-- `lib/core/registry.dart`: register new types here.
+- `lib/core/registry.dart`: register new types here, in `puzzleTypes` and in one home-screen group of `puzzleCategories` (numbers, grids, paths, casual; names are `cat*` ARB keys). The home screen shows the groups as sections that fold; the folded ones are kept in `Settings` (`set.collapsed`).
 - Daily challenges (`lib/core/daily.dart`, `lib/ui/daily_screen.dart`, route `/daily?d=2026-09-25[&p=<code>]`):
   - each day picks 3 games (seeded by `hash31(date)`, a web-safe FNV-1a) from the types whose `dailySince` is on or before it (launch: 2026-09-01), each at its `dailyDifficulties` (all by default; 2048 only medium);
   - the player can leave games out (the tune button on the daily screen, at least 3 stay): `dailyChoices` is a history of `(from, excluded ids)` kept by `GameStore` in `dailyPool`, and a change counts from today, so earlier days keep their games. Excluded ids are stored (not chosen ones), so new releases join by default. It travels with the progress export, but a device that has its own history keeps it;
@@ -81,7 +81,7 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
    - `<id>_explain.dart`: trace the solver's rules and add an `Explainer` (see Explain mode), with `ex<Id>*` texts;
    - `<id>Name`, `<id>Tagline`, `<id>Rules`, `tut<Id><n>`, `tut<Id>S<n>` (and any other texts) in all four ARB files.
 2. Generation must be deterministic for a given `GenParams.seed`, and pure, because it runs in an isolate. Types must be `const`.
-3. Add it to `puzzleTypes` in `registry.dart`.
+3. Add it to `puzzleTypes` and to one group of `puzzleCategories` in `registry.dart`.
 4. Add tests in `test/puzzles/<id>/`. Across seeds, sizes and difficulties, check that:
    - the solution is valid;
    - the puzzle has exactly one solution;

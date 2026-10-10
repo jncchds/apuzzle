@@ -20,6 +20,12 @@
   "playCode": "Play a puzzle code",
   "playCodeMenu": "Play a puzzle code…",
   "inProgress": "In progress",
+  "catNumbers": "Numbers",
+  "catGrids": "Logic grids",
+  "catPaths": "Paths & loops",
+  "catCasual": "Casual",
+  "collapse": "Collapse",
+  "expand": "Expand",
 
   "size": "Size",
   "difficulty": "Difficulty",

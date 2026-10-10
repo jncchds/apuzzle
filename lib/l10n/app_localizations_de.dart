@@ -61,6 +61,24 @@ class AppLocalizationsDe extends AppLocalizations {
   String get inProgress => 'Läuft';
 
   @override
+  String get catNumbers => 'Zahlen';
+
+  @override
+  String get catGrids => 'Logikgitter';
+
+  @override
+  String get catPaths => 'Wege & Schleifen';
+
+  @override
+  String get catCasual => 'Zum Entspannen';
+
+  @override
+  String get collapse => 'Einklappen';
+
+  @override
+  String get expand => 'Ausklappen';
+
+  @override
   String get size => 'Größe';
 
   @override

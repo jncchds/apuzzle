@@ -27,6 +27,7 @@ import '../puzzles/snake/snake_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
 import '../puzzles/tally/tally_type.dart';
 import '../puzzles/trail/trail_type.dart';
+import '../l10n/app_localizations.dart';
 import 'puzzle_type.dart';
 
 /// All puzzle types, in home-screen order. Add new types here.
@@ -60,6 +61,50 @@ const List<PuzzleType> puzzleTypes = [
   RailsType(),
   ArrowsType(),
   MinesType(),
+];
+
+/// A home-screen group of games.
+class PuzzleCategory {
+  const PuzzleCategory(this.id, this.types);
+
+  /// Stable: collapsed groups are remembered by it.
+  final String id;
+  final List<PuzzleType> types;
+
+  String name(AppLocalizations l) => switch (id) {
+    'numbers' => l.catNumbers,
+    'grids' => l.catGrids,
+    'paths' => l.catPaths,
+    _ => l.catCasual,
+  };
+}
+
+/// Every type of [puzzleTypes], once, grouped for the home screen.
+const List<PuzzleCategory> puzzleCategories = [
+  PuzzleCategory('numbers', [SudokuType(), BlocksType(), TallyType(), FormulaType(), PlotsType(), ShikakuType()]),
+  PuzzleCategory('grids', [
+    MamboType(),
+    KingsType(),
+    PairsType(),
+    HuesType(),
+    LitsType(),
+    CampType(),
+    IslandsType(),
+    LampsType(),
+    MinesType(),
+  ]),
+  PuzzleCategory('paths', [
+    TrailType(),
+    LinksType(),
+    LabyrinthType(),
+    PipesType(),
+    AtomsType(),
+    FenceType(),
+    PearlsType(),
+    RailsType(),
+    ArrowsType(),
+  ]),
+  PuzzleCategory('casual', [MosaicType(), BlendType(), PopType(), MergeType(), SnakeType()]),
 ];
 
 PuzzleType puzzleTypeById(String id) => puzzleTypes.firstWhere((t) => t.id == id);

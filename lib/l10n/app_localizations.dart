@@ -184,6 +184,42 @@ abstract class AppLocalizations {
   /// **'In progress'**
   String get inProgress;
 
+  /// No description provided for @catNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Numbers'**
+  String get catNumbers;
+
+  /// No description provided for @catGrids.
+  ///
+  /// In en, this message translates to:
+  /// **'Logic grids'**
+  String get catGrids;
+
+  /// No description provided for @catPaths.
+  ///
+  /// In en, this message translates to:
+  /// **'Paths & loops'**
+  String get catPaths;
+
+  /// No description provided for @catCasual.
+  ///
+  /// In en, this message translates to:
+  /// **'Casual'**
+  String get catCasual;
+
+  /// No description provided for @collapse.
+  ///
+  /// In en, this message translates to:
+  /// **'Collapse'**
+  String get collapse;
+
+  /// No description provided for @expand.
+  ///
+  /// In en, this message translates to:
+  /// **'Expand'**
+  String get expand;
+
   /// No description provided for @size.
   ///
   /// In en, this message translates to:

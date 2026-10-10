@@ -6,6 +6,7 @@ import '../core/day.dart';
 import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
 import '../core/registry.dart';
+import '../core/settings.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
 import 'daily_screen.dart';
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final store = context.read<GameStore>();
+    final settings = context.watch<Settings>();
     final l = context.l10n;
     return Scaffold(
       appBar: AppBar(
@@ -69,26 +70,109 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
             sliver: SliverToBoxAdapter(
               child: ValueListenableBuilder(
-                valueListenable: store.dailyRevision,
+                valueListenable: context.read<GameStore>().dailyRevision,
                 builder: (context, _, _) => const _DailyBanner(),
               ),
             ),
           ),
-          SliverPadding(
-            padding: const EdgeInsets.all(16),
-            sliver: SliverGrid.extent(
-              // Smaller cards on a turned phone, so more than one row shows.
-              maxCrossAxisExtent: MediaQuery.sizeOf(context).height < 480 ? 200 : 240,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 0.95,
+          for (final category in puzzleCategories)
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              sliver: SliverToBoxAdapter(
+                child: _CategorySection(
+                  category: category,
+                  collapsed: settings.isCollapsed(category.id),
+                  onToggle: () => settings.toggleCollapsed(category.id),
+                  onOpen: _open,
+                ),
+              ),
+            ),
+          const SliverPadding(padding: EdgeInsets.only(bottom: 16)),
+        ],
+      ),
+    );
+  }
+}
+
+/// One group of games: a header that folds its cards away, and the cards.
+class _CategorySection extends StatelessWidget {
+  const _CategorySection({
+    required this.category,
+    required this.collapsed,
+    required this.onToggle,
+    required this.onOpen,
+  });
+
+  final PuzzleCategory category;
+  final bool collapsed;
+  final VoidCallback onToggle;
+  final ValueChanged<PuzzleType> onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l = context.l10n;
+    final store = context.read<GameStore>();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: onToggle,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(4, 10, 0, 10),
+            child: Row(
               children: [
-                for (final t in puzzleTypes) _TypeCard(type: t, inProgress: store.hasSave(t.id), onTap: () => _open(t)),
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                      text: category.name(l),
+                      children: [
+                        TextSpan(
+                          text: '  ${category.types.length}',
+                          style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                        ),
+                      ],
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                ),
+                Tooltip(
+                  message: collapsed ? l.expand : l.collapse,
+                  child: AnimatedRotation(
+                    turns: collapsed ? -0.25 : 0,
+                    duration: const Duration(milliseconds: 200),
+                    child: const Icon(Icons.expand_more_rounded),
+                  ),
+                ),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+        AnimatedSize(
+          duration: const Duration(milliseconds: 220),
+          curve: Curves.easeOutCubic,
+          alignment: Alignment.topCenter,
+          child: collapsed
+              ? const SizedBox(width: double.infinity)
+              : GridView.extent(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.only(bottom: 8),
+                  // Smaller cards on a turned phone, so more than one row shows.
+                  maxCrossAxisExtent: MediaQuery.sizeOf(context).height < 480 ? 200 : 240,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: 0.95,
+                  children: [
+                    for (final t in category.types)
+                      _TypeCard(type: t, inProgress: store.hasSave(t.id), onTap: () => onOpen(t)),
+                  ],
+                ),
+        ),
+      ],
     );
   }
 }

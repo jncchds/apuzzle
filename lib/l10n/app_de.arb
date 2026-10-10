@@ -17,6 +17,12 @@
   "playCode": "Rätselcode spielen",
   "playCodeMenu": "Rätselcode spielen…",
   "inProgress": "Läuft",
+  "catNumbers": "Zahlen",
+  "catGrids": "Logikgitter",
+  "catPaths": "Wege & Schleifen",
+  "catCasual": "Zum Entspannen",
+  "collapse": "Einklappen",
+  "expand": "Ausklappen",
 
   "size": "Größe",
   "difficulty": "Schwierigkeit",

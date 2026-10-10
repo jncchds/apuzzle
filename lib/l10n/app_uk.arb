@@ -17,6 +17,12 @@
   "playCode": "Грати за кодом головоломки",
   "playCodeMenu": "Грати за кодом…",
   "inProgress": "Триває",
+  "catNumbers": "Числа",
+  "catGrids": "Логічні сітки",
+  "catPaths": "Шляхи та петлі",
+  "catCasual": "Для відпочинку",
+  "collapse": "Згорнути",
+  "expand": "Розгорнути",
 
   "size": "Розмір",
   "difficulty": "Складність",

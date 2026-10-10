@@ -1,6 +1,8 @@
 # Release notes
 
 ## 0.7.1 - 2026-10-10
+- Home screen: games are sorted into groups (Numbers, Logic grids, Paths & loops, Casual). Tap a group's title to fold it away; the app remembers which groups are folded
+- Home screen: games are sorted into groups (Numbers, Logic grids, Paths & loops, Casual). Tap a group's title to fold it away; the app remembers which groups are folded
 - New game: Formula. Guess the hidden equation in six tries: every guess is a true equation, and each tile is marked as in place, elsewhere or not there. Six, eight or ten tiles wide; easy boards add and subtract, medium ones multiply and divide too, hard ones have brackets, squares and cubes. With a tutorial and strategy lessons, and in the daily challenges from 2026-10-10
 - Daily challenges: choose which games they draw from (the new button on the calendar screen; at least three). A change counts from today, and earlier days keep their games and results
 

@@ -61,6 +61,24 @@ class AppLocalizationsUk extends AppLocalizations {
   String get inProgress => 'Триває';
 
   @override
+  String get catNumbers => 'Числа';
+
+  @override
+  String get catGrids => 'Логічні сітки';
+
+  @override
+  String get catPaths => 'Шляхи та петлі';
+
+  @override
+  String get catCasual => 'Для відпочинку';
+
+  @override
+  String get collapse => 'Згорнути';
+
+  @override
+  String get expand => 'Розгорнути';
+
+  @override
   String get size => 'Розмір';
 
   @override

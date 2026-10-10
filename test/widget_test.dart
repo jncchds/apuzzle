@@ -19,6 +19,6 @@ void main() {
       ),
     );
     expect(find.text('APuzzle by CHDS'), findsOneWidget);
-    expect(find.text('Sun & Moon'), findsOneWidget);
+    expect(find.text('Sudoku'), findsOneWidget);
   });
 }

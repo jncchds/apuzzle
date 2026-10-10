@@ -17,6 +17,12 @@
   "playCode": "Zagraj według kodu łamigłówki",
   "playCodeMenu": "Zagraj według kodu…",
   "inProgress": "W toku",
+  "catNumbers": "Liczby",
+  "catGrids": "Siatki logiczne",
+  "catPaths": "Ścieżki i pętle",
+  "catCasual": "Na luzie",
+  "collapse": "Zwiń",
+  "expand": "Rozwiń",
 
   "size": "Rozmiar",
   "difficulty": "Poziom trudności",

@@ -8,6 +8,7 @@ class Settings extends ChangeNotifier {
     _autoClearMarks = _prefs.getBool('set.autoClearMarks') ?? false;
     _themeMode = ThemeMode.values.asNameMap()[_prefs.getString('set.theme')] ?? ThemeMode.system;
     _language = _prefs.getString('set.language');
+    _collapsed = {...?_prefs.getStringList('set.collapsed')};
   }
 
   final SharedPreferences _prefs;
@@ -17,6 +18,7 @@ class Settings extends ChangeNotifier {
   late bool _autoClearMarks;
   late ThemeMode _themeMode;
   String? _language;
+  late Set<String> _collapsed;
 
   /// Show rule conflicts while playing (off by default: validation on submit).
   bool get highlightErrors => _highlightErrors;
@@ -53,6 +55,14 @@ class Settings extends ChangeNotifier {
   set themeMode(ThemeMode v) {
     _themeMode = v;
     _prefs.setString('set.theme', v.name);
+    notifyListeners();
+  }
+
+  /// Whether the home screen's game group [id] is folded away.
+  bool isCollapsed(String id) => _collapsed.contains(id);
+  void toggleCollapsed(String id) {
+    if (!_collapsed.remove(id)) _collapsed.add(id);
+    _prefs.setStringList('set.collapsed', _collapsed.toList());
     notifyListeners();
   }
 }
