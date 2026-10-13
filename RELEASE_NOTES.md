@@ -1,7 +1,12 @@
 # Release notes
 
+## 0.7.2 - 2026-10-13
+- Slide across cells to mark them all in one go, in every tap-to-fill game (Tetra, Crowns, Islands, Lamps…). The slide repeats what the tap did to its first cell, skips cells that hold something else, and is one undo step
+- Crowns, Campsite and Pairs: a long press puts a dot (grass) on every cell that the crowns, tents or pairs you have placed already rule out. A right click still cycles back
+- Shikaku: a rectangle is drawn faint while it holds no number, several numbers, or a number that differs from its size
+- Region outlines have rounded corners
+
 ## 0.7.1 - 2026-10-10
-- Home screen: games are sorted into groups (Numbers, Logic grids, Paths & loops, Casual). Tap a group's title to fold it away; the app remembers which groups are folded
 - Home screen: games are sorted into groups (Numbers, Logic grids, Paths & loops, Casual). Tap a group's title to fold it away; the app remembers which groups are folded
 - New game: Formula. Guess the hidden equation in six tries: every guess is a true equation, and each tile is marked as in place, elsewhere or not there. Six, eight or ten tiles wide; easy boards add and subtract, medium ones multiply and divide too, hard ones have brackets, squares and cubes. With a tutorial and strategy lessons, and in the daily challenges from 2026-10-10
 - Daily challenges: choose which games they draw from (the new button on the calendar screen; at least three). A change counts from today, and earlier days keep their games and results

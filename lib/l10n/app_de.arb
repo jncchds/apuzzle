@@ -152,7 +152,7 @@
 
   "kingsName": "Kronen",
   "kingsTagline": "Eine Krone pro Zeile, Spalte und Bereich",
-  "kingsRules": "• Setze genau eine Krone in jede Zeile, jede Spalte und jeden farbigen Bereich.\n• Kronen dürfen sich nicht berühren, auch nicht diagonal.\n\nTippe auf ein Feld, um zu wechseln: leer → Punkt (deine Notiz „keine Krone hier“) → Krone. Langes Drücken / Rechtsklick wechselt zurück.",
+  "kingsRules": "• Setze genau eine Krone in jede Zeile, jede Spalte und jeden farbigen Bereich.\n• Kronen dürfen sich nicht berühren, auch nicht diagonal.\n\nTippe auf ein Feld, um zu wechseln: leer → Punkt (deine Notiz „keine Krone hier“) → Krone. Rechtsklick wechselt zurück. Wische über Felder, um sie alle auf einmal zu markieren. Langes Drücken setzt Punkte in alle Felder, in denen wegen der gesetzten Kronen keine Krone mehr stehen kann.",
 
   "huesName": "Farbtöne",
   "huesTagline": "Zähle passende Farben um jede Zahl",
@@ -243,7 +243,7 @@
   "labyrinthRules": "• Finde den Weg durch das Labyrinth vom Eingang in der linken oberen Ecke zum Ausgang in der rechten unteren Ecke.\n• Durch Wände kommst du nicht hindurch.\n\nZiehe vom Ende deines Wegs aus, um weiterzugehen. Ziehe zurück, um umzukehren, oder tippe auf ein Feld des Wegs, um dorthin zurückzugehen.",
   "campName": "Zeltplatz",
   "campTagline": "Stell neben jeden Baum ein Zelt",
-  "campRules": "• Stell für jeden Baum ein Zelt direkt daneben auf (oben, unten, links oder rechts).\n• Jeder Baum bekommt sein eigenes Zelt, und jedes Zelt gehört zu einem Baum daneben.\n• Zelte berühren sich nie, auch nicht diagonal.\n• Die Zahlen außerhalb des Gitters geben an, wie viele Zelte in jeder Zeile und Spalte stehen.\n\nTippe auf ein Feld, um zu wechseln: leer → Gras (deine Notiz „kein Zelt hier“) → Zelt. Langes Drücken / Rechtsklick wechselt zurück.",
+  "campRules": "• Stell für jeden Baum ein Zelt direkt daneben auf (oben, unten, links oder rechts).\n• Jeder Baum bekommt sein eigenes Zelt, und jedes Zelt gehört zu einem Baum daneben.\n• Zelte berühren sich nie, auch nicht diagonal.\n• Die Zahlen außerhalb des Gitters geben an, wie viele Zelte in jeder Zeile und Spalte stehen.\n\nTippe auf ein Feld, um zu wechseln: leer → Gras (deine Notiz „kein Zelt hier“) → Zelt. Rechtsklick wechselt zurück. Wische über Felder, um sie alle auf einmal zu markieren. Langes Drücken legt Gras auf alle Felder, auf denen wegen der aufgestellten Zelte kein Zelt mehr stehen kann.",
   "islandsName": "Inseln",
   "islandsTagline": "Flute das Meer um die nummerierten Inseln",
   "islandsRules": "• Schattiere das Meer so, dass die freien Felder Inseln bilden.\n• Jede Insel enthält genau eine Zahl, und die ist ihre Größe in Feldern.\n• Inseln grenzen nur ans Meer, nie aneinander (diagonale Ecken sind erlaubt).\n• Das ganze Meer hängt zusammen und hat keine 2×2-Becken.\n\nTippe auf ein Feld, um zu wechseln: leer → Meer → Punkt (deine Notiz „Land“). Langes Drücken / Rechtsklick wechselt zurück.",
@@ -270,7 +270,7 @@
   "blocksRules": "• Fülle jedes Feld mit einer Zahl.\n• Ein Bereich aus k Feldern enthält jede Zahl von 1 bis k genau einmal (ein Bereich aus einem Feld enthält eine 1).\n• Gleiche Zahlen berühren sich nie, auch nicht diagonal.\n• Vorgegebene Zahlen sind fest.\n\nWähle eine Zahl in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Zahl. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld.",
   "pairsName": "Paare",
   "pairsTagline": "Zwei schattierte Felder nebeneinander in jedem Bereich",
-  "pairsRules": "• Schattiere in jedem umrandeten Bereich genau zwei Felder.\n• Jedes schattierte Feld berührt seitlich genau ein anderes schattiertes Feld, die Schattierung besteht also aus Paaren.\n• Paare berühren einander nie seitlich (an den Ecken schon).\n\nTippe auf ein Feld, um zu wechseln: leer → schattiert → Punkt (deine Notiz „nicht schattiert“). Langes Drücken / Rechtsklick wechselt zurück.",
+  "pairsRules": "• Schattiere in jedem umrandeten Bereich genau zwei Felder.\n• Jedes schattierte Feld berührt seitlich genau ein anderes schattiertes Feld, die Schattierung besteht also aus Paaren.\n• Paare berühren einander nie seitlich (an den Ecken schon).\n\nTippe auf ein Feld, um zu wechseln: leer → schattiert → Punkt (deine Notiz „nicht schattiert“). Rechtsklick wechselt zurück. Wische über Felder, um sie alle auf einmal zu markieren. Langes Drücken setzt Punkte in alle Felder, die wegen der fertigen Paare nicht mehr schattiert werden können.",
   "plotsName": "Parzellen",
   "plotsTagline": "Teile das Gitter in Parzellen so groß wie ihre Zahlen",
   "plotsRules": "• Fülle jedes Feld mit einer Zahl.\n• Gleiche Zahlen, die sich seitlich berühren, bilden eine Parzelle, und eine Parzelle hat genau so viele Felder wie ihre Zahl: Eine 3 liegt in einer Parzelle aus drei Feldern.\n• Zwei gleich große Parzellen berühren sich nie seitlich (sonst wären sie eine).\n• Manche Parzellen zeigen gar keine Zahl.\n\nWähle eine Zahl in der Palette und tippe auf Felder, um sie zu füllen, oder tippe zuerst auf ein Feld und dann auf eine Zahl. Zwischen verschiedenen Zahlen erscheinen Linien, so siehst du die Parzellen entstehen.",

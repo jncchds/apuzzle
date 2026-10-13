@@ -108,6 +108,7 @@ class CellGridBoard extends StatelessWidget {
     required this.cellBuilder,
     this.onTap,
     this.onSecondary,
+    this.onLongPress,
     this.overlayBuilder,
     this.underlayBuilder,
     this.win,
@@ -129,8 +130,11 @@ class CellGridBoard extends StatelessWidget {
   final CellWidgetBuilder cellBuilder;
   final void Function(Pos)? onTap;
 
-  /// Long-press on touch, right-click on desktop.
+  /// Right-click on desktop; a long press too, unless [onLongPress] is set.
   final void Function(Pos)? onSecondary;
+
+  /// A long press (finger or left mouse button), when it differs from [onSecondary].
+  final void Function(Pos)? onLongPress;
 
   /// Drawn above cells, ignores pointer (edge clues, borders...).
   final List<Widget> Function(BuildContext context, BoardMetrics m)? overlayBuilder;
@@ -185,6 +189,7 @@ class CellGridBoard extends StatelessWidget {
           headerRows: headerRows,
         );
 
+        final onHold = onLongPress ?? onSecondary;
         final children = <Widget>[
           if (underlayBuilder != null) ...underlayBuilder!(context, m),
         ];
@@ -195,7 +200,7 @@ class CellGridBoard extends StatelessWidget {
             Widget child = GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: onTap == null ? null : () => onTap!(pos),
-              onLongPress: onSecondary == null ? null : () => onSecondary!(pos),
+              onLongPress: onHold == null ? null : () => onHold(pos),
               onSecondaryTap: onSecondary == null ? null : () => onSecondary!(pos),
               child: cellBuilder(context, pos, m),
             );

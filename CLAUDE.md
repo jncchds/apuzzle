@@ -27,12 +27,21 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
 3. If it doesn't, add the commit's notes to that top version.
 4. Either way, set the top version's date to today.
 
+## README
+`README.md` is the project's front page; keep it in step with the app in the same commit as the change:
+- a new puzzle type gets a row in the Puzzles table (in `puzzleTypes` order) with its screenshot: copy `build/snapshots/<id>_dark.png` to `docs/screenshots/`;
+- a new or changed user-facing feature (anything that gets a release note beyond a fix) goes into the Features list;
+- when board visuals change, refresh the affected `docs/screenshots/*.png` (and `home.png`) from `build/snapshots/`;
+- new core files or moved responsibilities go into its Architecture tree.
+
 ## Architecture
 - `lib/core/puzzle_type.dart`: the `PuzzleType<P, S>` plug-in contract. P is the immutable puzzle (clues and solution), S is the immutable play state.
 - `lib/core/value_grid.dart`:
   - `ValueGridType` is the base for "one value per cell" puzzles. It gives you:
     - the board, cycle/palette input, pencil marks and palette;
     - hints and state serialization.
+    - slides: a drag starts as a tap on its first cell, and the cells it then crosses get the same change if they held what that cell held (the eraser clears anything); the whole slide is one undo step (`GameController.apply(merge: true)`);
+    - `markForbidden` (optional): a long press dots every cell the placed objects rule out (Crowns, Campsite, Pairs). Without it a long press is the same as a right click (`onCellSecondary`: cycle back / erase).
   - Subclasses supply `values`, rules (`isSolved`, `conflicts`), `generate`, and optionally `buildOverlay`, `cellColor`, `buildValue` and `buildEmpty` (content of an empty cell).
 - `lib/core/game_controller.dart`: the generic session. It handles:
   - undo/redo (full-state snapshots), timer, submit/hint;
@@ -92,6 +101,8 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
 - No live error highlighting by default (a setting turns it on). Validation happens on Submit, and the game auto-wins when it's complete and correct.
 - No zoom. Sizes are capped by `fittingSizes()` (a 36px minimum cell).
 - Grid size is variable in every game. Input supports both tap-to-cycle and palette stamping, with pencil marks where useful. Pencil marks are kept under a value: removing the value (tap it again, eraser, cycling to empty) shows them again; the eraser on an empty cell clears the marks.
+- Region outlines (`RegionBorders`) have rounded corners: a lone bend is an arc, and where three or four lines meet the inner corners are filled in.
+- Shikaku draws a rectangle faint while it can't stay as it is (no number, several, or the wrong area).
 - Use our own puzzle names and art, not LinkedIn's or the source app's (Tango, Queens, Zip, Mambo, Kings, …).
 
 The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want-to-hazy-neumann.md`.

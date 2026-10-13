@@ -110,9 +110,10 @@ class GameController extends ChangeNotifier {
   Set<Pos> get errorCells => {...flashErrors, ...liveConflicts};
 
   // ---- state changes ----
-  void apply(Object next) {
+  /// [merge] folds the change into the last undo entry (later cells of one stroke).
+  void apply(Object next, {bool merge = false}) {
     if (solved || identical(next, _state)) return;
-    _undo.add(_state);
+    if (!merge || _undo.isEmpty) _undo.add(_state);
     _redo.clear();
     _state = next;
     if (settings.haptics) HapticFeedback.selectionClick();

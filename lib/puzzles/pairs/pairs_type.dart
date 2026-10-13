@@ -4,6 +4,7 @@ import '../../core/day.dart';
 import '../../core/difficulty.dart';
 import '../../core/explain.dart';
 import '../../core/grid.dart';
+import '../../core/grid_graph.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
@@ -119,6 +120,21 @@ class PairsType extends ValueGridType<PairsPuzzle> {
       if (state.cells[i].value == null) return put(i, pairsDot);
     }
     return null;
+  }
+
+  /// Nothing more fits next to a finished pair, or in a region that has its two cells.
+  @override
+  ValueGrid markForbidden(PairsPuzzle puzzle, ValueGrid state) {
+    final n = puzzle.n, shaded = _shaded(state), next = orthNeighbors(n, n);
+    final inRegion = List.filled(puzzle.regionCount, 0);
+    for (var i = 0; i < shaded.length; i++) {
+      if (shaded[i]) inRegion[puzzle.regions[i]]++;
+    }
+    bool paired(int i) => shaded[i] && next[i].any((j) => shaded[j]);
+    return dotted(state, [
+      for (var i = 0; i < shaded.length; i++)
+        if (inRegion[puzzle.regions[i]] >= 2 || next[i].any(paired)) i,
+    ], pairsDot);
   }
 
   @override

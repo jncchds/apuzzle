@@ -146,6 +146,8 @@ class _ShikakuBoardState extends State<_ShikakuBoard> {
     final s = ctrl.state as ShikakuState;
     final scheme = Theme.of(context).colorScheme;
     final errors = ctrl.errorCells;
+    // A rectangle that can't stay as it is (no number, several, or the wrong area) is drawn faint.
+    final bad = shikakuBadRects(p, s.rects).toSet();
     final preview = _start != null && _end != null ? CellRect.span(_start!, _end!) : null;
 
     Rect pixelRect(BoardMetrics m, CellRect r) =>
@@ -187,10 +189,14 @@ class _ShikakuBoardState extends State<_ShikakuBoard> {
               duration: const Duration(milliseconds: 220),
               curve: Curves.easeOutBack,
               builder: (context, v, child) => Transform.scale(scale: v, child: child),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: regionColors[(s.rects[k].r0 * 7 + s.rects[k].c0 * 3) % regionColors.length],
-                  borderRadius: BorderRadius.circular(m.cell * 0.2),
+              child: AnimatedOpacity(
+                opacity: bad.contains(s.rects[k]) ? 0.35 : 1,
+                duration: const Duration(milliseconds: 200),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: regionColors[(s.rects[k].r0 * 7 + s.rects[k].c0 * 3) % regionColors.length],
+                    borderRadius: BorderRadius.circular(m.cell * 0.2),
+                  ),
                 ),
               ),
             ),
@@ -220,7 +226,8 @@ class _ShikakuBoardState extends State<_ShikakuBoard> {
       ],
       cellBuilder: (context, pos, m) {
         final i = p.size.index(pos);
-        final covered = s.rects.any((r) => r.contains(pos.r, pos.c));
+        final over = s.rects.where((r) => r.contains(pos.r, pos.c));
+        final covered = over.isNotEmpty;
         final clue = p.clues[i];
         return AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -241,7 +248,9 @@ class _ShikakuBoardState extends State<_ShikakuBoard> {
                   style: TextStyle(
                     fontSize: m.cell * 0.5,
                     fontWeight: FontWeight.w800,
-                    color: covered ? Colors.black.withValues(alpha: 0.8) : scheme.onSurface,
+                    color: covered && !bad.contains(over.first)
+                        ? Colors.black.withValues(alpha: 0.8)
+                        : scheme.onSurface,
                   ),
                 ),
         );

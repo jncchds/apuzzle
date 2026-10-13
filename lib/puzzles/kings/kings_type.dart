@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/difficulty.dart';
 import '../../core/explain.dart';
 import '../../core/grid.dart';
+import '../../core/grid_graph.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
@@ -103,6 +104,19 @@ class KingsType extends ValueGridType<KingsPuzzle> {
       }
     }
     return null;
+  }
+
+  /// A crown rules out its row, column and region, and the cells around it.
+  @override
+  ValueGrid markForbidden(KingsPuzzle puzzle, ValueGrid state) {
+    final n = puzzle.n, kings = _kings(state), around = kingNeighbors(n, n);
+    return dotted(state, [
+      for (var i = 0; i < n * n; i++)
+        if (kings.any(
+          (k) => k ~/ n == i ~/ n || k % n == i % n || puzzle.regions[k] == puzzle.regions[i] || around[k].contains(i),
+        ))
+          i,
+    ], kDot);
   }
 
   @override

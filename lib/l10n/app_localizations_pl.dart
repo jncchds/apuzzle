@@ -504,7 +504,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get kingsRules =>
-      '• Umieść dokładnie jedną koronę w każdym wierszu, każdej kolumnie i każdym kolorowym obszarze.\n• Korony nie mogą się stykać, nawet po przekątnej.\n\nDotknij pola, aby przełączać: puste → kropka (twoja notatka „tu nie ma korony”) → korona. Długie naciśnięcie / prawy przycisk przełącza wstecz.';
+      '• Umieść dokładnie jedną koronę w każdym wierszu, każdej kolumnie i każdym kolorowym obszarze.\n• Korony nie mogą się stykać, nawet po przekątnej.\n\nDotknij pola, aby przełączać: puste → kropka (twoja notatka „tu nie ma korony”) → korona. Prawy przycisk przełącza wstecz. Przesuń palcem po polach, aby oznaczyć je wszystkie naraz. Długie naciśnięcie stawia kropki na wszystkich polach, na których przez postawione korony nie może już być korony.';
 
   @override
   String get huesName => 'Odcienie';
@@ -806,7 +806,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get campRules =>
-      '• Rozbij po jednym namiocie dla każdego drzewa, tuż obok niego (nad, pod, z lewej lub z prawej).\n• Każde drzewo ma swój namiot, a każdy namiot należy do jednego sąsiedniego drzewa.\n• Namioty nie stykają się ze sobą, nawet po przekątnej.\n• Liczby poza siatką mówią, ile namiotów jest w każdym wierszu i kolumnie.\n\nDotknij pola, aby przełączać: puste → trawa (twoja notatka „tu nie ma namiotu”) → namiot. Długie naciśnięcie / prawy przycisk przełącza wstecz.';
+      '• Rozbij po jednym namiocie dla każdego drzewa, tuż obok niego (nad, pod, z lewej lub z prawej).\n• Każde drzewo ma swój namiot, a każdy namiot należy do jednego sąsiedniego drzewa.\n• Namioty nie stykają się ze sobą, nawet po przekątnej.\n• Liczby poza siatką mówią, ile namiotów jest w każdym wierszu i kolumnie.\n\nDotknij pola, aby przełączać: puste → trawa (twoja notatka „tu nie ma namiotu”) → namiot. Prawy przycisk przełącza wstecz. Przesuń palcem po polach, aby oznaczyć je wszystkie naraz. Długie naciśnięcie kładzie trawę na wszystkich polach, na których przez postawione namioty nie może już być namiotu.';
 
   @override
   String get islandsName => 'Wyspy';
@@ -895,7 +895,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get pairsRules =>
-      '• Zamaluj dokładnie dwa pola w każdym obrysowanym obszarze.\n• Każde zamalowane pole styka się bokiem z dokładnie jednym innym zamalowanym polem, więc zamalowane pola tworzą pary.\n• Pary nigdy nie stykają się ze sobą bokami (rogami mogą).\n\nDotknij pola, aby przełączać: puste → zamalowane → kropka (twoja notatka „niezamalowane”). Długie naciśnięcie / prawy przycisk przełącza wstecz.';
+      '• Zamaluj dokładnie dwa pola w każdym obrysowanym obszarze.\n• Każde zamalowane pole styka się bokiem z dokładnie jednym innym zamalowanym polem, więc zamalowane pola tworzą pary.\n• Pary nigdy nie stykają się ze sobą bokami (rogami mogą).\n\nDotknij pola, aby przełączać: puste → zamalowane → kropka (twoja notatka „niezamalowane”). Prawy przycisk przełącza wstecz. Przesuń palcem po polach, aby oznaczyć je wszystkie naraz. Długie naciśnięcie stawia kropki na wszystkich polach, których przez gotowe pary nie można już zamalować.';
 
   @override
   String get plotsName => 'Działki';

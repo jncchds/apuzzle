@@ -497,7 +497,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get kingsRules =>
-      '• Setze genau eine Krone in jede Zeile, jede Spalte und jeden farbigen Bereich.\n• Kronen dürfen sich nicht berühren, auch nicht diagonal.\n\nTippe auf ein Feld, um zu wechseln: leer → Punkt (deine Notiz „keine Krone hier“) → Krone. Langes Drücken / Rechtsklick wechselt zurück.';
+      '• Setze genau eine Krone in jede Zeile, jede Spalte und jeden farbigen Bereich.\n• Kronen dürfen sich nicht berühren, auch nicht diagonal.\n\nTippe auf ein Feld, um zu wechseln: leer → Punkt (deine Notiz „keine Krone hier“) → Krone. Rechtsklick wechselt zurück. Wische über Felder, um sie alle auf einmal zu markieren. Langes Drücken setzt Punkte in alle Felder, in denen wegen der gesetzten Kronen keine Krone mehr stehen kann.';
 
   @override
   String get huesName => 'Farbtöne';
@@ -791,7 +791,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get campRules =>
-      '• Stell für jeden Baum ein Zelt direkt daneben auf (oben, unten, links oder rechts).\n• Jeder Baum bekommt sein eigenes Zelt, und jedes Zelt gehört zu einem Baum daneben.\n• Zelte berühren sich nie, auch nicht diagonal.\n• Die Zahlen außerhalb des Gitters geben an, wie viele Zelte in jeder Zeile und Spalte stehen.\n\nTippe auf ein Feld, um zu wechseln: leer → Gras (deine Notiz „kein Zelt hier“) → Zelt. Langes Drücken / Rechtsklick wechselt zurück.';
+      '• Stell für jeden Baum ein Zelt direkt daneben auf (oben, unten, links oder rechts).\n• Jeder Baum bekommt sein eigenes Zelt, und jedes Zelt gehört zu einem Baum daneben.\n• Zelte berühren sich nie, auch nicht diagonal.\n• Die Zahlen außerhalb des Gitters geben an, wie viele Zelte in jeder Zeile und Spalte stehen.\n\nTippe auf ein Feld, um zu wechseln: leer → Gras (deine Notiz „kein Zelt hier“) → Zelt. Rechtsklick wechselt zurück. Wische über Felder, um sie alle auf einmal zu markieren. Langes Drücken legt Gras auf alle Felder, auf denen wegen der aufgestellten Zelte kein Zelt mehr stehen kann.';
 
   @override
   String get islandsName => 'Inseln';
@@ -880,7 +880,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pairsRules =>
-      '• Schattiere in jedem umrandeten Bereich genau zwei Felder.\n• Jedes schattierte Feld berührt seitlich genau ein anderes schattiertes Feld, die Schattierung besteht also aus Paaren.\n• Paare berühren einander nie seitlich (an den Ecken schon).\n\nTippe auf ein Feld, um zu wechseln: leer → schattiert → Punkt (deine Notiz „nicht schattiert“). Langes Drücken / Rechtsklick wechselt zurück.';
+      '• Schattiere in jedem umrandeten Bereich genau zwei Felder.\n• Jedes schattierte Feld berührt seitlich genau ein anderes schattiertes Feld, die Schattierung besteht also aus Paaren.\n• Paare berühren einander nie seitlich (an den Ecken schon).\n\nTippe auf ein Feld, um zu wechseln: leer → schattiert → Punkt (deine Notiz „nicht schattiert“). Rechtsklick wechselt zurück. Wische über Felder, um sie alle auf einmal zu markieren. Langes Drücken setzt Punkte in alle Felder, die wegen der fertigen Paare nicht mehr schattiert werden können.';
 
   @override
   String get plotsName => 'Parzellen';

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/difficulty.dart';
 import '../../core/explain.dart';
 import '../../core/grid.dart';
+import '../../core/grid_graph.dart';
 import '../../core/puzzle_type.dart';
 import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
@@ -109,6 +110,25 @@ class CampType extends ValueGridType<CampPuzzle> {
       if (puzzle.tents[i] && state.cells[i].value != campTent) return put(i, campTent);
     }
     return null;
+  }
+
+  /// No tent fits next to a tent, or in a row or column that has all of its tents.
+  @override
+  ValueGrid markForbidden(CampPuzzle puzzle, ValueGrid state) {
+    final rows = puzzle.rows, cols = puzzle.cols, tents = _tents(state), around = kingNeighbors(rows, cols);
+    final inRow = List.filled(rows, 0), inCol = List.filled(cols, 0);
+    for (var i = 0; i < tents.length; i++) {
+      if (!tents[i]) continue;
+      inRow[i ~/ cols]++;
+      inCol[i % cols]++;
+    }
+    return dotted(state, [
+      for (var i = 0; i < tents.length; i++)
+        if (inRow[i ~/ cols] == puzzle.rowCounts[i ~/ cols] ||
+            inCol[i % cols] == puzzle.colCounts[i % cols] ||
+            around[i].any((j) => tents[j]))
+          i,
+    ], campGrass);
   }
 
   @override

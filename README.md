@@ -1,13 +1,13 @@
 # APuzzle
 
 > ### ▶ [Play in your browser: jncchds.github.io/apuzzle](https://jncchds.github.io/apuzzle/)
-> No install needed: the web version has every game, the daily challenges and the tutorials, and it saves your progress in the browser.
+> No install needed: the web version has every game, the daily challenges, the tutorials and explain mode, and it saves your progress in the browser.
 >
 > **Prefer an app?** Download it from the [latest release](https://github.com/jncchds/apuzzle/releases/latest): an `.apk` for Android and a `.zip` for Windows.
 
 A collection of grid logic puzzles for Android, Windows, iOS and the web, built with Flutter.
 Every puzzle is **generated on the device**, and a solver checks that it has **exactly one solution**.
-Mines is solved by logic without guessing. The color-flood games, Pop and 2048 are move-based instead: their limits and targets come from solver playthroughs or the board size, so they are always reachable.
+Mines is solved by logic without guessing. The casual games (the color floods, Pop, 2048 and Snake) and Formula are played for a move limit, a target or a best score instead; their limits and targets come from solver playthroughs or the board size, so they are always reachable.
 You choose the grid size and the difficulty.
 
 <p align="center">
@@ -24,12 +24,15 @@ You choose the grid size and the difficulty.
 | <img src="docs/screenshots/sudoku_dark.png" width="90"> | **Sudoku** | 4×4, 6×6 or 9×9 grids. Every number appears once per row, column and box. Supports pencil marks. |
 | <img src="docs/screenshots/kings_dark.png" width="90"> | **Crowns** | Place one crown in every row, column and colored region. Crowns can't touch, not even diagonally. |
 | <img src="docs/screenshots/blocks_dark.png" width="90"> | **Blocks** | Fill every region of k cells with the numbers 1 to k. Equal numbers never touch, not even diagonally. Supports pencil marks. |
+| <img src="docs/screenshots/tally_dark.png" width="90"> | **Tally** | Every cell holds a number. Cross some out so that the numbers left in each row and column add up to the sums outside the grid. |
+| <img src="docs/screenshots/formula_dark.png" width="90"> | **Formula** | Guess the hidden equation in six tries. Every guess is a true equation, and each tile is marked as in place, elsewhere or not there. Six, eight or ten tiles wide; harder levels add × ÷, then brackets, squares and cubes. |
 | <img src="docs/screenshots/pairs_dark.png" width="90"> | **Pairs** | Shade exactly two cells in every region. Shaded cells come in side-by-side pairs, and pairs never touch each other. |
 | <img src="docs/screenshots/hues_light.png" width="90"> | **Hues** | Color the blank cells. Each number counts the blank cells around it (all 8 neighbors) that end up in its color. Supports pencil marks. |
 | <img src="docs/screenshots/mosaic_dark.png" width="90"> | **Mosaic** | Flood the board with one color from the top-left corner, within the move limit. |
 | <img src="docs/screenshots/blend_dark.png" width="90"> | **Blend** | Pick a color and repaint any patch; it merges with touching patches of that color. Make the board one color within the move limit. |
 | <img src="docs/screenshots/pop_dark.png" width="90"> | **Pop** | Tap a group of touching same-colored bubbles to select it, tap again to pop it: n bubbles score n×(n−1). Modes: Standard, Shifter (rows slide right), Continuous (new columns roll in) and Mega (both). Goals: clear the board (Standard only, always possible), reach a target score, or free play for a best score. |
 | <img src="docs/screenshots/merge_dark.png" width="90"> | **2048** | Slide the tiles and merge equal ones. Build the target tile (2048 on a hard 4×4), or play freely for a best score. New tiles come from the seed, so a share code replays the same game. |
+| <img src="docs/screenshots/snake_dark.png" width="90"> | **Snake** | Steer the snake to the apples, grow longer and don't crash. Play for a best score or an apple target; the difficulty sets the speed. |
 | <img src="docs/screenshots/pipes_dark.png" width="90"> | **Pipes** | Rotate tiles until every pipe connects to the source, with no open ends and no loops. |
 | <img src="docs/screenshots/shikaku_light.png" width="90"> | **Shikaku** | Split the grid into rectangles. Each holds one number equal to its area. |
 | <img src="docs/screenshots/plots_dark.png" width="90"> | **Plots** | Fill every cell with a number. Equal numbers that touch form a plot with exactly that many cells, and plots of the same size never touch. |
@@ -50,19 +53,25 @@ You choose the grid size and the difficulty.
 ## Features
 
 - **Endless puzzles.** Generation is seeded and deterministic, and runs in a background isolate.
-- **Daily challenges.** Every day picks three games, each at every difficulty, the same for everyone. Results are kept in a calendar.
+- **Daily challenges.** Every day picks three games, each at every difficulty, the same for everyone. Results are kept in a calendar, and you can choose which games the days draw from.
 - **Interactive tutorials.** Every game teaches its rules on a few tiny boards you play, ending with a small real one. Optional strategy lessons then show the techniques strong players use, each on a board that needs it.
+- **Explain mode.** For every logic puzzle, the button next to Hint explains the next step in words ("E4 must be a crown, because…"), highlights the cells it talks about, and can play the step for you.
 - **Share codes.** Every puzzle has a code (and a link on the web) that recreates it exactly.
 - **Exactly one solution.** Most types are also graded by how deep the solver's logic has to go (easy, medium, hard, and expert for Sudoku).
 - **Game options.** A puzzle can offer extra choices when you start a game, like Pop's mode and goal. They are part of the share code, and stats are kept per choice.
 - **Variable grid sizes.** A size is only offered if it fits the screen, so there's no zooming.
-- **Two input styles.** Tap a cell to cycle its values, or pick a value from a palette and stamp it. Pencil marks are available where useful.
+- **Two input styles.** Tap a cell to cycle its values, or pick a value from a palette and stamp it. Slide across cells to mark them all in one go. Pencil marks are available where useful.
+- **Notes done for you.** In Crowns, Campsite and Pairs, a long press dots every cell that the pieces you have placed already rule out.
 - **Checked on submit.** Mistakes aren't highlighted while you play; live highlighting is an option in Settings.
-- **Undo, redo, restart and hints.** There's a timer, and stats (best time, and best score for Pop) are kept per puzzle and difficulty.
+- **Undo, redo, restart and hints.** There's a timer, and stats (best time, or best score for the score games) are kept per puzzle and difficulty.
 - **Auto-save.** Leave at any time and continue where you stopped.
+- **Move your progress.** Export wins, best times, daily results and saved games as a file or as text, and import them on another device; importing merges and never replaces.
+- **Portrait and landscape.** Turn the phone or widen the window, and the board fills the height with the controls in a side panel.
+- **A tidy home screen.** Games are sorted into groups (Numbers, Logic grids, Paths & loops, Casual) that fold away.
 - **Animations.** Cells pop and fade, pipes rotate, colors flood, bubbles fall and slide, and solving plays a ripple with confetti.
 - **Light and dark themes** (Material 3).
 - **Four languages:** English, Ukrainian, Polish and German.
+- **Release notes** in Settings, also in [RELEASE_NOTES.md](RELEASE_NOTES.md).
 
 ## Getting started
 
@@ -117,12 +126,18 @@ lib/
   core/
     puzzle_type.dart      plug-in contract every puzzle implements
     value_grid.dart       base for "one value per cell" puzzles (input, palette, pencil marks, hints)
+    lattice_loop.dart     shared loop solver for Fence, Pearls, Rails and Arrows
     game_controller.dart  session: state history (undo/redo), timer, submit, hints, save/resume, stats
     generator_runner.dart runs generation off the UI thread
-    registry.dart         list of available puzzle types
-  ui/                     home, new-game sheet, game screen, settings, board widgets
-  puzzles/<id>/           model, solver, generator and type for each puzzle
-test/                     generator and solver tests per puzzle, controller tests, snapshots
+    daily.dart            daily challenges
+    tutorial.dart         tutorial and strategy steps
+    explain.dart          explain mode: traced solver deductions turned into steps and texts
+    backup.dart           progress export and import
+    registry.dart         list of available puzzle types and their home-screen groups
+  ui/                     home, new-game sheet, game, daily, learn and settings screens, board widgets
+  puzzles/<id>/           model, solver, generator, type, tutorial and explainer for each puzzle
+  l10n/                   texts in four languages (ARB files)
+test/                     generator and solver tests per puzzle, tutorial, explain and controller tests, snapshots
 ```
 
 To add a puzzle:
@@ -130,9 +145,11 @@ To add a puzzle:
 2. Implement `PuzzleType` (or `ValueGridType` for tap-to-fill grids). This needs:
    - an immutable puzzle and state;
    - a sound solver that can count solutions;
-   - a seeded generator.
+   - a seeded generator;
+   - a tutorial, and an explainer if the puzzle is solved by deduction.
 3. Register the type in `lib/core/registry.dart`.
 4. Add tests.
+5. Add it to the table above, with a screenshot in `docs/screenshots/`.
 
 ## Status
 

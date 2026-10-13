@@ -156,7 +156,7 @@
 
   "kingsName": "Crowns",
   "kingsTagline": "One crown per row, column and region",
-  "kingsRules": "• Place exactly one crown in every row, every column and every colored region.\n• Crowns may not touch each other, not even diagonally.\n\nTap a cell to cycle empty → dot (your \"no crown here\" note) → crown. Long-press / right-click cycles back.",
+  "kingsRules": "• Place exactly one crown in every row, every column and every colored region.\n• Crowns may not touch each other, not even diagonally.\n\nTap a cell to cycle empty → dot (your \"no crown here\" note) → crown. Right-click cycles back. Slide across cells to mark them all in one go. A long press puts a dot on every cell the placed crowns rule out.",
 
   "huesName": "Hues",
   "huesTagline": "Count the matching colors around each number",
@@ -252,7 +252,7 @@
   "labyrinthRules": "• Find the way through the maze from the entrance in the top-left corner to the exit in the bottom-right corner.\n• You can't pass through walls.\n\nDrag from the end of your path to walk on. Drag back to retrace your steps, or tap a cell of the path to go back there.",
   "campName": "Campsite",
   "campTagline": "Pitch a tent next to every tree",
-  "campRules": "• Pitch one tent for every tree, right next to it (up, down, left or right).\n• Every tree gets its own tent, and every tent belongs to one tree next to it.\n• Tents never touch each other, not even diagonally.\n• The numbers outside the grid tell how many tents are in each row and column.\n\nTap a cell to cycle empty → grass (your \"no tent here\" note) → tent. Long-press / right-click cycles back.",
+  "campRules": "• Pitch one tent for every tree, right next to it (up, down, left or right).\n• Every tree gets its own tent, and every tent belongs to one tree next to it.\n• Tents never touch each other, not even diagonally.\n• The numbers outside the grid tell how many tents are in each row and column.\n\nTap a cell to cycle empty → grass (your \"no tent here\" note) → tent. Right-click cycles back. Slide across cells to mark them all in one go. A long press puts grass on every cell where the placed tents leave no room for another.",
   "islandsName": "Islands",
   "islandsTagline": "Flood the sea around the numbered islands",
   "islandsRules": "• Shade the sea so that the unshaded cells form islands.\n• Every island contains exactly one number, which equals its size in cells.\n• Islands only touch the sea, never each other (diagonal corners are fine).\n• The whole sea is connected, and it has no 2×2 pools.\n\nTap a cell to cycle empty → sea → dot (your \"land\" note). Long-press / right-click cycles back.",
@@ -279,7 +279,7 @@
   "blocksRules": "• Fill every cell with a number.\n• A region of k cells holds each number from 1 to k exactly once (a region of one cell holds a 1).\n• Equal numbers never touch, not even diagonally.\n• Given numbers are fixed.\n\nPick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.",
   "pairsName": "Pairs",
   "pairsTagline": "Two shaded cells in every region, side by side",
-  "pairsRules": "• Shade exactly two cells in every outlined region.\n• Every shaded cell touches exactly one other shaded cell side by side, so the shading is all pairs.\n• Pairs never touch each other side by side (corners are fine).\n\nTap a cell to cycle empty → shaded → dot (your \"not shaded\" note). Long-press / right-click cycles back.",
+  "pairsRules": "• Shade exactly two cells in every outlined region.\n• Every shaded cell touches exactly one other shaded cell side by side, so the shading is all pairs.\n• Pairs never touch each other side by side (corners are fine).\n\nTap a cell to cycle empty → shaded → dot (your \"not shaded\" note). Right-click cycles back. Slide across cells to mark them all in one go. A long press puts a dot on every cell the finished pairs rule out.",
   "plotsName": "Plots",
   "plotsTagline": "Split the grid into plots as big as their numbers",
   "plotsRules": "• Fill every cell with a number.\n• Equal numbers that touch side by side form a plot, and a plot has exactly as many cells as its number: a 3 lies in a plot of three cells.\n• Two plots of the same size never touch side by side (they would be one plot).\n• Some plots show no number at all.\n\nPick a number in the palette and tap cells to fill them, or tap a cell first and then a number. Lines appear between different numbers, so you can see the plots take shape.",

@@ -152,7 +152,7 @@
 
   "kingsName": "Korony",
   "kingsTagline": "Jedna korona w wierszu, kolumnie i obszarze",
-  "kingsRules": "• Umieść dokładnie jedną koronę w każdym wierszu, każdej kolumnie i każdym kolorowym obszarze.\n• Korony nie mogą się stykać, nawet po przekątnej.\n\nDotknij pola, aby przełączać: puste → kropka (twoja notatka „tu nie ma korony”) → korona. Długie naciśnięcie / prawy przycisk przełącza wstecz.",
+  "kingsRules": "• Umieść dokładnie jedną koronę w każdym wierszu, każdej kolumnie i każdym kolorowym obszarze.\n• Korony nie mogą się stykać, nawet po przekątnej.\n\nDotknij pola, aby przełączać: puste → kropka (twoja notatka „tu nie ma korony”) → korona. Prawy przycisk przełącza wstecz. Przesuń palcem po polach, aby oznaczyć je wszystkie naraz. Długie naciśnięcie stawia kropki na wszystkich polach, na których przez postawione korony nie może już być korony.",
 
   "huesName": "Odcienie",
   "huesTagline": "Policz pasujące kolory wokół każdej liczby",
@@ -243,7 +243,7 @@
   "labyrinthRules": "• Znajdź drogę przez labirynt od wejścia w lewym górnym rogu do wyjścia w prawym dolnym.\n• Nie można przechodzić przez ściany.\n\nPrzeciągaj od końca ścieżki, aby iść dalej. Przeciągnij z powrotem, aby się cofnąć, albo dotknij pola ścieżki, aby do niego wrócić.",
   "campName": "Kemping",
   "campTagline": "Rozbij namiot przy każdym drzewie",
-  "campRules": "• Rozbij po jednym namiocie dla każdego drzewa, tuż obok niego (nad, pod, z lewej lub z prawej).\n• Każde drzewo ma swój namiot, a każdy namiot należy do jednego sąsiedniego drzewa.\n• Namioty nie stykają się ze sobą, nawet po przekątnej.\n• Liczby poza siatką mówią, ile namiotów jest w każdym wierszu i kolumnie.\n\nDotknij pola, aby przełączać: puste → trawa (twoja notatka „tu nie ma namiotu”) → namiot. Długie naciśnięcie / prawy przycisk przełącza wstecz.",
+  "campRules": "• Rozbij po jednym namiocie dla każdego drzewa, tuż obok niego (nad, pod, z lewej lub z prawej).\n• Każde drzewo ma swój namiot, a każdy namiot należy do jednego sąsiedniego drzewa.\n• Namioty nie stykają się ze sobą, nawet po przekątnej.\n• Liczby poza siatką mówią, ile namiotów jest w każdym wierszu i kolumnie.\n\nDotknij pola, aby przełączać: puste → trawa (twoja notatka „tu nie ma namiotu”) → namiot. Prawy przycisk przełącza wstecz. Przesuń palcem po polach, aby oznaczyć je wszystkie naraz. Długie naciśnięcie kładzie trawę na wszystkich polach, na których przez postawione namioty nie może już być namiotu.",
   "islandsName": "Wyspy",
   "islandsTagline": "Zalej morze wokół wysp z liczbami",
   "islandsRules": "• Zamaluj morze tak, aby niezamalowane pola tworzyły wyspy.\n• Każda wyspa zawiera dokładnie jedną liczbę, równą jej wielkości w polach.\n• Wyspy stykają się tylko z morzem, nigdy ze sobą (rogami po przekątnej mogą).\n• Całe morze jest połączone i nie ma w nim bloków 2×2.\n\nDotknij pola, aby przełączać: puste → morze → kropka (twoja notatka „ląd”). Długie naciśnięcie / prawy przycisk przełącza wstecz.",
@@ -270,7 +270,7 @@
   "blocksRules": "• Wypełnij każde pole liczbą.\n• Obszar z k pól zawiera każdą liczbę od 1 do k dokładnie raz (obszar z jednego pola zawiera 1).\n• Równe liczby nigdy się nie stykają, nawet po przekątnej.\n• Podanych liczb nie można zmieniać.\n\nWybierz liczbę z palety i dotykaj pól, aby ją wpisać, albo najpierw dotknij pola, a potem liczby. Przycisk ołówka włącza małe notatki. Długie naciśnięcie / prawy przycisk czyści pole.",
   "pairsName": "Pary",
   "pairsTagline": "Dwa zamalowane pola obok siebie w każdym obszarze",
-  "pairsRules": "• Zamaluj dokładnie dwa pola w każdym obrysowanym obszarze.\n• Każde zamalowane pole styka się bokiem z dokładnie jednym innym zamalowanym polem, więc zamalowane pola tworzą pary.\n• Pary nigdy nie stykają się ze sobą bokami (rogami mogą).\n\nDotknij pola, aby przełączać: puste → zamalowane → kropka (twoja notatka „niezamalowane”). Długie naciśnięcie / prawy przycisk przełącza wstecz.",
+  "pairsRules": "• Zamaluj dokładnie dwa pola w każdym obrysowanym obszarze.\n• Każde zamalowane pole styka się bokiem z dokładnie jednym innym zamalowanym polem, więc zamalowane pola tworzą pary.\n• Pary nigdy nie stykają się ze sobą bokami (rogami mogą).\n\nDotknij pola, aby przełączać: puste → zamalowane → kropka (twoja notatka „niezamalowane”). Prawy przycisk przełącza wstecz. Przesuń palcem po polach, aby oznaczyć je wszystkie naraz. Długie naciśnięcie stawia kropki na wszystkich polach, których przez gotowe pary nie można już zamalować.",
   "plotsName": "Działki",
   "plotsTagline": "Podziel planszę na działki tak duże jak ich liczby",
   "plotsRules": "• Wypełnij każde pole liczbą.\n• Równe liczby stykające się bokami tworzą działkę, a działka ma dokładnie tyle pól, ile mówi jej liczba: 3 leży w działce z trzech pól.\n• Dwie działki tej samej wielkości nigdy nie stykają się bokami (byłyby jedną działką).\n• Niektóre działki nie mają żadnej podanej liczby.\n\nWybierz liczbę z palety i dotykaj pól, aby je wypełnić, albo najpierw dotknij pola, a potem liczby. Między różnymi liczbami pojawiają się linie, więc widać, jak powstają działki.",

@@ -120,6 +120,15 @@ class ValueSpec {
   }
 }
 
+/// A slide over the board: the last cell reached and what it does to a cell (null = leave it).
+class _Stroke {
+  _Stroke(this.last, this.paint);
+  Pos last;
+  final CellValue? Function(CellValue cell) paint;
+}
+
+final _strokes = Expando<_Stroke>();
+
 /// Puzzle definitions used with [ValueGridType].
 abstract class ValueGridPuzzle {
   GridSize get size;
@@ -280,6 +289,10 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
       explain: ExplainView.of(ctrl),
       onTap: ctrl.solved ? null : (pos) => onCellTap(ctrl, pos),
       onSecondary: ctrl.solved ? null : (pos) => onCellSecondary(ctrl, pos),
+      onLongPress: ctrl.solved ? null : (pos) => onCellLongPress(ctrl, pos),
+      onDragStart: ctrl.solved ? null : (pos, _) => _strokes[ctrl] = _startStroke(ctrl, pos),
+      onDragUpdate: (pos, _) => _strokeTo(ctrl, pos),
+      onDragEnd: () => _strokes[ctrl] = null,
       overlayBuilder: (context, m) => buildOverlayIn(context, p, s, m),
       underlayBuilder: (context, m) => buildUnderlay(context, p, m),
       cellBuilder: (context, pos, m) {
@@ -356,6 +369,61 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
     } else {
       ctrl.apply(s.set(pos, cell.erased()));
     }
+  }
+
+  /// The state with a dot in every cell where the objects placed so far rule
+  /// out another one (a long press), or null if the type has no such notes.
+  ValueGrid? markForbidden(P puzzle, ValueGrid state) => null;
+
+  /// [state] with [dot] in the empty cells among [cells] (flat indices).
+  @protected
+  ValueGrid dotted(ValueGrid state, Iterable<int> cells, int dot) {
+    List<CellValue>? next;
+    for (final i in cells) {
+      if (state.cells[i].value != null) continue;
+      (next ??= List.of(state.cells, growable: false))[i] = state.cells[i].withValue(dot);
+    }
+    return next == null ? state : ValueGrid(state.size, next);
+  }
+
+  void onCellLongPress(GameController ctrl, Pos pos) {
+    final next = markForbidden(ctrl.puzzle as P, ctrl.state as ValueGrid);
+    if (next == null) return onCellSecondary(ctrl, pos);
+    ctrl.apply(next);
+  }
+
+  /// A slide starts as a tap on its first cell; the cells it then crosses get
+  /// the same change if they looked like that cell did.
+  _Stroke? _startStroke(GameController ctrl, Pos pos) {
+    final before = (ctrl.state as ValueGrid).at(pos);
+    onCellTap(ctrl, pos);
+    final after = (ctrl.state as ValueGrid).at(pos);
+    if (ctrl.inputMode == InputMode.palette && ctrl.tool == GameController.eraser) {
+      return _Stroke(pos, (c) => c.value == null && c.marks.isEmpty ? null : c.erased());
+    }
+    if (after.value != before.value) {
+      return _Stroke(pos, (c) => c.value == before.value ? c.withValue(after.value) : null);
+    }
+    final toggled = {...after.marks.difference(before.marks), ...before.marks.difference(after.marks)};
+    if (toggled.length != 1) return null;
+    final mark = toggled.single, add = after.marks.contains(mark);
+    return _Stroke(pos, (c) => c.value == null && c.marks.contains(mark) != add ? c.toggleMark(mark) : null);
+  }
+
+  void _strokeTo(GameController ctrl, Pos? pos) {
+    final stroke = _strokes[ctrl];
+    if (stroke == null || pos == null || pos == stroke.last || ctrl.solved) return;
+    var s = ctrl.state as ValueGrid;
+    // Step cell by cell, so a fast slide skips none.
+    var at = stroke.last;
+    while (at != pos) {
+      at = Pos(at.r + (pos.r - at.r).sign, at.c + (pos.c - at.c).sign);
+      final cell = s.at(at);
+      final next = cell.given ? null : stroke.paint(cell);
+      if (next != null) s = s.set(at, next);
+    }
+    stroke.last = pos;
+    ctrl.apply(s, merge: true);
   }
 
   /// Cell-first flow: a selected cell and no latched tool → apply once.
