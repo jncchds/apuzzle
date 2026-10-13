@@ -157,6 +157,9 @@ class _OrbitsBoardState extends State<_OrbitsBoard> {
   /// The star being painted, the board with the drag so far, and its last cell.
   int _active = -1;
   List<int>? _draft;
+
+  /// The star picked by a tap or the last drag: taps on cells give them to it.
+  int _picked = -1;
   Pos? _last;
 
   GameController get ctrl => widget.controller;
@@ -198,6 +201,7 @@ class _OrbitsBoardState extends State<_OrbitsBoard> {
     final next = _draft;
     if (next == null) return;
     setState(() {
+      _picked = _active;
       _draft = null;
       _last = null;
       _active = -1;
@@ -211,9 +215,17 @@ class _OrbitsBoardState extends State<_OrbitsBoard> {
     }
   }
 
-  /// Tap a cell to clear it and its twin.
+  /// Tap a star to pick it (again to let go), then cells to give them to
+  /// it, so a cell away from the region can be marked too. Tapping a cell
+  /// of the picked star, or any filled cell with no star picked, clears it
+  /// and its twin.
   void _tap(Pos pos) {
-    final next = p.geo.paint(_committed, p.size.index(pos), -1);
+    final g = p.geo, i = p.size.index(pos), owner = _committed;
+    if (g.home[i] >= 0) {
+      setState(() => _picked = _picked == g.home[i] ? -1 : g.home[i]);
+      return;
+    }
+    final next = g.paint(owner, i, _picked < 0 || owner[i] == _picked ? -1 : _picked);
     if (next != null) ctrl.apply(OrbitsState(next));
   }
 
@@ -242,7 +254,14 @@ class _OrbitsBoardState extends State<_OrbitsBoard> {
         ),
         Positioned.fill(
           child: CustomPaint(
-            painter: _StarsPainter(p.geo, m, scheme.onSurface, scheme.surface),
+            painter: _StarsPainter(
+              p.geo,
+              m,
+              scheme.onSurface,
+              scheme.surface,
+              ctrl.solved ? -1 : _picked,
+              scheme.primary,
+            ),
           ),
         ),
       ],
@@ -274,21 +293,36 @@ class _OrbitsBoardState extends State<_OrbitsBoard> {
 
 /// The stars: four-pointed, on cell centres, sides and corners.
 class _StarsPainter extends CustomPainter {
-  _StarsPainter(this.g, this.m, this.color, this.rim);
+  _StarsPainter(this.g, this.m, this.color, this.rim, this.picked, this.pickedColor);
 
   final OrbitsGeometry g;
   final BoardMetrics m;
   final Color color;
   final Color rim;
 
+  /// The picked star (-1: none), drawn bigger inside a ring.
+  final int picked;
+  final Color pickedColor;
+
   /// A lattice coordinate ([v] odd: the middle of a cell, even: a line) in pixels.
   double _at(int v, double Function(int) start) => v.isOdd ? start(v >> 1) + m.cell / 2 : start(v >> 1) - m.gap / 2;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final big = m.cell * 0.23, small = big * 0.42;
     for (var k = 0; k < g.count; k++) {
+      final big = m.cell * (k == picked ? 0.28 : 0.23), small = big * 0.42;
       final o = Offset(_at(g.xs[k], m.x), _at(g.ys[k], m.y));
+      if (k == picked) {
+        canvas.drawCircle(o, m.cell * 0.36, Paint()..color = rim.withValues(alpha: 0.75));
+        canvas.drawCircle(
+          o,
+          m.cell * 0.36,
+          Paint()
+            ..color = pickedColor
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = m.cell * 0.07,
+        );
+      }
       final star = Path();
       for (var t = 0; t < 8; t++) {
         final r = t.isEven ? big : small, a = t * pi / 4 - pi / 2;
@@ -304,7 +338,7 @@ class _StarsPainter extends CustomPainter {
           ..strokeWidth = m.cell * 0.09
           ..strokeJoin = StrokeJoin.round,
       );
-      canvas.drawPath(star, Paint()..color = color);
+      canvas.drawPath(star, Paint()..color = k == picked ? pickedColor : color);
     }
   }
 

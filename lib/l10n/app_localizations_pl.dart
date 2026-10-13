@@ -3412,7 +3412,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get orbitsRules =>
-      '• Podziel całą planszę na obszary, po jednym dla każdej gwiazdy.\n• Obszar to jeden spójny kawałek z gwiazdą dokładnie pośrodku.\n• Po półobrocie wokół gwiazdy obszar wygląda tak samo: każde pole ma bliźniaka po przeciwnej stronie gwiazdy.\n\nPrzeciągaj od gwiazdy albo od pola jej obszaru po polach, które chcesz dodać; każde zabiera ze sobą bliźniaka. Dotknij pola, aby wyczyścić je i jego bliźniaka.';
+      '• Podziel całą planszę na obszary, po jednym dla każdej gwiazdy.\n• Obszar to jeden spójny kawałek z gwiazdą dokładnie pośrodku.\n• Po półobrocie wokół gwiazdy obszar wygląda tak samo: każde pole ma bliźniaka po przeciwnej stronie gwiazdy.\n\nPrzeciągaj od gwiazdy albo od pola jej obszaru po polach, które chcesz dodać; każde zabiera ze sobą bliźniaka. Albo dotknij gwiazdy, aby ją wybrać, a potem pól, które chcesz jej dać, także tych z dala od jej obszaru. Dotknij pola wybranej gwiazdy (albo dowolnego wypełnionego pola, gdy żadna gwiazda nie jest wybrana), aby wyczyścić je i jego bliźniaka.';
 
   @override
   String get tutOrbits1 =>
@@ -3420,7 +3420,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get tutOrbits2 =>
-      'Gwiazda może leżeć wewnątrz pola, na linii między dwoma polami albo na rogu, gdzie stykają się cztery. Pola, których dotyka, należą do niej od początku. Przydziel każde pozostałe pole jakiejś gwieździe; dotknij pola, aby wyczyścić je i jego bliźniaka.';
+      'Gwiazda może leżeć wewnątrz pola, na linii między dwoma polami albo na rogu, gdzie stykają się cztery. Pola, których dotyka, należą do niej od początku. Przydziel każde pozostałe pole jakiejś gwieździe: przeciągnij od gwiazdy albo dotknij gwiazdy, a potem pól. Dotknij pola wybranej gwiazdy, aby wyczyścić je i jego bliźniaka.';
 
   @override
   String get tutOrbits3 =>

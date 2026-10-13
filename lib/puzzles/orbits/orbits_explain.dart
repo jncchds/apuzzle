@@ -82,6 +82,19 @@ class OrbitsExplainer extends Explainer<OrbitsPuzzle, OrbitsState, Uint8List> {
     return next == null ? null : OrbitsState(next);
   }
 
+  /// Cells near their star first, so regions grow outwards.
+  @override
+  int rank(OrbitsPuzzle p, Fact f) {
+    if (f.slot < 0) return 0;
+    final g = p.geo, i = f.slot ~/ g.count;
+    var best = 1 << 30;
+    for (final j in g.core[f.value]) {
+      final d = (i ~/ g.cols - j ~/ g.cols).abs() + (i % g.cols - j % g.cols).abs();
+      if (d < best) best = d;
+    }
+    return best;
+  }
+
   @override
   Set<Pos> targets(OrbitsPuzzle p, Fact f) {
     final i = f.slot ~/ p.geo.count;

@@ -3363,7 +3363,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get orbitsRules =>
-      '• Teile das ganze Gitter in Gebiete, eines für jeden Stern.\n• Ein Gebiet ist ein zusammenhängendes Stück mit seinem Stern genau in der Mitte.\n• Nach einer halben Drehung um den Stern sieht das Gebiet gleich aus: Jedes Feld hat einen Zwilling auf der gegenüberliegenden Seite des Sterns.\n\nZiehe von einem Stern oder von einem Feld seines Gebiets über die Felder, die dazukommen sollen; jedes bringt seinen Zwilling mit. Tippe auf ein Feld, um es und seinen Zwilling zu leeren.';
+      '• Teile das ganze Gitter in Gebiete, eines für jeden Stern.\n• Ein Gebiet ist ein zusammenhängendes Stück mit seinem Stern genau in der Mitte.\n• Nach einer halben Drehung um den Stern sieht das Gebiet gleich aus: Jedes Feld hat einen Zwilling auf der gegenüberliegenden Seite des Sterns.\n\nZiehe von einem Stern oder von einem Feld seines Gebiets über die Felder, die dazukommen sollen; jedes bringt seinen Zwilling mit. Oder tippe auf einen Stern, um ihn auszuwählen, und dann auf die Felder, die er bekommen soll, auch abseits seines Gebiets. Tippe auf ein Feld des ausgewählten Sterns (oder auf ein beliebiges gefülltes Feld, wenn kein Stern ausgewählt ist), um es und seinen Zwilling zu leeren.';
 
   @override
   String get tutOrbits1 =>
@@ -3371,7 +3371,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tutOrbits2 =>
-      'Ein Stern kann in einem Feld liegen, auf der Linie zwischen zwei Feldern oder auf einer Ecke, an der vier zusammentreffen. Die Felder, die er berührt, gehören ihm von Anfang an. Gib jedes übrige Feld einem Stern; tippe auf ein Feld, um es und seinen Zwilling zu leeren.';
+      'Ein Stern kann in einem Feld liegen, auf der Linie zwischen zwei Feldern oder auf einer Ecke, an der vier zusammentreffen. Die Felder, die er berührt, gehören ihm von Anfang an. Gib jedes übrige Feld einem Stern: Ziehe vom Stern aus oder tippe auf den Stern und dann auf die Felder. Tippe auf ein Feld des ausgewählten Sterns, um es und seinen Zwilling zu leeren.';
 
   @override
   String get tutOrbits3 =>

@@ -1,5 +1,8 @@
 # Release notes
 
+## 0.8.1 - 2026-10-13
+- Orbits: tap a star to pick it, then tap cells to give them to it, also cells away from its region (a drag could only reach them through the cells in between). The star of your last drag stays picked. Explain mode starts with the cells nearest to their star
+
 ## 0.8.0 - 2026-10-13
 - New game: Orbits. Give every star its own region: one connected piece with the star in its exact middle, looking the same after half a turn around it. Drag from a star over the cells to add, and each one brings its twin on the opposite side along; tap a cell to clear it. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-14
 

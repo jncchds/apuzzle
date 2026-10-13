@@ -4627,7 +4627,7 @@ abstract class AppLocalizations {
   /// No description provided for @orbitsRules.
   ///
   /// In en, this message translates to:
-  /// **'• Split the whole grid into regions, one for each star.\n• A region is one connected piece with its star in the exact middle.\n• Half a turn around the star leaves the region looking the same: every cell has a twin on the opposite side of the star.\n\nDrag from a star, or from a cell of its region, over the cells to add; each one brings its twin along. Tap a cell to clear it and its twin.'**
+  /// **'• Split the whole grid into regions, one for each star.\n• A region is one connected piece with its star in the exact middle.\n• Half a turn around the star leaves the region looking the same: every cell has a twin on the opposite side of the star.\n\nDrag from a star, or from a cell of its region, over the cells to add; each one brings its twin along. Or tap a star to pick it, then tap the cells to give it, even ones away from its region. Tap a cell of the picked star (or any filled cell when no star is picked) to clear it and its twin.'**
   String get orbitsRules;
 
   /// No description provided for @tutOrbits1.
@@ -4639,7 +4639,7 @@ abstract class AppLocalizations {
   /// No description provided for @tutOrbits2.
   ///
   /// In en, this message translates to:
-  /// **'A star can sit inside a cell, on the line between two cells, or on a corner where four meet. The cells it touches are its own from the start. Give every remaining cell to a star; tap a cell to clear it and its twin.'**
+  /// **'A star can sit inside a cell, on the line between two cells, or on a corner where four meet. The cells it touches are its own from the start. Give every remaining cell to a star: drag from the star, or tap the star and then the cells. Tap a cell of the picked star to clear it and its twin.'**
   String get tutOrbits2;
 
   /// No description provided for @tutOrbits3.
