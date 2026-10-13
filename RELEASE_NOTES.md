@@ -1,5 +1,8 @@
 # Release notes
 
+## 0.8.0 - 2026-10-13
+- New game: Orbits. Give every star its own region: one connected piece with the star in its exact middle, looking the same after half a turn around it. Drag from a star over the cells to add, and each one brings its twin on the opposite side along; tap a cell to clear it. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-14
+
 ## 0.7.2 - 2026-10-13
 - Slide across cells to mark them all in one go, in every tap-to-fill game (Tetra, Crowns, Islands, Lamps…). The slide repeats what the tap did to its first cell, skips cells that hold something else, and is one undo step
 - Crowns, Campsite and Pairs: a long press puts a dot (grass) on every cell that the crowns, tents or pairs you have placed already rule out. A right click still cycles back

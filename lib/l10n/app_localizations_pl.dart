@@ -3403,4 +3403,78 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutFormulaS3 =>
       'Największa: dziesięć płytek z nawiasem lub potęgą. Najpierw znajdź miejsce znaku =: zdradza długość wyniku.';
+
+  @override
+  String get orbitsName => 'Orbity';
+
+  @override
+  String get orbitsTagline => 'Daj każdej gwieździe obszar, który obraca się wokół niej';
+
+  @override
+  String get orbitsRules =>
+      '• Podziel całą planszę na obszary, po jednym dla każdej gwiazdy.\n• Obszar to jeden spójny kawałek z gwiazdą dokładnie pośrodku.\n• Po półobrocie wokół gwiazdy obszar wygląda tak samo: każde pole ma bliźniaka po przeciwnej stronie gwiazdy.\n\nPrzeciągaj od gwiazdy albo od pola jej obszaru po polach, które chcesz dodać; każde zabiera ze sobą bliźniaka. Dotknij pola, aby wyczyścić je i jego bliźniaka.';
+
+  @override
+  String get tutOrbits1 =>
+      'Podziel planszę na obszary, po jednym dla każdej gwiazdy. Gwiazda leży dokładnie pośrodku swojego obszaru, więc każde pole ma bliźniaka po przeciwnej stronie. Przeciągnij od gwiazdy w prawej kolumnie do pola nad nią: bliźniak poniżej też się wypełni.';
+
+  @override
+  String get tutOrbits2 =>
+      'Gwiazda może leżeć wewnątrz pola, na linii między dwoma polami albo na rogu, gdzie stykają się cztery. Pola, których dotyka, należą do niej od początku. Przydziel każde pozostałe pole jakiejś gwieździe; dotknij pola, aby wyczyścić je i jego bliźniaka.';
+
+  @override
+  String get tutOrbits3 =>
+      'Obszar może mieć dowolny kształt, o ile jest w jednym kawałku i po półobrocie wokół gwiazdy wygląda tak samo. Pole nie może dołączyć do gwiazdy, jeśli jego bliźniak wypadłby poza planszę albo na pole innej gwiazdy.';
+
+  @override
+  String get tutOrbits4 =>
+      'Teraz prawdziwa plansza. Zacznij od pól, które może wziąć tylko jedna gwiazda: warto szukać w rogach i przy krawędziach.';
+
+  @override
+  String get tutOrbitsS1 =>
+      'Pilnuj, by obszary były w jednym kawałku. Gdy pole należy do gwiazdy, ale nie jest z nią jeszcze połączone, sprawdź, jak można je połączyć: pole, przez które prowadzi każda droga, też należy do gwiazdy, tak jak jego bliźniak.';
+
+  @override
+  String get tutOrbitsS2 =>
+      'Trudna plansza. Gdy nic nie jest pewne, wybierz pole, które mogą wziąć tylko dwie gwiazdy, i wypróbuj jedną: jeśli jakieś pole zostaje wtedy bez żadnej gwiazdy, pole należy do drugiej gwiazdy.';
+
+  @override
+  String exOrbitsOnly(Object cell, Object star) {
+    return '$cell należy do gwiazdy na $star: żadna inna gwiazda nie może go wziąć.';
+  }
+
+  @override
+  String exOrbitsTwin(Object cell, Object star, Object other) {
+    return '$cell należy do gwiazdy na $star: to bliźniak $other.';
+  }
+
+  @override
+  String exOrbitsBridge(Object cell, Object star, Object other) {
+    return '$cell należy do gwiazdy na $star: bez niego $other byłoby odcięte od tej gwiazdy.';
+  }
+
+  @override
+  String exOrbitsTwinOut(Object cell, Object star, Object other) {
+    return '$cell nie może należeć do gwiazdy na $star: jego bliźniak $other nie może.';
+  }
+
+  @override
+  String exOrbitsReach(Object cell, Object star) {
+    return '$cell nie może należeć do gwiazdy na $star: nie da się go już połączyć z tą gwiazdą.';
+  }
+
+  @override
+  String exOrbitsFailEmpty(Object cell) {
+    return 'Ale wtedy dla $cell nie zostaje żadna gwiazda.';
+  }
+
+  @override
+  String exOrbitsSuppose(Object cell, Object star) {
+    return 'Załóżmy, że $cell należy do gwiazdy na $star.';
+  }
+
+  @override
+  String exOrbitsRefuted(Object cell, Object star) {
+    return '$cell nie może należeć do gwiazdy na $star: to prowadzi do sprzeczności.';
+  }
 }

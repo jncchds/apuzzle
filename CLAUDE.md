@@ -23,13 +23,13 @@ Run them through the output condenser (see the global CLAUDE.md):
 ## Releases and release notes
 Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/workflows/release.yml`; the version comes from the branch name, not pubspec). `RELEASE_NOTES.md` has one `## X.Y.Z - YYYY-MM-DD` header per release, newest first, with short user-facing bullets; it is bundled as an asset and shown under Settings → Release notes (`/release-notes`). With every commit:
 1. `git fetch`, then check whether the top version in `RELEASE_NOTES.md` exists as `origin/release/<version>`.
-2. If it does, add a new version on top (always the next patch, unless the user says otherwise) with the commit's notes.
-3. If it doesn't, add the commit's notes to that top version.
+2. If it does, add a new version on top with the commit's notes: the next minor (X.Y+1.0) for a new puzzle or a major feature, the next patch for cosmetic changes and bug fixes.
+3. If it doesn't, add the commit's notes to that top version. If that version is only a patch bump and the commit brings a new puzzle or a major feature, raise it to the next minor.
 4. Either way, set the top version's date to today.
 
 ## README
 `README.md` is the project's front page; keep it in step with the app in the same commit as the change:
-- a new puzzle type gets a row in the Puzzles table (in `puzzleTypes` order) with its screenshot: copy `build/snapshots/<id>_dark.png` to `docs/screenshots/`;
+- the Puzzles section has one table per home-screen group (`puzzleCategories`, same order), and every row shows the game in both themes. A new puzzle type gets a row in its group's table: copy `build/snapshots/<id>_dark.png` and `<id>_light.png` to `docs/screenshots/`;
 - a new or changed user-facing feature (anything that gets a release note beyond a fix) goes into the Features list;
 - when board visuals change, refresh the affected `docs/screenshots/*.png` (and `home.png`) from `build/snapshots/`;
 - new core files or moved responsibilities go into its Architecture tree.
@@ -52,7 +52,7 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
 - `lib/core/registry.dart`: register new types here, in `puzzleTypes` and in one home-screen group of `puzzleCategories` (numbers, grids, paths, casual; names are `cat*` ARB keys). The home screen shows the groups as sections that fold; the folded ones are kept in `Settings` (`set.collapsed`).
 - Daily challenges (`lib/core/daily.dart`, `lib/ui/daily_screen.dart`, route `/daily?d=2026-09-25[&p=<code>]`):
   - each day picks 3 games (seeded by `hash31(date)`, a web-safe FNV-1a) from the types whose `dailySince` is on or before it (launch: 2026-09-01), each at its `dailyDifficulties` (all by default; 2048 only medium);
-  - the player can leave games out (the tune button on the daily screen, at least 3 stay): `dailyChoices` is a history of `(from, excluded ids)` kept by `GameStore` in `dailyPool`, and a change counts from today, so earlier days keep their games. Excluded ids are stored (not chosen ones), so new releases join by default. It travels with the progress export, but a device that has its own history keeps it;
+  - the player can leave games out (the tune button on the daily screen, at least 3 stay): `dailyChoices` is a history of `(from, excluded ids)` kept by `GameStore` in `dailyPool`, and a change counts from today, so earlier days keep their games. Excluded ids are stored (not chosen ones), so a new puzzle joins everyone's selection by default. The exception is a new casual game (the `casual` group): it must start left out for players who already have a selection, so build that when the first one comes. It travels with the progress export, but a device that has its own history keeps it;
   - every puzzle of the day uses the same seed, with the type's fixed `dailySize(difficulty)` and default options, so it is a normal share code;
   - `GameStore`: results in `daily.<date>` (`type.difficulty` → code, best ms, hints), in-progress dailies in their own save slot (`save.daily.<code>`), so they never replace the free game. Daily wins also count in the regular stats;
   - the router only treats a code as a daily one if it really is that day's puzzle (`isDailyPuzzle`), and never for future days.
@@ -85,7 +85,7 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
    - `<id>_model.dart`: the puzzle plus a pure rule check;
    - `<id>_solver.dart`: tiered, sound deductions plus `countSolutions(limit: 2)`;
    - `<id>_generator.dart`: random solution → strip clues while still solvable at the difficulty's tier;
-   - `<id>_type.dart`, including `dailySize` (must fit a 360×760 phone) and `dailySince` set to the release date, so earlier days keep their games;
+   - `<id>_type.dart`, including `dailySize` (must fit a 360×760 phone) and `dailySince` set to the day after the push to origin (the release date + 1), so earlier days, the release day included, keep their games. If the push slips to a later day, move `dailySince` and the release note along;
    - `<id>_tutorial.dart`: 3–5 tiny boards, one rule or edge case each, ending with a small generated board; override `tutorial()` in the type. Add 1–3 strategy lessons too (`strategies()`);
    - `<id>_explain.dart`: trace the solver's rules and add an `Explainer` (see Explain mode), with `ex<Id>*` texts;
    - `<id>Name`, `<id>Tagline`, `<id>Rules`, `tut<Id><n>`, `tut<Id>S<n>` (and any other texts) in all four ARB files.
@@ -131,6 +131,7 @@ The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want
 | blocks | Blocks (Suguru) | ValueGridType | regions grown together with their numbers (a walled-in cell joins a neighbouring region as its next number), then givens stripped; tiers: singles / pointing + naked pairs / probing; daily from 2026-09-28 |
 | pairs | Pairs (Norinori) | ValueGridType | dominoes first, each its own region; cells join regions most-constrained-first only while the tier still solves the board (monotone, like LITS), stuck spots are freed and regrown; tiers: basic / every way to finish a region / probing (hard hardens borders with `RegionSearch`); daily from 2026-09-28 |
 | plots | Plots (Fillomino) | ValueGridType | plots grown so no two of the same size touch, then givens stripped; tiers: group logic (closed, one exit, reach, merge size) / + probing cells with ≤3 candidates; lines between different numbers via `RegionBorders.split`; daily from 2026-09-28 |
+| orbits | Orbits (Tentai Show / Galaxies) | PuzzleType | one region per star, symmetric under a half turn around it; stars sit on a lattice twice as fine as the cells (`OrbitsGeometry`: `twin`, `core`, `paint`); state = the star of each cell, a star's own cells are filled from the start; drag from a region paints cells and their twins (a cell taken from another star takes its twin there along), tap clears a cell and its twin; solver keeps one flag per (cell, star): tier 1 twins + a way to the star + last star left, tier 2 + cells without which a cell of the star is cut off, tier 3 probing; generator fills the grid with random symmetric regions, redraws in smaller pieces a region the tier can't settle, and prefers boards that need their tier and have few one-cell regions; daily 6×6 / 8×8 / 9×9 from 2026-10-14 |
 | links | Links (Numberlink) | PuzzleType | paths fill the grid; `randomHamiltonianPath` (grid_graph) cut into pieces, cut again where edge logic stalls, rejoined end to end toward a pair count per difficulty; drag from a dot, drawing across a path cuts it; daily from 2026-09-28 |
 | arrows | Arrows (Yajilin) | PuzzleType | `ArrowsSolver` extends `LoopSolver` with one state entry per cell (shaded / on the loop); loop reshaped where tier-1 logic stalls, a shaded cell becomes a clue where still stuck, medium/hard re-aim clues; `LoopBoard.onCellTap` shades cells; daily from 2026-09-28 |
 | tally | Tally (Sumplete/Rullo) | ValueGridType | a digit in every cell (drawn by `buildEmpty`), cross some out so rows/columns hit the edge sums; tap cycles cross → circle (optional) → empty; tiers: too big / needed, every way to make a line's sum (subset-sum DP), probing; generator mutates digits/sides of stuck cells while the tier gets no worse, medium/hard then push the tier below to stall; daily from 2026-10-10 |

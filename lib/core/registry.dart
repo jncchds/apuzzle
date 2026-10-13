@@ -16,6 +16,7 @@ import '../puzzles/mambo/mambo_type.dart';
 import '../puzzles/merge/merge_type.dart';
 import '../puzzles/mines/mines_type.dart';
 import '../puzzles/mosaic/mosaic_type.dart';
+import '../puzzles/orbits/orbits_type.dart';
 import '../puzzles/pairs/pairs_type.dart';
 import '../puzzles/pearls/pearls_type.dart';
 import '../puzzles/plots/plots_type.dart';
@@ -48,6 +49,7 @@ const List<PuzzleType> puzzleTypes = [
   PipesType(),
   ShikakuType(),
   PlotsType(),
+  OrbitsType(),
   TrailType(),
   LinksType(),
   LabyrinthType(),
@@ -91,6 +93,7 @@ const List<PuzzleCategory> puzzleCategories = [
     CampType(),
     IslandsType(),
     LampsType(),
+    OrbitsType(),
     MinesType(),
   ]),
   PuzzleCategory('paths', [

@@ -3354,4 +3354,78 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutFormulaS3 =>
       'Das große: zehn Felder mit einer Klammer oder Potenz. Finde zuerst, wo das = steht: Es verrät, wie lang das Ergebnis ist.';
+
+  @override
+  String get orbitsName => 'Orbits';
+
+  @override
+  String get orbitsTagline => 'Gib jedem Stern ein Gebiet, das sich um ihn dreht';
+
+  @override
+  String get orbitsRules =>
+      '• Teile das ganze Gitter in Gebiete, eines für jeden Stern.\n• Ein Gebiet ist ein zusammenhängendes Stück mit seinem Stern genau in der Mitte.\n• Nach einer halben Drehung um den Stern sieht das Gebiet gleich aus: Jedes Feld hat einen Zwilling auf der gegenüberliegenden Seite des Sterns.\n\nZiehe von einem Stern oder von einem Feld seines Gebiets über die Felder, die dazukommen sollen; jedes bringt seinen Zwilling mit. Tippe auf ein Feld, um es und seinen Zwilling zu leeren.';
+
+  @override
+  String get tutOrbits1 =>
+      'Teile das Gitter in Gebiete, eines für jeden Stern. Der Stern liegt genau in der Mitte seines Gebiets, also hat jedes Feld einen Zwilling auf der gegenüberliegenden Seite. Ziehe vom Stern in der rechten Spalte zum Feld darüber: Der Zwilling darunter wird mit gefüllt.';
+
+  @override
+  String get tutOrbits2 =>
+      'Ein Stern kann in einem Feld liegen, auf der Linie zwischen zwei Feldern oder auf einer Ecke, an der vier zusammentreffen. Die Felder, die er berührt, gehören ihm von Anfang an. Gib jedes übrige Feld einem Stern; tippe auf ein Feld, um es und seinen Zwilling zu leeren.';
+
+  @override
+  String get tutOrbits3 =>
+      'Ein Gebiet kann jede Form haben, solange es ein Stück ist und nach einer halben Drehung um seinen Stern gleich aussieht. Ein Feld kann nicht zu einem Stern gehören, wenn sein Zwilling außerhalb des Gitters oder auf dem Feld eines anderen Sterns läge.';
+
+  @override
+  String get tutOrbits4 =>
+      'Jetzt ein echtes Gitter. Beginne mit Feldern, die nur ein Stern nehmen kann: Ecken und Ränder sind gute Stellen dafür.';
+
+  @override
+  String get tutOrbitsS1 =>
+      'Halte Gebiete in einem Stück. Gehört ein Feld zu einem Stern, ist aber noch nicht mit ihm verbunden, dann sieh dir die Wege dorthin an: Ein Feld, durch das jeder Weg führt, gehört ebenfalls zum Stern, genau wie sein Zwilling.';
+
+  @override
+  String get tutOrbitsS2 =>
+      'Ein schweres Gitter. Wenn nichts sicher ist, wähle ein Feld, das nur zwei Sterne nehmen können, und probiere einen aus: Bleibt dann irgendein Feld ganz ohne Stern, gehört das Feld dem anderen Stern.';
+
+  @override
+  String exOrbitsOnly(Object cell, Object star) {
+    return '$cell gehört zum Stern bei $star: Kein anderer Stern kann es nehmen.';
+  }
+
+  @override
+  String exOrbitsTwin(Object cell, Object star, Object other) {
+    return '$cell gehört zum Stern bei $star: Es ist der Zwilling von $other.';
+  }
+
+  @override
+  String exOrbitsBridge(Object cell, Object star, Object other) {
+    return '$cell gehört zum Stern bei $star: Ohne es wäre $other von diesem Stern abgeschnitten.';
+  }
+
+  @override
+  String exOrbitsTwinOut(Object cell, Object star, Object other) {
+    return '$cell kann nicht zum Stern bei $star gehören: Sein Zwilling $other kann es nicht.';
+  }
+
+  @override
+  String exOrbitsReach(Object cell, Object star) {
+    return '$cell kann nicht zum Stern bei $star gehören: Es lässt sich nicht mehr mit diesem Stern verbinden.';
+  }
+
+  @override
+  String exOrbitsFailEmpty(Object cell) {
+    return 'Dann bliebe für $cell aber kein Stern übrig.';
+  }
+
+  @override
+  String exOrbitsSuppose(Object cell, Object star) {
+    return 'Angenommen, $cell gehörte zum Stern bei $star.';
+  }
+
+  @override
+  String exOrbitsRefuted(Object cell, Object star) {
+    return '$cell kann nicht zum Stern bei $star gehören: Das führt zu einem Widerspruch.';
+  }
 }

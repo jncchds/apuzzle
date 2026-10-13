@@ -3347,4 +3347,78 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutFormulaS3 =>
       'The big one: ten tiles with a bracket or a power. Start by finding where = stands: it tells how long the result is.';
+
+  @override
+  String get orbitsName => 'Orbits';
+
+  @override
+  String get orbitsTagline => 'Give every star a region that turns around it';
+
+  @override
+  String get orbitsRules =>
+      '• Split the whole grid into regions, one for each star.\n• A region is one connected piece with its star in the exact middle.\n• Half a turn around the star leaves the region looking the same: every cell has a twin on the opposite side of the star.\n\nDrag from a star, or from a cell of its region, over the cells to add; each one brings its twin along. Tap a cell to clear it and its twin.';
+
+  @override
+  String get tutOrbits1 =>
+      'Split the grid into regions, one for each star. The star sits in the exact middle of its region, so every cell has a twin on the opposite side. Drag from the star in the right column to the cell above it: the twin below is filled in too.';
+
+  @override
+  String get tutOrbits2 =>
+      'A star can sit inside a cell, on the line between two cells, or on a corner where four meet. The cells it touches are its own from the start. Give every remaining cell to a star; tap a cell to clear it and its twin.';
+
+  @override
+  String get tutOrbits3 =>
+      'A region can have any shape, as long as it is one piece and looks the same after half a turn around its star. A cell can\'t join a star if its twin would fall off the board or onto another star\'s cell.';
+
+  @override
+  String get tutOrbits4 =>
+      'Now a real board. Start with cells that only one star can take: the corners and edges are good places to look.';
+
+  @override
+  String get tutOrbitsS1 =>
+      'Keep regions in one piece. When a cell belongs to a star but isn\'t joined to it yet, look at the ways to connect them: a cell that every way passes through belongs to the star too, and so does its twin.';
+
+  @override
+  String get tutOrbitsS2 =>
+      'A hard board. When nothing is certain, pick a cell that only two stars can take and try one: if some cell is then left with no star at all, the cell belongs to the other star.';
+
+  @override
+  String exOrbitsOnly(Object cell, Object star) {
+    return '$cell belongs to the star at $star: no other star can take it.';
+  }
+
+  @override
+  String exOrbitsTwin(Object cell, Object star, Object other) {
+    return '$cell belongs to the star at $star: it\'s the twin of $other.';
+  }
+
+  @override
+  String exOrbitsBridge(Object cell, Object star, Object other) {
+    return '$cell belongs to the star at $star: without it, $other would be cut off from that star.';
+  }
+
+  @override
+  String exOrbitsTwinOut(Object cell, Object star, Object other) {
+    return '$cell can\'t belong to the star at $star: its twin $other can\'t.';
+  }
+
+  @override
+  String exOrbitsReach(Object cell, Object star) {
+    return '$cell can\'t belong to the star at $star: no way is left to join it to that star.';
+  }
+
+  @override
+  String exOrbitsFailEmpty(Object cell) {
+    return 'But then no star is left for $cell.';
+  }
+
+  @override
+  String exOrbitsSuppose(Object cell, Object star) {
+    return 'Suppose $cell belonged to the star at $star.';
+  }
+
+  @override
+  String exOrbitsRefuted(Object cell, Object star) {
+    return '$cell can\'t belong to the star at $star: it leads to a contradiction.';
+  }
 }

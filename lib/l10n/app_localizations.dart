@@ -4611,6 +4611,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The big one: ten tiles with a bracket or a power. Start by finding where = stands: it tells how long the result is.'**
   String get tutFormulaS3;
+
+  /// No description provided for @orbitsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Orbits'**
+  String get orbitsName;
+
+  /// No description provided for @orbitsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Give every star a region that turns around it'**
+  String get orbitsTagline;
+
+  /// No description provided for @orbitsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Split the whole grid into regions, one for each star.\n• A region is one connected piece with its star in the exact middle.\n• Half a turn around the star leaves the region looking the same: every cell has a twin on the opposite side of the star.\n\nDrag from a star, or from a cell of its region, over the cells to add; each one brings its twin along. Tap a cell to clear it and its twin.'**
+  String get orbitsRules;
+
+  /// No description provided for @tutOrbits1.
+  ///
+  /// In en, this message translates to:
+  /// **'Split the grid into regions, one for each star. The star sits in the exact middle of its region, so every cell has a twin on the opposite side. Drag from the star in the right column to the cell above it: the twin below is filled in too.'**
+  String get tutOrbits1;
+
+  /// No description provided for @tutOrbits2.
+  ///
+  /// In en, this message translates to:
+  /// **'A star can sit inside a cell, on the line between two cells, or on a corner where four meet. The cells it touches are its own from the start. Give every remaining cell to a star; tap a cell to clear it and its twin.'**
+  String get tutOrbits2;
+
+  /// No description provided for @tutOrbits3.
+  ///
+  /// In en, this message translates to:
+  /// **'A region can have any shape, as long as it is one piece and looks the same after half a turn around its star. A cell can\'t join a star if its twin would fall off the board or onto another star\'s cell.'**
+  String get tutOrbits3;
+
+  /// No description provided for @tutOrbits4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with cells that only one star can take: the corners and edges are good places to look.'**
+  String get tutOrbits4;
+
+  /// No description provided for @tutOrbitsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep regions in one piece. When a cell belongs to a star but isn\'t joined to it yet, look at the ways to connect them: a cell that every way passes through belongs to the star too, and so does its twin.'**
+  String get tutOrbitsS1;
+
+  /// No description provided for @tutOrbitsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When nothing is certain, pick a cell that only two stars can take and try one: if some cell is then left with no star at all, the cell belongs to the other star.'**
+  String get tutOrbitsS2;
+
+  /// No description provided for @exOrbitsOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} belongs to the star at {star}: no other star can take it.'**
+  String exOrbitsOnly(Object cell, Object star);
+
+  /// No description provided for @exOrbitsTwin.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} belongs to the star at {star}: it\'s the twin of {other}.'**
+  String exOrbitsTwin(Object cell, Object star, Object other);
+
+  /// No description provided for @exOrbitsBridge.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} belongs to the star at {star}: without it, {other} would be cut off from that star.'**
+  String exOrbitsBridge(Object cell, Object star, Object other);
+
+  /// No description provided for @exOrbitsTwinOut.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t belong to the star at {star}: its twin {other} can\'t.'**
+  String exOrbitsTwinOut(Object cell, Object star, Object other);
+
+  /// No description provided for @exOrbitsReach.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t belong to the star at {star}: no way is left to join it to that star.'**
+  String exOrbitsReach(Object cell, Object star);
+
+  /// No description provided for @exOrbitsFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no star is left for {cell}.'**
+  String exOrbitsFailEmpty(Object cell);
+
+  /// No description provided for @exOrbitsSuppose.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} belonged to the star at {star}.'**
+  String exOrbitsSuppose(Object cell, Object star);
+
+  /// No description provided for @exOrbitsRefuted.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t belong to the star at {star}: it leads to a contradiction.'**
+  String exOrbitsRefuted(Object cell, Object star);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

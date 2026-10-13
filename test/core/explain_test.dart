@@ -9,6 +9,7 @@ import 'package:apuzzle/puzzles/arrows/arrows_model.dart';
 import 'package:apuzzle/puzzles/atoms/atoms_model.dart';
 import 'package:apuzzle/puzzles/links/links_model.dart';
 import 'package:apuzzle/puzzles/mines/mines_model.dart';
+import 'package:apuzzle/puzzles/orbits/orbits_model.dart';
 import 'package:apuzzle/puzzles/shikaku/shikaku_model.dart';
 import 'package:apuzzle/puzzles/trail/trail_model.dart';
 import 'package:apuzzle/puzzles/rails/rails_model.dart';
@@ -50,6 +51,13 @@ Object? wrongOther(Object puzzle, Object start) {
     case (final ShikakuPuzzle p, final ShikakuState s):
       const r = CellRect(0, 0, 0, 0);
       return p.solution.contains(r) ? null : ShikakuState([...s.rects, r]);
+    case (final OrbitsPuzzle p, final OrbitsState s):
+      for (var i = 0; i < p.geo.n; i++) {
+        for (var k = 0; k < p.geo.count; k++) {
+          if (k == p.solution[i]) continue;
+          if (p.geo.paint(s.owner, i, k) case final bad?) return OrbitsState(bad);
+        }
+      }
     case (final AtomsPuzzle p, final AtomsState s):
       final e = p.solution.indexWhere((b) => b < 2);
       return AtomsState(List.of(s.bonds)..[e] = p.solution[e] + 1);

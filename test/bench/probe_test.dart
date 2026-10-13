@@ -2,6 +2,7 @@
 library;
 
 import 'dart:io';
+import 'dart:math';
 
 import 'package:apuzzle/core/difficulty.dart';
 import 'package:apuzzle/core/grid.dart';
@@ -11,6 +12,8 @@ import 'package:apuzzle/puzzles/kings/kings_generator.dart';
 import 'package:apuzzle/puzzles/kings/kings_solver.dart';
 import 'package:apuzzle/puzzles/lits/lits_generator.dart';
 import 'package:apuzzle/puzzles/lits/lits_solver.dart';
+import 'package:apuzzle/puzzles/orbits/orbits_generator.dart';
+import 'package:apuzzle/puzzles/orbits/orbits_solver.dart';
 import 'package:apuzzle/puzzles/shikaku/shikaku_generator.dart';
 import 'package:apuzzle/puzzles/shikaku/shikaku_solver.dart';
 import 'package:apuzzle/puzzles/trail/trail_generator.dart';
@@ -20,7 +23,7 @@ import 'package:apuzzle/puzzles/trail/trail_solver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Per-generator probes: time, achieved logic tier and shape stats.
-/// Pick one with PROBE=atoms/shikaku/trail/kings/lits, plus PROBE_SIZES=5,6,7 PROBE_SEEDS=5:
+/// Pick one with PROBE=atoms/shikaku/trail/kings/lits/orbits, plus PROBE_SIZES=5,6,7 PROBE_SEEDS=5:
 ///   flutter test test/bench/probe_test.dart --run-skipped --tags bench
 void main() {
   final probe = Platform.environment['PROBE'] ?? 'lits';
@@ -91,6 +94,18 @@ void main() {
       final t = s.solveLogic(1) != null ? 1 : (s.solveLogic(2) != null ? 2 : 3);
       final u = s.solutions(budget: 3000000).length;
       return 't$t u$u r${p.regionCount}';
+    });
+  }
+  if (probe == 'orbits') {
+    run(probe, (params) {
+      final p = generateOrbits(params);
+      final s = OrbitsSolver(p.geo);
+      final u = params.size.rows <= 7 ? s.countSolutions() : -1;
+      final sizes = List<int>.filled(p.stars.length, 0);
+      for (final k in p.solution) {
+        sizes[k]++;
+      }
+      return 't${s.grade()} u$u s${p.stars.length} ones${sizes.where((x) => x == 1).length} max${sizes.reduce(max)}';
     });
   }
 }
