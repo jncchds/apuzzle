@@ -892,6 +892,72 @@ class AppLocalizationsDe extends AppLocalizations {
   String get junctionWrong => 'Falscher Bahnhof! Tippe für einen neuen Versuch';
 
   @override
+  String get turnaboutName => 'Karussell';
+
+  @override
+  String get turnaboutTagline => 'Sei vor dem Rivalen am Stern, in einem Labyrinth, das sich ständig dreht';
+
+  @override
+  String get turnaboutRules =>
+      '• Du und ein Rivale startet in gegenüberliegenden Ecken eines Labyrinths, dazwischen liegt ein Stern, von beiden gleich weit entfernt.\n• Wische (oder drücke eine Pfeiltaste), um ein Feld weiterzugehen; wische weiter, um weiterzulaufen. Der Rivale läuft den kürzesten Weg in seinem eigenen Tempo.\n• Alle paar Sekunden macht das ganze Labyrinth eine Vierteldrehung (auf schwer manchmal eine halbe). Ein Pfeil warnt kurz vorher. Die Richtungen bleiben am Bildschirm: Oben ist immer oben auf dem Bildschirm.\n• Wer zuerst am Stern ist, gewinnt die Runde. Jede Runde ist ein neues Labyrinth.\n• Tippe aufs Feld (oder drücke die Leertaste), um zu pausieren.\n\nZiele\n• 5 Runden: Gewinne so viele Runden wie möglich.\n• 3 Leben: Spiele, bis der Rivale drei Runden gewonnen hat; mit deinen Siegen wird er etwas schneller.\n\nDer Schwierigkeitsgrad bestimmt das Tempo des Rivalen, die Labyrinthe und wie oft sie sich drehen.';
+
+  @override
+  String get turnaboutGoalRoundsHint => 'Spiele eine feste Zahl von Runden und gewinne so viele wie möglich.';
+
+  @override
+  String turnaboutGoalLivesHint(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Runden',
+      one: 'eine Runde',
+    );
+    return 'Spiele, bis der Rivale $_temp0 gewonnen hat; mit deinen Siegen wird er schneller. Schlag deinen Rekord.';
+  }
+
+  @override
+  String turnaboutFinished(int count, int total) {
+    return '$count von $total Runden gewonnen';
+  }
+
+  @override
+  String turnaboutStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Runden gewonnen',
+      one: '1 Runde gewonnen',
+      zero: 'Keine Runde gewonnen',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String turnaboutRound(int round) {
+    return 'Runde $round';
+  }
+
+  @override
+  String turnaboutScore(int wins, int losses) {
+    return 'Du $wins : $losses Rivale';
+  }
+
+  @override
+  String get turnaboutStart => 'Wische, um zu starten';
+
+  @override
+  String get turnaboutPaused => 'Pause: Wische, um weiterzumachen';
+
+  @override
+  String get turnaboutWon => 'Der Stern gehört dir! Wische für die nächste Runde';
+
+  @override
+  String get turnaboutLost => 'Der Rivale war schneller. Wische für die nächste Runde';
+
+  @override
+  String get turnaboutLostPractice => 'Der Rivale war schneller! Tippe für einen neuen Versuch';
+
+  @override
   String get pipesName => 'Rohre';
 
   @override
@@ -1491,6 +1557,18 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutJunction3 =>
       'Ein echtes Feld: Bring 6 Züge zu ihren Bahnhöfen. Achte auf die Züge aus dem Tunnel und stell die Weichen vor ihnen.';
+
+  @override
+  String get tutTurnabout1 =>
+      'Wische (oder drücke eine Pfeiltaste), um deinen Läufer, die runde Figur, ein Feld weiterzuziehen. Wische weiter, um weiterzulaufen. Wände versperren den Weg. Erreiche den Stern.';
+
+  @override
+  String get tutTurnabout2 =>
+      'Alle paar Sekunden dreht sich das ganze Labyrinth, und kurz vorher erscheint ein runder Pfeil. Die Richtungen am Bildschirm bleiben gleich: Oben ist immer oben, also kann der Weg zum Stern jetzt in eine andere Richtung führen. Erreiche den Stern.';
+
+  @override
+  String get tutTurnabout3 =>
+      'Ein Wettrennen: Der Rivale, die Raute, läuft auf dem kürzesten Weg zum Stern. Sei vor ihm da! Die Runde beginnt mit deinem ersten Zug; tippe aufs Feld, um zu pausieren.';
 
   @override
   String get tutPipes1 =>

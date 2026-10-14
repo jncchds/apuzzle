@@ -45,6 +45,7 @@ import '../puzzles/solo/solo_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
 import '../puzzles/tally/tally_type.dart';
 import '../puzzles/trail/trail_type.dart';
+import '../puzzles/turnabout/turnabout_type.dart';
 import '../puzzles/vanish/vanish_type.dart';
 import '../l10n/app_localizations.dart';
 import 'puzzle_type.dart';
@@ -70,6 +71,7 @@ const List<PuzzleType> puzzleTypes = [
   MergeType(),
   SnakeType(),
   JunctionType(),
+  TurnaboutType(),
   GlimpseType(),
   VanishType(),
   HopperType(),
@@ -217,6 +219,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('merge', [MergeType()]),
       PuzzleFamily('snake', [SnakeType()]),
       PuzzleFamily('junction', [JunctionType()]),
+      PuzzleFamily('turnabout', [TurnaboutType()]),
       PuzzleFamily('memory', [GlimpseType(), VanishType(), HopperType(), ReboundType()]),
     ],
   ),

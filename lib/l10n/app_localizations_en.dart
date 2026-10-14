@@ -885,6 +885,72 @@ class AppLocalizationsEn extends AppLocalizations {
   String get junctionWrong => 'Wrong station! Tap to try again';
 
   @override
+  String get turnaboutName => 'Turnabout';
+
+  @override
+  String get turnaboutTagline => 'Race a rival to the star through a maze that keeps turning';
+
+  @override
+  String get turnaboutRules =>
+      '• You and a rival start in opposite corners of a maze, with a star between you, just as far from both.\n• Swipe (or press an arrow key) to move one cell; keep the swipe going to move on. The rival runs the shortest way at its own pace.\n• Every few seconds the whole maze makes a quarter turn (on hard sometimes a half turn). An arrow warns you just before. Your moves stay on screen: up is always up on the screen.\n• Whoever reaches the star first wins the round. Every round is a new maze.\n• Tap the board (or press space) to pause.\n\nGoals\n• 5 rounds: win as many rounds as you can.\n• 3 lives: play on until the rival has won three rounds; it gets a little faster as you win.\n\nThe difficulty sets the rival\'s pace, the mazes and how often they turn.';
+
+  @override
+  String get turnaboutGoalRoundsHint => 'Race a set number of rounds and win as many as you can.';
+
+  @override
+  String turnaboutGoalLivesHint(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count rounds',
+      one: 'a round',
+    );
+    return 'Race on until the rival has won $_temp0; it gets faster as you win. Beat your best score.';
+  }
+
+  @override
+  String turnaboutFinished(int count, int total) {
+    return 'You won $count of $total rounds';
+  }
+
+  @override
+  String turnaboutStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count rounds won',
+      one: '1 round won',
+      zero: 'No rounds won',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String turnaboutRound(int round) {
+    return 'Round $round';
+  }
+
+  @override
+  String turnaboutScore(int wins, int losses) {
+    return 'You $wins : $losses Rival';
+  }
+
+  @override
+  String get turnaboutStart => 'Swipe to start';
+
+  @override
+  String get turnaboutPaused => 'Paused: swipe to go on';
+
+  @override
+  String get turnaboutWon => 'The star is yours! Swipe for the next round';
+
+  @override
+  String get turnaboutLost => 'The rival got there first. Swipe for the next round';
+
+  @override
+  String get turnaboutLostPractice => 'The rival got there first! Tap to try again';
+
+  @override
   String get pipesName => 'Pipes';
 
   @override
@@ -1482,6 +1548,18 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutJunction3 =>
       'A real board: get 6 trains to their stations. Watch the trains coming out of the tunnel and set the switches ahead of them.';
+
+  @override
+  String get tutTurnabout1 =>
+      'Swipe (or press an arrow key) to move your runner, the round piece, one cell. Keep the swipe going to move on. Walls block the way. Reach the star.';
+
+  @override
+  String get tutTurnabout2 =>
+      'Every few seconds the whole maze turns, and a round arrow warns you just before. Your swipes stay on screen: up is always up, so the way to the star may now lie in another direction. Reach the star.';
+
+  @override
+  String get tutTurnabout3 =>
+      'A race: the rival, the diamond, runs to the star the shortest way. Get there first! The round starts with your first move; tap the board to pause.';
 
   @override
   String get tutPipes1 =>

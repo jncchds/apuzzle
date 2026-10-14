@@ -72,6 +72,7 @@ void main() {
     expect(alt('minesweeper'), ['mines']);
     expect(alt('samegame'), ['pop']);
     expect(alt('train of thought'), ['junction']);
+    expect(alt('penguin pursuit'), ['turnabout']);
   });
 
   List<String> similar(String q) => [for (final t in searchGames(q).similar) t.id];

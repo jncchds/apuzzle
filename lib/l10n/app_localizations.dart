@@ -1522,6 +1522,90 @@ abstract class AppLocalizations {
   /// **'Wrong station! Tap to try again'**
   String get junctionWrong;
 
+  /// No description provided for @turnaboutName.
+  ///
+  /// In en, this message translates to:
+  /// **'Turnabout'**
+  String get turnaboutName;
+
+  /// No description provided for @turnaboutTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Race a rival to the star through a maze that keeps turning'**
+  String get turnaboutTagline;
+
+  /// No description provided for @turnaboutRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• You and a rival start in opposite corners of a maze, with a star between you, just as far from both.\n• Swipe (or press an arrow key) to move one cell; keep the swipe going to move on. The rival runs the shortest way at its own pace.\n• Every few seconds the whole maze makes a quarter turn (on hard sometimes a half turn). An arrow warns you just before. Your moves stay on screen: up is always up on the screen.\n• Whoever reaches the star first wins the round. Every round is a new maze.\n• Tap the board (or press space) to pause.\n\nGoals\n• 5 rounds: win as many rounds as you can.\n• 3 lives: play on until the rival has won three rounds; it gets a little faster as you win.\n\nThe difficulty sets the rival\'s pace, the mazes and how often they turn.'**
+  String get turnaboutRules;
+
+  /// No description provided for @turnaboutGoalRoundsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Race a set number of rounds and win as many as you can.'**
+  String get turnaboutGoalRoundsHint;
+
+  /// No description provided for @turnaboutGoalLivesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Race on until the rival has won {count, plural, one{a round} other{{count} rounds}}; it gets faster as you win. Beat your best score.'**
+  String turnaboutGoalLivesHint(int count);
+
+  /// No description provided for @turnaboutFinished.
+  ///
+  /// In en, this message translates to:
+  /// **'You won {count} of {total} rounds'**
+  String turnaboutFinished(int count, int total);
+
+  /// No description provided for @turnaboutStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No rounds won} one{1 round won} other{{count} rounds won}}'**
+  String turnaboutStreak(int count);
+
+  /// No description provided for @turnaboutRound.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {round}'**
+  String turnaboutRound(int round);
+
+  /// No description provided for @turnaboutScore.
+  ///
+  /// In en, this message translates to:
+  /// **'You {wins} : {losses} Rival'**
+  String turnaboutScore(int wins, int losses);
+
+  /// No description provided for @turnaboutStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe to start'**
+  String get turnaboutStart;
+
+  /// No description provided for @turnaboutPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused: swipe to go on'**
+  String get turnaboutPaused;
+
+  /// No description provided for @turnaboutWon.
+  ///
+  /// In en, this message translates to:
+  /// **'The star is yours! Swipe for the next round'**
+  String get turnaboutWon;
+
+  /// No description provided for @turnaboutLost.
+  ///
+  /// In en, this message translates to:
+  /// **'The rival got there first. Swipe for the next round'**
+  String get turnaboutLost;
+
+  /// No description provided for @turnaboutLostPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'The rival got there first! Tap to try again'**
+  String get turnaboutLostPractice;
+
   /// No description provided for @pipesName.
   ///
   /// In en, this message translates to:
@@ -2511,6 +2595,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A real board: get 6 trains to their stations. Watch the trains coming out of the tunnel and set the switches ahead of them.'**
   String get tutJunction3;
+
+  /// No description provided for @tutTurnabout1.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe (or press an arrow key) to move your runner, the round piece, one cell. Keep the swipe going to move on. Walls block the way. Reach the star.'**
+  String get tutTurnabout1;
+
+  /// No description provided for @tutTurnabout2.
+  ///
+  /// In en, this message translates to:
+  /// **'Every few seconds the whole maze turns, and a round arrow warns you just before. Your swipes stay on screen: up is always up, so the way to the star may now lie in another direction. Reach the star.'**
+  String get tutTurnabout2;
+
+  /// No description provided for @tutTurnabout3.
+  ///
+  /// In en, this message translates to:
+  /// **'A race: the rival, the diamond, runs to the star the shortest way. Get there first! The round starts with your first move; tap the board to pause.'**
+  String get tutTurnabout3;
 
   /// No description provided for @tutPipes1.
   ///

@@ -17,7 +17,7 @@ LabyrinthPuzzle generateLabyrinth(GenParams params) {
   LabyrinthPuzzle? best;
   var bestScore = -1;
   for (var t = 0; t < tries; t++) {
-    final p = _carve(params.size.rows, params.size.cols, newest, rng);
+    final p = carveLabyrinth(params.size.rows, params.size.cols, newest, rng);
     final score = _junctions(p);
     if (score > bestScore) {
       best = p;
@@ -27,7 +27,8 @@ LabyrinthPuzzle generateLabyrinth(GenParams params) {
   return best!;
 }
 
-LabyrinthPuzzle _carve(int rows, int cols, double newest, Random rng) {
+/// One perfect maze; [newest] is the chance of carving on from the newest cell.
+LabyrinthPuzzle carveLabyrinth(int rows, int cols, double newest, Random rng) {
   final n = rows * cols;
   final open = List<int>.filled(n, 0);
   final seen = List<bool>.filled(n, false);

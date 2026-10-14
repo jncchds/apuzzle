@@ -913,6 +913,76 @@ class AppLocalizationsPl extends AppLocalizations {
   String get junctionWrong => 'Zła stacja! Dotknij, aby spróbować ponownie';
 
   @override
+  String get turnaboutName => 'Karuzela';
+
+  @override
+  String get turnaboutTagline => 'Wyprzedź rywala do gwiazdy w labiryncie, który ciągle się obraca';
+
+  @override
+  String get turnaboutRules =>
+      '• Ty i rywal startujecie w przeciwległych rogach labiryntu, a między wami jest gwiazda, tak samo daleko od obu.\n• Przesuń palcem (lub naciśnij strzałkę), aby przejść o jedno pole; prowadź palec dalej, aby iść dalej. Rywal biegnie najkrótszą drogą we własnym tempie.\n• Co kilka sekund cały labirynt obraca się o ćwierć obrotu (na trudnym poziomie czasem o pół). Strzałka ostrzega tuż przed obrotem. Kierunki pozostają ekranowe: w górę to zawsze w górę ekranu.\n• Kto pierwszy dotrze do gwiazdy, wygrywa rundę. Każda runda to nowy labirynt.\n• Dotknij planszy (lub naciśnij spację), aby wstrzymać.\n\nCele\n• 5 rund: wygraj jak najwięcej rund.\n• 3 życia: graj, dopóki rywal nie wygra trzech rund; z każdą twoją wygraną staje się nieco szybszy.\n\nPoziom trudności ustala szybkość rywala, labirynty i to, jak często się obracają.';
+
+  @override
+  String get turnaboutGoalRoundsHint => 'Rozegraj ustaloną liczbę rund i wygraj jak najwięcej.';
+
+  @override
+  String turnaboutGoalLivesHint(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count rundy',
+      many: '$count rund',
+      few: '$count rund',
+      one: 'jednej rundy',
+    );
+    return 'Graj, dopóki rywal nie wygra $_temp0; gdy wygrywasz, przyspiesza. Pobij swój rekord.';
+  }
+
+  @override
+  String turnaboutFinished(int count, int total) {
+    return 'Wygrane rundy: $count z $total';
+  }
+
+  @override
+  String turnaboutStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count wygranej rundy',
+      many: '$count wygranych rund',
+      few: '$count wygrane rundy',
+      one: '$count wygrana runda',
+      zero: 'Brak wygranych rund',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String turnaboutRound(int round) {
+    return 'Runda $round';
+  }
+
+  @override
+  String turnaboutScore(int wins, int losses) {
+    return 'Ty $wins : $losses Rywal';
+  }
+
+  @override
+  String get turnaboutStart => 'Przesuń palcem, aby zacząć';
+
+  @override
+  String get turnaboutPaused => 'Pauza: przesuń palcem, aby kontynuować';
+
+  @override
+  String get turnaboutWon => 'Gwiazda twoja! Przesuń palcem, aby zagrać następną rundę';
+
+  @override
+  String get turnaboutLost => 'Rywal był szybszy. Przesuń palcem, aby zagrać następną rundę';
+
+  @override
+  String get turnaboutLostPractice => 'Rywal był szybszy! Dotknij, aby spróbować ponownie';
+
+  @override
   String get pipesName => 'Rury';
 
   @override
@@ -1513,6 +1583,18 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutJunction3 =>
       'Prawdziwa plansza: doprowadź 6 pociągów do ich stacji. Obserwuj pociągi wyjeżdżające z tunelu i przestawiaj zwrotnice przed nimi.';
+
+  @override
+  String get tutTurnabout1 =>
+      'Przesuń palcem (lub naciśnij strzałkę), aby przesunąć swojego biegacza, okrągły pionek, o jedno pole. Prowadź palec dalej, aby iść dalej. Ściany zagradzają drogę. Dotrzyj do gwiazdy.';
+
+  @override
+  String get tutTurnabout2 =>
+      'Co kilka sekund cały labirynt się obraca, a tuż przed obrotem pojawia się okrągła strzałka. Kierunki na ekranie się nie zmieniają: w górę to zawsze w górę, więc droga do gwiazdy może teraz prowadzić w inną stronę. Dotrzyj do gwiazdy.';
+
+  @override
+  String get tutTurnabout3 =>
+      'Wyścig: rywal, romb, biegnie do gwiazdy najkrótszą drogą. Dotrzyj tam przed nim! Runda zaczyna się od twojego pierwszego ruchu; dotknij planszy, aby wstrzymać.';
 
   @override
   String get tutPipes1 =>

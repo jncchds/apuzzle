@@ -913,6 +913,76 @@ class AppLocalizationsUk extends AppLocalizations {
   String get junctionWrong => 'Не та станція! Торкнися, щоб спробувати ще';
 
   @override
+  String get turnaboutName => 'Круговерть';
+
+  @override
+  String get turnaboutTagline => 'Випередь суперника до зірки в лабіринті, що весь час обертається';
+
+  @override
+  String get turnaboutRules =>
+      '• Ти й суперник стартуєте в протилежних кутах лабіринту, а між вами зірка, однаково далеко від обох.\n• Проведи пальцем (або натисни стрілку), щоб перейти на одну клітинку; веди палець далі, щоб іти далі. Суперник біжить найкоротшим шляхом у своєму темпі.\n• Що кілька секунд увесь лабіринт повертається на чверть оберту (на складному рівні іноді на пів оберту). Стрілка попереджає перед поворотом. Напрямки лишаються екранними: вгору — завжди вгору на екрані.\n• Хто першим дістанеться зірки, виграє раунд. Кожен раунд — новий лабіринт.\n• Торкнися поля (або натисни пробіл), щоб поставити на паузу.\n\nЦілі\n• 5 раундів: виграй якомога більше раундів.\n• 3 життя: грай, доки суперник не виграє три раунди; з твоїми перемогами він трохи пришвидшується.\n\nСкладність задає швидкість суперника, лабіринти і як часто вони повертаються.';
+
+  @override
+  String get turnaboutGoalRoundsHint => 'Зіграй задану кількість раундів і виграй якомога більше.';
+
+  @override
+  String turnaboutGoalLivesHint(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count раунду',
+      many: '$count раундів',
+      few: '$count раунди',
+      one: '$count раунд',
+    );
+    return 'Грай, доки суперник не виграє $_temp0; з твоїми перемогами він пришвидшується. Побий свій рекорд.';
+  }
+
+  @override
+  String turnaboutFinished(int count, int total) {
+    return 'Виграно раундів: $count з $total';
+  }
+
+  @override
+  String turnaboutStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count раунду виграно',
+      many: '$count раундів виграно',
+      few: '$count раунди виграно',
+      one: '$count раунд виграно',
+      zero: 'Жодного виграного раунду',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String turnaboutRound(int round) {
+    return 'Раунд $round';
+  }
+
+  @override
+  String turnaboutScore(int wins, int losses) {
+    return 'Ти $wins : $losses Суперник';
+  }
+
+  @override
+  String get turnaboutStart => 'Проведи пальцем, щоб почати';
+
+  @override
+  String get turnaboutPaused => 'Пауза: проведи пальцем, щоб продовжити';
+
+  @override
+  String get turnaboutWon => 'Зірка твоя! Проведи пальцем, щоб почати наступний раунд';
+
+  @override
+  String get turnaboutLost => 'Суперник був швидшим. Проведи пальцем, щоб почати наступний раунд';
+
+  @override
+  String get turnaboutLostPractice => 'Суперник був швидшим! Торкнися, щоб спробувати ще';
+
+  @override
   String get pipesName => 'Труби';
 
   @override
@@ -1513,6 +1583,18 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get tutJunction3 =>
       'Справжнє поле: доправ 6 потягів на їхні станції. Стеж за потягами з тунелю і переводь стрілки перед ними.';
+
+  @override
+  String get tutTurnabout1 =>
+      'Проведи пальцем (або натисни стрілку), щоб перевести свого бігуна, круглу фішку, на одну клітинку. Веди палець далі, щоб іти далі. Стіни не пускають. Дійди до зірки.';
+
+  @override
+  String get tutTurnabout2 =>
+      'Що кілька секунд увесь лабіринт повертається, а перед поворотом з\'являється кругова стрілка. Напрямки на екрані не змінюються: вгору — завжди вгору, тож шлях до зірки тепер може вести в інший бік. Дійди до зірки.';
+
+  @override
+  String get tutTurnabout3 =>
+      'Перегони: суперник, ромб, біжить до зірки найкоротшим шляхом. Дістанься туди раніше за нього! Раунд починається з твого першого руху; торкнися поля, щоб поставити на паузу.';
 
   @override
   String get tutPipes1 =>
