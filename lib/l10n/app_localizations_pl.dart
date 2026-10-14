@@ -4659,4 +4659,38 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutGlimpse3 =>
       'Prawdziwa plansza: każda dobra runda zapala następnym razem o jedno pole więcej, a pomyłka o jedno mniej. Zalicz 3 rundy.';
+
+  @override
+  String get famMemory => 'Pamięć';
+
+  @override
+  String get famMemoryAbout => 'Przyjrzyj się, a potem odpowiadaj z pamięci. Każda dobra runda utrudnia następną';
+
+  @override
+  String get vanishName => 'Znikanie';
+
+  @override
+  String get vanishTagline => 'Dotknij 1, a liczby się schowają: resztę dotykaj po kolei z pamięci';
+
+  @override
+  String get vanishRules =>
+      '• Na planszy pojawiają się liczby od 1. Nie spiesz się: są widoczne, dopóki nie dotkniesz 1.\n• Gdy tylko dotkniesz 1, pozostałe liczby się chowają. Dotykaj ich pól po kolei: 2, 3, 4…\n• Dotknięcie złego pola kończy rundę.\n• Dobra runda daje punkt za każdą liczbę, a następna pokazuje o jedną liczbę więcej. Po pomyłce — o jedną mniej.\n\nCele\n• Rundy: zagraj 10 rund o rekord.\n• Życia: graj do trzeciej pomyłki.\n\nPoziom trudności ustala, ile liczb pokazuje pierwsza runda.';
+
+  @override
+  String get vanishWatch => 'Dotknij 1, gdy zapamiętasz';
+
+  @override
+  String get vanishPrompt => 'Dotykaj liczb po kolei';
+
+  @override
+  String get tutVanish1 =>
+      'Dotknij planszy, aby zacząć. Pojawią się liczby: dotknij 1, a reszta się schowa. Potem dotknij miejsc, gdzie były 2 i 3.';
+
+  @override
+  String get tutVanish2 =>
+      'Patrz, ile chcesz: liczby są widoczne, dopóki nie dotkniesz 1. Dotknięcie złego pola kończy rundę; tutaj zagrasz ją wtedy jeszcze raz. Zalicz obie rundy.';
+
+  @override
+  String get tutVanish3 =>
+      'Prawdziwa plansza: każda dobra runda pokazuje następnym razem o jedną liczbę więcej, a pomyłka o jedną mniej. Zalicz 3 rundy.';
 }

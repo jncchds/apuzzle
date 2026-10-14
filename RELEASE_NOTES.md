@@ -5,6 +5,7 @@
 - New game: Basins. The grid is cut into basins: fill them with water so that every row and column holds the count beside it. Water settles from the bottom up, level across the whole basin. A long press lets the water you placed settle. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-15
 - When a new board takes a moment to find, the loading screen says so
 - New game: Glimpse. Some cells light up for a moment: tap every one of them from memory. Each round you get right lights one more cell next time, a miss one fewer. Play 10 rounds for a best score, or until your third miss. With a tutorial, and in the daily challenges from 2026-10-15
+- New game: Vanish. Numbers from 1 up appear on the grid, and stay until you tap 1; then the others hide, and you tap their cells in order from memory. Each round you get right shows one number more next time, a miss one fewer. With a tutorial, and in the daily challenges from 2026-10-15. Glimpse and Vanish share a family page, Memory
 - New casual games join the daily challenges for players who haven't picked their daily games yet. If you have, they start left out: add them with the tune button on the daily screen
 
 ## 0.9.0 - 2026-10-14

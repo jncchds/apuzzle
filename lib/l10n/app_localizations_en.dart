@@ -4569,4 +4569,39 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutGlimpse3 =>
       'A real board: each round you get right lights one more cell next time, and a miss lights one fewer. Get 3 rounds right.';
+
+  @override
+  String get famMemory => 'Memory';
+
+  @override
+  String get famMemoryAbout =>
+      'Look closely, then answer from memory. Every round you get right makes the next one harder';
+
+  @override
+  String get vanishName => 'Vanish';
+
+  @override
+  String get vanishTagline => 'Tap 1 and the numbers hide: tap the rest in order from memory';
+
+  @override
+  String get vanishRules =>
+      '• Numbers from 1 up appear on the grid. Take your time: they stay until you tap 1.\n• As soon as you tap 1, the other numbers hide. Tap their cells in order: 2, 3, 4…\n• A tap on the wrong cell ends the round.\n• A round you get right scores a point per number, and the next one shows one number more. After a miss, it shows one fewer.\n\nGoals\n• Rounds: play 10 rounds for a best score.\n• Lives: play on until your third miss.\n\nThe difficulty sets how many numbers the first round shows.';
+
+  @override
+  String get vanishWatch => 'Tap 1 when you\'re ready';
+
+  @override
+  String get vanishPrompt => 'Tap the numbers in order';
+
+  @override
+  String get tutVanish1 =>
+      'Tap the board to start. Numbers appear: tap 1, and the others hide. Then tap where 2 and 3 were.';
+
+  @override
+  String get tutVanish2 =>
+      'Look as long as you like: the numbers stay until you tap 1. A tap on the wrong cell ends the round; here the round then plays again. Get both rounds right.';
+
+  @override
+  String get tutVanish3 =>
+      'A real board: each round you get right shows one number more next time, and a miss one fewer. Get 3 rounds right.';
 }

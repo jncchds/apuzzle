@@ -4582,4 +4582,40 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutGlimpse3 =>
       'Ein echtes Brett: jede richtige Runde lässt beim nächsten Mal ein Feld mehr aufleuchten, ein Fehler eines weniger. Schaffe 3 Runden.';
+
+  @override
+  String get famMemory => 'Gedächtnis';
+
+  @override
+  String get famMemoryAbout =>
+      'Schau genau hin und antworte dann aus dem Gedächtnis. Jede richtige Runde macht die nächste schwerer';
+
+  @override
+  String get vanishName => 'Verschwunden';
+
+  @override
+  String get vanishTagline =>
+      'Tippe die 1, und die Zahlen verschwinden: tippe den Rest der Reihe nach aus dem Gedächtnis';
+
+  @override
+  String get vanishRules =>
+      '• Zahlen ab 1 erscheinen auf dem Brett. Lass dir Zeit: sie bleiben, bis du die 1 antippst.\n• Sobald du die 1 antippst, verschwinden die anderen Zahlen. Tippe ihre Felder der Reihe nach an: 2, 3, 4…\n• Ein Tipp auf das falsche Feld beendet die Runde.\n• Eine richtige Runde bringt einen Punkt pro Zahl, und die nächste zeigt eine Zahl mehr. Nach einem Fehler eine weniger.\n\nZiele\n• Runden: spiele 10 Runden um einen Rekord.\n• Leben: spiele bis zum dritten Fehler.\n\nDer Schwierigkeitsgrad bestimmt, wie viele Zahlen die erste Runde zeigt.';
+
+  @override
+  String get vanishWatch => 'Tippe die 1, wenn du so weit bist';
+
+  @override
+  String get vanishPrompt => 'Tippe die Zahlen der Reihe nach an';
+
+  @override
+  String get tutVanish1 =>
+      'Tippe aufs Brett, um zu starten. Zahlen erscheinen: tippe die 1, und die anderen verschwinden. Tippe dann dorthin, wo 2 und 3 waren.';
+
+  @override
+  String get tutVanish2 =>
+      'Schau so lange, wie du willst: die Zahlen bleiben, bis du die 1 antippst. Ein Tipp auf das falsche Feld beendet die Runde; hier wird sie dann wiederholt. Schaffe beide Runden.';
+
+  @override
+  String get tutVanish3 =>
+      'Ein echtes Brett: jede richtige Runde zeigt beim nächsten Mal eine Zahl mehr, ein Fehler eine weniger. Schaffe 3 Runden.';
 }

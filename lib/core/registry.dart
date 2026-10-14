@@ -38,6 +38,7 @@ import '../puzzles/solo/solo_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
 import '../puzzles/tally/tally_type.dart';
 import '../puzzles/trail/trail_type.dart';
+import '../puzzles/vanish/vanish_type.dart';
 import '../l10n/app_localizations.dart';
 import 'puzzle_type.dart';
 
@@ -62,6 +63,7 @@ const List<PuzzleType> puzzleTypes = [
   MergeType(),
   SnakeType(),
   GlimpseType(),
+  VanishType(),
   PipesType(),
   ShikakuType(),
   PlotsType(),
@@ -97,6 +99,7 @@ class PuzzleFamily {
   String name(AppLocalizations l) => switch (id) {
     'flood' => l.famFlood,
     'latin' => l.famLatin,
+    'memory' => l.famMemory,
     _ => types.first.name(l),
   };
 
@@ -104,6 +107,7 @@ class PuzzleFamily {
   String about(AppLocalizations l) => switch (id) {
     'flood' => l.famFloodAbout,
     'latin' => l.famLatinAbout,
+    'memory' => l.famMemoryAbout,
     _ => types.first.tagline(l),
   };
 
@@ -193,7 +197,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('pop', [PopType()]),
       PuzzleFamily('merge', [MergeType()]),
       PuzzleFamily('snake', [SnakeType()]),
-      PuzzleFamily('glimpse', [GlimpseType()]),
+      PuzzleFamily('memory', [GlimpseType(), VanishType()]),
     ],
   ),
 ];

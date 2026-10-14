@@ -232,6 +232,7 @@ class RecallView {
     required this.waiting,
     required this.scheme,
     required this.accent,
+    this.fontFamily,
   });
 
   final RecallPuzzle puzzle;
@@ -250,6 +251,9 @@ class RecallView {
   final bool waiting;
   final ColorScheme scheme;
   final Color accent;
+
+  /// The theme's font, for numbers on the board.
+  final String? fontFamily;
 
   RecallPhase get phase => state.phase;
 
@@ -281,7 +285,13 @@ class RecallView {
     final tp = TextPainter(
       text: TextSpan(
         text: text,
-        style: TextStyle(color: color, fontSize: cell * size, fontWeight: FontWeight.w700, height: 1),
+        style: TextStyle(
+          fontFamily: fontFamily,
+          color: color,
+          fontSize: cell * size,
+          fontWeight: FontWeight.w700,
+          height: 1,
+        ),
       ),
       textDirection: TextDirection.ltr,
     )..layout();

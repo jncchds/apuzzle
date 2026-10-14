@@ -6123,6 +6123,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A real board: each round you get right lights one more cell next time, and a miss lights one fewer. Get 3 rounds right.'**
   String get tutGlimpse3;
+
+  /// No description provided for @famMemory.
+  ///
+  /// In en, this message translates to:
+  /// **'Memory'**
+  String get famMemory;
+
+  /// No description provided for @famMemoryAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'Look closely, then answer from memory. Every round you get right makes the next one harder'**
+  String get famMemoryAbout;
+
+  /// No description provided for @vanishName.
+  ///
+  /// In en, this message translates to:
+  /// **'Vanish'**
+  String get vanishName;
+
+  /// No description provided for @vanishTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap 1 and the numbers hide: tap the rest in order from memory'**
+  String get vanishTagline;
+
+  /// No description provided for @vanishRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Numbers from 1 up appear on the grid. Take your time: they stay until you tap 1.\n• As soon as you tap 1, the other numbers hide. Tap their cells in order: 2, 3, 4…\n• A tap on the wrong cell ends the round.\n• A round you get right scores a point per number, and the next one shows one number more. After a miss, it shows one fewer.\n\nGoals\n• Rounds: play 10 rounds for a best score.\n• Lives: play on until your third miss.\n\nThe difficulty sets how many numbers the first round shows.'**
+  String get vanishRules;
+
+  /// No description provided for @vanishWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap 1 when you\'re ready'**
+  String get vanishWatch;
+
+  /// No description provided for @vanishPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the numbers in order'**
+  String get vanishPrompt;
+
+  /// No description provided for @tutVanish1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the board to start. Numbers appear: tap 1, and the others hide. Then tap where 2 and 3 were.'**
+  String get tutVanish1;
+
+  /// No description provided for @tutVanish2.
+  ///
+  /// In en, this message translates to:
+  /// **'Look as long as you like: the numbers stay until you tap 1. A tap on the wrong cell ends the round; here the round then plays again. Get both rounds right.'**
+  String get tutVanish2;
+
+  /// No description provided for @tutVanish3.
+  ///
+  /// In en, this message translates to:
+  /// **'A real board: each round you get right shows one number more next time, and a miss one fewer. Get 3 rounds right.'**
+  String get tutVanish3;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

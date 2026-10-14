@@ -183,6 +183,7 @@ class _RecallBoardState extends State<RecallBoard> with SingleTickerProviderStat
                       waiting: _waiting,
                       scheme: scheme,
                       accent: type.accent,
+                      fontFamily: theme.textTheme.bodyMedium?.fontFamily,
                     ),
                     key: '${s.toJson()}.$_waiting.${scheme.brightness}.$cell',
                   ),
