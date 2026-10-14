@@ -208,17 +208,173 @@ abstract class AppLocalizations {
   /// **'Casual'**
   String get catCasual;
 
-  /// No description provided for @collapse.
+  /// No description provided for @searchHint.
   ///
   /// In en, this message translates to:
-  /// **'Collapse'**
-  String get collapse;
+  /// **'Search games'**
+  String get searchHint;
 
-  /// No description provided for @expand.
+  /// No description provided for @searchNone.
   ///
   /// In en, this message translates to:
-  /// **'Expand'**
-  String get expand;
+  /// **'No games found. Browse the categories:'**
+  String get searchNone;
+
+  /// No description provided for @searchSimilar.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing called “{query}”. Did you mean:'**
+  String searchSimilar(String query);
+
+  /// No description provided for @searchAlternatives.
+  ///
+  /// In en, this message translates to:
+  /// **'We don’t have “{query}”, but you might like:'**
+  String searchAlternatives(String query);
+
+  /// No description provided for @yourGames.
+  ///
+  /// In en, this message translates to:
+  /// **'Your games'**
+  String get yourGames;
+
+  /// No description provided for @gamesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} game} other{{count} games}}'**
+  String gamesCount(int count);
+
+  /// No description provided for @pinGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Pin to your games'**
+  String get pinGame;
+
+  /// No description provided for @unpinGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpin from your games'**
+  String get unpinGame;
+
+  /// No description provided for @pinnedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is pinned to your games'**
+  String pinnedToast(String name);
+
+  /// No description provided for @unpinnedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is unpinned'**
+  String unpinnedToast(String name);
+
+  /// No description provided for @famFlood.
+  ///
+  /// In en, this message translates to:
+  /// **'Flood'**
+  String get famFlood;
+
+  /// No description provided for @famFloodAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'Paint the board until it is one color, in as few moves as you can'**
+  String get famFloodAbout;
+
+  /// No description provided for @tagShade.
+  ///
+  /// In en, this message translates to:
+  /// **'shade cells, black out'**
+  String get tagShade;
+
+  /// No description provided for @tagLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'draw a loop, cycle'**
+  String get tagLoop;
+
+  /// No description provided for @tagPath.
+  ///
+  /// In en, this message translates to:
+  /// **'draw a path, line, route'**
+  String get tagPath;
+
+  /// No description provided for @tagNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'place numbers, digits'**
+  String get tagNumbers;
+
+  /// No description provided for @tagRegions.
+  ///
+  /// In en, this message translates to:
+  /// **'split into regions, areas, divide'**
+  String get tagRegions;
+
+  /// No description provided for @tagSums.
+  ///
+  /// In en, this message translates to:
+  /// **'sums, add up, arithmetic, math, maths'**
+  String get tagSums;
+
+  /// No description provided for @tagLatin.
+  ///
+  /// In en, this message translates to:
+  /// **'Latin square'**
+  String get tagLatin;
+
+  /// No description provided for @tagPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'place objects'**
+  String get tagPlace;
+
+  /// No description provided for @tagConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'connect, join, link, bridges'**
+  String get tagConnect;
+
+  /// No description provided for @tagColors.
+  ///
+  /// In en, this message translates to:
+  /// **'colors, colours, paint'**
+  String get tagColors;
+
+  /// No description provided for @tagGuess.
+  ///
+  /// In en, this message translates to:
+  /// **'guess, word game'**
+  String get tagGuess;
+
+  /// No description provided for @tagSlide.
+  ///
+  /// In en, this message translates to:
+  /// **'slide tiles, merge'**
+  String get tagSlide;
+
+  /// No description provided for @tagArcade.
+  ///
+  /// In en, this message translates to:
+  /// **'arcade, action, reflexes'**
+  String get tagArcade;
+
+  /// No description provided for @tagSymmetry.
+  ///
+  /// In en, this message translates to:
+  /// **'symmetry, symmetric'**
+  String get tagSymmetry;
+
+  /// No description provided for @tagBinary.
+  ///
+  /// In en, this message translates to:
+  /// **'two symbols, binary'**
+  String get tagBinary;
+
+  /// No description provided for @tagMaze.
+  ///
+  /// In en, this message translates to:
+  /// **'maze'**
+  String get tagMaze;
 
   /// No description provided for @size.
   ///

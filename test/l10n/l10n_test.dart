@@ -92,21 +92,21 @@ void main() {
     tester.platformDispatcher.localesTestValue = const [Locale('ru', 'RU')];
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
     await _pumpApp(tester);
-    expect(find.text('Блоки'), findsOneWidget);
+    expect(find.text('Числа'), findsOneWidget);
   });
 
   testWidgets('the language setting overrides the system', (tester) async {
     tester.platformDispatcher.localesTestValue = const [Locale('pl')];
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
     final settings = await _pumpApp(tester, prefs: {'set.language': 'de'});
-    expect(find.text('Blöcke'), findsOneWidget);
+    expect(find.text('Zahlen'), findsOneWidget);
 
     settings.language = null;
     await tester.pumpAndSettle();
-    expect(find.text('Bloki'), findsOneWidget);
+    expect(find.text('Liczby'), findsOneWidget);
 
     settings.language = 'en';
     await tester.pumpAndSettle();
-    expect(find.text('Blocks'), findsOneWidget);
+    expect(find.text('Numbers'), findsOneWidget);
   });
 }

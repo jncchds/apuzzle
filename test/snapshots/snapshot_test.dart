@@ -25,7 +25,9 @@ import 'package:apuzzle/puzzles/hues/hues_generator.dart';
 import 'package:apuzzle/puzzles/hues/hues_model.dart';
 import 'package:apuzzle/puzzles/pop/pop_model.dart';
 import 'package:apuzzle/puzzles/rails/rails_model.dart';
+import 'package:apuzzle/ui/app_router.dart';
 import 'package:apuzzle/ui/game_screen.dart';
+import 'package:apuzzle/ui/home_screen.dart';
 import 'package:apuzzle/ui/tutorial_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -262,12 +264,16 @@ void main() {
     }
   }
 
-  // Keep the app import used (home screen snapshot).
-  testWidgets('snapshot home', (tester) async {
+  Future<GlobalKey> pumpApp(WidgetTester tester, String theme) async {
     tester.view.physicalSize = _phone;
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
-    SharedPreferences.setMockInitialValues({'set.theme': 'dark', 'set.language': ?_lang});
+    SharedPreferences.setMockInitialValues({
+      'set.theme': theme,
+      'set.language': ?_lang,
+      'games.recent': ['orbits', 'sudoku', 'fence', 'kings', 'trail'],
+      'games.pinned': ['mambo'],
+    });
     final store = await GameStore.open();
     final key = GlobalKey();
     await tester.pumpWidget(
@@ -280,11 +286,39 @@ void main() {
       ),
     );
     await tester.pump(const Duration(milliseconds: 500));
+    return key;
+  }
+
+  Future<void> capture(WidgetTester tester, GlobalKey key, String name) async {
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 600));
+    await tester.pump(const Duration(milliseconds: 100));
     await tester.runAsync(() async {
       final boundary = key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
       final image = await boundary.toImage(pixelRatio: 1);
       final png = await image.toByteData(format: ui.ImageByteFormat.png);
-      File('${outDir.path}/home$_suffix.png').writeAsBytesSync(png!.buffer.asUint8List());
+      File('${outDir.path}/$name$_suffix.png').writeAsBytesSync(png!.buffer.asUint8List());
     });
+  }
+
+  for (final theme in ['dark', 'light']) {
+    final tag = theme == 'dark' ? '' : '_light';
+    testWidgets('snapshot home $theme', (tester) async {
+      final key = await pumpApp(tester, theme);
+      await capture(tester, key, 'home$tag');
+    });
+  }
+
+  testWidgets('snapshot browse', (tester) async {
+    final key = await pumpApp(tester, 'dark');
+    final delegate = AppRouterDelegate.of(tester.element(find.byType(HomeScreen)));
+    delegate.openCategory(categoryById('grids')!);
+    await capture(tester, key, 'browse_category');
+    delegate.openFamily(familyById('flood')!);
+    await capture(tester, key, 'browse_family');
+    delegate.setNewRoutePath(AppRoute.parse(Uri.parse('/?q=loop')));
+    await capture(tester, key, 'browse_search');
+    delegate.setNewRoutePath(AppRoute.parse(Uri.parse('/?q=Nurikabe')));
+    await capture(tester, key, 'browse_alias');
   });
 }

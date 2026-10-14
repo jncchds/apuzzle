@@ -6,9 +6,10 @@ import '../core/day.dart';
 import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
 import '../core/registry.dart';
-import '../core/settings.dart';
+import '../core/search.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
+import 'browse_screens.dart';
 import 'daily_screen.dart';
 import 'install_app.dart';
 import 'new_game_sheet.dart';
@@ -16,22 +17,34 @@ import 'puzzle_code_ui.dart';
 import 'version_pill.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, this.query = ''});
+
+  /// The search text, kept in the address (`/?q=…`).
+  final String query;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<void> _open(PuzzleType type) async {
-    await showNewGameSheet(context, type);
-    if (mounted) setState(() {}); // refresh "in progress" badges
+  late final _search = TextEditingController(text: widget.query);
+
+  @override
+  void didUpdateWidget(HomeScreen old) {
+    super.didUpdateWidget(old);
+    if (widget.query != _search.text) _search.text = widget.query;
+  }
+
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final settings = context.watch<Settings>();
     final l = context.l10n;
+    final searching = searchWords(widget.query).isNotEmpty;
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -47,10 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.pin_outlined),
             tooltip: l.playCode,
-            onPressed: () async {
-              await showEnterCodeDialog(context);
-              if (mounted) setState(() {});
-            },
+            onPressed: () => showEnterCodeDialog(context),
           ),
           IconButton(
             icon: const Icon(Icons.school_outlined),
@@ -64,134 +74,211 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-            sliver: SliverToBoxAdapter(
-              child: ValueListenableBuilder(
-                valueListenable: context.read<GameStore>().dailyRevision,
-                builder: (context, _, _) => const _DailyBanner(),
-              ),
-            ),
-          ),
-          for (final category in puzzleCategories)
+      body: GamesListener(
+        builder: (context) => CustomScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          slivers: [
             SliverPadding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
               sliver: SliverToBoxAdapter(
-                child: _CategorySection(
-                  category: category,
-                  collapsed: settings.isCollapsed(category.id),
-                  onToggle: () => settings.toggleCollapsed(category.id),
-                  onOpen: _open,
+                child: SearchBar(
+                  controller: _search,
+                  hintText: l.searchHint,
+                  elevation: const WidgetStatePropertyAll(0),
+                  leading: const Padding(padding: EdgeInsets.only(left: 4), child: Icon(Icons.search_rounded)),
+                  trailing: [
+                    if (widget.query.isNotEmpty)
+                      IconButton(
+                        icon: const Icon(Icons.close_rounded),
+                        tooltip: MaterialLocalizations.of(context).deleteButtonTooltip,
+                        onPressed: () {
+                          _search.clear();
+                          AppRouterDelegate.of(context).search('');
+                        },
+                      ),
+                  ],
+                  onChanged: AppRouterDelegate.of(context).search,
                 ),
               ),
             ),
-          const SliverPadding(padding: EdgeInsets.only(bottom: 16)),
-        ],
+            if (searching)
+              ..._results(context)
+            else ...[
+              const SliverToBoxAdapter(child: _YourGames()),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+                sliver: SliverToBoxAdapter(
+                  child: ValueListenableBuilder(
+                    valueListenable: context.read<GameStore>().dailyRevision,
+                    builder: (context, _, _) => const _DailyBanner(),
+                  ),
+                ),
+              ),
+              _categories(context),
+            ],
+          ],
+        ),
       ),
     );
   }
+
+  List<Widget> _results(BuildContext context) {
+    final theme = Theme.of(context);
+    final l = context.l10n;
+    final r = searchGames(widget.query);
+    Widget row(PuzzleType t) => GameRow(type: t, label: categoryOf(t).name(l));
+    Widget note(String text) => Padding(
+      padding: const EdgeInsets.fromLTRB(4, 12, 4, 8),
+      child: Text(text, style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+    );
+    final nothing = r.found.isEmpty && r.alternatives.isEmpty && r.similar.isEmpty;
+    return [
+      SliverPadding(
+        padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
+        sliver: SliverList.list(
+          children: [
+            if (r.similar.isNotEmpty) ...[
+              note(l.searchSimilar(widget.query.trim())),
+              for (final t in r.similar) row(t),
+            ] else if (r.found.isEmpty && r.alternatives.isEmpty)
+              note(l.searchNone),
+            for (final t in r.found) row(t),
+            if (r.alternatives.isNotEmpty) ...[
+              note(l.searchAlternatives(widget.query.trim())),
+              for (final t in r.alternatives) row(t),
+            ],
+          ],
+        ),
+      ),
+      if (nothing) _categories(context),
+    ];
+  }
+
+  Widget _categories(BuildContext context) => SliverPadding(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+    sliver: SliverGrid(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 220,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+        mainAxisExtent: 156,
+      ),
+      delegate: SliverChildListDelegate([for (final c in puzzleCategories) _CategoryTile(category: c)]),
+    ),
+  );
 }
 
-/// One group of games: a header that folds its cards away, and the cards.
-class _CategorySection extends StatelessWidget {
-  const _CategorySection({
-    required this.category,
-    required this.collapsed,
-    required this.onToggle,
-    required this.onOpen,
-  });
-
-  final PuzzleCategory category;
-  final bool collapsed;
-  final VoidCallback onToggle;
-  final ValueChanged<PuzzleType> onOpen;
+/// Pinned games, then the ones played last; hidden while there are none.
+class _YourGames extends StatelessWidget {
+  const _YourGames();
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l = context.l10n;
     final store = context.read<GameStore>();
+    final ids = {...store.pinnedGames.reversed, ...store.recentGames};
+    final games = [
+      for (final id in ids) ?puzzleTypes.where((t) => t.id == id).firstOrNull,
+    ];
+    if (games.isEmpty) return const SizedBox.shrink();
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: onToggle,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(4, 10, 0, 10),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text.rich(
-                    TextSpan(
-                      text: category.name(l),
-                      children: [
-                        TextSpan(
-                          text: '  ${category.types.length}',
-                          style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-                        ),
-                      ],
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
-                  ),
-                ),
-                Tooltip(
-                  message: collapsed ? l.expand : l.collapse,
-                  child: AnimatedRotation(
-                    turns: collapsed ? -0.25 : 0,
-                    duration: const Duration(milliseconds: 200),
-                    child: const Icon(Icons.expand_more_rounded),
-                  ),
-                ),
-              ],
-            ),
-          ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 6),
+          child: Text(l.yourGames, style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
         ),
-        AnimatedSize(
-          duration: const Duration(milliseconds: 220),
-          curve: Curves.easeOutCubic,
-          alignment: Alignment.topCenter,
-          child: collapsed
-              ? const SizedBox(width: double.infinity)
-              : GridView.extent(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.only(bottom: 8),
-                  // Smaller cards on a turned phone, so more than one row shows.
-                  maxCrossAxisExtent: MediaQuery.sizeOf(context).height < 480 ? 200 : 240,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                  childAspectRatio: 0.95,
-                  children: [
-                    for (final t in category.types)
-                      _TypeCard(type: t, inProgress: store.hasSave(t.id), onTap: () => onOpen(t)),
-                  ],
-                ),
+        SizedBox(
+          height: 100,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            itemCount: games.length,
+            separatorBuilder: (_, _) => const SizedBox(width: 8),
+            itemBuilder: (context, i) => _YourGame(type: games[i]),
+          ),
         ),
       ],
     );
   }
 }
 
-class _TypeCard extends StatelessWidget {
-  const _TypeCard({required this.type, required this.inProgress, required this.onTap});
+class _YourGame extends StatelessWidget {
+  const _YourGame({required this.type});
 
   final PuzzleType type;
-  final bool inProgress;
-  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l = context.l10n;
+    final store = context.read<GameStore>();
+    return SizedBox(
+      width: 92,
+      child: Card(
+        margin: EdgeInsets.zero,
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: () => showNewGameSheet(context, type),
+          onLongPress: () => togglePinned(context, type),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(6, 10, 6, 8),
+                child: Column(
+                  children: [
+                    GameIcon(icon: type.icon, accent: type.accent, size: 24),
+                    const Spacer(),
+                    Text(
+                      type.name(l),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.labelMedium,
+                    ),
+                  ],
+                ),
+              ),
+              if (store.isPinned(type.id))
+                Positioned(
+                  top: 4,
+                  right: 4,
+                  child: Icon(Icons.push_pin_rounded, size: 14, color: theme.colorScheme.onSurfaceVariant),
+                ),
+              if (store.hasSave(type.id))
+                Positioned(
+                  top: 6,
+                  left: 6,
+                  child: Tooltip(
+                    message: l.inProgress,
+                    child: CircleAvatar(radius: 4, backgroundColor: theme.colorScheme.primary),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// A big tile that opens a category: its name, game count and icons.
+class _CategoryTile extends StatelessWidget {
+  const _CategoryTile({required this.category});
+
+  final PuzzleCategory category;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l = context.l10n;
+    final types = category.types;
     return Card(
+      margin: EdgeInsets.zero,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: onTap,
+        onTap: () => AppRouterDelegate.of(context).openCategory(category),
         child: Padding(
           padding: const EdgeInsets.all(14),
           child: Column(
@@ -199,37 +286,31 @@ class _TypeCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: type.accent.withValues(alpha: 0.18),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Icon(type.icon, color: type.accent, size: 30),
-                  ),
+                  GameIcon(icon: category.icon, accent: category.accent, size: 26),
                   const Spacer(),
-                  if (inProgress)
-                    Chip(
-                      label: Text(l.inProgress),
-                      visualDensity: VisualDensity.compact,
-                      labelStyle: theme.textTheme.labelSmall,
-                    ),
+                  Icon(Icons.chevron_right_rounded, color: theme.colorScheme.onSurfaceVariant),
                 ],
               ),
               const Spacer(),
               Text(
-                type.name(l),
-                style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                category.name(l),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
+                style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
               ),
-              const SizedBox(height: 4),
-              Flexible(
-                child: Text(
-                  type.tagline(l),
-                  style: theme.textTheme.bodySmall,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+              Text(
+                l.gamesCount(types.length),
+                style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+              ),
+              const SizedBox(height: 8),
+              ClipRect(
+                child: SizedBox(
+                  height: 20,
+                  child: Wrap(
+                    spacing: 6,
+                    clipBehavior: Clip.hardEdge,
+                    children: [for (final t in types) Icon(t.icon, size: 18, color: t.accent)],
+                  ),
                 ),
               ),
             ],
@@ -252,6 +333,7 @@ class _DailyBanner extends StatelessWidget {
     final p = dailyProgress(context.read<GameStore>(), today);
     final complete = p.done == p.total;
     return Card(
+      margin: EdgeInsets.zero,
       clipBehavior: Clip.antiAlias,
       color: theme.colorScheme.primaryContainer,
       child: InkWell(

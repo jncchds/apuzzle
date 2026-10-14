@@ -73,10 +73,104 @@ class AppLocalizationsDe extends AppLocalizations {
   String get catCasual => 'Zum Entspannen';
 
   @override
-  String get collapse => 'Einklappen';
+  String get searchHint => 'Spiele suchen';
 
   @override
-  String get expand => 'Ausklappen';
+  String get searchNone => 'Keine Spiele gefunden. Stöbere in den Kategorien:';
+
+  @override
+  String searchSimilar(String query) {
+    return 'Nichts namens „$query“. Meintest du:';
+  }
+
+  @override
+  String searchAlternatives(String query) {
+    return '„$query“ haben wir nicht, aber vielleicht gefällt dir:';
+  }
+
+  @override
+  String get yourGames => 'Deine Spiele';
+
+  @override
+  String gamesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Spiele',
+      one: '$count Spiel',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pinGame => 'An deine Spiele anheften';
+
+  @override
+  String get unpinGame => 'Von deinen Spielen lösen';
+
+  @override
+  String pinnedToast(String name) {
+    return '$name ist an deine Spiele angeheftet';
+  }
+
+  @override
+  String unpinnedToast(String name) {
+    return '$name ist nicht mehr angeheftet';
+  }
+
+  @override
+  String get famFlood => 'Farbflut';
+
+  @override
+  String get famFloodAbout => 'Färbe das Brett um, bis es einfarbig ist, mit so wenigen Zügen wie möglich';
+
+  @override
+  String get tagShade => 'Felder schwärzen, schattieren, ausmalen';
+
+  @override
+  String get tagLoop => 'Schleife zeichnen, Rundweg, Kreis';
+
+  @override
+  String get tagPath => 'Weg zeichnen, Linie, Pfad, Route';
+
+  @override
+  String get tagNumbers => 'Zahlen eintragen, Ziffern';
+
+  @override
+  String get tagRegions => 'in Gebiete teilen, Bereiche, Regionen';
+
+  @override
+  String get tagSums => 'Summen, addieren, Rechnen, Mathe';
+
+  @override
+  String get tagLatin => 'lateinisches Quadrat';
+
+  @override
+  String get tagPlace => 'Objekte platzieren';
+
+  @override
+  String get tagConnect => 'verbinden, Brücken';
+
+  @override
+  String get tagColors => 'Farben, malen';
+
+  @override
+  String get tagGuess => 'raten, Ratespiel';
+
+  @override
+  String get tagSlide => 'Steine schieben, verschmelzen';
+
+  @override
+  String get tagArcade => 'Arcade, Action, Reaktion';
+
+  @override
+  String get tagSymmetry => 'Symmetrie, symmetrisch';
+
+  @override
+  String get tagBinary => 'zwei Symbole, binär';
+
+  @override
+  String get tagMaze => 'Labyrinth, Irrgarten';
 
   @override
   String get size => 'Größe';

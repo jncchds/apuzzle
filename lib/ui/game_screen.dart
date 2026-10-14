@@ -72,6 +72,10 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    // After the frame: the home screen listens, and it may be building.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) context.read<GameStore>().markPlayed(type.id);
+    });
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       if (mounted && _ctrl != null && !_ctrl!.solved) setState(() {});
     });

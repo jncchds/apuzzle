@@ -73,10 +73,104 @@ class AppLocalizationsEn extends AppLocalizations {
   String get catCasual => 'Casual';
 
   @override
-  String get collapse => 'Collapse';
+  String get searchHint => 'Search games';
 
   @override
-  String get expand => 'Expand';
+  String get searchNone => 'No games found. Browse the categories:';
+
+  @override
+  String searchSimilar(String query) {
+    return 'Nothing called “$query”. Did you mean:';
+  }
+
+  @override
+  String searchAlternatives(String query) {
+    return 'We don’t have “$query”, but you might like:';
+  }
+
+  @override
+  String get yourGames => 'Your games';
+
+  @override
+  String gamesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count games',
+      one: '$count game',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pinGame => 'Pin to your games';
+
+  @override
+  String get unpinGame => 'Unpin from your games';
+
+  @override
+  String pinnedToast(String name) {
+    return '$name is pinned to your games';
+  }
+
+  @override
+  String unpinnedToast(String name) {
+    return '$name is unpinned';
+  }
+
+  @override
+  String get famFlood => 'Flood';
+
+  @override
+  String get famFloodAbout => 'Paint the board until it is one color, in as few moves as you can';
+
+  @override
+  String get tagShade => 'shade cells, black out';
+
+  @override
+  String get tagLoop => 'draw a loop, cycle';
+
+  @override
+  String get tagPath => 'draw a path, line, route';
+
+  @override
+  String get tagNumbers => 'place numbers, digits';
+
+  @override
+  String get tagRegions => 'split into regions, areas, divide';
+
+  @override
+  String get tagSums => 'sums, add up, arithmetic, math, maths';
+
+  @override
+  String get tagLatin => 'Latin square';
+
+  @override
+  String get tagPlace => 'place objects';
+
+  @override
+  String get tagConnect => 'connect, join, link, bridges';
+
+  @override
+  String get tagColors => 'colors, colours, paint';
+
+  @override
+  String get tagGuess => 'guess, word game';
+
+  @override
+  String get tagSlide => 'slide tiles, merge';
+
+  @override
+  String get tagArcade => 'arcade, action, reflexes';
+
+  @override
+  String get tagSymmetry => 'symmetry, symmetric';
+
+  @override
+  String get tagBinary => 'two symbols, binary';
+
+  @override
+  String get tagMaze => 'maze';
 
   @override
   String get size => 'Size';

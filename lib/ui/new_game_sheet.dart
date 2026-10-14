@@ -9,6 +9,7 @@ import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
+import 'browse_screens.dart';
 import 'tutorial_screen.dart';
 
 /// Sizes of [type] whose board fits [screen] without zoom. A phone can turn,
@@ -123,7 +124,15 @@ class _NewGameSheetState extends State<_NewGameSheet> {
               children: [
                 Icon(type.icon, color: type.accent),
                 const SizedBox(width: 10),
-                Text(type.name(l), style: theme.textTheme.titleLarge),
+                Expanded(child: Text(type.name(l), style: theme.textTheme.titleLarge)),
+                IconButton(
+                  icon: Icon(store.isPinned(type.id) ? Icons.push_pin_rounded : Icons.push_pin_outlined),
+                  tooltip: store.isPinned(type.id) ? l.unpinGame : l.pinGame,
+                  onPressed: () async {
+                    await togglePinned(context, type);
+                    if (mounted) setState(() {});
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 16),

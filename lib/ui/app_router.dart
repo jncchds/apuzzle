@@ -8,6 +8,7 @@ import '../core/puzzle_code.dart';
 import '../core/puzzle_type.dart';
 import '../core/registry.dart';
 import '../l10n/l10n.dart';
+import 'browse_screens.dart';
 import 'daily_screen.dart';
 import 'game_screen.dart';
 import 'home_screen.dart';
@@ -16,13 +17,16 @@ import 'release_notes_screen.dart';
 import 'settings_screen.dart';
 import 'tutorial_screen.dart';
 
-/// What the address bar shows: home (`/`), settings (`/settings`), the
+/// What the address bar shows: home (`/`, searching `/?q=text`), a category
+/// (`/c/numbers`), a family of several games (`/f/flood`, over its category),
+/// settings (`/settings`), the
 /// release notes (`/release-notes`, over settings), the
 /// tutorials (`/learn`; one game's is `/learn?t=mambo`, its strategy
 /// lessons `/learn?t=mambo&s=1`), daily
 /// challenges (`/daily?d=2026-09-25`) or a puzzle by its share code
 /// (`/?p=kings-8x8-hard-4FZ8K1-v1`, the share link itself; a daily one is
-/// `/daily?d=…&p=…`). On the web this gives the browser's back and forward
+/// `/daily?d=…&p=…`; one opened while browsing keeps the page below it:
+/// `/c/numbers?p=…`). On the web this gives the browser's back and forward
 /// buttons real history; on Android the same parser opens share links.
 class AppRoute {
   const AppRoute({
@@ -34,7 +38,17 @@ class AppRoute {
     this.daily,
     this.game,
     this.error,
+    this.category,
+    this.family,
+    this.query = '',
   });
+
+  /// The category page, under [family] if that is open too.
+  final PuzzleCategory? category;
+  final PuzzleFamily? family;
+
+  /// The home screen's search text.
+  final String query;
 
   final bool settings;
 
@@ -70,7 +84,8 @@ class AppRoute {
         return AppRoute(error: e.describe);
       }
     }
-    final page = uri.pathSegments.lastOrNull;
+    final segments = uri.pathSegments.where((s) => s.isNotEmpty).toList();
+    final page = segments.lastOrNull;
     if (page == 'learn') {
       final tutorial = puzzleTypes.where((t) => t.id == uri.queryParameters['t']).firstOrNull;
       return AppRoute(
@@ -88,16 +103,42 @@ class AppRoute {
       return AppRoute(daily: day, game: game);
     }
     if (page == 'release-notes') return const AppRoute(settings: true, releaseNotes: true);
-    return game != null ? AppRoute(game: game) : AppRoute(settings: page == 'settings');
+    final parent = segments.length >= 2 ? segments[segments.length - 2] : null;
+    if (parent == 'c' || parent == 'f') {
+      final family = parent == 'f' ? familyById(page) : null;
+      final category = family != null
+          ? categoryOfFamily(family)
+          : parent == 'c'
+          ? categoryById(page)
+          // A family of one has no page: show its category.
+          : puzzleTypes.where((t) => t.id == page).map(categoryOf).firstOrNull;
+      return AppRoute(category: category, family: family, game: game);
+    }
+    if (page == 'settings') return const AppRoute(settings: true);
+    return AppRoute(game: game, query: uri.queryParameters['q'] ?? '');
   }
 
   Uri get uri => tutorial != null || learn
       ? Uri(path: '/learn', queryParameters: tutorial == null ? null : {'t': tutorial!.id, if (strategies) 's': '1'})
       : daily != null
       ? Uri(path: '/daily', queryParameters: {'d': daily.toString(), if (game != null) 'p': game.toString()})
-      : game != null
-      ? Uri(path: '/', queryParameters: {'p': game.toString()})
-      : Uri(path: releaseNotes ? '/release-notes' : (settings ? '/settings' : '/'));
+      : releaseNotes
+      ? Uri(path: '/release-notes')
+      : settings
+      ? Uri(path: '/settings')
+      : Uri(
+          path: family != null
+              ? '/f/${family!.id}'
+              : category != null
+              ? '/c/${category!.id}'
+              : '/',
+          queryParameters: _orNull({
+            if (query.isNotEmpty && category == null) 'q': query,
+            if (game != null) 'p': game.toString(),
+          }),
+        );
+
+  static Map<String, String>? _orNull(Map<String, String> m) => m.isEmpty ? null : m;
 }
 
 class AppRouteParser extends RouteInformationParser<AppRoute> {
@@ -144,6 +185,9 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
   int _games = 0;
   PuzzleType? _tutorial;
   bool _strategies = false;
+  PuzzleCategory? _category;
+  PuzzleFamily? _family;
+  String _query = '';
 
   /// Where the tutorial's "Play" button leads (the game it was offered for).
   VoidCallback? _tutorialPlay;
@@ -157,6 +201,9 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
     strategies: _strategies,
     daily: _daily,
     game: _game?.code,
+    category: _category,
+    family: _family,
+    query: _query,
   );
 
   @override
@@ -180,13 +227,28 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
         learn: configuration.learn,
         daily: configuration.daily,
         game: configuration.game,
+        category: configuration.category,
+        family: configuration.family,
+        query: configuration.query,
       );
     }
     return SynchronousFuture(null);
   }
 
   /// With [daily] and [game], the game is that day's challenge.
-  void _show({bool settings = false, bool releaseNotes = false, bool learn = false, Day? daily, PuzzleCode? game}) {
+  void _show({
+    bool settings = false,
+    bool releaseNotes = false,
+    bool learn = false,
+    Day? daily,
+    PuzzleCode? game,
+    PuzzleCategory? category,
+    PuzzleFamily? family,
+    String query = '',
+  }) {
+    _category = category;
+    _family = family;
+    _query = category == null ? query : '';
     _settings = settings || releaseNotes;
     _releaseNotes = releaseNotes;
     _learn = learn;
@@ -218,8 +280,25 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
     notifyListeners();
   }
 
-  /// Opens a puzzle; if it is the saved one, the game resumes.
-  void openGame(PuzzleType type, GenParams params) => _show(game: PuzzleCode(type, params));
+  /// Opens a puzzle over the page it was picked on; if it is the saved one,
+  /// the game resumes.
+  void openGame(PuzzleType type, GenParams params) =>
+      _show(game: PuzzleCode(type, params), category: _category, family: _family, query: _query);
+
+  void openCategory(PuzzleCategory category) => _show(category: category);
+
+  /// A family of several games, over its category.
+  void openFamily(PuzzleFamily family) => _show(category: categoryOfFamily(family), family: family);
+
+  /// Changes the home screen's search text, without a history entry.
+  void search(String query) {
+    final context = navigatorKey.currentContext;
+    if (context == null || query == _query) return;
+    Router.neglect(context, () {
+      _query = query;
+      notifyListeners();
+    });
+  }
 
   /// Opens the daily challenges of [day] (today by default).
   void openDaily([Day? day]) => _show(daily: day ?? Day.today());
@@ -256,7 +335,20 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
     return Navigator(
       key: navigatorKey,
       pages: [
-        const MaterialPage(key: ValueKey('home'), child: HomeScreen()),
+        MaterialPage(
+          key: const ValueKey('home'),
+          child: HomeScreen(query: _query),
+        ),
+        if (_category case final category?)
+          MaterialPage(
+            key: const ValueKey('category'),
+            child: CategoryScreen(category: category),
+          ),
+        if (_family case final family?)
+          MaterialPage(
+            key: const ValueKey('family'),
+            child: FamilyScreen(family: family),
+          ),
         if (_settings) const MaterialPage(key: ValueKey('settings'), child: SettingsScreen()),
         if (_releaseNotes) const MaterialPage(key: ValueKey('release-notes'), child: ReleaseNotesScreen()),
         if (_learn) const MaterialPage(key: ValueKey('learn'), child: LearnScreen()),
@@ -282,6 +374,11 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
           ),
       ],
       onDidRemovePage: (page) {
+        if (page.key == const ValueKey('category')) {
+          _category = null;
+          _family = null;
+        }
+        if (page.key == const ValueKey('family')) _family = null;
         if (page.key == const ValueKey('settings')) _settings = false;
         if (page.key == const ValueKey('release-notes')) _releaseNotes = false;
         if (page.key == const ValueKey('learn')) _learn = false;

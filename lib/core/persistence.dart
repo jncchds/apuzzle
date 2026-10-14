@@ -270,6 +270,34 @@ class GameStore {
       hasSave(typeId) ||
       prefs.getKeys().any((k) => k.startsWith('stats.$typeId.'));
 
+  /// Bumped when [recentGames] or [pinnedGames] change.
+  final ValueNotifier<int> gamesRevision = ValueNotifier(0);
+
+  static const _recentKey = 'games.recent';
+  static const _pinnedKey = 'games.pinned';
+  static const recentLimit = 8;
+
+  /// Type ids of the games played last, newest first. Kept on the device.
+  List<String> get recentGames => prefs.getStringList(_recentKey) ?? const [];
+
+  Future<void> markPlayed(String typeId) async {
+    final recent = [typeId, ...recentGames.where((id) => id != typeId)].take(recentLimit).toList();
+    if (recent.join(',') == recentGames.join(',')) return;
+    await prefs.setStringList(_recentKey, recent);
+    gamesRevision.value++;
+  }
+
+  /// Type ids the player pinned to the home screen, in pinning order.
+  List<String> get pinnedGames => prefs.getStringList(_pinnedKey) ?? const [];
+
+  bool isPinned(String typeId) => pinnedGames.contains(typeId);
+
+  Future<void> setPinned(String typeId, bool pinned) async {
+    final rest = pinnedGames.where((id) => id != typeId);
+    await prefs.setStringList(_pinnedKey, [...rest, if (pinned) typeId]);
+    gamesRevision.value++;
+  }
+
   /// Last chosen size/difficulty/options for the new-game sheet.
   Map<String, dynamic>? lastChoice(String typeId) => _readJson(_lastKey(typeId));
   Future<void> setLastChoice(String typeId, Map<String, dynamic> j) => prefs.setString(_lastKey(typeId), jsonEncode(j));

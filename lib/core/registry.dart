@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../puzzles/arrows/arrows_type.dart';
 import '../puzzles/atoms/atoms_type.dart';
 import '../puzzles/blocks/blocks_type.dart';
@@ -65,13 +67,43 @@ const List<PuzzleType> puzzleTypes = [
   MinesType(),
 ];
 
-/// A home-screen group of games.
-class PuzzleCategory {
-  const PuzzleCategory(this.id, this.types);
+/// Games that share a board idea. Most are families of one, which open their
+/// game directly; a family with several variants has its own page (`/f/<id>`).
+class PuzzleFamily {
+  const PuzzleFamily(this.id, this.types);
 
-  /// Stable: collapsed groups are remembered by it.
+  /// Stable: it is part of the address. A family of one uses its game's id.
   final String id;
   final List<PuzzleType> types;
+
+  bool get single => types.length == 1;
+
+  String name(AppLocalizations l) => switch (id) {
+    'flood' => l.famFlood,
+    _ => types.first.name(l),
+  };
+
+  /// What the variants share, under the family's name.
+  String about(AppLocalizations l) => switch (id) {
+    'flood' => l.famFloodAbout,
+    _ => types.first.tagline(l),
+  };
+
+  IconData get icon => types.first.icon;
+  Color get accent => types.first.accent;
+}
+
+/// A home-screen category: a tile that opens its families (`/c/<id>`).
+class PuzzleCategory {
+  const PuzzleCategory(this.id, this.families, {required this.icon, required this.accent});
+
+  /// Stable: it is part of the address.
+  final String id;
+  final List<PuzzleFamily> families;
+  final IconData icon;
+  final Color accent;
+
+  List<PuzzleType> get types => [for (final f in families) ...f.types];
 
   String name(AppLocalizations l) => switch (id) {
     'numbers' => l.catNumbers,
@@ -81,33 +113,75 @@ class PuzzleCategory {
   };
 }
 
-/// Every type of [puzzleTypes], once, grouped for the home screen.
+/// Every type of [puzzleTypes], in exactly one family of one category.
 const List<PuzzleCategory> puzzleCategories = [
-  PuzzleCategory('numbers', [SudokuType(), BlocksType(), TallyType(), FormulaType(), PlotsType(), ShikakuType()]),
-  PuzzleCategory('grids', [
-    MamboType(),
-    KingsType(),
-    PairsType(),
-    HuesType(),
-    LitsType(),
-    CampType(),
-    IslandsType(),
-    LampsType(),
-    OrbitsType(),
-    MinesType(),
-  ]),
-  PuzzleCategory('paths', [
-    TrailType(),
-    LinksType(),
-    LabyrinthType(),
-    PipesType(),
-    AtomsType(),
-    FenceType(),
-    PearlsType(),
-    RailsType(),
-    ArrowsType(),
-  ]),
-  PuzzleCategory('casual', [MosaicType(), BlendType(), PopType(), MergeType(), SnakeType()]),
+  PuzzleCategory(
+    'numbers',
+    icon: Icons.calculate_rounded,
+    accent: Color(0xFF6FA8FF),
+    [
+      PuzzleFamily('sudoku', [SudokuType()]),
+      PuzzleFamily('blocks', [BlocksType()]),
+      PuzzleFamily('tally', [TallyType()]),
+      PuzzleFamily('formula', [FormulaType()]),
+      PuzzleFamily('plots', [PlotsType()]),
+      PuzzleFamily('shikaku', [ShikakuType()]),
+    ],
+  ),
+  PuzzleCategory(
+    'grids',
+    icon: Icons.grid_on_rounded,
+    accent: Color(0xFFFFB86B),
+    [
+      PuzzleFamily('mambo', [MamboType()]),
+      PuzzleFamily('kings', [KingsType()]),
+      PuzzleFamily('pairs', [PairsType()]),
+      PuzzleFamily('hues', [HuesType()]),
+      PuzzleFamily('lits', [LitsType()]),
+      PuzzleFamily('camp', [CampType()]),
+      PuzzleFamily('islands', [IslandsType()]),
+      PuzzleFamily('lamps', [LampsType()]),
+      PuzzleFamily('orbits', [OrbitsType()]),
+      PuzzleFamily('mines', [MinesType()]),
+    ],
+  ),
+  PuzzleCategory(
+    'paths',
+    icon: Icons.route_rounded,
+    accent: Color(0xFF7BD88F),
+    [
+      PuzzleFamily('trail', [TrailType()]),
+      PuzzleFamily('links', [LinksType()]),
+      PuzzleFamily('labyrinth', [LabyrinthType()]),
+      PuzzleFamily('pipes', [PipesType()]),
+      PuzzleFamily('atoms', [AtomsType()]),
+      PuzzleFamily('fence', [FenceType()]),
+      PuzzleFamily('pearls', [PearlsType()]),
+      PuzzleFamily('rails', [RailsType()]),
+      PuzzleFamily('arrows', [ArrowsType()]),
+    ],
+  ),
+  PuzzleCategory(
+    'casual',
+    icon: Icons.sports_esports_rounded,
+    accent: Color(0xFFFF7EB6),
+    [
+      PuzzleFamily('flood', [MosaicType(), BlendType()]),
+      PuzzleFamily('pop', [PopType()]),
+      PuzzleFamily('merge', [MergeType()]),
+      PuzzleFamily('snake', [SnakeType()]),
+    ],
+  ),
 ];
 
 PuzzleType puzzleTypeById(String id) => puzzleTypes.firstWhere((t) => t.id == id);
+
+PuzzleCategory? categoryById(String? id) => puzzleCategories.where((c) => c.id == id).firstOrNull;
+
+/// Only families with several variants have a page.
+PuzzleFamily? familyById(String? id) =>
+    [for (final c in puzzleCategories) ...c.families].where((f) => f.id == id && !f.single).firstOrNull;
+
+PuzzleCategory categoryOf(PuzzleType type) => puzzleCategories.firstWhere((c) => c.types.any((t) => t.id == type.id));
+
+PuzzleCategory categoryOfFamily(PuzzleFamily family) => puzzleCategories.firstWhere((c) => c.families.contains(family));

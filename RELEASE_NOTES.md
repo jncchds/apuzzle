@@ -1,5 +1,9 @@
 # Release notes
 
+## 0.9.0 - 2026-10-14
+- New home screen: search at the top, then your games (the ones you pinned and played last), the daily challenge and a tile for each category. A category lists its games, and games that are variants of one idea share a family page (Mosaic and Blend are now the Flood family)
+- Search finds games by name, by what you do in them ("draw a loop", "shade cells") and by other names the puzzles are known by, in any of the app's languages, and forgives typos
+- Pin a game to the home screen with a long press on its card, or with the pin on its new-game sheet
 ## 0.8.1 - 2026-10-13
 - Orbits: tap a star to pick it, then tap cells to give them to it, also cells away from its region (a drag could only reach them through the cells in between). The star of your last drag stays picked. Explain mode starts with the cells nearest to their star
 
@@ -49,7 +53,7 @@
 - README: all games with screenshots, links to the web version and downloads
 
 ## 0.3.2 - 2026-09-27
-- New puzzles: Rails (Train Tracks), Arrows (Yajilin), Blocks (Suguru), Pairs (Norinori), Plots (Fillomino) and Links (Numberlink), each with a tutorial
+- New puzzles: Rails, Arrows, Blocks, Pairs, Plots and Links, each with a tutorial
 - The new puzzles join the daily challenges from 2026-09-28
 
 ## 0.3.1 - 2026-09-25
@@ -62,7 +66,7 @@
 ## 0.2.1 - 2026-09-25
 - New puzzle: 2048, with a target tile or free play
 - New app icon and splash screen
-- LITS renamed to Tetra
+- The tetromino puzzle has a new name: Tetra
 - MIT license
 
 ## 0.2.0 - 2026-09-25
@@ -71,7 +75,7 @@
 - Link previews for shared puzzles
 
 ## 0.1.5 - 2026-09-25
-- New puzzles: Campsite (Tents), Islands (Nurikabe), Lamps (Light Up), Fence (Slitherlink), Pearls (Masyu) and Mines
+- New puzzles: Campsite, Islands, Lamps, Fence, Pearls and Mines
 - Mines never needs guessing, and digging a mine flags it instead of ending the game
 
 ## 0.1.4 - 2026-09-25
@@ -89,7 +93,7 @@
 - Share codes and links: every puzzle has a code that recreates it; links open the web version or the Android app, and codes can be pasted on the home screen
 
 ## 0.1.0 - 2026-09-25
-- First release: Sun & Moon, Sudoku, Crowns, Hues, Mosaic, Blend, Pipes, Shikaku, Trail, Atoms and LITS, generated on the device, each with exactly one solution
+- First release: Sun & Moon, Sudoku, Crowns, Hues, Mosaic, Blend, Pipes, Shikaku, Trail, Atoms and Tetra, generated on the device, each with exactly one solution
 - Undo and redo, timer, hints, saving and resuming, and stats
 - Sudoku: same-value and row, column and box highlights; an optional setting to remove pencil marks automatically
 - Hues: clue numbers count down as matching cells are painted

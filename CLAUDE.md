@@ -29,7 +29,7 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
 
 ## README
 `README.md` is the project's front page; keep it in step with the app in the same commit as the change:
-- the Puzzles section has one table per home-screen group (`puzzleCategories`, same order), and every row shows the game in both themes. A new puzzle type gets a row in its group's table: copy `build/snapshots/<id>_dark.png` and `<id>_light.png` to `docs/screenshots/`;
+- the Puzzles section has one table per home-screen category (`puzzleCategories`, same order), and every row shows the game in both themes. A new puzzle type gets a row in its category's table: copy `build/snapshots/<id>_dark.png` and `<id>_light.png` to `docs/screenshots/`;
 - a new or changed user-facing feature (anything that gets a release note beyond a fix) goes into the Features list;
 - when board visuals change, refresh the affected `docs/screenshots/*.png` (and `home.png`) from `build/snapshots/`;
 - new core files or moved responsibilities go into its Architecture tree.
@@ -48,8 +48,10 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
   - saving and resuming (shared_preferences), and win detection and stats.
 - `lib/core/generator_runner.dart`: runs `type.generate(params)` via `compute`, which is an isolate on native platforms.
 - `lib/ui/board/cell_grid_board.dart`: a fit-to-screen grid with no zoom, and the win ripple. `cell_tile.dart` is the standard animated cell.
-- `lib/ui/app_router.dart`: `MaterialApp.router`. The route is the URL: `/`, `/settings`, or `/?p=<share code>`, so the web gets browser back/forward and Android share links use the same parser. The web build uses path URLs, and the Pages deploy copies `index.html` to `404.html`. Open screens through `AppRouterDelegate.of(context)`, not `Navigator.push` (dialogs and sheets are fine).
-- `lib/core/registry.dart`: register new types here, in `puzzleTypes` and in one home-screen group of `puzzleCategories` (numbers, grids, paths, casual; names are `cat*` ARB keys). The home screen shows the groups as sections that fold; the folded ones are kept in `Settings` (`set.collapsed`).
+- `lib/ui/app_router.dart`: `MaterialApp.router`. The route is the URL: `/` (searching: `/?q=<text>`), `/c/<category>`, `/f/<family>` (over its category), `/settings`, or `/?p=<share code>` (a game opened while browsing keeps its page: `/c/grids?p=<code>`), so the web gets browser back/forward and Android share links use the same parser. The web build uses path URLs, and the Pages deploy copies `index.html` to `404.html`. Open screens through `AppRouterDelegate.of(context)`, not `Navigator.push` (dialogs and sheets are fine).
+- `lib/core/registry.dart`: register new types here, in `puzzleTypes` and in one `PuzzleFamily` of one `PuzzleCategory` in `puzzleCategories` (numbers, grids, paths, casual; names are `cat*` ARB keys). A family of one has its game's id and opens the new-game sheet directly; a family of several variants (e.g. `flood`: Mosaic, Blend) gets a page (`FamilyScreen`) with a `fam<Id>` name and a `fam<Id>About` line on what they share.
+- Home screen (`lib/ui/home_screen.dart`, `lib/ui/browse_screens.dart`): a search bar, "your games" (pinned first, then played last: `GameStore.pinnedGames`/`recentGames`, prefs `games.*`, kept on the device and not exported; `GameScreen` marks a game played, a long press on a game card or the pin on the new-game sheet pins it), the daily card, and one tile per category. A category page (`CategoryScreen`) shows family and game cards.
+- Search (`lib/core/search.dart`): one list of games for any category. Every query word must start a word (case- and accent-insensitive, `searchWords`) of the game's name, tagline or tags (`gameTags`, translated `tag*` ARB keys that may list synonyms since they are never shown), in any of the four languages. Games found only by another name (`gameAliases`: Nurikabe, Slitherlink, Queens…) are listed under "We don't have “<query>”, but you might like:" (the player's text, never the alias). When nothing matches, names and other names are tried with typos allowed (one edit for 4–6 letters, two from 7: "Did you mean:"), and failing that the category tiles are shown. Aliases are for matching only: never show them in the UI, store listings or app metadata.
 - Daily challenges (`lib/core/daily.dart`, `lib/ui/daily_screen.dart`, route `/daily?d=2026-09-25[&p=<code>]`):
   - each day picks 3 games (seeded by `hash31(date)`, a web-safe FNV-1a) from the types whose `dailySince` is on or before it (launch: 2026-09-01), each at its `dailyDifficulties` (all by default; 2048 only medium);
   - the player can leave games out (the tune button on the daily screen, at least 3 stay): `dailyChoices` is a history of `(from, excluded ids)` kept by `GameStore` in `dailyPool`, and a change counts from today, so earlier days keep their games. Excluded ids are stored (not chosen ones), so a new puzzle joins everyone's selection by default. The exception is a new casual game (the `casual` group): it must start left out for players who already have a selection, so build that when the first one comes. It travels with the progress export, but a device that has its own history keeps it;
@@ -90,7 +92,7 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
    - `<id>_explain.dart`: trace the solver's rules and add an `Explainer` (see Explain mode), with `ex<Id>*` texts;
    - `<id>Name`, `<id>Tagline`, `<id>Rules`, `tut<Id><n>`, `tut<Id>S<n>` (and any other texts) in all four ARB files.
 2. Generation must be deterministic for a given `GenParams.seed`, and pure, because it runs in an isolate. Types must be `const`.
-3. Add it to `puzzleTypes` and to one group of `puzzleCategories` in `registry.dart`.
+3. Add it to `puzzleTypes` and to one family (its own, or a family of variants) of one category in `puzzleCategories` (`registry.dart`). Give it search tags in `gameTags` (add a `GameTag` with `tag*` texts in all four languages if none fits) and the other names it is known by (original or trademarked names) in `gameAliases` (`search.dart`).
 4. Add tests in `test/puzzles/<id>/`. Across seeds, sizes and difficulties, check that:
    - the solution is valid;
    - the puzzle has exactly one solution;
@@ -104,6 +106,7 @@ Releases are `release/X.Y.Z` branches on the remote (pushing one runs `.github/w
 - Region outlines (`RegionBorders`) have rounded corners: a lone bend is an arc, and where three or four lines meet the inner corners are filled in.
 - Shikaku draws a rectangle faint while it can't stay as it is (no number, several, or the wrong area).
 - Use our own puzzle names and art, not LinkedIn's or the source app's (Tango, Queens, Zip, Mambo, Kings, …).
+- Original or trademarked puzzle names (Nurikabe, Slitherlink, Queens, …) appear only in code and developer notes (`gameAliases`, this file). Never in anything players or stores see: ARB texts, README, RELEASE_NOTES.md, web/app metadata. Keep them out of commit messages too, since the history is public.
 
 The full plan and puzzle rules are in `C:\Users\check\.claude\plans\hello-i-want-to-hazy-neumann.md`.
 

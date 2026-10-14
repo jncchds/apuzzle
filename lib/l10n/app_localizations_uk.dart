@@ -73,10 +73,106 @@ class AppLocalizationsUk extends AppLocalizations {
   String get catCasual => 'Для відпочинку';
 
   @override
-  String get collapse => 'Згорнути';
+  String get searchHint => 'Пошук ігор';
 
   @override
-  String get expand => 'Розгорнути';
+  String get searchNone => 'Ігор не знайдено. Перегляньте категорії:';
+
+  @override
+  String searchSimilar(String query) {
+    return 'Нічого не знайдено за «$query». Можливо, ви мали на увазі:';
+  }
+
+  @override
+  String searchAlternatives(String query) {
+    return 'У нас немає «$query», але може сподобатися:';
+  }
+
+  @override
+  String get yourGames => 'Ваші ігри';
+
+  @override
+  String gamesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count гри',
+      many: '$count ігор',
+      few: '$count гри',
+      one: '$count гра',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pinGame => 'Закріпити у ваших іграх';
+
+  @override
+  String get unpinGame => 'Відкріпити з ваших ігор';
+
+  @override
+  String pinnedToast(String name) {
+    return '$name закріплено у ваших іграх';
+  }
+
+  @override
+  String unpinnedToast(String name) {
+    return '$name відкріплено';
+  }
+
+  @override
+  String get famFlood => 'Заливка';
+
+  @override
+  String get famFloodAbout => 'Перефарбовуйте поле, доки воно не стане одного кольору, за якомога менше ходів';
+
+  @override
+  String get tagShade => 'зафарбувати клітинки, затінити';
+
+  @override
+  String get tagLoop => 'намалювати петлю, цикл, замкнена лінія';
+
+  @override
+  String get tagPath => 'намалювати шлях, лінія, маршрут';
+
+  @override
+  String get tagNumbers => 'розставити числа, цифри';
+
+  @override
+  String get tagRegions => 'поділити на області, ділянки, регіони';
+
+  @override
+  String get tagSums => 'суми, додавання, арифметика, математика';
+
+  @override
+  String get tagLatin => 'латинський квадрат';
+
+  @override
+  String get tagPlace => 'розставити об’єкти';
+
+  @override
+  String get tagConnect => 'з’єднати, поєднати, мости';
+
+  @override
+  String get tagColors => 'кольори, фарби';
+
+  @override
+  String get tagGuess => 'вгадати, вгадування';
+
+  @override
+  String get tagSlide => 'пересувати плитки, злиття';
+
+  @override
+  String get tagArcade => 'аркада, екшн, реакція';
+
+  @override
+  String get tagSymmetry => 'симетрія, симетричний';
+
+  @override
+  String get tagBinary => 'два символи, бінарна';
+
+  @override
+  String get tagMaze => 'лабіринт';
 
   @override
   String get size => 'Розмір';

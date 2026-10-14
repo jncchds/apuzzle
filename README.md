@@ -18,7 +18,7 @@ You choose the grid size and the difficulty.
 
 ## Puzzles
 
-The games are grouped as on the home screen. Each one is shown in the dark and the light theme.
+The games are grouped by the home screen's categories. Each one is shown in the dark and the light theme.
 
 ### Numbers
 
@@ -62,6 +62,8 @@ The games are grouped as on the home screen. Each one is shown in the dark and t
 
 ### Casual
 
+Mosaic and Blend are one family on the home screen, Flood.
+
 | Dark | Light | Puzzle | Goal |
 |---|---|---|---|
 | <img src="docs/screenshots/mosaic_dark.png" width="90" alt="Mosaic, dark theme"> | <img src="docs/screenshots/mosaic_light.png" width="90" alt="Mosaic, light theme"> | **Mosaic** | Flood the board with one color from the top-left corner, within the move limit. |
@@ -87,7 +89,7 @@ The games are grouped as on the home screen. Each one is shown in the dark and t
 - **Auto-save.** Leave at any time and continue where you stopped.
 - **Move your progress.** Export wins, best times, daily results and saved games as a file or as text, and import them on another device; importing merges and never replaces.
 - **Portrait and landscape.** Turn the phone or widen the window, and the board fills the height with the controls in a side panel.
-- **A tidy home screen.** Games are sorted into groups (Numbers, Logic grids, Paths & loops, Casual) that fold away.
+- **A tidy home screen.** Search at the top, then your games (the ones you pinned and played last), the daily challenge and one tile per category (Numbers, Logic grids, Paths & loops, Casual). A category lists its games; games that are variants of one idea share a family page. Search finds games by name, by what you do in them ("draw a loop", "shade cells") in any of the four languages, and by other names the puzzles are known by; it forgives typos. Long-press a game, or use the pin on its new-game sheet, to pin it.
 - **Animations.** Cells pop and fade, pipes rotate, colors flood, bubbles fall and slide, and solving plays a ripple with confetti.
 - **Light and dark themes** (Material 3).
 - **Four languages:** English, Ukrainian, Polish and German.
@@ -153,8 +155,9 @@ lib/
     tutorial.dart         tutorial and strategy steps
     explain.dart          explain mode: traced solver deductions turned into steps and texts
     backup.dart           progress export and import
-    registry.dart         list of available puzzle types and their home-screen groups
-  ui/                     home, new-game sheet, game, daily, learn and settings screens, board widgets
+    registry.dart         puzzle types, grouped into families and home-screen categories
+    search.dart           game search: tags, other names, accent-insensitive word-prefix matching
+  ui/                     home, category and family pages (browse_screens.dart), new-game sheet, game, daily, learn and settings screens, board widgets
   puzzles/<id>/           model, solver, generator, type, tutorial and explainer for each puzzle
   l10n/                   texts in four languages (ARB files)
 test/                     generator and solver tests per puzzle, tutorial, explain and controller tests, snapshots
@@ -167,7 +170,7 @@ To add a puzzle:
    - a sound solver that can count solutions;
    - a seeded generator;
    - a tutorial, and an explainer if the puzzle is solved by deduction.
-3. Register the type in `lib/core/registry.dart`.
+3. Register the type in `lib/core/registry.dart` (in a family of a category), and give it search tags and any other names it is known by in `lib/core/search.dart`.
 4. Add tests.
 5. Add it to its group's table above, with a dark and a light screenshot in `docs/screenshots/`.
 
