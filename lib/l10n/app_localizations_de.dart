@@ -3770,4 +3770,141 @@ class AppLocalizationsDe extends AppLocalizations {
   String exSignsAboveCol(Object cell, Object cells, Object col, Object values) {
     return '$cell ist größer als jedes von $cells, alle in Spalte $col: Sie brauchen verschiedene Zahlen unter ihm, also kann $cell nicht $values sein.';
   }
+
+  @override
+  String get soloName => 'Solo';
+
+  @override
+  String get soloTagline => 'Schwärze Doppelte, bis jede Zahl allein steht';
+
+  @override
+  String get soloRules =>
+      '• In jedem Feld steht eine Zahl. Schwärze einige davon, sodass keine Zahl in einer Zeile oder Spalte doppelt vorkommt.\n• Geschwärzte Felder berühren sich nie mit einer Seite.\n• Die übrigen Felder bilden ein zusammenhängendes Gebiet.\n• Schwärze nur eine Zahl, die ungeschwärzt noch irgendwo in ihrer Zeile oder Spalte steht.\n\nTippe auf ein Feld, um zu wechseln: geschwärzt → eingekreist (deine Notiz „bleibt“) → leer. Langes Drücken / Rechtsklick wechselt zurück. Kreise sind freiwillig: Das Rätsel ist gelöst, sobald die richtigen Zahlen geschwärzt sind.';
+
+  @override
+  String get tutSolo1 =>
+      'Schwärze Zahlen, sodass keine in einer Zeile oder Spalte doppelt vorkommt. Geschwärzte Felder berühren sich nicht mit einer Seite, und die übrigen bleiben ein Stück. Schwärze nur Zahlen, die sich wiederholen. Tippe auf ein Feld, um es zu schwärzen.';
+
+  @override
+  String get tutSolo2 =>
+      'Geschwärzte Felder berühren sich nicht, also bleiben die Zahlen neben einem geschwärzten Feld. Die 1 oben links ist geschwärzt: Tippe die markierten Zahlen zweimal an, um sie einzukreisen (deine Notiz, dass sie bleiben), und löse dann das Gitter.';
+
+  @override
+  String get tutSolo3 =>
+      'Zwei gleiche Zahlen mit einem Feld dazwischen: Eine davon ist geschwärzt, und jede würde das mittlere Feld berühren, also bleibt die mittlere Zahl. Kreise die markierte 1 ein und löse dann das Gitter.';
+
+  @override
+  String get tutSolo4 =>
+      'Die übrigen Felder müssen ein Stück bilden. Sobald die 1 neben der 1 oben links geschwärzt ist, ist die 2 darunter der einzige Weg aus der Ecke, also bleibt sie. Löse das Gitter.';
+
+  @override
+  String get tutSolo5 =>
+      'Jetzt ein echtes Gitter. Fang mit Zahlen an, die in ihrer Zeile und Spalte nur einmal vorkommen, und mit gleichen Zahlen, die nah beieinander stehen.';
+
+  @override
+  String get tutSoloS1 =>
+      'Zwei gleiche Zahlen nebeneinander können nicht beide geschwärzt sein, also bleibt eine davon, und jede weitere gleiche Zahl in ihrer Zeile oder Spalte wird geschwärzt. In der oberen Zeile stehen zwei 4en nebeneinander: Schwärze die markierte 4.';
+
+  @override
+  String get tutSoloS2 =>
+      'Halte die übrigen Felder zusammen: Würde das Schwärzen eines Feldes sie in zwei Teile schneiden, mit bleibenden Zahlen auf beiden Seiten, dann bleibt dieses Feld. Achte auf geschwärzte Felder, die sich schräg zu einem Rand hin aufreihen.';
+
+  @override
+  String get tutSoloS3 =>
+      'Ein schweres Gitter. Wenn du feststeckst, schwärze eine Zahl und verfolge die Folgen: Bleiben zwei gleiche Zahlen in einer Linie übrig oder werden Felder abgeschnitten, dann bleibt diese Zahl.';
+
+  @override
+  String exSoloSupposeShade(Object cell) {
+    return 'Angenommen, $cell wäre geschwärzt.';
+  }
+
+  @override
+  String exSoloSupposeKeep(Object cell) {
+    return 'Angenommen, $cell bliebe.';
+  }
+
+  @override
+  String exSoloRefutedShade(Object cell) {
+    return '$cell bleibt: Schwärzen führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exSoloRefutedKeep(Object cell) {
+    return '$cell ist geschwärzt: Stehenlassen führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exSoloUnique(Object cell, int digit) {
+    return '$cell bleibt: Seine $digit kommt in seiner Zeile und Spalte sonst nicht vor.';
+  }
+
+  @override
+  String exSoloLastCopy(Object cell, int digit) {
+    return '$cell bleibt: Jede andere $digit in seiner Zeile und Spalte ist geschwärzt, und eine geschwärzte Zahl muss noch irgendwo stehen.';
+  }
+
+  @override
+  String exSoloTwiceRow(Object cell, Object other, int digit, Object row) {
+    return '$cell ist geschwärzt: Die $digit in $other bleibt in Zeile $row.';
+  }
+
+  @override
+  String exSoloTwiceCol(Object cell, Object other, int digit, Object col) {
+    return '$cell ist geschwärzt: Die $digit in $other bleibt in Spalte $col.';
+  }
+
+  @override
+  String exSoloTouch(Object cell, Object other) {
+    return '$cell bleibt: Es berührt das geschwärzte $other.';
+  }
+
+  @override
+  String exSoloShows(Object cell, Object other, int digit) {
+    return '$cell bleibt: $other ist geschwärzt, und seine $digit muss in Zeile oder Spalte noch stehen.';
+  }
+
+  @override
+  String exSoloBetween(Object cell, Object a, Object b, int digit) {
+    return '$cell bleibt: Eine der ${digit}en in $a und $b ist geschwärzt, und beide berühren es.';
+  }
+
+  @override
+  String exSoloPair(Object cell, Object a, Object b, int digit) {
+    return '$cell ist geschwärzt: Die ${digit}en in $a und $b stehen nebeneinander, also bleibt eine davon.';
+  }
+
+  @override
+  String exSoloWalled(Object cell, Object other) {
+    return '$cell bleibt: Es ist der letzte Ausweg für $other.';
+  }
+
+  @override
+  String exSoloCut(Object cell) {
+    return '$cell bleibt: Schwärzen würde die übrigen Felder in zwei Teile schneiden.';
+  }
+
+  @override
+  String exSoloFailTwice(Object a, Object b, int digit) {
+    return 'Aber dann behalten $a und $b beide eine $digit in einer Linie.';
+  }
+
+  @override
+  String exSoloFailTouch(Object a, Object b) {
+    return 'Aber dann berühren sich die geschwärzten Felder $a und $b.';
+  }
+
+  @override
+  String exSoloFailLonely(Object a, int digit) {
+    return 'Aber dann ist die $digit in $a geschwärzt und steht sonst nirgends in ihrer Zeile oder Spalte.';
+  }
+
+  @override
+  String exSoloFailWalled(Object a) {
+    return 'Aber dann ist $a eingemauert.';
+  }
+
+  @override
+  String exSoloFailApart(Object a, Object b) {
+    return 'Aber dann sind $a und $b voneinander abgeschnitten.';
+  }
 }

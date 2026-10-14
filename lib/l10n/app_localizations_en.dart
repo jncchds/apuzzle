@@ -3763,4 +3763,141 @@ class AppLocalizationsEn extends AppLocalizations {
   String exSignsAboveCol(Object cell, Object cells, Object col, Object values) {
     return '$cell is bigger than each of $cells, all in column $col: they need different numbers smaller than it, so $cell can\'t be $values.';
   }
+
+  @override
+  String get soloName => 'Solo';
+
+  @override
+  String get soloTagline => 'Shade the repeats until every number stands alone';
+
+  @override
+  String get soloRules =>
+      '• Every cell holds a number. Shade some of them so that no number shows twice in a row or column.\n• Shaded cells never touch side by side.\n• The cells left form one connected area.\n• Only shade a number that still shows, unshaded, somewhere in its row or column.\n\nTap a cell to cycle: shaded → circled (your \"this one stays\" note) → empty. Long-press / right-click cycles back. Circles are optional: the puzzle is done once the right numbers are shaded.';
+
+  @override
+  String get tutSolo1 =>
+      'Shade numbers so that none shows twice in a row or column. Shaded cells never touch side by side, and the cells left stay in one piece. Only shade a number that repeats. Tap a cell to shade it.';
+
+  @override
+  String get tutSolo2 =>
+      'Shaded cells never touch, so the numbers next to a shaded cell stay. The top-left 1 is shaded: tap the highlighted numbers twice to circle them (your note that they stay), then finish the board.';
+
+  @override
+  String get tutSolo3 =>
+      'Two equal numbers with one cell between them: one of them is shaded, and either one would touch the middle cell, so the middle number stays. Circle the highlighted 1, then finish the board.';
+
+  @override
+  String get tutSolo4 =>
+      'The cells left must form one piece. Once the 1 next to the top-left 1 is shaded, the 2 below it is that corner\'s only way out, so it stays. Finish the board.';
+
+  @override
+  String get tutSolo5 =>
+      'Now a real board. Start with numbers that show only once in their row and column, and with equal numbers close together.';
+
+  @override
+  String get tutSoloS1 =>
+      'Two equal numbers side by side can\'t both be shaded, so one of them stays, and every other copy of that number in their row or column is shaded. The top row has two 4s side by side: shade the highlighted 4.';
+
+  @override
+  String get tutSoloS2 =>
+      'Keep the cells left in one piece: if shading a cell would cut them in two, with numbers that stay on both sides, that cell stays. Watch for shaded cells lining up diagonally toward an edge.';
+
+  @override
+  String get tutSoloS3 =>
+      'A hard board. When stuck, shade a number and follow on: if two equal numbers end up left in one line, or some cells get cut off, that number stays.';
+
+  @override
+  String exSoloSupposeShade(Object cell) {
+    return 'Suppose $cell were shaded.';
+  }
+
+  @override
+  String exSoloSupposeKeep(Object cell) {
+    return 'Suppose $cell stayed.';
+  }
+
+  @override
+  String exSoloRefutedShade(Object cell) {
+    return '$cell stays: shading it leads to a contradiction.';
+  }
+
+  @override
+  String exSoloRefutedKeep(Object cell) {
+    return '$cell is shaded: keeping it leads to a contradiction.';
+  }
+
+  @override
+  String exSoloUnique(Object cell, int digit) {
+    return '$cell stays: its $digit shows nowhere else in its row or column.';
+  }
+
+  @override
+  String exSoloLastCopy(Object cell, int digit) {
+    return '$cell stays: every other $digit in its row and column is shaded, and a shaded number must still show somewhere.';
+  }
+
+  @override
+  String exSoloTwiceRow(Object cell, Object other, int digit, Object row) {
+    return '$cell is shaded: the $digit at $other stays in row $row.';
+  }
+
+  @override
+  String exSoloTwiceCol(Object cell, Object other, int digit, Object col) {
+    return '$cell is shaded: the $digit at $other stays in column $col.';
+  }
+
+  @override
+  String exSoloTouch(Object cell, Object other) {
+    return '$cell stays: it touches the shaded $other.';
+  }
+
+  @override
+  String exSoloShows(Object cell, Object other, int digit) {
+    return '$cell stays: $other is shaded, and its $digit must still show in its row or column.';
+  }
+
+  @override
+  String exSoloBetween(Object cell, Object a, Object b, int digit) {
+    return '$cell stays: one of the ${digit}s at $a and $b is shaded, and both touch it.';
+  }
+
+  @override
+  String exSoloPair(Object cell, Object a, Object b, int digit) {
+    return '$cell is shaded: the ${digit}s at $a and $b sit side by side, so one of them stays.';
+  }
+
+  @override
+  String exSoloWalled(Object cell, Object other) {
+    return '$cell stays: it is the last way out for $other.';
+  }
+
+  @override
+  String exSoloCut(Object cell) {
+    return '$cell stays: shading it would cut the cells left in two.';
+  }
+
+  @override
+  String exSoloFailTwice(Object a, Object b, int digit) {
+    return 'But then $a and $b both keep a $digit in one line.';
+  }
+
+  @override
+  String exSoloFailTouch(Object a, Object b) {
+    return 'But then the shaded cells $a and $b touch.';
+  }
+
+  @override
+  String exSoloFailLonely(Object a, int digit) {
+    return 'But then the $digit at $a is shaded and shows nowhere else in its row or column.';
+  }
+
+  @override
+  String exSoloFailWalled(Object a) {
+    return 'But then $a is walled in.';
+  }
+
+  @override
+  String exSoloFailApart(Object a, Object b) {
+    return 'But then $a and $b are cut off from each other.';
+  }
 }

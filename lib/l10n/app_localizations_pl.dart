@@ -3821,4 +3821,141 @@ class AppLocalizationsPl extends AppLocalizations {
   String exSignsAboveCol(Object cell, Object cells, Object col, Object values) {
     return '$cell jest większe od każdego z $cells, wszystkich w kolumnie $col: potrzebują różnych liczb mniejszych od niego, więc w $cell nie może być $values.';
   }
+
+  @override
+  String get soloName => 'Solo';
+
+  @override
+  String get soloTagline => 'Zamaluj powtórki, aż każda liczba zostanie sama';
+
+  @override
+  String get soloRules =>
+      '• W każdym polu jest liczba. Zamaluj niektóre z nich tak, aby żadna liczba nie powtarzała się w wierszu ani kolumnie.\n• Zamalowane pola nigdy nie stykają się bokami.\n• Pozostałe pola tworzą jeden spójny obszar.\n• Zamalować można tylko liczbę, która nadal widnieje niezamalowana gdzieś w jej wierszu lub kolumnie.\n\nDotknij pola, aby przełączać: zamalowane → w kółku (twoja notatka „zostaje”) → puste. Długie naciśnięcie / prawy przycisk przełącza wstecz. Kółka są opcjonalne: zagadka jest rozwiązana, gdy właściwe liczby są zamalowane.';
+
+  @override
+  String get tutSolo1 =>
+      'Zamaluj liczby tak, aby żadna nie powtarzała się w wierszu ani kolumnie. Zamalowane pola nie stykają się bokami, a pozostałe tworzą jedną całość. Zamalowuj tylko liczby, które się powtarzają. Dotknij pola, aby je zamalować.';
+
+  @override
+  String get tutSolo2 =>
+      'Zamalowane pola się nie stykają, więc liczby obok zamalowanego pola zostają. Lewa górna 1 jest zamalowana: dotknij dwa razy zaznaczonych liczb, aby wziąć je w kółko (twoja notatka, że zostają), a potem dokończ planszę.';
+
+  @override
+  String get tutSolo3 =>
+      'Dwie równe liczby z jednym polem pomiędzy: jedna z nich jest zamalowana, a każda z nich dotykałaby środkowego pola, więc środkowa liczba zostaje. Weź w kółko zaznaczoną 1, a potem dokończ planszę.';
+
+  @override
+  String get tutSolo4 =>
+      'Pozostałe pola muszą tworzyć jedną całość. Gdy 1 obok lewej górnej 1 jest zamalowana, 2 pod nią to jedyne wyjście z rogu, więc zostaje. Dokończ planszę.';
+
+  @override
+  String get tutSolo5 =>
+      'Teraz prawdziwa plansza. Zacznij od liczb, które występują w swoim wierszu i kolumnie tylko raz, oraz od równych liczb stojących blisko siebie.';
+
+  @override
+  String get tutSoloS1 =>
+      'Dwie równe liczby obok siebie nie mogą być obie zamalowane, więc jedna z nich zostaje, a każda inna taka sama liczba w ich wierszu lub kolumnie jest zamalowana. W górnym wierszu dwie 4 stoją obok siebie: zamaluj zaznaczoną 4.';
+
+  @override
+  String get tutSoloS2 =>
+      'Utrzymuj pozostałe pola w jednym kawałku: jeśli zamalowanie pola przecięłoby je na dwie części, a po obu stronach są liczby, które zostają, to pole zostaje. Uważaj na zamalowane pola układające się po skosie w stronę krawędzi.';
+
+  @override
+  String get tutSoloS3 =>
+      'Trudna plansza. Gdy utkniesz, zamaluj liczbę i śledź skutki: jeśli w jednej linii zostaną dwie równe liczby albo jakieś pola zostaną odcięte, ta liczba zostaje.';
+
+  @override
+  String exSoloSupposeShade(Object cell) {
+    return 'Załóżmy, że $cell jest zamalowane.';
+  }
+
+  @override
+  String exSoloSupposeKeep(Object cell) {
+    return 'Załóżmy, że $cell zostaje.';
+  }
+
+  @override
+  String exSoloRefutedShade(Object cell) {
+    return '$cell zostaje: zamalowanie prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exSoloRefutedKeep(Object cell) {
+    return '$cell jest zamalowane: pozostawienie prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exSoloUnique(Object cell, int digit) {
+    return '$cell zostaje: jego $digit nie występuje nigdzie indziej w wierszu ani kolumnie.';
+  }
+
+  @override
+  String exSoloLastCopy(Object cell, int digit) {
+    return '$cell zostaje: każda inna $digit w jego wierszu i kolumnie jest zamalowana, a zamalowana liczba musi gdzieś pozostać widoczna.';
+  }
+
+  @override
+  String exSoloTwiceRow(Object cell, Object other, int digit, Object row) {
+    return '$cell jest zamalowane: $digit w $other zostaje w wierszu $row.';
+  }
+
+  @override
+  String exSoloTwiceCol(Object cell, Object other, int digit, Object col) {
+    return '$cell jest zamalowane: $digit w $other zostaje w kolumnie $col.';
+  }
+
+  @override
+  String exSoloTouch(Object cell, Object other) {
+    return '$cell zostaje: styka się z zamalowanym $other.';
+  }
+
+  @override
+  String exSoloShows(Object cell, Object other, int digit) {
+    return '$cell zostaje: $other jest zamalowane, a jego $digit musi pozostać widoczna w wierszu lub kolumnie.';
+  }
+
+  @override
+  String exSoloBetween(Object cell, Object a, Object b, int digit) {
+    return '$cell zostaje: jedna z liczb $digit w $a i $b jest zamalowana, a obie go dotykają.';
+  }
+
+  @override
+  String exSoloPair(Object cell, Object a, Object b, int digit) {
+    return '$cell jest zamalowane: liczby $digit w $a i $b stoją obok siebie, więc jedna z nich zostaje.';
+  }
+
+  @override
+  String exSoloWalled(Object cell, Object other) {
+    return '$cell zostaje: to ostatnie wyjście dla $other.';
+  }
+
+  @override
+  String exSoloCut(Object cell) {
+    return '$cell zostaje: jego zamalowanie przecięłoby pozostałe pola na dwie części.';
+  }
+
+  @override
+  String exSoloFailTwice(Object a, Object b, int digit) {
+    return 'Ale wtedy $a i $b zostawiają tę samą $digit w jednej linii.';
+  }
+
+  @override
+  String exSoloFailTouch(Object a, Object b) {
+    return 'Ale wtedy zamalowane $a i $b się stykają.';
+  }
+
+  @override
+  String exSoloFailLonely(Object a, int digit) {
+    return 'Ale wtedy $digit w $a jest zamalowana i nie widnieje nigdzie indziej w wierszu ani kolumnie.';
+  }
+
+  @override
+  String exSoloFailWalled(Object a) {
+    return 'Ale wtedy $a jest zamknięte.';
+  }
+
+  @override
+  String exSoloFailApart(Object a, Object b) {
+    return 'Ale wtedy $a i $b są od siebie odcięte.';
+  }
 }

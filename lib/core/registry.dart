@@ -30,6 +30,7 @@ import '../puzzles/shikaku/shikaku_type.dart';
 import '../puzzles/signs/signs_type.dart';
 import '../puzzles/skyline/skyline_type.dart';
 import '../puzzles/snake/snake_type.dart';
+import '../puzzles/solo/solo_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
 import '../puzzles/tally/tally_type.dart';
 import '../puzzles/trail/trail_type.dart';
@@ -46,6 +47,7 @@ const List<PuzzleType> puzzleTypes = [
   KingsType(),
   BlocksType(),
   TallyType(),
+  SoloType(),
   FormulaType(),
   PairsType(),
   HuesType(),
@@ -132,6 +134,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('latin', [SkylineType(), CagesType(), SignsType()]),
       PuzzleFamily('blocks', [BlocksType()]),
       PuzzleFamily('tally', [TallyType()]),
+      PuzzleFamily('solo', [SoloType()]),
       PuzzleFamily('formula', [FormulaType()]),
       PuzzleFamily('plots', [PlotsType()]),
       PuzzleFamily('shikaku', [ShikakuType()]),

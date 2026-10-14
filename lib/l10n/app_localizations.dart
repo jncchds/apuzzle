@@ -5217,6 +5217,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{cell} is bigger than each of {cells}, all in column {col}: they need different numbers smaller than it, so {cell} can\'t be {values}.'**
   String exSignsAboveCol(Object cell, Object cells, Object col, Object values);
+
+  /// No description provided for @soloName.
+  ///
+  /// In en, this message translates to:
+  /// **'Solo'**
+  String get soloName;
+
+  /// No description provided for @soloTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Shade the repeats until every number stands alone'**
+  String get soloTagline;
+
+  /// No description provided for @soloRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Every cell holds a number. Shade some of them so that no number shows twice in a row or column.\n• Shaded cells never touch side by side.\n• The cells left form one connected area.\n• Only shade a number that still shows, unshaded, somewhere in its row or column.\n\nTap a cell to cycle: shaded → circled (your \"this one stays\" note) → empty. Long-press / right-click cycles back. Circles are optional: the puzzle is done once the right numbers are shaded.'**
+  String get soloRules;
+
+  /// No description provided for @tutSolo1.
+  ///
+  /// In en, this message translates to:
+  /// **'Shade numbers so that none shows twice in a row or column. Shaded cells never touch side by side, and the cells left stay in one piece. Only shade a number that repeats. Tap a cell to shade it.'**
+  String get tutSolo1;
+
+  /// No description provided for @tutSolo2.
+  ///
+  /// In en, this message translates to:
+  /// **'Shaded cells never touch, so the numbers next to a shaded cell stay. The top-left 1 is shaded: tap the highlighted numbers twice to circle them (your note that they stay), then finish the board.'**
+  String get tutSolo2;
+
+  /// No description provided for @tutSolo3.
+  ///
+  /// In en, this message translates to:
+  /// **'Two equal numbers with one cell between them: one of them is shaded, and either one would touch the middle cell, so the middle number stays. Circle the highlighted 1, then finish the board.'**
+  String get tutSolo3;
+
+  /// No description provided for @tutSolo4.
+  ///
+  /// In en, this message translates to:
+  /// **'The cells left must form one piece. Once the 1 next to the top-left 1 is shaded, the 2 below it is that corner\'s only way out, so it stays. Finish the board.'**
+  String get tutSolo4;
+
+  /// No description provided for @tutSolo5.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with numbers that show only once in their row and column, and with equal numbers close together.'**
+  String get tutSolo5;
+
+  /// No description provided for @tutSoloS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Two equal numbers side by side can\'t both be shaded, so one of them stays, and every other copy of that number in their row or column is shaded. The top row has two 4s side by side: shade the highlighted 4.'**
+  String get tutSoloS1;
+
+  /// No description provided for @tutSoloS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep the cells left in one piece: if shading a cell would cut them in two, with numbers that stay on both sides, that cell stays. Watch for shaded cells lining up diagonally toward an edge.'**
+  String get tutSoloS2;
+
+  /// No description provided for @tutSoloS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When stuck, shade a number and follow on: if two equal numbers end up left in one line, or some cells get cut off, that number stays.'**
+  String get tutSoloS3;
+
+  /// No description provided for @exSoloSupposeShade.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were shaded.'**
+  String exSoloSupposeShade(Object cell);
+
+  /// No description provided for @exSoloSupposeKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} stayed.'**
+  String exSoloSupposeKeep(Object cell);
+
+  /// No description provided for @exSoloRefutedShade.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: shading it leads to a contradiction.'**
+  String exSoloRefutedShade(Object cell);
+
+  /// No description provided for @exSoloRefutedKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: keeping it leads to a contradiction.'**
+  String exSoloRefutedKeep(Object cell);
+
+  /// No description provided for @exSoloUnique.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: its {digit} shows nowhere else in its row or column.'**
+  String exSoloUnique(Object cell, int digit);
+
+  /// No description provided for @exSoloLastCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: every other {digit} in its row and column is shaded, and a shaded number must still show somewhere.'**
+  String exSoloLastCopy(Object cell, int digit);
+
+  /// No description provided for @exSoloTwiceRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: the {digit} at {other} stays in row {row}.'**
+  String exSoloTwiceRow(Object cell, Object other, int digit, Object row);
+
+  /// No description provided for @exSoloTwiceCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: the {digit} at {other} stays in column {col}.'**
+  String exSoloTwiceCol(Object cell, Object other, int digit, Object col);
+
+  /// No description provided for @exSoloTouch.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: it touches the shaded {other}.'**
+  String exSoloTouch(Object cell, Object other);
+
+  /// No description provided for @exSoloShows.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: {other} is shaded, and its {digit} must still show in its row or column.'**
+  String exSoloShows(Object cell, Object other, int digit);
+
+  /// No description provided for @exSoloBetween.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: one of the {digit}s at {a} and {b} is shaded, and both touch it.'**
+  String exSoloBetween(Object cell, Object a, Object b, int digit);
+
+  /// No description provided for @exSoloPair.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: the {digit}s at {a} and {b} sit side by side, so one of them stays.'**
+  String exSoloPair(Object cell, Object a, Object b, int digit);
+
+  /// No description provided for @exSoloWalled.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: it is the last way out for {other}.'**
+  String exSoloWalled(Object cell, Object other);
+
+  /// No description provided for @exSoloCut.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: shading it would cut the cells left in two.'**
+  String exSoloCut(Object cell);
+
+  /// No description provided for @exSoloFailTwice.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {a} and {b} both keep a {digit} in one line.'**
+  String exSoloFailTwice(Object a, Object b, int digit);
+
+  /// No description provided for @exSoloFailTouch.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the shaded cells {a} and {b} touch.'**
+  String exSoloFailTouch(Object a, Object b);
+
+  /// No description provided for @exSoloFailLonely.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the {digit} at {a} is shaded and shows nowhere else in its row or column.'**
+  String exSoloFailLonely(Object a, int digit);
+
+  /// No description provided for @exSoloFailWalled.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {a} is walled in.'**
+  String exSoloFailWalled(Object a);
+
+  /// No description provided for @exSoloFailApart.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {a} and {b} are cut off from each other.'**
+  String exSoloFailApart(Object a, Object b);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

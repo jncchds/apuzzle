@@ -7,6 +7,7 @@
 - New game: Skyline. Put a tower in every cell, each height once per row and column, so that the clues around the grid see the right number of towers: a taller tower hides the shorter ones behind it. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-15
 - New game: Cages. Fill the grid so every number appears once per row and column, and the numbers in each outlined cage make the clue in its corner: added, taken away, multiplied or divided. Easy boards only add and take away. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-15
 - New game: Signs. Fill the grid so every number appears once per row and column, and every sign between two cells points at the smaller number. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-15. Skyline, Cages and Signs share a family page, Latin squares
+- New game: Solo. Every cell holds a number: shade some so that no number shows twice in a row or column. Shaded cells never touch side by side, and the cells left stay in one piece. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-15
 
 ## 0.8.1 - 2026-10-13
 - Orbits: tap a star to pick it, then tap cells to give them to it, also cells away from its region (a drag could only reach them through the cells in between). The star of your last drag stays picked. Explain mode starts with the cells nearest to their star

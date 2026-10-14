@@ -3836,4 +3836,141 @@ class AppLocalizationsUk extends AppLocalizations {
   String exSignsAboveCol(Object cell, Object cells, Object col, Object values) {
     return '$cell більша за кожну з $cells, усі в стовпці $col: їм потрібні різні числа, менші за неї, тож у $cell не може бути $values.';
   }
+
+  @override
+  String get soloName => 'Соло';
+
+  @override
+  String get soloTagline => 'Зафарбовуйте повтори, доки кожне число не залишиться одне';
+
+  @override
+  String get soloRules =>
+      '• У кожній клітинці стоїть число. Зафарбуйте деякі з них так, щоб жодне число не повторювалося в рядку чи стовпці.\n• Зафарбовані клітинки ніколи не торкаються сторонами.\n• Решта клітинок утворює одну зв\'язну область.\n• Зафарбовувати можна лише число, яке ще видно незафарбованим десь у його рядку чи стовпці.\n\nТоркніться клітинки, щоб перебрати: зафарбовано → обведено (ваша позначка «залишається») → порожньо. Довге натискання / правий клік — у зворотному порядку. Кружечки необов\'язкові: головоломку розв\'язано, щойно потрібні числа зафарбовано.';
+
+  @override
+  String get tutSolo1 =>
+      'Зафарбуйте числа так, щоб жодне не повторювалося в рядку чи стовпці. Зафарбовані клітинки не торкаються сторонами, а решта залишається одним цілим. Зафарбовуйте лише числа, що повторюються. Торкніться клітинки, щоб зафарбувати її.';
+
+  @override
+  String get tutSolo2 =>
+      'Зафарбовані клітинки не торкаються, тож числа поруч із зафарбованою залишаються. Верхню ліву 1 зафарбовано: торкніться позначених чисел двічі, щоб обвести їх (ваша позначка, що вони залишаються), а потім розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutSolo3 =>
+      'Два однакові числа через одну клітинку: одне з них зафарбоване, і будь-яке з них торкалося б середньої клітинки, тож середнє число залишається. Обведіть позначену 1, а потім розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutSolo4 =>
+      'Решта клітинок має бути одним цілим. Щойно 1 поруч із верхньою лівою 1 зафарбовано, 2 під нею — єдиний вихід із кутка, тож вона залишається. Розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutSolo5 =>
+      'Тепер справжнє поле. Почніть із чисел, які трапляються у своєму рядку й стовпці лише раз, і з однакових чисел, що стоять близько.';
+
+  @override
+  String get tutSoloS1 =>
+      'Два однакові числа поруч не можуть обидва бути зафарбовані, тож одне з них залишається, а всі інші такі самі числа в їхньому рядку чи стовпці зафарбовуються. У верхньому рядку дві 4 стоять поруч: зафарбуйте позначену 4.';
+
+  @override
+  String get tutSoloS2 =>
+      'Тримайте решту клітинок одним цілим: якщо зафарбування клітинки розрізало б їх надвоє, і з обох боків є числа, що залишаються, ця клітинка залишається. Стежте за зафарбованими клітинками, що вишиковуються по діагоналі до краю.';
+
+  @override
+  String get tutSoloS3 =>
+      'Складне поле. Коли застрягли, зафарбуйте число й простежте наслідки: якщо в одній лінії залишаться два однакові числа або якісь клітинки відріжуться, це число залишається.';
+
+  @override
+  String exSoloSupposeShade(Object cell) {
+    return 'Припустімо, $cell зафарбовано.';
+  }
+
+  @override
+  String exSoloSupposeKeep(Object cell) {
+    return 'Припустімо, $cell залишається.';
+  }
+
+  @override
+  String exSoloRefutedShade(Object cell) {
+    return '$cell залишається: якщо зафарбувати, виникне суперечність.';
+  }
+
+  @override
+  String exSoloRefutedKeep(Object cell) {
+    return '$cell зафарбовано: якщо залишити, виникне суперечність.';
+  }
+
+  @override
+  String exSoloUnique(Object cell, int digit) {
+    return '$cell залишається: її $digit більше ніде не трапляється в рядку чи стовпці.';
+  }
+
+  @override
+  String exSoloLastCopy(Object cell, int digit) {
+    return '$cell залишається: усі інші $digit у її рядку й стовпці зафарбовано, а зафарбоване число має десь лишатися видимим.';
+  }
+
+  @override
+  String exSoloTwiceRow(Object cell, Object other, int digit, Object row) {
+    return '$cell зафарбовано: $digit у $other залишається в рядку $row.';
+  }
+
+  @override
+  String exSoloTwiceCol(Object cell, Object other, int digit, Object col) {
+    return '$cell зафарбовано: $digit у $other залишається в стовпці $col.';
+  }
+
+  @override
+  String exSoloTouch(Object cell, Object other) {
+    return '$cell залишається: вона торкається зафарбованої $other.';
+  }
+
+  @override
+  String exSoloShows(Object cell, Object other, int digit) {
+    return '$cell залишається: $other зафарбовано, а її $digit має лишатися видимим у рядку чи стовпці.';
+  }
+
+  @override
+  String exSoloBetween(Object cell, Object a, Object b, int digit) {
+    return '$cell залишається: одне з чисел $digit у $a і $b зафарбоване, а обидва її торкаються.';
+  }
+
+  @override
+  String exSoloPair(Object cell, Object a, Object b, int digit) {
+    return '$cell зафарбовано: числа $digit у $a і $b стоять поруч, тож одне з них залишається.';
+  }
+
+  @override
+  String exSoloWalled(Object cell, Object other) {
+    return '$cell залишається: це останній вихід для $other.';
+  }
+
+  @override
+  String exSoloCut(Object cell) {
+    return '$cell залишається: якщо її зафарбувати, решта клітинок розпадеться надвоє.';
+  }
+
+  @override
+  String exSoloFailTwice(Object a, Object b, int digit) {
+    return 'Але тоді $a і $b обидві залишають $digit в одній лінії.';
+  }
+
+  @override
+  String exSoloFailTouch(Object a, Object b) {
+    return 'Але тоді зафарбовані $a і $b торкаються.';
+  }
+
+  @override
+  String exSoloFailLonely(Object a, int digit) {
+    return 'Але тоді $digit у $a зафарбовано, і воно більше ніде не видно в рядку чи стовпці.';
+  }
+
+  @override
+  String exSoloFailWalled(Object a) {
+    return 'Але тоді $a замкнено.';
+  }
+
+  @override
+  String exSoloFailApart(Object a, Object b) {
+    return 'Але тоді $a і $b відрізано одна від одної.';
+  }
 }
