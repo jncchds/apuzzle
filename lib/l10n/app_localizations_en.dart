@@ -4604,4 +4604,54 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutVanish3 =>
       'A real board: each round you get right shows one number more next time, and a miss one fewer. Get 3 rounds right.';
+
+  @override
+  String get hopperName => 'Hopper';
+
+  @override
+  String get hopperTagline => 'Watch the frog hop from pad to pad, then retrace its jumps';
+
+  @override
+  String get hopperRules =>
+      '• A frog hops from pad to pad, one jump at a time. When it stops, tap the pads it landed on, in the same order.\n• A pad can come up more than once: tap it again each time.\n• A wrong tap ends the round.\n• A round you get right scores a point per jump, and the next one has one jump more. After a miss, it has one fewer.\n\nOrder\n• Same order: from the first jump to the last.\n• Backwards: from the last jump back to the first.\n\nGoals\n• Rounds: play 10 rounds for a best score.\n• Lives: play on until your third miss.\n\nThe difficulty sets how many jumps the first round has and how fast the frog hops.';
+
+  @override
+  String get hopperOrder => 'Order';
+
+  @override
+  String get hopperForward => 'Same order';
+
+  @override
+  String get hopperForwardHint => 'Tap the pads in the order the frog jumped.';
+
+  @override
+  String get hopperReverse => 'Backwards';
+
+  @override
+  String get hopperReverseHint => 'Tap the pads from the frog\'s last jump back to its first.';
+
+  @override
+  String get hopperWatch => 'Watch the frog…';
+
+  @override
+  String get hopperPrompt => 'Tap the pads in order';
+
+  @override
+  String get hopperPromptReverse => 'Tap the pads backwards, last jump first';
+
+  @override
+  String get tutHopper1 =>
+      'Tap the board to start. The frog hops from pad to pad. When it stops, tap the pads it landed on, in the same order.';
+
+  @override
+  String get tutHopper2 =>
+      'A pad can come up more than once: tap it again each time. A wrong tap ends the round; here the round then plays again. Get both rounds right.';
+
+  @override
+  String get tutHopper3 =>
+      'With the Backwards option, tap the same pads from the last jump back to the first. Try it once.';
+
+  @override
+  String get tutHopper4 =>
+      'A real board: each round you get right adds a jump next time, and a miss takes one away. Get 3 rounds right.';
 }

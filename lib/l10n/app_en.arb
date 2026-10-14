@@ -1476,5 +1476,20 @@
   "vanishPrompt": "Tap the numbers in order",
   "tutVanish1": "Tap the board to start. Numbers appear: tap 1, and the others hide. Then tap where 2 and 3 were.",
   "tutVanish2": "Look as long as you like: the numbers stay until you tap 1. A tap on the wrong cell ends the round; here the round then plays again. Get both rounds right.",
-  "tutVanish3": "A real board: each round you get right shows one number more next time, and a miss one fewer. Get 3 rounds right."
+  "tutVanish3": "A real board: each round you get right shows one number more next time, and a miss one fewer. Get 3 rounds right.",
+  "hopperName": "Hopper",
+  "hopperTagline": "Watch the frog hop from pad to pad, then retrace its jumps",
+  "hopperRules": "• A frog hops from pad to pad, one jump at a time. When it stops, tap the pads it landed on, in the same order.\n• A pad can come up more than once: tap it again each time.\n• A wrong tap ends the round.\n• A round you get right scores a point per jump, and the next one has one jump more. After a miss, it has one fewer.\n\nOrder\n• Same order: from the first jump to the last.\n• Backwards: from the last jump back to the first.\n\nGoals\n• Rounds: play 10 rounds for a best score.\n• Lives: play on until your third miss.\n\nThe difficulty sets how many jumps the first round has and how fast the frog hops.",
+  "hopperOrder": "Order",
+  "hopperForward": "Same order",
+  "hopperForwardHint": "Tap the pads in the order the frog jumped.",
+  "hopperReverse": "Backwards",
+  "hopperReverseHint": "Tap the pads from the frog's last jump back to its first.",
+  "hopperWatch": "Watch the frog…",
+  "hopperPrompt": "Tap the pads in order",
+  "hopperPromptReverse": "Tap the pads backwards, last jump first",
+  "tutHopper1": "Tap the board to start. The frog hops from pad to pad. When it stops, tap the pads it landed on, in the same order.",
+  "tutHopper2": "A pad can come up more than once: tap it again each time. A wrong tap ends the round; here the round then plays again. Get both rounds right.",
+  "tutHopper3": "With the Backwards option, tap the same pads from the last jump back to the first. Try it once.",
+  "tutHopper4": "A real board: each round you get right adds a jump next time, and a miss takes one away. Get 3 rounds right."
 }

@@ -6183,6 +6183,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A real board: each round you get right shows one number more next time, and a miss one fewer. Get 3 rounds right.'**
   String get tutVanish3;
+
+  /// No description provided for @hopperName.
+  ///
+  /// In en, this message translates to:
+  /// **'Hopper'**
+  String get hopperName;
+
+  /// No description provided for @hopperTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch the frog hop from pad to pad, then retrace its jumps'**
+  String get hopperTagline;
+
+  /// No description provided for @hopperRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• A frog hops from pad to pad, one jump at a time. When it stops, tap the pads it landed on, in the same order.\n• A pad can come up more than once: tap it again each time.\n• A wrong tap ends the round.\n• A round you get right scores a point per jump, and the next one has one jump more. After a miss, it has one fewer.\n\nOrder\n• Same order: from the first jump to the last.\n• Backwards: from the last jump back to the first.\n\nGoals\n• Rounds: play 10 rounds for a best score.\n• Lives: play on until your third miss.\n\nThe difficulty sets how many jumps the first round has and how fast the frog hops.'**
+  String get hopperRules;
+
+  /// No description provided for @hopperOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get hopperOrder;
+
+  /// No description provided for @hopperForward.
+  ///
+  /// In en, this message translates to:
+  /// **'Same order'**
+  String get hopperForward;
+
+  /// No description provided for @hopperForwardHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the pads in the order the frog jumped.'**
+  String get hopperForwardHint;
+
+  /// No description provided for @hopperReverse.
+  ///
+  /// In en, this message translates to:
+  /// **'Backwards'**
+  String get hopperReverse;
+
+  /// No description provided for @hopperReverseHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the pads from the frog\'s last jump back to its first.'**
+  String get hopperReverseHint;
+
+  /// No description provided for @hopperWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch the frog…'**
+  String get hopperWatch;
+
+  /// No description provided for @hopperPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the pads in order'**
+  String get hopperPrompt;
+
+  /// No description provided for @hopperPromptReverse.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the pads backwards, last jump first'**
+  String get hopperPromptReverse;
+
+  /// No description provided for @tutHopper1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the board to start. The frog hops from pad to pad. When it stops, tap the pads it landed on, in the same order.'**
+  String get tutHopper1;
+
+  /// No description provided for @tutHopper2.
+  ///
+  /// In en, this message translates to:
+  /// **'A pad can come up more than once: tap it again each time. A wrong tap ends the round; here the round then plays again. Get both rounds right.'**
+  String get tutHopper2;
+
+  /// No description provided for @tutHopper3.
+  ///
+  /// In en, this message translates to:
+  /// **'With the Backwards option, tap the same pads from the last jump back to the first. Try it once.'**
+  String get tutHopper3;
+
+  /// No description provided for @tutHopper4.
+  ///
+  /// In en, this message translates to:
+  /// **'A real board: each round you get right adds a jump next time, and a miss takes one away. Get 3 rounds right.'**
+  String get tutHopper4;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

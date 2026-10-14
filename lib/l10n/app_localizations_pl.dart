@@ -4693,4 +4693,54 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutVanish3 =>
       'Prawdziwa plansza: każda dobra runda pokazuje następnym razem o jedną liczbę więcej, a pomyłka o jedną mniej. Zalicz 3 rundy.';
+
+  @override
+  String get hopperName => 'Skoczek';
+
+  @override
+  String get hopperTagline => 'Patrz, jak żabka skacze z liścia na liść, i powtórz jej skoki';
+
+  @override
+  String get hopperRules =>
+      '• Żabka skacze z liścia na liść, po jednym skoku. Gdy się zatrzyma, dotknij liści, na które skakała, w tej samej kolejności.\n• Liść może się powtórzyć: dotknij go za każdym razem.\n• Złe dotknięcie kończy rundę.\n• Dobra runda daje punkt za każdy skok, a następna ma o jeden skok więcej. Po pomyłce — o jeden mniej.\n\nKolejność\n• Ta sama: od pierwszego skoku do ostatniego.\n• Od końca: od ostatniego skoku do pierwszego.\n\nCele\n• Rundy: zagraj 10 rund o rekord.\n• Życia: graj do trzeciej pomyłki.\n\nPoziom trudności ustala, ile skoków ma pierwsza runda i jak szybko skacze żabka.';
+
+  @override
+  String get hopperOrder => 'Kolejność';
+
+  @override
+  String get hopperForward => 'Ta sama';
+
+  @override
+  String get hopperForwardHint => 'Dotykaj liści w kolejności skoków żabki.';
+
+  @override
+  String get hopperReverse => 'Od końca';
+
+  @override
+  String get hopperReverseHint => 'Dotykaj liści od ostatniego skoku żabki do pierwszego.';
+
+  @override
+  String get hopperWatch => 'Patrz na żabkę…';
+
+  @override
+  String get hopperPrompt => 'Dotykaj liści po kolei';
+
+  @override
+  String get hopperPromptReverse => 'Dotykaj liści od końca, od ostatniego skoku';
+
+  @override
+  String get tutHopper1 =>
+      'Dotknij planszy, aby zacząć. Żabka skacze z liścia na liść. Gdy się zatrzyma, dotknij liści, na które skakała, w tej samej kolejności.';
+
+  @override
+  String get tutHopper2 =>
+      'Liść może się powtórzyć: dotknij go za każdym razem. Złe dotknięcie kończy rundę; tutaj zagrasz ją wtedy jeszcze raz. Zalicz obie rundy.';
+
+  @override
+  String get tutHopper3 =>
+      'Z opcją „Od końca” dotykaj tych samych liści od ostatniego skoku do pierwszego. Spróbuj raz.';
+
+  @override
+  String get tutHopper4 =>
+      'Prawdziwa plansza: każda dobra runda dodaje następnym razem jeden skok, a pomyłka zabiera jeden. Zalicz 3 rundy.';
 }

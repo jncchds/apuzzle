@@ -12,6 +12,7 @@ import '../puzzles/fence/fence_type.dart';
 import '../puzzles/fleet/fleet_type.dart';
 import '../puzzles/formula/formula_type.dart';
 import '../puzzles/glimpse/glimpse_type.dart';
+import '../puzzles/hopper/hopper_type.dart';
 import '../puzzles/hues/hues_type.dart';
 import '../puzzles/islands/islands_type.dart';
 import '../puzzles/kings/kings_type.dart';
@@ -64,6 +65,7 @@ const List<PuzzleType> puzzleTypes = [
   SnakeType(),
   GlimpseType(),
   VanishType(),
+  HopperType(),
   PipesType(),
   ShikakuType(),
   PlotsType(),
@@ -197,7 +199,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('pop', [PopType()]),
       PuzzleFamily('merge', [MergeType()]),
       PuzzleFamily('snake', [SnakeType()]),
-      PuzzleFamily('memory', [GlimpseType(), VanishType()]),
+      PuzzleFamily('memory', [GlimpseType(), VanishType(), HopperType()]),
     ],
   ),
 ];

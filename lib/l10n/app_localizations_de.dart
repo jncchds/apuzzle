@@ -4618,4 +4618,54 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutVanish3 =>
       'Ein echtes Brett: jede richtige Runde zeigt beim nächsten Mal eine Zahl mehr, ein Fehler eine weniger. Schaffe 3 Runden.';
+
+  @override
+  String get hopperName => 'Hüpfer';
+
+  @override
+  String get hopperTagline => 'Sieh zu, wie der Frosch von Blatt zu Blatt hüpft, und wiederhole seine Sprünge';
+
+  @override
+  String get hopperRules =>
+      '• Ein Frosch hüpft von Blatt zu Blatt, einen Sprung nach dem anderen. Wenn er anhält, tippe die Blätter, auf denen er gelandet ist, in derselben Reihenfolge an.\n• Ein Blatt kann mehrmals vorkommen: tippe es jedes Mal an.\n• Ein falscher Tipp beendet die Runde.\n• Eine richtige Runde bringt einen Punkt pro Sprung, und die nächste hat einen Sprung mehr. Nach einem Fehler einen weniger.\n\nReihenfolge\n• Gleiche Reihenfolge: vom ersten Sprung bis zum letzten.\n• Rückwärts: vom letzten Sprung zurück zum ersten.\n\nZiele\n• Runden: spiele 10 Runden um einen Rekord.\n• Leben: spiele bis zum dritten Fehler.\n\nDer Schwierigkeitsgrad bestimmt, wie viele Sprünge die erste Runde hat und wie schnell der Frosch hüpft.';
+
+  @override
+  String get hopperOrder => 'Reihenfolge';
+
+  @override
+  String get hopperForward => 'Gleiche Reihenfolge';
+
+  @override
+  String get hopperForwardHint => 'Tippe die Blätter in der Reihenfolge an, in der der Frosch gesprungen ist.';
+
+  @override
+  String get hopperReverse => 'Rückwärts';
+
+  @override
+  String get hopperReverseHint => 'Tippe die Blätter vom letzten Sprung des Frosches bis zum ersten an.';
+
+  @override
+  String get hopperWatch => 'Beobachte den Frosch…';
+
+  @override
+  String get hopperPrompt => 'Tippe die Blätter der Reihe nach an';
+
+  @override
+  String get hopperPromptReverse => 'Tippe die Blätter rückwärts an, letzter Sprung zuerst';
+
+  @override
+  String get tutHopper1 =>
+      'Tippe aufs Brett, um zu starten. Der Frosch hüpft von Blatt zu Blatt. Wenn er anhält, tippe die Blätter, auf denen er gelandet ist, in derselben Reihenfolge an.';
+
+  @override
+  String get tutHopper2 =>
+      'Ein Blatt kann mehrmals vorkommen: tippe es jedes Mal an. Ein falscher Tipp beendet die Runde; hier wird sie dann wiederholt. Schaffe beide Runden.';
+
+  @override
+  String get tutHopper3 =>
+      'Mit der Option „Rückwärts“ tippst du dieselben Blätter vom letzten Sprung zurück zum ersten an. Probier es einmal.';
+
+  @override
+  String get tutHopper4 =>
+      'Ein echtes Brett: jede richtige Runde bringt beim nächsten Mal einen Sprung mehr, ein Fehler einen weniger. Schaffe 3 Runden.';
 }
