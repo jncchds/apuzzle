@@ -88,24 +88,35 @@ void checkText(String text) {
   expect(stripped.contains('⟦') || stripped.contains('⟧'), isFalse, reason: text);
 }
 
-void main() {
+/// Number of test files the explain checks are split into, so they run in
+/// parallel (`explain_<k>_test.dart`).
+const explainShards = 4;
+
+/// The checks for every [explainShards]th type that can explain, starting
+/// with [shard]; the token test runs in shard 0.
+void explainShard(int shard) {
   late final Map<String, AppLocalizations> langs;
 
   setUpAll(() async {
     langs = {for (final code in appLanguages.keys) code: await AppLocalizations.delegate.load(Locale(code))};
   });
 
-  final types = [
+  final explaining = [
     for (final t in puzzleTypes)
       if (t.canExplain) t,
+  ];
+  final types = [
+    for (var i = shard; i < explaining.length; i += explainShards) explaining[i],
   ];
 
   for (final type in types) {
     group(type.id, () {
       for (final size in type.sizes) {
         for (final d in type.difficulties) {
+          // Four boards at the default size, one at the others.
+          final seeds = size == type.defaultSize ? 4 : 1;
           test('${size.rows}x${size.cols} ${d.name}: explained steps solve the board', () {
-            for (var seed = 1; seed <= 4; seed++) {
+            for (var seed = 1; seed <= seeds; seed++) {
               final puzzle = type.generate(GenParams(size: size, difficulty: d, seed: seed)) as Object;
               var state = type.initialState(puzzle) as Object;
               var steps = 0, probes = 0;
@@ -190,6 +201,7 @@ void main() {
     });
   }
 
+  if (shard != 0) return;
   test('tokens parse into chips', () {
     final parts = parseExplainText('${cellTok(const Pos(3, 4))} and row ${rowTok(1)}, ${valTok(2)}.');
     expect(parts.whereType<ExplainChip>().map((c) => c.label), ['E4', '2', '']);

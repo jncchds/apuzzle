@@ -58,12 +58,12 @@ void main() {
         final p = type.generate(params);
         expect(p.start.where((v) => v > 0).length, 2);
         expect(type.generate(params).toJson(), p.toJson());
+        // A fixed run of moves (skipping ones that don't move): spawns come
+        // from (seed, move number), so the same moves give the same game.
         MergeState play() {
           var s = type.initialState(p);
-          for (var k = 0; k < 30; k++) {
-            final h = type.hint(p, s);
-            if (h == null) break;
-            s = h.state;
+          for (var k = 0; k < 60; k++) {
+            s = mergeMove(p, s, MergeDir.values[k * 7 % 4]) ?? s;
           }
           return s;
         }
