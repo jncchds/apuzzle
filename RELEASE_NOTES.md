@@ -7,7 +7,6 @@
 - New game: Blockade. Sail the boat past the patrol ships into the harbour. After each of your turns every ship sails one cell along its drawn beat; never end a turn where a ship is or swap places with one, and arrive within the turns you have, waiting or taking a detour at the right moment. With a tutorial and strategy lessons, and in the daily challenges from 2026-10-15
 - New game: Inlay. Fit all the pieces from the tray into the shape: drag them onto the board, tap to turn them, and on hard boards flip them over too. Any way that fits them all wins. With a tutorial and strategy lessons, and in the daily challenges from 2026-10-15
 - New game: Channel. Turn the pipe tiles so that one pipe leads the water from the source to the drain; the other tiles are only there to lead you astray, and ends may stay open. Water goes straight across a bridge, so on hard boards the pipe can pass one twice. With a tutorial and strategy lessons, and in the daily challenges from 2026-10-15. Pipes and Channel share a family page, Plumbing
-- When a new board takes a moment to find, the loading screen says so
 - New game: Glimpse. Some cells light up for a moment: tap every one of them from memory. Each round you get right lights one more cell next time, a miss one fewer. Play 10 rounds for a best score, or until your third miss. With a tutorial, and in the daily challenges from 2026-10-15
 - New game: Vanish. Numbers from 1 up appear on the grid, and stay until you tap 1; then the others hide, and you tap their cells in order from memory. Each round you get right shows one number more next time, a miss one fewer. With a tutorial, and in the daily challenges from 2026-10-15. Glimpse and Vanish share a family page, Memory
 - New game: Hopper. A frog hops from pad to pad, one jump at a time: tap the pads it landed on, in the same order, or backwards if you pick that when you start. Each round you get right adds a jump, a miss takes one away. With a tutorial, and in the daily challenges from 2026-10-15. It joins the Memory family
@@ -16,6 +15,7 @@
 - New game: Turnabout. Race a rival through a maze to the star, just as far from both of you, while the whole maze keeps turning: an arrow warns you before each turn, and your swipes stay the same on screen. Play 5 rounds, or until the rival has won three; harder levels bring a faster rival, more winding mazes and more turns. With a tutorial, and in the daily challenges from 2026-10-15
 - New casual games join the daily challenges for players who haven't picked their daily games yet. If you have, they start left out: add them with the tune button on the daily screen
 - Search always finds something: when no game matches, it shows the closest ones, also by part of a word
+- When a new board takes a moment to find, the loading screen says so
 
 ## 0.9.0 - 2026-10-14
 - New home screen: search at the top, then your games (the ones you pinned and played last), the daily challenge and a tile for each category. A category lists its games, and games that are variants of one idea share a family page (Mosaic and Blend are now the Flood family)
