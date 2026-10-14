@@ -26,6 +26,7 @@ import '../puzzles/pop/pop_type.dart';
 import '../puzzles/pipes/pipes_type.dart';
 import '../puzzles/rails/rails_type.dart';
 import '../puzzles/shikaku/shikaku_type.dart';
+import '../puzzles/skyline/skyline_type.dart';
 import '../puzzles/snake/snake_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
 import '../puzzles/tally/tally_type.dart';
@@ -37,6 +38,7 @@ import 'puzzle_type.dart';
 const List<PuzzleType> puzzleTypes = [
   MamboType(),
   SudokuType(),
+  SkylineType(),
   KingsType(),
   BlocksType(),
   TallyType(),
@@ -121,6 +123,7 @@ const List<PuzzleCategory> puzzleCategories = [
     accent: Color(0xFF6FA8FF),
     [
       PuzzleFamily('sudoku', [SudokuType()]),
+      PuzzleFamily('skyline', [SkylineType()]),
       PuzzleFamily('blocks', [BlocksType()]),
       PuzzleFamily('tally', [TallyType()]),
       PuzzleFamily('formula', [FormulaType()]),

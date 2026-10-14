@@ -4,6 +4,7 @@
 - New home screen: search at the top, then your games (the ones you pinned and played last), the daily challenge and a tile for each category. A category lists its games, and games that are variants of one idea share a family page (Mosaic and Blend are now the Flood family)
 - Search finds games by name, by what you do in them ("draw a loop", "shade cells") and by other names the puzzles are known by, in any of the app's languages, and forgives typos
 - Pin a game to the home screen with a long press on its card, or with the pin on its new-game sheet
+- New game: Skyline. Put a tower in every cell, each height once per row and column, so that the clues around the grid see the right number of towers: a taller tower hides the shorter ones behind it. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-15
 ## 0.8.1 - 2026-10-13
 - Orbits: tap a star to pick it, then tap cells to give them to it, also cells away from its region (a drag could only reach them through the cells in between). The star of your last drag stays picked. Explain mode starts with the cells nearest to their star
 

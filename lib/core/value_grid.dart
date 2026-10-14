@@ -217,6 +217,9 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
   /// Room for edge clues left of / above the grid, in cells: (columns, rows).
   (double, double) header(P puzzle) => (0, 0);
 
+  /// Room for edge clues right of / below the grid, in cells: (columns, rows).
+  (double, double) footer(P puzzle) => (0, 0);
+
   /// Decorations drawn below the cells.
   List<Widget> buildUnderlay(BuildContext context, P puzzle, BoardMetrics m) => const [];
 
@@ -277,12 +280,15 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
         ? markPeers(p, ctrl.selectedCell!).toSet()
         : const <Pos>{};
     final (headCols, headRows) = header(p);
+    final (footCols, footRows) = footer(p);
     return CellGridBoard(
       rows: p.size.rows,
       cols: p.size.cols,
       gapRatio: gapRatio,
       headerCols: headCols,
       headerRows: headRows,
+      footerCols: footCols,
+      footerRows: footRows,
       sectionRows: secR,
       sectionCols: secC,
       win: ctrl.winAnimation,

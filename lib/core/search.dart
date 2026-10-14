@@ -46,6 +46,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
 const Map<String, List<GameTag>> gameTags = {
   'mambo': [GameTag.binary, GameTag.place],
   'sudoku': [GameTag.numbers, GameTag.latin],
+  'skyline': [GameTag.numbers, GameTag.latin],
   'kings': [GameTag.place, GameTag.regions],
   'blocks': [GameTag.numbers, GameTag.regions],
   'tally': [GameTag.shade, GameTag.sums],
@@ -81,6 +82,7 @@ const Map<String, List<GameTag>> gameTags = {
 const Map<String, List<String>> gameAliases = {
   'mambo': ['Takuzu', 'Binairo', 'Tango', 'Binary puzzle', 'Unruly', '0h h1'],
   'sudoku': ['Number place'],
+  'skyline': ['Skyscrapers', 'Skyscraper', 'Towers', 'Buildings', 'Хмарочоси', 'Drapacze chmur', 'Wolkenkratzer'],
   'kings': ['Queens', 'Star Battle', 'Two not touch'],
   'blocks': ['Suguru', 'Tectonic'],
   'tally': ['Sumplete', 'Rullo'],

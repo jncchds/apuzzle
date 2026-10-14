@@ -3573,4 +3573,112 @@ class AppLocalizationsPl extends AppLocalizations {
   String exOrbitsRefuted(Object cell, Object star) {
     return '$cell nie może należeć do gwiazdy na $star: to prowadzi do sprzeczności.';
   }
+
+  @override
+  String get skylineName => 'Panorama';
+
+  @override
+  String get skylineTagline => 'Ile wież widać z każdej strony?';
+
+  @override
+  String get skylineRules =>
+      '• Postaw w każdym polu wieżę o wysokości od 1 do N pięter (N = rozmiar siatki).\n• W każdym wierszu i kolumnie każda wysokość występuje dokładnie raz.\n• Liczba poza siatką mówi, ile wież widać z tego miejsca, patrząc wzdłuż wiersza lub kolumny: wieża zasłania wszystkie niższe za nią.\n\nWybierz wysokość z palety i dotykaj pól, aby ją wpisać, albo najpierw dotknij pola, a potem wysokości. Przycisk ołówka włącza małe notatki. Długie naciśnięcie / prawy przycisk czyści pole.';
+
+  @override
+  String get tutSkyline1 =>
+      'Zbuduj panoramę: w każdym wierszu i kolumnie stoi po jednej wieży każdej wysokości od 1 do 4. Tu jednej brakuje: wybierz jej wysokość w palecie i dotknij pustego pola.';
+
+  @override
+  String get tutSkyline2 =>
+      'Wskazówka liczy wieże widoczne z jej strony: każda wieża zasłania niższe za nią. Wskazówka z lewej strony górnego wiersza to 2. Wypełnij puste pola tak, by widać było stamtąd tylko dwie wieże.';
+
+  @override
+  String get tutSkyline3 =>
+      '1 znaczy, że najwyższa wieża stoi tuż przy wskazówce i zasłania wszystkie inne. 4 znaczy, że widać wszystkie wieże, więc rosną po kolei: 1, 2, 3, 4. Wypełnij wiersz.';
+
+  @override
+  String get tutSkyline4 =>
+      'Teraz cała plansza. Zapisuj ołówkiem wysokości, które jeszcze pasują do pola, a wskazówki niech je zawężają.';
+
+  @override
+  String get tutSkylineS1 =>
+      'Najwyższa wieża zasłania wszystko za sobą, więc przy 3 nie stoi w dwóch pierwszych polach. Ogólnie przy dużej wskazówce wieże muszą być niskie: obok 3 na planszy 5×5 najwyżej 3 piętra.';
+
+  @override
+  String get tutSkylineS2 =>
+      'Utknąłeś? Weź wiersz lub kolumnę ze wskazówkami i przejrzyj wszystkie sposoby wypełnienia, które pasują do twoich notatek i wskazówek. Wysokość, która nigdy nie trafia do pola, można tam skreślić.';
+
+  @override
+  String get tutSkylineS3 =>
+      'Najtrudniejsze plansze wymagają założenia, które da się obalić. Załóż, że w polu jest jedna z dwóch lub trzech ostatnich wysokości, i rozumuj dalej; jeśli dojdziesz do sprzeczności, skreśl tę wysokość.';
+
+  @override
+  String exLatinNaked(Object cell, Object value) {
+    return 'W $cell musi być $value: wszystkie inne liczby są tam wykluczone.';
+  }
+
+  @override
+  String exLatinHiddenRow(Object cell, Object value, Object row) {
+    return 'W $cell musi być $value: to jedyne miejsce na $value w wierszu $row.';
+  }
+
+  @override
+  String exLatinHiddenCol(Object cell, Object value, Object col) {
+    return 'W $cell musi być $value: to jedyne miejsce na $value w kolumnie $col.';
+  }
+
+  @override
+  String exLatinPairRow(Object a, Object b, Object v1, Object v2, Object row) {
+    return 'W $a i $b mogą być tylko $v1 i $v2, więc w reszcie wiersza $row tych liczb nie będzie.';
+  }
+
+  @override
+  String exLatinPairCol(Object a, Object b, Object v1, Object v2, Object col) {
+    return 'W $a i $b mogą być tylko $v1 i $v2, więc w reszcie kolumny $col tych liczb nie będzie.';
+  }
+
+  @override
+  String exLatinFailEmpty(Object cell) {
+    return 'Ale wtedy dla $cell nie zostaje żadna liczba.';
+  }
+
+  @override
+  String exLatinFailNoPlaceRow(Object value, Object row) {
+    return 'Ale wtedy $value nie ma już miejsca w wierszu $row.';
+  }
+
+  @override
+  String exLatinFailNoPlaceCol(Object value, Object col) {
+    return 'Ale wtedy $value nie ma już miejsca w kolumnie $col.';
+  }
+
+  @override
+  String exSkylineBound(Object clue, Object side, Object cell, Object max) {
+    return 'Wskazówka $clue przy $side wymaga tylu widocznych wież, więc w $cell jest najwyżej $max.';
+  }
+
+  @override
+  String exSkylineTallest(Object cell, Object value, Object side) {
+    return 'W $cell musi być $value: wskazówka 1 przy $side widzi tylko najwyższą wieżę.';
+  }
+
+  @override
+  String exSkylineLineRow(Object cell, Object value, Object row) {
+    return 'W $cell nie może być $value: żaden sposób wypełnienia wiersza $row zgodny z jego wskazówkami jej tam nie stawia.';
+  }
+
+  @override
+  String exSkylineLineCol(Object cell, Object value, Object col) {
+    return 'W $cell nie może być $value: żaden sposób wypełnienia kolumny $col zgodny z jej wskazówkami jej tam nie stawia.';
+  }
+
+  @override
+  String exSkylineFailRow(Object row) {
+    return 'Ale wtedy wiersza $row nie da się wypełnić zgodnie z jego wskazówkami.';
+  }
+
+  @override
+  String exSkylineFailCol(Object col) {
+    return 'Ale wtedy kolumny $col nie da się wypełnić zgodnie z jej wskazówkami.';
+  }
 }

@@ -7,8 +7,9 @@ import '../../core/grid.dart';
 import 'explain_overlay.dart';
 
 /// Geometry of a laid-out board. Optional sections (e.g. Sudoku boxes) add an
-/// extra gap every [sectionCols] columns / [sectionRows] rows. An optional
-/// header band ([ox] wide on the left, [oy] tall on top) holds edge clues.
+/// extra gap every [sectionCols] columns / [sectionRows] rows. Optional
+/// bands hold edge clues: [ox] wide on the left, [oy] tall on top, [ex] wide
+/// on the right and [ey] tall below.
 class BoardMetrics {
   const BoardMetrics({
     required this.rows,
@@ -20,6 +21,8 @@ class BoardMetrics {
     this.sectionGap = 0,
     this.ox = 0,
     this.oy = 0,
+    this.ex = 0,
+    this.ey = 0,
   });
 
   final int rows;
@@ -31,6 +34,8 @@ class BoardMetrics {
   final double sectionGap;
   final double ox;
   final double oy;
+  final double ex;
+  final double ey;
 
   static int _sections(int n, int k) => k <= 0 ? 0 : (n - 1) ~/ k;
 
@@ -39,6 +44,10 @@ class BoardMetrics {
 
   double get width => x(cols - 1) + cell;
   double get height => y(rows - 1) + cell;
+
+  /// The board with the bands right and below.
+  double get outerWidth => width + ex;
+  double get outerHeight => height + ey;
   Offset topLeft(Pos p) => Offset(x(p.c), y(p.r));
   Offset center(Pos p) => topLeft(p) + Offset(cell / 2, cell / 2);
   Rect rectOf(Pos p) => topLeft(p) & Size(cell, cell);
@@ -79,9 +88,13 @@ class BoardMetrics {
     double maxCell = 88,
     double headerCols = 0,
     double headerRows = 0,
+    double footerCols = 0,
+    double footerRows = 0,
   }) {
-    final wUnits = headerCols + cols + gapRatio * (cols - 1) + sectionGapRatio * _sections(cols, sectionCols);
-    final hUnits = headerRows + rows + gapRatio * (rows - 1) + sectionGapRatio * _sections(rows, sectionRows);
+    final wUnits =
+        headerCols + footerCols + cols + gapRatio * (cols - 1) + sectionGapRatio * _sections(cols, sectionCols);
+    final hUnits =
+        headerRows + footerRows + rows + gapRatio * (rows - 1) + sectionGapRatio * _sections(rows, sectionRows);
     final cell = min(min(space.width / wUnits, space.height / hUnits), maxCell).floorToDouble();
     return BoardMetrics(
       rows: rows,
@@ -93,6 +106,8 @@ class BoardMetrics {
       sectionGap: cell * sectionGapRatio,
       ox: (cell * headerCols).roundToDouble(),
       oy: (cell * headerRows).roundToDouble(),
+      ex: (cell * footerCols).roundToDouble(),
+      ey: (cell * footerRows).roundToDouble(),
     );
   }
 }
@@ -122,6 +137,8 @@ class CellGridBoard extends StatelessWidget {
     this.maxCell = 88,
     this.headerCols = 0,
     this.headerRows = 0,
+    this.footerCols = 0,
+    this.footerRows = 0,
     this.explain,
   });
 
@@ -157,6 +174,10 @@ class CellGridBoard extends StatelessWidget {
   final double headerCols;
   final double headerRows;
 
+  /// Room for edge clues right of / below the grid, in cells (see [BoardMetrics.ex]).
+  final double footerCols;
+  final double footerRows;
+
   /// Explain mode: highlights plus coordinate labels around the board.
   final ExplainView? explain;
 
@@ -187,6 +208,8 @@ class CellGridBoard extends StatelessWidget {
           maxCell: maxCell,
           headerCols: headerCols,
           headerRows: headerRows,
+          footerCols: footerCols,
+          footerRows: footerRows,
         );
 
         final onHold = onLongPress ?? onSecondary;
@@ -224,8 +247,8 @@ class CellGridBoard extends StatelessWidget {
           );
         }
         Widget board = SizedBox(
-          width: m.width,
-          height: m.height,
+          width: m.outerWidth,
+          height: m.outerHeight,
           child: Stack(clipBehavior: Clip.none, children: children),
         );
         if (onDragStart != null) {

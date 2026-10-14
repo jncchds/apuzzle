@@ -3588,4 +3588,112 @@ class AppLocalizationsUk extends AppLocalizations {
   String exOrbitsRefuted(Object cell, Object star) {
     return '$cell не може належати зірці на $star: це веде до суперечності.';
   }
+
+  @override
+  String get skylineName => 'Панорама';
+
+  @override
+  String get skylineTagline => 'Скільки веж видно з кожного боку?';
+
+  @override
+  String get skylineRules =>
+      '• Поставте в кожну клітинку вежу заввишки від 1 до N поверхів (N — розмір сітки).\n• У кожному рядку й стовпці кожна висота трапляється рівно один раз.\n• Число за межами сітки показує, скільки веж видно звідти, якщо дивитися вздовж рядка чи стовпця: вежа затуляє всі нижчі за нею.\n\nВиберіть висоту в палітрі й торкайтеся клітинок, щоб поставити її, або спершу торкніться клітинки, а потім висоти. Кнопка з олівцем вмикає дрібні позначки. Довге натискання / правий клік очищає клітинку.';
+
+  @override
+  String get tutSkyline1 =>
+      'Збудуйте панораму: у кожному рядку й стовпці стоїть по одній вежі кожної висоти від 1 до 4. Тут однієї бракує: виберіть її висоту в палітрі й торкніться порожньої клітинки.';
+
+  @override
+  String get tutSkyline2 =>
+      'Підказка рахує вежі, які видно з її боку: кожна вежа затуляє нижчі за нею. Підказка ліворуч від верхнього рядка — 2. Заповніть порожні клітинки так, щоб звідти було видно лише дві вежі.';
+
+  @override
+  String get tutSkyline3 =>
+      '1 означає, що найвища вежа стоїть одразу біля підказки й затуляє всі інші. 4 означає, що видно всі вежі, тож вони йдуть угору: 1, 2, 3, 4. Заповніть рядок.';
+
+  @override
+  String get tutSkyline4 =>
+      'Тепер ціле поле. Позначайте олівцем висоти, які ще можливі в клітинці, і нехай підказки їх звужують.';
+
+  @override
+  String get tutSkylineS1 =>
+      'Найвища вежа затуляє все за нею, тож при 3 її немає в перших двох клітинках. Загалом біля великої підказки вежі мають бути низькими: поруч із 3 на полі 5×5 — щонайбільше 3 поверхи.';
+
+  @override
+  String get tutSkylineS2 =>
+      'Застрягли? Візьміть рядок чи стовпець із підказками й переберіть усі способи заповнити його, що пасують до ваших позначок і підказок. Висоту, яка ніколи не потрапляє в клітинку, там можна викреслити.';
+
+  @override
+  String get tutSkylineS3 =>
+      'Найважчі поля потребують припущення, яке можна спростувати. Припустіть, що в клітинці одна з двох-трьох останніх висот, і міркуйте далі; якщо дійдете до суперечності, викресліть цю висоту.';
+
+  @override
+  String exLatinNaked(Object cell, Object value) {
+    return 'У $cell має бути $value: усі інші числа там виключено.';
+  }
+
+  @override
+  String exLatinHiddenRow(Object cell, Object value, Object row) {
+    return 'У $cell має бути $value: це єдине місце для $value у рядку $row.';
+  }
+
+  @override
+  String exLatinHiddenCol(Object cell, Object value, Object col) {
+    return 'У $cell має бути $value: це єдине місце для $value у стовпці $col.';
+  }
+
+  @override
+  String exLatinPairRow(Object a, Object b, Object v1, Object v2, Object row) {
+    return 'У $a і $b можуть бути лише $v1 і $v2, тож у решті рядка $row цих чисел бути не може.';
+  }
+
+  @override
+  String exLatinPairCol(Object a, Object b, Object v1, Object v2, Object col) {
+    return 'У $a і $b можуть бути лише $v1 і $v2, тож у решті стовпця $col цих чисел бути не може.';
+  }
+
+  @override
+  String exLatinFailEmpty(Object cell) {
+    return 'Але тоді для $cell не лишається жодного числа.';
+  }
+
+  @override
+  String exLatinFailNoPlaceRow(Object value, Object row) {
+    return 'Але тоді для $value не лишається місця в рядку $row.';
+  }
+
+  @override
+  String exLatinFailNoPlaceCol(Object value, Object col) {
+    return 'Але тоді для $value не лишається місця в стовпці $col.';
+  }
+
+  @override
+  String exSkylineBound(Object clue, Object side, Object cell, Object max) {
+    return 'Підказка $clue біля $side вимагає стільки видимих веж, тож у $cell щонайбільше $max.';
+  }
+
+  @override
+  String exSkylineTallest(Object cell, Object value, Object side) {
+    return 'У $cell має бути $value: підказка 1 біля $side бачить лише найвищу вежу.';
+  }
+
+  @override
+  String exSkylineLineRow(Object cell, Object value, Object row) {
+    return 'У $cell не може бути $value: жоден спосіб заповнити рядок $row за його підказками не ставить його туди.';
+  }
+
+  @override
+  String exSkylineLineCol(Object cell, Object value, Object col) {
+    return 'У $cell не може бути $value: жоден спосіб заповнити стовпець $col за його підказками не ставить його туди.';
+  }
+
+  @override
+  String exSkylineFailRow(Object row) {
+    return 'Але тоді рядок $row не заповнити за його підказками.';
+  }
+
+  @override
+  String exSkylineFailCol(Object col) {
+    return 'Але тоді стовпець $col не заповнити за його підказками.';
+  }
 }

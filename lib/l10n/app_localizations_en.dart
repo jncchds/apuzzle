@@ -3515,4 +3515,112 @@ class AppLocalizationsEn extends AppLocalizations {
   String exOrbitsRefuted(Object cell, Object star) {
     return '$cell can\'t belong to the star at $star: it leads to a contradiction.';
   }
+
+  @override
+  String get skylineName => 'Skyline';
+
+  @override
+  String get skylineTagline => 'How many towers can you see from each side?';
+
+  @override
+  String get skylineRules =>
+      '• Put a tower in every cell, 1 to N floors tall (N = grid size).\n• Every row and column holds each height exactly once.\n• A number outside the grid tells how many towers you can see from there, looking along its row or column: a tower hides every shorter one behind it.\n\nPick a height in the palette and tap cells to place it, or tap a cell first and then a height. The pencil button toggles small notes. Long-press / right-click clears a cell.';
+
+  @override
+  String get tutSkyline1 =>
+      'Build a skyline: every row and column holds one tower of each height from 1 to 4. One is missing here: pick its height in the palette, then tap the empty cell.';
+
+  @override
+  String get tutSkyline2 =>
+      'A clue counts the towers you can see from its side: each tower hides the shorter ones behind it. The clue left of the top row says 2. Fill the empty cells so that only two towers show from there.';
+
+  @override
+  String get tutSkyline3 =>
+      'A 1 means the tallest tower stands right at the clue and hides all the rest. A 4 means every tower is in sight, so they climb 1, 2, 3, 4. Fill the row.';
+
+  @override
+  String get tutSkyline4 =>
+      'Now a whole board. Note the heights a cell can still hold with the pencil, and let the clues narrow them down.';
+
+  @override
+  String get tutSkylineS1 =>
+      'The tallest tower hides everything behind it, so a 3 keeps it out of the first two cells. In general, a big clue needs short towers near it: next to a 3 on a board of 5, at most 3 floors.';
+
+  @override
+  String get tutSkylineS2 =>
+      'Stuck? Take a row or column with clues and go through every way to fill it that fits your notes and its clues. A height that never lands in a cell can be crossed off there.';
+
+  @override
+  String get tutSkylineS3 =>
+      'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three heights and follow on; if that runs into a contradiction, cross the height off.';
+
+  @override
+  String exLatinNaked(Object cell, Object value) {
+    return '$cell must be $value: every other number is ruled out there.';
+  }
+
+  @override
+  String exLatinHiddenRow(Object cell, Object value, Object row) {
+    return '$cell must be $value: it\'s the only place left for $value in row $row.';
+  }
+
+  @override
+  String exLatinHiddenCol(Object cell, Object value, Object col) {
+    return '$cell must be $value: it\'s the only place left for $value in column $col.';
+  }
+
+  @override
+  String exLatinPairRow(Object a, Object b, Object v1, Object v2, Object row) {
+    return '$a and $b can only hold $v1 and $v2, so those numbers are ruled out in the rest of row $row.';
+  }
+
+  @override
+  String exLatinPairCol(Object a, Object b, Object v1, Object v2, Object col) {
+    return '$a and $b can only hold $v1 and $v2, so those numbers are ruled out in the rest of column $col.';
+  }
+
+  @override
+  String exLatinFailEmpty(Object cell) {
+    return 'But then no number is left for $cell.';
+  }
+
+  @override
+  String exLatinFailNoPlaceRow(Object value, Object row) {
+    return 'But then $value has no place left in row $row.';
+  }
+
+  @override
+  String exLatinFailNoPlaceCol(Object value, Object col) {
+    return 'But then $value has no place left in column $col.';
+  }
+
+  @override
+  String exSkylineBound(Object clue, Object side, Object cell, Object max) {
+    return 'The $clue at $side needs that many towers in sight, so $cell can be at most $max.';
+  }
+
+  @override
+  String exSkylineTallest(Object cell, Object value, Object side) {
+    return '$cell must be $value: the 1 at $side sees only the tallest tower.';
+  }
+
+  @override
+  String exSkylineLineRow(Object cell, Object value, Object row) {
+    return '$cell can\'t be $value: no way to fill row $row that matches its clues puts it there.';
+  }
+
+  @override
+  String exSkylineLineCol(Object cell, Object value, Object col) {
+    return '$cell can\'t be $value: no way to fill column $col that matches its clues puts it there.';
+  }
+
+  @override
+  String exSkylineFailRow(Object row) {
+    return 'But then row $row can\'t be filled to match its clues.';
+  }
+
+  @override
+  String exSkylineFailCol(Object col) {
+    return 'But then column $col can\'t be filled to match its clues.';
+  }
 }

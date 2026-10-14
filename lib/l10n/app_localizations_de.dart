@@ -3522,4 +3522,112 @@ class AppLocalizationsDe extends AppLocalizations {
   String exOrbitsRefuted(Object cell, Object star) {
     return '$cell kann nicht zum Stern bei $star gehören: Das führt zu einem Widerspruch.';
   }
+
+  @override
+  String get skylineName => 'Skyline';
+
+  @override
+  String get skylineTagline => 'Wie viele Türme siehst du von jeder Seite?';
+
+  @override
+  String get skylineRules =>
+      '• Stell in jedes Feld einen Turm mit 1 bis N Stockwerken (N = Gittergröße).\n• Jede Zeile und jede Spalte enthält jede Höhe genau einmal.\n• Eine Zahl außerhalb des Gitters gibt an, wie viele Türme man von dort aus entlang der Zeile oder Spalte sieht: Ein Turm verdeckt alle niedrigeren dahinter.\n\nWähle eine Höhe in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Höhe. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld.';
+
+  @override
+  String get tutSkyline1 =>
+      'Bau eine Skyline: Jede Zeile und Spalte hat je einen Turm jeder Höhe von 1 bis 4. Hier fehlt einer: Wähle seine Höhe in der Palette und tippe auf das leere Feld.';
+
+  @override
+  String get tutSkyline2 =>
+      'Ein Hinweis zählt die Türme, die man von seiner Seite sieht: Jeder Turm verdeckt die niedrigeren dahinter. Links von der obersten Zeile steht 2. Füll die leeren Felder so, dass von dort nur zwei Türme zu sehen sind.';
+
+  @override
+  String get tutSkyline3 =>
+      'Eine 1 heißt: Der höchste Turm steht direkt am Hinweis und verdeckt alle anderen. Eine 4 heißt: Alle Türme sind zu sehen, also steigen sie an: 1, 2, 3, 4. Füll die Zeile.';
+
+  @override
+  String get tutSkyline4 =>
+      'Jetzt ein ganzes Gitter. Notier mit dem Stift die Höhen, die in einem Feld noch gehen, und lass die Hinweise sie eingrenzen.';
+
+  @override
+  String get tutSkylineS1 =>
+      'Der höchste Turm verdeckt alles dahinter, also steht er bei einer 3 nicht in den ersten beiden Feldern. Allgemein brauchen große Hinweise niedrige Türme in ihrer Nähe: neben einer 3 auf einem 5×5-Gitter höchstens 3 Stockwerke.';
+
+  @override
+  String get tutSkylineS2 =>
+      'Kommst du nicht weiter? Nimm eine Zeile oder Spalte mit Hinweisen und geh alle Arten durch, sie passend zu deinen Notizen und ihren Hinweisen zu füllen. Eine Höhe, die nie in einem Feld landet, kannst du dort streichen.';
+
+  @override
+  String get tutSkylineS3 =>
+      'Die schwersten Gitter brauchen eine Annahme, die sich widerlegen lässt. Nimm an, ein Feld hat eine seiner letzten zwei oder drei Höhen, und denk weiter; führt das zu einem Widerspruch, streich die Höhe.';
+
+  @override
+  String exLatinNaked(Object cell, Object value) {
+    return 'In $cell muss $value stehen: alle anderen Zahlen sind dort ausgeschlossen.';
+  }
+
+  @override
+  String exLatinHiddenRow(Object cell, Object value, Object row) {
+    return 'In $cell muss $value stehen: es ist der einzige Platz für $value in Zeile $row.';
+  }
+
+  @override
+  String exLatinHiddenCol(Object cell, Object value, Object col) {
+    return 'In $cell muss $value stehen: es ist der einzige Platz für $value in Spalte $col.';
+  }
+
+  @override
+  String exLatinPairRow(Object a, Object b, Object v1, Object v2, Object row) {
+    return 'In $a und $b können nur $v1 und $v2 stehen, also kommen diese Zahlen sonst nirgends in Zeile $row vor.';
+  }
+
+  @override
+  String exLatinPairCol(Object a, Object b, Object v1, Object v2, Object col) {
+    return 'In $a und $b können nur $v1 und $v2 stehen, also kommen diese Zahlen sonst nirgends in Spalte $col vor.';
+  }
+
+  @override
+  String exLatinFailEmpty(Object cell) {
+    return 'Dann bliebe für $cell aber keine Zahl übrig.';
+  }
+
+  @override
+  String exLatinFailNoPlaceRow(Object value, Object row) {
+    return 'Dann hätte $value in Zeile $row aber keinen Platz mehr.';
+  }
+
+  @override
+  String exLatinFailNoPlaceCol(Object value, Object col) {
+    return 'Dann hätte $value in Spalte $col aber keinen Platz mehr.';
+  }
+
+  @override
+  String exSkylineBound(Object clue, Object side, Object cell, Object max) {
+    return 'Die $clue bei $side braucht so viele sichtbare Türme, also steht in $cell höchstens $max.';
+  }
+
+  @override
+  String exSkylineTallest(Object cell, Object value, Object side) {
+    return 'In $cell muss $value stehen: Die 1 bei $side sieht nur den höchsten Turm.';
+  }
+
+  @override
+  String exSkylineLineRow(Object cell, Object value, Object row) {
+    return 'In $cell kann kein $value stehen: Keine Art, Zeile $row passend zu ihren Hinweisen zu füllen, setzt es dorthin.';
+  }
+
+  @override
+  String exSkylineLineCol(Object cell, Object value, Object col) {
+    return 'In $cell kann kein $value stehen: Keine Art, Spalte $col passend zu ihren Hinweisen zu füllen, setzt es dorthin.';
+  }
+
+  @override
+  String exSkylineFailRow(Object row) {
+    return 'Dann ließe sich Zeile $row aber nicht passend zu ihren Hinweisen füllen.';
+  }
+
+  @override
+  String exSkylineFailCol(Object col) {
+    return 'Dann ließe sich Spalte $col aber nicht passend zu ihren Hinweisen füllen.';
+  }
 }

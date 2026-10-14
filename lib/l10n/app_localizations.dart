@@ -4869,6 +4869,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{cell} can\'t belong to the star at {star}: it leads to a contradiction.'**
   String exOrbitsRefuted(Object cell, Object star);
+
+  /// No description provided for @skylineName.
+  ///
+  /// In en, this message translates to:
+  /// **'Skyline'**
+  String get skylineName;
+
+  /// No description provided for @skylineTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'How many towers can you see from each side?'**
+  String get skylineTagline;
+
+  /// No description provided for @skylineRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Put a tower in every cell, 1 to N floors tall (N = grid size).\n• Every row and column holds each height exactly once.\n• A number outside the grid tells how many towers you can see from there, looking along its row or column: a tower hides every shorter one behind it.\n\nPick a height in the palette and tap cells to place it, or tap a cell first and then a height. The pencil button toggles small notes. Long-press / right-click clears a cell.'**
+  String get skylineRules;
+
+  /// No description provided for @tutSkyline1.
+  ///
+  /// In en, this message translates to:
+  /// **'Build a skyline: every row and column holds one tower of each height from 1 to 4. One is missing here: pick its height in the palette, then tap the empty cell.'**
+  String get tutSkyline1;
+
+  /// No description provided for @tutSkyline2.
+  ///
+  /// In en, this message translates to:
+  /// **'A clue counts the towers you can see from its side: each tower hides the shorter ones behind it. The clue left of the top row says 2. Fill the empty cells so that only two towers show from there.'**
+  String get tutSkyline2;
+
+  /// No description provided for @tutSkyline3.
+  ///
+  /// In en, this message translates to:
+  /// **'A 1 means the tallest tower stands right at the clue and hides all the rest. A 4 means every tower is in sight, so they climb 1, 2, 3, 4. Fill the row.'**
+  String get tutSkyline3;
+
+  /// No description provided for @tutSkyline4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a whole board. Note the heights a cell can still hold with the pencil, and let the clues narrow them down.'**
+  String get tutSkyline4;
+
+  /// No description provided for @tutSkylineS1.
+  ///
+  /// In en, this message translates to:
+  /// **'The tallest tower hides everything behind it, so a 3 keeps it out of the first two cells. In general, a big clue needs short towers near it: next to a 3 on a board of 5, at most 3 floors.'**
+  String get tutSkylineS1;
+
+  /// No description provided for @tutSkylineS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Stuck? Take a row or column with clues and go through every way to fill it that fits your notes and its clues. A height that never lands in a cell can be crossed off there.'**
+  String get tutSkylineS2;
+
+  /// No description provided for @tutSkylineS3.
+  ///
+  /// In en, this message translates to:
+  /// **'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three heights and follow on; if that runs into a contradiction, cross the height off.'**
+  String get tutSkylineS3;
+
+  /// No description provided for @exLatinNaked.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: every other number is ruled out there.'**
+  String exLatinNaked(Object cell, Object value);
+
+  /// No description provided for @exLatinHiddenRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: it\'s the only place left for {value} in row {row}.'**
+  String exLatinHiddenRow(Object cell, Object value, Object row);
+
+  /// No description provided for @exLatinHiddenCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: it\'s the only place left for {value} in column {col}.'**
+  String exLatinHiddenCol(Object cell, Object value, Object col);
+
+  /// No description provided for @exLatinPairRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {b} can only hold {v1} and {v2}, so those numbers are ruled out in the rest of row {row}.'**
+  String exLatinPairRow(Object a, Object b, Object v1, Object v2, Object row);
+
+  /// No description provided for @exLatinPairCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {b} can only hold {v1} and {v2}, so those numbers are ruled out in the rest of column {col}.'**
+  String exLatinPairCol(Object a, Object b, Object v1, Object v2, Object col);
+
+  /// No description provided for @exLatinFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no number is left for {cell}.'**
+  String exLatinFailEmpty(Object cell);
+
+  /// No description provided for @exLatinFailNoPlaceRow.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {value} has no place left in row {row}.'**
+  String exLatinFailNoPlaceRow(Object value, Object row);
+
+  /// No description provided for @exLatinFailNoPlaceCol.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {value} has no place left in column {col}.'**
+  String exLatinFailNoPlaceCol(Object value, Object col);
+
+  /// No description provided for @exSkylineBound.
+  ///
+  /// In en, this message translates to:
+  /// **'The {clue} at {side} needs that many towers in sight, so {cell} can be at most {max}.'**
+  String exSkylineBound(Object clue, Object side, Object cell, Object max);
+
+  /// No description provided for @exSkylineTallest.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: the 1 at {side} sees only the tallest tower.'**
+  String exSkylineTallest(Object cell, Object value, Object side);
+
+  /// No description provided for @exSkylineLineRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: no way to fill row {row} that matches its clues puts it there.'**
+  String exSkylineLineRow(Object cell, Object value, Object row);
+
+  /// No description provided for @exSkylineLineCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: no way to fill column {col} that matches its clues puts it there.'**
+  String exSkylineLineCol(Object cell, Object value, Object col);
+
+  /// No description provided for @exSkylineFailRow.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} can\'t be filled to match its clues.'**
+  String exSkylineFailRow(Object row);
+
+  /// No description provided for @exSkylineFailCol.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} can\'t be filled to match its clues.'**
+  String exSkylineFailCol(Object col);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

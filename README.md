@@ -25,6 +25,7 @@ The games are grouped by the home screen's categories. Each one is shown in the 
 | Dark | Light | Puzzle | Goal |
 |---|---|---|---|
 | <img src="docs/screenshots/sudoku_dark.png" width="90" alt="Sudoku, dark theme"> | <img src="docs/screenshots/sudoku_light.png" width="90" alt="Sudoku, light theme"> | **Sudoku** | 4×4, 6×6 or 9×9 grids. Every number appears once per row, column and box. Supports pencil marks. |
+| <img src="docs/screenshots/skyline_dark.png" width="90" alt="Skyline, dark theme"> | <img src="docs/screenshots/skyline_light.png" width="90" alt="Skyline, light theme"> | **Skyline** | Put a tower in every cell, each height once per row and column. The clues around the grid say how many towers can be seen from there; taller towers hide shorter ones behind them. Supports pencil marks. |
 | <img src="docs/screenshots/blocks_dark.png" width="90" alt="Blocks, dark theme"> | <img src="docs/screenshots/blocks_light.png" width="90" alt="Blocks, light theme"> | **Blocks** | Fill every region of k cells with the numbers 1 to k. Equal numbers never touch, not even diagonally. Supports pencil marks. |
 | <img src="docs/screenshots/tally_dark.png" width="90" alt="Tally, dark theme"> | <img src="docs/screenshots/tally_light.png" width="90" alt="Tally, light theme"> | **Tally** | Every cell holds a number. Cross some out so that the numbers left in each row and column add up to the sums outside the grid. |
 | <img src="docs/screenshots/formula_dark.png" width="90" alt="Formula, dark theme"> | <img src="docs/screenshots/formula_light.png" width="90" alt="Formula, light theme"> | **Formula** | Guess the hidden equation in six tries. Every guess is a true equation, and each tile is marked as in place, elsewhere or not there. Six, eight or ten tiles wide; harder levels add × ÷, then brackets, squares and cubes. |
@@ -149,6 +150,7 @@ lib/
     puzzle_type.dart      plug-in contract every puzzle implements
     value_grid.dart       base for "one value per cell" puzzles (input, palette, pencil marks, hints)
     lattice_loop.dart     shared loop solver for Fence, Pearls, Rails and Arrows
+    latin_square.dart     shared Latin-square candidates, rules, generator and explainer (Skyline)
     game_controller.dart  session: state history (undo/redo), timer, submit, hints, save/resume, stats
     generator_runner.dart runs generation off the UI thread
     daily.dart            daily challenges
@@ -176,7 +178,7 @@ To add a puzzle:
 
 ## Status
 
-The Tetra generator is currently limited to 7×7. At larger sizes, proving the solution is unique is still too slow to do on the device.
+The Tetra and Skyline generators are currently limited to 7×7. At larger sizes, proving the solution is unique (Tetra) or grading a hard board (Skyline) is still too slow to do on the device.
 
 ## Credits
 

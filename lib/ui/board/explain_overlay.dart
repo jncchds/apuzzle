@@ -93,12 +93,12 @@ class CoordinateLabels extends StatelessWidget {
     );
     // The board stays the first child, so it keeps its state as labels come and go.
     return SizedBox(
-      width: m.width + band,
-      height: m.height + band,
+      width: m.outerWidth + band,
+      height: m.outerHeight + band,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          Positioned(left: band, top: band, width: m.width, height: m.height, child: child),
+          Positioned(left: band, top: band, width: m.outerWidth, height: m.outerHeight, child: child),
           if (shown > 0) ...[
             for (var c = 0; c < m.cols; c++)
               Positioned(
