@@ -70,6 +70,7 @@ void main() {
     expect(alt('train tracks'), ['rails']);
     expect(alt('minesweeper'), ['mines']);
     expect(alt('samegame'), ['pop']);
+    expect(alt('train of thought'), ['junction']);
   });
 
   List<String> similar(String q) => [for (final t in searchGames(q).similar) t.id];

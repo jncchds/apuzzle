@@ -18,6 +18,7 @@ import '../puzzles/homeward/homeward_type.dart';
 import '../puzzles/hues/hues_type.dart';
 import '../puzzles/inlay/inlay_type.dart';
 import '../puzzles/islands/islands_type.dart';
+import '../puzzles/junction/junction_type.dart';
 import '../puzzles/kings/kings_type.dart';
 import '../puzzles/labyrinth/labyrinth_type.dart';
 import '../puzzles/lamps/lamps_type.dart';
@@ -67,6 +68,7 @@ const List<PuzzleType> puzzleTypes = [
   PopType(),
   MergeType(),
   SnakeType(),
+  JunctionType(),
   GlimpseType(),
   VanishType(),
   HopperType(),
@@ -210,6 +212,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('pop', [PopType()]),
       PuzzleFamily('merge', [MergeType()]),
       PuzzleFamily('snake', [SnakeType()]),
+      PuzzleFamily('junction', [JunctionType()]),
       PuzzleFamily('memory', [GlimpseType(), VanishType(), HopperType(), ReboundType()]),
     ],
   ),

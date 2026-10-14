@@ -826,6 +826,65 @@ class AppLocalizationsEn extends AppLocalizations {
   String get snakeCrashed => 'Crashed! Tap to try again';
 
   @override
+  String get junctionName => 'Junction';
+
+  @override
+  String get junctionTagline => 'Flip the switches and send every train to its own station';
+
+  @override
+  String get junctionRules =>
+      '• Trains come out of the tunnel one by one and run along the track on their own.\n• Every train carries a symbol, and its station has the same one.\n• At a switch the track splits in two. Tap a switch to flip it: the lever points at the branch the next train takes. A train takes the branch the switch is set to as it passes.\n• A train that reaches its own station scores; one that reaches another station is a miss.\n• Tap anywhere else on the board (or press space) to pause, and tap to go on.\n\nGoals\n• 20 trains: route a set number of trains and get as many as you can to their stations.\n• Timed: get as many trains to their stations as you can in two minutes.\n\nThe difficulty sets the speed, how often trains leave and how many stations there are; bigger boards have more switches.';
+
+  @override
+  String junctionGoalTrains(int count) {
+    return '$count trains';
+  }
+
+  @override
+  String get junctionGoalTrainsHint => 'Route a set number of trains and get as many as you can to their stations.';
+
+  @override
+  String junctionGoalTimed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes',
+      one: '1 minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get junctionGoalTimedHint => 'Get as many trains to their stations as you can before the time runs out.';
+
+  @override
+  String junctionFinished(int count, int total) {
+    return '$count of $total trains made it';
+  }
+
+  @override
+  String get junctionTimeUp => 'Time\'s up!';
+
+  @override
+  String junctionArrived(int count) {
+    return 'Arrived: $count';
+  }
+
+  @override
+  String junctionMisses(int count) {
+    return 'Missed: $count';
+  }
+
+  @override
+  String get junctionStart => 'Tap to start';
+
+  @override
+  String get junctionPaused => 'Paused: tap to go on';
+
+  @override
+  String get junctionWrong => 'Wrong station! Tap to try again';
+
+  @override
   String get pipesName => 'Pipes';
 
   @override
@@ -1395,6 +1454,18 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutSnakeS1 =>
       'A long snake needs room. Before you grab an apple, make sure you can get out again: the cells your tail leaves are always free, so following your tail is the safe way. Eat 3 apples.';
+
+  @override
+  String get tutJunction1 =>
+      'Trains come out of the tunnel and run on their own. Tap the switch to flip it: the lever points where the next train goes. Send each train to the station with its symbol. Tap the board to start.';
+
+  @override
+  String get tutJunction2 =>
+      'A train takes the branch a switch is set to as it passes, so set each switch before the train gets there, and flip it back for the next one if needed. Tap the board away from the switches to pause.';
+
+  @override
+  String get tutJunction3 =>
+      'A real board: get 6 trains to their stations. Watch the trains coming out of the tunnel and set the switches ahead of them.';
 
   @override
   String get tutPipes1 =>

@@ -1438,6 +1438,90 @@ abstract class AppLocalizations {
   /// **'Crashed! Tap to try again'**
   String get snakeCrashed;
 
+  /// No description provided for @junctionName.
+  ///
+  /// In en, this message translates to:
+  /// **'Junction'**
+  String get junctionName;
+
+  /// No description provided for @junctionTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Flip the switches and send every train to its own station'**
+  String get junctionTagline;
+
+  /// No description provided for @junctionRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Trains come out of the tunnel one by one and run along the track on their own.\n• Every train carries a symbol, and its station has the same one.\n• At a switch the track splits in two. Tap a switch to flip it: the lever points at the branch the next train takes. A train takes the branch the switch is set to as it passes.\n• A train that reaches its own station scores; one that reaches another station is a miss.\n• Tap anywhere else on the board (or press space) to pause, and tap to go on.\n\nGoals\n• 20 trains: route a set number of trains and get as many as you can to their stations.\n• Timed: get as many trains to their stations as you can in two minutes.\n\nThe difficulty sets the speed, how often trains leave and how many stations there are; bigger boards have more switches.'**
+  String get junctionRules;
+
+  /// No description provided for @junctionGoalTrains.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} trains'**
+  String junctionGoalTrains(int count);
+
+  /// No description provided for @junctionGoalTrainsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Route a set number of trains and get as many as you can to their stations.'**
+  String get junctionGoalTrainsHint;
+
+  /// No description provided for @junctionGoalTimed.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{1 minute} other{{count} minutes}}'**
+  String junctionGoalTimed(int count);
+
+  /// No description provided for @junctionGoalTimedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Get as many trains to their stations as you can before the time runs out.'**
+  String get junctionGoalTimedHint;
+
+  /// No description provided for @junctionFinished.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of {total} trains made it'**
+  String junctionFinished(int count, int total);
+
+  /// No description provided for @junctionTimeUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Time\'s up!'**
+  String get junctionTimeUp;
+
+  /// No description provided for @junctionArrived.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrived: {count}'**
+  String junctionArrived(int count);
+
+  /// No description provided for @junctionMisses.
+  ///
+  /// In en, this message translates to:
+  /// **'Missed: {count}'**
+  String junctionMisses(int count);
+
+  /// No description provided for @junctionStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to start'**
+  String get junctionStart;
+
+  /// No description provided for @junctionPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused: tap to go on'**
+  String get junctionPaused;
+
+  /// No description provided for @junctionWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong station! Tap to try again'**
+  String get junctionWrong;
+
   /// No description provided for @pipesName.
   ///
   /// In en, this message translates to:
@@ -2379,6 +2463,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A long snake needs room. Before you grab an apple, make sure you can get out again: the cells your tail leaves are always free, so following your tail is the safe way. Eat 3 apples.'**
   String get tutSnakeS1;
+
+  /// No description provided for @tutJunction1.
+  ///
+  /// In en, this message translates to:
+  /// **'Trains come out of the tunnel and run on their own. Tap the switch to flip it: the lever points where the next train goes. Send each train to the station with its symbol. Tap the board to start.'**
+  String get tutJunction1;
+
+  /// No description provided for @tutJunction2.
+  ///
+  /// In en, this message translates to:
+  /// **'A train takes the branch a switch is set to as it passes, so set each switch before the train gets there, and flip it back for the next one if needed. Tap the board away from the switches to pause.'**
+  String get tutJunction2;
+
+  /// No description provided for @tutJunction3.
+  ///
+  /// In en, this message translates to:
+  /// **'A real board: get 6 trains to their stations. Watch the trains coming out of the tunnel and set the switches ahead of them.'**
+  String get tutJunction3;
 
   /// No description provided for @tutPipes1.
   ///

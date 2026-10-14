@@ -827,6 +827,71 @@ class AppLocalizationsDe extends AppLocalizations {
   String get snakeCrashed => 'Zusammenstoß! Tippe für einen neuen Versuch';
 
   @override
+  String get junctionName => 'Weichensteller';
+
+  @override
+  String get junctionTagline => 'Stell die Weichen und schick jeden Zug zu seinem Bahnhof';
+
+  @override
+  String get junctionRules =>
+      '• Die Züge kommen einer nach dem anderen aus dem Tunnel und fahren von selbst über die Gleise.\n• Jeder Zug trägt ein Symbol, sein Bahnhof dasselbe.\n• An einer Weiche teilt sich das Gleis. Tippe auf eine Weiche, um sie umzustellen: Der Hebel zeigt auf den Zweig, den der nächste Zug nimmt. Ein Zug nimmt den Zweig, auf den die Weiche steht, wenn er über sie fährt.\n• Ein Zug an seinem eigenen Bahnhof bringt einen Punkt, einer an einem fremden Bahnhof ist ein Fehler.\n• Tippe woanders aufs Feld (oder drück die Leertaste) für eine Pause, und tippe, um weiterzuspielen.\n\nZiele\n• 20 Züge: Leite eine feste Zahl Züge und bring so viele wie möglich zu ihrem Bahnhof.\n• Auf Zeit: Bring in zwei Minuten so viele Züge wie möglich zu ihrem Bahnhof.\n\nDer Schwierigkeitsgrad bestimmt das Tempo, wie oft Züge abfahren und wie viele Bahnhöfe es gibt; größere Felder haben mehr Weichen.';
+
+  @override
+  String junctionGoalTrains(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Züge',
+      one: '$count Zug',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get junctionGoalTrainsHint => 'Leite eine feste Zahl Züge und bring so viele wie möglich zu ihrem Bahnhof.';
+
+  @override
+  String junctionGoalTimed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Minuten',
+      one: '$count Minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get junctionGoalTimedHint => 'Bring so viele Züge wie möglich zu ihrem Bahnhof, bevor die Zeit abläuft.';
+
+  @override
+  String junctionFinished(int count, int total) {
+    return '$count von $total Zügen am Ziel';
+  }
+
+  @override
+  String get junctionTimeUp => 'Die Zeit ist um!';
+
+  @override
+  String junctionArrived(int count) {
+    return 'Am Ziel: $count';
+  }
+
+  @override
+  String junctionMisses(int count) {
+    return 'Fehler: $count';
+  }
+
+  @override
+  String get junctionStart => 'Tippe zum Starten';
+
+  @override
+  String get junctionPaused => 'Pause: Tippe zum Weiterspielen';
+
+  @override
+  String get junctionWrong => 'Falscher Bahnhof! Tippe für einen neuen Versuch';
+
+  @override
   String get pipesName => 'Rohre';
 
   @override
@@ -1398,6 +1463,18 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutSnakeS1 =>
       'Eine lange Schlange braucht Platz. Bevor du einen Apfel holst, sorg dafür, dass du wieder herauskommst: Die Felder, die dein Schwanz verlässt, sind immer frei, also ist es sicher, ihm zu folgen. Friss 3 Äpfel.';
+
+  @override
+  String get tutJunction1 =>
+      'Die Züge kommen aus dem Tunnel und fahren von selbst. Tippe auf die Weiche, um sie umzustellen: Der Hebel zeigt, wohin der nächste Zug fährt. Schick jeden Zug zum Bahnhof mit seinem Symbol. Tippe aufs Feld, um zu starten.';
+
+  @override
+  String get tutJunction2 =>
+      'Ein Zug nimmt den Zweig, auf den die Weiche steht, wenn er über sie fährt. Stell also jede Weiche, bevor der Zug dort ankommt, und für den nächsten Zug bei Bedarf wieder zurück. Tippe abseits der Weichen aufs Feld für eine Pause.';
+
+  @override
+  String get tutJunction3 =>
+      'Ein echtes Feld: Bring 6 Züge zu ihren Bahnhöfen. Achte auf die Züge aus dem Tunnel und stell die Weichen vor ihnen.';
 
   @override
   String get tutPipes1 =>

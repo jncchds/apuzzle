@@ -844,6 +844,75 @@ class AppLocalizationsUk extends AppLocalizations {
   String get snakeCrashed => 'Аварія! Торкнися, щоб спробувати ще';
 
   @override
+  String get junctionName => 'Стрілочник';
+
+  @override
+  String get junctionTagline => 'Перемикай стрілки й відправ кожен потяг на його станцію';
+
+  @override
+  String get junctionRules =>
+      '• Потяги по одному виїжджають з тунелю і самі їдуть колією.\n• Кожен потяг має символ, і його станція має такий самий.\n• На стрілці колія розходиться надвоє. Торкнися стрілки, щоб перевести її: важіль показує гілку, якою поїде наступний потяг. Потяг їде тією гілкою, на яку переведена стрілка, коли він її проїжджає.\n• Потяг, що доїхав до своєї станції, приносить очко; потяг на чужій станції — промах.\n• Торкнися поля деінде (або натисни пробіл), щоб поставити паузу, і торкнися, щоб продовжити.\n\nЦілі\n• 20 потягів: проведи задану кількість потягів і доправ якомога більше на їхні станції.\n• На час: доправ якомога більше потягів на їхні станції за дві хвилини.\n\nСкладність задає швидкість, як часто вирушають потяги і скільки є станцій; на більших полях більше стрілок.';
+
+  @override
+  String junctionGoalTrains(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count потяга',
+      many: '$count потягів',
+      few: '$count потяги',
+      one: '$count потяг',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get junctionGoalTrainsHint => 'Проведи задану кількість потягів і доправ якомога більше на їхні станції.';
+
+  @override
+  String junctionGoalTimed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count хвилини',
+      many: '$count хвилин',
+      few: '$count хвилини',
+      one: '$count хвилина',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get junctionGoalTimedHint => 'Доправ якомога більше потягів на їхні станції, поки не вийшов час.';
+
+  @override
+  String junctionFinished(int count, int total) {
+    return '$count з $total потягів на своїх станціях';
+  }
+
+  @override
+  String get junctionTimeUp => 'Час вийшов!';
+
+  @override
+  String junctionArrived(int count) {
+    return 'Доїхали: $count';
+  }
+
+  @override
+  String junctionMisses(int count) {
+    return 'Промахи: $count';
+  }
+
+  @override
+  String get junctionStart => 'Торкнися, щоб почати';
+
+  @override
+  String get junctionPaused => 'Пауза: торкнися, щоб продовжити';
+
+  @override
+  String get junctionWrong => 'Не та станція! Торкнися, щоб спробувати ще';
+
+  @override
   String get pipesName => 'Труби';
 
   @override
@@ -1416,6 +1485,18 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get tutSnakeS1 =>
       'Довгій змійці потрібне місце. Перш ніж хапати яблуко, переконайся, що зможеш вибратися: клітинки, які звільняє хвіст, завжди вільні, тож повзти за хвостом безпечно. З’їж 3 яблука.';
+
+  @override
+  String get tutJunction1 =>
+      'Потяги виїжджають з тунелю і їдуть самі. Торкнися стрілки, щоб перевести її: важіль показує, куди поїде наступний потяг. Відправ кожен потяг на станцію з його символом. Торкнися поля, щоб почати.';
+
+  @override
+  String get tutJunction2 =>
+      'Потяг їде тією гілкою, на яку переведена стрілка, коли він її проїжджає, тож переводь кожну стрілку заздалегідь, а для наступного потяга, якщо треба, переведи назад. Торкнися поля подалі від стрілок, щоб поставити паузу.';
+
+  @override
+  String get tutJunction3 =>
+      'Справжнє поле: доправ 6 потягів на їхні станції. Стеж за потягами з тунелю і переводь стрілки перед ними.';
 
   @override
   String get tutPipes1 =>

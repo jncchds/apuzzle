@@ -844,6 +844,75 @@ class AppLocalizationsPl extends AppLocalizations {
   String get snakeCrashed => 'Kraksa! Dotknij, aby spróbować ponownie';
 
   @override
+  String get junctionName => 'Zwrotniczy';
+
+  @override
+  String get junctionTagline => 'Przestawiaj zwrotnice i kieruj każdy pociąg na jego stację';
+
+  @override
+  String get junctionRules =>
+      '• Pociągi wyjeżdżają z tunelu jeden po drugim i same jadą po torach.\n• Każdy pociąg ma symbol, a jego stacja ma taki sam.\n• Na zwrotnicy tor rozchodzi się na dwa. Dotknij zwrotnicy, aby ją przestawić: dźwignia wskazuje odgałęzienie, którym pojedzie następny pociąg. Pociąg jedzie tym odgałęzieniem, na które zwrotnica jest ustawiona, gdy przez nią przejeżdża.\n• Pociąg, który dojedzie do swojej stacji, daje punkt; pociąg na cudzej stacji to pudło.\n• Dotknij planszy w innym miejscu (lub naciśnij spację), aby wstrzymać grę, i dotknij, aby grać dalej.\n\nCele\n• 20 pociągów: poprowadź zadaną liczbę pociągów i doprowadź jak najwięcej do ich stacji.\n• Na czas: doprowadź jak najwięcej pociągów do ich stacji w dwie minuty.\n\nPoziom trudności ustala prędkość, jak często odjeżdżają pociągi i ile jest stacji; większe plansze mają więcej zwrotnic.';
+
+  @override
+  String junctionGoalTrains(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pociągu',
+      many: '$count pociągów',
+      few: '$count pociągi',
+      one: '$count pociąg',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get junctionGoalTrainsHint => 'Poprowadź zadaną liczbę pociągów i doprowadź jak najwięcej do ich stacji.';
+
+  @override
+  String junctionGoalTimed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minuty',
+      many: '$count minut',
+      few: '$count minuty',
+      one: '$count minuta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get junctionGoalTimedHint => 'Doprowadź jak najwięcej pociągów do ich stacji, zanim skończy się czas.';
+
+  @override
+  String junctionFinished(int count, int total) {
+    return '$count z $total pociągów na swoich stacjach';
+  }
+
+  @override
+  String get junctionTimeUp => 'Koniec czasu!';
+
+  @override
+  String junctionArrived(int count) {
+    return 'Dojechały: $count';
+  }
+
+  @override
+  String junctionMisses(int count) {
+    return 'Pudła: $count';
+  }
+
+  @override
+  String get junctionStart => 'Dotknij, aby zacząć';
+
+  @override
+  String get junctionPaused => 'Pauza: dotknij, aby grać dalej';
+
+  @override
+  String get junctionWrong => 'Zła stacja! Dotknij, aby spróbować ponownie';
+
+  @override
   String get pipesName => 'Rury';
 
   @override
@@ -1416,6 +1485,18 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutSnakeS1 =>
       'Długi wąż potrzebuje miejsca. Zanim złapiesz jabłko, upewnij się, że zdołasz się wydostać: pola zwalniane przez ogon są zawsze wolne, więc podążanie za ogonem jest bezpieczne. Zjedz 3 jabłka.';
+
+  @override
+  String get tutJunction1 =>
+      'Pociągi wyjeżdżają z tunelu i jadą same. Dotknij zwrotnicy, aby ją przestawić: dźwignia wskazuje, dokąd pojedzie następny pociąg. Wyślij każdy pociąg na stację z jego symbolem. Dotknij planszy, aby zacząć.';
+
+  @override
+  String get tutJunction2 =>
+      'Pociąg jedzie tym odgałęzieniem, na które zwrotnica jest ustawiona, gdy przez nią przejeżdża, więc przestawiaj każdą zawczasu, a dla następnego pociągu w razie potrzeby z powrotem. Dotknij planszy z dala od zwrotnic, aby wstrzymać grę.';
+
+  @override
+  String get tutJunction3 =>
+      'Prawdziwa plansza: doprowadź 6 pociągów do ich stacji. Obserwuj pociągi wyjeżdżające z tunelu i przestawiaj zwrotnice przed nimi.';
 
   @override
   String get tutPipes1 =>
