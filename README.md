@@ -22,13 +22,14 @@ The games are grouped by the home screen's categories. Each one is shown in the 
 
 ### Numbers
 
-Skyline and Cages are one family on the home screen, Latin squares.
+Skyline, Cages and Signs are one family on the home screen, Latin squares.
 
 | Dark | Light | Puzzle | Goal |
 |---|---|---|---|
 | <img src="docs/screenshots/sudoku_dark.png" width="90" alt="Sudoku, dark theme"> | <img src="docs/screenshots/sudoku_light.png" width="90" alt="Sudoku, light theme"> | **Sudoku** | 4×4, 6×6 or 9×9 grids. Every number appears once per row, column and box. Supports pencil marks. |
 | <img src="docs/screenshots/skyline_dark.png" width="90" alt="Skyline, dark theme"> | <img src="docs/screenshots/skyline_light.png" width="90" alt="Skyline, light theme"> | **Skyline** | Put a tower in every cell, each height once per row and column. The clues around the grid say how many towers can be seen from there; taller towers hide shorter ones behind them. Supports pencil marks. |
 | <img src="docs/screenshots/cages_dark.png" width="90" alt="Cages, dark theme"> | <img src="docs/screenshots/cages_light.png" width="90" alt="Cages, light theme"> | **Cages** | Fill the grid so every number appears once per row and column. The numbers in each outlined cage make the clue in its corner: added, multiplied, or, in a cage of two cells, subtracted or divided. Supports pencil marks. |
+| <img src="docs/screenshots/signs_dark.png" width="90" alt="Signs, dark theme"> | <img src="docs/screenshots/signs_light.png" width="90" alt="Signs, light theme"> | **Signs** | Fill the grid so every number appears once per row and column. A sign between two cells points at the smaller number. Supports pencil marks. |
 | <img src="docs/screenshots/blocks_dark.png" width="90" alt="Blocks, dark theme"> | <img src="docs/screenshots/blocks_light.png" width="90" alt="Blocks, light theme"> | **Blocks** | Fill every region of k cells with the numbers 1 to k. Equal numbers never touch, not even diagonally. Supports pencil marks. |
 | <img src="docs/screenshots/tally_dark.png" width="90" alt="Tally, dark theme"> | <img src="docs/screenshots/tally_light.png" width="90" alt="Tally, light theme"> | **Tally** | Every cell holds a number. Cross some out so that the numbers left in each row and column add up to the sums outside the grid. |
 | <img src="docs/screenshots/formula_dark.png" width="90" alt="Formula, dark theme"> | <img src="docs/screenshots/formula_light.png" width="90" alt="Formula, light theme"> | **Formula** | Guess the hidden equation in six tries. Every guess is a true equation, and each tile is marked as in place, elsewhere or not there. Six, eight or ten tiles wide; harder levels add × ÷, then brackets, squares and cubes. |
@@ -153,7 +154,7 @@ lib/
     puzzle_type.dart      plug-in contract every puzzle implements
     value_grid.dart       base for "one value per cell" puzzles (input, palette, pencil marks, hints)
     lattice_loop.dart     shared loop solver for Fence, Pearls, Rails and Arrows
-    latin_square.dart     shared Latin-square candidates, rules, generator and explainer (Skyline, Cages)
+    latin_square.dart     shared Latin-square candidates, rules, generator and explainer (Skyline, Cages, Signs)
     game_controller.dart  session: state history (undo/redo), timer, submit, hints, save/resume, stats
     generator_runner.dart runs generation off the UI thread
     daily.dart            daily challenges

@@ -146,6 +146,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get tagLatin => 'lateinisches Quadrat';
 
   @override
+  String get tagCompare => 'vergleichen, Vergleich, größer, kleiner, mehr, weniger, Ungleichung, Zeichen';
+
+  @override
   String get tagPlace => 'Objekte platzieren';
 
   @override
@@ -3698,5 +3701,73 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String exCagesFail(Object clue, Object cage) {
     return 'Dann ließe sich der $clue-Käfig bei $cage aber nicht füllen.';
+  }
+
+  @override
+  String get signsName => 'Zeichen';
+
+  @override
+  String get signsTagline => 'Folge den Zeichen: Welche Zahl ist größer?';
+
+  @override
+  String get signsRules =>
+      '• Füll das Gitter mit den Zahlen 1 bis N (N = Gittergröße), jede einmal in jeder Zeile und Spalte.\n• Ein Zeichen zwischen zwei benachbarten Feldern zeigt mit der Spitze auf die kleinere Zahl, wie bei 2 < 3: Die offene Seite zeigt zur größeren. Zeichen gelten in Zeilen und in Spalten.\n• Ein paar Zahlen können vorgegeben sein.\n\nWähle eine Zahl in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Zahl. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld.';
+
+  @override
+  String get tutSigns1 =>
+      'Jede Zeile und Spalte enthält 1 bis 4 je einmal. Ein Zeichen zwischen zwei Feldern zeigt auf die kleinere Zahl, wie bei 1 < 2, auch von oben nach unten. Zeilen und Spalten allein erlauben hier zwei Wege: Lass die Zeichen einen wählen.';
+
+  @override
+  String get tutSigns2 =>
+      'Zeichen können eine Kette bilden: Jedes Feld der dritten Zeile ist größer als das nächste. Das erste hat drei kleinere hinter sich, also ist es 4, und das letzte ist 1. Füll die unteren zwei Zeilen.';
+
+  @override
+  String get tutSigns3 =>
+      'Das zweite Feld der zweiten Zeile ist größer als seine beiden Nachbarn. Die brauchen zwei verschiedene kleinere Zahlen, also kann es nicht 1 oder 2 sein. Füll die oberen zwei Zeilen.';
+
+  @override
+  String get tutSigns4 =>
+      'Jetzt ein ganzes Gitter. Fang dort an, wo sich Zeichen häufen oder eine Zahl vorgegeben ist, notier mit dem Stift, was in ein Feld noch passt, und lass Zeilen und Spalten die Auswahl eingrenzen.';
+
+  @override
+  String get tutSignsS1 =>
+      'Folge den Zeichen. Ein Feld, das kleiner als sein Nachbar ist, erreicht nicht dessen größte noch mögliche Zahl, und ein größeres sinkt nicht auf dessen kleinste. In einer Kette a < b < c ist das erste höchstens N − 2. Streich, was die Zeichen ausschließen.';
+
+  @override
+  String get tutSignsS2 =>
+      'Ein Feld, das größer als beide Nachbarn in einer Zeile ist, braucht zwei verschiedene Zahlen darunter, also ist es mindestens 3; eine Reihe von Zeichen zählt genauso. Und wenn zwei Felder einer Zeile nur dieselben zwei Zahlen haben können, gehören die beiden Zahlen ihnen.';
+
+  @override
+  String get tutSignsS3 =>
+      'Die schwersten Gitter brauchen eine Annahme, die sich widerlegen lässt. Nimm an, ein Feld hat eine seiner letzten zwei oder drei Zahlen, und denk weiter; führt das zu einem Widerspruch, streich die Zahl.';
+
+  @override
+  String exSignsLess(Object cell, Object other, Object limit, Object values) {
+    return '$cell ist kleiner als $other, wo höchstens $limit steht, also kann $cell nicht $values sein.';
+  }
+
+  @override
+  String exSignsMore(Object cell, Object other, Object limit, Object values) {
+    return '$cell ist größer als $other, wo mindestens $limit steht, also kann $cell nicht $values sein.';
+  }
+
+  @override
+  String exSignsBelowRow(Object cell, Object cells, Object row, Object values) {
+    return '$cell ist kleiner als jedes von $cells, alle in Zeile $row: Sie brauchen verschiedene Zahlen über ihm, also kann $cell nicht $values sein.';
+  }
+
+  @override
+  String exSignsBelowCol(Object cell, Object cells, Object col, Object values) {
+    return '$cell ist kleiner als jedes von $cells, alle in Spalte $col: Sie brauchen verschiedene Zahlen über ihm, also kann $cell nicht $values sein.';
+  }
+
+  @override
+  String exSignsAboveRow(Object cell, Object cells, Object row, Object values) {
+    return '$cell ist größer als jedes von $cells, alle in Zeile $row: Sie brauchen verschiedene Zahlen unter ihm, also kann $cell nicht $values sein.';
+  }
+
+  @override
+  String exSignsAboveCol(Object cell, Object cells, Object col, Object values) {
+    return '$cell ist größer als jedes von $cells, alle in Spalte $col: Sie brauchen verschiedene Zahlen unter ihm, also kann $cell nicht $values sein.';
   }
 }

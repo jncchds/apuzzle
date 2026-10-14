@@ -148,6 +148,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get tagLatin => 'kwadrat łaciński';
 
   @override
+  String get tagCompare => 'porównanie, porównać, większy, mniejszy, więcej, mniej, nierówność, znaki';
+
+  @override
   String get tagPlace => 'rozmieść obiekty';
 
   @override
@@ -3749,5 +3752,73 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String exCagesFail(Object clue, Object cage) {
     return 'Ale wtedy klatki $clue w $cage nie da się wypełnić.';
+  }
+
+  @override
+  String get signsName => 'Znaki';
+
+  @override
+  String get signsTagline => 'Idź za znakami: która liczba jest większa?';
+
+  @override
+  String get signsRules =>
+      '• Wypełnij siatkę liczbami od 1 do N (N = rozmiar siatki), każdą raz w każdym wierszu i kolumnie.\n• Znak między dwoma sąsiednimi polami wskazuje ostrzem mniejszą liczbę, jak w 2 < 3: otwartą stroną zwrócony jest ku większej. Znaki działają w wierszach i w kolumnach.\n• Kilka liczb może być podanych.\n\nWybierz liczbę z palety i dotykaj pól, aby ją wpisać, albo najpierw dotknij pola, a potem liczby. Przycisk ołówka włącza małe notatki. Długie naciśnięcie / prawy przycisk czyści pole.';
+
+  @override
+  String get tutSigns1 =>
+      'Każdy wiersz i kolumna zawiera 1–4 po razie. Znak między dwoma polami wskazuje mniejszą liczbę, jak w 1 < 2, i działa też w pionie. Same wiersze i kolumny dopuszczają tu dwa sposoby: niech znaki wybiorą jeden.';
+
+  @override
+  String get tutSigns2 =>
+      'Znaki mogą tworzyć łańcuch: każde pole trzeciego wiersza jest większe od następnego. Pierwsze ma za sobą trzy mniejsze, więc to 4, a ostatnie to 1. Wypełnij dwa dolne wiersze.';
+
+  @override
+  String get tutSigns3 =>
+      'Drugie pole drugiego wiersza jest większe od obu sąsiadów. Potrzebują one dwóch różnych mniejszych liczb, więc nie może to być 1 ani 2. Wypełnij dwa górne wiersze.';
+
+  @override
+  String get tutSigns4 =>
+      'Teraz cała plansza. Zacznij tam, gdzie jest dużo znaków albo podana liczba, notuj ołówkiem, co jeszcze może być w polu, i pozwól wierszom i kolumnom zawęzić wybór.';
+
+  @override
+  String get tutSignsS1 =>
+      'Idź za znakami. Pole mniejsze od sąsiada nie sięga największej liczby, jaka może jeszcze być u sąsiada, a większe nie schodzi do jego najmniejszej. W łańcuchu a < b < c pierwsze jest co najwyżej N − 2. Skreślaj to, co wykluczają znaki.';
+
+  @override
+  String get tutSignsS2 =>
+      'Pole większe od obu sąsiadów w wierszu potrzebuje pod sobą dwóch różnych liczb, więc ma co najmniej 3; ciąg znaków liczy się tak samo. A gdy dwa pola wiersza mogą zawierać tylko te same dwie liczby, te liczby są ich.';
+
+  @override
+  String get tutSignsS3 =>
+      'Najtrudniejsze plansze wymagają założenia, które da się obalić. Załóż, że w polu jest jedna z dwóch lub trzech ostatnich liczb, i rozumuj dalej; jeśli dojdziesz do sprzeczności, skreśl tę liczbę.';
+
+  @override
+  String exSignsLess(Object cell, Object other, Object limit, Object values) {
+    return '$cell jest mniejsze od $other, gdzie jest co najwyżej $limit, więc w $cell nie może być $values.';
+  }
+
+  @override
+  String exSignsMore(Object cell, Object other, Object limit, Object values) {
+    return '$cell jest większe od $other, gdzie jest co najmniej $limit, więc w $cell nie może być $values.';
+  }
+
+  @override
+  String exSignsBelowRow(Object cell, Object cells, Object row, Object values) {
+    return '$cell jest mniejsze od każdego z $cells, wszystkich w wierszu $row: potrzebują różnych liczb większych od niego, więc w $cell nie może być $values.';
+  }
+
+  @override
+  String exSignsBelowCol(Object cell, Object cells, Object col, Object values) {
+    return '$cell jest mniejsze od każdego z $cells, wszystkich w kolumnie $col: potrzebują różnych liczb większych od niego, więc w $cell nie może być $values.';
+  }
+
+  @override
+  String exSignsAboveRow(Object cell, Object cells, Object row, Object values) {
+    return '$cell jest większe od każdego z $cells, wszystkich w wierszu $row: potrzebują różnych liczb mniejszych od niego, więc w $cell nie może być $values.';
+  }
+
+  @override
+  String exSignsAboveCol(Object cell, Object cells, Object col, Object values) {
+    return '$cell jest większe od każdego z $cells, wszystkich w kolumnie $col: potrzebują różnych liczb mniejszych od niego, więc w $cell nie może być $values.';
   }
 }

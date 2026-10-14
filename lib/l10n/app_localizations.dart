@@ -322,6 +322,12 @@ abstract class AppLocalizations {
   /// **'Latin square'**
   String get tagLatin;
 
+  /// No description provided for @tagCompare.
+  ///
+  /// In en, this message translates to:
+  /// **'compare, greater, less, bigger, smaller, more, fewer, inequality, signs'**
+  String get tagCompare;
+
   /// No description provided for @tagPlace.
   ///
   /// In en, this message translates to:
@@ -5115,6 +5121,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then the {clue} cage at {cage} can\'t be filled.'**
   String exCagesFail(Object clue, Object cage);
+
+  /// No description provided for @signsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Signs'**
+  String get signsName;
+
+  /// No description provided for @signsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow the signs: which number is bigger?'**
+  String get signsTagline;
+
+  /// No description provided for @signsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Fill the grid with the numbers 1 to N (N = grid size), each once in every row and column.\n• A sign between two neighbouring cells points at the smaller number, like 2 < 3: its open side faces the bigger one. Signs work along rows and down columns.\n• A few numbers may be given.\n\nPick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.'**
+  String get signsRules;
+
+  /// No description provided for @tutSigns1.
+  ///
+  /// In en, this message translates to:
+  /// **'Every row and column holds 1 to 4 once. A sign between two cells points at the smaller number, like 1 < 2, and works up and down too. Rows and columns alone allow two ways here: let the signs pick one.'**
+  String get tutSigns1;
+
+  /// No description provided for @tutSigns2.
+  ///
+  /// In en, this message translates to:
+  /// **'Signs can form a chain: every cell of the third row is bigger than the next. The first one has three smaller cells after it, so it must be 4, and the last must be 1. Fill the bottom two rows.'**
+  String get tutSigns2;
+
+  /// No description provided for @tutSigns3.
+  ///
+  /// In en, this message translates to:
+  /// **'The second cell of the second row is bigger than both its neighbours. They need two different smaller numbers, so it can\'t be 1 or 2. Fill the top two rows.'**
+  String get tutSigns3;
+
+  /// No description provided for @tutSigns4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a whole board. Start where signs bunch up or a number is given, note what a cell can still hold with the pencil, and let rows and columns narrow it down.'**
+  String get tutSigns4;
+
+  /// No description provided for @tutSignsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow the signs. A cell smaller than its neighbour can\'t reach the biggest number the neighbour can still hold, and a bigger one can\'t go down to its smallest. Along a chain a < b < c the first is at most N − 2. Cross off what the signs rule out.'**
+  String get tutSignsS1;
+
+  /// No description provided for @tutSignsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A cell bigger than both its neighbours in a row needs two different numbers below it, so it is at least 3; a run of signs counts the same way. And when two cells of a row can only hold the same two numbers, those two are theirs.'**
+  String get tutSignsS2;
+
+  /// No description provided for @tutSignsS3.
+  ///
+  /// In en, this message translates to:
+  /// **'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three numbers and follow on; if that runs into a contradiction, cross the number off.'**
+  String get tutSignsS3;
+
+  /// No description provided for @exSignsLess.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is smaller than {other}, which is at most {limit}, so {cell} can\'t be {values}.'**
+  String exSignsLess(Object cell, Object other, Object limit, Object values);
+
+  /// No description provided for @exSignsMore.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is bigger than {other}, which is at least {limit}, so {cell} can\'t be {values}.'**
+  String exSignsMore(Object cell, Object other, Object limit, Object values);
+
+  /// No description provided for @exSignsBelowRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is smaller than each of {cells}, all in row {row}: they need different numbers bigger than it, so {cell} can\'t be {values}.'**
+  String exSignsBelowRow(Object cell, Object cells, Object row, Object values);
+
+  /// No description provided for @exSignsBelowCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is smaller than each of {cells}, all in column {col}: they need different numbers bigger than it, so {cell} can\'t be {values}.'**
+  String exSignsBelowCol(Object cell, Object cells, Object col, Object values);
+
+  /// No description provided for @exSignsAboveRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is bigger than each of {cells}, all in row {row}: they need different numbers smaller than it, so {cell} can\'t be {values}.'**
+  String exSignsAboveRow(Object cell, Object cells, Object row, Object values);
+
+  /// No description provided for @exSignsAboveCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is bigger than each of {cells}, all in column {col}: they need different numbers smaller than it, so {cell} can\'t be {values}.'**
+  String exSignsAboveCol(Object cell, Object cells, Object col, Object values);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

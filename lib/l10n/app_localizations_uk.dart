@@ -148,6 +148,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get tagLatin => 'латинський квадрат';
 
   @override
+  String get tagCompare => 'порівняння, порівняти, більше, менше, нерівність, знаки';
+
+  @override
   String get tagPlace => 'розставити об’єкти';
 
   @override
@@ -3764,5 +3767,73 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String exCagesFail(Object clue, Object cage) {
     return 'Але тоді клітку $clue у $cage не заповнити.';
+  }
+
+  @override
+  String get signsName => 'Знаки';
+
+  @override
+  String get signsTagline => 'Ідіть за знаками: яке число більше?';
+
+  @override
+  String get signsRules =>
+      '• Заповніть сітку числами від 1 до N (N — розмір сітки), кожне по одному разу в кожному рядку й стовпці.\n• Знак між двома сусідніми клітинками вказує вістрям на менше число, як у 2 < 3: відкритим боком він повернутий до більшого. Знаки діють і в рядках, і в стовпцях.\n• Кілька чисел можуть бути дані.\n\nВиберіть число в палітрі й торкайтеся клітинок, щоб поставити його, або спершу торкніться клітинки, а потім числа. Кнопка з олівцем вмикає дрібні позначки. Довге натискання / правий клік очищає клітинку.';
+
+  @override
+  String get tutSigns1 =>
+      'Кожен рядок і стовпець містить 1–4 по разу. Знак між двома клітинками вказує на менше число, як у 1 < 2, і працює також згори вниз. Самі рядки й стовпці тут допускають два варіанти: нехай знаки виберуть один.';
+
+  @override
+  String get tutSigns2 =>
+      'Знаки можуть утворювати ланцюжок: кожна клітинка третього рядка більша за наступну. Перша має після себе три менші, тож це 4, а остання — 1. Заповніть два нижні рядки.';
+
+  @override
+  String get tutSigns3 =>
+      'Друга клітинка другого рядка більша за обох сусідів. Їм потрібні два різні менші числа, тож вона не може бути 1 чи 2. Заповніть два верхні рядки.';
+
+  @override
+  String get tutSigns4 =>
+      'Тепер ціле поле. Почніть там, де знаків багато або є дане число, позначайте олівцем, що ще може бути в клітинці, і нехай рядки й стовпці звужують вибір.';
+
+  @override
+  String get tutSignsS1 =>
+      'Ідіть за знаками. Клітинка, менша за сусідню, не досягає найбільшого числа, яке ще може бути в сусідній, а більша не опускається до її найменшого. У ланцюжку a < b < c перша — щонайбільше N − 2. Викреслюйте те, що виключають знаки.';
+
+  @override
+  String get tutSignsS2 =>
+      'Клітинці, більшій за обох сусідів у рядку, потрібні два різні менші числа, тож вона щонайменше 3; так само рахується ряд знаків. А коли дві клітинки рядка можуть містити лише ті самі два числа, ці числа — їхні.';
+
+  @override
+  String get tutSignsS3 =>
+      'Найважчі поля потребують припущення, яке можна спростувати. Припустіть, що в клітинці одне з двох-трьох останніх чисел, і міркуйте далі; якщо дійдете до суперечності, викресліть це число.';
+
+  @override
+  String exSignsLess(Object cell, Object other, Object limit, Object values) {
+    return '$cell менша за $other, а там щонайбільше $limit, тож у $cell не може бути $values.';
+  }
+
+  @override
+  String exSignsMore(Object cell, Object other, Object limit, Object values) {
+    return '$cell більша за $other, а там щонайменше $limit, тож у $cell не може бути $values.';
+  }
+
+  @override
+  String exSignsBelowRow(Object cell, Object cells, Object row, Object values) {
+    return '$cell менша за кожну з $cells, усі в рядку $row: їм потрібні різні числа, більші за неї, тож у $cell не може бути $values.';
+  }
+
+  @override
+  String exSignsBelowCol(Object cell, Object cells, Object col, Object values) {
+    return '$cell менша за кожну з $cells, усі в стовпці $col: їм потрібні різні числа, більші за неї, тож у $cell не може бути $values.';
+  }
+
+  @override
+  String exSignsAboveRow(Object cell, Object cells, Object row, Object values) {
+    return '$cell більша за кожну з $cells, усі в рядку $row: їм потрібні різні числа, менші за неї, тож у $cell не може бути $values.';
+  }
+
+  @override
+  String exSignsAboveCol(Object cell, Object cells, Object col, Object values) {
+    return '$cell більша за кожну з $cells, усі в стовпці $col: їм потрібні різні числа, менші за неї, тож у $cell не може бути $values.';
   }
 }

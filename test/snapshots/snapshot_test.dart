@@ -16,6 +16,7 @@ import 'package:apuzzle/app.dart';
 import 'package:apuzzle/core/difficulty.dart';
 import 'package:apuzzle/core/persistence.dart';
 import 'package:apuzzle/core/puzzle_type.dart';
+import 'package:apuzzle/core/latin_square.dart';
 import 'package:apuzzle/core/registry.dart';
 import 'package:apuzzle/core/settings.dart';
 import 'package:apuzzle/l10n/l10n.dart';
@@ -26,6 +27,7 @@ import 'package:apuzzle/puzzles/hues/hues_generator.dart';
 import 'package:apuzzle/puzzles/hues/hues_model.dart';
 import 'package:apuzzle/puzzles/pop/pop_model.dart';
 import 'package:apuzzle/puzzles/rails/rails_model.dart';
+import 'package:apuzzle/puzzles/signs/signs_model.dart';
 import 'package:apuzzle/ui/app_router.dart';
 import 'package:apuzzle/ui/game_screen.dart';
 import 'package:apuzzle/ui/home_screen.dart';
@@ -137,14 +139,15 @@ void main() {
           state = grid;
         }
 
-        // Some pencil marks on Cages: two to four candidates in a few empty cells.
-        if (puzzle is CagesPuzzle && state is ValueGrid) {
+        // Some pencil marks on Cages and Signs: two to four candidates in a few empty cells.
+        if ((puzzle is CagesPuzzle || puzzle is SignsPuzzle) && state is ValueGrid) {
+          final p = puzzle as LatinPuzzle;
           var grid = state;
           var n = 0;
-          for (var i = 0; i < puzzle.solution.length && n < 3; i++) {
+          for (var i = 0; i < p.n * p.n && n < 3; i++) {
             if (grid.cells[i].value != null) continue;
-            final marks = {for (var k = 0; k < 2 + n; k++) (puzzle.solution[i] + 2 * k) % puzzle.n};
-            grid = grid.set(puzzle.size.pos(i), CellValue(marks: marks));
+            final marks = {for (var k = 0; k < 2 + n; k++) (p.solutionAt(i) + 2 * k) % p.n};
+            grid = grid.set(p.size.pos(i), CellValue(marks: marks));
             n++;
           }
           state = grid;

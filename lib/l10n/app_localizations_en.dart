@@ -146,6 +146,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tagLatin => 'Latin square';
 
   @override
+  String get tagCompare => 'compare, greater, less, bigger, smaller, more, fewer, inequality, signs';
+
+  @override
   String get tagPlace => 'place objects';
 
   @override
@@ -3691,5 +3694,73 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String exCagesFail(Object clue, Object cage) {
     return 'But then the $clue cage at $cage can\'t be filled.';
+  }
+
+  @override
+  String get signsName => 'Signs';
+
+  @override
+  String get signsTagline => 'Follow the signs: which number is bigger?';
+
+  @override
+  String get signsRules =>
+      '• Fill the grid with the numbers 1 to N (N = grid size), each once in every row and column.\n• A sign between two neighbouring cells points at the smaller number, like 2 < 3: its open side faces the bigger one. Signs work along rows and down columns.\n• A few numbers may be given.\n\nPick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.';
+
+  @override
+  String get tutSigns1 =>
+      'Every row and column holds 1 to 4 once. A sign between two cells points at the smaller number, like 1 < 2, and works up and down too. Rows and columns alone allow two ways here: let the signs pick one.';
+
+  @override
+  String get tutSigns2 =>
+      'Signs can form a chain: every cell of the third row is bigger than the next. The first one has three smaller cells after it, so it must be 4, and the last must be 1. Fill the bottom two rows.';
+
+  @override
+  String get tutSigns3 =>
+      'The second cell of the second row is bigger than both its neighbours. They need two different smaller numbers, so it can\'t be 1 or 2. Fill the top two rows.';
+
+  @override
+  String get tutSigns4 =>
+      'Now a whole board. Start where signs bunch up or a number is given, note what a cell can still hold with the pencil, and let rows and columns narrow it down.';
+
+  @override
+  String get tutSignsS1 =>
+      'Follow the signs. A cell smaller than its neighbour can\'t reach the biggest number the neighbour can still hold, and a bigger one can\'t go down to its smallest. Along a chain a < b < c the first is at most N − 2. Cross off what the signs rule out.';
+
+  @override
+  String get tutSignsS2 =>
+      'A cell bigger than both its neighbours in a row needs two different numbers below it, so it is at least 3; a run of signs counts the same way. And when two cells of a row can only hold the same two numbers, those two are theirs.';
+
+  @override
+  String get tutSignsS3 =>
+      'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three numbers and follow on; if that runs into a contradiction, cross the number off.';
+
+  @override
+  String exSignsLess(Object cell, Object other, Object limit, Object values) {
+    return '$cell is smaller than $other, which is at most $limit, so $cell can\'t be $values.';
+  }
+
+  @override
+  String exSignsMore(Object cell, Object other, Object limit, Object values) {
+    return '$cell is bigger than $other, which is at least $limit, so $cell can\'t be $values.';
+  }
+
+  @override
+  String exSignsBelowRow(Object cell, Object cells, Object row, Object values) {
+    return '$cell is smaller than each of $cells, all in row $row: they need different numbers bigger than it, so $cell can\'t be $values.';
+  }
+
+  @override
+  String exSignsBelowCol(Object cell, Object cells, Object col, Object values) {
+    return '$cell is smaller than each of $cells, all in column $col: they need different numbers bigger than it, so $cell can\'t be $values.';
+  }
+
+  @override
+  String exSignsAboveRow(Object cell, Object cells, Object row, Object values) {
+    return '$cell is bigger than each of $cells, all in row $row: they need different numbers smaller than it, so $cell can\'t be $values.';
+  }
+
+  @override
+  String exSignsAboveCol(Object cell, Object cells, Object col, Object values) {
+    return '$cell is bigger than each of $cells, all in column $col: they need different numbers smaller than it, so $cell can\'t be $values.';
   }
 }
