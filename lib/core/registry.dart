@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../puzzles/arrows/arrows_type.dart';
 import '../puzzles/atoms/atoms_type.dart';
 import '../puzzles/blocks/blocks_type.dart';
+import '../puzzles/cages/cages_type.dart';
 import '../puzzles/blend/blend_type.dart';
 import '../puzzles/camp/camp_type.dart';
 import '../puzzles/fence/fence_type.dart';
@@ -39,6 +40,7 @@ const List<PuzzleType> puzzleTypes = [
   MamboType(),
   SudokuType(),
   SkylineType(),
+  CagesType(),
   KingsType(),
   BlocksType(),
   TallyType(),
@@ -82,12 +84,14 @@ class PuzzleFamily {
 
   String name(AppLocalizations l) => switch (id) {
     'flood' => l.famFlood,
+    'latin' => l.famLatin,
     _ => types.first.name(l),
   };
 
   /// What the variants share, under the family's name.
   String about(AppLocalizations l) => switch (id) {
     'flood' => l.famFloodAbout,
+    'latin' => l.famLatinAbout,
     _ => types.first.tagline(l),
   };
 
@@ -123,7 +127,7 @@ const List<PuzzleCategory> puzzleCategories = [
     accent: Color(0xFF6FA8FF),
     [
       PuzzleFamily('sudoku', [SudokuType()]),
-      PuzzleFamily('skyline', [SkylineType()]),
+      PuzzleFamily('latin', [SkylineType(), CagesType()]),
       PuzzleFamily('blocks', [BlocksType()]),
       PuzzleFamily('tally', [TallyType()]),
       PuzzleFamily('formula', [FormulaType()]),

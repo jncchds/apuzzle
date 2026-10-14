@@ -3623,4 +3623,73 @@ class AppLocalizationsEn extends AppLocalizations {
   String exSkylineFailCol(Object col) {
     return 'But then column $col can\'t be filled to match its clues.';
   }
+
+  @override
+  String get famLatin => 'Latin squares';
+
+  @override
+  String get famLatinAbout => 'Every row and column holds each number once, and the clues tell you more';
+
+  @override
+  String get cagesName => 'Cages';
+
+  @override
+  String get cagesTagline => 'Add, take away, multiply and divide to fill each cage';
+
+  @override
+  String get cagesRules =>
+      '• Fill the grid with the numbers 1 to N (N = grid size), each once in every row and column.\n• Thick outlines split the grid into cages. The numbers in a cage make the clue in its corner with the sign shown: added up (+), multiplied (×), or, in a cage of two cells, the bigger minus the smaller (−) or the bigger divided by the smaller (÷). A cage of one cell simply holds its number.\n• A number may repeat in a cage, as long as not in the same row or column.\n\nPick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.';
+
+  @override
+  String get tutCages1 =>
+      'Every row and column holds 1 to 4 once. The outlines group cells into cages, and the numbers in a cage make its clue: in a 7+ cage they add up to 7. Fill the empty cells.';
+
+  @override
+  String get tutCages2 =>
+      'In a cage of two cells, − is the bigger number minus the smaller, and ÷ the bigger divided by the smaller; either cell can hold the bigger one. Fill the top two rows.';
+
+  @override
+  String get tutCages3 =>
+      '× multiplies. A number may repeat in a cage as long as it\'s not twice in a row or column, like 1 × 2 × 1 for a 2×. Rows and columns alone allow two ways here: let the cages pick one.';
+
+  @override
+  String get tutCages4 =>
+      'Now a whole board. Start with the cages that can be made in few ways, note what a cell can still hold with the pencil, and let rows and columns narrow it down.';
+
+  @override
+  String get tutCagesS1 =>
+      'Go through the ways to make a cage. Two cells making 3+ can only be 1 and 2; a 4− on a board of 5 is 1 and 5. A number that no way puts into a cell can be crossed off there.';
+
+  @override
+  String get tutCagesS2 =>
+      'If every way to fill a cage puts some number into its cells of one row, no other cell of that row can have it. A 2÷ in a row on a board of 5 is 1 and 2 or 2 and 4: a 2 either way. And when two cells of a row can only hold the same two numbers, those two are theirs.';
+
+  @override
+  String get tutCagesS3 =>
+      'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three numbers and follow on; if that runs into a contradiction, cross the number off.';
+
+  @override
+  String exCagesSingle(Object cell, Object value) {
+    return '$cell must be $value: its cage is that one cell.';
+  }
+
+  @override
+  String exCagesCombo(Object clue, Object cage, Object values, Object cell) {
+    return 'No way to fill the $clue cage at $cage puts $values into $cell.';
+  }
+
+  @override
+  String exCagesRequiredRow(Object clue, Object cage, Object values, Object row, Object cell) {
+    return 'Every way to fill the $clue cage at $cage puts $values into its cells in row $row, so not into $cell.';
+  }
+
+  @override
+  String exCagesRequiredCol(Object clue, Object cage, Object values, Object col, Object cell) {
+    return 'Every way to fill the $clue cage at $cage puts $values into its cells in column $col, so not into $cell.';
+  }
+
+  @override
+  String exCagesFail(Object clue, Object cage) {
+    return 'But then the $clue cage at $cage can\'t be filled.';
+  }
 }

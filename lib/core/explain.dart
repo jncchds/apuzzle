@@ -76,10 +76,23 @@ class ExplainTrace {
 /// One sentence of an explanation and the cells it talks about. The text
 /// holds tokens (see [cellTok] and friends) that the UI draws as chips.
 class ExplainLine {
-  const ExplainLine(this.text, [this.cells = const {}]);
+  const ExplainLine(this.text, [this.cells = const {}, this.key]);
 
   final Tr text;
   final Set<Pos> cells;
+
+  /// Lines with the same key say the same thing (one deduction that ruled
+  /// out several cells): a story tells it once.
+  final Object? key;
+}
+
+/// [lines] without repeats of a keyed line.
+List<ExplainLine> _once(Iterable<ExplainLine> lines) {
+  final seen = <Object>{};
+  return [
+    for (final l in lines)
+      if (l.key == null || seen.add(l.key!)) l,
+  ];
 }
 
 /// The next step: what to do ([headline], [next]) and why ([why], and for a
@@ -335,10 +348,10 @@ Explanation _build<P, S, K>(
 ) {
   final headline = x.describe(p, f) ?? const ExplainLine(_empty);
   final chain = t.chainOf(f);
-  final why = [
+  final why = _once([
     for (final c in chain)
       if (!x.quiet(p, c)) ?x.describe(p, c),
-  ];
+  ]);
   // The assumption behind the step: its own, or the latest one it rests on.
   final refuted = refutedBy[f.id] ?? [for (final c in chain.reversed) ?refutedBy[c.id]].firstOrNull;
   ExplainLine? suppose;
@@ -357,7 +370,7 @@ Explanation _build<P, S, K>(
       }
     }
     final fail = x.describe(p, fork.failure!);
-    probe = [...probe, ?fail];
+    probe = _once([...probe, ?fail]);
   }
   final targets = x.targets(p, f);
   return Explanation(

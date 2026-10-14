@@ -3681,4 +3681,73 @@ class AppLocalizationsPl extends AppLocalizations {
   String exSkylineFailCol(Object col) {
     return 'Ale wtedy kolumny $col nie da się wypełnić zgodnie z jej wskazówkami.';
   }
+
+  @override
+  String get famLatin => 'Kwadraty łacińskie';
+
+  @override
+  String get famLatinAbout => 'Każda liczba raz w każdym wierszu i kolumnie, a wskazówki mówią więcej';
+
+  @override
+  String get cagesName => 'Klatki';
+
+  @override
+  String get cagesTagline => 'Dodawaj, odejmuj, mnóż i dziel, by wypełnić każdą klatkę';
+
+  @override
+  String get cagesRules =>
+      '• Wypełnij siatkę liczbami od 1 do N (N = rozmiar siatki), każdą raz w każdym wierszu i kolumnie.\n• Grube kontury dzielą siatkę na klatki. Liczby w klatce dają wskazówkę z jej rogu wskazanym działaniem: suma (+), iloczyn (×), a w klatce z dwóch pól większa minus mniejsza (−) albo większa podzielona przez mniejszą (÷). Klatka z jednego pola po prostu zawiera swoją liczbę.\n• Liczba może się powtarzać w klatce, jeśli nie w tym samym wierszu ani kolumnie.\n\nWybierz liczbę z palety i dotykaj pól, aby ją wpisać, albo najpierw dotknij pola, a potem liczby. Przycisk ołówka włącza małe notatki. Długie naciśnięcie / prawy przycisk czyści pole.';
+
+  @override
+  String get tutCages1 =>
+      'W każdym wierszu i kolumnie liczby od 1 do 4 występują raz. Kontury łączą pola w klatki, a liczby w klatce dają jej wskazówkę: w klatce 7+ sumują się do 7. Wypełnij puste pola.';
+
+  @override
+  String get tutCages2 =>
+      'W klatce z dwóch pól − to większa liczba minus mniejsza, a ÷ większa podzielona przez mniejszą; większa może stać w dowolnym z nich. Wypełnij dwa górne wiersze.';
+
+  @override
+  String get tutCages3 =>
+      '× mnoży. Liczba może się powtarzać w klatce, jeśli nie występuje dwa razy w wierszu ani kolumnie, jak 1 × 2 × 1 dla 2×. Same wiersze i kolumny pozwalają tu na dwa sposoby: niech klatki wybiorą jeden.';
+
+  @override
+  String get tutCages4 =>
+      'Teraz cała plansza. Zacznij od klatek, które da się złożyć na niewiele sposobów, zapisuj ołówkiem, co jeszcze pasuje do pola, a wiersze i kolumny niech to zawężają.';
+
+  @override
+  String get tutCagesS1 =>
+      'Przejrzyj sposoby złożenia klatki. Dwa pola dające 3+ to tylko 1 i 2; 4− na planszy 5×5 to 1 i 5. Liczbę, której żaden sposób nie stawia w polu, można tam skreślić.';
+
+  @override
+  String get tutCagesS2 =>
+      'Jeśli każdy sposób wypełnienia klatki stawia jakąś liczbę w jej polach jednego wiersza, w reszcie wiersza tej liczby nie będzie. 2÷ w wierszu na planszy 5×5 to 1 i 2 albo 2 i 4: dwójka tak czy inaczej. A gdy dwa pola wiersza mogą mieć tylko te same dwie liczby, te liczby są ich.';
+
+  @override
+  String get tutCagesS3 =>
+      'Najtrudniejsze plansze wymagają założenia, które da się obalić. Załóż, że w polu jest jedna z dwóch lub trzech ostatnich liczb, i rozumuj dalej; jeśli dojdziesz do sprzeczności, skreśl tę liczbę.';
+
+  @override
+  String exCagesSingle(Object cell, Object value) {
+    return 'W $cell musi być $value: jego klatka to tylko to jedno pole.';
+  }
+
+  @override
+  String exCagesCombo(Object clue, Object cage, Object values, Object cell) {
+    return 'Żaden sposób wypełnienia klatki $clue w $cage nie stawia $values w $cell.';
+  }
+
+  @override
+  String exCagesRequiredRow(Object clue, Object cage, Object values, Object row, Object cell) {
+    return 'Każdy sposób wypełnienia klatki $clue w $cage stawia $values w jej polach w wierszu $row, a więc nie w $cell.';
+  }
+
+  @override
+  String exCagesRequiredCol(Object clue, Object cage, Object values, Object col, Object cell) {
+    return 'Każdy sposób wypełnienia klatki $clue w $cage stawia $values w jej polach w kolumnie $col, a więc nie w $cell.';
+  }
+
+  @override
+  String exCagesFail(Object clue, Object cage) {
+    return 'Ale wtedy klatki $clue w $cage nie da się wypełnić.';
+  }
 }

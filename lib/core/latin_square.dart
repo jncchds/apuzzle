@@ -336,6 +336,7 @@ abstract class LatinExplainer<P extends LatinPuzzle> extends MaskGridExplainer<P
         return ExplainLine(
           (l) => u < p.n ? l.exLatinPairRow(c1, c2, d1, d2, line(u)) : l.exLatinPairCol(c1, c2, d1, d2, line(u)),
           cells(sq.lines[u]),
+          (LatinRule.pair, u, a[1], a[2]),
         );
       case LatinRule.failEmpty:
         return ExplainLine((l) => l.exLatinFailEmpty(cell(a[0])), {pos(a[0])});

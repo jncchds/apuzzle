@@ -3630,4 +3630,73 @@ class AppLocalizationsDe extends AppLocalizations {
   String exSkylineFailCol(Object col) {
     return 'Dann ließe sich Spalte $col aber nicht passend zu ihren Hinweisen füllen.';
   }
+
+  @override
+  String get famLatin => 'Lateinische Quadrate';
+
+  @override
+  String get famLatinAbout => 'Jede Zahl einmal in jeder Zeile und Spalte, und die Hinweise verraten mehr';
+
+  @override
+  String get cagesName => 'Käfige';
+
+  @override
+  String get cagesTagline => 'Addiere, subtrahiere, multipliziere und teile, um jeden Käfig zu füllen';
+
+  @override
+  String get cagesRules =>
+      '• Füll das Gitter mit den Zahlen 1 bis N (N = Gittergröße), jede einmal in jeder Zeile und Spalte.\n• Dicke Umrisse teilen das Gitter in Käfige. Die Zahlen eines Käfigs ergeben den Hinweis in seiner Ecke mit dem gezeigten Zeichen: addiert (+), multipliziert (×) oder, in einem Käfig aus zwei Feldern, die größere minus die kleinere (−) oder die größere geteilt durch die kleinere (÷). Ein Käfig aus einem Feld enthält einfach seine Zahl.\n• Eine Zahl darf sich in einem Käfig wiederholen, nur nicht in derselben Zeile oder Spalte.\n\nWähle eine Zahl in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Zahl. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld.';
+
+  @override
+  String get tutCages1 =>
+      'Jede Zeile und Spalte enthält 1 bis 4 je einmal. Die Umrisse fassen Felder zu Käfigen zusammen, und die Zahlen eines Käfigs ergeben seinen Hinweis: In einem 7+-Käfig ist ihre Summe 7. Füll die leeren Felder.';
+
+  @override
+  String get tutCages2 =>
+      'In einem Käfig aus zwei Feldern heißt − die größere Zahl minus die kleinere und ÷ die größere geteilt durch die kleinere; die größere darf in jedem der beiden stehen. Füll die oberen zwei Zeilen.';
+
+  @override
+  String get tutCages3 =>
+      '× multipliziert. Eine Zahl darf sich in einem Käfig wiederholen, solange sie nicht zweimal in einer Zeile oder Spalte steht, etwa 1 × 2 × 1 für 2×. Zeilen und Spalten allein lassen hier zwei Möglichkeiten: Die Käfige wählen eine.';
+
+  @override
+  String get tutCages4 =>
+      'Jetzt ein ganzes Gitter. Fang mit Käfigen an, die sich auf wenige Arten bilden lassen, notier mit dem Stift, was in einem Feld noch geht, und lass Zeilen und Spalten es eingrenzen.';
+
+  @override
+  String get tutCagesS1 =>
+      'Geh die Arten durch, einen Käfig zu bilden. Zwei Felder mit 3+ sind nur 1 und 2; ein 4− auf einem 5×5-Gitter ist 1 und 5. Eine Zahl, die keine Art in ein Feld setzt, kannst du dort streichen.';
+
+  @override
+  String get tutCagesS2 =>
+      'Setzt jede Art, einen Käfig zu füllen, eine Zahl in seine Felder einer Zeile, kann kein anderes Feld der Zeile sie haben. Ein 2÷ in einer Zeile auf einem 5×5-Gitter ist 1 und 2 oder 2 und 4: so oder so eine 2. Und wenn zwei Felder einer Zeile nur dieselben zwei Zahlen haben können, gehören diese ihnen.';
+
+  @override
+  String get tutCagesS3 =>
+      'Die schwersten Gitter brauchen eine Annahme, die sich widerlegen lässt. Nimm an, ein Feld hat eine seiner letzten zwei oder drei Zahlen, und denk weiter; führt das zu einem Widerspruch, streich die Zahl.';
+
+  @override
+  String exCagesSingle(Object cell, Object value) {
+    return 'In $cell muss $value stehen: Sein Käfig ist nur dieses eine Feld.';
+  }
+
+  @override
+  String exCagesCombo(Object clue, Object cage, Object values, Object cell) {
+    return 'Keine Art, den $clue-Käfig bei $cage zu füllen, setzt $values in $cell.';
+  }
+
+  @override
+  String exCagesRequiredRow(Object clue, Object cage, Object values, Object row, Object cell) {
+    return 'Jede Art, den $clue-Käfig bei $cage zu füllen, setzt $values in seine Felder in Zeile $row, also nicht in $cell.';
+  }
+
+  @override
+  String exCagesRequiredCol(Object clue, Object cage, Object values, Object col, Object cell) {
+    return 'Jede Art, den $clue-Käfig bei $cage zu füllen, setzt $values in seine Felder in Spalte $col, also nicht in $cell.';
+  }
+
+  @override
+  String exCagesFail(Object clue, Object cage) {
+    return 'Dann ließe sich der $clue-Käfig bei $cage aber nicht füllen.';
+  }
 }

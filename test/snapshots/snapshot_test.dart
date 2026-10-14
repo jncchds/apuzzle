@@ -20,6 +20,7 @@ import 'package:apuzzle/core/registry.dart';
 import 'package:apuzzle/core/settings.dart';
 import 'package:apuzzle/l10n/l10n.dart';
 import 'package:apuzzle/core/value_grid.dart';
+import 'package:apuzzle/puzzles/cages/cages_model.dart';
 import 'package:apuzzle/puzzles/formula/formula_model.dart';
 import 'package:apuzzle/puzzles/hues/hues_generator.dart';
 import 'package:apuzzle/puzzles/hues/hues_model.dart';
@@ -130,6 +131,19 @@ void main() {
             if (puzzle.clues[i] != null || grid.cells[i].value != null) continue;
             final marks = {puzzle.solution[i], (puzzle.solution[i] + 1) % huesColorCount};
             if (n.isOdd) marks.add((puzzle.solution[i] + 2) % huesColorCount);
+            grid = grid.set(puzzle.size.pos(i), CellValue(marks: marks));
+            n++;
+          }
+          state = grid;
+        }
+
+        // Some pencil marks on Cages: two to four candidates in a few empty cells.
+        if (puzzle is CagesPuzzle && state is ValueGrid) {
+          var grid = state;
+          var n = 0;
+          for (var i = 0; i < puzzle.solution.length && n < 3; i++) {
+            if (grid.cells[i].value != null) continue;
+            final marks = {for (var k = 0; k < 2 + n; k++) (puzzle.solution[i] + 2 * k) % puzzle.n};
             grid = grid.set(puzzle.size.pos(i), CellValue(marks: marks));
             n++;
           }

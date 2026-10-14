@@ -5013,6 +5013,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then column {col} can\'t be filled to match its clues.'**
   String exSkylineFailCol(Object col);
+
+  /// No description provided for @famLatin.
+  ///
+  /// In en, this message translates to:
+  /// **'Latin squares'**
+  String get famLatin;
+
+  /// No description provided for @famLatinAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'Every row and column holds each number once, and the clues tell you more'**
+  String get famLatinAbout;
+
+  /// No description provided for @cagesName.
+  ///
+  /// In en, this message translates to:
+  /// **'Cages'**
+  String get cagesName;
+
+  /// No description provided for @cagesTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Add, take away, multiply and divide to fill each cage'**
+  String get cagesTagline;
+
+  /// No description provided for @cagesRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Fill the grid with the numbers 1 to N (N = grid size), each once in every row and column.\n• Thick outlines split the grid into cages. The numbers in a cage make the clue in its corner with the sign shown: added up (+), multiplied (×), or, in a cage of two cells, the bigger minus the smaller (−) or the bigger divided by the smaller (÷). A cage of one cell simply holds its number.\n• A number may repeat in a cage, as long as not in the same row or column.\n\nPick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.'**
+  String get cagesRules;
+
+  /// No description provided for @tutCages1.
+  ///
+  /// In en, this message translates to:
+  /// **'Every row and column holds 1 to 4 once. The outlines group cells into cages, and the numbers in a cage make its clue: in a 7+ cage they add up to 7. Fill the empty cells.'**
+  String get tutCages1;
+
+  /// No description provided for @tutCages2.
+  ///
+  /// In en, this message translates to:
+  /// **'In a cage of two cells, − is the bigger number minus the smaller, and ÷ the bigger divided by the smaller; either cell can hold the bigger one. Fill the top two rows.'**
+  String get tutCages2;
+
+  /// No description provided for @tutCages3.
+  ///
+  /// In en, this message translates to:
+  /// **'× multiplies. A number may repeat in a cage as long as it\'s not twice in a row or column, like 1 × 2 × 1 for a 2×. Rows and columns alone allow two ways here: let the cages pick one.'**
+  String get tutCages3;
+
+  /// No description provided for @tutCages4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a whole board. Start with the cages that can be made in few ways, note what a cell can still hold with the pencil, and let rows and columns narrow it down.'**
+  String get tutCages4;
+
+  /// No description provided for @tutCagesS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Go through the ways to make a cage. Two cells making 3+ can only be 1 and 2; a 4− on a board of 5 is 1 and 5. A number that no way puts into a cell can be crossed off there.'**
+  String get tutCagesS1;
+
+  /// No description provided for @tutCagesS2.
+  ///
+  /// In en, this message translates to:
+  /// **'If every way to fill a cage puts some number into its cells of one row, no other cell of that row can have it. A 2÷ in a row on a board of 5 is 1 and 2 or 2 and 4: a 2 either way. And when two cells of a row can only hold the same two numbers, those two are theirs.'**
+  String get tutCagesS2;
+
+  /// No description provided for @tutCagesS3.
+  ///
+  /// In en, this message translates to:
+  /// **'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three numbers and follow on; if that runs into a contradiction, cross the number off.'**
+  String get tutCagesS3;
+
+  /// No description provided for @exCagesSingle.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: its cage is that one cell.'**
+  String exCagesSingle(Object cell, Object value);
+
+  /// No description provided for @exCagesCombo.
+  ///
+  /// In en, this message translates to:
+  /// **'No way to fill the {clue} cage at {cage} puts {values} into {cell}.'**
+  String exCagesCombo(Object clue, Object cage, Object values, Object cell);
+
+  /// No description provided for @exCagesRequiredRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Every way to fill the {clue} cage at {cage} puts {values} into its cells in row {row}, so not into {cell}.'**
+  String exCagesRequiredRow(Object clue, Object cage, Object values, Object row, Object cell);
+
+  /// No description provided for @exCagesRequiredCol.
+  ///
+  /// In en, this message translates to:
+  /// **'Every way to fill the {clue} cage at {cage} puts {values} into its cells in column {col}, so not into {cell}.'**
+  String exCagesRequiredCol(Object clue, Object cage, Object values, Object col, Object cell);
+
+  /// No description provided for @exCagesFail.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the {clue} cage at {cage} can\'t be filled.'**
+  String exCagesFail(Object clue, Object cage);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
