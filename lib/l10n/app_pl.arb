@@ -1084,5 +1084,12 @@
   "tutHopper1": "Dotknij planszy, aby zacząć. Żabka skacze z liścia na liść. Gdy się zatrzyma, dotknij liści, na które skakała, w tej samej kolejności.",
   "tutHopper2": "Liść może się powtórzyć: dotknij go za każdym razem. Złe dotknięcie kończy rundę; tutaj zagrasz ją wtedy jeszcze raz. Zalicz obie rundy.",
   "tutHopper3": "Z opcją „Od końca” dotykaj tych samych liści od ostatniego skoku do pierwszego. Spróbuj raz.",
-  "tutHopper4": "Prawdziwa plansza: każda dobra runda dodaje następnym razem jeden skok, a pomyłka zabiera jeden. Zalicz 3 rundy."
+  "tutHopper4": "Prawdziwa plansza: każda dobra runda dodaje następnym razem jeden skok, a pomyłka zabiera jeden. Zalicz 3 rundy.",
+  "reboundName": "Rykoszet",
+  "reboundTagline": "Zapamiętaj odbijacze i wskaż, gdzie wyleci piłka",
+  "reboundRules": "• Na planszy stoją odbijacze, a przy strzałce na krawędzi czeka piłka. Zapamiętaj odbijacze: po chwili (albo gdy dotkniesz „Gotowe”) się schowają.\n• Piłka toczy się od strzałki, a każdy odbijacz na jej drodze skręca ją o ćwierć obrotu, tak jak jest pochylony. Dotknij krawędzi, przez którą piłka opuści planszę.\n• Dobra runda daje punkt za każdy odbijacz, a następna ma o jeden odbijacz więcej. Po pomyłce — o jeden mniej.\n\nCele\n• Rundy: zagraj 10 rund o rekord.\n• Życia: graj do trzeciej pomyłki.\n\nPoziom trudności ustala, ile odbijaczy ma pierwsza runda i jak długo są widoczne.",
+  "reboundPrompt": "Dotknij krawędzi, przez którą wyleci piłka",
+  "tutRebound1": "Dotknij planszy, aby zacząć. Piłka toczy się od strzałki i odbija od odbijacza tak, jak jest pochylony. Zapamiętaj go, a gdy się schowa, dotknij krawędzi, przez którą wyleci piłka.",
+  "tutRebound2": "Piłka może trafić na kilka odbijaczy, a inne ominąć. Dotknij „Gotowe”, gdy tylko je zapamiętasz. Zła krawędź kończy rundę; tutaj zagrasz ją wtedy jeszcze raz.",
+  "tutRebound3": "Prawdziwa plansza: każda dobra runda dodaje następnym razem jeden odbijacz, a pomyłka zabiera jeden. Zalicz 3 rundy."
 }

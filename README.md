@@ -73,7 +73,7 @@ Skyline, Cages and Signs are one family on the home screen, Latin squares.
 
 ### Casual
 
-Mosaic and Blend are one family on the home screen, Flood; the memory games (Glimpse, Vanish, Hopper) are another, Memory.
+Mosaic and Blend are one family on the home screen, Flood; the memory games (Glimpse, Vanish, Hopper, Rebound) are another, Memory.
 
 | Dark | Light | Puzzle | Goal |
 |---|---|---|---|
@@ -85,6 +85,7 @@ Mosaic and Blend are one family on the home screen, Flood; the memory games (Gli
 | <img src="docs/screenshots/glimpse_dark.png" width="90" alt="Glimpse, dark theme"> | <img src="docs/screenshots/glimpse_light.png" width="90" alt="Glimpse, light theme"> | **Glimpse** | Some cells light up for a moment: tap them all from memory. A round you get right lights one more cell next time, a miss one fewer. Play 10 rounds for a best score, or until your third miss. |
 | <img src="docs/screenshots/vanish_dark.png" width="90" alt="Vanish, dark theme"> | <img src="docs/screenshots/vanish_light.png" width="90" alt="Vanish, light theme"> | **Vanish** | Numbers from 1 up appear on the grid. Tap 1 and the others hide: tap their cells in order from memory. A round you get right shows one number more next time, a miss one fewer. |
 | <img src="docs/screenshots/hopper_dark.png" width="90" alt="Hopper, dark theme"> | <img src="docs/screenshots/hopper_light.png" width="90" alt="Hopper, light theme"> | **Hopper** | A frog hops from pad to pad, one jump at a time; then tap the pads it landed on, in the same order or backwards (a game option). Each round you get right adds a jump, a miss takes one away. |
+| <img src="docs/screenshots/rebound_dark.png" width="90" alt="Rebound, dark theme"> | <img src="docs/screenshots/rebound_light.png" width="90" alt="Rebound, light theme"> | **Rebound** | Remember the bumpers on the grid; once they hide, a ball rolls in at the arrow, and every bumper it meets turns it. Tap the edge where it leaves. Each round you get right adds a bumper, a miss takes one away. |
 
 ## Features
 
@@ -92,7 +93,7 @@ Mosaic and Blend are one family on the home screen, Flood; the memory games (Gli
 - **Daily challenges.** Every day picks three games, each at every difficulty, the same for everyone. Results are kept in a calendar, and you can choose which games the days draw from.
 - **Interactive tutorials.** Every game teaches its rules on a few tiny boards you play, ending with a small real one. Optional strategy lessons then show the techniques strong players use, each on a board that needs it.
 - **Explain mode.** For every logic puzzle, the button next to Hint explains the next step in words ("E4 must be a crown, because…"), highlights the cells it talks about, and can play the step for you.
-- **Memory games.** Glimpse, Vanish and Hopper show something for a moment (or until you tap Ready), hides it, and asks for it back. Rounds get harder as you get them right and easier after a miss; play a set number of rounds or until your third miss, for a best score. Rounds come from the seed, so a share code replays the same game.
+- **Memory games.** Glimpse, Vanish, Hopper and Rebound show something for a moment (or until you tap Ready), hides it, and asks for it back. Rounds get harder as you get them right and easier after a miss; play a set number of rounds or until your third miss, for a best score. Rounds come from the seed, so a share code replays the same game.
 - **Share codes.** Every puzzle has a code (and a link on the web) that recreates it exactly.
 - **Exactly one solution.** Most types are also graded by how deep the solver's logic has to go (easy, medium, hard, and expert for Sudoku).
 - **Game options.** A puzzle can offer extra choices when you start a game, like Pop's mode and goal. They are part of the share code, and stats are kept per choice.

@@ -4761,4 +4761,29 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutHopper4 =>
       'Ein echtes Brett: jede richtige Runde bringt beim nächsten Mal einen Sprung mehr, ein Fehler einen weniger. Schaffe 3 Runden.';
+
+  @override
+  String get reboundName => 'Abpraller';
+
+  @override
+  String get reboundTagline => 'Merk dir die Abweiser und sag, wo die Kugel herauskommt';
+
+  @override
+  String get reboundRules =>
+      '• Auf dem Brett stehen Abweiser, und an einem Pfeil am Rand wartet eine Kugel. Merk dir die Abweiser: nach einem Moment (oder wenn du auf „Bereit“ tippst) verschwinden sie.\n• Die Kugel rollt am Pfeil hinein, und jeder Abweiser, auf den sie trifft, lenkt sie um eine Vierteldrehung ab, so wie er schräg steht. Tippe auf den Rand, an dem sie das Brett verlässt.\n• Eine richtige Runde bringt einen Punkt pro Abweiser, und die nächste hat einen Abweiser mehr. Nach einem Fehler einen weniger.\n\nZiele\n• Runden: spiele 10 Runden um einen Rekord.\n• Leben: spiele bis zum dritten Fehler.\n\nDer Schwierigkeitsgrad bestimmt, wie viele Abweiser die erste Runde hat und wie lange sie zu sehen sind.';
+
+  @override
+  String get reboundPrompt => 'Tippe auf den Rand, an dem die Kugel das Brett verlässt';
+
+  @override
+  String get tutRebound1 =>
+      'Tippe aufs Brett, um zu starten. Die Kugel rollt am Pfeil hinein und prallt am Abweiser ab, so wie er schräg steht. Merk ihn dir, und wenn er verschwindet, tippe auf den Rand, an dem die Kugel herauskommt.';
+
+  @override
+  String get tutRebound2 =>
+      'Die Kugel kann auf mehrere Abweiser treffen und andere verfehlen. Tippe auf „Bereit“, sobald du sie dir gemerkt hast. Ein falscher Rand beendet die Runde; hier wird sie dann wiederholt.';
+
+  @override
+  String get tutRebound3 =>
+      'Ein echtes Brett: jede richtige Runde bringt beim nächsten Mal einen Abweiser mehr, ein Fehler einen weniger. Schaffe 3 Runden.';
 }

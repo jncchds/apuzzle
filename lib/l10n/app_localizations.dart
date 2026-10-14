@@ -6423,6 +6423,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A real board: each round you get right adds a jump next time, and a miss takes one away. Get 3 rounds right.'**
   String get tutHopper4;
+
+  /// No description provided for @reboundName.
+  ///
+  /// In en, this message translates to:
+  /// **'Rebound'**
+  String get reboundName;
+
+  /// No description provided for @reboundTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember the bumpers, then tell where the ball comes out'**
+  String get reboundTagline;
+
+  /// No description provided for @reboundRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Bumpers sit on the grid, and a ball waits at an arrow on the edge. Remember the bumpers: after a moment (or when you tap Ready) they hide.\n• The ball rolls in at the arrow, and every bumper it meets turns it a quarter turn, the way the bumper slants. Tap the edge where it will leave the board.\n• A round you get right scores a point per bumper, and the next one has one bumper more. After a miss, it has one fewer.\n\nGoals\n• Rounds: play 10 rounds for a best score.\n• Lives: play on until your third miss.\n\nThe difficulty sets how many bumpers the first round has and how long they stay.'**
+  String get reboundRules;
+
+  /// No description provided for @reboundPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap where the ball leaves the board'**
+  String get reboundPrompt;
+
+  /// No description provided for @tutRebound1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the board to start. The ball rolls in at the arrow and bounces off the bumper, the way it slants. Remember it; when it hides, tap the edge where the ball comes out.'**
+  String get tutRebound1;
+
+  /// No description provided for @tutRebound2.
+  ///
+  /// In en, this message translates to:
+  /// **'The ball may meet several bumpers and miss others. Tap Ready as soon as you have them. A wrong edge ends the round; here the round then plays again.'**
+  String get tutRebound2;
+
+  /// No description provided for @tutRebound3.
+  ///
+  /// In en, this message translates to:
+  /// **'A real board: each round you get right adds a bumper next time, and a miss takes one away. Get 3 rounds right.'**
+  String get tutRebound3;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

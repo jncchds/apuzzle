@@ -4836,4 +4836,29 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutHopper4 =>
       'Prawdziwa plansza: każda dobra runda dodaje następnym razem jeden skok, a pomyłka zabiera jeden. Zalicz 3 rundy.';
+
+  @override
+  String get reboundName => 'Rykoszet';
+
+  @override
+  String get reboundTagline => 'Zapamiętaj odbijacze i wskaż, gdzie wyleci piłka';
+
+  @override
+  String get reboundRules =>
+      '• Na planszy stoją odbijacze, a przy strzałce na krawędzi czeka piłka. Zapamiętaj odbijacze: po chwili (albo gdy dotkniesz „Gotowe”) się schowają.\n• Piłka toczy się od strzałki, a każdy odbijacz na jej drodze skręca ją o ćwierć obrotu, tak jak jest pochylony. Dotknij krawędzi, przez którą piłka opuści planszę.\n• Dobra runda daje punkt za każdy odbijacz, a następna ma o jeden odbijacz więcej. Po pomyłce — o jeden mniej.\n\nCele\n• Rundy: zagraj 10 rund o rekord.\n• Życia: graj do trzeciej pomyłki.\n\nPoziom trudności ustala, ile odbijaczy ma pierwsza runda i jak długo są widoczne.';
+
+  @override
+  String get reboundPrompt => 'Dotknij krawędzi, przez którą wyleci piłka';
+
+  @override
+  String get tutRebound1 =>
+      'Dotknij planszy, aby zacząć. Piłka toczy się od strzałki i odbija od odbijacza tak, jak jest pochylony. Zapamiętaj go, a gdy się schowa, dotknij krawędzi, przez którą wyleci piłka.';
+
+  @override
+  String get tutRebound2 =>
+      'Piłka może trafić na kilka odbijaczy, a inne ominąć. Dotknij „Gotowe”, gdy tylko je zapamiętasz. Zła krawędź kończy rundę; tutaj zagrasz ją wtedy jeszcze raz.';
+
+  @override
+  String get tutRebound3 =>
+      'Prawdziwa plansza: każda dobra runda dodaje następnym razem jeden odbijacz, a pomyłka zabiera jeden. Zalicz 3 rundy.';
 }

@@ -33,6 +33,7 @@ import '../puzzles/plots/plots_type.dart';
 import '../puzzles/pop/pop_type.dart';
 import '../puzzles/pipes/pipes_type.dart';
 import '../puzzles/rails/rails_type.dart';
+import '../puzzles/rebound/rebound_type.dart';
 import '../puzzles/shikaku/shikaku_type.dart';
 import '../puzzles/signs/signs_type.dart';
 import '../puzzles/skyline/skyline_type.dart';
@@ -68,6 +69,7 @@ const List<PuzzleType> puzzleTypes = [
   GlimpseType(),
   VanishType(),
   HopperType(),
+  ReboundType(),
   PipesType(),
   ShikakuType(),
   PlotsType(),
@@ -205,7 +207,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('pop', [PopType()]),
       PuzzleFamily('merge', [MergeType()]),
       PuzzleFamily('snake', [SnakeType()]),
-      PuzzleFamily('memory', [GlimpseType(), VanishType(), HopperType()]),
+      PuzzleFamily('memory', [GlimpseType(), VanishType(), HopperType(), ReboundType()]),
     ],
   ),
 ];

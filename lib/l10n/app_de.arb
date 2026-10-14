@@ -1084,5 +1084,12 @@
   "tutHopper1": "Tippe aufs Brett, um zu starten. Der Frosch hüpft von Blatt zu Blatt. Wenn er anhält, tippe die Blätter, auf denen er gelandet ist, in derselben Reihenfolge an.",
   "tutHopper2": "Ein Blatt kann mehrmals vorkommen: tippe es jedes Mal an. Ein falscher Tipp beendet die Runde; hier wird sie dann wiederholt. Schaffe beide Runden.",
   "tutHopper3": "Mit der Option „Rückwärts“ tippst du dieselben Blätter vom letzten Sprung zurück zum ersten an. Probier es einmal.",
-  "tutHopper4": "Ein echtes Brett: jede richtige Runde bringt beim nächsten Mal einen Sprung mehr, ein Fehler einen weniger. Schaffe 3 Runden."
+  "tutHopper4": "Ein echtes Brett: jede richtige Runde bringt beim nächsten Mal einen Sprung mehr, ein Fehler einen weniger. Schaffe 3 Runden.",
+  "reboundName": "Abpraller",
+  "reboundTagline": "Merk dir die Abweiser und sag, wo die Kugel herauskommt",
+  "reboundRules": "• Auf dem Brett stehen Abweiser, und an einem Pfeil am Rand wartet eine Kugel. Merk dir die Abweiser: nach einem Moment (oder wenn du auf „Bereit“ tippst) verschwinden sie.\n• Die Kugel rollt am Pfeil hinein, und jeder Abweiser, auf den sie trifft, lenkt sie um eine Vierteldrehung ab, so wie er schräg steht. Tippe auf den Rand, an dem sie das Brett verlässt.\n• Eine richtige Runde bringt einen Punkt pro Abweiser, und die nächste hat einen Abweiser mehr. Nach einem Fehler einen weniger.\n\nZiele\n• Runden: spiele 10 Runden um einen Rekord.\n• Leben: spiele bis zum dritten Fehler.\n\nDer Schwierigkeitsgrad bestimmt, wie viele Abweiser die erste Runde hat und wie lange sie zu sehen sind.",
+  "reboundPrompt": "Tippe auf den Rand, an dem die Kugel das Brett verlässt",
+  "tutRebound1": "Tippe aufs Brett, um zu starten. Die Kugel rollt am Pfeil hinein und prallt am Abweiser ab, so wie er schräg steht. Merk ihn dir, und wenn er verschwindet, tippe auf den Rand, an dem die Kugel herauskommt.",
+  "tutRebound2": "Die Kugel kann auf mehrere Abweiser treffen und andere verfehlen. Tippe auf „Bereit“, sobald du sie dir gemerkt hast. Ein falscher Rand beendet die Runde; hier wird sie dann wiederholt.",
+  "tutRebound3": "Ein echtes Brett: jede richtige Runde bringt beim nächsten Mal einen Abweiser mehr, ein Fehler einen weniger. Schaffe 3 Runden."
 }
