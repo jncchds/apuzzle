@@ -4023,4 +4023,234 @@ class AppLocalizationsEn extends AppLocalizations {
   String exDominoRefutedCross(Object link) {
     return '$link is a domino: leaving it out leads to a contradiction.';
   }
+
+  @override
+  String get tagShips => 'ships, boats, fleet, sea, navy, hidden';
+
+  @override
+  String get fleetName => 'Fleet';
+
+  @override
+  String get fleetTagline => 'Find the hidden ships from the counts at the edge';
+
+  @override
+  String get fleetRules =>
+      '• A fleet of ships hides in the grid; the ships it has are shown below the grid. Each ship is a straight line of cells, across or down.\n• Ships never touch each other, not even diagonally.\n• The numbers outside the grid tell how many ship cells each row and column holds.\n• Some cells are shown from the start: water, or a piece of a ship. A rounded end shows where its ship ends, a square piece sits in the middle of a ship, and a round piece is a whole ship of one cell.\n\nTap a cell to cycle: ship → water (your \"no ship here\" note) → empty. Right-click cycles back. Slide across cells to mark them all in one go. A long press puts water on every cell where the placed ships leave no room for another. Water is optional: the puzzle is done once every ship is in place. Ships you finish fade in the list below the grid once water or the edge closes them in.';
+
+  @override
+  String get tutFleet1 =>
+      'A fleet of ships hides in the grid, and the list below it shows its ships. The numbers outside tell how many ship cells each row and column holds. Here the fleet is three ships of one cell. Tap a cell to put a ship there, tap again for water.';
+
+  @override
+  String get tutFleet2 =>
+      'Ships are straight lines of cells, and they never touch, not even diagonally. The bottom row needs two ship cells, but this fleet has no ship of two cells, so they are two separate ships with a gap between them. Finish the board.';
+
+  @override
+  String get tutFleet3 =>
+      'Some pieces are shown from the start. A rounded end means its ship goes on the other way: the piece in the corner is rounded at the top, so the cell below it is a ship too. Finish the board.';
+
+  @override
+  String get tutFleet4 =>
+      'Now a real board. Start with rows and columns whose count is zero or full, put water around the ships you know, and keep an eye on which ships are still missing.';
+
+  @override
+  String get tutFleetS1 =>
+      'Look for where the missing ships still fit. A cell no missing ship can pass through is water, and when the longest missing ship has only a few places left, the cells they all share are ship. Count the places in the rows and columns with room for it.';
+
+  @override
+  String get tutFleetS2 =>
+      'A hard board: some counts are hidden. When stuck, suppose a cell is a ship and follow on: if a row overflows, ships touch or a ship has nowhere to go, that cell is water.';
+
+  @override
+  String exFleetSupposeShip(Object cell) {
+    return 'Suppose $cell were part of a ship.';
+  }
+
+  @override
+  String exFleetSupposeWater(Object cell) {
+    return 'Suppose $cell were water.';
+  }
+
+  @override
+  String exFleetRefutedShip(Object cell) {
+    return '$cell is water: a ship there leads to a contradiction.';
+  }
+
+  @override
+  String exFleetRefutedWater(Object cell) {
+    return '$cell is part of a ship: water there leads to a contradiction.';
+  }
+
+  @override
+  String exFleetPieceShip(Object cell, Object other) {
+    return '$cell is part of a ship: the piece at $other goes on that way.';
+  }
+
+  @override
+  String exFleetPieceWater(Object cell, Object other) {
+    return '$cell is water: the piece at $other ends on that side.';
+  }
+
+  @override
+  String exFleetMiddle(Object cell, Object other) {
+    return '$cell is part of a ship: the middle piece at $other can\'t run the other way.';
+  }
+
+  @override
+  String exFleetDiagonal(Object cell, Object other) {
+    return '$cell is water: it touches the ship at $other diagonally.';
+  }
+
+  @override
+  String exFleetRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'all its $count ship cells',
+      one: 'its ship cell',
+    );
+    return '$cell is water: row $row already has $_temp0.';
+  }
+
+  @override
+  String exFleetColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'all its $count ship cells',
+      one: 'its ship cell',
+    );
+    return '$cell is water: column $col already has $_temp0.';
+  }
+
+  @override
+  String exFleetRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ship cells',
+      one: 'a ship cell',
+    );
+    return '$cell is part of a ship: row $row needs $_temp0, and only that many cells are left.';
+  }
+
+  @override
+  String exFleetColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ship cells',
+      one: 'a ship cell',
+    );
+    return '$cell is part of a ship: column $col needs $_temp0, and only that many cells are left.';
+  }
+
+  @override
+  String exFleetAllFound(Object cell) {
+    return '$cell is water: every ship of the fleet is found.';
+  }
+
+  @override
+  String exFleetLongest(Object cell, Object other, int length) {
+    return '$cell is water: the ship at $other already has length $length, as long as the longest ship still missing.';
+  }
+
+  @override
+  String exFleetTooLong(Object cell, int length) {
+    return '$cell is water: a ship there would be longer than $length, the length of the longest ship still missing.';
+  }
+
+  @override
+  String exFleetNoFit(Object cell) {
+    return '$cell is water: none of the missing ships fits through it.';
+  }
+
+  @override
+  String exFleetExtend(Object cell, Object other) {
+    return '$cell is part of a ship: every ship that fits through $other covers it.';
+  }
+
+  @override
+  String exFleetMustCover(Object cell, int length) {
+    return '$cell is part of a ship: every place left for the missing ship of length $length covers it.';
+  }
+
+  @override
+  String exFleetOnlySpots(Object cell, int length) {
+    return '$cell is part of a ship: the ships of length $length have just enough places left.';
+  }
+
+  @override
+  String exFleetFailTouch(Object a, Object b) {
+    return 'But then the ships at $a and $b touch.';
+  }
+
+  @override
+  String exFleetFailRowMany(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ship cells',
+      one: 'one ship cell',
+    );
+    return 'But then row $row has more than $_temp0.';
+  }
+
+  @override
+  String exFleetFailColMany(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ship cells',
+      one: 'one ship cell',
+    );
+    return 'But then column $col has more than $_temp0.';
+  }
+
+  @override
+  String exFleetFailRowFew(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'its $count ship cells',
+      one: 'its ship cell',
+    );
+    return 'But then row $row can\'t get $_temp0.';
+  }
+
+  @override
+  String exFleetFailColFew(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'its $count ship cells',
+      one: 'its ship cell',
+    );
+    return 'But then column $col can\'t get $_temp0.';
+  }
+
+  @override
+  String exFleetFailPiece(Object a) {
+    return 'But then the piece at $a doesn\'t fit.';
+  }
+
+  @override
+  String exFleetFailLong(Object a, int length) {
+    return 'But then the ship at $a is longer than $length, the longest ship still missing.';
+  }
+
+  @override
+  String exFleetFailFleet(int length) {
+    return 'But then there are too many ships of length $length.';
+  }
+
+  @override
+  String exFleetFailNoRoom(int length) {
+    return 'But then the ships of length $length don\'t all fit.';
+  }
+
+  @override
+  String exFleetFailStray(Object a) {
+    return 'But then the ship cell $a can\'t belong to any missing ship.';
+  }
 }

@@ -59,6 +59,8 @@ void main() {
     expect(alt('sumplete'), ['tally']);
     expect(alt('hitori'), ['solo']);
     expect(alt('dominosa'), ['domino']);
+    expect(alt('bimaru'), ['fleet']);
+    expect(alt('battleships'), ['fleet']);
     expect(alt('nerdle'), ['formula']);
     expect(alt('train tracks'), ['rails']);
     expect(alt('minesweeper'), ['mines']);

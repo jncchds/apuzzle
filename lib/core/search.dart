@@ -22,6 +22,7 @@ enum GameTag {
   symmetry,
   binary,
   maze,
+  ships,
 }
 
 String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
@@ -42,6 +43,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
   GameTag.symmetry => l.tagSymmetry,
   GameTag.binary => l.tagBinary,
   GameTag.maze => l.tagMaze,
+  GameTag.ships => l.tagShips,
 };
 
 /// Tags of every type, by id.
@@ -74,6 +76,7 @@ const Map<String, List<GameTag>> gameTags = {
   'atoms': [GameTag.connect],
   'lits': [GameTag.shade, GameTag.regions],
   'camp': [GameTag.place],
+  'fleet': [GameTag.place, GameTag.ships],
   'islands': [GameTag.shade],
   'lamps': [GameTag.place],
   'fence': [GameTag.loop],
@@ -122,6 +125,17 @@ const Map<String, List<String>> gameAliases = {
   'atoms': ['Hashi', 'Hashiwokakero', 'Bridges'],
   'lits': ['LITS', 'Nuruomino'],
   'camp': ['Tents', 'Tents and Trees'],
+  'fleet': [
+    'Battleships',
+    'Battleship',
+    'Bimaru',
+    'Solitaire Battleship',
+    'Sea Battle',
+    'Морський бій',
+    'Морской бой',
+    'Statki',
+    'Schiffe versenken',
+  ],
   'islands': ['Nurikabe'],
   'lamps': ['Light Up', 'Akari'],
   'fence': ['Slitherlink', 'Loopy', 'Fences'],

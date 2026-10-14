@@ -4081,4 +4081,242 @@ class AppLocalizationsPl extends AppLocalizations {
   String exDominoRefutedCross(Object link) {
     return '$link to kostka: bez niej dochodzi do sprzeczności.';
   }
+
+  @override
+  String get tagShips => 'statki, łodzie, flota, morze, ukryte';
+
+  @override
+  String get fleetName => 'Flota';
+
+  @override
+  String get fleetTagline => 'Znajdź ukryte statki według liczb na brzegach';
+
+  @override
+  String get fleetRules =>
+      '• W siatce ukrywa się flota; pod siatką widać, z jakich statków się składa. Każdy statek to prosta linia pól, poziomo lub pionowo.\n• Statki nigdy się nie stykają, nawet po przekątnej.\n• Liczby poza siatką mówią, ile pól statków jest w każdym wierszu i kolumnie.\n• Niektóre pola są pokazane od początku: woda albo część statku. Zaokrąglony koniec pokazuje, gdzie statek się kończy, kwadratowa część leży w środku statku, a okrągła to cały statek z jednego pola.\n\nDotknij pola, by przełączać: statek → woda (twoja notatka „tu nie ma statku”) → puste. Prawy klik przełącza wstecz. Przesuń po polach, by oznaczyć je wszystkie naraz. Długie przytrzymanie stawia wodę na każdym polu, gdzie postawione statki nie zostawiają miejsca na inny. Woda jest opcjonalna: łamigłówka jest rozwiązana, gdy wszystkie statki są na miejscu. Ukończone statki blakną na liście pod siatką, gdy woda lub krawędź zamyka je ze wszystkich stron.';
+
+  @override
+  String get tutFleet1 =>
+      'W siatce ukrywa się flota, a lista pod nią pokazuje jej statki. Liczby na zewnątrz mówią, ile pól statków jest w każdym wierszu i kolumnie. Tutaj flota to trzy statki z jednego pola. Dotknij pola, by postawić statek, jeszcze raz – by postawić wodę.';
+
+  @override
+  String get tutFleet2 =>
+      'Statki to proste linie pól i nigdy się nie stykają, nawet po przekątnej. Dolny wiersz potrzebuje dwóch pól statków, ale we flocie nie ma statku z dwóch pól, więc to dwa osobne statki z przerwą między nimi. Dokończ planszę.';
+
+  @override
+  String get tutFleet3 =>
+      'Niektóre części są pokazane od początku. Zaokrąglony koniec oznacza, że statek ciągnie się w drugą stronę: część w rogu jest zaokrąglona u góry, więc pole pod nią też jest statkiem. Dokończ planszę.';
+
+  @override
+  String get tutFleet4 =>
+      'Teraz prawdziwa plansza. Zacznij od wierszy i kolumn z zerem lub pełną liczbą, stawiaj wodę wokół znanych statków i pilnuj, których statków jeszcze brakuje.';
+
+  @override
+  String get tutFleetS1 =>
+      'Szukaj miejsc, gdzie brakujące statki jeszcze się mieszczą. Pole, przez które nie przejdzie żaden z nich, to woda, a gdy najdłuższy brakujący statek ma już niewiele miejsc, pola wspólne dla nich wszystkich to statek. Licz miejsca w wierszach i kolumnach, które mają na niego miejsce.';
+
+  @override
+  String get tutFleetS2 =>
+      'Trudna plansza: niektóre liczby są ukryte. Gdy utkniesz, załóż, że pole jest statkiem, i idź dalej: jeśli wiersz się przepełni, statki się zetkną albo statek nie ma gdzie stanąć, na tym polu jest woda.';
+
+  @override
+  String exFleetSupposeShip(Object cell) {
+    return 'Załóżmy, że $cell jest częścią statku.';
+  }
+
+  @override
+  String exFleetSupposeWater(Object cell) {
+    return 'Załóżmy, że na $cell jest woda.';
+  }
+
+  @override
+  String exFleetRefutedShip(Object cell) {
+    return 'Na $cell jest woda: statek tam prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exFleetRefutedWater(Object cell) {
+    return '$cell jest częścią statku: woda tam prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exFleetPieceShip(Object cell, Object other) {
+    return '$cell jest częścią statku: część na $other ciągnie się w tę stronę.';
+  }
+
+  @override
+  String exFleetPieceWater(Object cell, Object other) {
+    return 'Na $cell jest woda: część na $other kończy się z tej strony.';
+  }
+
+  @override
+  String exFleetMiddle(Object cell, Object other) {
+    return '$cell jest częścią statku: środkowa część na $other nie może biec w drugą stronę.';
+  }
+
+  @override
+  String exFleetDiagonal(Object cell, Object other) {
+    return 'Na $cell jest woda: styka się po przekątnej ze statkiem na $other.';
+  }
+
+  @override
+  String exFleetRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'wszystkie $count pola statków',
+      many: 'wszystkie $count pól statków',
+      few: 'wszystkie $count pola statków',
+      one: 'swoje pole statku',
+    );
+    return 'Na $cell jest woda: wiersz $row ma już $_temp0.';
+  }
+
+  @override
+  String exFleetColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'wszystkie $count pola statków',
+      many: 'wszystkie $count pól statków',
+      few: 'wszystkie $count pola statków',
+      one: 'swoje pole statku',
+    );
+    return 'Na $cell jest woda: kolumna $col ma już $_temp0.';
+  }
+
+  @override
+  String exFleetRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól statków',
+      one: 'jednego pola statku',
+    );
+    return '$cell jest częścią statku: wiersz $row potrzebuje $_temp0, a tyle właśnie pól zostało.';
+  }
+
+  @override
+  String exFleetColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól statków',
+      one: 'jednego pola statku',
+    );
+    return '$cell jest częścią statku: kolumna $col potrzebuje $_temp0, a tyle właśnie pól zostało.';
+  }
+
+  @override
+  String exFleetAllFound(Object cell) {
+    return 'Na $cell jest woda: wszystkie statki floty są już znalezione.';
+  }
+
+  @override
+  String exFleetLongest(Object cell, Object other, int length) {
+    return 'Na $cell jest woda: statek na $other ma już długość $length, tyle co najdłuższy brakujący statek.';
+  }
+
+  @override
+  String exFleetTooLong(Object cell, int length) {
+    return 'Na $cell jest woda: statek tam byłby dłuższy niż $length, długość najdłuższego brakującego statku.';
+  }
+
+  @override
+  String exFleetNoFit(Object cell) {
+    return 'Na $cell jest woda: nie przechodzi przez nie żaden brakujący statek.';
+  }
+
+  @override
+  String exFleetExtend(Object cell, Object other) {
+    return '$cell jest częścią statku: każdy statek, który mieści się przez $other, je obejmuje.';
+  }
+
+  @override
+  String exFleetMustCover(Object cell, int length) {
+    return '$cell jest częścią statku: każde miejsce, które zostało dla brakującego statku o długości $length, je obejmuje.';
+  }
+
+  @override
+  String exFleetOnlySpots(Object cell, int length) {
+    return '$cell jest częścią statku: statkom o długości $length zostało dokładnie tyle miejsc, ile trzeba.';
+  }
+
+  @override
+  String exFleetFailTouch(Object a, Object b) {
+    return 'Ale wtedy statki na $a i $b się stykają.';
+  }
+
+  @override
+  String exFleetFailRowMany(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola statków',
+      many: '$count pól statków',
+      few: '$count pola statków',
+      one: 'jedno pole statku',
+    );
+    return 'Ale wtedy wiersz $row ma więcej niż $_temp0.';
+  }
+
+  @override
+  String exFleetFailColMany(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola statków',
+      many: '$count pól statków',
+      few: '$count pola statków',
+      one: 'jedno pole statku',
+    );
+    return 'Ale wtedy kolumna $col ma więcej niż $_temp0.';
+  }
+
+  @override
+  String exFleetFailRowFew(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'swoich $count pól statków',
+      one: 'swojego pola statku',
+    );
+    return 'Ale wtedy wiersz $row nie zdobędzie $_temp0.';
+  }
+
+  @override
+  String exFleetFailColFew(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'swoich $count pól statków',
+      one: 'swojego pola statku',
+    );
+    return 'Ale wtedy kolumna $col nie zdobędzie $_temp0.';
+  }
+
+  @override
+  String exFleetFailPiece(Object a) {
+    return 'Ale wtedy część na $a nie pasuje.';
+  }
+
+  @override
+  String exFleetFailLong(Object a, int length) {
+    return 'Ale wtedy statek na $a jest dłuższy niż $length, najdłuższy brakujący statek.';
+  }
+
+  @override
+  String exFleetFailFleet(int length) {
+    return 'Ale wtedy jest za dużo statków o długości $length.';
+  }
+
+  @override
+  String exFleetFailNoRoom(int length) {
+    return 'Ale wtedy statki o długości $length nie zmieszczą się wszystkie.';
+  }
+
+  @override
+  String exFleetFailStray(Object a) {
+    return 'Ale wtedy pole statku $a nie może należeć do żadnego brakującego statku.';
+  }
 }

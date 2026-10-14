@@ -4030,4 +4030,234 @@ class AppLocalizationsDe extends AppLocalizations {
   String exDominoRefutedCross(Object link) {
     return '$link ist ein Stein: Ohne ihn ergibt sich ein Widerspruch.';
   }
+
+  @override
+  String get tagShips => 'Schiffe, Boote, Flotte, Meer, Seeschlacht, versteckt';
+
+  @override
+  String get fleetName => 'Flotte';
+
+  @override
+  String get fleetTagline => 'Finde die versteckten Schiffe anhand der Zahlen am Rand';
+
+  @override
+  String get fleetRules =>
+      '• Im Gitter versteckt sich eine Flotte; welche Schiffe dazugehören, steht unter dem Gitter. Jedes Schiff ist eine gerade Linie von Feldern, waagerecht oder senkrecht.\n• Schiffe berühren sich nie, auch nicht diagonal.\n• Die Zahlen außerhalb des Gitters sagen, wie viele Schiffsfelder jede Zeile und Spalte enthält.\n• Manche Felder sind von Anfang an gezeigt: Wasser oder ein Schiffsteil. Ein abgerundetes Ende zeigt, wo sein Schiff endet, ein eckiges Teil liegt in der Mitte eines Schiffs, und ein rundes Teil ist ein ganzes Schiff aus einem Feld.\n\nTippe auf ein Feld zum Wechseln: Schiff → Wasser (deine Notiz „hier kein Schiff“) → leer. Rechtsklick wechselt zurück. Wische über Felder, um sie alle auf einmal zu markieren. Langes Drücken setzt Wasser auf jedes Feld, auf dem die gesetzten Schiffe keinen Platz für ein weiteres lassen. Wasser ist freiwillig: Das Rätsel ist gelöst, sobald alle Schiffe stehen. Fertige Schiffe verblassen in der Liste unter dem Gitter, sobald Wasser oder der Rand sie ringsum abschließt.';
+
+  @override
+  String get tutFleet1 =>
+      'Im Gitter versteckt sich eine Flotte, und die Liste darunter zeigt ihre Schiffe. Die Zahlen außen sagen, wie viele Schiffsfelder jede Zeile und Spalte enthält. Hier besteht die Flotte aus drei Schiffen mit je einem Feld. Tippe auf ein Feld für ein Schiff, noch einmal für Wasser.';
+
+  @override
+  String get tutFleet2 =>
+      'Schiffe sind gerade Linien von Feldern und berühren sich nie, auch nicht diagonal. Die untere Zeile braucht zwei Schiffsfelder, aber die Flotte hat kein Schiff mit zwei Feldern, also sind es zwei getrennte Schiffe mit einer Lücke dazwischen. Löse das Rätsel zu Ende.';
+
+  @override
+  String get tutFleet3 =>
+      'Manche Teile sind von Anfang an gezeigt. Ein abgerundetes Ende heißt, dass sein Schiff in die andere Richtung weitergeht: Das Teil in der Ecke ist oben abgerundet, also ist das Feld darunter auch ein Schiff. Löse das Rätsel zu Ende.';
+
+  @override
+  String get tutFleet4 =>
+      'Jetzt ein echtes Rätsel. Beginne mit Zeilen und Spalten, deren Zahl null oder voll ist, setze Wasser um bekannte Schiffe und behalte im Blick, welche Schiffe noch fehlen.';
+
+  @override
+  String get tutFleetS1 =>
+      'Suche, wo die fehlenden Schiffe noch hinpassen. Ein Feld, durch das keines von ihnen passt, ist Wasser, und hat das längste fehlende Schiff nur noch wenige Plätze, sind die Felder, die alle gemeinsam haben, Schiff. Zähle die Plätze in den Zeilen und Spalten, die noch Raum dafür haben.';
+
+  @override
+  String get tutFleetS2 =>
+      'Ein schweres Rätsel: Manche Zahlen sind verborgen. Wenn du feststeckst, nimm an, ein Feld sei Schiff, und folge den Schlüssen: Läuft eine Zeile über, berühren sich Schiffe oder findet ein Schiff keinen Platz, ist dort Wasser.';
+
+  @override
+  String exFleetSupposeShip(Object cell) {
+    return 'Angenommen, $cell wäre Teil eines Schiffs.';
+  }
+
+  @override
+  String exFleetSupposeWater(Object cell) {
+    return 'Angenommen, auf $cell wäre Wasser.';
+  }
+
+  @override
+  String exFleetRefutedShip(Object cell) {
+    return 'Auf $cell ist Wasser: Ein Schiff dort führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exFleetRefutedWater(Object cell) {
+    return '$cell ist Teil eines Schiffs: Wasser dort führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exFleetPieceShip(Object cell, Object other) {
+    return '$cell ist Teil eines Schiffs: Das Teil auf $other geht in diese Richtung weiter.';
+  }
+
+  @override
+  String exFleetPieceWater(Object cell, Object other) {
+    return 'Auf $cell ist Wasser: Das Teil auf $other endet auf dieser Seite.';
+  }
+
+  @override
+  String exFleetMiddle(Object cell, Object other) {
+    return '$cell ist Teil eines Schiffs: Das Mittelteil auf $other kann nicht in die andere Richtung laufen.';
+  }
+
+  @override
+  String exFleetDiagonal(Object cell, Object other) {
+    return 'Auf $cell ist Wasser: Es berührt das Schiff auf $other diagonal.';
+  }
+
+  @override
+  String exFleetRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'alle $count Schiffsfelder',
+      one: 'ihr Schiffsfeld',
+    );
+    return 'Auf $cell ist Wasser: Zeile $row hat schon $_temp0.';
+  }
+
+  @override
+  String exFleetColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'alle $count Schiffsfelder',
+      one: 'ihr Schiffsfeld',
+    );
+    return 'Auf $cell ist Wasser: Spalte $col hat schon $_temp0.';
+  }
+
+  @override
+  String exFleetRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Schiffsfelder',
+      one: 'ein Schiffsfeld',
+    );
+    return '$cell ist Teil eines Schiffs: Zeile $row braucht $_temp0, und genau so viele Felder sind übrig.';
+  }
+
+  @override
+  String exFleetColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Schiffsfelder',
+      one: 'ein Schiffsfeld',
+    );
+    return '$cell ist Teil eines Schiffs: Spalte $col braucht $_temp0, und genau so viele Felder sind übrig.';
+  }
+
+  @override
+  String exFleetAllFound(Object cell) {
+    return 'Auf $cell ist Wasser: Alle Schiffe der Flotte sind gefunden.';
+  }
+
+  @override
+  String exFleetLongest(Object cell, Object other, int length) {
+    return 'Auf $cell ist Wasser: Das Schiff auf $other hat schon die Länge $length, so lang wie das längste fehlende Schiff.';
+  }
+
+  @override
+  String exFleetTooLong(Object cell, int length) {
+    return 'Auf $cell ist Wasser: Ein Schiff dort wäre länger als $length, die Länge des längsten fehlenden Schiffs.';
+  }
+
+  @override
+  String exFleetNoFit(Object cell) {
+    return 'Auf $cell ist Wasser: Keines der fehlenden Schiffe passt hindurch.';
+  }
+
+  @override
+  String exFleetExtend(Object cell, Object other) {
+    return '$cell ist Teil eines Schiffs: Jedes Schiff, das durch $other passt, bedeckt es.';
+  }
+
+  @override
+  String exFleetMustCover(Object cell, int length) {
+    return '$cell ist Teil eines Schiffs: Jeder Platz, der für das fehlende Schiff der Länge $length bleibt, bedeckt es.';
+  }
+
+  @override
+  String exFleetOnlySpots(Object cell, int length) {
+    return '$cell ist Teil eines Schiffs: Für die Schiffe der Länge $length bleiben genau so viele Plätze wie nötig.';
+  }
+
+  @override
+  String exFleetFailTouch(Object a, Object b) {
+    return 'Aber dann berühren sich die Schiffe auf $a und $b.';
+  }
+
+  @override
+  String exFleetFailRowMany(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Schiffsfelder',
+      one: 'ein Schiffsfeld',
+    );
+    return 'Aber dann hat Zeile $row mehr als $_temp0.';
+  }
+
+  @override
+  String exFleetFailColMany(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Schiffsfelder',
+      one: 'ein Schiffsfeld',
+    );
+    return 'Aber dann hat Spalte $col mehr als $_temp0.';
+  }
+
+  @override
+  String exFleetFailRowFew(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ihre $count Schiffsfelder',
+      one: 'ihr Schiffsfeld',
+    );
+    return 'Aber dann kann Zeile $row $_temp0 nicht bekommen.';
+  }
+
+  @override
+  String exFleetFailColFew(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ihre $count Schiffsfelder',
+      one: 'ihr Schiffsfeld',
+    );
+    return 'Aber dann kann Spalte $col $_temp0 nicht bekommen.';
+  }
+
+  @override
+  String exFleetFailPiece(Object a) {
+    return 'Aber dann passt das Teil auf $a nicht.';
+  }
+
+  @override
+  String exFleetFailLong(Object a, int length) {
+    return 'Aber dann ist das Schiff auf $a länger als $length, das längste fehlende Schiff.';
+  }
+
+  @override
+  String exFleetFailFleet(int length) {
+    return 'Aber dann gibt es zu viele Schiffe der Länge $length.';
+  }
+
+  @override
+  String exFleetFailNoRoom(int length) {
+    return 'Aber dann passen nicht alle Schiffe der Länge $length.';
+  }
+
+  @override
+  String exFleetFailStray(Object a) {
+    return 'Aber dann kann das Schiffsfeld $a zu keinem fehlenden Schiff gehören.';
+  }
 }

@@ -5553,6 +5553,240 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{link} is a domino: leaving it out leads to a contradiction.'**
   String exDominoRefutedCross(Object link);
+
+  /// No description provided for @tagShips.
+  ///
+  /// In en, this message translates to:
+  /// **'ships, boats, fleet, sea, navy, hidden'**
+  String get tagShips;
+
+  /// No description provided for @fleetName.
+  ///
+  /// In en, this message translates to:
+  /// **'Fleet'**
+  String get fleetName;
+
+  /// No description provided for @fleetTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the hidden ships from the counts at the edge'**
+  String get fleetTagline;
+
+  /// No description provided for @fleetRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• A fleet of ships hides in the grid; the ships it has are shown below the grid. Each ship is a straight line of cells, across or down.\n• Ships never touch each other, not even diagonally.\n• The numbers outside the grid tell how many ship cells each row and column holds.\n• Some cells are shown from the start: water, or a piece of a ship. A rounded end shows where its ship ends, a square piece sits in the middle of a ship, and a round piece is a whole ship of one cell.\n\nTap a cell to cycle: ship → water (your \"no ship here\" note) → empty. Right-click cycles back. Slide across cells to mark them all in one go. A long press puts water on every cell where the placed ships leave no room for another. Water is optional: the puzzle is done once every ship is in place. Ships you finish fade in the list below the grid once water or the edge closes them in.'**
+  String get fleetRules;
+
+  /// No description provided for @tutFleet1.
+  ///
+  /// In en, this message translates to:
+  /// **'A fleet of ships hides in the grid, and the list below it shows its ships. The numbers outside tell how many ship cells each row and column holds. Here the fleet is three ships of one cell. Tap a cell to put a ship there, tap again for water.'**
+  String get tutFleet1;
+
+  /// No description provided for @tutFleet2.
+  ///
+  /// In en, this message translates to:
+  /// **'Ships are straight lines of cells, and they never touch, not even diagonally. The bottom row needs two ship cells, but this fleet has no ship of two cells, so they are two separate ships with a gap between them. Finish the board.'**
+  String get tutFleet2;
+
+  /// No description provided for @tutFleet3.
+  ///
+  /// In en, this message translates to:
+  /// **'Some pieces are shown from the start. A rounded end means its ship goes on the other way: the piece in the corner is rounded at the top, so the cell below it is a ship too. Finish the board.'**
+  String get tutFleet3;
+
+  /// No description provided for @tutFleet4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with rows and columns whose count is zero or full, put water around the ships you know, and keep an eye on which ships are still missing.'**
+  String get tutFleet4;
+
+  /// No description provided for @tutFleetS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Look for where the missing ships still fit. A cell no missing ship can pass through is water, and when the longest missing ship has only a few places left, the cells they all share are ship. Count the places in the rows and columns with room for it.'**
+  String get tutFleetS1;
+
+  /// No description provided for @tutFleetS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board: some counts are hidden. When stuck, suppose a cell is a ship and follow on: if a row overflows, ships touch or a ship has nowhere to go, that cell is water.'**
+  String get tutFleetS2;
+
+  /// No description provided for @exFleetSupposeShip.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were part of a ship.'**
+  String exFleetSupposeShip(Object cell);
+
+  /// No description provided for @exFleetSupposeWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} were water.'**
+  String exFleetSupposeWater(Object cell);
+
+  /// No description provided for @exFleetRefutedShip.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is water: a ship there leads to a contradiction.'**
+  String exFleetRefutedShip(Object cell);
+
+  /// No description provided for @exFleetRefutedWater.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is part of a ship: water there leads to a contradiction.'**
+  String exFleetRefutedWater(Object cell);
+
+  /// No description provided for @exFleetPieceShip.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is part of a ship: the piece at {other} goes on that way.'**
+  String exFleetPieceShip(Object cell, Object other);
+
+  /// No description provided for @exFleetPieceWater.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is water: the piece at {other} ends on that side.'**
+  String exFleetPieceWater(Object cell, Object other);
+
+  /// No description provided for @exFleetMiddle.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is part of a ship: the middle piece at {other} can\'t run the other way.'**
+  String exFleetMiddle(Object cell, Object other);
+
+  /// No description provided for @exFleetDiagonal.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is water: it touches the ship at {other} diagonally.'**
+  String exFleetDiagonal(Object cell, Object other);
+
+  /// No description provided for @exFleetRowDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is water: row {row} already has {count, plural, =1{its ship cell} other{all its {count} ship cells}}.'**
+  String exFleetRowDone(Object cell, Object row, int count);
+
+  /// No description provided for @exFleetColDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is water: column {col} already has {count, plural, =1{its ship cell} other{all its {count} ship cells}}.'**
+  String exFleetColDone(Object cell, Object col, int count);
+
+  /// No description provided for @exFleetRowNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is part of a ship: row {row} needs {count, plural, =1{a ship cell} other{{count} ship cells}}, and only that many cells are left.'**
+  String exFleetRowNeed(Object cell, Object row, int count);
+
+  /// No description provided for @exFleetColNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is part of a ship: column {col} needs {count, plural, =1{a ship cell} other{{count} ship cells}}, and only that many cells are left.'**
+  String exFleetColNeed(Object cell, Object col, int count);
+
+  /// No description provided for @exFleetAllFound.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is water: every ship of the fleet is found.'**
+  String exFleetAllFound(Object cell);
+
+  /// No description provided for @exFleetLongest.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is water: the ship at {other} already has length {length}, as long as the longest ship still missing.'**
+  String exFleetLongest(Object cell, Object other, int length);
+
+  /// No description provided for @exFleetTooLong.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is water: a ship there would be longer than {length}, the length of the longest ship still missing.'**
+  String exFleetTooLong(Object cell, int length);
+
+  /// No description provided for @exFleetNoFit.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is water: none of the missing ships fits through it.'**
+  String exFleetNoFit(Object cell);
+
+  /// No description provided for @exFleetExtend.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is part of a ship: every ship that fits through {other} covers it.'**
+  String exFleetExtend(Object cell, Object other);
+
+  /// No description provided for @exFleetMustCover.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is part of a ship: every place left for the missing ship of length {length} covers it.'**
+  String exFleetMustCover(Object cell, int length);
+
+  /// No description provided for @exFleetOnlySpots.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is part of a ship: the ships of length {length} have just enough places left.'**
+  String exFleetOnlySpots(Object cell, int length);
+
+  /// No description provided for @exFleetFailTouch.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the ships at {a} and {b} touch.'**
+  String exFleetFailTouch(Object a, Object b);
+
+  /// No description provided for @exFleetFailRowMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} has more than {count, plural, =1{one ship cell} other{{count} ship cells}}.'**
+  String exFleetFailRowMany(Object row, int count);
+
+  /// No description provided for @exFleetFailColMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} has more than {count, plural, =1{one ship cell} other{{count} ship cells}}.'**
+  String exFleetFailColMany(Object col, int count);
+
+  /// No description provided for @exFleetFailRowFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} can\'t get {count, plural, =1{its ship cell} other{its {count} ship cells}}.'**
+  String exFleetFailRowFew(Object row, int count);
+
+  /// No description provided for @exFleetFailColFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} can\'t get {count, plural, =1{its ship cell} other{its {count} ship cells}}.'**
+  String exFleetFailColFew(Object col, int count);
+
+  /// No description provided for @exFleetFailPiece.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the piece at {a} doesn\'t fit.'**
+  String exFleetFailPiece(Object a);
+
+  /// No description provided for @exFleetFailLong.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the ship at {a} is longer than {length}, the longest ship still missing.'**
+  String exFleetFailLong(Object a, int length);
+
+  /// No description provided for @exFleetFailFleet.
+  ///
+  /// In en, this message translates to:
+  /// **'But then there are too many ships of length {length}.'**
+  String exFleetFailFleet(int length);
+
+  /// No description provided for @exFleetFailNoRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the ships of length {length} don\'t all fit.'**
+  String exFleetFailNoRoom(int length);
+
+  /// No description provided for @exFleetFailStray.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the ship cell {a} can\'t belong to any missing ship.'**
+  String exFleetFailStray(Object a);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

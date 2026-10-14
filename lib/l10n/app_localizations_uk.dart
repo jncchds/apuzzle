@@ -4098,4 +4098,250 @@ class AppLocalizationsUk extends AppLocalizations {
   String exDominoRefutedCross(Object link) {
     return '$link — кісточка: без неї виходить суперечність.';
   }
+
+  @override
+  String get tagShips => 'кораблі, човни, флот, море, морський бій, приховані';
+
+  @override
+  String get fleetName => 'Флот';
+
+  @override
+  String get fleetTagline => 'Знайдіть приховані кораблі за числами по краях';
+
+  @override
+  String get fleetRules =>
+      '• У сітці сховався флот; які кораблі в нього входять, показано під сіткою. Кожен корабель — пряма лінія клітинок, горизонтальна або вертикальна.\n• Кораблі ніколи не торкаються один одного, навіть по діагоналі.\n• Числа поза сіткою показують, скільки клітинок кораблів у кожному рядку й стовпці.\n• Деякі клітинки показано з самого початку: вода або частина корабля. Заокруглений край показує, де корабель закінчується, квадратна частина стоїть посередині корабля, а кругла — це цілий корабель з однієї клітинки.\n\nТоркніться клітинки, щоб перемикати: корабель → вода (ваша позначка «тут корабля нема») → порожньо. Правий клік перемикає назад. Проведіть по клітинках, щоб позначити їх усі разом. Довге натискання ставить воду на всі клітинки, де розставлені кораблі не лишають місця для іншого. Вода необов’язкова: головоломку розв’язано, щойно всі кораблі на місці. Знайдені кораблі бліднуть у списку під сіткою, коли вода або край закривають їх з усіх боків.';
+
+  @override
+  String get tutFleet1 =>
+      'У сітці сховався флот, а список під нею показує його кораблі. Числа ззовні показують, скільки клітинок кораблів у кожному рядку й стовпці. Тут флот — три кораблі з однієї клітинки. Торкніться клітинки, щоб поставити корабель, ще раз — щоб поставити воду.';
+
+  @override
+  String get tutFleet2 =>
+      'Кораблі — прямі лінії клітинок, і вони ніколи не торкаються, навіть по діагоналі. Нижньому рядку потрібні дві клітинки кораблів, але у флоті немає корабля з двох клітинок, тож це два окремі кораблі з проміжком між ними. Завершіть поле.';
+
+  @override
+  String get tutFleet3 =>
+      'Деякі частини показано з початку. Заокруглений край означає, що корабель продовжується в інший бік: частина в куті заокруглена зверху, тож клітинка під нею теж корабель. Завершіть поле.';
+
+  @override
+  String get tutFleet4 =>
+      'Тепер справжнє поле. Почніть із рядків і стовпців, де число нуль або повне, ставте воду навколо відомих кораблів і стежте, яких кораблів ще бракує.';
+
+  @override
+  String get tutFleetS1 =>
+      'Шукайте, де ще вміщаються кораблі, яких бракує. Клітинка, через яку не пройде жоден такий корабель, — вода, а якщо найдовшому кораблю лишилося мало місць, спільні для всіх них клітинки — корабель. Рахуйте місця в рядках і стовпцях, де він ще вміщається.';
+
+  @override
+  String get tutFleetS2 =>
+      'Складне поле: деякі числа приховано. Коли застрягнете, припустіть, що клітинка — корабель, і йдіть далі: якщо рядок переповнюється, кораблі торкаються або кораблю ніде стати, там вода.';
+
+  @override
+  String exFleetSupposeShip(Object cell) {
+    return 'Припустімо, $cell — частина корабля.';
+  }
+
+  @override
+  String exFleetSupposeWater(Object cell) {
+    return 'Припустімо, у $cell вода.';
+  }
+
+  @override
+  String exFleetRefutedShip(Object cell) {
+    return 'У $cell вода: корабель там призводить до суперечності.';
+  }
+
+  @override
+  String exFleetRefutedWater(Object cell) {
+    return '$cell — частина корабля: вода там призводить до суперечності.';
+  }
+
+  @override
+  String exFleetPieceShip(Object cell, Object other) {
+    return '$cell — частина корабля: частина в $other продовжується в цей бік.';
+  }
+
+  @override
+  String exFleetPieceWater(Object cell, Object other) {
+    return 'У $cell вода: частина в $other закінчується з цього боку.';
+  }
+
+  @override
+  String exFleetMiddle(Object cell, Object other) {
+    return '$cell — частина корабля: середня частина в $other не може йти в інший бік.';
+  }
+
+  @override
+  String exFleetDiagonal(Object cell, Object other) {
+    return 'У $cell вода: вона по діагоналі торкається корабля в $other.';
+  }
+
+  @override
+  String exFleetRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'є всі $count клітинки кораблів',
+      many: 'є всі $count клітинок кораблів',
+      few: 'є всі $count клітинки кораблів',
+      one: 'є його клітинка корабля',
+    );
+    return 'У $cell вода: у рядку $row уже $_temp0.';
+  }
+
+  @override
+  String exFleetColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'є всі $count клітинки кораблів',
+      many: 'є всі $count клітинок кораблів',
+      few: 'є всі $count клітинки кораблів',
+      one: 'є його клітинка корабля',
+    );
+    return 'У $cell вода: у стовпці $col уже $_temp0.';
+  }
+
+  @override
+  String exFleetRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки кораблів',
+      many: '$count клітинок кораблів',
+      few: '$count клітинки кораблів',
+      one: 'одну клітинку корабля',
+    );
+    return '$cell — частина корабля: рядку $row потрібно $_temp0, і саме стільки клітинок лишилося.';
+  }
+
+  @override
+  String exFleetColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки кораблів',
+      many: '$count клітинок кораблів',
+      few: '$count клітинки кораблів',
+      one: 'одну клітинку корабля',
+    );
+    return '$cell — частина корабля: стовпцю $col потрібно $_temp0, і саме стільки клітинок лишилося.';
+  }
+
+  @override
+  String exFleetAllFound(Object cell) {
+    return 'У $cell вода: усі кораблі флоту знайдено.';
+  }
+
+  @override
+  String exFleetLongest(Object cell, Object other, int length) {
+    return 'У $cell вода: корабель у $other уже має довжину $length, як найдовший із тих, яких бракує.';
+  }
+
+  @override
+  String exFleetTooLong(Object cell, int length) {
+    return 'У $cell вода: корабель там був би довший за $length, довжину найдовшого з тих, яких бракує.';
+  }
+
+  @override
+  String exFleetNoFit(Object cell) {
+    return 'У $cell вода: через неї не проходить жоден із кораблів, яких бракує.';
+  }
+
+  @override
+  String exFleetExtend(Object cell, Object other) {
+    return '$cell — частина корабля: кожен корабель, що вміщається через $other, накриває її.';
+  }
+
+  @override
+  String exFleetMustCover(Object cell, int length) {
+    return '$cell — частина корабля: кожне місце, що лишилося для корабля довжиною $length, накриває її.';
+  }
+
+  @override
+  String exFleetOnlySpots(Object cell, int length) {
+    return '$cell — частина корабля: кораблям довжиною $length лишилося рівно стільки місць, скільки треба.';
+  }
+
+  @override
+  String exFleetFailTouch(Object a, Object b) {
+    return 'Але тоді кораблі в $a і $b торкаються.';
+  }
+
+  @override
+  String exFleetFailRowMany(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки кораблів',
+      many: '$count клітинок кораблів',
+      few: '$count клітинки кораблів',
+      one: 'одна клітинка корабля',
+    );
+    return 'Але тоді в рядку $row більше ніж $_temp0.';
+  }
+
+  @override
+  String exFleetFailColMany(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки кораблів',
+      many: '$count клітинок кораблів',
+      few: '$count клітинки кораблів',
+      one: 'одна клітинка корабля',
+    );
+    return 'Але тоді в стовпці $col більше ніж $_temp0.';
+  }
+
+  @override
+  String exFleetFailRowFew(Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'свої $count клітинки кораблів',
+      many: 'свої $count клітинок кораблів',
+      few: 'свої $count клітинки кораблів',
+      one: 'свою клітинку корабля',
+    );
+    return 'Але тоді рядок $row не може отримати $_temp0.';
+  }
+
+  @override
+  String exFleetFailColFew(Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'свої $count клітинки кораблів',
+      many: 'свої $count клітинок кораблів',
+      few: 'свої $count клітинки кораблів',
+      one: 'свою клітинку корабля',
+    );
+    return 'Але тоді стовпець $col не може отримати $_temp0.';
+  }
+
+  @override
+  String exFleetFailPiece(Object a) {
+    return 'Але тоді частина в $a не підходить.';
+  }
+
+  @override
+  String exFleetFailLong(Object a, int length) {
+    return 'Але тоді корабель у $a довший за $length, найдовший із тих, яких бракує.';
+  }
+
+  @override
+  String exFleetFailFleet(int length) {
+    return 'Але тоді кораблів довжиною $length забагато.';
+  }
+
+  @override
+  String exFleetFailNoRoom(int length) {
+    return 'Але тоді всі кораблі довжиною $length не вміщаються.';
+  }
+
+  @override
+  String exFleetFailStray(Object a) {
+    return 'Але тоді клітинка корабля $a не може належати жодному кораблю, якого бракує.';
+  }
 }
