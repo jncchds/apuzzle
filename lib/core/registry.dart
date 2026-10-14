@@ -6,6 +6,7 @@ import '../puzzles/blocks/blocks_type.dart';
 import '../puzzles/cages/cages_type.dart';
 import '../puzzles/blend/blend_type.dart';
 import '../puzzles/camp/camp_type.dart';
+import '../puzzles/domino/domino_type.dart';
 import '../puzzles/fence/fence_type.dart';
 import '../puzzles/formula/formula_type.dart';
 import '../puzzles/hues/hues_type.dart';
@@ -48,6 +49,7 @@ const List<PuzzleType> puzzleTypes = [
   BlocksType(),
   TallyType(),
   SoloType(),
+  DominoType(),
   FormulaType(),
   PairsType(),
   HuesType(),
@@ -135,6 +137,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('blocks', [BlocksType()]),
       PuzzleFamily('tally', [TallyType()]),
       PuzzleFamily('solo', [SoloType()]),
+      PuzzleFamily('domino', [DominoType()]),
       PuzzleFamily('formula', [FormulaType()]),
       PuzzleFamily('plots', [PlotsType()]),
       PuzzleFamily('shikaku', [ShikakuType()]),

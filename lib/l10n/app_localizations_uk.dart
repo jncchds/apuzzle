@@ -3973,4 +3973,129 @@ class AppLocalizationsUk extends AppLocalizations {
   String exSoloFailApart(Object a, Object b) {
     return 'Але тоді $a і $b відрізано одна від одної.';
   }
+
+  @override
+  String get dominoName => 'Доміно';
+
+  @override
+  String get dominoTagline => 'Знайдіть, де лежить кожна кісточка набору';
+
+  @override
+  String get dominoRules =>
+      '• Поле — це повний набір доміно зі стертими контурами: кожна пара чисел, від 0–0 до найбільшого дубля, є рівно на одній кісточці.\n• Розбийте поле на кісточки з двох сусідніх клітинок так, щоб кожна пара трапилася один раз.\n\nТоркніться лінії між двома клітинками, щоб з\'єднати їх у кісточку; ще раз — хрестик (ваша позначка «тут кісточки немає»), і ще раз — очистити. Проведіть пальцем по клітинках, щоб викласти кісточки вздовж шляху. Нова кісточка забирає свої клітинки в кісточок, які їх мали.';
+
+  @override
+  String get tutDomino1 =>
+      'Поле — це набір доміно зі стертими контурами, і кожна пара чисел є рівно на одній кісточці. У цьому маленькому наборі є 0–0, 0–1 і 1–1. З\'єднайте дві сусідні клітинки, торкнувшись лінії між ними, або проведіть від однієї клітинки до іншої.';
+
+  @override
+  String get tutDomino2 =>
+      'Пара чисел, що стоїть поруч лише в одному місці, мусить бути там кісточкою. Позначені 0 і 0 — єдині два нулі поруч: з\'єднайте їх, а потім розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutDomino3 =>
+      'Кожна клітинка належить кісточці. 2–2 вже лежить, тож у позначеного 0 залишився лише один сусід для пари. З\'єднайте їх, а потім розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutDomino4 =>
+      'Кожна пара використовується один раз. Кісточка 2–3 вже лежить, тож дві інші 2–3 у верхньому куті не можуть бути кісточками: торкніться лінії між кожною з них двічі, щоб поставити хрестик. Потім подивіться, який сусід лишився в кутової 2, і розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutDomino5 =>
+      'Тепер справжнє поле. Почніть із пар, які поміщаються лише в одному місці, і з клітинок, у яких лишився один сусід. Закреслюйте інші місця кожної пари, яку ви поклали.';
+
+  @override
+  String get tutDominoS1 =>
+      'Коли всі місця, що лишилися для пари, накривають одну клітинку, ця клітинка належить цій парі й не може стати в пару з іншим сусідом. Усі місця, що лишилися для 3–3, накривають позначену клітинку: закресліть її інших сусідів, а потім розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutDominoS2 =>
+      'Коли всі кісточки, до яких може належати клітинка, — це одна й та сама пара, ця пара лежить біля цієї клітинки, тож закресліть її місця деінде. Позначена 3 може бути лише в 1–3, так чи інакше: закресліть інші 1–3.';
+
+  @override
+  String get tutDominoS3 =>
+      'Складне поле. Стежте за відкритими клітинками, замкненими в групу з непарної кількості: кісточки не можуть її заповнити. Коли застрягли, спробуйте кісточку й простежте наслідки: якщо для клітинки чи пари не лишається місця або з\'являється непарна група, ця кісточка хибна.';
+
+  @override
+  String exDominoOnlySpot(Object a, Object b, Object link) {
+    return '$a–$b поміщається лише на $link, тож це кісточка.';
+  }
+
+  @override
+  String exDominoOnlyWay(Object cell, Object link) {
+    return 'У $cell лишився один сусід для пари, тож $link — кісточка.';
+  }
+
+  @override
+  String exDominoCovered(Object cell, Object link) {
+    return '$cell уже в кісточці, тож $link — не кісточка.';
+  }
+
+  @override
+  String exDominoUsed(Object a, Object b, Object placed, Object link) {
+    return '$a–$b лежить на $placed, тож $link — не кісточка.';
+  }
+
+  @override
+  String exDominoPairAtCell(Object a, Object b, Object cell, Object link) {
+    return 'Усі місця, що лишилися для $a–$b, накривають $cell, тож $cell належить їй, а $link — не кісточка.';
+  }
+
+  @override
+  String exDominoCellOnePair(Object a, Object b, Object cell, Object link) {
+    return '$cell може бути лише в $a–$b, тож ця кісточка лежить біля $cell, а $link — не вона.';
+  }
+
+  @override
+  String exDominoFailCell(Object cell) {
+    return 'Але тоді жодна кісточка не накриє $cell.';
+  }
+
+  @override
+  String exDominoFailPair(Object a, Object b) {
+    return 'Але тоді для $a–$b не лишається місця.';
+  }
+
+  @override
+  String exDominoFailCellTwice(Object cell) {
+    return 'Але тоді $cell опиняється у двох кісточках.';
+  }
+
+  @override
+  String exDominoFailPairTwice(Object a, Object b) {
+    return 'Але тоді $a–$b лежить двічі.';
+  }
+
+  @override
+  String exDominoFailOdd(Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинок',
+      one: '$count клітинки',
+    );
+    return 'Але тоді відкриті клітинки разом із $cell замкнені в групу з $_temp0 — непарної кількості, яку кісточки не заповнять.';
+  }
+
+  @override
+  String exDominoSupposeLine(Object link) {
+    return 'Припустімо, що $link — кісточка.';
+  }
+
+  @override
+  String exDominoSupposeCross(Object link) {
+    return 'Припустімо, що $link — не кісточка.';
+  }
+
+  @override
+  String exDominoRefutedLine(Object link) {
+    return '$link — не кісточка: інакше виходить суперечність.';
+  }
+
+  @override
+  String exDominoRefutedCross(Object link) {
+    return '$link — кісточка: без неї виходить суперечність.';
+  }
 }

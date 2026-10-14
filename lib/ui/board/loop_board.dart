@@ -58,6 +58,8 @@ class LoopBoard extends StatefulWidget {
     this.onCellTap,
     this.paintNotes,
     this.explain,
+    this.lineWidth = 0.14,
+    this.joints = true,
   });
 
   final LatticeLoop g;
@@ -98,6 +100,12 @@ class LoopBoard extends StatefulWidget {
 
   /// Explain mode: highlights plus coordinate labels around the grid.
   final ExplainView? explain;
+
+  /// Width of a line, in cells (wide ones with round caps make dominoes).
+  final double lineWidth;
+
+  /// Draw a dot where lines meet on a centred lattice.
+  final bool joints;
 
   @override
   State<LoopBoard> createState() => _LoopBoardState();
@@ -271,6 +279,8 @@ class _LoopBoardState extends State<LoopBoard> {
             cluesOnTop: widget.cluesOnTop,
             pulse: pulse,
             explain: widget.explain,
+            lineWidth: widget.lineWidth,
+            joints: widget.joints,
             explainColor: scheme.tertiary,
             labelStyle: Theme.of(context).textTheme.labelSmall!.copyWith(
               color: scheme.onSurfaceVariant.withValues(alpha: _shown),
@@ -322,6 +332,8 @@ class _LoopPainter extends CustomPainter {
     required this.cluesOnTop,
     required this.pulse,
     required this.explain,
+    required this.lineWidth,
+    required this.joints,
     required this.explainColor,
     required this.labelStyle,
     required this.band,
@@ -344,6 +356,8 @@ class _LoopPainter extends CustomPainter {
   final bool cluesOnTop;
   final double pulse;
   final ExplainView? explain;
+  final double lineWidth;
+  final bool joints;
   final Color explainColor;
   final TextStyle labelStyle;
   final double band;
@@ -376,7 +390,7 @@ class _LoopPainter extends CustomPainter {
 
     final line = Paint()
       ..color = lineColor
-      ..strokeWidth = cell * (0.14 + 0.06 * pulse)
+      ..strokeWidth = cell * (lineWidth + 0.06 * pulse)
       ..strokeCap = StrokeCap.round;
     final cross = Paint()
       ..color = crossColor
@@ -399,7 +413,7 @@ class _LoopPainter extends CustomPainter {
     for (var p = 0; p < g.vertexCount; p++) {
       final used = g.incident[p].any((e) => marks[e] == 1);
       if (geo.centered) {
-        if (used) canvas.drawCircle(_pos(p), cell * (0.07 + 0.03 * pulse), Paint()..color = lineColor);
+        if (used && joints) canvas.drawCircle(_pos(p), cell * (0.07 + 0.03 * pulse), Paint()..color = lineColor);
       } else {
         canvas.drawCircle(
           _pos(p),
@@ -408,7 +422,7 @@ class _LoopPainter extends CustomPainter {
         );
       }
     }
-    if (cluesOnTop) paintClues(canvas, geo);
+    // The step's edges glow under clues drawn on top (they stay readable).
     if (explain case final x?) {
       final glow = Paint()
         ..color = explainColor.withValues(alpha: 0.55)
@@ -419,6 +433,7 @@ class _LoopPainter extends CustomPainter {
         canvas.drawLine(_pos(a), _pos(b), glow);
       }
     }
+    if (cluesOnTop) paintClues(canvas, geo);
   }
 
   /// Column letters above and row numbers left of the cells.

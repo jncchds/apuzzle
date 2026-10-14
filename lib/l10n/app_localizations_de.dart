@@ -3907,4 +3907,127 @@ class AppLocalizationsDe extends AppLocalizations {
   String exSoloFailApart(Object a, Object b) {
     return 'Aber dann sind $a und $b voneinander abgeschnitten.';
   }
+
+  @override
+  String get dominoName => 'Domino';
+
+  @override
+  String get dominoTagline => 'Finde, wo jeder Stein des Satzes liegt';
+
+  @override
+  String get dominoRules =>
+      '• Das Gitter ist ein voller Satz Dominosteine ohne Umrisse: Jedes Zahlenpaar, von 0–0 bis zum höchsten Pasch, ist auf genau einem Stein.\n• Teile das Gitter in Steine aus zwei benachbarten Feldern, sodass jedes Paar einmal vorkommt.\n\nTippe auf die Linie zwischen zwei Feldern, um sie zu einem Stein zu verbinden; tippe noch einmal für ein Kreuz (deine Notiz „hier kein Stein“) und noch einmal zum Löschen. Wische über Felder, um unterwegs Steine zu legen. Ein neuer Stein nimmt seine Felder den Steinen weg, die sie hatten.';
+
+  @override
+  String get tutDomino1 =>
+      'Das Gitter ist ein Satz Dominosteine ohne Umrisse, und jedes Zahlenpaar ist auf genau einem Stein. Dieser kleine Satz hat 0–0, 0–1 und 1–1. Verbinde zwei benachbarte Felder, indem du auf die Linie zwischen ihnen tippst, oder wische von einem Feld zum anderen.';
+
+  @override
+  String get tutDomino2 =>
+      'Ein Zahlenpaar, das nur an einer Stelle nebeneinander steht, muss dort ein Stein sein. Die markierten 0 und 0 sind die einzigen zwei Nullen nebeneinander: Verbinde sie und löse dann das Gitter.';
+
+  @override
+  String get tutDomino3 =>
+      'Jedes Feld gehört zu einem Stein. Die 2–2 liegt schon, also hat die markierte 0 nur noch einen Nachbarn für ein Paar. Verbinde die beiden und löse dann das Gitter.';
+
+  @override
+  String get tutDomino4 =>
+      'Jedes Paar kommt einmal vor. Der Stein 2–3 liegt schon, also können die zwei anderen 2–3 in der oberen Ecke keine Steine sein: Tippe die Linie zwischen ihnen jeweils zweimal an, um sie anzukreuzen. Dann sieh, welcher Nachbar der 2 in der Ecke bleibt, und löse das Gitter.';
+
+  @override
+  String get tutDomino5 =>
+      'Jetzt ein echtes Gitter. Fang mit Paaren an, die nur an eine Stelle passen, und mit Feldern, denen nur ein Nachbar bleibt. Kreuze die übrigen Stellen jedes gelegten Paares an.';
+
+  @override
+  String get tutDominoS1 =>
+      'Wenn jede Stelle, die einem Paar bleibt, dasselbe Feld bedeckt, gehört dieses Feld zu dem Paar und kann mit keinem anderen Nachbarn ein Paar bilden. Jede Stelle, die der 3–3 bleibt, bedeckt das markierte Feld: Kreuze seine anderen Nachbarn an und löse dann das Gitter.';
+
+  @override
+  String get tutDominoS2 =>
+      'Wenn jeder Stein, zu dem ein Feld gehören kann, dasselbe Paar ist, liegt dieses Paar an diesem Feld, also kreuze seine Stellen anderswo an. Die markierte 3 kann nur in einer 1–3 liegen, so oder so: Kreuze die anderen 1–3 an.';
+
+  @override
+  String get tutDominoS3 =>
+      'Ein schweres Gitter. Achte auf offene Felder, die in einer Gruppe ungerader Größe eingeschlossen sind: Steine können sie nicht füllen. Wenn du feststeckst, probiere einen Stein und verfolge die Folgen: Bleibt für ein Feld oder ein Paar kein Platz oder entsteht eine ungerade Gruppe, ist dieser Stein falsch.';
+
+  @override
+  String exDominoOnlySpot(Object a, Object b, Object link) {
+    return '$a–$b passt nur an $link, also ist das ein Stein.';
+  }
+
+  @override
+  String exDominoOnlyWay(Object cell, Object link) {
+    return '$cell hat nur noch einen Nachbarn für ein Paar, also ist $link ein Stein.';
+  }
+
+  @override
+  String exDominoCovered(Object cell, Object link) {
+    return '$cell liegt schon in einem Stein, also ist $link keiner.';
+  }
+
+  @override
+  String exDominoUsed(Object a, Object b, Object placed, Object link) {
+    return '$a–$b liegt an $placed, also ist $link kein Stein.';
+  }
+
+  @override
+  String exDominoPairAtCell(Object a, Object b, Object cell, Object link) {
+    return 'Jede Stelle, die $a–$b bleibt, bedeckt $cell, also gehört $cell dazu, und $link ist kein Stein.';
+  }
+
+  @override
+  String exDominoCellOnePair(Object a, Object b, Object cell, Object link) {
+    return '$cell kann nur in einer $a–$b liegen, also liegt dieser Stein an $cell, und $link ist er nicht.';
+  }
+
+  @override
+  String exDominoFailCell(Object cell) {
+    return 'Aber dann kann kein Stein $cell bedecken.';
+  }
+
+  @override
+  String exDominoFailPair(Object a, Object b) {
+    return 'Aber dann bleibt für $a–$b kein Platz.';
+  }
+
+  @override
+  String exDominoFailCellTwice(Object cell) {
+    return 'Aber dann liegt $cell in zwei Steinen.';
+  }
+
+  @override
+  String exDominoFailPairTwice(Object a, Object b) {
+    return 'Aber dann liegt $a–$b zweimal.';
+  }
+
+  @override
+  String exDominoFailOdd(Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Feldern',
+      one: '1 Feld',
+    );
+    return 'Aber dann sind die offenen Felder mit $cell in einer Gruppe aus $_temp0 eingeschlossen, einer ungeraden Zahl, die Steine nicht füllen können.';
+  }
+
+  @override
+  String exDominoSupposeLine(Object link) {
+    return 'Angenommen, $link wäre ein Stein.';
+  }
+
+  @override
+  String exDominoSupposeCross(Object link) {
+    return 'Angenommen, $link wäre kein Stein.';
+  }
+
+  @override
+  String exDominoRefutedLine(Object link) {
+    return '$link ist kein Stein: Sonst ergibt sich ein Widerspruch.';
+  }
+
+  @override
+  String exDominoRefutedCross(Object link) {
+    return '$link ist ein Stein: Ohne ihn ergibt sich ein Widerspruch.';
+  }
 }

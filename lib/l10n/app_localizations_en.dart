@@ -3900,4 +3900,127 @@ class AppLocalizationsEn extends AppLocalizations {
   String exSoloFailApart(Object a, Object b) {
     return 'But then $a and $b are cut off from each other.';
   }
+
+  @override
+  String get dominoName => 'Dominoes';
+
+  @override
+  String get dominoTagline => 'Find where every domino of the set lies';
+
+  @override
+  String get dominoRules =>
+      '• The grid is a full set of dominoes with the outlines rubbed off: every pair of numbers, from 0–0 up to the highest double, is on exactly one domino.\n• Split the grid into dominoes of two neighbouring cells, so that every pair shows up once.\n\nTap the line between two cells to join them into a domino; tap again for a cross (your \"no domino here\" note) and once more to clear it. Drag across cells to lay dominoes along the way. A new domino takes its cells away from the dominoes that had them.';
+
+  @override
+  String get tutDomino1 =>
+      'The grid is a set of dominoes with the outlines rubbed off, and every pair of numbers is on exactly one domino. This small set has 0–0, 0–1 and 1–1. Join two neighbouring cells by tapping the line between them, or drag from one cell to the other.';
+
+  @override
+  String get tutDomino2 =>
+      'A pair of numbers that sits side by side in only one place must be a domino there. The highlighted 0 and 0 are the only two 0s next to each other: join them, then finish the board.';
+
+  @override
+  String get tutDomino3 =>
+      'Every cell is in a domino. The 2–2 is placed, so the highlighted 0 has only one neighbour left to pair with. Join them, then finish the board.';
+
+  @override
+  String get tutDomino4 =>
+      'Every pair is used once. The 2–3 domino is placed already, so the two other 2–3s in the top corner can\'t be dominoes: tap the line between each of them twice to cross it out. Then see which neighbour the corner 2 has left, and finish the board.';
+
+  @override
+  String get tutDomino5 =>
+      'Now a real board. Start with pairs that fit in one place only, and with cells that have one neighbour left. Cross out the places of every pair you have placed.';
+
+  @override
+  String get tutDominoS1 =>
+      'When every place left for a pair covers the same cell, that cell belongs to that pair, so it can\'t pair with any other neighbour. Every place left for the 3–3 covers the highlighted cell: cross out its other neighbours, then finish the board.';
+
+  @override
+  String get tutDominoS2 =>
+      'When every domino a cell can be in is the same pair, that pair lies at this cell, so cross out its places elsewhere. The highlighted 3 can only be in a 1–3, either way: cross out the other 1–3s.';
+
+  @override
+  String get tutDominoS3 =>
+      'A hard board. Watch for open cells walled into a group of an odd size: dominoes can\'t fill it. When stuck, try a domino and follow on: if a cell or a pair ends up with no place, or an odd group appears, that domino is wrong.';
+
+  @override
+  String exDominoOnlySpot(Object a, Object b, Object link) {
+    return '$a–$b fits only at $link, so that is a domino.';
+  }
+
+  @override
+  String exDominoOnlyWay(Object cell, Object link) {
+    return '$cell has one neighbour left to pair with, so $link is a domino.';
+  }
+
+  @override
+  String exDominoCovered(Object cell, Object link) {
+    return '$cell is in a domino already, so $link is not one.';
+  }
+
+  @override
+  String exDominoUsed(Object a, Object b, Object placed, Object link) {
+    return '$a–$b lies at $placed, so $link is not a domino.';
+  }
+
+  @override
+  String exDominoPairAtCell(Object a, Object b, Object cell, Object link) {
+    return 'Every place left for $a–$b covers $cell, so $cell belongs to it and $link is not a domino.';
+  }
+
+  @override
+  String exDominoCellOnePair(Object a, Object b, Object cell, Object link) {
+    return '$cell can only be in a $a–$b, so that domino lies at $cell and $link is not one.';
+  }
+
+  @override
+  String exDominoFailCell(Object cell) {
+    return 'But then no domino can cover $cell.';
+  }
+
+  @override
+  String exDominoFailPair(Object a, Object b) {
+    return 'But then $a–$b has no place left.';
+  }
+
+  @override
+  String exDominoFailCellTwice(Object cell) {
+    return 'But then $cell is in two dominoes.';
+  }
+
+  @override
+  String exDominoFailPairTwice(Object a, Object b) {
+    return 'But then $a–$b is placed twice.';
+  }
+
+  @override
+  String exDominoFailOdd(Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: '1 cell',
+    );
+    return 'But then the open cells with $cell are walled in as a group of $_temp0, an odd number, which dominoes can\'t fill.';
+  }
+
+  @override
+  String exDominoSupposeLine(Object link) {
+    return 'Suppose $link were a domino.';
+  }
+
+  @override
+  String exDominoSupposeCross(Object link) {
+    return 'Suppose $link were not a domino.';
+  }
+
+  @override
+  String exDominoRefutedLine(Object link) {
+    return '$link is not a domino: making it one leads to a contradiction.';
+  }
+
+  @override
+  String exDominoRefutedCross(Object link) {
+    return '$link is a domino: leaving it out leads to a contradiction.';
+  }
 }

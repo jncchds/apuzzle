@@ -5397,6 +5397,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then {a} and {b} are cut off from each other.'**
   String exSoloFailApart(Object a, Object b);
+
+  /// No description provided for @dominoName.
+  ///
+  /// In en, this message translates to:
+  /// **'Dominoes'**
+  String get dominoName;
+
+  /// No description provided for @dominoTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Find where every domino of the set lies'**
+  String get dominoTagline;
+
+  /// No description provided for @dominoRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• The grid is a full set of dominoes with the outlines rubbed off: every pair of numbers, from 0–0 up to the highest double, is on exactly one domino.\n• Split the grid into dominoes of two neighbouring cells, so that every pair shows up once.\n\nTap the line between two cells to join them into a domino; tap again for a cross (your \"no domino here\" note) and once more to clear it. Drag across cells to lay dominoes along the way. A new domino takes its cells away from the dominoes that had them.'**
+  String get dominoRules;
+
+  /// No description provided for @tutDomino1.
+  ///
+  /// In en, this message translates to:
+  /// **'The grid is a set of dominoes with the outlines rubbed off, and every pair of numbers is on exactly one domino. This small set has 0–0, 0–1 and 1–1. Join two neighbouring cells by tapping the line between them, or drag from one cell to the other.'**
+  String get tutDomino1;
+
+  /// No description provided for @tutDomino2.
+  ///
+  /// In en, this message translates to:
+  /// **'A pair of numbers that sits side by side in only one place must be a domino there. The highlighted 0 and 0 are the only two 0s next to each other: join them, then finish the board.'**
+  String get tutDomino2;
+
+  /// No description provided for @tutDomino3.
+  ///
+  /// In en, this message translates to:
+  /// **'Every cell is in a domino. The 2–2 is placed, so the highlighted 0 has only one neighbour left to pair with. Join them, then finish the board.'**
+  String get tutDomino3;
+
+  /// No description provided for @tutDomino4.
+  ///
+  /// In en, this message translates to:
+  /// **'Every pair is used once. The 2–3 domino is placed already, so the two other 2–3s in the top corner can\'t be dominoes: tap the line between each of them twice to cross it out. Then see which neighbour the corner 2 has left, and finish the board.'**
+  String get tutDomino4;
+
+  /// No description provided for @tutDomino5.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with pairs that fit in one place only, and with cells that have one neighbour left. Cross out the places of every pair you have placed.'**
+  String get tutDomino5;
+
+  /// No description provided for @tutDominoS1.
+  ///
+  /// In en, this message translates to:
+  /// **'When every place left for a pair covers the same cell, that cell belongs to that pair, so it can\'t pair with any other neighbour. Every place left for the 3–3 covers the highlighted cell: cross out its other neighbours, then finish the board.'**
+  String get tutDominoS1;
+
+  /// No description provided for @tutDominoS2.
+  ///
+  /// In en, this message translates to:
+  /// **'When every domino a cell can be in is the same pair, that pair lies at this cell, so cross out its places elsewhere. The highlighted 3 can only be in a 1–3, either way: cross out the other 1–3s.'**
+  String get tutDominoS2;
+
+  /// No description provided for @tutDominoS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. Watch for open cells walled into a group of an odd size: dominoes can\'t fill it. When stuck, try a domino and follow on: if a cell or a pair ends up with no place, or an odd group appears, that domino is wrong.'**
+  String get tutDominoS3;
+
+  /// No description provided for @exDominoOnlySpot.
+  ///
+  /// In en, this message translates to:
+  /// **'{a}–{b} fits only at {link}, so that is a domino.'**
+  String exDominoOnlySpot(Object a, Object b, Object link);
+
+  /// No description provided for @exDominoOnlyWay.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} has one neighbour left to pair with, so {link} is a domino.'**
+  String exDominoOnlyWay(Object cell, Object link);
+
+  /// No description provided for @exDominoCovered.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is in a domino already, so {link} is not one.'**
+  String exDominoCovered(Object cell, Object link);
+
+  /// No description provided for @exDominoUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'{a}–{b} lies at {placed}, so {link} is not a domino.'**
+  String exDominoUsed(Object a, Object b, Object placed, Object link);
+
+  /// No description provided for @exDominoPairAtCell.
+  ///
+  /// In en, this message translates to:
+  /// **'Every place left for {a}–{b} covers {cell}, so {cell} belongs to it and {link} is not a domino.'**
+  String exDominoPairAtCell(Object a, Object b, Object cell, Object link);
+
+  /// No description provided for @exDominoCellOnePair.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can only be in a {a}–{b}, so that domino lies at {cell} and {link} is not one.'**
+  String exDominoCellOnePair(Object a, Object b, Object cell, Object link);
+
+  /// No description provided for @exDominoFailCell.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no domino can cover {cell}.'**
+  String exDominoFailCell(Object cell);
+
+  /// No description provided for @exDominoFailPair.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {a}–{b} has no place left.'**
+  String exDominoFailPair(Object a, Object b);
+
+  /// No description provided for @exDominoFailCellTwice.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cell} is in two dominoes.'**
+  String exDominoFailCellTwice(Object cell);
+
+  /// No description provided for @exDominoFailPairTwice.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {a}–{b} is placed twice.'**
+  String exDominoFailPairTwice(Object a, Object b);
+
+  /// No description provided for @exDominoFailOdd.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the open cells with {cell} are walled in as a group of {count, plural, =1{1 cell} other{{count} cells}}, an odd number, which dominoes can\'t fill.'**
+  String exDominoFailOdd(Object cell, int count);
+
+  /// No description provided for @exDominoSupposeLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {link} were a domino.'**
+  String exDominoSupposeLine(Object link);
+
+  /// No description provided for @exDominoSupposeCross.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {link} were not a domino.'**
+  String exDominoSupposeCross(Object link);
+
+  /// No description provided for @exDominoRefutedLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{link} is not a domino: making it one leads to a contradiction.'**
+  String exDominoRefutedLine(Object link);
+
+  /// No description provided for @exDominoRefutedCross.
+  ///
+  /// In en, this message translates to:
+  /// **'{link} is a domino: leaving it out leads to a contradiction.'**
+  String exDominoRefutedCross(Object link);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -3958,4 +3958,127 @@ class AppLocalizationsPl extends AppLocalizations {
   String exSoloFailApart(Object a, Object b) {
     return 'Ale wtedy $a i $b są od siebie odcięte.';
   }
+
+  @override
+  String get dominoName => 'Domino';
+
+  @override
+  String get dominoTagline => 'Znajdź, gdzie leży każda kostka kompletu';
+
+  @override
+  String get dominoRules =>
+      '• Plansza to pełny komplet domina z zatartymi obrysami: każda para liczb, od 0–0 do najwyższego dubletu, jest na dokładnie jednej kostce.\n• Podziel planszę na kostki z dwóch sąsiednich pól tak, aby każda para wystąpiła raz.\n\nDotknij linii między dwoma polami, aby połączyć je w kostkę; dotknij jeszcze raz, aby postawić krzyżyk (twoja notatka „tu nie ma kostki”), i jeszcze raz, aby wyczyścić. Przeciągnij po polach, aby układać kostki po drodze. Nowa kostka zabiera swoje pola kostkom, które je miały.';
+
+  @override
+  String get tutDomino1 =>
+      'Plansza to komplet domina z zatartymi obrysami, a każda para liczb jest na dokładnie jednej kostce. Ten mały komplet ma 0–0, 0–1 i 1–1. Połącz dwa sąsiednie pola, dotykając linii między nimi, albo przeciągnij od jednego pola do drugiego.';
+
+  @override
+  String get tutDomino2 =>
+      'Para liczb, która stoi obok siebie tylko w jednym miejscu, musi tam być kostką. Zaznaczone 0 i 0 to jedyne dwa zera obok siebie: połącz je, a potem dokończ planszę.';
+
+  @override
+  String get tutDomino3 =>
+      'Każde pole należy do kostki. 2–2 już leży, więc zaznaczonemu 0 został tylko jeden sąsiad do pary. Połącz je, a potem dokończ planszę.';
+
+  @override
+  String get tutDomino4 =>
+      'Każda para jest użyta raz. Kostka 2–3 już leży, więc dwie inne 2–3 w górnym rogu nie mogą być kostkami: dotknij dwa razy linii między polami każdej z nich, aby postawić krzyżyk. Potem zobacz, jaki sąsiad został narożnej 2, i dokończ planszę.';
+
+  @override
+  String get tutDomino5 =>
+      'Teraz prawdziwa plansza. Zacznij od par, które mieszczą się tylko w jednym miejscu, i od pól, którym został jeden sąsiad. Skreślaj pozostałe miejsca każdej położonej pary.';
+
+  @override
+  String get tutDominoS1 =>
+      'Gdy każde miejsce, które zostało dla pary, obejmuje to samo pole, to pole należy do tej pary i nie może utworzyć pary z innym sąsiadem. Każde miejsce, które zostało dla 3–3, obejmuje zaznaczone pole: skreśl jego pozostałych sąsiadów, a potem dokończ planszę.';
+
+  @override
+  String get tutDominoS2 =>
+      'Gdy każda kostka, do której może należeć pole, to ta sama para, ta para leży przy tym polu, więc skreśl jej miejsca gdzie indziej. Zaznaczona 3 może być tylko w 1–3, tak czy inaczej: skreśl pozostałe 1–3.';
+
+  @override
+  String get tutDominoS3 =>
+      'Trudna plansza. Uważaj na otwarte pola zamknięte w grupie o nieparzystej liczbie pól: kostki jej nie wypełnią. Gdy utkniesz, spróbuj kostki i śledź skutki: jeśli dla pola lub pary nie zostaje miejsce albo pojawia się nieparzysta grupa, ta kostka jest błędna.';
+
+  @override
+  String exDominoOnlySpot(Object a, Object b, Object link) {
+    return '$a–$b mieści się tylko na $link, więc to jest kostka.';
+  }
+
+  @override
+  String exDominoOnlyWay(Object cell, Object link) {
+    return '$cell ma jednego sąsiada do pary, więc $link to kostka.';
+  }
+
+  @override
+  String exDominoCovered(Object cell, Object link) {
+    return '$cell jest już w kostce, więc $link nie jest kostką.';
+  }
+
+  @override
+  String exDominoUsed(Object a, Object b, Object placed, Object link) {
+    return '$a–$b leży na $placed, więc $link nie jest kostką.';
+  }
+
+  @override
+  String exDominoPairAtCell(Object a, Object b, Object cell, Object link) {
+    return 'Każde miejsce, które zostało dla $a–$b, obejmuje $cell, więc $cell należy do niej, a $link nie jest kostką.';
+  }
+
+  @override
+  String exDominoCellOnePair(Object a, Object b, Object cell, Object link) {
+    return '$cell może być tylko w $a–$b, więc ta kostka leży przy $cell, a $link nią nie jest.';
+  }
+
+  @override
+  String exDominoFailCell(Object cell) {
+    return 'Ale wtedy żadna kostka nie pokryje $cell.';
+  }
+
+  @override
+  String exDominoFailPair(Object a, Object b) {
+    return 'Ale wtedy dla $a–$b nie zostaje miejsce.';
+  }
+
+  @override
+  String exDominoFailCellTwice(Object cell) {
+    return 'Ale wtedy $cell jest w dwóch kostkach.';
+  }
+
+  @override
+  String exDominoFailPairTwice(Object a, Object b) {
+    return 'Ale wtedy $a–$b leży dwa razy.';
+  }
+
+  @override
+  String exDominoFailOdd(Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól',
+      one: '1 pola',
+    );
+    return 'Ale wtedy otwarte pola razem z $cell są zamknięte w grupie $_temp0, nieparzystej, której kostki nie wypełnią.';
+  }
+
+  @override
+  String exDominoSupposeLine(Object link) {
+    return 'Załóżmy, że $link to kostka.';
+  }
+
+  @override
+  String exDominoSupposeCross(Object link) {
+    return 'Załóżmy, że $link nie jest kostką.';
+  }
+
+  @override
+  String exDominoRefutedLine(Object link) {
+    return '$link nie jest kostką: inaczej dochodzi do sprzeczności.';
+  }
+
+  @override
+  String exDominoRefutedCross(Object link) {
+    return '$link to kostka: bez niej dochodzi do sprzeczności.';
+  }
 }

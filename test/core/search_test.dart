@@ -58,6 +58,7 @@ void main() {
     expect(alt('star battle'), ['kings']);
     expect(alt('sumplete'), ['tally']);
     expect(alt('hitori'), ['solo']);
+    expect(alt('dominosa'), ['domino']);
     expect(alt('nerdle'), ['formula']);
     expect(alt('train tracks'), ['rails']);
     expect(alt('minesweeper'), ['mines']);
