@@ -16,6 +16,7 @@ import '../puzzles/glimpse/glimpse_type.dart';
 import '../puzzles/hopper/hopper_type.dart';
 import '../puzzles/homeward/homeward_type.dart';
 import '../puzzles/hues/hues_type.dart';
+import '../puzzles/inlay/inlay_type.dart';
 import '../puzzles/islands/islands_type.dart';
 import '../puzzles/kings/kings_type.dart';
 import '../puzzles/labyrinth/labyrinth_type.dart';
@@ -74,6 +75,7 @@ const List<PuzzleType> puzzleTypes = [
   ShikakuType(),
   PlotsType(),
   OrbitsType(),
+  InlayType(),
   TrailType(),
   LinksType(),
   LabyrinthType(),
@@ -177,6 +179,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('islands', [IslandsType()]),
       PuzzleFamily('lamps', [LampsType()]),
       PuzzleFamily('orbits', [OrbitsType()]),
+      PuzzleFamily('inlay', [InlayType()]),
       PuzzleFamily('mines', [MinesType()]),
     ],
   ),

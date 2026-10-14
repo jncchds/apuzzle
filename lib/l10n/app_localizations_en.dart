@@ -152,6 +152,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tagPlace => 'place objects';
 
   @override
+  String get tagPieces => 'pieces, shapes, tiles, blocks, fit, pack, jigsaw';
+
+  @override
   String get tagConnect => 'connect, join, link, bridges';
 
   @override
@@ -3614,6 +3617,49 @@ class AppLocalizationsEn extends AppLocalizations {
   String exOrbitsRefuted(Object cell, Object star) {
     return '$cell can\'t belong to the star at $star: it leads to a contradiction.';
   }
+
+  @override
+  String get inlayName => 'Inlay';
+
+  @override
+  String get inlayTagline => 'Fit every piece into the shape';
+
+  @override
+  String get inlayRules =>
+      '• Fill the shape with all the pieces from the tray. Every cell of the shape gets covered, and pieces never overlap.\n• Any way that fits them all wins.\n• Pieces may be turned. On hard boards they may be flipped over too.\n\nDrag a piece onto the shape: it snaps to the cells. Drag a laid piece to move it, or off the shape to put it back in the tray. Tap a piece to turn it a quarter. On hard boards, Flip mirrors the piece you touched last (on a computer, right-click a piece).';
+
+  @override
+  String get inlayFlip => 'Flip';
+
+  @override
+  String get inlayNoRoom => 'No room to turn it here';
+
+  @override
+  String get tutInlay1 =>
+      'Drag each piece from the tray onto the shape. It snaps to the cells. Cover the whole shape with the pieces.';
+
+  @override
+  String get tutInlay2 =>
+      'Tap a piece to turn it a quarter, in the tray or on the board. Turn these pieces so they fit.';
+
+  @override
+  String get tutInlay3 =>
+      'The bar on the board leaves no room for the other pieces. Drag a laid piece to move it, or drag it off the shape to put it back in the tray.';
+
+  @override
+  String get tutInlay4 =>
+      'On hard boards a piece can also be flipped over. Touch a piece, then tap Flip (on a computer, right-click it). One piece here only fits flipped.';
+
+  @override
+  String get tutInlay5 => 'Now a real board. Any way that fits all the pieces wins.';
+
+  @override
+  String get tutInlayS1 =>
+      'Start where the pieces have the fewest ways in: the corners, narrow arms and small pockets. The cell at the tip of the arm has a single neighbour: find the piece that fits there, and lay it first.';
+
+  @override
+  String get tutInlayS2 =>
+      'Lay the biggest and most awkward pieces first, while there is still room for them; small pieces fill the last gaps. Watch for pockets: a gap smaller than every piece left means a piece must move. On hard boards some pieces only fit flipped.';
 
   @override
   String get skylineName => 'Skyline';

@@ -334,6 +334,12 @@ abstract class AppLocalizations {
   /// **'place objects'**
   String get tagPlace;
 
+  /// No description provided for @tagPieces.
+  ///
+  /// In en, this message translates to:
+  /// **'pieces, shapes, tiles, blocks, fit, pack, jigsaw'**
+  String get tagPieces;
+
   /// No description provided for @tagConnect.
   ///
   /// In en, this message translates to:
@@ -5031,6 +5037,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{cell} can\'t belong to the star at {star}: it leads to a contradiction.'**
   String exOrbitsRefuted(Object cell, Object star);
+
+  /// No description provided for @inlayName.
+  ///
+  /// In en, this message translates to:
+  /// **'Inlay'**
+  String get inlayName;
+
+  /// No description provided for @inlayTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Fit every piece into the shape'**
+  String get inlayTagline;
+
+  /// No description provided for @inlayRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Fill the shape with all the pieces from the tray. Every cell of the shape gets covered, and pieces never overlap.\n• Any way that fits them all wins.\n• Pieces may be turned. On hard boards they may be flipped over too.\n\nDrag a piece onto the shape: it snaps to the cells. Drag a laid piece to move it, or off the shape to put it back in the tray. Tap a piece to turn it a quarter. On hard boards, Flip mirrors the piece you touched last (on a computer, right-click a piece).'**
+  String get inlayRules;
+
+  /// No description provided for @inlayFlip.
+  ///
+  /// In en, this message translates to:
+  /// **'Flip'**
+  String get inlayFlip;
+
+  /// No description provided for @inlayNoRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'No room to turn it here'**
+  String get inlayNoRoom;
+
+  /// No description provided for @tutInlay1.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag each piece from the tray onto the shape. It snaps to the cells. Cover the whole shape with the pieces.'**
+  String get tutInlay1;
+
+  /// No description provided for @tutInlay2.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a piece to turn it a quarter, in the tray or on the board. Turn these pieces so they fit.'**
+  String get tutInlay2;
+
+  /// No description provided for @tutInlay3.
+  ///
+  /// In en, this message translates to:
+  /// **'The bar on the board leaves no room for the other pieces. Drag a laid piece to move it, or drag it off the shape to put it back in the tray.'**
+  String get tutInlay3;
+
+  /// No description provided for @tutInlay4.
+  ///
+  /// In en, this message translates to:
+  /// **'On hard boards a piece can also be flipped over. Touch a piece, then tap Flip (on a computer, right-click it). One piece here only fits flipped.'**
+  String get tutInlay4;
+
+  /// No description provided for @tutInlay5.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Any way that fits all the pieces wins.'**
+  String get tutInlay5;
+
+  /// No description provided for @tutInlayS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Start where the pieces have the fewest ways in: the corners, narrow arms and small pockets. The cell at the tip of the arm has a single neighbour: find the piece that fits there, and lay it first.'**
+  String get tutInlayS1;
+
+  /// No description provided for @tutInlayS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Lay the biggest and most awkward pieces first, while there is still room for them; small pieces fill the last gaps. Watch for pockets: a gap smaller than every piece left means a piece must move. On hard boards some pieces only fit flipped.'**
+  String get tutInlayS2;
 
   /// No description provided for @skylineName.
   ///

@@ -152,6 +152,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get tagPlace => 'Objekte platzieren';
 
   @override
+  String get tagPieces => 'Teile, Formen, Plättchen, Klötze, Legespiel';
+
+  @override
   String get tagConnect => 'verbinden, Brücken';
 
   @override
@@ -3621,6 +3624,49 @@ class AppLocalizationsDe extends AppLocalizations {
   String exOrbitsRefuted(Object cell, Object star) {
     return '$cell kann nicht zum Stern bei $star gehören: Das führt zu einem Widerspruch.';
   }
+
+  @override
+  String get inlayName => 'Intarsie';
+
+  @override
+  String get inlayTagline => 'Füge jedes Teil in die Form';
+
+  @override
+  String get inlayRules =>
+      '• Fülle die Form mit allen Teilen aus der Ablage. Jedes Feld der Form wird bedeckt, und Teile überlappen sich nie.\n• Jede Lösung, bei der alle Teile passen, gewinnt.\n• Teile dürfen gedreht werden. Auf schweren Gittern dürfen sie auch gespiegelt werden.\n\nZieh ein Teil auf die Form: Es rastet an den Feldern ein. Zieh ein gelegtes Teil, um es zu verschieben, oder aus der Form heraus, um es in die Ablage zurückzulegen. Tippe auf ein Teil, um es eine Vierteldrehung zu drehen. Auf schweren Gittern spiegelt „Spiegeln“ das zuletzt berührte Teil (am Computer: Rechtsklick auf ein Teil).';
+
+  @override
+  String get inlayFlip => 'Spiegeln';
+
+  @override
+  String get inlayNoRoom => 'Hier ist kein Platz zum Drehen';
+
+  @override
+  String get tutInlay1 =>
+      'Zieh jedes Teil aus der Ablage auf die Form. Es rastet an den Feldern ein. Bedecke die ganze Form mit den Teilen.';
+
+  @override
+  String get tutInlay2 =>
+      'Tippe auf ein Teil, um es eine Vierteldrehung zu drehen, in der Ablage oder auf dem Gitter. Dreh diese Teile so, dass sie passen.';
+
+  @override
+  String get tutInlay3 =>
+      'Der Balken auf dem Gitter lässt den anderen Teilen keinen Platz. Zieh ein gelegtes Teil, um es zu verschieben, oder aus der Form heraus, um es in die Ablage zurückzulegen.';
+
+  @override
+  String get tutInlay4 =>
+      'Auf schweren Gittern lässt sich ein Teil auch spiegeln. Berühre ein Teil und tippe dann auf „Spiegeln“ (am Computer: Rechtsklick darauf). Ein Teil passt hier nur gespiegelt.';
+
+  @override
+  String get tutInlay5 => 'Jetzt ein echtes Gitter. Jede Lösung, bei der alle Teile passen, gewinnt.';
+
+  @override
+  String get tutInlayS1 =>
+      'Beginne dort, wo die Teile am wenigsten Wege haben: in Ecken, schmalen Armen und kleinen Nischen. Das Feld an der Spitze des Arms hat nur einen Nachbarn: Finde das Teil, das dort passt, und lege es zuerst.';
+
+  @override
+  String get tutInlayS2 =>
+      'Lege die größten und sperrigsten Teile zuerst, solange noch Platz für sie ist; kleine Teile füllen die letzten Lücken. Achte auf Nischen: Eine Lücke, die kleiner ist als jedes übrige Teil, heißt, dass ein Teil umziehen muss. Auf schweren Gittern passen manche Teile nur gespiegelt.';
 
   @override
   String get skylineName => 'Skyline';

@@ -154,6 +154,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get tagPlace => 'rozmieść obiekty';
 
   @override
+  String get tagPieces => 'elementy, kształty, klocki, kafelki, dopasuj, układanka';
+
+  @override
   String get tagConnect => 'połącz, łącz, mosty';
 
   @override
@@ -3672,6 +3675,49 @@ class AppLocalizationsPl extends AppLocalizations {
   String exOrbitsRefuted(Object cell, Object star) {
     return '$cell nie może należeć do gwiazdy na $star: to prowadzi do sprzeczności.';
   }
+
+  @override
+  String get inlayName => 'Intarsja';
+
+  @override
+  String get inlayTagline => 'Dopasuj każdy element do kształtu';
+
+  @override
+  String get inlayRules =>
+      '• Wypełnij kształt wszystkimi elementami z tacki. Każde pole kształtu musi być zakryte, a elementy nie mogą na siebie nachodzić.\n• Wygrywa każdy sposób, w jaki mieszczą się wszystkie elementy.\n• Elementy można obracać. Na trudnych planszach można je też odwracać.\n\nPrzeciągnij element na kształt: przyciągnie się do pól. Przeciągnij ułożony element, by go przesunąć, albo poza kształt, by odłożyć go na tackę. Dotknij elementu, by obrócić go o ćwierć obrotu. Na trudnych planszach „Odwróć” robi lustrzane odbicie elementu, którego dotknąłeś ostatnio (na komputerze kliknij element prawym przyciskiem).';
+
+  @override
+  String get inlayFlip => 'Odwróć';
+
+  @override
+  String get inlayNoRoom => 'Brak miejsca, by go tu obrócić';
+
+  @override
+  String get tutInlay1 =>
+      'Przeciągnij każdy element z tacki na kształt. Przyciągnie się do pól. Zakryj elementami cały kształt.';
+
+  @override
+  String get tutInlay2 =>
+      'Dotknij elementu, by obrócić go o ćwierć obrotu, na tacce albo na planszy. Obróć te elementy tak, żeby się zmieściły.';
+
+  @override
+  String get tutInlay3 =>
+      'Belka na planszy nie zostawia miejsca innym elementom. Przeciągnij ułożony element, by go przesunąć, albo poza kształt, by odłożyć go na tackę.';
+
+  @override
+  String get tutInlay4 =>
+      'Na trudnych planszach element można też odwrócić. Dotknij elementu, a potem „Odwróć” (na komputerze kliknij go prawym przyciskiem). Jeden element mieści się tu tylko odwrócony.';
+
+  @override
+  String get tutInlay5 => 'Teraz prawdziwa plansza. Wygrywa każdy sposób, w jaki mieszczą się wszystkie elementy.';
+
+  @override
+  String get tutInlayS1 =>
+      'Zacznij tam, gdzie elementy mają najmniej dróg: w rogach, wąskich wypustkach i małych zakamarkach. Pole na końcu wypustki ma tylko jednego sąsiada: znajdź element, który się tam mieści, i połóż go najpierw.';
+
+  @override
+  String get tutInlayS2 =>
+      'Najpierw układaj największe i najbardziej nieporęczne elementy, póki jest na nie miejsce; małe wypełnią ostatnie luki. Uważaj na zakamarki: luka mniejsza niż każdy pozostały element oznacza, że któryś element trzeba przesunąć. Na trudnych planszach niektóre elementy mieszczą się tylko odwrócone.';
 
   @override
   String get skylineName => 'Panorama';
