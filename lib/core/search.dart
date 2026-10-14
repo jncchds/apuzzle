@@ -23,6 +23,7 @@ enum GameTag {
   binary,
   maze,
   ships,
+  water,
 }
 
 String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
@@ -44,6 +45,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
   GameTag.binary => l.tagBinary,
   GameTag.maze => l.tagMaze,
   GameTag.ships => l.tagShips,
+  GameTag.water => l.tagWater,
 };
 
 /// Tags of every type, by id.
@@ -77,6 +79,7 @@ const Map<String, List<GameTag>> gameTags = {
   'lits': [GameTag.shade, GameTag.regions],
   'camp': [GameTag.place],
   'fleet': [GameTag.place, GameTag.ships],
+  'basins': [GameTag.water, GameTag.regions],
   'islands': [GameTag.shade],
   'lamps': [GameTag.place],
   'fence': [GameTag.loop],
@@ -136,6 +139,7 @@ const Map<String, List<String>> gameAliases = {
     'Statki',
     'Schiffe versenken',
   ],
+  'basins': ['Aquarium', 'Акваріум', 'Аквариум', 'Akwarium'],
   'islands': ['Nurikabe'],
   'lamps': ['Light Up', 'Akari'],
   'fence': ['Slitherlink', 'Loopy', 'Fences'],

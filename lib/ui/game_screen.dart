@@ -345,6 +345,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
               const CircularProgressIndicator(),
               const SizedBox(height: 16),
               Text(l.generating),
+              const _SlowNote(),
             ],
           ),
   );
@@ -549,4 +550,44 @@ class _Toolbar extends StatelessWidget {
       child: row,
     );
   }
+}
+
+/// A line under the spinner, shown once generating takes a moment: harder
+/// boards can take a few seconds.
+class _SlowNote extends StatefulWidget {
+  const _SlowNote();
+
+  @override
+  State<_SlowNote> createState() => _SlowNoteState();
+}
+
+class _SlowNoteState extends State<_SlowNote> {
+  bool _shown = false;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer(const Duration(milliseconds: 1200), () => setState(() => _shown = true));
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AnimatedOpacity(
+    opacity: _shown ? 1 : 0,
+    duration: const Duration(milliseconds: 300),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Text(
+        context.l10n.generatingSlow,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+      ),
+    ),
+  );
 }

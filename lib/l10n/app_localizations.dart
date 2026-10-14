@@ -742,6 +742,12 @@ abstract class AppLocalizations {
   /// **'Generating puzzle…'**
   String get generating;
 
+  /// No description provided for @generatingSlow.
+  ///
+  /// In en, this message translates to:
+  /// **'Good boards can take a few seconds to find.'**
+  String get generatingSlow;
+
   /// No description provided for @tapToCycle.
   ///
   /// In en, this message translates to:
@@ -5787,6 +5793,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then the ship cell {a} can\'t belong to any missing ship.'**
   String exFleetFailStray(Object a);
+
+  /// No description provided for @tagWater.
+  ///
+  /// In en, this message translates to:
+  /// **'water, fill, liquid, pour, level, tank, pool, flood'**
+  String get tagWater;
+
+  /// No description provided for @basinsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Basins'**
+  String get basinsName;
+
+  /// No description provided for @basinsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill the basins with level water to match the counts'**
+  String get basinsTagline;
+
+  /// No description provided for @basinsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• The grid is cut into basins. Fill some cells with water.\n• Water settles: in every basin it fills from the bottom up to one level, the same across the whole basin. Every cell of the basin at that height or lower holds water, every cell above it stays dry. A basin may also stay empty or fill to the top.\n• The numbers outside the grid tell how many water cells each row and column holds.\n\nTap a cell to cycle: water → dry (your note) → empty. Right-click cycles back. Slide across cells to fill them all in one go. A long press lets the water settle: it fills every cell of a basin below your water, and marks dry the cells above your dry marks and in rows and columns that have all their water. Dry marks are optional: the puzzle is done once all the water is in place.'**
+  String get basinsRules;
+
+  /// No description provided for @tutBasins1.
+  ///
+  /// In en, this message translates to:
+  /// **'The grid is cut into basins, and water settles in each one from the bottom up. The numbers outside tell how many water cells each row and column holds. Column A holds 2, so its basin fills its two lowest cells. Tap a cell to fill it with water, tap again to mark it dry.'**
+  String get tutBasins1;
+
+  /// No description provided for @tutBasins2.
+  ///
+  /// In en, this message translates to:
+  /// **'Water lies level across the whole basin: when one cell of a basin holds water, so does every cell of that basin as low or lower. Row 2 needs just one water cell, so the wide basin can\'t reach that high. Finish the board.'**
+  String get tutBasins2;
+
+  /// No description provided for @tutBasins3.
+  ///
+  /// In en, this message translates to:
+  /// **'Think ahead: water in a cell fills everything below it in its basin. Once the bottom row is full, column A needs just one more water cell, but water in its top cell would fill two. So the top cell stays dry. Finish the board.'**
+  String get tutBasins3;
+
+  /// No description provided for @tutBasins4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with rows and columns that are empty or full, let the water settle, and before you fill a cell, count how much water it brings along.'**
+  String get tutBasins4;
+
+  /// No description provided for @tutBasinsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Water in a row comes in pieces: the cells of one basin in that row fill together. When only some sets of pieces add up to the row\'s count, a piece that is in all of them holds water, and a piece in none of them stays dry.'**
+  String get tutBasinsS1;
+
+  /// No description provided for @tutBasinsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Try every water level of a basin, from empty to full, against the counts of the rows and columns it touches. Cells that come out the same in every level that fits are settled.'**
+  String get tutBasinsS2;
+
+  /// No description provided for @tutBasinsS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board: some counts are hidden. When stuck, suppose a cell holds water and let it settle: if a row or column overflows or can\'t reach its count, that cell stays dry.'**
+  String get tutBasinsS3;
+
+  /// No description provided for @exBasinsSupposeWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} held water.'**
+  String exBasinsSupposeWater(Object cell);
+
+  /// No description provided for @exBasinsSupposeDry.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} stayed dry.'**
+  String exBasinsSupposeDry(Object cell);
+
+  /// No description provided for @exBasinsRefutedWater.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays dry: water there leads to a contradiction.'**
+  String exBasinsRefutedWater(Object cell);
+
+  /// No description provided for @exBasinsRefutedDry.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds water: leaving it dry leads to a contradiction.'**
+  String exBasinsRefutedDry(Object cell);
+
+  /// No description provided for @exBasinsWaterBelow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds water: the water at {other} fills its basin up to that height.'**
+  String exBasinsWaterBelow(Object cell, Object other);
+
+  /// No description provided for @exBasinsDryAbove.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays dry: {other} in the same basin is dry, so the water stays lower.'**
+  String exBasinsDryAbove(Object cell, Object other);
+
+  /// No description provided for @exBasinsRowDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays dry: row {row} already has {count, plural, =1{its water cell} other{all its {count} water cells}}.'**
+  String exBasinsRowDone(Object cell, Object row, int count);
+
+  /// No description provided for @exBasinsColDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays dry: column {col} already has {count, plural, =1{its water cell} other{all its {count} water cells}}.'**
+  String exBasinsColDone(Object cell, Object col, int count);
+
+  /// No description provided for @exBasinsRowNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds water: row {row} needs {count, plural, =1{a water cell} other{{count} water cells}}, and only that many cells are left.'**
+  String exBasinsRowNeed(Object cell, Object row, int count);
+
+  /// No description provided for @exBasinsColNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds water: column {col} needs {count, plural, =1{a water cell} other{{count} water cells}}, and only that many cells are left.'**
+  String exBasinsColNeed(Object cell, Object col, int count);
+
+  /// No description provided for @exBasinsTooMuchRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays dry: water there would fill {count, plural, =1{a cell} other{{count} cells}} of row {row}, which {need, plural, =0{already has all its water} =1{needs only one more} other{needs only {need} more}}.'**
+  String exBasinsTooMuchRow(Object cell, Object row, int count, int need);
+
+  /// No description provided for @exBasinsTooMuchCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays dry: water there would fill {count, plural, =1{a cell} other{{count} cells}} of column {col}, which {need, plural, =0{already has all its water} =1{needs only one more} other{needs only {need} more}}.'**
+  String exBasinsTooMuchCol(Object cell, Object col, int count, int need);
+
+  /// No description provided for @exBasinsTooLittleRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds water: dry, it would keep {count, plural, =1{a cell} other{{count} cells}} of row {row} dry, and the row could no longer reach its count.'**
+  String exBasinsTooLittleRow(Object cell, Object row, int count);
+
+  /// No description provided for @exBasinsTooLittleCol.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds water: dry, it would keep {count, plural, =1{a cell} other{{count} cells}} of column {col} dry, and the column could no longer reach its count.'**
+  String exBasinsTooLittleCol(Object cell, Object col, int count);
+
+  /// No description provided for @exBasinsWaysWater.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds water: every way to make {count} in row {row} from its basins\' pieces needs this one.'**
+  String exBasinsWaysWater(Object cell, Object row, int count);
+
+  /// No description provided for @exBasinsWaysDry.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays dry: no way to make {count} in row {row} from its basins\' pieces uses this one.'**
+  String exBasinsWaysDry(Object cell, Object row, int count);
+
+  /// No description provided for @exBasinsLevelsWater.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds water: every water level of its basin that leaves it dry breaks the count of a row or column.'**
+  String exBasinsLevelsWater(Object cell);
+
+  /// No description provided for @exBasinsLevelsDry.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays dry: every water level of its basin that reaches it breaks the count of a row or column.'**
+  String exBasinsLevelsDry(Object cell);
+
+  /// No description provided for @exBasinsFailLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {wet} holds water while {dry}, as low or lower in the same basin, stays dry.'**
+  String exBasinsFailLevel(Object wet, Object dry);
+
+  /// No description provided for @exBasinsFailRowMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} gets more than {count} water cells.'**
+  String exBasinsFailRowMany(Object row, int count);
+
+  /// No description provided for @exBasinsFailColMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} gets more than {count} water cells.'**
+  String exBasinsFailColMany(Object col, int count);
+
+  /// No description provided for @exBasinsFailRowFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} can no longer get {count} water cells.'**
+  String exBasinsFailRowFew(Object row, int count);
+
+  /// No description provided for @exBasinsFailColFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} can no longer get {count} water cells.'**
+  String exBasinsFailColFew(Object col, int count);
+
+  /// No description provided for @exBasinsFailWays.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no set of the basins\' pieces in row {row} adds up to {count}.'**
+  String exBasinsFailWays(Object row, int count);
+
+  /// No description provided for @exBasinsFailLevels.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no water level of the basin at {cell} fits the counts.'**
+  String exBasinsFailLevels(Object cell);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

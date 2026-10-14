@@ -371,6 +371,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get generating => 'Tworzenie łamigłówki…';
 
   @override
+  String get generatingSlow => 'Znalezienie dobrej planszy może potrwać kilka sekund.';
+
+  @override
   String get tapToCycle => 'Przełączanie dotknięciem';
 
   @override
@@ -4318,5 +4321,245 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String exFleetFailStray(Object a) {
     return 'Ale wtedy pole statku $a nie może należeć do żadnego brakującego statku.';
+  }
+
+  @override
+  String get tagWater => 'woda, napełnić, ciecz, nalać, poziom, zbiornik, basen';
+
+  @override
+  String get basinsName => 'Baseny';
+
+  @override
+  String get basinsTagline => 'Napełnij baseny równą wodą zgodnie z liczbami';
+
+  @override
+  String get basinsRules =>
+      '• Siatka jest podzielona na baseny. Napełnij niektóre pola wodą.\n• Woda opada: w każdym basenie wypełnia go od dna do jednego poziomu, takiego samego w całym basenie. Każde pole basenu na tej wysokości lub niżej ma wodę, każde wyżej zostaje suche. Basen może też zostać pusty albo wypełnić się po brzegi.\n• Liczby na zewnątrz mówią, ile pól z wodą jest w każdym wierszu i kolumnie.\n\nDotknij pola, by przełączać: woda → suche (twoja notatka) → puste. Prawy klik przełącza wstecz. Przeciągnij po polach, by napełnić je wszystkie naraz. Długie przytrzymanie pozwala wodzie opaść: wypełnia każde pole basenu poniżej twojej wody i oznacza jako suche pola nad twoimi suchymi znacznikami oraz w wierszach i kolumnach, które mają już całą wodę. Suche znaczniki są opcjonalne: zagadka jest rozwiązana, gdy cała woda jest na miejscu.';
+
+  @override
+  String get tutBasins1 =>
+      'Siatka jest podzielona na baseny, a woda w każdym opada od dna w górę. Liczby na zewnątrz mówią, ile pól z wodą jest w każdym wierszu i kolumnie. Kolumna A ma 2, więc jej basen wypełnia dwa najniższe pola. Dotknij pola, by nalać do niego wody, jeszcze raz – by oznaczyć je jako suche.';
+
+  @override
+  String get tutBasins2 =>
+      'Woda leży równo w całym basenie: gdy jedno pole basenu ma wodę, ma ją też każde jego pole na tej samej wysokości lub niżej. Wiersz 2 potrzebuje tylko jednego pola z wodą, więc szeroki basen nie może sięgać tak wysoko. Dokończ planszę.';
+
+  @override
+  String get tutBasins3 =>
+      'Myśl naprzód: woda w polu wypełnia wszystko pod nim w jego basenie. Gdy dolny wiersz jest pełny, kolumna A potrzebuje jeszcze tylko jednego pola z wodą, a woda w jej górnym polu wypełniłaby dwa. Więc górne pole zostaje suche. Dokończ planszę.';
+
+  @override
+  String get tutBasins4 =>
+      'Teraz prawdziwa plansza. Zacznij od pustych lub pełnych wierszy i kolumn, pozwól wodzie opaść, a zanim napełnisz pole, policz, ile wody pociągnie za sobą.';
+
+  @override
+  String get tutBasinsS1 =>
+      'Woda w wierszu przychodzi kawałkami: pola jednego basenu w tym wierszu napełniają się razem. Gdy tylko niektóre zestawy kawałków sumują się do liczby wiersza, kawałek obecny we wszystkich ma wodę, a kawałek, którego nie ma w żadnym, zostaje suchy.';
+
+  @override
+  String get tutBasinsS2 =>
+      'Wypróbuj każdy poziom wody w basenie, od pustego do pełnego, z liczbami wierszy i kolumn, których dotyka. Pola, które wychodzą tak samo w każdym pasującym poziomie, są ustalone.';
+
+  @override
+  String get tutBasinsS3 =>
+      'Trudna plansza: niektóre liczby są ukryte. Gdy utkniesz, załóż, że pole ma wodę, i pozwól jej opaść: jeśli wiersz lub kolumna się przepełni albo nie osiągnie swojej liczby, to pole zostaje suche.';
+
+  @override
+  String exBasinsSupposeWater(Object cell) {
+    return 'Załóżmy, że na $cell jest woda.';
+  }
+
+  @override
+  String exBasinsSupposeDry(Object cell) {
+    return 'Załóżmy, że $cell jest suche.';
+  }
+
+  @override
+  String exBasinsRefutedWater(Object cell) {
+    return '$cell jest suche: woda tam prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exBasinsRefutedDry(Object cell) {
+    return 'Na $cell jest woda: zostawienie go suchym prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exBasinsWaterBelow(Object cell, Object other) {
+    return 'Na $cell jest woda: woda na $other wypełnia basen do tej wysokości.';
+  }
+
+  @override
+  String exBasinsDryAbove(Object cell, Object other) {
+    return '$cell jest suche: $other w tym samym basenie jest suche, więc woda jest niżej.';
+  }
+
+  @override
+  String exBasinsRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'wszystkie $count pola z wodą',
+      many: 'wszystkie $count pól z wodą',
+      few: 'wszystkie $count pola z wodą',
+      one: 'swoje pole z wodą',
+    );
+    return '$cell jest suche: wiersz $row ma już $_temp0.';
+  }
+
+  @override
+  String exBasinsColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'wszystkie $count pola z wodą',
+      many: 'wszystkie $count pól z wodą',
+      few: 'wszystkie $count pola z wodą',
+      one: 'swoje pole z wodą',
+    );
+    return '$cell jest suche: kolumna $col ma już $_temp0.';
+  }
+
+  @override
+  String exBasinsRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól z wodą',
+      one: 'jednego pola z wodą',
+    );
+    return 'Na $cell jest woda: wiersz $row potrzebuje $_temp0, a tylko tyle pól zostało.';
+  }
+
+  @override
+  String exBasinsColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól z wodą',
+      one: 'jednego pola z wodą',
+    );
+    return 'Na $cell jest woda: kolumna $col potrzebuje $_temp0, a tylko tyle pól zostało.';
+  }
+
+  @override
+  String exBasinsTooMuchRow(Object cell, Object row, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: 'jedno pole',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'potrzebuje jeszcze tylko $need',
+      one: 'potrzebuje jeszcze tylko jednego',
+      zero: 'ma już całą wodę',
+    );
+    return '$cell jest suche: woda tam wypełniłaby $_temp0 wiersza $row, który $_temp1.';
+  }
+
+  @override
+  String exBasinsTooMuchCol(Object cell, Object col, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: 'jedno pole',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'potrzebuje jeszcze tylko $need',
+      one: 'potrzebuje jeszcze tylko jednego',
+      zero: 'ma już całą wodę',
+    );
+    return '$cell jest suche: woda tam wypełniłaby $_temp0 kolumny $col, która $_temp1.';
+  }
+
+  @override
+  String exBasinsTooLittleRow(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: 'jedno pole',
+    );
+    return 'Na $cell jest woda: suche zostawiłoby suchymi $_temp0 wiersza $row, a wiersz nie osiągnąłby już swojej liczby.';
+  }
+
+  @override
+  String exBasinsTooLittleCol(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: 'jedno pole',
+    );
+    return 'Na $cell jest woda: suche zostawiłoby suchymi $_temp0 kolumny $col, a kolumna nie osiągnęłaby już swojej liczby.';
+  }
+
+  @override
+  String exBasinsWaysWater(Object cell, Object row, int count) {
+    return 'Na $cell jest woda: każdy sposób, by złożyć $count w wierszu $row z kawałków jego basenów, wymaga tego kawałka.';
+  }
+
+  @override
+  String exBasinsWaysDry(Object cell, Object row, int count) {
+    return '$cell jest suche: żaden sposób, by złożyć $count w wierszu $row z kawałków jego basenów, nie używa tego kawałka.';
+  }
+
+  @override
+  String exBasinsLevelsWater(Object cell) {
+    return 'Na $cell jest woda: każdy poziom wody w jego basenie, przy którym jest suche, łamie liczbę wiersza lub kolumny.';
+  }
+
+  @override
+  String exBasinsLevelsDry(Object cell) {
+    return '$cell jest suche: każdy poziom wody w jego basenie, który do niego sięga, łamie liczbę wiersza lub kolumny.';
+  }
+
+  @override
+  String exBasinsFailLevel(Object wet, Object dry) {
+    return 'Ale wtedy $wet ma wodę, a $dry, na tej samej wysokości lub niżej w tym samym basenie, jest suche.';
+  }
+
+  @override
+  String exBasinsFailRowMany(Object row, int count) {
+    return 'Ale wtedy wiersz $row ma więcej niż $count pól z wodą.';
+  }
+
+  @override
+  String exBasinsFailColMany(Object col, int count) {
+    return 'Ale wtedy kolumna $col ma więcej niż $count pól z wodą.';
+  }
+
+  @override
+  String exBasinsFailRowFew(Object row, int count) {
+    return 'Ale wtedy wiersz $row nie zbierze już $count pól z wodą.';
+  }
+
+  @override
+  String exBasinsFailColFew(Object col, int count) {
+    return 'Ale wtedy kolumna $col nie zbierze już $count pól z wodą.';
+  }
+
+  @override
+  String exBasinsFailWays(Object row, int count) {
+    return 'Ale wtedy żaden zestaw kawałków basenów w wierszu $row nie sumuje się do $count.';
+  }
+
+  @override
+  String exBasinsFailLevels(Object cell) {
+    return 'Ale wtedy żaden poziom wody w basenie z $cell nie pasuje do liczb.';
   }
 }

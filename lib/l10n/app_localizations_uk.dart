@@ -371,6 +371,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get generating => 'Створюємо головоломку…';
 
   @override
+  String get generatingSlow => 'Пошук гарного поля може тривати кілька секунд.';
+
+  @override
   String get tapToCycle => 'Перебір дотиком';
 
   @override
@@ -4343,5 +4346,253 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String exFleetFailStray(Object a) {
     return 'Але тоді клітинка корабля $a не може належати жодному кораблю, якого бракує.';
+  }
+
+  @override
+  String get tagWater => 'вода, наповнити, рідина, налити, рівень, резервуар, басейн, бак';
+
+  @override
+  String get basinsName => 'Басейни';
+
+  @override
+  String get basinsTagline => 'Наповніть басейни рівною водою за числами по краях';
+
+  @override
+  String get basinsRules =>
+      '• Сітку поділено на басейни. Наповніть деякі клітинки водою.\n• Вода осідає: у кожному басейні вона заповнює його знизу до одного рівня, однакового по всьому басейну. Кожна клітинка басейну на цій висоті чи нижче — з водою, кожна вище — суха. Басейн може лишитися порожнім або наповнитися доверху.\n• Числа ззовні показують, скільки клітинок з водою в кожному рядку й стовпці.\n\nТоркніться клітинки, щоб перебрати: вода → суха (ваша позначка) → порожня. Правий клік перебирає назад. Проведіть по клітинках, щоб наповнити їх усі разом. Довге натискання дає воді осісти: заповнює кожну клітинку басейну нижче вашої води й позначає сухими клітинки над вашими сухими позначками та в рядках і стовпцях, де вже вся вода. Сухі позначки необов\'язкові: головоломку розв\'язано, щойно вся вода на місці.';
+
+  @override
+  String get tutBasins1 =>
+      'Сітку поділено на басейни, і вода в кожному осідає знизу вгору. Числа ззовні показують, скільки клітинок з водою в кожному рядку й стовпці. У стовпці A їх 2, тож його басейн заповнює дві найнижчі клітинки. Торкніться клітинки, щоб налити в неї воду, ще раз — щоб позначити її сухою.';
+
+  @override
+  String get tutBasins2 =>
+      'Вода лежить рівно по всьому басейну: якщо в одній клітинці басейну є вода, то вона є й у кожній його клітинці на тій самій висоті чи нижче. Рядку 2 потрібна лише одна клітинка з водою, тож широкий басейн не може сягнути так високо. Завершіть поле.';
+
+  @override
+  String get tutBasins3 =>
+      'Думайте наперед: вода в клітинці заповнює все під нею в її басейні. Коли нижній рядок заповнено, стовпцю A потрібна ще лише одна клітинка з водою, а вода у верхній клітинці заповнила б дві. Тож верхня клітинка лишається сухою. Завершіть поле.';
+
+  @override
+  String get tutBasins4 =>
+      'Тепер справжнє поле. Почніть з порожніх або повних рядків і стовпців, дайте воді осісти, а перш ніж наповнити клітинку, порахуйте, скільки води вона потягне за собою.';
+
+  @override
+  String get tutBasinsS1 =>
+      'Вода в рядку йде шматками: клітинки одного басейну в цьому рядку наповнюються разом. Коли до числа рядка дають у сумі лише деякі набори шматків, шматок, що є в усіх них, — з водою, а шматок, якого немає в жодному, — сухий.';
+
+  @override
+  String get tutBasinsS2 =>
+      'Спробуйте кожен рівень води в басейні, від порожнього до повного, проти чисел рядків і стовпців, яких він торкається. Клітинки, однакові в кожному рівні, що підходить, визначено.';
+
+  @override
+  String get tutBasinsS3 =>
+      'Складне поле: деякі числа приховано. Коли застрягли, припустіть, що в клітинці є вода, і дайте їй осісти: якщо рядок чи стовпець переповниться або не досягне свого числа, ця клітинка суха.';
+
+  @override
+  String exBasinsSupposeWater(Object cell) {
+    return 'Припустімо, що в $cell є вода.';
+  }
+
+  @override
+  String exBasinsSupposeDry(Object cell) {
+    return 'Припустімо, що $cell суха.';
+  }
+
+  @override
+  String exBasinsRefutedWater(Object cell) {
+    return '$cell суха: вода там веде до суперечності.';
+  }
+
+  @override
+  String exBasinsRefutedDry(Object cell) {
+    return 'У $cell вода: якщо лишити її сухою, буде суперечність.';
+  }
+
+  @override
+  String exBasinsWaterBelow(Object cell, Object other) {
+    return 'У $cell вода: вода в $other заповнює басейн до цієї висоти.';
+  }
+
+  @override
+  String exBasinsDryAbove(Object cell, Object other) {
+    return '$cell суха: $other в тому самому басейні суха, тож вода нижче.';
+  }
+
+  @override
+  String exBasinsRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'є всі $count клітинки з водою',
+      many: 'є всі $count клітинок з водою',
+      few: 'є всі $count клітинки з водою',
+      one: 'є його клітинка з водою',
+    );
+    return '$cell суха: у рядку $row уже $_temp0.';
+  }
+
+  @override
+  String exBasinsColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'є всі $count клітинки з водою',
+      many: 'є всі $count клітинок з водою',
+      few: 'є всі $count клітинки з водою',
+      one: 'є його клітинка з водою',
+    );
+    return '$cell суха: у стовпці $col уже $_temp0.';
+  }
+
+  @override
+  String exBasinsRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки з водою',
+      many: '$count клітинок з водою',
+      few: '$count клітинки з водою',
+      one: 'одну клітинку з водою',
+    );
+    return 'У $cell вода: рядку $row потрібно $_temp0, і стільки клітинок і лишилося.';
+  }
+
+  @override
+  String exBasinsColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки з водою',
+      many: '$count клітинок з водою',
+      few: '$count клітинки з водою',
+      one: 'одну клітинку з водою',
+    );
+    return 'У $cell вода: стовпцю $col потрібно $_temp0, і стільки клітинок і лишилося.';
+  }
+
+  @override
+  String exBasinsTooMuchRow(Object cell, Object row, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинки',
+      one: 'одну клітинку',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'йому потрібно ще лише $need',
+      many: 'йому потрібно ще лише $need',
+      few: 'йому потрібно ще лише $need',
+      one: 'йому потрібна ще лише одна',
+      zero: 'він уже має всю свою воду',
+    );
+    return '$cell суха: вода там заповнила б $_temp0 рядка $row, а $_temp1.';
+  }
+
+  @override
+  String exBasinsTooMuchCol(Object cell, Object col, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинки',
+      one: 'одну клітинку',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'йому потрібно ще лише $need',
+      many: 'йому потрібно ще лише $need',
+      few: 'йому потрібно ще лише $need',
+      one: 'йому потрібна ще лише одна',
+      zero: 'він уже має всю свою воду',
+    );
+    return '$cell суха: вода там заповнила б $_temp0 стовпця $col, а $_temp1.';
+  }
+
+  @override
+  String exBasinsTooLittleRow(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинки',
+      one: 'одну клітинку',
+    );
+    return 'У $cell вода: суха, вона лишила б сухими $_temp0 рядка $row, і рядок уже не досяг би свого числа.';
+  }
+
+  @override
+  String exBasinsTooLittleCol(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинки',
+      one: 'одну клітинку',
+    );
+    return 'У $cell вода: суха, вона лишила б сухими $_temp0 стовпця $col, і стовпець уже не досяг би свого числа.';
+  }
+
+  @override
+  String exBasinsWaysWater(Object cell, Object row, int count) {
+    return 'У $cell вода: кожен спосіб скласти $count у рядку $row зі шматків його басейнів потребує цього шматка.';
+  }
+
+  @override
+  String exBasinsWaysDry(Object cell, Object row, int count) {
+    return '$cell суха: жоден спосіб скласти $count у рядку $row зі шматків його басейнів не використовує цей шматок.';
+  }
+
+  @override
+  String exBasinsLevelsWater(Object cell) {
+    return 'У $cell вода: кожен рівень води в її басейні, за якого вона суха, порушує число рядка чи стовпця.';
+  }
+
+  @override
+  String exBasinsLevelsDry(Object cell) {
+    return '$cell суха: кожен рівень води в її басейні, що сягає її, порушує число рядка чи стовпця.';
+  }
+
+  @override
+  String exBasinsFailLevel(Object wet, Object dry) {
+    return 'Але тоді в $wet вода, а $dry, на тій самій висоті чи нижче в тому самому басейні, суха.';
+  }
+
+  @override
+  String exBasinsFailRowMany(Object row, int count) {
+    return 'Але тоді в рядку $row більше ніж $count клітинок з водою.';
+  }
+
+  @override
+  String exBasinsFailColMany(Object col, int count) {
+    return 'Але тоді в стовпці $col більше ніж $count клітинок з водою.';
+  }
+
+  @override
+  String exBasinsFailRowFew(Object row, int count) {
+    return 'Але тоді рядок $row уже не набере $count клітинок з водою.';
+  }
+
+  @override
+  String exBasinsFailColFew(Object col, int count) {
+    return 'Але тоді стовпець $col уже не набере $count клітинок з водою.';
+  }
+
+  @override
+  String exBasinsFailWays(Object row, int count) {
+    return 'Але тоді жоден набір шматків басейнів у рядку $row не дає в сумі $count.';
+  }
+
+  @override
+  String exBasinsFailLevels(Object cell) {
+    return 'Але тоді жоден рівень води в басейні з $cell не підходить до чисел.';
   }
 }

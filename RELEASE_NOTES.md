@@ -2,6 +2,8 @@
 
 ## 0.10.0 - 2026-10-14
 - New game: Fleet. A fleet of ships hides in the grid: find every ship from the counts outside, which tell how many ship cells each row and column holds. Ships are straight and never touch, not even diagonally, and the pieces shown from the start tell where their ships go on. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-15
+- New game: Basins. The grid is cut into basins: fill them with water so that every row and column holds the count beside it. Water settles from the bottom up, level across the whole basin. A long press lets the water you placed settle. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-15
+- When a new board takes a moment to find, the loading screen says so
 
 ## 0.9.0 - 2026-10-14
 - New home screen: search at the top, then your games (the ones you pinned and played last), the daily challenge and a tile for each category. A category lists its games, and games that are variants of one idea share a family page (Mosaic and Blend are now the Flood family)

@@ -61,6 +61,7 @@ void main() {
     expect(alt('dominosa'), ['domino']);
     expect(alt('bimaru'), ['fleet']);
     expect(alt('battleships'), ['fleet']);
+    expect(alt('aquarium'), ['basins']);
     expect(alt('nerdle'), ['formula']);
     expect(alt('train tracks'), ['rails']);
     expect(alt('minesweeper'), ['mines']);

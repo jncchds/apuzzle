@@ -369,6 +369,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get generating => 'Generating puzzle…';
 
   @override
+  String get generatingSlow => 'Good boards can take a few seconds to find.';
+
+  @override
   String get tapToCycle => 'Tap to cycle';
 
   @override
@@ -4252,5 +4255,233 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String exFleetFailStray(Object a) {
     return 'But then the ship cell $a can\'t belong to any missing ship.';
+  }
+
+  @override
+  String get tagWater => 'water, fill, liquid, pour, level, tank, pool, flood';
+
+  @override
+  String get basinsName => 'Basins';
+
+  @override
+  String get basinsTagline => 'Fill the basins with level water to match the counts';
+
+  @override
+  String get basinsRules =>
+      '• The grid is cut into basins. Fill some cells with water.\n• Water settles: in every basin it fills from the bottom up to one level, the same across the whole basin. Every cell of the basin at that height or lower holds water, every cell above it stays dry. A basin may also stay empty or fill to the top.\n• The numbers outside the grid tell how many water cells each row and column holds.\n\nTap a cell to cycle: water → dry (your note) → empty. Right-click cycles back. Slide across cells to fill them all in one go. A long press lets the water settle: it fills every cell of a basin below your water, and marks dry the cells above your dry marks and in rows and columns that have all their water. Dry marks are optional: the puzzle is done once all the water is in place.';
+
+  @override
+  String get tutBasins1 =>
+      'The grid is cut into basins, and water settles in each one from the bottom up. The numbers outside tell how many water cells each row and column holds. Column A holds 2, so its basin fills its two lowest cells. Tap a cell to fill it with water, tap again to mark it dry.';
+
+  @override
+  String get tutBasins2 =>
+      'Water lies level across the whole basin: when one cell of a basin holds water, so does every cell of that basin as low or lower. Row 2 needs just one water cell, so the wide basin can\'t reach that high. Finish the board.';
+
+  @override
+  String get tutBasins3 =>
+      'Think ahead: water in a cell fills everything below it in its basin. Once the bottom row is full, column A needs just one more water cell, but water in its top cell would fill two. So the top cell stays dry. Finish the board.';
+
+  @override
+  String get tutBasins4 =>
+      'Now a real board. Start with rows and columns that are empty or full, let the water settle, and before you fill a cell, count how much water it brings along.';
+
+  @override
+  String get tutBasinsS1 =>
+      'Water in a row comes in pieces: the cells of one basin in that row fill together. When only some sets of pieces add up to the row\'s count, a piece that is in all of them holds water, and a piece in none of them stays dry.';
+
+  @override
+  String get tutBasinsS2 =>
+      'Try every water level of a basin, from empty to full, against the counts of the rows and columns it touches. Cells that come out the same in every level that fits are settled.';
+
+  @override
+  String get tutBasinsS3 =>
+      'A hard board: some counts are hidden. When stuck, suppose a cell holds water and let it settle: if a row or column overflows or can\'t reach its count, that cell stays dry.';
+
+  @override
+  String exBasinsSupposeWater(Object cell) {
+    return 'Suppose $cell held water.';
+  }
+
+  @override
+  String exBasinsSupposeDry(Object cell) {
+    return 'Suppose $cell stayed dry.';
+  }
+
+  @override
+  String exBasinsRefutedWater(Object cell) {
+    return '$cell stays dry: water there leads to a contradiction.';
+  }
+
+  @override
+  String exBasinsRefutedDry(Object cell) {
+    return '$cell holds water: leaving it dry leads to a contradiction.';
+  }
+
+  @override
+  String exBasinsWaterBelow(Object cell, Object other) {
+    return '$cell holds water: the water at $other fills its basin up to that height.';
+  }
+
+  @override
+  String exBasinsDryAbove(Object cell, Object other) {
+    return '$cell stays dry: $other in the same basin is dry, so the water stays lower.';
+  }
+
+  @override
+  String exBasinsRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'all its $count water cells',
+      one: 'its water cell',
+    );
+    return '$cell stays dry: row $row already has $_temp0.';
+  }
+
+  @override
+  String exBasinsColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'all its $count water cells',
+      one: 'its water cell',
+    );
+    return '$cell stays dry: column $col already has $_temp0.';
+  }
+
+  @override
+  String exBasinsRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count water cells',
+      one: 'a water cell',
+    );
+    return '$cell holds water: row $row needs $_temp0, and only that many cells are left.';
+  }
+
+  @override
+  String exBasinsColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count water cells',
+      one: 'a water cell',
+    );
+    return '$cell holds water: column $col needs $_temp0, and only that many cells are left.';
+  }
+
+  @override
+  String exBasinsTooMuchRow(Object cell, Object row, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'a cell',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'needs only $need more',
+      one: 'needs only one more',
+      zero: 'already has all its water',
+    );
+    return '$cell stays dry: water there would fill $_temp0 of row $row, which $_temp1.';
+  }
+
+  @override
+  String exBasinsTooMuchCol(Object cell, Object col, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'a cell',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'needs only $need more',
+      one: 'needs only one more',
+      zero: 'already has all its water',
+    );
+    return '$cell stays dry: water there would fill $_temp0 of column $col, which $_temp1.';
+  }
+
+  @override
+  String exBasinsTooLittleRow(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'a cell',
+    );
+    return '$cell holds water: dry, it would keep $_temp0 of row $row dry, and the row could no longer reach its count.';
+  }
+
+  @override
+  String exBasinsTooLittleCol(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'a cell',
+    );
+    return '$cell holds water: dry, it would keep $_temp0 of column $col dry, and the column could no longer reach its count.';
+  }
+
+  @override
+  String exBasinsWaysWater(Object cell, Object row, int count) {
+    return '$cell holds water: every way to make $count in row $row from its basins\' pieces needs this one.';
+  }
+
+  @override
+  String exBasinsWaysDry(Object cell, Object row, int count) {
+    return '$cell stays dry: no way to make $count in row $row from its basins\' pieces uses this one.';
+  }
+
+  @override
+  String exBasinsLevelsWater(Object cell) {
+    return '$cell holds water: every water level of its basin that leaves it dry breaks the count of a row or column.';
+  }
+
+  @override
+  String exBasinsLevelsDry(Object cell) {
+    return '$cell stays dry: every water level of its basin that reaches it breaks the count of a row or column.';
+  }
+
+  @override
+  String exBasinsFailLevel(Object wet, Object dry) {
+    return 'But then $wet holds water while $dry, as low or lower in the same basin, stays dry.';
+  }
+
+  @override
+  String exBasinsFailRowMany(Object row, int count) {
+    return 'But then row $row gets more than $count water cells.';
+  }
+
+  @override
+  String exBasinsFailColMany(Object col, int count) {
+    return 'But then column $col gets more than $count water cells.';
+  }
+
+  @override
+  String exBasinsFailRowFew(Object row, int count) {
+    return 'But then row $row can no longer get $count water cells.';
+  }
+
+  @override
+  String exBasinsFailColFew(Object col, int count) {
+    return 'But then column $col can no longer get $count water cells.';
+  }
+
+  @override
+  String exBasinsFailWays(Object row, int count) {
+    return 'But then no set of the basins\' pieces in row $row adds up to $count.';
+  }
+
+  @override
+  String exBasinsFailLevels(Object cell) {
+    return 'But then no water level of the basin at $cell fits the counts.';
   }
 }

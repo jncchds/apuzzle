@@ -369,6 +369,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get generating => 'Rätsel wird erstellt…';
 
   @override
+  String get generatingSlow => 'Ein gutes Feld zu finden kann ein paar Sekunden dauern.';
+
+  @override
   String get tapToCycle => 'Durchtippen';
 
   @override
@@ -4259,5 +4262,233 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String exFleetFailStray(Object a) {
     return 'Aber dann kann das Schiffsfeld $a zu keinem fehlenden Schiff gehören.';
+  }
+
+  @override
+  String get tagWater => 'Wasser, füllen, Flüssigkeit, gießen, Pegel, Tank, Becken, Pool';
+
+  @override
+  String get basinsName => 'Becken';
+
+  @override
+  String get basinsTagline => 'Fülle die Becken mit ebenem Wasser passend zu den Zahlen';
+
+  @override
+  String get basinsRules =>
+      '• Das Gitter ist in Becken geteilt. Fülle einige Felder mit Wasser.\n• Wasser setzt sich ab: In jedem Becken füllt es von unten bis zu einer Höhe, die im ganzen Becken gleich ist. Jedes Feld des Beckens auf dieser Höhe oder tiefer hat Wasser, jedes darüber bleibt trocken. Ein Becken kann auch leer bleiben oder bis oben voll sein.\n• Die Zahlen außen sagen, wie viele Wasserfelder jede Zeile und Spalte enthält.\n\nTippe auf ein Feld zum Durchschalten: Wasser → trocken (deine Notiz) → leer. Rechtsklick schaltet zurück. Wische über Felder, um sie alle auf einmal zu füllen. Langes Drücken lässt das Wasser sich setzen: Es füllt jedes Feld eines Beckens unter deinem Wasser und markiert die Felder über deinen Trocken-Notizen sowie in Zeilen und Spalten mit all ihrem Wasser als trocken. Trocken-Notizen sind freiwillig: Das Rätsel ist gelöst, sobald alles Wasser an seinem Platz ist.';
+
+  @override
+  String get tutBasins1 =>
+      'Das Gitter ist in Becken geteilt, und in jedem setzt sich das Wasser von unten nach oben. Die Zahlen außen sagen, wie viele Wasserfelder jede Zeile und Spalte enthält. Spalte A hat 2, also füllt ihr Becken die zwei untersten Felder. Tippe auf ein Feld für Wasser, noch einmal, um es als trocken zu markieren.';
+
+  @override
+  String get tutBasins2 =>
+      'Wasser steht im ganzen Becken gleich hoch: Hat ein Feld eines Beckens Wasser, dann auch jedes Feld dieses Beckens auf gleicher Höhe oder tiefer. Zeile 2 braucht nur ein Wasserfeld, also kann das breite Becken nicht so hoch reichen. Löse das Feld.';
+
+  @override
+  String get tutBasins3 =>
+      'Denk voraus: Wasser in einem Feld füllt alles darunter in seinem Becken. Ist die unterste Zeile voll, braucht Spalte A nur noch ein Wasserfeld, aber Wasser im obersten Feld würde zwei füllen. Also bleibt das oberste Feld trocken. Löse das Feld.';
+
+  @override
+  String get tutBasins4 =>
+      'Jetzt ein echtes Feld. Beginne mit leeren oder vollen Zeilen und Spalten, lass das Wasser sich setzen und zähle, bevor du ein Feld füllst, wie viel Wasser es mit sich bringt.';
+
+  @override
+  String get tutBasinsS1 =>
+      'Wasser kommt in einer Zeile stückweise: Die Felder eines Beckens in dieser Zeile füllen sich gemeinsam. Ergeben nur manche Sätze von Stücken die Zahl der Zeile, hat ein Stück, das in allen vorkommt, Wasser, und eines, das in keinem vorkommt, bleibt trocken.';
+
+  @override
+  String get tutBasinsS2 =>
+      'Probiere jede Wasserhöhe eines Beckens, von leer bis voll, gegen die Zahlen der Zeilen und Spalten, die es berührt. Felder, die in jeder passenden Höhe gleich ausfallen, stehen fest.';
+
+  @override
+  String get tutBasinsS3 =>
+      'Ein schweres Feld: Manche Zahlen sind verborgen. Wenn du feststeckst, nimm an, dass ein Feld Wasser hat, und lass es sich setzen: Läuft eine Zeile oder Spalte über oder erreicht ihre Zahl nicht, bleibt das Feld trocken.';
+
+  @override
+  String exBasinsSupposeWater(Object cell) {
+    return 'Angenommen, $cell hätte Wasser.';
+  }
+
+  @override
+  String exBasinsSupposeDry(Object cell) {
+    return 'Angenommen, $cell bliebe trocken.';
+  }
+
+  @override
+  String exBasinsRefutedWater(Object cell) {
+    return '$cell bleibt trocken: Wasser dort führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exBasinsRefutedDry(Object cell) {
+    return '$cell hat Wasser: Bliebe es trocken, gäbe es einen Widerspruch.';
+  }
+
+  @override
+  String exBasinsWaterBelow(Object cell, Object other) {
+    return '$cell hat Wasser: Das Wasser auf $other füllt sein Becken bis zu dieser Höhe.';
+  }
+
+  @override
+  String exBasinsDryAbove(Object cell, Object other) {
+    return '$cell bleibt trocken: $other im selben Becken ist trocken, also steht das Wasser tiefer.';
+  }
+
+  @override
+  String exBasinsRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'alle $count Wasserfelder',
+      one: 'ihr Wasserfeld',
+    );
+    return '$cell bleibt trocken: Zeile $row hat schon $_temp0.';
+  }
+
+  @override
+  String exBasinsColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'alle $count Wasserfelder',
+      one: 'ihr Wasserfeld',
+    );
+    return '$cell bleibt trocken: Spalte $col hat schon $_temp0.';
+  }
+
+  @override
+  String exBasinsRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Wasserfelder',
+      one: 'ein Wasserfeld',
+    );
+    return '$cell hat Wasser: Zeile $row braucht $_temp0, und nur so viele Felder sind übrig.';
+  }
+
+  @override
+  String exBasinsColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Wasserfelder',
+      one: 'ein Wasserfeld',
+    );
+    return '$cell hat Wasser: Spalte $col braucht $_temp0, und nur so viele Felder sind übrig.';
+  }
+
+  @override
+  String exBasinsTooMuchRow(Object cell, Object row, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: 'ein Feld',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'nur noch $need braucht',
+      one: 'nur noch eins braucht',
+      zero: 'schon all ihr Wasser hat',
+    );
+    return '$cell bleibt trocken: Wasser dort würde $_temp0 von Zeile $row füllen, die $_temp1.';
+  }
+
+  @override
+  String exBasinsTooMuchCol(Object cell, Object col, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: 'ein Feld',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'nur noch $need braucht',
+      one: 'nur noch eins braucht',
+      zero: 'schon all ihr Wasser hat',
+    );
+    return '$cell bleibt trocken: Wasser dort würde $_temp0 von Spalte $col füllen, die $_temp1.';
+  }
+
+  @override
+  String exBasinsTooLittleRow(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: 'ein Feld',
+    );
+    return '$cell hat Wasser: Trocken hielte es $_temp0 von Zeile $row trocken, und die Zeile käme nicht mehr auf ihre Zahl.';
+  }
+
+  @override
+  String exBasinsTooLittleCol(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: 'ein Feld',
+    );
+    return '$cell hat Wasser: Trocken hielte es $_temp0 von Spalte $col trocken, und die Spalte käme nicht mehr auf ihre Zahl.';
+  }
+
+  @override
+  String exBasinsWaysWater(Object cell, Object row, int count) {
+    return '$cell hat Wasser: Jede Art, in Zeile $row aus den Stücken ihrer Becken $count zu bilden, braucht dieses Stück.';
+  }
+
+  @override
+  String exBasinsWaysDry(Object cell, Object row, int count) {
+    return '$cell bleibt trocken: Keine Art, in Zeile $row aus den Stücken ihrer Becken $count zu bilden, nutzt dieses Stück.';
+  }
+
+  @override
+  String exBasinsLevelsWater(Object cell) {
+    return '$cell hat Wasser: Jede Wasserhöhe seines Beckens, bei der es trocken bleibt, verletzt die Zahl einer Zeile oder Spalte.';
+  }
+
+  @override
+  String exBasinsLevelsDry(Object cell) {
+    return '$cell bleibt trocken: Jede Wasserhöhe seines Beckens, die es erreicht, verletzt die Zahl einer Zeile oder Spalte.';
+  }
+
+  @override
+  String exBasinsFailLevel(Object wet, Object dry) {
+    return 'Aber dann hat $wet Wasser, während $dry, gleich hoch oder tiefer im selben Becken, trocken bleibt.';
+  }
+
+  @override
+  String exBasinsFailRowMany(Object row, int count) {
+    return 'Aber dann hat Zeile $row mehr als $count Wasserfelder.';
+  }
+
+  @override
+  String exBasinsFailColMany(Object col, int count) {
+    return 'Aber dann hat Spalte $col mehr als $count Wasserfelder.';
+  }
+
+  @override
+  String exBasinsFailRowFew(Object row, int count) {
+    return 'Aber dann kommt Zeile $row nicht mehr auf $count Wasserfelder.';
+  }
+
+  @override
+  String exBasinsFailColFew(Object col, int count) {
+    return 'Aber dann kommt Spalte $col nicht mehr auf $count Wasserfelder.';
+  }
+
+  @override
+  String exBasinsFailWays(Object row, int count) {
+    return 'Aber dann ergibt kein Satz von Beckenstücken in Zeile $row zusammen $count.';
+  }
+
+  @override
+  String exBasinsFailLevels(Object cell) {
+    return 'Aber dann passt keine Wasserhöhe des Beckens bei $cell zu den Zahlen.';
   }
 }

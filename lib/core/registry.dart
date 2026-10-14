@@ -5,6 +5,7 @@ import '../puzzles/atoms/atoms_type.dart';
 import '../puzzles/blocks/blocks_type.dart';
 import '../puzzles/cages/cages_type.dart';
 import '../puzzles/blend/blend_type.dart';
+import '../puzzles/basins/basins_type.dart';
 import '../puzzles/camp/camp_type.dart';
 import '../puzzles/domino/domino_type.dart';
 import '../puzzles/fence/fence_type.dart';
@@ -70,6 +71,7 @@ const List<PuzzleType> puzzleTypes = [
   LitsType(),
   CampType(),
   FleetType(),
+  BasinsType(),
   IslandsType(),
   LampsType(),
   FenceType(),
@@ -157,6 +159,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('lits', [LitsType()]),
       PuzzleFamily('camp', [CampType()]),
       PuzzleFamily('fleet', [FleetType()]),
+      PuzzleFamily('basins', [BasinsType()]),
       PuzzleFamily('islands', [IslandsType()]),
       PuzzleFamily('lamps', [LampsType()]),
       PuzzleFamily('orbits', [OrbitsType()]),
