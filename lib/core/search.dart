@@ -253,9 +253,59 @@ SearchResults searchGames(String query) {
     }
   }
   final found = [...byName, ...other];
-  return (
-    found: found,
-    alternatives: alternatives,
-    similar: found.isEmpty && alternatives.isEmpty ? similar : const <PuzzleType>[],
-  );
+  if (found.isNotEmpty || alternatives.isNotEmpty) {
+    return (found: found, alternatives: alternatives, similar: const <PuzzleType>[]);
+  }
+  return (found: found, alternatives: alternatives, similar: similar.isNotEmpty ? similar : _closest(q));
+}
+
+/// Edits that turn [q] into some part of [w] (the rest of [w] is free), so a
+/// query found inside a word costs nothing.
+int _partDistance(String q, String w) {
+  var prev = List.filled(w.length + 1, 0);
+  for (var i = 1; i <= q.length; i++) {
+    final cur = List.filled(w.length + 1, i);
+    for (var j = 1; j <= w.length; j++) {
+      final cost = q[i - 1] == w[j - 1] ? 0 : 1;
+      cur[j] = [prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost].reduce((x, y) => x < y ? x : y);
+    }
+    prev = cur;
+  }
+  return prev.reduce((x, y) => x < y ? x : y);
+}
+
+/// The games whose words come closest to [q] (partial words count, names
+/// beat taglines, tags and other names), so a search never comes back empty.
+List<PuzzleType> _closest(List<String> q) {
+  int best(String w, List<String> words) => words.fold(1 << 30, (m, n) {
+    final d = _partDistance(w, n);
+    return d < m ? d : m;
+  });
+  final scored = <(PuzzleType, int)>[];
+  for (final c in puzzleCategories) {
+    for (final f in c.families) {
+      for (final t in f.types) {
+        final names = {
+          for (final l in _languages) ...[...searchWords(t.name(l)), if (!f.single) ...searchWords(f.name(l))],
+        }.toList();
+        final rest = {
+          for (final l in _languages) ...searchWords(t.tagline(l)),
+          for (final tag in gameTags[t.id] ?? const <GameTag>[])
+            for (final l in _languages) ...searchWords(tagLabel(l, tag)),
+          for (final a in gameAliases[t.id] ?? const <String>[]) ...searchWords(a),
+        }.toList();
+        var score = 0;
+        for (final w in q) {
+          final byName = 2 * best(w, names), byRest = 2 * best(w, rest) + 1;
+          score += byName < byRest ? byName : byRest;
+        }
+        scored.add((t, score));
+      }
+    }
+  }
+  final top = scored.map((s) => s.$2).reduce((x, y) => x < y ? x : y);
+  return [
+    for (final (t, s) in scored)
+      if (s == top) t,
+  ].take(5).toList();
 }

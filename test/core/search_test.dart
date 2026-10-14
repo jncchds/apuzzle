@@ -77,8 +77,17 @@ void main() {
     expect(similar('peralrs'), contains('pearls'), reason: 'swapped letters');
     expect(similar('sudoku'), isEmpty, reason: 'found exactly');
     expect(similar('nurikabe'), isEmpty, reason: 'an alternative');
-    expect(similar('qwxzv'), isEmpty);
-    expect(similar('pip'), isEmpty, reason: 'short words must match exactly');
+    expect(similar('pip'), isEmpty, reason: 'found by its start');
+  });
+
+  test('failing that, the closest games, also by part of a word', () {
+    expect(similar('ipes'), ['pipes']);
+    expect(similar('abyrint'), ['labyrinth']);
+    expect(similar('udok'), ['sudoku']);
+    for (final q in ['qwxzv', 'x', 'zzzzzzzzzzzzzzzz', 'ж', '42']) {
+      expect(similar(q), isNotEmpty, reason: q);
+      expect(similar(q).length, lessThanOrEqualTo(5), reason: q);
+    }
   });
 
   test('a family name finds all of its games', () {
