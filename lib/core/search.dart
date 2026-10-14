@@ -24,6 +24,7 @@ enum GameTag {
   maze,
   ships,
   water,
+  memory,
 }
 
 String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
@@ -46,6 +47,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
   GameTag.maze => l.tagMaze,
   GameTag.ships => l.tagShips,
   GameTag.water => l.tagWater,
+  GameTag.memory => l.tagMemory,
 };
 
 /// Tags of every type, by id.
@@ -68,6 +70,7 @@ const Map<String, List<GameTag>> gameTags = {
   'pop': [GameTag.colors],
   'merge': [GameTag.slide, GameTag.numbers],
   'snake': [GameTag.arcade],
+  'glimpse': [GameTag.memory],
   'pipes': [GameTag.connect],
   'shikaku': [GameTag.regions],
   'plots': [GameTag.regions, GameTag.numbers],
@@ -118,6 +121,7 @@ const Map<String, List<String>> gameAliases = {
   'blend': ['Flood-it', 'Free flood'],
   'pop': ['SameGame', 'Same game', 'Bubble breaker', 'Jawbreaker', 'Clickomania'],
   'snake': ['Nibbles'],
+  'glimpse': ['Memory Matrix', 'Lumosity', 'Visual memory'],
   'pipes': ['Net', 'NetWalk'],
   'shikaku': ['Rectangles'],
   'plots': ['Fillomino'],

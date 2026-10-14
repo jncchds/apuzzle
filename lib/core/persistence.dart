@@ -169,7 +169,7 @@ class GameStore {
       for (final c in dailyChoices)
         if (c.from < from) c,
     ];
-    final before = choices.isEmpty ? const <String>{} : choices.last.excluded;
+    final before = choices.isEmpty ? const <String>{} : choiceExcluded(choices.last, from);
     if (!setEquals(before, excluded)) choices.add((from: from, excluded: {...excluded}));
     dailyChoices = choices;
     await prefs.setString(

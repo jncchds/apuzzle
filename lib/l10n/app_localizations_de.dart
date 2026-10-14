@@ -4491,4 +4491,95 @@ class AppLocalizationsDe extends AppLocalizations {
   String exBasinsFailLevels(Object cell) {
     return 'Aber dann passt keine Wasserhöhe des Beckens bei $cell zu den Zahlen.';
   }
+
+  @override
+  String recallGoalRounds(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Runden',
+      one: '$count Runde',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recallGoalRoundsHint => 'Spiele eine feste Zahl von Runden und hol so viele Punkte wie möglich.';
+
+  @override
+  String recallGoalLives(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Leben',
+      one: '$count Leben',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recallGoalLivesHint(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count-mal',
+      one: 'einmal',
+    );
+    return 'Spiele, bis du dich $_temp0 vertust, und schlag deinen Rekord.';
+  }
+
+  @override
+  String recallRound(int round, int count) {
+    return 'Runde $round/$count';
+  }
+
+  @override
+  String get recallReady => 'Bereit';
+
+  @override
+  String get recallStart => 'Tippen zum Starten';
+
+  @override
+  String get recallWatch => 'Merk es dir…';
+
+  @override
+  String recallRight(int points) {
+    return 'Richtig! +$points';
+  }
+
+  @override
+  String get recallMissed => 'Daneben';
+
+  @override
+  String recallRoundsRight(int correct, int count) {
+    return '$correct von $count Runden richtig';
+  }
+
+  @override
+  String get tagMemory => 'Gedächtnis, merken, erinnern, Gehirntraining, Konzentration, Aufmerksamkeit';
+
+  @override
+  String get glimpseName => 'Blitz';
+
+  @override
+  String get glimpseTagline => 'Felder leuchten kurz auf: tippe sie alle aus dem Gedächtnis an';
+
+  @override
+  String get glimpseRules =>
+      '• Einige Felder leuchten kurz auf und werden wieder dunkel. Tippe jedes Feld an, das aufgeleuchtet hat, in beliebiger Reihenfolge.\n• Tippe auf „Bereit“, um sie früher zu verbergen.\n• Ein Tipp auf ein Feld, das nicht aufgeleuchtet hat, beendet die Runde.\n• Eine richtige Runde bringt einen Punkt pro Feld, und die nächste lässt ein Feld mehr aufleuchten. Nach einem Fehler eines weniger.\n\nZiele\n• Runden: spiele 10 Runden um einen Rekord.\n• Leben: spiele bis zum dritten Fehler.\n\nDer Schwierigkeitsgrad bestimmt, wie viele Felder die erste Runde zeigt und wie lange sie leuchten.';
+
+  @override
+  String get glimpsePrompt => 'Tippe alle Felder an, die aufgeleuchtet haben';
+
+  @override
+  String get tutGlimpse1 =>
+      'Tippe aufs Brett, um zu starten. Drei Felder leuchten kurz auf: merk sie dir, und wenn sie dunkel werden, tippe alle drei an.';
+
+  @override
+  String get tutGlimpse2 =>
+      'Tippe auf „Bereit“, sobald du die Felder kennst, um sie früher zu verbergen. Ein Tipp auf ein Feld, das nicht aufgeleuchtet hat, beendet die Runde; hier wird sie dann wiederholt. Schaffe beide Runden.';
+
+  @override
+  String get tutGlimpse3 =>
+      'Ein echtes Brett: jede richtige Runde lässt beim nächsten Mal ein Feld mehr aufleuchten, ein Fehler eines weniger. Schaffe 3 Runden.';
 }

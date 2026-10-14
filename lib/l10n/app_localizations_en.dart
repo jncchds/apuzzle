@@ -4484,4 +4484,89 @@ class AppLocalizationsEn extends AppLocalizations {
   String exBasinsFailLevels(Object cell) {
     return 'But then no water level of the basin at $cell fits the counts.';
   }
+
+  @override
+  String recallGoalRounds(int count) {
+    return '$count rounds';
+  }
+
+  @override
+  String get recallGoalRoundsHint => 'Play a set number of rounds and score as many points as you can.';
+
+  @override
+  String recallGoalLives(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count lives',
+      one: '1 life',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recallGoalLivesHint(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count times',
+      one: 'once',
+    );
+    return 'Play on until you miss $_temp0, and beat your best score.';
+  }
+
+  @override
+  String recallRound(int round, int count) {
+    return 'Round $round/$count';
+  }
+
+  @override
+  String get recallReady => 'Ready';
+
+  @override
+  String get recallStart => 'Tap to start';
+
+  @override
+  String get recallWatch => 'Remember…';
+
+  @override
+  String recallRight(int points) {
+    return 'Right! +$points';
+  }
+
+  @override
+  String get recallMissed => 'Missed';
+
+  @override
+  String recallRoundsRight(int correct, int count) {
+    return '$correct of $count rounds right';
+  }
+
+  @override
+  String get tagMemory => 'memory, remember, recall, brain training, concentration, attention';
+
+  @override
+  String get glimpseName => 'Glimpse';
+
+  @override
+  String get glimpseTagline => 'Cells light up for a moment: tap them all from memory';
+
+  @override
+  String get glimpseRules =>
+      '• Some cells light up for a moment, then go dark. Tap every cell that lit up, in any order.\n• Tap Ready to hide them sooner.\n• A tap on a cell that didn\'t light up ends the round.\n• A round you get right scores a point per cell, and the next one lights one more cell. After a miss, it lights one fewer.\n\nGoals\n• Rounds: play 10 rounds for a best score.\n• Lives: play on until your third miss.\n\nThe difficulty sets how many cells the first round lights and how long they stay lit.';
+
+  @override
+  String get glimpsePrompt => 'Tap every cell that lit up';
+
+  @override
+  String get tutGlimpse1 =>
+      'Tap the board to start. Three cells light up for a moment: remember them, and once they go dark, tap all three.';
+
+  @override
+  String get tutGlimpse2 =>
+      'Tap Ready as soon as you have the cells, to hide them sooner. A tap on a cell that didn\'t light up ends the round; here the round then plays again. Get both rounds right.';
+
+  @override
+  String get tutGlimpse3 =>
+      'A real board: each round you get right lights one more cell next time, and a miss lights one fewer. Get 3 rounds right.';
 }

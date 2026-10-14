@@ -6009,6 +6009,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then no water level of the basin at {cell} fits the counts.'**
   String exBasinsFailLevels(Object cell);
+
+  /// No description provided for @recallGoalRounds.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} rounds'**
+  String recallGoalRounds(int count);
+
+  /// No description provided for @recallGoalRoundsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Play a set number of rounds and score as many points as you can.'**
+  String get recallGoalRoundsHint;
+
+  /// No description provided for @recallGoalLives.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{1 life} other{{count} lives}}'**
+  String recallGoalLives(int count);
+
+  /// No description provided for @recallGoalLivesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Play on until you miss {count, plural, one{once} other{{count} times}}, and beat your best score.'**
+  String recallGoalLivesHint(int count);
+
+  /// No description provided for @recallRound.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {round}/{count}'**
+  String recallRound(int round, int count);
+
+  /// No description provided for @recallReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get recallReady;
+
+  /// No description provided for @recallStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to start'**
+  String get recallStart;
+
+  /// No description provided for @recallWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember…'**
+  String get recallWatch;
+
+  /// No description provided for @recallRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Right! +{points}'**
+  String recallRight(int points);
+
+  /// No description provided for @recallMissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Missed'**
+  String get recallMissed;
+
+  /// No description provided for @recallRoundsRight.
+  ///
+  /// In en, this message translates to:
+  /// **'{correct} of {count} rounds right'**
+  String recallRoundsRight(int correct, int count);
+
+  /// No description provided for @tagMemory.
+  ///
+  /// In en, this message translates to:
+  /// **'memory, remember, recall, brain training, concentration, attention'**
+  String get tagMemory;
+
+  /// No description provided for @glimpseName.
+  ///
+  /// In en, this message translates to:
+  /// **'Glimpse'**
+  String get glimpseName;
+
+  /// No description provided for @glimpseTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Cells light up for a moment: tap them all from memory'**
+  String get glimpseTagline;
+
+  /// No description provided for @glimpseRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Some cells light up for a moment, then go dark. Tap every cell that lit up, in any order.\n• Tap Ready to hide them sooner.\n• A tap on a cell that didn\'t light up ends the round.\n• A round you get right scores a point per cell, and the next one lights one more cell. After a miss, it lights one fewer.\n\nGoals\n• Rounds: play 10 rounds for a best score.\n• Lives: play on until your third miss.\n\nThe difficulty sets how many cells the first round lights and how long they stay lit.'**
+  String get glimpseRules;
+
+  /// No description provided for @glimpsePrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap every cell that lit up'**
+  String get glimpsePrompt;
+
+  /// No description provided for @tutGlimpse1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the board to start. Three cells light up for a moment: remember them, and once they go dark, tap all three.'**
+  String get tutGlimpse1;
+
+  /// No description provided for @tutGlimpse2.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap Ready as soon as you have the cells, to hide them sooner. A tap on a cell that didn\'t light up ends the round; here the round then plays again. Get both rounds right.'**
+  String get tutGlimpse2;
+
+  /// No description provided for @tutGlimpse3.
+  ///
+  /// In en, this message translates to:
+  /// **'A real board: each round you get right lights one more cell next time, and a miss lights one fewer. Get 3 rounds right.'**
+  String get tutGlimpse3;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -4562,4 +4562,101 @@ class AppLocalizationsPl extends AppLocalizations {
   String exBasinsFailLevels(Object cell) {
     return 'Ale wtedy żaden poziom wody w basenie z $cell nie pasuje do liczb.';
   }
+
+  @override
+  String recallGoalRounds(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count rundy',
+      many: '$count rund',
+      few: '$count rundy',
+      one: '$count runda',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recallGoalRoundsHint => 'Zagraj ustaloną liczbę rund i zdobądź jak najwięcej punktów.';
+
+  @override
+  String recallGoalLives(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count życia',
+      many: '$count żyć',
+      few: '$count życia',
+      one: '$count życie',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recallGoalLivesHint(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count razy',
+      many: '$count razy',
+      few: '$count razy',
+      one: 'raz',
+    );
+    return 'Graj, aż pomylisz się $_temp0, i pobij swój rekord.';
+  }
+
+  @override
+  String recallRound(int round, int count) {
+    return 'Runda $round/$count';
+  }
+
+  @override
+  String get recallReady => 'Gotowe';
+
+  @override
+  String get recallStart => 'Dotknij, aby zacząć';
+
+  @override
+  String get recallWatch => 'Zapamiętaj…';
+
+  @override
+  String recallRight(int points) {
+    return 'Dobrze! +$points';
+  }
+
+  @override
+  String get recallMissed => 'Pudło';
+
+  @override
+  String recallRoundsRight(int correct, int count) {
+    return 'Dobrze: $correct z $count rund';
+  }
+
+  @override
+  String get tagMemory => 'pamięć, zapamiętywanie, przypominanie, trening mózgu, koncentracja, uwaga';
+
+  @override
+  String get glimpseName => 'Błysk';
+
+  @override
+  String get glimpseTagline => 'Pola rozbłyskują na chwilę: dotknij ich wszystkich z pamięci';
+
+  @override
+  String get glimpseRules =>
+      '• Kilka pól rozbłyska na chwilę i gaśnie. Dotknij każdego pola, które rozbłysło, w dowolnej kolejności.\n• Dotknij „Gotowe”, aby ukryć je wcześniej.\n• Dotknięcie pola, które nie rozbłysło, kończy rundę.\n• Dobra runda daje punkt za każde pole, a następna zapala o jedno pole więcej. Po pomyłce — o jedno mniej.\n\nCele\n• Rundy: zagraj 10 rund o rekord.\n• Życia: graj do trzeciej pomyłki.\n\nPoziom trudności ustala, ile pól zapala pierwsza runda i jak długo świecą.';
+
+  @override
+  String get glimpsePrompt => 'Dotknij wszystkich pól, które rozbłysły';
+
+  @override
+  String get tutGlimpse1 =>
+      'Dotknij planszy, aby zacząć. Trzy pola rozbłysną na chwilę: zapamiętaj je, a gdy zgasną, dotknij wszystkich trzech.';
+
+  @override
+  String get tutGlimpse2 =>
+      'Dotknij „Gotowe”, gdy tylko zapamiętasz pola, aby ukryć je wcześniej. Dotknięcie pola, które nie rozbłysło, kończy rundę; tutaj zagrasz ją wtedy jeszcze raz. Zalicz obie rundy.';
+
+  @override
+  String get tutGlimpse3 =>
+      'Prawdziwa plansza: każda dobra runda zapala następnym razem o jedno pole więcej, a pomyłka o jedno mniej. Zalicz 3 rundy.';
 }

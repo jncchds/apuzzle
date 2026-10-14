@@ -7,7 +7,7 @@
 
 A collection of grid logic puzzles for Android, Windows, iOS and the web, built with Flutter.
 Every puzzle is **generated on the device**, and a solver checks that it has **exactly one solution**.
-Mines is solved by logic without guessing. The casual games (the color floods, Pop, 2048 and Snake) and Formula are played for a move limit, a target or a best score instead; their limits and targets come from solver playthroughs or the board size, so they are always reachable.
+Mines is solved by logic without guessing. The casual games (the color floods, Pop, 2048, Snake and Glimpse) and Formula are played for a move limit, a target or a best score instead; their limits and targets come from solver playthroughs or the board size, so they are always reachable.
 You choose the grid size and the difficulty.
 
 <p align="center">
@@ -80,6 +80,7 @@ Mosaic and Blend are one family on the home screen, Flood.
 | <img src="docs/screenshots/pop_dark.png" width="90" alt="Pop, dark theme"> | <img src="docs/screenshots/pop_light.png" width="90" alt="Pop, light theme"> | **Pop** | Tap a group of touching same-colored bubbles to select it, tap again to pop it: n bubbles score n×(n−1). Modes: Standard, Shifter (rows slide right), Continuous (new columns roll in) and Mega (both). Goals: clear the board (Standard only, always possible), reach a target score, or free play for a best score. |
 | <img src="docs/screenshots/merge_dark.png" width="90" alt="2048, dark theme"> | <img src="docs/screenshots/merge_light.png" width="90" alt="2048, light theme"> | **2048** | Slide the tiles and merge equal ones. Build the target tile (2048 on a hard 4×4), or play freely for a best score. New tiles come from the seed, so a share code replays the same game. |
 | <img src="docs/screenshots/snake_dark.png" width="90" alt="Snake, dark theme"> | <img src="docs/screenshots/snake_light.png" width="90" alt="Snake, light theme"> | **Snake** | Steer the snake to the apples, grow longer and don't crash. Play for a best score or an apple target; the difficulty sets the speed. |
+| <img src="docs/screenshots/glimpse_dark.png" width="90" alt="Glimpse, dark theme"> | <img src="docs/screenshots/glimpse_light.png" width="90" alt="Glimpse, light theme"> | **Glimpse** | Some cells light up for a moment: tap them all from memory. A round you get right lights one more cell next time, a miss one fewer. Play 10 rounds for a best score, or until your third miss. |
 
 ## Features
 
@@ -87,6 +88,7 @@ Mosaic and Blend are one family on the home screen, Flood.
 - **Daily challenges.** Every day picks three games, each at every difficulty, the same for everyone. Results are kept in a calendar, and you can choose which games the days draw from.
 - **Interactive tutorials.** Every game teaches its rules on a few tiny boards you play, ending with a small real one. Optional strategy lessons then show the techniques strong players use, each on a board that needs it.
 - **Explain mode.** For every logic puzzle, the button next to Hint explains the next step in words ("E4 must be a crown, because…"), highlights the cells it talks about, and can play the step for you.
+- **Memory games.** Glimpse shows something for a moment (or until you tap Ready), hides it, and asks for it back. Rounds get harder as you get them right and easier after a miss; play a set number of rounds or until your third miss, for a best score. Rounds come from the seed, so a share code replays the same game.
 - **Share codes.** Every puzzle has a code (and a link on the web) that recreates it exactly.
 - **Exactly one solution.** Most types are also graded by how deep the solver's logic has to go (easy, medium, hard, and expert for Sudoku).
 - **Game options.** A puzzle can offer extra choices when you start a game, like Pop's mode and goal. They are part of the share code, and stats are kept per choice.
@@ -167,6 +169,7 @@ lib/
     backup.dart           progress export and import
     registry.dart         puzzle types, grouped into families and home-screen categories
     search.dart           game search: tags, other names, accent-insensitive word-prefix matching
+    recall.dart           shared rounds, levels, score and goals of the memory games (board in ui/board/recall_board.dart)
   ui/                     home, category and family pages (browse_screens.dart), new-game sheet, game, daily, learn and settings screens, board widgets
   puzzles/<id>/           model, solver, generator, type, tutorial and explainer for each puzzle
   l10n/                   texts in four languages (ARB files)

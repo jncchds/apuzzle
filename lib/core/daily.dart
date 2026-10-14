@@ -31,13 +31,23 @@ typedef DailyChoice = ({Day from, Set<String> excluded});
 List<DailyChoice> dailyChoices = const [];
 
 /// Type ids left out of [day]'s draw.
-Set<String> dailyExcluded(Day day) {
-  var excluded = const <String>{};
+Set<String> dailyExcluded(Day day, [List<PuzzleType> types = puzzleTypes]) {
+  DailyChoice? choice;
   for (final c in dailyChoices) {
-    if (c.from <= day) excluded = c.excluded;
+    if (c.from <= day) choice = c;
   }
-  return excluded;
+  return choice == null ? const {} : choiceExcluded(choice, day, types);
 }
+
+/// What [choice] leaves out on [day]: the games the player left out, plus
+/// every [PuzzleType.dailyOptIn] game in [day]'s pool that only joined it
+/// after the choice was made, so the player never got to pick it. Players
+/// who never chose get those games like any other.
+Set<String> choiceExcluded(DailyChoice choice, Day day, [List<PuzzleType> types = puzzleTypes]) => {
+  ...choice.excluded,
+  for (final t in types)
+    if (t.dailyOptIn && choice.from < t.dailySince && t.dailySince <= day) t.id,
+};
 
 /// The games that can be chosen for daily challenges on [day].
 List<PuzzleType> dailyPool(Day day, [List<PuzzleType> types = puzzleTypes]) => [
@@ -49,7 +59,7 @@ List<PuzzleType> dailyPool(Day day, [List<PuzzleType> types = puzzleTypes]) => [
 /// [PuzzleType.dailySince], so releasing one never changes earlier days, and
 /// a [DailyChoice] only counts from its own day on.
 List<PuzzleType> dailyGames(Day day, [List<PuzzleType> types = puzzleTypes]) {
-  final excluded = dailyExcluded(day);
+  final excluded = dailyExcluded(day, types);
   // By id, so reordering the home screen doesn't reshuffle past days.
   final pool = [
     for (final t in dailyPool(day, types))

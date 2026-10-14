@@ -11,6 +11,7 @@ import '../puzzles/domino/domino_type.dart';
 import '../puzzles/fence/fence_type.dart';
 import '../puzzles/fleet/fleet_type.dart';
 import '../puzzles/formula/formula_type.dart';
+import '../puzzles/glimpse/glimpse_type.dart';
 import '../puzzles/hues/hues_type.dart';
 import '../puzzles/islands/islands_type.dart';
 import '../puzzles/kings/kings_type.dart';
@@ -60,6 +61,7 @@ const List<PuzzleType> puzzleTypes = [
   PopType(),
   MergeType(),
   SnakeType(),
+  GlimpseType(),
   PipesType(),
   ShikakuType(),
   PlotsType(),
@@ -191,6 +193,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('pop', [PopType()]),
       PuzzleFamily('merge', [MergeType()]),
       PuzzleFamily('snake', [SnakeType()]),
+      PuzzleFamily('glimpse', [GlimpseType()]),
     ],
   ),
 ];

@@ -4595,4 +4595,101 @@ class AppLocalizationsUk extends AppLocalizations {
   String exBasinsFailLevels(Object cell) {
     return 'Але тоді жоден рівень води в басейні з $cell не підходить до чисел.';
   }
+
+  @override
+  String recallGoalRounds(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count раунду',
+      many: '$count раундів',
+      few: '$count раунди',
+      one: '$count раунд',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recallGoalRoundsHint => 'Зіграйте задану кількість раундів і наберіть якомога більше очок.';
+
+  @override
+  String recallGoalLives(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count життя',
+      many: '$count життів',
+      few: '$count життя',
+      one: '$count життя',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recallGoalLivesHint(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count разу',
+      many: '$count разів',
+      few: '$count рази',
+      one: '$count раз',
+    );
+    return 'Грайте, доки не помилитеся $_temp0, і бийте свій рекорд.';
+  }
+
+  @override
+  String recallRound(int round, int count) {
+    return 'Раунд $round/$count';
+  }
+
+  @override
+  String get recallReady => 'Готово';
+
+  @override
+  String get recallStart => 'Торкніться, щоб почати';
+
+  @override
+  String get recallWatch => 'Запам\'ятовуйте…';
+
+  @override
+  String recallRight(int points) {
+    return 'Правильно! +$points';
+  }
+
+  @override
+  String get recallMissed => 'Помилка';
+
+  @override
+  String recallRoundsRight(int correct, int count) {
+    return 'Правильно: $correct з $count раундів';
+  }
+
+  @override
+  String get tagMemory => 'пам\'ять, запам\'ятати, згадати, тренування мозку, концентрація, увага';
+
+  @override
+  String get glimpseName => 'Спалах';
+
+  @override
+  String get glimpseTagline => 'Клітинки на мить спалахують: торкніться їх усіх з пам\'яті';
+
+  @override
+  String get glimpseRules =>
+      '• Кілька клітинок на мить спалахують і гаснуть. Торкніться кожної клітинки, що спалахнула, у будь-якому порядку.\n• Натисніть «Готово», щоб сховати їх раніше.\n• Дотик до клітинки, що не спалахувала, завершує раунд.\n• Правильний раунд дає по очку за клітинку, і наступний засвічує на одну клітинку більше. Після помилки — на одну менше.\n\nЦілі\n• Раунди: зіграйте 10 раундів на рекорд.\n• Життя: грайте до третьої помилки.\n\nСкладність задає, скільки клітинок засвічує перший раунд і як довго вони світяться.';
+
+  @override
+  String get glimpsePrompt => 'Торкніться всіх клітинок, що спалахнули';
+
+  @override
+  String get tutGlimpse1 =>
+      'Торкніться поля, щоб почати. Три клітинки на мить спалахнуть: запам\'ятайте їх, а коли вони згаснуть, торкніться всіх трьох.';
+
+  @override
+  String get tutGlimpse2 =>
+      'Натисніть «Готово», щойно запам\'ятаєте клітинки, щоб сховати їх раніше. Дотик до клітинки, що не спалахувала, завершує раунд; тут він тоді грається ще раз. Пройдіть обидва раунди.';
+
+  @override
+  String get tutGlimpse3 =>
+      'Справжнє поле: кожен правильний раунд засвічує наступного разу на одну клітинку більше, а помилка — на одну менше. Пройдіть 3 раунди.';
 }

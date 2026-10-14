@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/l10n.dart';
-import 'daily.dart' show dailyLaunch;
+import 'daily.dart' show choiceExcluded, dailyLaunch;
 import 'day.dart';
 import 'difficulty.dart';
 import 'explain.dart';
@@ -58,6 +58,11 @@ abstract class PuzzleType<P, S> {
   /// First day this type can appear in daily challenges. A new type
   /// overrides it with its release date, so earlier days keep their games.
   Day get dailySince => dailyLaunch;
+
+  /// Starts left out of daily challenges for players who chose their daily
+  /// games before [dailySince] (see [choiceExcluded]); players who never
+  /// chose get it like any other game. New casual games opt in this way.
+  bool get dailyOptIn => false;
 
   /// Extra choices for a new game, given the current (possibly incomplete)
   /// ones, so an option's choices can depend on another (a goal per mode).

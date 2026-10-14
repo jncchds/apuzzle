@@ -202,4 +202,49 @@ void main() {
     expect(dailyChoices.length, 1);
     expect(dailyExcluded(second), off);
   });
+
+  test('a new opt-in game starts left out for players who already chose', () async {
+    final optIn = [
+      for (final t in puzzleTypes)
+        if (t.dailyOptIn) t,
+    ];
+    expect(optIn, isNotEmpty);
+    expect(optIn.every((t) => t.dailySince > dailyLaunch), isTrue);
+    expect(puzzleTypeById('snake').dailyOptIn, isFalse, reason: 'released before opt-in existed');
+    final since = optIn.map((t) => t.dailySince).reduce((a, b) => a < b ? a : b);
+    final later = since.addDays(30);
+    final ids = {for (final t in optIn) t.id};
+
+    // Never chose: the new games join the pool like any other.
+    SharedPreferences.setMockInitialValues({});
+    final store = await GameStore.open();
+    expect(dailyExcluded(later), isEmpty);
+    final drawn = <String>{};
+    for (var d = since; d < since.addDays(200); d = d.addDays(1)) {
+      drawn.addAll(dailyGames(d).map((t) => t.id));
+    }
+    expect(drawn.intersection(ids), isNotEmpty);
+
+    // Chose before they came out: they stay left out, and nothing else changes.
+    final before = since.addDays(-5);
+    await store.setDailyExcluded({'kings'}, today: before);
+    expect(dailyExcluded(before.addDays(1)), {'kings'}, reason: 'not out yet');
+    expect(dailyExcluded(later), {'kings', ...ids});
+    for (var d = since; d < since.addDays(200); d = d.addDays(1)) {
+      expect(dailyGames(d).any((t) => ids.contains(t.id) || t.id == 'kings'), isFalse, reason: '$d');
+    }
+
+    // Saving the same selection again later changes nothing.
+    await store.setDailyExcluded(dailyExcluded(later), today: later);
+    expect(dailyChoices.length, 1);
+
+    // Picking a new game later takes it in from then on.
+    final pick = optIn.first.id;
+    await store.setDailyExcluded(dailyExcluded(later).difference({pick}), today: later);
+    expect(dailyExcluded(later).contains(pick), isFalse);
+    expect(dailyExcluded(later.addDays(-1)).contains(pick), isTrue);
+    // Choices made once the game is out are taken as they are.
+    dailyChoices = [(from: later, excluded: const {})];
+    expect(dailyExcluded(later), isEmpty);
+  });
 }
