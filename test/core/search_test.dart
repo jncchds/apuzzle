@@ -64,6 +64,7 @@ void main() {
     expect(alt('aquarium'), ['basins']);
     expect(alt('pet detective'), ['homeward']);
     expect(alt('katamino'), ['inlay']);
+    expect(alt('disconnection'), ['channel']);
     expect(alt('pentomino'), ['inlay']);
     expect(alt('pirate passage'), ['blockade']);
     expect(alt('nerdle'), ['formula']);

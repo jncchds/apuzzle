@@ -923,6 +923,22 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Obracaj kafelki tak, aby każda rura łączyła się ze źródłem (kafelek z pierścieniem).\n• Żaden koniec rury nie może zostać otwarty, a sieć nie może mieć pętli.\n• Woda płynie przez wszystko, co jest już połączone ze źródłem.\n• Kafelki z kropką w rogu są zablokowane i już na miejscu.\n\nDotknij kafelka, aby obrócić go zgodnie z ruchem wskazówek zegara; długie naciśnięcie / prawy przycisk obraca go z powrotem.';
 
   @override
+  String get famPlumbing => 'Hydraulika';
+
+  @override
+  String get famPlumbingAbout => 'Obracaj kafelki z rurami, aż woda popłynie tam, gdzie trzeba';
+
+  @override
+  String get channelName => 'Kanał';
+
+  @override
+  String get channelTagline => 'Doprowadź wodę ze źródła do odpływu';
+
+  @override
+  String get channelRules =>
+      '• Obracaj kafelki tak, aby jedna rura prowadziła wodę ze źródła (kafelek z pierścieniem) do odpływu (kafelek z kwadratem).\n• Pozostałe kafelki nie mają znaczenia, a końce rur mogą zostać otwarte.\n• Woda wypływa z kafelka wszystkimi pozostałymi końcami, ale przez most (skrzyżowanie) płynie tylko prosto, więc rura może przejść przez most dwa razy.\n• Kafelki z kropką w rogu są zablokowane i już na miejscu.\n\nDotknij kafelka, aby obrócić go zgodnie z ruchem wskazówek zegara; długie naciśnięcie / prawy przycisk obraca go z powrotem.';
+
+  @override
   String get shikakuName => 'Shikaku';
 
   @override
@@ -1516,6 +1532,29 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutPipesS2 =>
       'Trudna plansza. Sieć nie może mieć pętli: jeśli obrót kafelka zamknąłby pętlę, musi on wskazywać gdzie indziej. A dwa ślepe końce nigdy nie patrzą na siebie, bo tworzyłyby parę odciętą od reszty.';
+
+  @override
+  String get tutChannel1 =>
+      'Dotknij kafelka, aby obrócić go zgodnie z ruchem wskazówek zegara (długie naciśnięcie lub prawy przycisk obraca z powrotem). Doprowadź wodę ze źródła, kafelka z pierścieniem, do odpływu, kafelka z kwadratem.';
+
+  @override
+  String get tutChannel2 =>
+      'Liczy się tylko rura od źródła do odpływu: inne kafelki mogą wskazywać dokądkolwiek, a końce mogą zostać otwarte. Woda wypływa z kafelka wszystkimi pozostałymi końcami, więc trójnik poprowadzi ją dalej, nawet gdy jego trzeci koniec prowadzi donikąd.';
+
+  @override
+  String get tutChannel3 =>
+      'Skrzyżowanie to most: woda płynie przez nie prosto i nigdy tam nie skręca, więc rura może przejść przez nie dwa razy, raz wzdłuż i raz w poprzek.';
+
+  @override
+  String get tutChannel4 => 'Teraz prawdziwa plansza. Wiele kafelków jest tu tylko po to, by cię zmylić.';
+
+  @override
+  String get tutChannelS1 =>
+      'Działaj z obu końców. Odpływ też jest zablokowany, więc prowadź rurę również wstecz od niego: prosta musi biec dalej, kolanko musi skręcić, a brzeg planszy odcina drogi. Połącz oba odcinki tam, gdzie mogą się spotkać.';
+
+  @override
+  String get tutChannelS2 =>
+      'Trudna plansza, z mostami. Gdy droga kończy się ślepo, wychodzi poza planszę albo trafia na kafelki, które nie przyjmą wody, wróć do ostatniego kafelka, gdzie był wybór, i spróbuj innej drogi.';
 
   @override
   String get tutShikaku1 =>

@@ -5,6 +5,7 @@ import '../puzzles/atoms/atoms_type.dart';
 import '../puzzles/blockade/blockade_type.dart';
 import '../puzzles/blocks/blocks_type.dart';
 import '../puzzles/cages/cages_type.dart';
+import '../puzzles/channel/channel_type.dart';
 import '../puzzles/blend/blend_type.dart';
 import '../puzzles/basins/basins_type.dart';
 import '../puzzles/camp/camp_type.dart';
@@ -74,6 +75,7 @@ const List<PuzzleType> puzzleTypes = [
   HopperType(),
   ReboundType(),
   PipesType(),
+  ChannelType(),
   ShikakuType(),
   PlotsType(),
   OrbitsType(),
@@ -112,6 +114,7 @@ class PuzzleFamily {
     'flood' => l.famFlood,
     'latin' => l.famLatin,
     'memory' => l.famMemory,
+    'plumbing' => l.famPlumbing,
     _ => types.first.name(l),
   };
 
@@ -120,6 +123,7 @@ class PuzzleFamily {
     'flood' => l.famFloodAbout,
     'latin' => l.famLatinAbout,
     'memory' => l.famMemoryAbout,
+    'plumbing' => l.famPlumbingAbout,
     _ => types.first.tagline(l),
   };
 
@@ -195,7 +199,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('labyrinth', [LabyrinthType()]),
       PuzzleFamily('homeward', [HomewardType()]),
       PuzzleFamily('blockade', [BlockadeType()]),
-      PuzzleFamily('pipes', [PipesType()]),
+      PuzzleFamily('plumbing', [PipesType(), ChannelType()]),
       PuzzleFamily('atoms', [AtomsType()]),
       PuzzleFamily('fence', [FenceType()]),
       PuzzleFamily('pearls', [PearlsType()]),

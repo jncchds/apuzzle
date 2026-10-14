@@ -58,6 +58,8 @@ Skyline, Cages and Signs are one family on the home screen, Latin squares.
 
 ### Paths & loops
 
+Pipes and Channel are one family on the home screen, Plumbing.
+
 | Dark | Light | Puzzle | Goal |
 |---|---|---|---|
 | <img src="docs/screenshots/trail_dark.png" width="90" alt="Trail, dark theme"> | <img src="docs/screenshots/trail_light.png" width="90" alt="Trail, light theme"> | **Trail** | Draw one path through every cell that passes the numbers in order. |
@@ -66,6 +68,7 @@ Skyline, Cages and Signs are one family on the home screen, Latin squares.
 | <img src="docs/screenshots/homeward_dark.png" width="90" alt="Homeward, dark theme"> | <img src="docs/screenshots/homeward_light.png" width="90" alt="Homeward, light theme"> | **Homeward** | Drive the car along the roads to pick up every pet and bring it to the home with the same symbol. The car has only a few seats, every road costs fuel, and the fuel is just enough for a well-planned drive. |
 | <img src="docs/screenshots/blockade_dark.png" width="90" alt="Blockade, dark theme"> | <img src="docs/screenshots/blockade_light.png" width="90" alt="Blockade, light theme"> | **Blockade** | Sail the boat to the harbour, one cell or one wait per turn. Patrol ships sail their drawn beats one cell after each of your turns: never end a turn on a ship's cell or swap places with one, and arrive within the turns you have. |
 | <img src="docs/screenshots/pipes_dark.png" width="90" alt="Pipes, dark theme"> | <img src="docs/screenshots/pipes_light.png" width="90" alt="Pipes, light theme"> | **Pipes** | Rotate tiles until every pipe connects to the source, with no open ends and no loops. |
+| <img src="docs/screenshots/channel_dark.png" width="90" alt="Channel, dark theme"> | <img src="docs/screenshots/channel_light.png" width="90" alt="Channel, light theme"> | **Channel** | Turn the tiles so that one pipe leads the water from the source to the drain. The other tiles don't matter and ends may stay open; water goes straight across a bridge, so the pipe can pass one twice. |
 | <img src="docs/screenshots/atoms_dark.png" width="90" alt="Atoms, dark theme"> | <img src="docs/screenshots/atoms_light.png" width="90" alt="Atoms, light theme"> | **Atoms** | Connect atoms with single or double bonds that match their numbers. Bonds can't cross, and all atoms must end up connected. |
 | <img src="docs/screenshots/fence_dark.png" width="90" alt="Fence, dark theme"> | <img src="docs/screenshots/fence_light.png" width="90" alt="Fence, light theme"> | **Fence** | Draw one loop along the grid lines. A number tells how many sides of its cell the loop uses. |
 | <img src="docs/screenshots/pearls_dark.png" width="90" alt="Pearls, dark theme"> | <img src="docs/screenshots/pearls_light.png" width="90" alt="Pearls, light theme"> | **Pearls** | Draw one loop through the cell centres and every pearl: straight through white pearls (turning next to them), turning on black pearls (going straight next to them). |

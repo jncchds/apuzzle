@@ -1540,6 +1540,36 @@ abstract class AppLocalizations {
   /// **'• Rotate the tiles so that every pipe connects back to the source (the ringed tile).\n• No pipe end may be left open, and the network may not contain loops.\n• Water flows through everything already connected to the source.\n• Tiles with a dot in the corner are fixed and already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.'**
   String get pipesRules;
 
+  /// No description provided for @famPlumbing.
+  ///
+  /// In en, this message translates to:
+  /// **'Plumbing'**
+  String get famPlumbing;
+
+  /// No description provided for @famPlumbingAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn the pipe tiles until the water flows where it should'**
+  String get famPlumbingAbout;
+
+  /// No description provided for @channelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Channel'**
+  String get channelName;
+
+  /// No description provided for @channelTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Lead the water from the source to the drain'**
+  String get channelTagline;
+
+  /// No description provided for @channelRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Turn the tiles so that one pipe carries the water from the source (the ringed tile) to the drain (the tile with the square).\n• The other tiles don\'t matter, and pipe ends may stay open.\n• Water leaves a tile by all its other ends, but it goes straight across a bridge (a crossing), so the pipe can pass a bridge twice.\n• Tiles with a dot in the corner are fixed and already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.'**
+  String get channelRules;
+
   /// No description provided for @shikakuName.
   ///
   /// In en, this message translates to:
@@ -2511,6 +2541,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A hard board. The network may not form a loop: if turning a tile would close one, it must point elsewhere. And two dead ends never face each other, or they\'d form a pair cut off from the rest.'**
   String get tutPipesS2;
+
+  /// No description provided for @tutChannel1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a tile to turn it clockwise (a long press or right-click turns it back). Lead the water from the source, the ringed tile, to the drain, the tile with the square.'**
+  String get tutChannel1;
+
+  /// No description provided for @tutChannel2.
+  ///
+  /// In en, this message translates to:
+  /// **'Only the pipe from the source to the drain counts: other tiles may point anywhere, and ends may stay open. Water leaves a tile by all its other ends, so a T carries it on even if its third end leads nowhere.'**
+  String get tutChannel2;
+
+  /// No description provided for @tutChannel3.
+  ///
+  /// In en, this message translates to:
+  /// **'A crossing is a bridge: water goes straight across it and never turns there, so the pipe can pass it twice, once along and once across.'**
+  String get tutChannel3;
+
+  /// No description provided for @tutChannel4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Many tiles are there only to lead you astray.'**
+  String get tutChannel4;
+
+  /// No description provided for @tutChannelS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Work from both ends. The drain is fixed too, so follow the pipe back from it as well: a straight must go on, a bend must turn, and the edge cuts off ways. Join the two stretches where they can meet.'**
+  String get tutChannelS1;
+
+  /// No description provided for @tutChannelS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board, with bridges. When a way runs into a dead end, off the board or into tiles that can\'t take the water, go back to the last tile where you had a choice and try another way.'**
+  String get tutChannelS2;
 
   /// No description provided for @tutShikaku1.
   ///

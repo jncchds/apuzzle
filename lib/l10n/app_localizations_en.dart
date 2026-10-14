@@ -895,6 +895,22 @@ class AppLocalizationsEn extends AppLocalizations {
       '• Rotate the tiles so that every pipe connects back to the source (the ringed tile).\n• No pipe end may be left open, and the network may not contain loops.\n• Water flows through everything already connected to the source.\n• Tiles with a dot in the corner are fixed and already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.';
 
   @override
+  String get famPlumbing => 'Plumbing';
+
+  @override
+  String get famPlumbingAbout => 'Turn the pipe tiles until the water flows where it should';
+
+  @override
+  String get channelName => 'Channel';
+
+  @override
+  String get channelTagline => 'Lead the water from the source to the drain';
+
+  @override
+  String get channelRules =>
+      '• Turn the tiles so that one pipe carries the water from the source (the ringed tile) to the drain (the tile with the square).\n• The other tiles don\'t matter, and pipe ends may stay open.\n• Water leaves a tile by all its other ends, but it goes straight across a bridge (a crossing), so the pipe can pass a bridge twice.\n• Tiles with a dot in the corner are fixed and already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.';
+
+  @override
   String get shikakuName => 'Shikaku';
 
   @override
@@ -1485,6 +1501,29 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutPipesS2 =>
       'A hard board. The network may not form a loop: if turning a tile would close one, it must point elsewhere. And two dead ends never face each other, or they\'d form a pair cut off from the rest.';
+
+  @override
+  String get tutChannel1 =>
+      'Tap a tile to turn it clockwise (a long press or right-click turns it back). Lead the water from the source, the ringed tile, to the drain, the tile with the square.';
+
+  @override
+  String get tutChannel2 =>
+      'Only the pipe from the source to the drain counts: other tiles may point anywhere, and ends may stay open. Water leaves a tile by all its other ends, so a T carries it on even if its third end leads nowhere.';
+
+  @override
+  String get tutChannel3 =>
+      'A crossing is a bridge: water goes straight across it and never turns there, so the pipe can pass it twice, once along and once across.';
+
+  @override
+  String get tutChannel4 => 'Now a real board. Many tiles are there only to lead you astray.';
+
+  @override
+  String get tutChannelS1 =>
+      'Work from both ends. The drain is fixed too, so follow the pipe back from it as well: a straight must go on, a bend must turn, and the edge cuts off ways. Join the two stretches where they can meet.';
+
+  @override
+  String get tutChannelS2 =>
+      'A hard board, with bridges. When a way runs into a dead end, off the board or into tiles that can\'t take the water, go back to the last tile where you had a choice and try another way.';
 
   @override
   String get tutShikaku1 =>
