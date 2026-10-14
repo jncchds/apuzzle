@@ -883,6 +883,99 @@ class AppLocalizationsEn extends AppLocalizations {
       '• Find the way through the maze from the entrance in the top-left corner to the exit in the bottom-right corner.\n• You can\'t pass through walls.\n\nDrag from the end of your path to walk on. Drag back to retrace your steps, or tap a cell of the path to go back there.';
 
   @override
+  String get tagDrive => 'drive, car, taxi, pick up, deliver, pets, animals, fuel, route planning';
+
+  @override
+  String get homewardName => 'Homeward';
+
+  @override
+  String get homewardTagline => 'Drive every pet home before the fuel runs out';
+
+  @override
+  String get homewardRules =>
+      '• Drive the car along the roads. Every road between two crossings takes one unit of fuel.\n• Drive to a pet to pick it up, then drive to the home with the same symbol to drop it off. Both happen by themselves.\n• The car has only so many seats: a pet you reach while every seat is taken keeps waiting. With a seat free, it always gets in.\n• Bring every pet home before the fuel runs out.\n\nTap a crossing next to the car, or one further along a straight road, to drive there. Or drag along the roads. If the fuel runs out, undo or restart.';
+
+  @override
+  String homewardFuel(int left, int limit) {
+    return 'Fuel $left / $limit';
+  }
+
+  @override
+  String get homewardOutOfFuel => 'Out of fuel: undo or restart';
+
+  @override
+  String get tutHomeward1 =>
+      'Tap a crossing next to the car to drive there. Every road costs one unit of fuel. Drive to the pet to pick it up, then bring it to the home with the same symbol.';
+
+  @override
+  String get tutHomeward2 =>
+      'This car has one seat. A pet you reach while the seat is taken keeps waiting, so take one pet home before you fetch the next. Bring both home.';
+
+  @override
+  String get tutHomeward3 =>
+      'Now there\'s no fuel to spare, and the car has two seats. Rushing to the nearest pet isn\'t always best: plan a drive that picks up both pets and then passes both homes.';
+
+  @override
+  String get tutHomeward4 =>
+      'Now a real board. Before you set off, look where each pet lives, and plan a drive that passes pets and homes on the way.';
+
+  @override
+  String get tutHomewardS1 =>
+      'Chain the trips: plan so that each drop-off lies on the way to the next pet, and pick up a pet early when its home lies along a road you will drive anyway. This board has no fuel to spare.';
+
+  @override
+  String get tutHomewardS2 =>
+      'Hard boards leave no fuel to spare and give the car only two seats. Plan the whole drive before the first road: a seat taken too early makes you drive past a pet you need, so sometimes take another road around a pet.';
+
+  @override
+  String get blockadeName => 'Blockade';
+
+  @override
+  String get blockadeTagline => 'Slip past the patrol ships into the harbour';
+
+  @override
+  String get blockadeRules =>
+      '• Sail the boat to the harbour. Each turn the boat moves one cell (up, down, left or right) or waits where it is. Rocks block the way.\n• After every turn, each patrol ship sails one cell along its beat: back and forth along a line, or round and round a loop. Its beat is drawn on the board, and a ring shows where the ship will be after your next turn.\n• Don\'t get caught: never end a turn on a ship\'s cell, and never swap places with a ship. No ship ever enters the start or the harbour.\n• Reach the harbour within the turns you have.\n\nTap a cell next to the boat to sail there, or drag. Tap the boat or Wait to stay put for a turn. On a keyboard, use the arrow keys and the space bar. If you\'re caught or out of turns, undo or restart.';
+
+  @override
+  String blockadeTurn(int turn, int limit) {
+    return 'Turn $turn / $limit';
+  }
+
+  @override
+  String get blockadeWait => 'Wait';
+
+  @override
+  String get blockadeCaught => 'Caught by a patrol ship: undo or restart';
+
+  @override
+  String get blockadeOutOfTurns => 'Out of turns: undo or restart';
+
+  @override
+  String get tutBlockade1 =>
+      'Tap a cell next to the boat to sail there, one cell per turn. Rocks block the way. Sail to the harbour.';
+
+  @override
+  String get tutBlockade2 =>
+      'After each of your turns, every patrol ship sails one cell along its beat, and the ring shows where it goes next. Don\'t end a turn where a ship will be, and don\'t swap places with one. Tap the boat or Wait to stay put for a turn.';
+
+  @override
+  String get tutBlockade3 =>
+      'This ship sails round and round the island, and there are no turns to spare: the counter shows how many you have. The short way runs head-on into the ship, and there\'s no time to wait. Go round the island the other way, right behind the ship.';
+
+  @override
+  String get tutBlockade4 =>
+      'Now a real board. Before you set off, watch where each ship goes and plan when to pass each one.';
+
+  @override
+  String get tutBlockadeS1 =>
+      'A ship never surprises you: its dots show its whole beat, and the ring shows where it will be after your turn. You may sail into a cell a ship is just leaving, as long as it isn\'t coming to the cell you leave. Here there are no turns to spare: count the ships\' beats and slip through the gaps.';
+
+  @override
+  String get tutBlockadeS2 =>
+      'Hard boards leave no turns to spare. Plan the whole passage before the first turn: if you must wait, wait where no ship comes, and a detour right behind a ship often beats waiting for it.';
+
+  @override
   String get campName => 'Campsite';
 
   @override

@@ -54,8 +54,8 @@ void main() {
     expect(find.text('Islands'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'zzzz');
     await tester.pumpAndSettle();
-    expect(find.textContaining('No games found'), findsOneWidget);
-    expect(find.text('Numbers'), findsOneWidget, reason: 'categories to browse instead');
+    expect(find.textContaining('Did you mean'), findsOneWidget, reason: 'the closest games instead');
+    expect(find.textContaining('No games found'), findsNothing);
     await tester.enterText(find.byType(TextField), 'sudoko');
     await tester.pumpAndSettle();
     expect(find.textContaining('Did you mean'), findsOneWidget);

@@ -7,7 +7,7 @@
 
 A collection of grid logic puzzles for Android, Windows, iOS and the web, built with Flutter.
 Every puzzle is **generated on the device**, and a solver checks that it has **exactly one solution**.
-Mines is solved by logic without guessing. The casual games (the color floods, Pop, 2048, Snake and the memory games) and Formula are played for a move limit, a target or a best score instead; their limits and targets come from solver playthroughs or the board size, so they are always reachable.
+Mines is solved by logic without guessing. The casual games (the color floods, Pop, 2048, Snake and the memory games), Formula, Homeward and Blockade are played for a move limit, a target or a best score instead; their limits and targets come from solver playthroughs or the board size, so they are always reachable (Homeward's fuel and Blockade's turns come from the exact shortest plan).
 You choose the grid size and the difficulty.
 
 <p align="center">
@@ -62,6 +62,8 @@ Skyline, Cages and Signs are one family on the home screen, Latin squares.
 | <img src="docs/screenshots/trail_dark.png" width="90" alt="Trail, dark theme"> | <img src="docs/screenshots/trail_light.png" width="90" alt="Trail, light theme"> | **Trail** | Draw one path through every cell that passes the numbers in order. |
 | <img src="docs/screenshots/links_dark.png" width="90" alt="Links, dark theme"> | <img src="docs/screenshots/links_light.png" width="90" alt="Links, light theme"> | **Links** | Join each pair of equal dots with a path. Paths never cross, and together they fill the whole grid. |
 | <img src="docs/screenshots/labyrinth_dark.png" width="90" alt="Labyrinth, dark theme"> | <img src="docs/screenshots/labyrinth_light.png" width="90" alt="Labyrinth, light theme"> | **Labyrinth** | Walk through the maze from the top-left corner to the exit in the bottom-right corner. |
+| <img src="docs/screenshots/homeward_dark.png" width="90" alt="Homeward, dark theme"> | <img src="docs/screenshots/homeward_light.png" width="90" alt="Homeward, light theme"> | **Homeward** | Drive the car along the roads to pick up every pet and bring it to the home with the same symbol. The car has only a few seats, every road costs fuel, and the fuel is just enough for a well-planned drive. |
+| <img src="docs/screenshots/blockade_dark.png" width="90" alt="Blockade, dark theme"> | <img src="docs/screenshots/blockade_light.png" width="90" alt="Blockade, light theme"> | **Blockade** | Sail the boat to the harbour, one cell or one wait per turn. Patrol ships sail their drawn beats one cell after each of your turns: never end a turn on a ship's cell or swap places with one, and arrive within the turns you have. |
 | <img src="docs/screenshots/pipes_dark.png" width="90" alt="Pipes, dark theme"> | <img src="docs/screenshots/pipes_light.png" width="90" alt="Pipes, light theme"> | **Pipes** | Rotate tiles until every pipe connects to the source, with no open ends and no loops. |
 | <img src="docs/screenshots/atoms_dark.png" width="90" alt="Atoms, dark theme"> | <img src="docs/screenshots/atoms_light.png" width="90" alt="Atoms, light theme"> | **Atoms** | Connect atoms with single or double bonds that match their numbers. Bonds can't cross, and all atoms must end up connected. |
 | <img src="docs/screenshots/fence_dark.png" width="90" alt="Fence, dark theme"> | <img src="docs/screenshots/fence_light.png" width="90" alt="Fence, light theme"> | **Fence** | Draw one loop along the grid lines. A number tells how many sides of its cell the loop uses. |
@@ -102,7 +104,7 @@ Mosaic and Blend are one family on the home screen, Flood; the memory games (Gli
 - **Auto-save.** Leave at any time and continue where you stopped.
 - **Move your progress.** Export wins, best times, daily results and saved games as a file or as text, and import them on another device; importing merges and never replaces.
 - **Portrait and landscape.** Turn the phone or widen the window, and the board fills the height with the controls in a side panel.
-- **A tidy home screen.** Search at the top, then your games (the ones you pinned and played last), the daily challenge and one tile per category (Numbers, Logic grids, Paths & loops, Casual). A category lists its games; games that are variants of one idea share a family page. Search finds games by name, by what you do in them ("draw a loop", "shade cells") in any of the four languages, and by other names the puzzles are known by; it forgives typos. Long-press a game, or use the pin on its new-game sheet, to pin it.
+- **A tidy home screen.** Search at the top, then your games (the ones you pinned and played last), the daily challenge and one tile per category (Numbers, Logic grids, Paths & loops, Casual). A category lists its games; games that are variants of one idea share a family page. Search finds games by name, by what you do in them ("draw a loop", "shade cells") in any of the four languages, and by other names the puzzles are known by; it forgives typos, and when nothing matches it shows the closest games, also by part of a word. Long-press a game, or use the pin on its new-game sheet, to pin it.
 - **Animations.** Cells pop and fade, pipes rotate, colors flood, bubbles fall and slide, and solving plays a ripple with confetti.
 - **Light and dark themes** (Material 3).
 - **Four languages:** English, Ukrainian, Polish and German.

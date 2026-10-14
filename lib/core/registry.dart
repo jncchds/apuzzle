@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../puzzles/arrows/arrows_type.dart';
 import '../puzzles/atoms/atoms_type.dart';
+import '../puzzles/blockade/blockade_type.dart';
 import '../puzzles/blocks/blocks_type.dart';
 import '../puzzles/cages/cages_type.dart';
 import '../puzzles/blend/blend_type.dart';
@@ -13,6 +14,7 @@ import '../puzzles/fleet/fleet_type.dart';
 import '../puzzles/formula/formula_type.dart';
 import '../puzzles/glimpse/glimpse_type.dart';
 import '../puzzles/hopper/hopper_type.dart';
+import '../puzzles/homeward/homeward_type.dart';
 import '../puzzles/hues/hues_type.dart';
 import '../puzzles/islands/islands_type.dart';
 import '../puzzles/kings/kings_type.dart';
@@ -73,6 +75,8 @@ const List<PuzzleType> puzzleTypes = [
   TrailType(),
   LinksType(),
   LabyrinthType(),
+  HomewardType(),
+  BlockadeType(),
   AtomsType(),
   LitsType(),
   CampType(),
@@ -182,6 +186,8 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('trail', [TrailType()]),
       PuzzleFamily('links', [LinksType()]),
       PuzzleFamily('labyrinth', [LabyrinthType()]),
+      PuzzleFamily('homeward', [HomewardType()]),
+      PuzzleFamily('blockade', [BlockadeType()]),
       PuzzleFamily('pipes', [PipesType()]),
       PuzzleFamily('atoms', [AtomsType()]),
       PuzzleFamily('fence', [FenceType()]),

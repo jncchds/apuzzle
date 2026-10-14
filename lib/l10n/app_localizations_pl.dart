@@ -901,6 +901,99 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Znajdź drogę przez labirynt od wejścia w lewym górnym rogu do wyjścia w prawym dolnym.\n• Nie można przechodzić przez ściany.\n\nPrzeciągaj od końca ścieżki, aby iść dalej. Przeciągnij z powrotem, aby się cofnąć, albo dotknij pola ścieżki, aby do niego wrócić.';
 
   @override
+  String get tagDrive => 'jazda, auto, samochód, taksówka, zabrać, dowieźć, zwierzęta, zwierzaki, paliwo, trasa';
+
+  @override
+  String get homewardName => 'Do domu';
+
+  @override
+  String get homewardTagline => 'Odwieź wszystkie zwierzaki do domu, zanim skończy się paliwo';
+
+  @override
+  String get homewardRules =>
+      '• Jedź autem po drogach. Każdy odcinek drogi między dwoma skrzyżowaniami kosztuje jedną jednostkę paliwa.\n• Podjedź do zwierzaka, aby go zabrać, a potem do domu z tym samym symbolem, aby go wysadzić. Jedno i drugie dzieje się samo.\n• Auto ma niewiele miejsc: zwierzak, do którego dojedziesz, gdy wszystkie miejsca są zajęte, czeka dalej. Gdy jest wolne miejsce, zawsze wsiada.\n• Odwieź wszystkie zwierzaki do domu, zanim skończy się paliwo.\n\nDotknij skrzyżowania obok auta albo dalej na prostej drodze, aby tam pojechać. Możesz też przeciągać wzdłuż dróg. Gdy skończy się paliwo, cofnij lub zacznij od nowa.';
+
+  @override
+  String homewardFuel(int left, int limit) {
+    return 'Paliwo $left / $limit';
+  }
+
+  @override
+  String get homewardOutOfFuel => 'Koniec paliwa: cofnij lub zacznij od nowa';
+
+  @override
+  String get tutHomeward1 =>
+      'Dotknij skrzyżowania obok auta, aby tam pojechać. Każdy odcinek drogi kosztuje jedną jednostkę paliwa. Podjedź do zwierzaka, aby go zabrać, i zawieź go do domu z tym samym symbolem.';
+
+  @override
+  String get tutHomeward2 =>
+      'To auto ma jedno miejsce. Zwierzak, do którego dojedziesz, gdy miejsce jest zajęte, czeka dalej, więc odwieź jednego do domu, zanim pojedziesz po następnego. Odwieź oba do domu.';
+
+  @override
+  String get tutHomeward3 =>
+      'Teraz paliwa jest na styk, a auto ma dwa miejsca. Pędzenie do najbliższego zwierzaka nie zawsze się opłaca: zaplanuj trasę, która zabiera oba, a potem mija oba domy.';
+
+  @override
+  String get tutHomeward4 =>
+      'Teraz prawdziwa plansza. Zanim ruszysz, sprawdź, gdzie mieszka każdy zwierzak, i zaplanuj trasę, która po drodze mija zwierzaki i domy.';
+
+  @override
+  String get tutHomewardS1 =>
+      'Łącz kursy: planuj tak, aby każde wysadzenie wypadało po drodze do następnego zwierzaka, i zabieraj zwierzaka wcześniej, jeśli jego dom leży na trasie, którą i tak pojedziesz. Na tej planszy paliwa jest na styk.';
+
+  @override
+  String get tutHomewardS2 =>
+      'Na trudnych planszach paliwa jest na styk, a auto ma tylko dwa miejsca. Zaplanuj całą trasę przed pierwszym odcinkiem: miejsce zajęte za wcześnie zmusi cię do minięcia potrzebnego zwierzaka, więc czasem objedź zwierzaka inną drogą.';
+
+  @override
+  String get blockadeName => 'Blokada';
+
+  @override
+  String get blockadeTagline => 'Przemknij obok okrętów patrolowych do portu';
+
+  @override
+  String get blockadeRules =>
+      '• Doprowadź łódź do portu. W każdej turze łódź przesuwa się o jedno pole (w górę, w dół, w lewo lub w prawo) albo czeka w miejscu. Skały zagradzają drogę.\n• Po każdej turze każdy okręt patrolowy płynie o jedno pole swoją trasą: tam i z powrotem wzdłuż linii albo w kółko po pętli. Trasa jest narysowana na planszy, a pierścień pokazuje, gdzie okręt będzie po twojej następnej turze.\n• Nie daj się złapać: nigdy nie kończ tury na polu okrętu i nie zamieniaj się z okrętem miejscami. Żaden okręt nie wpływa na start ani do portu.\n• Dotrzyj do portu w dostępnej liczbie tur.\n\nDotknij pola obok łodzi, aby tam popłynąć, albo przeciągnij. Dotknij łodzi lub „Czekaj”, aby przeczekać turę. Na klawiaturze: strzałki i spacja. Jeśli cię złapią albo skończą się tury, cofnij lub zacznij od nowa.';
+
+  @override
+  String blockadeTurn(int turn, int limit) {
+    return 'Tura $turn / $limit';
+  }
+
+  @override
+  String get blockadeWait => 'Czekaj';
+
+  @override
+  String get blockadeCaught => 'Patrol złapał łódź: cofnij lub zacznij od nowa';
+
+  @override
+  String get blockadeOutOfTurns => 'Koniec tur: cofnij lub zacznij od nowa';
+
+  @override
+  String get tutBlockade1 =>
+      'Dotknij pola obok łodzi, aby tam popłynąć: jedno pole na turę. Skały zagradzają drogę. Dopłyń do portu.';
+
+  @override
+  String get tutBlockade2 =>
+      'Po każdej twojej turze każdy okręt patrolowy płynie o jedno pole swoją trasą, a pierścień pokazuje, dokąd popłynie dalej. Nie kończ tury tam, gdzie będzie okręt, i nie zamieniaj się z nim miejscami. Dotknij łodzi lub „Czekaj”, aby przeczekać turę.';
+
+  @override
+  String get tutBlockade3 =>
+      'Ten okręt krąży wokół wyspy, a tur nie ma w zapasie: licznik pokazuje, ile ich masz. Krótka droga prowadzi wprost na okręt, a na czekanie nie ma czasu. Opłyń wyspę z drugiej strony, tuż za okrętem.';
+
+  @override
+  String get tutBlockade4 =>
+      'Teraz prawdziwa plansza. Zanim ruszysz, sprawdź, dokąd płynie każdy okręt, i zaplanuj, kiedy minąć każdy z nich.';
+
+  @override
+  String get tutBlockadeS1 =>
+      'Okręt nigdy cię nie zaskoczy: kropki pokazują całą jego trasę, a pierścień, gdzie będzie po twojej turze. Na pole, które okręt właśnie opuszcza, możesz wpłynąć, o ile nie płynie on na pole, które opuszczasz ty. Tu tur nie ma w zapasie: licz rytm okrętów i przemykaj w lukach.';
+
+  @override
+  String get tutBlockadeS2 =>
+      'Na trudnych planszach tur nie ma w zapasie. Zaplanuj całą drogę przed pierwszą turą: jeśli trzeba czekać, czekaj tam, gdzie nie dopływa żaden okręt, a objazd tuż za okrętem często jest lepszy niż czekanie na niego.';
+
+  @override
   String get campName => 'Kemping';
 
   @override
