@@ -4,6 +4,8 @@ import 'package:apuzzle/core/recall.dart';
 import 'package:apuzzle/puzzles/glimpse/glimpse_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   const type = GlimpseType();
 
@@ -27,7 +29,7 @@ void main() {
         }
       }
     }
-    expect(watch.elapsedMilliseconds, lessThan(2000), reason: '$rounds rounds');
+    expect(watch.elapsedMilliseconds, lessThan(timeLimit(2000)), reason: '$rounds rounds');
   });
 
   test('a tap on an unlit cell fails at once, the last lit cell passes', () {

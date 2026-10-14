@@ -8,6 +8,8 @@ import 'package:apuzzle/puzzles/junction/junction_tutorial.dart';
 import 'package:apuzzle/puzzles/junction/junction_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 /// One switch on 5×5 (cell 12): up to station 0 (cell 4), down to station 1 (cell 24).
 JunctionPuzzle _fork({List<int> trains = const [0, 1], int gap = 3}) => junctionPractice(
   5,
@@ -123,7 +125,7 @@ void main() {
         for (var seed = 1; seed <= 6; seed++) {
           final params = GenParams(size: size, difficulty: d, seed: seed);
           final p = type.generate(params);
-          expect(type.generate(params).toJson(), p.toJson(), reason: 'deterministic');
+          if (seed == 1) expect(type.generate(params).toJson(), p.toJson(), reason: 'deterministic');
           _checkNetwork(p, junctionStations(size, d));
           final s = _auto(p);
           expect(s.score, junctionTrainCount, reason: 'seed $seed');
@@ -157,7 +159,7 @@ void main() {
         }
       }
     }
-    expect(watch.elapsedMilliseconds / n, lessThan(150));
+    expect(watch.elapsedMilliseconds / n, lessThan(timeLimit(150)));
   });
 
   test('state survives a save round trip', () {

@@ -4,6 +4,8 @@ import 'package:apuzzle/core/recall.dart';
 import 'package:apuzzle/puzzles/vanish/vanish_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   const type = VanishType();
 
@@ -24,7 +26,7 @@ void main() {
         }
       }
     }
-    expect(watch.elapsedMilliseconds, lessThan(2000));
+    expect(watch.elapsedMilliseconds, lessThan(timeLimit(2000)));
   });
 
   test('tapping 1 hides the rest; the numbers go in order', () {

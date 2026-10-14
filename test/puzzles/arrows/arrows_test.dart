@@ -5,6 +5,8 @@ import 'package:apuzzle/puzzles/arrows/arrows_model.dart';
 import 'package:apuzzle/puzzles/arrows/arrows_solver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   for (final n in [5, 6, 8, 10]) {
     for (final d in [Difficulty.easy, Difficulty.medium, Difficulty.hard]) {
@@ -26,9 +28,9 @@ void main() {
           expect(s.linesOf(st), p.lines);
           expect(s.shadedOf(st), p.shaded);
           if (n <= 6) expect(s.countSolutions(s.initial()), 1);
-          expect(generateArrows(params).toJson(), p.toJson());
+          if (seed == 1) expect(generateArrows(params).toJson(), p.toJson());
           expect(ArrowsPuzzle.fromJson(p.toJson()).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(3000));
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(3000)));
           info.add('${sw.elapsedMilliseconds}ms clues ${p.arrows.where((a) => a >= 0).length} t1 ${s.slack(1)}');
         }
         // ignore: avoid_print

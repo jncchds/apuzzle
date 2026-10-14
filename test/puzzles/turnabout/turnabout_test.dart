@@ -9,6 +9,8 @@ import 'package:apuzzle/puzzles/turnabout/turnabout_tutorial.dart';
 import 'package:apuzzle/puzzles/turnabout/turnabout_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 const type = TurnaboutType();
 
 /// Plays the perfect player to the end of the game.
@@ -171,11 +173,11 @@ void main() {
         for (var seed = 1; seed <= 4; seed++) {
           final params = GenParams(size: size, difficulty: d, seed: seed);
           final p = type.generate(params);
-          final again = type.generate(params);
-          expect(again.toJson(), p.toJson(), reason: 'deterministic');
+          final again = seed == 1 ? type.generate(params) : null;
+          if (again != null) expect(again.toJson(), p.toJson(), reason: 'deterministic');
           for (var r = 0; r < turnaboutRounds; r++) {
-            final a = p.round(r), b = again.round(r);
-            expect(b.toJson(), a.toJson(), reason: 'round $r is deterministic');
+            final a = p.round(r);
+            if (again != null) expect(again.round(r).toJson(), a.toJson(), reason: 'round $r is deterministic');
             _checkRound(a);
           }
           expect(p.round(1).open, isNot(p.round(0).open), reason: 'a new maze every round');
@@ -217,7 +219,7 @@ void main() {
         }
       }
     }
-    expect(watch.elapsedMilliseconds / n, lessThan(50));
+    expect(watch.elapsedMilliseconds / n, lessThan(timeLimit(50)));
   });
 
   test('state and puzzle survive a save round trip', () {

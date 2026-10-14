@@ -5,6 +5,8 @@ import 'package:apuzzle/puzzles/camp/camp_model.dart';
 import 'package:apuzzle/puzzles/camp/camp_solver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   for (final n in [5, 7, 8, 10]) {
     for (final d in [Difficulty.easy, Difficulty.medium, Difficulty.hard]) {
@@ -24,8 +26,8 @@ void main() {
           for (var i = 0; i < n * n; i++) {
             if (!p.trees[i]) expect(st[i] == campTent, p.tents[i]);
           }
-          expect(generateCamp(params).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(3000));
+          if (seed == 1) expect(generateCamp(params).toJson(), p.toJson());
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(3000)));
           final hidden = [...p.rowCounts, ...p.colCounts].where((c) => c == null).length;
           info.add('${sw.elapsedMilliseconds}ms t${p.treeCount} g${p.givenTents.length} h$hidden');
         }

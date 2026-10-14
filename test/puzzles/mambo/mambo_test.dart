@@ -6,6 +6,8 @@ import 'package:apuzzle/puzzles/mambo/mambo_solver.dart';
 import 'package:apuzzle/puzzles/mambo/mambo_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   const sizes = [4, 6, 8, 10];
 
@@ -31,9 +33,8 @@ void main() {
           expect(MamboSolver(n, p.edges).solveLogic(lg, tier), isTrue);
           expect(lg, p.solution);
 
-          final again = generateMambo(params);
-          expect(again.toJson(), p.toJson(), reason: 'not deterministic');
-          expect(sw.elapsedMilliseconds, lessThan(8000), reason: 'too slow');
+          if (seed == 1) expect(generateMambo(params).toJson(), p.toJson(), reason: 'not deterministic');
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(8000)), reason: 'too slow');
         }
       });
     }

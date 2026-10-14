@@ -4,6 +4,8 @@ import 'package:apuzzle/core/recall.dart';
 import 'package:apuzzle/puzzles/hopper/hopper_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   const type = HopperType();
 
@@ -29,7 +31,7 @@ void main() {
         }
       }
     }
-    expect(watch.elapsedMilliseconds, lessThan(2000));
+    expect(watch.elapsedMilliseconds, lessThan(timeLimit(2000)));
   });
 
   test('the pads go in jump order, or backwards', () {

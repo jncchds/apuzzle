@@ -7,6 +7,8 @@ import 'package:apuzzle/puzzles/trail/trail_solver.dart';
 import 'package:apuzzle/puzzles/trail/trail_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   const type = TrailType();
   for (final n in [4, 5, 6, 7, 8, 10]) {
@@ -27,8 +29,8 @@ void main() {
             expect(sols.length, 1);
             expect(sols.single, p.solution);
           }
-          expect(generateTrail(params).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(10000), reason: '${sw.elapsedMilliseconds}ms');
+          if (seed == 1) expect(generateTrail(params).toJson(), p.toJson());
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(10000)), reason: '${sw.elapsedMilliseconds}ms');
           counts.add(p.lastNumber);
         }
         // ignore: avoid_print

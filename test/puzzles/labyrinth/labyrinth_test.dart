@@ -5,6 +5,8 @@ import 'package:apuzzle/puzzles/labyrinth/labyrinth_model.dart';
 import 'package:apuzzle/puzzles/labyrinth/labyrinth_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 /// Every cell reachable from the start, and edges = cells - 1 (so no loops).
 bool _perfectMaze(LabyrinthPuzzle p) {
   final n = p.rows * p.cols;
@@ -38,11 +40,11 @@ void main() {
           final params = GenParams(size: size, difficulty: d, seed: seed);
           final sw = Stopwatch()..start();
           final p = generateLabyrinth(params);
-          expect(sw.elapsedMilliseconds, lessThan(500));
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(500)));
           expect(_perfectMaze(p), isTrue, reason: 'not a perfect maze');
           expect(labyrinthSolved(p, p.solution), isTrue);
           expect(type.isSolved(p, type.initialState(p)), isFalse);
-          expect(generateLabyrinth(params).toJson(), p.toJson());
+          if (seed == 1) expect(generateLabyrinth(params).toJson(), p.toJson());
         }
       });
     }

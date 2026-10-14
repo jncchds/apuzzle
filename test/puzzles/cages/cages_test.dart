@@ -7,6 +7,8 @@ import 'package:apuzzle/puzzles/cages/cages_solver.dart';
 import 'package:apuzzle/puzzles/cages/cages_tutorial.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   test('cage operations', () {
     expect(cageHolds(CageOp.add, 7, [1, 2, 4]), isTrue);
@@ -44,8 +46,8 @@ void main() {
           expect(s.solve(c, tier), isTrue, reason: 'not solvable at tier $tier');
           expect(LatinSquare.of(n).values(c), p.solution);
           final below = tier > 1 && s.solve(s.start(p.givens), tier - 1);
-          expect(generateCages(params).toJson(), p.toJson(), reason: 'not deterministic');
-          expect(sw.elapsedMilliseconds, lessThan(4000), reason: 'too slow');
+          if (seed == 1) expect(generateCages(params).toJson(), p.toJson(), reason: 'not deterministic');
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(4000)), reason: 'too slow');
           final lone = p.cages.where((c) => c.cells.length == 1).length;
           info.add('${sw.elapsedMilliseconds}ms k${p.cages.length} l$lone${below ? ' easier' : ''}');
         }

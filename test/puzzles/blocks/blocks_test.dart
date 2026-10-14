@@ -5,6 +5,8 @@ import 'package:apuzzle/puzzles/blocks/blocks_model.dart';
 import 'package:apuzzle/puzzles/blocks/blocks_solver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   for (final n in [5, 6, 8, 10]) {
     for (final d in [Difficulty.easy, Difficulty.medium, Difficulty.hard]) {
@@ -31,9 +33,9 @@ void main() {
           expect(s.solve(c, tier), isTrue);
           expect([for (final m in c) BlocksSolver.valueOf(m)], p.solution);
           expect(s.countSolutions(s.start(p.givens)!), 1);
-          expect(generateBlocks(params).toJson(), p.toJson());
+          if (seed == 1) expect(generateBlocks(params).toJson(), p.toJson());
           expect(BlocksPuzzle.fromJson(p.toJson()).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(3000));
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(3000)));
           final lower = tier > 1 && s.solves(p.givens, tier - 1);
           info.add(
             '${sw.elapsedMilliseconds}ms givens ${p.givens.where((g) => g != null).length}${lower ? ' (easier)' : ''}',

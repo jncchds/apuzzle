@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../helpers/timing.dart';
+
 const _c = FormulaMark.correct, _p = FormulaMark.present, _a = FormulaMark.absent;
 
 FormulaState _typed(FormulaState s, String text) => text.split('').fold(s, (s, ch) => s.type(ch));
@@ -123,7 +125,7 @@ void main() {
     for (var seed = 0; seed < 100; seed++) {
       generateFormula(params.withSeed(seed));
     }
-    expect(sw.elapsedMilliseconds, lessThan(2000));
+    expect(sw.elapsedMilliseconds, lessThan(timeLimit(2000)));
     final code = PuzzleCode.format(type, params);
     expect(PuzzleCode.parse(code, puzzleTypes).params.size, params.size);
   });

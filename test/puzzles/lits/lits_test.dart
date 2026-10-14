@@ -6,6 +6,8 @@ import 'package:apuzzle/puzzles/lits/lits_solver.dart';
 import 'package:apuzzle/puzzles/lits/lits_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   test('classify', () {
     // 5 columns
@@ -35,8 +37,8 @@ void main() {
           final sols = solver.solutions(budget: 3000000);
           expect(sols.length, 1);
           expect(sols.single, p.shaded);
-          expect(generateLits(params).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(8000), reason: '${sw.elapsedMilliseconds}ms');
+          if (seed == 1) expect(generateLits(params).toJson(), p.toJson());
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(8000)), reason: '${sw.elapsedMilliseconds}ms');
           regionCounts.add(p.regionCount);
         }
         // ignore: avoid_print

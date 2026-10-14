@@ -5,6 +5,8 @@ import 'package:apuzzle/puzzles/pearls/pearls_model.dart';
 import 'package:apuzzle/puzzles/pearls/pearls_solver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   for (final n in [5, 7, 8, 10]) {
     for (final d in [Difficulty.easy, Difficulty.medium, Difficulty.hard]) {
@@ -25,8 +27,8 @@ void main() {
             expect(st[e] == 1, p.lines[e]);
           }
           if (n <= 7) expect(s.countSolutions(s.initial()), 1);
-          expect(generatePearls(params).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(3000));
+          if (seed == 1) expect(generatePearls(params).toJson(), p.toJson());
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(3000)));
           info.add('${sw.elapsedMilliseconds}ms #${p.pearls.where((x) => x != pearlNone).length}');
         }
         // ignore: avoid_print

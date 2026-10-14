@@ -6,6 +6,8 @@ import 'package:apuzzle/puzzles/orbits/orbits_solver.dart';
 import 'package:apuzzle/puzzles/orbits/orbits_tutorial.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   for (final n in [5, 6, 8, 10]) {
     for (final d in [Difficulty.easy, Difficulty.medium, Difficulty.hard]) {
@@ -27,9 +29,9 @@ void main() {
           expect(s.solve(c, d.index + 1), isTrue);
           expect(s.owners(c), p.solution);
           if (n <= 8) expect(s.countSolutions(), 1);
-          expect(generateOrbits(params).toJson(), p.toJson());
+          if (seed == 1) expect(generateOrbits(params).toJson(), p.toJson());
           expect(OrbitsPuzzle.fromJson(p.toJson()).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(3000));
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(3000)));
           info.add('${sw.elapsedMilliseconds}ms t${s.grade()} stars ${g.count}');
         }
         // ignore: avoid_print

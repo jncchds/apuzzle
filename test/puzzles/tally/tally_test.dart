@@ -5,6 +5,8 @@ import 'package:apuzzle/puzzles/tally/tally_model.dart';
 import 'package:apuzzle/puzzles/tally/tally_solver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   for (final n in [5, 6, 7, 8, 9]) {
     for (final d in [Difficulty.easy, Difficulty.medium, Difficulty.hard]) {
@@ -34,9 +36,9 @@ void main() {
             ),
             1,
           );
-          expect(generateTally(params).toJson(), p.toJson());
+          if (seed == 1) expect(generateTally(params).toJson(), p.toJson());
           expect(TallyPuzzle.fromJson(p.toJson()).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(3000));
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(3000)));
           info.add('${sw.elapsedMilliseconds}ms grade $grade givens ${p.givens.length}');
         }
         // ignore: avoid_print

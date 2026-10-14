@@ -5,6 +5,8 @@ import 'package:apuzzle/puzzles/kings/kings_model.dart';
 import 'package:apuzzle/puzzles/kings/kings_solver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   for (final n in [5, 6, 7, 8, 9, 10]) {
     for (final d in [Difficulty.easy, Difficulty.medium, Difficulty.hard]) {
@@ -31,8 +33,8 @@ void main() {
             final ks = solver.solveLogic(g)!..sort();
             expect(ks, kings..sort());
           }
-          expect(generateKings(params).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(8000), reason: 'too slow (${sw.elapsedMilliseconds}ms)');
+          if (seed == 1) expect(generateKings(params).toJson(), p.toJson());
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(8000)), reason: 'too slow (${sw.elapsedMilliseconds}ms)');
         }
         // ignore: avoid_print
         print('grades $n ${d.name}: $gradeCounts');

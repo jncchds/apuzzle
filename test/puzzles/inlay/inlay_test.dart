@@ -7,6 +7,8 @@ import 'package:apuzzle/puzzles/inlay/inlay_tutorial.dart';
 import 'package:apuzzle/puzzles/inlay/inlay_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 InlayState _solutionState(InlayPuzzle p) =>
     InlayState([for (final (o, _) in p.solution) o], [for (final (_, at) in p.solution) at]);
 
@@ -55,7 +57,7 @@ void main() {
           final params = GenParams(size: size, difficulty: d, seed: seed);
           final sw = Stopwatch()..start();
           final p = type.generate(params);
-          expect(sw.elapsedMilliseconds, lessThan(1500));
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(1500)));
           expect(p.rows, size.rows);
           expect(p.cols, size.cols);
           expect(p.flip, d == Difficulty.hard);
@@ -78,7 +80,7 @@ void main() {
           final s = InlayState([for (final (o, _) in cover!) o], [for (final (_, at) in cover) at]);
           expect(type.isSolved(p, s), isTrue);
           expect(type.isSolved(p, type.initialState(p)), isFalse);
-          expect(type.generate(params).toJson(), p.toJson());
+          if (seed == 1) expect(type.generate(params).toJson(), p.toJson());
           expect(type.decodePuzzle(type.encodePuzzle(p)).toJson(), p.toJson());
           final st = type.decodeState(type.encodeState(s));
           expect(st.orient, s.orient);

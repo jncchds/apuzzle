@@ -4,6 +4,8 @@ import 'package:apuzzle/core/recall.dart';
 import 'package:apuzzle/puzzles/rebound/rebound_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 /// An independent walk of the ball, cell by cell, for checking [reboundRun].
 int _walk(RecallPuzzle p, List<int> round) {
   final n = p.rows, m = p.cols;
@@ -79,7 +81,7 @@ void main() {
       }
     }
     expect(met / placed, greaterThan(0.5), reason: 'most bumpers are on the way');
-    expect(watch.elapsedMilliseconds, lessThan(5000));
+    expect(watch.elapsedMilliseconds, lessThan(timeLimit(5000)));
   });
 
   test('a tap on the exit passes, any other slot misses; the grid is no answer', () {

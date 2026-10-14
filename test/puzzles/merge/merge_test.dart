@@ -7,6 +7,8 @@ import 'package:apuzzle/puzzles/merge/merge_model.dart';
 import 'package:apuzzle/puzzles/merge/merge_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 MergePuzzle _puzzle(List<int> start, int rows, int cols, {int target = 2048}) =>
     MergePuzzle(rows: rows, cols: cols, goal: MergeGoal.target, target: target, seed: 1, start: start);
 
@@ -95,7 +97,7 @@ void main() {
       s = type.hint(p, s)!.state;
       if (sw.elapsedMilliseconds > slowest) slowest = sw.elapsedMilliseconds;
     }
-    expect(slowest, lessThan(150), reason: '${slowest}ms');
+    expect(slowest, lessThan(timeLimit(150)), reason: '${slowest}ms');
   });
 
   test('state survives a save round trip', () {

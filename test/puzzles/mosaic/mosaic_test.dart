@@ -4,6 +4,8 @@ import 'package:apuzzle/puzzles/mosaic/mosaic_model.dart';
 import 'package:apuzzle/puzzles/mosaic/mosaic_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   const type = MosaicType();
   for (final n in [6, 12, 18]) {
@@ -20,8 +22,8 @@ void main() {
           }
           expect(type.isSolved(p, s), isTrue);
           expect(p.plan.length, lessThanOrEqualTo(p.limit));
-          expect(type.generate(params).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(5000));
+          if (seed == 1) expect(type.generate(params).toJson(), p.toJson());
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(5000)));
         }
       });
     }

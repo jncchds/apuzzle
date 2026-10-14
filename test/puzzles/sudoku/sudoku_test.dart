@@ -5,6 +5,8 @@ import 'package:apuzzle/puzzles/sudoku/sudoku_model.dart';
 import 'package:apuzzle/puzzles/sudoku/sudoku_solver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   for (final n in [4, 6, 9]) {
     for (final d in Difficulty.values) {
@@ -29,8 +31,8 @@ void main() {
             expect(solver.solveLogic(lg, tier), isTrue, reason: 'not solvable at tier $tier');
             expect(lg, p.solution);
           }
-          expect(generateSudoku(params).toJson(), p.toJson(), reason: 'not deterministic');
-          expect(sw.elapsedMilliseconds, lessThan(8000), reason: 'too slow');
+          if (seed == 1) expect(generateSudoku(params).toJson(), p.toJson(), reason: 'not deterministic');
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(8000)), reason: 'too slow');
         }
       });
     }

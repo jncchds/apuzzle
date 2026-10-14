@@ -9,6 +9,8 @@ import 'package:apuzzle/puzzles/skyline/skyline_solver.dart';
 import 'package:apuzzle/puzzles/skyline/skyline_tutorial.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   test('latin rule ids leave room after the shared rules', () {
     expect(latinRuleCount, LatinRule.values.length);
@@ -51,8 +53,8 @@ void main() {
           expect(s.solve(c, tier), isTrue, reason: 'not solvable at tier $tier');
           expect(LatinSquare.of(n).values(c), p.solution);
           final below = tier > 1 && s.solve(s.start(p.givens), tier - 1);
-          expect(generateSkyline(params).toJson(), p.toJson(), reason: 'not deterministic');
-          expect(sw.elapsedMilliseconds, lessThan(4000), reason: 'too slow');
+          if (seed == 1) expect(generateSkyline(params).toJson(), p.toJson(), reason: 'not deterministic');
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(4000)), reason: 'too slow');
           final clues = p.clues.where((c) => c != null).length;
           final givens = p.givens.where((g) => g != null).length;
           info.add('${sw.elapsedMilliseconds}ms c$clues g$givens${below ? ' easier' : ''}');

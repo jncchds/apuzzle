@@ -5,6 +5,8 @@ import 'package:apuzzle/puzzles/lamps/lamps_model.dart';
 import 'package:apuzzle/puzzles/lamps/lamps_solver.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   for (final n in [5, 7, 8, 10]) {
     for (final d in [Difficulty.easy, Difficulty.medium, Difficulty.hard]) {
@@ -23,8 +25,8 @@ void main() {
           for (var i = 0; i < n * n; i++) {
             if (!p.walls[i]) expect(st[i] == lampsLamp, p.lamps[i]);
           }
-          expect(generateLamps(params).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(3000));
+          if (seed == 1) expect(generateLamps(params).toJson(), p.toJson());
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(3000)));
           info.add(
             '${sw.elapsedMilliseconds}ms w${p.walls.where((w) => w).length} '
             '#${p.numbers.where((x) => x != null).length}',

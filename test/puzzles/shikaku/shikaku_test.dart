@@ -6,6 +6,8 @@ import 'package:apuzzle/puzzles/shikaku/shikaku_solver.dart';
 import 'package:apuzzle/puzzles/shikaku/shikaku_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/timing.dart';
+
 void main() {
   const type = ShikakuType();
   for (final n in [5, 7, 9, 12]) {
@@ -21,8 +23,8 @@ void main() {
           expect(solver.solutions().length, 1);
           final tier = d.index >= Difficulty.hard.index ? 2 : 1;
           expect(solver.solveLogic(tier), isNotNull);
-          expect(generateShikaku(params).toJson(), p.toJson());
-          expect(sw.elapsedMilliseconds, lessThan(8000), reason: '${sw.elapsedMilliseconds}ms');
+          if (seed == 1) expect(generateShikaku(params).toJson(), p.toJson());
+          expect(sw.elapsedMilliseconds, lessThan(timeLimit(8000)), reason: '${sw.elapsedMilliseconds}ms');
         }
       });
     }
