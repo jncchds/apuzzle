@@ -929,6 +929,54 @@ class AppLocalizationsDe extends AppLocalizations {
       'Schwere Bretter lassen kein Benzin übrig, und das Auto hat nur zwei Plätze. Plane die ganze Fahrt vor dem ersten Straßenstück: Ein zu früh besetzter Platz lässt dich an einem Tier vorbeifahren, das du brauchst. Fahre deshalb manchmal auf einer anderen Straße um ein Tier herum.';
 
   @override
+  String get blockadeName => 'Blockade';
+
+  @override
+  String get blockadeTagline => 'Schlüpf an den Patrouillenschiffen vorbei in den Hafen';
+
+  @override
+  String get blockadeRules =>
+      '• Bring das Boot in den Hafen. In jedem Zug fährt das Boot ein Feld weit (nach oben, unten, links oder rechts) oder wartet, wo es ist. Felsen versperren den Weg.\n• Nach jedem Zug fährt jedes Patrouillenschiff ein Feld auf seiner Route weiter: auf einer Linie hin und her oder immer im Kreis. Die Route ist auf dem Brett eingezeichnet, und ein Ring zeigt, wo das Schiff nach deinem nächsten Zug sein wird.\n• Lass dich nicht erwischen: Beende nie einen Zug auf dem Feld eines Schiffs, und tausche nie mit einem Schiff die Plätze. Kein Schiff fährt je auf den Start oder in den Hafen.\n• Erreiche den Hafen mit den Zügen, die du hast.\n\nTippe auf ein Feld neben dem Boot, um dorthin zu fahren, oder ziehe. Tippe auf das Boot oder auf „Warten“, um einen Zug auszusetzen. Auf der Tastatur: Pfeiltasten und Leertaste. Wenn du erwischt wirst oder keine Züge mehr hast, mach rückgängig oder starte neu.';
+
+  @override
+  String blockadeTurn(int turn, int limit) {
+    return 'Zug $turn / $limit';
+  }
+
+  @override
+  String get blockadeWait => 'Warten';
+
+  @override
+  String get blockadeCaught => 'Von einer Patrouille erwischt: rückgängig machen oder neu starten';
+
+  @override
+  String get blockadeOutOfTurns => 'Keine Züge mehr: rückgängig machen oder neu starten';
+
+  @override
+  String get tutBlockade1 =>
+      'Tippe auf ein Feld neben dem Boot, um dorthin zu fahren: ein Feld pro Zug. Felsen versperren den Weg. Fahr in den Hafen.';
+
+  @override
+  String get tutBlockade2 =>
+      'Nach jedem deiner Züge fährt jedes Patrouillenschiff ein Feld auf seiner Route weiter, und der Ring zeigt, wohin es als Nächstes fährt. Beende keinen Zug dort, wo ein Schiff sein wird, und tausche nicht mit einem die Plätze. Tippe auf das Boot oder auf „Warten“, um einen Zug auszusetzen.';
+
+  @override
+  String get tutBlockade3 =>
+      'Dieses Schiff fährt immer um die Insel herum, und es gibt keinen Zug zu viel: Der Zähler zeigt, wie viele du hast. Der kurze Weg führt dem Schiff direkt entgegen, und zum Warten ist keine Zeit. Fahr auf der anderen Seite um die Insel, dicht hinter dem Schiff her.';
+
+  @override
+  String get tutBlockade4 =>
+      'Jetzt ein echtes Brett. Sieh vor dem Ablegen nach, wohin jedes Schiff fährt, und plane, wann du an jedem vorbeikommst.';
+
+  @override
+  String get tutBlockadeS1 =>
+      'Ein Schiff überrascht dich nie: Die Punkte zeigen seine ganze Route und der Ring, wo es nach deinem Zug sein wird. In ein Feld, das ein Schiff gerade verlässt, darfst du fahren, solange es nicht auf das Feld fährt, das du verlässt. Hier gibt es keinen Zug zu viel: Zähle den Takt der Schiffe und schlüpf durch die Lücken.';
+
+  @override
+  String get tutBlockadeS2 =>
+      'Schwere Bretter lassen keinen Zug übrig. Plane die ganze Fahrt vor dem ersten Zug: Wenn du warten musst, warte dort, wo kein Schiff hinkommt, und ein Umweg dicht hinter einem Schiff ist oft besser, als auf es zu warten.';
+
+  @override
   String get campName => 'Zeltplatz';
 
   @override

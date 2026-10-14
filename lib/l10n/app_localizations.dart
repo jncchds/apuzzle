@@ -1612,6 +1612,84 @@ abstract class AppLocalizations {
   /// **'Hard boards leave no fuel to spare and give the car only two seats. Plan the whole drive before the first road: a seat taken too early makes you drive past a pet you need, so sometimes take another road around a pet.'**
   String get tutHomewardS2;
 
+  /// No description provided for @blockadeName.
+  ///
+  /// In en, this message translates to:
+  /// **'Blockade'**
+  String get blockadeName;
+
+  /// No description provided for @blockadeTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Slip past the patrol ships into the harbour'**
+  String get blockadeTagline;
+
+  /// No description provided for @blockadeRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Sail the boat to the harbour. Each turn the boat moves one cell (up, down, left or right) or waits where it is. Rocks block the way.\n• After every turn, each patrol ship sails one cell along its beat: back and forth along a line, or round and round a loop. Its beat is drawn on the board, and a ring shows where the ship will be after your next turn.\n• Don\'t get caught: never end a turn on a ship\'s cell, and never swap places with a ship. No ship ever enters the start or the harbour.\n• Reach the harbour within the turns you have.\n\nTap a cell next to the boat to sail there, or drag. Tap the boat or Wait to stay put for a turn. On a keyboard, use the arrow keys and the space bar. If you\'re caught or out of turns, undo or restart.'**
+  String get blockadeRules;
+
+  /// No description provided for @blockadeTurn.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn {turn} / {limit}'**
+  String blockadeTurn(int turn, int limit);
+
+  /// No description provided for @blockadeWait.
+  ///
+  /// In en, this message translates to:
+  /// **'Wait'**
+  String get blockadeWait;
+
+  /// No description provided for @blockadeCaught.
+  ///
+  /// In en, this message translates to:
+  /// **'Caught by a patrol ship: undo or restart'**
+  String get blockadeCaught;
+
+  /// No description provided for @blockadeOutOfTurns.
+  ///
+  /// In en, this message translates to:
+  /// **'Out of turns: undo or restart'**
+  String get blockadeOutOfTurns;
+
+  /// No description provided for @tutBlockade1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a cell next to the boat to sail there, one cell per turn. Rocks block the way. Sail to the harbour.'**
+  String get tutBlockade1;
+
+  /// No description provided for @tutBlockade2.
+  ///
+  /// In en, this message translates to:
+  /// **'After each of your turns, every patrol ship sails one cell along its beat, and the ring shows where it goes next. Don\'t end a turn where a ship will be, and don\'t swap places with one. Tap the boat or Wait to stay put for a turn.'**
+  String get tutBlockade2;
+
+  /// No description provided for @tutBlockade3.
+  ///
+  /// In en, this message translates to:
+  /// **'This ship sails round and round the island, and there are no turns to spare: the counter shows how many you have. The short way runs head-on into the ship, and there\'s no time to wait. Go round the island the other way, right behind the ship.'**
+  String get tutBlockade3;
+
+  /// No description provided for @tutBlockade4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Before you set off, watch where each ship goes and plan when to pass each one.'**
+  String get tutBlockade4;
+
+  /// No description provided for @tutBlockadeS1.
+  ///
+  /// In en, this message translates to:
+  /// **'A ship never surprises you: its dots show its whole beat, and the ring shows where it will be after your turn. You may sail into a cell a ship is just leaving, as long as it isn\'t coming to the cell you leave. Here there are no turns to spare: count the ships\' beats and slip through the gaps.'**
+  String get tutBlockadeS1;
+
+  /// No description provided for @tutBlockadeS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard boards leave no turns to spare. Plan the whole passage before the first turn: if you must wait, wait where no ship comes, and a detour right behind a ship often beats waiting for it.'**
+  String get tutBlockadeS2;
+
   /// No description provided for @campName.
   ///
   /// In en, this message translates to:

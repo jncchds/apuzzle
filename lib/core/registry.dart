@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../puzzles/arrows/arrows_type.dart';
 import '../puzzles/atoms/atoms_type.dart';
+import '../puzzles/blockade/blockade_type.dart';
 import '../puzzles/blocks/blocks_type.dart';
 import '../puzzles/cages/cages_type.dart';
 import '../puzzles/blend/blend_type.dart';
@@ -69,6 +70,7 @@ const List<PuzzleType> puzzleTypes = [
   LinksType(),
   LabyrinthType(),
   HomewardType(),
+  BlockadeType(),
   AtomsType(),
   LitsType(),
   CampType(),
@@ -177,6 +179,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('links', [LinksType()]),
       PuzzleFamily('labyrinth', [LabyrinthType()]),
       PuzzleFamily('homeward', [HomewardType()]),
+      PuzzleFamily('blockade', [BlockadeType()]),
       PuzzleFamily('pipes', [PipesType()]),
       PuzzleFamily('atoms', [AtomsType()]),
       PuzzleFamily('fence', [FenceType()]),
