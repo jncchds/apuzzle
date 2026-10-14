@@ -24,6 +24,7 @@ enum GameTag {
   maze,
   ships,
   water,
+  drive,
 }
 
 String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
@@ -46,6 +47,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
   GameTag.maze => l.tagMaze,
   GameTag.ships => l.tagShips,
   GameTag.water => l.tagWater,
+  GameTag.drive => l.tagDrive,
 };
 
 /// Tags of every type, by id.
@@ -75,6 +77,7 @@ const Map<String, List<GameTag>> gameTags = {
   'trail': [GameTag.path],
   'links': [GameTag.path, GameTag.connect],
   'labyrinth': [GameTag.path, GameTag.maze],
+  'homeward': [GameTag.drive, GameTag.path],
   'atoms': [GameTag.connect],
   'lits': [GameTag.shade, GameTag.regions],
   'camp': [GameTag.place],
@@ -125,6 +128,7 @@ const Map<String, List<String>> gameAliases = {
   'trail': ['Zip', 'Hamiltonian path'],
   'links': ['Numberlink', 'Arukone', 'Flow'],
   'labyrinth': ['Maze'],
+  'homeward': ['Pet Detective', 'Pet taxi'],
   'atoms': ['Hashi', 'Hashiwokakero', 'Bridges'],
   'lits': ['LITS', 'Nuruomino'],
   'camp': ['Tents', 'Tents and Trees'],

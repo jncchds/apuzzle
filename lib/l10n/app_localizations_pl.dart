@@ -901,6 +901,51 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Znajdź drogę przez labirynt od wejścia w lewym górnym rogu do wyjścia w prawym dolnym.\n• Nie można przechodzić przez ściany.\n\nPrzeciągaj od końca ścieżki, aby iść dalej. Przeciągnij z powrotem, aby się cofnąć, albo dotknij pola ścieżki, aby do niego wrócić.';
 
   @override
+  String get tagDrive => 'jazda, auto, samochód, taksówka, zabrać, dowieźć, zwierzęta, zwierzaki, paliwo, trasa';
+
+  @override
+  String get homewardName => 'Do domu';
+
+  @override
+  String get homewardTagline => 'Odwieź wszystkie zwierzaki do domu, zanim skończy się paliwo';
+
+  @override
+  String get homewardRules =>
+      '• Jedź autem po drogach. Każdy odcinek drogi między dwoma skrzyżowaniami kosztuje jedną jednostkę paliwa.\n• Podjedź do zwierzaka, aby go zabrać, a potem do domu z tym samym symbolem, aby go wysadzić. Jedno i drugie dzieje się samo.\n• Auto ma niewiele miejsc: zwierzak, do którego dojedziesz, gdy wszystkie miejsca są zajęte, czeka dalej. Gdy jest wolne miejsce, zawsze wsiada.\n• Odwieź wszystkie zwierzaki do domu, zanim skończy się paliwo.\n\nDotknij skrzyżowania obok auta albo dalej na prostej drodze, aby tam pojechać. Możesz też przeciągać wzdłuż dróg. Gdy skończy się paliwo, cofnij lub zacznij od nowa.';
+
+  @override
+  String homewardFuel(int left, int limit) {
+    return 'Paliwo $left / $limit';
+  }
+
+  @override
+  String get homewardOutOfFuel => 'Koniec paliwa: cofnij lub zacznij od nowa';
+
+  @override
+  String get tutHomeward1 =>
+      'Dotknij skrzyżowania obok auta, aby tam pojechać. Każdy odcinek drogi kosztuje jedną jednostkę paliwa. Podjedź do zwierzaka, aby go zabrać, i zawieź go do domu z tym samym symbolem.';
+
+  @override
+  String get tutHomeward2 =>
+      'To auto ma jedno miejsce. Zwierzak, do którego dojedziesz, gdy miejsce jest zajęte, czeka dalej, więc odwieź jednego do domu, zanim pojedziesz po następnego. Odwieź oba do domu.';
+
+  @override
+  String get tutHomeward3 =>
+      'Teraz paliwa jest na styk, a auto ma dwa miejsca. Pędzenie do najbliższego zwierzaka nie zawsze się opłaca: zaplanuj trasę, która zabiera oba, a potem mija oba domy.';
+
+  @override
+  String get tutHomeward4 =>
+      'Teraz prawdziwa plansza. Zanim ruszysz, sprawdź, gdzie mieszka każdy zwierzak, i zaplanuj trasę, która po drodze mija zwierzaki i domy.';
+
+  @override
+  String get tutHomewardS1 =>
+      'Łącz kursy: planuj tak, aby każde wysadzenie wypadało po drodze do następnego zwierzaka, i zabieraj zwierzaka wcześniej, jeśli jego dom leży na trasie, którą i tak pojedziesz. Na tej planszy paliwa jest na styk.';
+
+  @override
+  String get tutHomewardS2 =>
+      'Na trudnych planszach paliwa jest na styk, a auto ma tylko dwa miejsca. Zaplanuj całą trasę przed pierwszym odcinkiem: miejsce zajęte za wcześnie zmusi cię do minięcia potrzebnego zwierzaka, więc czasem objedź zwierzaka inną drogą.';
+
+  @override
   String get campName => 'Kemping';
 
   @override

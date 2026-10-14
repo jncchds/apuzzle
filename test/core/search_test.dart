@@ -62,6 +62,7 @@ void main() {
     expect(alt('bimaru'), ['fleet']);
     expect(alt('battleships'), ['fleet']);
     expect(alt('aquarium'), ['basins']);
+    expect(alt('pet detective'), ['homeward']);
     expect(alt('nerdle'), ['formula']);
     expect(alt('train tracks'), ['rails']);
     expect(alt('minesweeper'), ['mines']);

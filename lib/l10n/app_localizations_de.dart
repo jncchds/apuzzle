@@ -884,6 +884,51 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Finde den Weg durch das Labyrinth vom Eingang in der linken oberen Ecke zum Ausgang in der rechten unteren Ecke.\n• Durch Wände kommst du nicht hindurch.\n\nZiehe vom Ende deines Wegs aus, um weiterzugehen. Ziehe zurück, um umzukehren, oder tippe auf ein Feld des Wegs, um dorthin zurückzugehen.';
 
   @override
+  String get tagDrive => 'fahren, Auto, Taxi, abholen, liefern, Haustiere, Tiere, Benzin, Tank, Route';
+
+  @override
+  String get homewardName => 'Heimwärts';
+
+  @override
+  String get homewardTagline => 'Bring alle Tiere nach Hause, bevor das Benzin ausgeht';
+
+  @override
+  String get homewardRules =>
+      '• Fahre mit dem Auto über die Straßen. Jedes Straßenstück zwischen zwei Kreuzungen kostet eine Einheit Benzin.\n• Fahre zu einem Tier, um es abzuholen, und dann zum Haus mit demselben Symbol, um es abzusetzen. Beides geschieht von selbst.\n• Das Auto hat nur wenige Plätze: Ein Tier, das du erreichst, während alle Plätze besetzt sind, wartet weiter. Ist ein Platz frei, steigt es immer ein.\n• Bring alle Tiere nach Hause, bevor das Benzin ausgeht.\n\nTippe auf eine Kreuzung neben dem Auto oder weiter entlang einer geraden Straße, um dorthin zu fahren. Oder ziehe entlang der Straßen. Geht das Benzin aus, mache Züge rückgängig oder starte neu.';
+
+  @override
+  String homewardFuel(int left, int limit) {
+    return 'Benzin $left / $limit';
+  }
+
+  @override
+  String get homewardOutOfFuel => 'Kein Benzin mehr: rückgängig machen oder neu starten';
+
+  @override
+  String get tutHomeward1 =>
+      'Tippe auf eine Kreuzung neben dem Auto, um dorthin zu fahren. Jedes Straßenstück kostet eine Einheit Benzin. Fahre zum Tier, um es abzuholen, und bring es zum Haus mit demselben Symbol.';
+
+  @override
+  String get tutHomeward2 =>
+      'Dieses Auto hat einen Platz. Ein Tier, das du erreichst, während der Platz besetzt ist, wartet weiter. Bring also erst ein Tier nach Hause, bevor du das nächste holst. Bring beide nach Hause.';
+
+  @override
+  String get tutHomeward3 =>
+      'Jetzt ist kein Benzin übrig, und das Auto hat zwei Plätze. Zum nächsten Tier zu eilen ist nicht immer am besten: Plane eine Fahrt, die erst beide Tiere abholt und dann an beiden Häusern vorbeikommt.';
+
+  @override
+  String get tutHomeward4 =>
+      'Jetzt ein echtes Brett. Sieh vor der Abfahrt nach, wo jedes Tier wohnt, und plane eine Fahrt, die unterwegs an Tieren und Häusern vorbeikommt.';
+
+  @override
+  String get tutHomewardS1 =>
+      'Verbinde die Fahrten: Plane so, dass jedes Absetzen auf dem Weg zum nächsten Tier liegt, und hole ein Tier früh ab, wenn sein Haus an einer Strecke liegt, die du ohnehin fährst. Auf diesem Brett ist kein Benzin übrig.';
+
+  @override
+  String get tutHomewardS2 =>
+      'Schwere Bretter lassen kein Benzin übrig, und das Auto hat nur zwei Plätze. Plane die ganze Fahrt vor dem ersten Straßenstück: Ein zu früh besetzter Platz lässt dich an einem Tier vorbeifahren, das du brauchst. Fahre deshalb manchmal auf einer anderen Straße um ein Tier herum.';
+
+  @override
   String get campName => 'Zeltplatz';
 
   @override

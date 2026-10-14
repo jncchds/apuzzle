@@ -883,6 +883,51 @@ class AppLocalizationsEn extends AppLocalizations {
       '• Find the way through the maze from the entrance in the top-left corner to the exit in the bottom-right corner.\n• You can\'t pass through walls.\n\nDrag from the end of your path to walk on. Drag back to retrace your steps, or tap a cell of the path to go back there.';
 
   @override
+  String get tagDrive => 'drive, car, taxi, pick up, deliver, pets, animals, fuel, route planning';
+
+  @override
+  String get homewardName => 'Homeward';
+
+  @override
+  String get homewardTagline => 'Drive every pet home before the fuel runs out';
+
+  @override
+  String get homewardRules =>
+      '• Drive the car along the roads. Every road between two crossings takes one unit of fuel.\n• Drive to a pet to pick it up, then drive to the home with the same symbol to drop it off. Both happen by themselves.\n• The car has only so many seats: a pet you reach while every seat is taken keeps waiting. With a seat free, it always gets in.\n• Bring every pet home before the fuel runs out.\n\nTap a crossing next to the car, or one further along a straight road, to drive there. Or drag along the roads. If the fuel runs out, undo or restart.';
+
+  @override
+  String homewardFuel(int left, int limit) {
+    return 'Fuel $left / $limit';
+  }
+
+  @override
+  String get homewardOutOfFuel => 'Out of fuel: undo or restart';
+
+  @override
+  String get tutHomeward1 =>
+      'Tap a crossing next to the car to drive there. Every road costs one unit of fuel. Drive to the pet to pick it up, then bring it to the home with the same symbol.';
+
+  @override
+  String get tutHomeward2 =>
+      'This car has one seat. A pet you reach while the seat is taken keeps waiting, so take one pet home before you fetch the next. Bring both home.';
+
+  @override
+  String get tutHomeward3 =>
+      'Now there\'s no fuel to spare, and the car has two seats. Rushing to the nearest pet isn\'t always best: plan a drive that picks up both pets and then passes both homes.';
+
+  @override
+  String get tutHomeward4 =>
+      'Now a real board. Before you set off, look where each pet lives, and plan a drive that passes pets and homes on the way.';
+
+  @override
+  String get tutHomewardS1 =>
+      'Chain the trips: plan so that each drop-off lies on the way to the next pet, and pick up a pet early when its home lies along a road you will drive anyway. This board has no fuel to spare.';
+
+  @override
+  String get tutHomewardS2 =>
+      'Hard boards leave no fuel to spare and give the car only two seats. Plan the whole drive before the first road: a seat taken too early makes you drive past a pet you need, so sometimes take another road around a pet.';
+
+  @override
   String get campName => 'Campsite';
 
   @override
