@@ -5304,4 +5304,136 @@ class AppLocalizationsEn extends AppLocalizations {
   String exPocketsAreaFill(Object lead, Object gone, Object cell) {
     return '$lead. No way to do that with different digits puts $gone into $cell.';
   }
+
+  @override
+  String get chambersName => 'Chambers';
+
+  @override
+  String get chambersTagline => 'Shade each room\'s count, and keep the lines between rooms short';
+
+  @override
+  String get chambersRules =>
+      '• The grid is cut into rooms. A number in a room tells how many of its cells are shaded; a room without a number may hold any count.\n• Shaded cells never touch side by side.\n• The unshaded cells form one connected area.\n• A straight line of unshaded cells, across or down, never crosses two room borders: it reaches into two rooms at most.\n\nTap a cell to cycle: shaded → dot (your \"this one stays\" note) → empty. Right-click cycles back. A long press dots the cells next to shaded ones and the rest of every room that has all its shaded cells. Dots are optional: the puzzle is done once the right cells are shaded.';
+
+  @override
+  String get tutChambers1 =>
+      'The grid is cut into rooms, and a number tells how many cells of its room are shaded. Shaded cells never touch side by side. A room with 0 stays empty, and a one-cell room with 1 is shaded. Tap a cell to shade it.';
+
+  @override
+  String get tutChambers2 =>
+      'A straight line of unshaded cells may not cross two room borders. The highlighted row runs through three rooms, and two of them hold no shaded cell, so the third one must break the line. Finish the board.';
+
+  @override
+  String get tutChambers3 =>
+      'The unshaded cells must stay in one piece. Once its neighbour is shaded, the top-left cell\'s only way out is the cell below it, so that cell stays. Tap a cell twice to dot it (your note that it stays), then finish the board.';
+
+  @override
+  String get tutChambers4 =>
+      'Now a real board. Start with 0 rooms, rooms that need every cell they have left, and long lines through several rooms.';
+
+  @override
+  String get tutChambersS1 =>
+      'Count the ways a room can hold its shaded cells. The highlighted room is three cells long and holds 2, and shaded cells never touch, so only its two ends can be shaded. Shade them, then finish the board.';
+
+  @override
+  String get tutChambersS2 =>
+      'Try every way to fit a room\'s shaded cells: none may touch, and every long line through the room that only it can break must be broken. A cell shaded in every way is shaded, one never shaded stays. Also, a cell whose shading would cut the unshaded cells in two stays.';
+
+  @override
+  String get tutChambersS3 =>
+      'A hard board. When stuck, shade a cell and follow on: if a room gets too many shaded cells, a long line can\'t be broken, or some cells get cut off, that cell stays.';
+
+  @override
+  String exChambersFull(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'already has all $count of its shaded cells',
+      one: 'already has its 1 shaded cell',
+      zero: 'holds no shaded cells',
+    );
+    return '$cell stays: room $room $_temp0.';
+  }
+
+  @override
+  String exChambersNeed(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count shaded cells',
+      one: '1 shaded cell',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'them',
+      one: 'it',
+    );
+    return '$cell is shaded: room $room needs $_temp0, and no other cells are left for $_temp1.';
+  }
+
+  @override
+  String exChambersSpan(Object cell, Object a, Object b) {
+    return '$cell is shaded: otherwise every cell from $a to $b would stay, a straight line across two room borders.';
+  }
+
+  @override
+  String exChambersWaysShade(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count shaded cells',
+      one: '1 shaded cell',
+    );
+    return '$cell is shaded: every way to fit $_temp0 into room $room, with none touching and every long line broken, shades it.';
+  }
+
+  @override
+  String exChambersWaysKeep(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count shaded cells',
+      one: '1 shaded cell',
+    );
+    return '$cell stays: no way to fit $_temp0 into room $room, with none touching and every long line broken, shades it.';
+  }
+
+  @override
+  String exChambersFailMany(Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count shaded cells',
+      one: '1 shaded cell',
+    );
+    return 'But then room $room has more than $_temp0.';
+  }
+
+  @override
+  String exChambersFailFew(Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count shaded cells',
+      one: '1 shaded cell',
+    );
+    return 'But then room $room can\'t get $_temp0.';
+  }
+
+  @override
+  String exChambersFailSpan(Object a, Object b) {
+    return 'But then every cell from $a to $b stays, a straight line across two room borders.';
+  }
+
+  @override
+  String exChambersFailWays(Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count shaded cells',
+      one: '1 shaded cell',
+    );
+    return 'But then there\'s no way to fit $_temp0 into room $room.';
+  }
 }

@@ -5408,4 +5408,136 @@ class AppLocalizationsPl extends AppLocalizations {
   String exPocketsAreaFill(Object lead, Object gone, Object cell) {
     return '$lead. Żaden sposób zrobienia tego różnymi cyframi nie stawia $gone w $cell.';
   }
+
+  @override
+  String get chambersName => 'Komnaty';
+
+  @override
+  String get chambersTagline => 'Zamaluj w każdej komnacie tyle pól, ile trzeba, i nie ciągnij długich linii';
+
+  @override
+  String get chambersRules =>
+      '• Siatka jest podzielona na komnaty. Liczba w komnacie mówi, ile jej pól jest zamalowanych; komnata bez liczby może mieć ich dowolnie wiele.\n• Zamalowane pola nigdy nie stykają się bokami.\n• Niezamalowane pola tworzą jeden spójny obszar.\n• Prosta linia niezamalowanych pól, w poziomie lub w pionie, nigdy nie przecina dwóch granic komnat: sięga najwyżej do dwóch komnat.\n\nDotknij pola, aby przełączać: zamalowane → kropka (twoja notatka „zostaje”) → puste. Prawy przycisk przełącza wstecz. Długie naciśnięcie stawia kropki obok zamalowanych pól i w reszcie każdej komnaty, która ma już wszystkie zamalowane pola. Kropki są opcjonalne: zagadka jest rozwiązana, gdy właściwe pola są zamalowane.';
+
+  @override
+  String get tutChambers1 =>
+      'Siatka jest podzielona na komnaty, a liczba mówi, ile pól jej komnaty jest zamalowanych. Zamalowane pola nigdy nie stykają się bokami. Komnata z 0 zostaje pusta, a jednopolowa komnata z 1 jest zamalowana. Dotknij pola, aby je zamalować.';
+
+  @override
+  String get tutChambers2 =>
+      'Prosta linia niezamalowanych pól nie może przecinać dwóch granic komnat. Zaznaczony wiersz biegnie przez trzy komnaty, a dwie z nich nie mają zamalowanych pól, więc linię musi przerwać trzecia. Dokończ planszę.';
+
+  @override
+  String get tutChambers3 =>
+      'Niezamalowane pola muszą tworzyć jedną całość. Gdy sąsiednie pole jest zamalowane, jedynym wyjściem dla lewego górnego pola jest pole pod nim, więc ono zostaje. Dotknij pola dwa razy, aby postawić kropkę (twoja notatka, że zostaje), a potem dokończ planszę.';
+
+  @override
+  String get tutChambers4 =>
+      'Teraz prawdziwa plansza. Zacznij od komnat z 0, komnat, które potrzebują wszystkich pozostałych pól, i długich linii przez kilka komnat.';
+
+  @override
+  String get tutChambersS1 =>
+      'Policz, jak komnata może pomieścić swoje zamalowane pola. Zaznaczona komnata ma trzy pola długości i liczbę 2, a zamalowane pola się nie stykają, więc zamalować można tylko jej dwa końce. Zamaluj je, a potem dokończ planszę.';
+
+  @override
+  String get tutChambersS2 =>
+      'Sprawdzaj każdy sposób rozmieszczenia zamalowanych pól komnaty: żadne dwa się nie stykają, a każda długa linia przez komnatę, którą tylko ona może przerwać, musi zostać przerwana. Pole zamalowane w każdym sposobie jest zamalowane, a pole nigdy niezamalowane zostaje. Zostaje też pole, którego zamalowanie przecięłoby niezamalowane pola na dwie części.';
+
+  @override
+  String get tutChambersS3 =>
+      'Trudna plansza. Gdy utkniesz, zamaluj pole i zobacz, co dalej: jeśli komnata dostanie za dużo zamalowanych pól, długiej linii nie da się przerwać albo jakieś pola zostaną odcięte, to pole zostaje.';
+
+  @override
+  String exChambersFull(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ma już wszystkie $count zamalowanego pola',
+      many: 'ma już wszystkie $count zamalowanych pól',
+      few: 'ma już wszystkie $count zamalowane pola',
+      one: 'ma już swoje 1 zamalowane pole',
+      zero: 'nie ma zamalowanych pól',
+    );
+    return '$cell zostaje: komnata $room $_temp0.';
+  }
+
+  @override
+  String exChambersNeed(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: '1 pole',
+    );
+    return '$cell jest zamalowane: w komnacie $room trzeba zamalować $_temp0, a innych wolnych pól tam nie ma.';
+  }
+
+  @override
+  String exChambersSpan(Object cell, Object a, Object b) {
+    return '$cell jest zamalowane: inaczej wszystkie pola od $a do $b by zostały, a to prosta linia przez dwie granice komnat.';
+  }
+
+  @override
+  String exChambersWaysShade(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: '1 pole',
+    );
+    return '$cell jest zamalowane: tak robi każdy sposób zamalowania w komnacie $room $_temp0 tak, by się nie stykały, a każda długa linia była przerwana.';
+  }
+
+  @override
+  String exChambersWaysKeep(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: '1 pole',
+    );
+    return '$cell zostaje: żaden sposób zamalowania w komnacie $room $_temp0 tak, by się nie stykały, a każda długa linia była przerwana, go nie zamalowuje.';
+  }
+
+  @override
+  String exChambersFailMany(Object room, int count) {
+    return 'Ale wtedy komnata $room ma więcej zamalowanych pól niż $count.';
+  }
+
+  @override
+  String exChambersFailFew(Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: '1 pole',
+    );
+    return 'Ale wtedy w komnacie $room nie da się zamalować $_temp0.';
+  }
+
+  @override
+  String exChambersFailSpan(Object a, Object b) {
+    return 'Ale wtedy wszystkie pola od $a do $b zostają, a to prosta linia przez dwie granice komnat.';
+  }
+
+  @override
+  String exChambersFailWays(Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: '1 pole',
+    );
+    return 'Ale wtedy w komnacie $room nie da się zamalować $_temp0 tak, by się nie stykały, a każda długa linia była przerwana.';
+  }
 }

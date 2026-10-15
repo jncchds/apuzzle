@@ -5325,4 +5325,130 @@ class AppLocalizationsDe extends AppLocalizations {
   String exPocketsAreaFill(Object lead, Object gone, Object cell) {
     return '$lead. Keine Art, das mit verschiedenen Ziffern zu schaffen, setzt $gone in $cell.';
   }
+
+  @override
+  String get chambersName => 'Kammern';
+
+  @override
+  String get chambersTagline => 'Schwärze in jeder Kammer so viele Felder wie angegeben, ohne lange Linien';
+
+  @override
+  String get chambersRules =>
+      '• Das Gitter ist in Kammern geteilt. Eine Zahl in einer Kammer sagt, wie viele ihrer Felder geschwärzt sind; eine Kammer ohne Zahl darf beliebig viele haben.\n• Geschwärzte Felder berühren sich nie mit einer Seite.\n• Die nicht geschwärzten Felder bilden ein zusammenhängendes Gebiet.\n• Eine gerade Linie nicht geschwärzter Felder, waagrecht oder senkrecht, überquert nie zwei Kammergrenzen: Sie reicht höchstens in zwei Kammern.\n\nTippe auf ein Feld, um zu wechseln: geschwärzt → Punkt (deine Notiz „bleibt“) → leer. Rechtsklick wechselt zurück. Langes Drücken setzt Punkte neben geschwärzte Felder und in den Rest jeder Kammer, die schon alle ihre geschwärzten Felder hat. Punkte sind freiwillig: Das Rätsel ist gelöst, sobald die richtigen Felder geschwärzt sind.';
+
+  @override
+  String get tutChambers1 =>
+      'Das Gitter ist in Kammern geteilt, und eine Zahl sagt, wie viele Felder ihrer Kammer geschwärzt sind. Geschwärzte Felder berühren sich nie mit einer Seite. Eine Kammer mit 0 bleibt leer, und eine Kammer aus einem Feld mit 1 ist geschwärzt. Tippe auf ein Feld, um es zu schwärzen.';
+
+  @override
+  String get tutChambers2 =>
+      'Eine gerade Linie nicht geschwärzter Felder darf nicht zwei Kammergrenzen überqueren. Die markierte Zeile läuft durch drei Kammern, und zwei davon haben kein geschwärztes Feld, also muss die dritte die Linie unterbrechen. Löse dann das Gitter.';
+
+  @override
+  String get tutChambers3 =>
+      'Die nicht geschwärzten Felder müssen ein Stück bleiben. Sobald sein Nachbar geschwärzt ist, ist der einzige Ausweg des Felds oben links das Feld darunter, also bleibt es. Tippe ein Feld zweimal an, um einen Punkt zu setzen (deine Notiz, dass es bleibt), und löse dann das Gitter.';
+
+  @override
+  String get tutChambers4 =>
+      'Jetzt ein echtes Gitter. Beginne mit Kammern mit 0, Kammern, die jedes ihrer übrigen Felder brauchen, und langen Linien durch mehrere Kammern.';
+
+  @override
+  String get tutChambersS1 =>
+      'Zähle, wie eine Kammer ihre geschwärzten Felder unterbringen kann. Die markierte Kammer ist drei Felder lang und hat eine 2, und geschwärzte Felder berühren sich nie, also können nur ihre beiden Enden geschwärzt sein. Schwärze sie und löse dann das Gitter.';
+
+  @override
+  String get tutChambersS2 =>
+      'Probiere jede Art, die geschwärzten Felder einer Kammer unterzubringen: Keine zwei berühren sich, und jede lange Linie durch die Kammer, die nur sie unterbrechen kann, wird unterbrochen. Ein Feld, das jede Art schwärzt, ist geschwärzt, eines, das keine schwärzt, bleibt. Außerdem bleibt ein Feld, dessen Schwärzen die übrigen Felder in zwei Teile schneiden würde.';
+
+  @override
+  String get tutChambersS3 =>
+      'Ein schweres Gitter. Wenn du feststeckst, schwärze ein Feld und folge den Folgen: Bekommt eine Kammer zu viele geschwärzte Felder, lässt sich eine lange Linie nicht unterbrechen oder werden Felder abgeschnitten, dann bleibt dieses Feld.';
+
+  @override
+  String exChambersFull(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'hat schon alle $count geschwärzten Felder',
+      one: 'hat schon ihr 1 geschwärztes Feld',
+      zero: 'hat keine geschwärzten Felder',
+    );
+    return '$cell bleibt: Kammer $room $_temp0.';
+  }
+
+  @override
+  String exChambersNeed(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count geschwärzte Felder',
+      one: '1 geschwärztes Feld',
+    );
+    return '$cell ist geschwärzt: Kammer $room braucht $_temp0, und andere freie Felder hat sie nicht mehr.';
+  }
+
+  @override
+  String exChambersSpan(Object cell, Object a, Object b) {
+    return '$cell ist geschwärzt: Sonst blieben alle Felder von $a bis $b, eine gerade Linie über zwei Kammergrenzen.';
+  }
+
+  @override
+  String exChambersWaysShade(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: '1 Feld',
+    );
+    return '$cell ist geschwärzt: Das tut jede Art, in Kammer $room $_temp0 zu schwärzen, ohne dass sie sich berühren und mit jeder langen Linie unterbrochen.';
+  }
+
+  @override
+  String exChambersWaysKeep(Object cell, Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: '1 Feld',
+    );
+    return '$cell bleibt: Keine Art, in Kammer $room $_temp0 zu schwärzen, ohne dass sie sich berühren und mit jeder langen Linie unterbrochen, schwärzt es.';
+  }
+
+  @override
+  String exChambersFailMany(Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count geschwärzte Felder',
+      one: '1 geschwärztes Feld',
+    );
+    return 'Aber dann hat Kammer $room mehr als $_temp0.';
+  }
+
+  @override
+  String exChambersFailFew(Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count geschwärzten Felder',
+      one: '1 geschwärztes Feld',
+    );
+    return 'Aber dann kann Kammer $room keine $_temp0 mehr bekommen.';
+  }
+
+  @override
+  String exChambersFailSpan(Object a, Object b) {
+    return 'Aber dann bleiben alle Felder von $a bis $b, eine gerade Linie über zwei Kammergrenzen.';
+  }
+
+  @override
+  String exChambersFailWays(Object room, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: '1 Feld',
+    );
+    return 'Aber dann lassen sich in Kammer $room keine $_temp0 schwärzen, ohne dass sie sich berühren und jede lange Linie unterbrochen ist.';
+  }
 }

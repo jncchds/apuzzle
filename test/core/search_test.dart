@@ -59,6 +59,7 @@ void main() {
     expect(alt('star battle'), ['kings']);
     expect(alt('sumplete'), ['tally']);
     expect(alt('hitori'), ['solo']);
+    expect(alt('heyawake'), ['chambers']);
     expect(alt('dominosa'), ['domino']);
     expect(alt('bimaru'), ['fleet']);
     expect(alt('battleships'), ['fleet']);
