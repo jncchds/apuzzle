@@ -6227,4 +6227,88 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tagSwitch => 'Licht, Lichter, Schalter, umschalten, an und aus, dunkel, Nacht, Fenster';
+
+  @override
+  String get glideName => 'Gleiten';
+
+  @override
+  String get glideTagline => 'Schiebe die Plättchen durch die Lücke, bis sie wieder in Reihenfolge sind';
+
+  @override
+  String get glideRules =>
+      '• Im Rahmen liegen nummerierte Plättchen und eine Lücke.\n• Tippe ein Plättchen neben der Lücke an, um es hineinzuschieben. Ein Plättchen weiter hinten in der Zeile oder Spalte der Lücke schiebt sich mit allen Plättchen dazwischen auf einmal. Du kannst auch wischen oder die Pfeiltasten nehmen.\n• Bring die Plättchen in Reihenfolge: 1, 2, 3, … Zeile für Zeile von oben, die Lücke unten rechts.\n\nJedes Plättchen, das sich bewegt, zählt als ein Zug. Mit farbigen Plättchen baust du stattdessen den Farbverlauf nach: jedes Plättchen gehört dorthin, wo seine Farbe passt.';
+
+  @override
+  String get glideFace => 'Plättchen';
+
+  @override
+  String get glideFaceNumbers => 'Zahlen';
+
+  @override
+  String get glideFaceNumbersHint => 'Nummerierte Plättchen, die 1 oben links.';
+
+  @override
+  String get glideFaceColors => 'Farben';
+
+  @override
+  String get glideFaceColorsHint => 'Plättchen eines Farbverlaufs: Leg jede Farbe dorthin, wo sie passt.';
+
+  @override
+  String get glideGoalFree => 'Freies Spiel';
+
+  @override
+  String get glideGoalFreeHint => 'Kein Limit: Nimm so viele Züge, wie du brauchst.';
+
+  @override
+  String get glideGoalMoves => 'Zuglimit';
+
+  @override
+  String get glideGoalMovesHint =>
+      'Schaff es im Limit: doppelt so viele Züge wie der beste Weg auf leicht, das 1,5-Fache auf mittel, das 1,25-Fache auf schwer.';
+
+  @override
+  String glideMoves(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Züge',
+      one: '$count Zug',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get glideFewest => 'Geordnet mit den wenigsten Zügen!';
+
+  @override
+  String get tutGlide1 =>
+      'Der Rahmen hat eine Lücke. Tippe das markierte Plättchen daneben an, um es in die Lücke zu schieben. Das Ziel: die Plättchen in Reihenfolge, 1, 2, 3, … Zeile für Zeile, die Lücke am Ende.';
+
+  @override
+  String get tutGlide2 =>
+      'Auch ein Plättchen weiter hinten in der Zeile oder Spalte der Lücke bewegt sich: Tippe das markierte Plättchen an, und es rückt mit allen Plättchen zwischen ihm und der Lücke auf.';
+
+  @override
+  String get tutGlide3 =>
+      'Du kannst ein Plättchen auch zur Lücke hin wischen, oder irgendwo wischen, um das Plättchen zu schieben, das in diese Richtung kann. Wisch das markierte Plättchen nach oben, dann das darunter.';
+
+  @override
+  String get tutGlide4 =>
+      'Jetzt liegen ein paar Plättchen falsch. Bring sie zurück in Reihenfolge: Plättchen rücken nur in die Lücke, also überleg, wohin die Lücke muss.';
+
+  @override
+  String get tutGlide5 =>
+      'Ein echtes Brett. Der Zähler zeigt deine Züge und das Limit; jedes Plättchen, das sich bewegt, zählt. Rückgängig gibt Züge zurück.';
+
+  @override
+  String get tutGlideS1 =>
+      'Große Bretter löst du Zeile für Zeile: Bring 1, 2, 3 und 4 in die oberste Zeile und lass sie dann in Ruhe. Was übrig bleibt, ist ein kleineres Brett; lös es genauso.';
+
+  @override
+  String get tutGlideS2 =>
+      'Das Ende einer Zeile ist der knifflige Teil: 1, 2 und 3 sind daheim, aber die 4 kommt nicht an der 3 vorbei, ohne sie zu bewegen. Setz zuerst die 4 dorthin, wo die 3 hingehört, und die 3 direkt darunter, dann schieb beide zusammen hinein: die 4 nach rechts, die 3 nach oben.';
+
+  @override
+  String get tutGlideS3 =>
+      'Ein echtes Brett. Leg die oberste Zeile, dann die linke Spalte, dann die nächste Zeile, sodass das Brett immer kleiner wird. Die letzten zwei Plättchen einer Spalte kommen zusammen hinein, wie das Ende einer Zeile, auf die Seite gedreht. Am Ende bleibt eine kleine Ecke: Lass ihre Plättchen im Kreis wandern, bis sie an ihrem Platz sind.';
 }

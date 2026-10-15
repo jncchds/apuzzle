@@ -79,6 +79,8 @@ void main() {
     expect(alt('minesweeper'), ['mines']);
     expect(alt('lights out'), ['nightfall']);
     expect(alt('merlin'), ['nightfall']);
+    expect(alt('fifteen'), ['glide']);
+    expect(alt('gem puzzle'), ['glide']);
     expect(alt('samegame'), ['pop']);
     expect(alt('train of thought'), ['junction']);
     expect(alt('penguin pursuit'), ['turnabout']);

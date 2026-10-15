@@ -8307,6 +8307,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'lights, switch, toggle, on and off, dark, night, windows, flip, invert'**
   String get tagSwitch;
+
+  /// No description provided for @glideName.
+  ///
+  /// In en, this message translates to:
+  /// **'Glide'**
+  String get glideName;
+
+  /// No description provided for @glideTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Slide the tiles through the gap until they are back in order'**
+  String get glideTagline;
+
+  /// No description provided for @glideRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• The frame holds numbered tiles and one gap.\n• Tap a tile next to the gap to slide it in. Tapping a tile further along the gap\'s row or column slides it and every tile between at once. You can also swipe, or use the arrow keys.\n• Put the tiles in order: 1, 2, 3, … along each row from the top, with the gap in the bottom right corner.\n\nEvery tile that moves counts as a move. With colored tiles, rebuild the gradient instead: each tile belongs where its color fits.'**
+  String get glideRules;
+
+  /// No description provided for @glideFace.
+  ///
+  /// In en, this message translates to:
+  /// **'Tiles'**
+  String get glideFace;
+
+  /// No description provided for @glideFaceNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Numbers'**
+  String get glideFaceNumbers;
+
+  /// No description provided for @glideFaceNumbersHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Numbered tiles, 1 in the top left corner.'**
+  String get glideFaceNumbersHint;
+
+  /// No description provided for @glideFaceColors.
+  ///
+  /// In en, this message translates to:
+  /// **'Colors'**
+  String get glideFaceColors;
+
+  /// No description provided for @glideFaceColorsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tiles of a gradient: put each color where it fits.'**
+  String get glideFaceColorsHint;
+
+  /// No description provided for @glideGoalFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free play'**
+  String get glideGoalFree;
+
+  /// No description provided for @glideGoalFreeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'No limit: take as many moves as you need.'**
+  String get glideGoalFreeHint;
+
+  /// No description provided for @glideGoalMoves.
+  ///
+  /// In en, this message translates to:
+  /// **'Move limit'**
+  String get glideGoalMoves;
+
+  /// No description provided for @glideGoalMovesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish within a limit: twice the best way out on easy, 1.5 times on medium, 1.25 times on hard.'**
+  String get glideGoalMovesHint;
+
+  /// No description provided for @glideMoves.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} move} other{{count} moves}}'**
+  String glideMoves(int count);
+
+  /// No description provided for @glideFewest.
+  ///
+  /// In en, this message translates to:
+  /// **'In order in the fewest moves!'**
+  String get glideFewest;
+
+  /// No description provided for @tutGlide1.
+  ///
+  /// In en, this message translates to:
+  /// **'The frame has one gap. Tap the marked tile next to it to slide it into the gap. The goal: the tiles in order, 1, 2, 3, … row by row, with the gap at the end.'**
+  String get tutGlide1;
+
+  /// No description provided for @tutGlide2.
+  ///
+  /// In en, this message translates to:
+  /// **'A tile further along the gap\'s row or column slides too: tap the marked tile, and it moves along with every tile between it and the gap.'**
+  String get tutGlide2;
+
+  /// No description provided for @tutGlide3.
+  ///
+  /// In en, this message translates to:
+  /// **'You can also swipe a tile toward the gap, or swipe anywhere to slide the tile that can go that way. Swipe the marked tile up, then the tile below it.'**
+  String get tutGlide3;
+
+  /// No description provided for @tutGlide4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a few tiles are out of place. Put them back in order: tiles only ever move into the gap, so think about where the gap has to go.'**
+  String get tutGlide4;
+
+  /// No description provided for @tutGlide5.
+  ///
+  /// In en, this message translates to:
+  /// **'A real board. The counter shows your moves and the limit; every tile that moves counts. Undo gives moves back.'**
+  String get tutGlide5;
+
+  /// No description provided for @tutGlideS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Big boards go row by row: put 1, 2, 3 and 4 into the top row, then leave that row alone. What is left is a smaller board; solve it the same way.'**
+  String get tutGlideS1;
+
+  /// No description provided for @tutGlideS2.
+  ///
+  /// In en, this message translates to:
+  /// **'The end of a row is the tricky part: 1, 2 and 3 are home, but 4 can\'t get past 3 without moving it. Put 4 where 3 belongs first and 3 right below it, then slide both in together: 4 to the right, 3 up.'**
+  String get tutGlideS2;
+
+  /// No description provided for @tutGlideS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A real board. Place the top row, then the left column, then the next row, so the board keeps shrinking. The last two tiles of a column go in together, like the end of a row turned on its side. A small corner is left at the end: circle its tiles round until they fall into place.'**
+  String get tutGlideS3;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

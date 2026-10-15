@@ -6262,4 +6262,88 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tagSwitch => 'lights, switch, toggle, on and off, dark, night, windows, flip, invert';
+
+  @override
+  String get glideName => 'Glide';
+
+  @override
+  String get glideTagline => 'Slide the tiles through the gap until they are back in order';
+
+  @override
+  String get glideRules =>
+      '• The frame holds numbered tiles and one gap.\n• Tap a tile next to the gap to slide it in. Tapping a tile further along the gap\'s row or column slides it and every tile between at once. You can also swipe, or use the arrow keys.\n• Put the tiles in order: 1, 2, 3, … along each row from the top, with the gap in the bottom right corner.\n\nEvery tile that moves counts as a move. With colored tiles, rebuild the gradient instead: each tile belongs where its color fits.';
+
+  @override
+  String get glideFace => 'Tiles';
+
+  @override
+  String get glideFaceNumbers => 'Numbers';
+
+  @override
+  String get glideFaceNumbersHint => 'Numbered tiles, 1 in the top left corner.';
+
+  @override
+  String get glideFaceColors => 'Colors';
+
+  @override
+  String get glideFaceColorsHint => 'Tiles of a gradient: put each color where it fits.';
+
+  @override
+  String get glideGoalFree => 'Free play';
+
+  @override
+  String get glideGoalFreeHint => 'No limit: take as many moves as you need.';
+
+  @override
+  String get glideGoalMoves => 'Move limit';
+
+  @override
+  String get glideGoalMovesHint =>
+      'Finish within a limit: twice the best way out on easy, 1.5 times on medium, 1.25 times on hard.';
+
+  @override
+  String glideMoves(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count moves',
+      one: '$count move',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get glideFewest => 'In order in the fewest moves!';
+
+  @override
+  String get tutGlide1 =>
+      'The frame has one gap. Tap the marked tile next to it to slide it into the gap. The goal: the tiles in order, 1, 2, 3, … row by row, with the gap at the end.';
+
+  @override
+  String get tutGlide2 =>
+      'A tile further along the gap\'s row or column slides too: tap the marked tile, and it moves along with every tile between it and the gap.';
+
+  @override
+  String get tutGlide3 =>
+      'You can also swipe a tile toward the gap, or swipe anywhere to slide the tile that can go that way. Swipe the marked tile up, then the tile below it.';
+
+  @override
+  String get tutGlide4 =>
+      'Now a few tiles are out of place. Put them back in order: tiles only ever move into the gap, so think about where the gap has to go.';
+
+  @override
+  String get tutGlide5 =>
+      'A real board. The counter shows your moves and the limit; every tile that moves counts. Undo gives moves back.';
+
+  @override
+  String get tutGlideS1 =>
+      'Big boards go row by row: put 1, 2, 3 and 4 into the top row, then leave that row alone. What is left is a smaller board; solve it the same way.';
+
+  @override
+  String get tutGlideS2 =>
+      'The end of a row is the tricky part: 1, 2 and 3 are home, but 4 can\'t get past 3 without moving it. Put 4 where 3 belongs first and 3 right below it, then slide both in together: 4 to the right, 3 up.';
+
+  @override
+  String get tutGlideS3 =>
+      'A real board. Place the top row, then the left column, then the next row, so the board keeps shrinking. The last two tiles of a column go in together, like the end of a row turned on its side. A small corner is left at the end: circle its tiles round until they fall into place.';
 }

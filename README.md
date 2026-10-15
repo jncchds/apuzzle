@@ -7,7 +7,7 @@
 
 A collection of grid logic puzzles for Android, Windows, iOS and the web, built with Flutter.
 Every puzzle is **generated on the device**, and a solver checks that it has **exactly one solution**.
-Mines is solved by logic without guessing. The casual games (the color floods, Pop, 2048, Nightfall, Snake, Junction, Turnabout and the memory games), Formula, Homeward and Blockade are played for a move limit, a target or a best score instead; their limits and targets come from solver playthroughs or the board size, so they are always reachable (Nightfall's move limit from the exact fewest taps, Homeward's fuel and Blockade's turns come from the exact shortest plan).
+Mines is solved by logic without guessing. The casual games (the color floods, Pop, 2048, Nightfall, Glide, Snake, Junction, Turnabout and the memory games), Formula, Homeward and Blockade are played for a move limit, a target or a best score instead; their limits and targets come from solver playthroughs or the board size, so they are always reachable (Nightfall's move limit from the exact fewest taps, Glide's from the shortest way out found, Homeward's fuel and Blockade's turns come from the exact shortest plan).
 You choose the grid size and the difficulty.
 
 <p align="center">
@@ -18,12 +18,12 @@ You choose the grid size and the difficulty.
 
 ## Puzzles
 
-57 games in four categories. See [PUZZLES.md](PUZZLES.md) for the rules of each, with screenshots in both themes.
+58 games in four categories. See [PUZZLES.md](PUZZLES.md) for the rules of each, with screenshots in both themes.
 
 - **Numbers:** Sudoku, Pockets, Skyline, Cages, Signs, Totals, Blocks, Tally, Solo, Dominoes, Formula, Plots, Shikaku
 - **Logic grids:** Sun & Moon, Crowns, Pairs, Hues, Tetra, Campsite, Fleet, Basins, Mercury, Poles, Pebbles, Chambers, Lookout, Rampart, Islands, Lamps, Orbits, Inlay, Mines
 - **Paths & loops:** Trail, Links, Waymarks, Labyrinth, Homeward, Blockade, Pipes, Channel, Atoms, Fence, Pearls, Rails, Arrows
-- **Casual:** Mosaic, Blend, Pop, 2048, Nightfall, Snake, Junction, Turnabout, Glimpse, Vanish, Hopper, Rebound
+- **Casual:** Mosaic, Blend, Pop, 2048, Nightfall, Glide, Snake, Junction, Turnabout, Glimpse, Vanish, Hopper, Rebound
 
 ## Features
 

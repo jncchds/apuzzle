@@ -19,6 +19,7 @@ import '../puzzles/formula/formula_type.dart';
 import '../puzzles/glimpse/glimpse_type.dart';
 import '../puzzles/hopper/hopper_type.dart';
 import '../puzzles/homeward/homeward_type.dart';
+import '../puzzles/glide/glide_type.dart';
 import '../puzzles/hues/hues_type.dart';
 import '../puzzles/inlay/inlay_type.dart';
 import '../puzzles/islands/islands_type.dart';
@@ -82,6 +83,7 @@ const List<PuzzleType> puzzleTypes = [
   PopType(),
   MergeType(),
   NightfallType(),
+  GlideType(),
   SnakeType(),
   JunctionType(),
   TurnaboutType(),
@@ -249,6 +251,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('pop', [PopType()]),
       PuzzleFamily('merge', [MergeType()]),
       PuzzleFamily('nightfall', [NightfallType()]),
+      PuzzleFamily('glide', [GlideType()]),
       PuzzleFamily('snake', [SnakeType()]),
       PuzzleFamily('junction', [JunctionType()]),
       PuzzleFamily('turnabout', [TurnaboutType()]),

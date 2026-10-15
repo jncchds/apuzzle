@@ -6291,4 +6291,82 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get tagSwitch => 'światło, światła, włącznik, przełącznik, włącz, wyłącz, ciemność, noc, okna';
+
+  @override
+  String get glideName => 'Ślizg';
+
+  @override
+  String get glideTagline => 'Przesuwaj płytki przez puste pole, aż wrócą do porządku';
+
+  @override
+  String get glideRules =>
+      '• W ramce są ponumerowane płytki i jedno puste pole.\n• Stuknij płytkę obok pustego pola, aby ją tam wsunąć. Stuknięcie płytki dalej w tym samym wierszu lub kolumnie przesuwa ją razem ze wszystkimi płytkami pomiędzy. Możesz też przesuwać palcem albo używać strzałek.\n• Ułóż płytki po kolei: 1, 2, 3, … w każdym wierszu od góry, z pustym polem w prawym dolnym rogu.\n\nKażda przesunięta płytka to jeden ruch. Przy kolorowych płytkach odtwórz gradient: każda płytka należy tam, gdzie pasuje jej kolor.';
+
+  @override
+  String get glideFace => 'Płytki';
+
+  @override
+  String get glideFaceNumbers => 'Liczby';
+
+  @override
+  String get glideFaceNumbersHint => 'Ponumerowane płytki, 1 w lewym górnym rogu.';
+
+  @override
+  String get glideFaceColors => 'Kolory';
+
+  @override
+  String get glideFaceColorsHint => 'Płytki gradientu: połóż każdy kolor tam, gdzie pasuje.';
+
+  @override
+  String get glideGoalFree => 'Gra swobodna';
+
+  @override
+  String get glideGoalFreeHint => 'Bez limitu: wykonaj tyle ruchów, ile potrzebujesz.';
+
+  @override
+  String get glideGoalMoves => 'Limit ruchów';
+
+  @override
+  String get glideGoalMovesHint =>
+      'Zmieść się w limicie: dwa razy tyle co najlepszy sposób na łatwym, 1,5 raza na średnim, 1,25 raza na trudnym.';
+
+  @override
+  String glideMoves(int count) {
+    return 'Ruchy: $count';
+  }
+
+  @override
+  String get glideFewest => 'Po kolei w najmniejszej liczbie ruchów!';
+
+  @override
+  String get tutGlide1 =>
+      'W ramce jest jedno puste pole. Stuknij zaznaczoną płytkę obok niego, aby ją tam wsunąć. Cel: płytki po kolei, 1, 2, 3, … wiersz po wierszu, z pustym polem na końcu.';
+
+  @override
+  String get tutGlide2 =>
+      'Płytka dalej w wierszu lub kolumnie pustego pola też się przesuwa: stuknij zaznaczoną płytkę, a przesunie się razem ze wszystkimi płytkami między nią a pustym polem.';
+
+  @override
+  String get tutGlide3 =>
+      'Możesz też przesunąć palcem płytkę w stronę pustego pola albo przesunąć palcem gdziekolwiek, aby ruszyć płytkę, która może pójść w tę stronę. Przesuń zaznaczoną płytkę w górę, a potem płytkę pod nią.';
+
+  @override
+  String get tutGlide4 =>
+      'Teraz kilka płytek jest nie na miejscu. Ułóż je z powrotem po kolei: płytki wchodzą tylko na puste pole, więc pomyśl, dokąd musi trafić puste pole.';
+
+  @override
+  String get tutGlide5 =>
+      'Prawdziwa plansza. Licznik pokazuje twoje ruchy i limit; liczy się każda przesunięta płytka. Cofnij oddaje ruchy.';
+
+  @override
+  String get tutGlideS1 =>
+      'Duże plansze układa się wiersz po wierszu: wstaw 1, 2, 3 i 4 do górnego wiersza i więcej go nie ruszaj. Reszta to mniejsza plansza; ułóż ją tak samo.';
+
+  @override
+  String get tutGlideS2 =>
+      'Koniec wiersza to najtrudniejsza część: 1, 2 i 3 są na miejscu, ale 4 nie przejdzie obok 3, nie ruszając jej. Najpierw postaw 4 tam, gdzie powinna być 3, a 3 tuż pod nią, potem wsuń obie razem: 4 w prawo, 3 w górę.';
+
+  @override
+  String get tutGlideS3 =>
+      'Prawdziwa plansza. Ułóż górny wiersz, potem lewą kolumnę, potem następny wiersz, aby plansza się zmniejszała. Dwie ostatnie płytki kolumny wstawia się razem, jak koniec wiersza obrócony na bok. Na końcu zostaje mały róg: obracaj jego płytki w kółko, aż trafią na miejsca.';
 }
