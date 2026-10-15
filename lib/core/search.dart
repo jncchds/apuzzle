@@ -31,6 +31,7 @@ enum GameTag {
   arrow,
   charge,
   temperature,
+  switches,
 }
 
 String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
@@ -60,6 +61,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
   GameTag.arrow => l.tagArrow,
   GameTag.charge => l.tagCharge,
   GameTag.temperature => l.tagTemperature,
+  GameTag.switches => l.tagSwitch,
 };
 
 /// Tags of every type, by id.
@@ -83,6 +85,7 @@ const Map<String, List<GameTag>> gameTags = {
   'blend': [GameTag.colors],
   'pop': [GameTag.colors],
   'merge': [GameTag.slide, GameTag.numbers],
+  'nightfall': [GameTag.switches],
   'snake': [GameTag.arcade],
   'junction': [GameTag.arcade, GameTag.path],
   'turnabout': [GameTag.arcade, GameTag.maze],
@@ -161,6 +164,18 @@ const Map<String, List<String>> gameAliases = {
   'mosaic': ['Flood-it', 'Flood fill'],
   'blend': ['Flood-it', 'Free flood'],
   'pop': ['SameGame', 'Same game', 'Bubble breaker', 'Jawbreaker', 'Clickomania'],
+  'nightfall': [
+    'Lights Out',
+    'Lights Off',
+    'Merlin',
+    'Flip',
+    'Lichter aus',
+    'Світло вимкнено',
+    'Вимкни світло',
+    'Выключи свет',
+    'Погаси свет',
+    'Zgaś światło',
+  ],
   'snake': ['Nibbles'],
   'junction': ['Train of Thought', 'Lumosity'],
   'turnabout': ['Penguin Pursuit', 'Lumosity'],

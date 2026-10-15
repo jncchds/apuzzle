@@ -6180,4 +6180,86 @@ class AppLocalizationsEn extends AppLocalizations {
   String exMercuryFailPair(Object lines) {
     return 'But then the numbers of $lines can no longer both come out.';
   }
+
+  @override
+  String get nightfallName => 'Nightfall';
+
+  @override
+  String get nightfallTagline => 'Tap the windows until the whole house goes dark';
+
+  @override
+  String get nightfallRules =>
+      '• Every cell is a window, lit or dark.\n• Tapping a window flips it and its neighbours above, below, left and right: lit windows go dark, dark ones light up.\n• Make every window dark, within the move limit if the game has one.\n\nThe order of taps never matters, and tapping a window twice changes nothing. When the edges wrap around, a window on the edge also flips the one across the board.';
+
+  @override
+  String get nightfallEdges => 'Edges';
+
+  @override
+  String get nightfallEdgesFlat => 'Flat';
+
+  @override
+  String get nightfallEdgesFlatHint => 'Windows on the edge have fewer neighbours.';
+
+  @override
+  String get nightfallEdgesWrap => 'Wrap around';
+
+  @override
+  String get nightfallEdgesWrapHint => 'The edges join up: a window on the edge also flips the one across the board.';
+
+  @override
+  String get nightfallGoalMoves => 'Move limit';
+
+  @override
+  String get nightfallGoalMovesHint => 'Make it dark within a few moves more than the fewest (none more on hard).';
+
+  @override
+  String get nightfallGoalFree => 'Free play';
+
+  @override
+  String get nightfallGoalFreeHint => 'No limit: take as many moves as you need.';
+
+  @override
+  String nightfallMoves(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count moves',
+      one: '$count move',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nightfallFewest => 'Dark in the fewest moves!';
+
+  @override
+  String get tutNightfall1 =>
+      'A tap flips a window and its neighbours above, below, left and right: lit windows go dark, dark ones light up. Tap the middle window to make every window dark.';
+
+  @override
+  String get tutNightfall2 =>
+      'A window on the edge or in a corner has fewer neighbours, so a tap there flips fewer windows. Make every window dark.';
+
+  @override
+  String get tutNightfall3 =>
+      'Two taps that flip the same window leave it as it was. The order of taps never matters, and tapping a window twice changes nothing, so each window needs one tap or none.';
+
+  @override
+  String get tutNightfall4 =>
+      'A real board. The counter shows your moves and the limit: a few more than the fewest that make every window dark. Undo gives a move back.';
+
+  @override
+  String get tutNightfallS1 =>
+      'Chase the lights down: for each lit window in the top row, tap the window right below it, and the top row goes dark. Do the same for each row in turn, down to the bottom.';
+
+  @override
+  String get tutNightfallS2 =>
+      'Here a chase leaves lit windows in the bottom row: the top row needs a tap too. Tap the marked window first, then chase the lights down again.';
+
+  @override
+  String get tutNightfallS3 =>
+      'A real board with no move limit. Chase the lights down; if some stay lit in the bottom row, start over with a tap or two in the top row and chase again, until the bottom row goes dark too.';
+
+  @override
+  String get tagSwitch => 'lights, switch, toggle, on and off, dark, night, windows, flip, invert';
 }

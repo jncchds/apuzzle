@@ -77,6 +77,8 @@ void main() {
     expect(alt('nerdle'), ['formula']);
     expect(alt('train tracks'), ['rails']);
     expect(alt('minesweeper'), ['mines']);
+    expect(alt('lights out'), ['nightfall']);
+    expect(alt('merlin'), ['nightfall']);
     expect(alt('samegame'), ['pop']);
     expect(alt('train of thought'), ['junction']);
     expect(alt('penguin pursuit'), ['turnabout']);

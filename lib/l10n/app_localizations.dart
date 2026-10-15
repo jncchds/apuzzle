@@ -8175,6 +8175,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then the numbers of {lines} can no longer both come out.'**
   String exMercuryFailPair(Object lines);
+
+  /// No description provided for @nightfallName.
+  ///
+  /// In en, this message translates to:
+  /// **'Nightfall'**
+  String get nightfallName;
+
+  /// No description provided for @nightfallTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the windows until the whole house goes dark'**
+  String get nightfallTagline;
+
+  /// No description provided for @nightfallRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Every cell is a window, lit or dark.\n• Tapping a window flips it and its neighbours above, below, left and right: lit windows go dark, dark ones light up.\n• Make every window dark, within the move limit if the game has one.\n\nThe order of taps never matters, and tapping a window twice changes nothing. When the edges wrap around, a window on the edge also flips the one across the board.'**
+  String get nightfallRules;
+
+  /// No description provided for @nightfallEdges.
+  ///
+  /// In en, this message translates to:
+  /// **'Edges'**
+  String get nightfallEdges;
+
+  /// No description provided for @nightfallEdgesFlat.
+  ///
+  /// In en, this message translates to:
+  /// **'Flat'**
+  String get nightfallEdgesFlat;
+
+  /// No description provided for @nightfallEdgesFlatHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Windows on the edge have fewer neighbours.'**
+  String get nightfallEdgesFlatHint;
+
+  /// No description provided for @nightfallEdgesWrap.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrap around'**
+  String get nightfallEdgesWrap;
+
+  /// No description provided for @nightfallEdgesWrapHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The edges join up: a window on the edge also flips the one across the board.'**
+  String get nightfallEdgesWrapHint;
+
+  /// No description provided for @nightfallGoalMoves.
+  ///
+  /// In en, this message translates to:
+  /// **'Move limit'**
+  String get nightfallGoalMoves;
+
+  /// No description provided for @nightfallGoalMovesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Make it dark within a few moves more than the fewest (none more on hard).'**
+  String get nightfallGoalMovesHint;
+
+  /// No description provided for @nightfallGoalFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free play'**
+  String get nightfallGoalFree;
+
+  /// No description provided for @nightfallGoalFreeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'No limit: take as many moves as you need.'**
+  String get nightfallGoalFreeHint;
+
+  /// No description provided for @nightfallMoves.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} move} other{{count} moves}}'**
+  String nightfallMoves(int count);
+
+  /// No description provided for @nightfallFewest.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark in the fewest moves!'**
+  String get nightfallFewest;
+
+  /// No description provided for @tutNightfall1.
+  ///
+  /// In en, this message translates to:
+  /// **'A tap flips a window and its neighbours above, below, left and right: lit windows go dark, dark ones light up. Tap the middle window to make every window dark.'**
+  String get tutNightfall1;
+
+  /// No description provided for @tutNightfall2.
+  ///
+  /// In en, this message translates to:
+  /// **'A window on the edge or in a corner has fewer neighbours, so a tap there flips fewer windows. Make every window dark.'**
+  String get tutNightfall2;
+
+  /// No description provided for @tutNightfall3.
+  ///
+  /// In en, this message translates to:
+  /// **'Two taps that flip the same window leave it as it was. The order of taps never matters, and tapping a window twice changes nothing, so each window needs one tap or none.'**
+  String get tutNightfall3;
+
+  /// No description provided for @tutNightfall4.
+  ///
+  /// In en, this message translates to:
+  /// **'A real board. The counter shows your moves and the limit: a few more than the fewest that make every window dark. Undo gives a move back.'**
+  String get tutNightfall4;
+
+  /// No description provided for @tutNightfallS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Chase the lights down: for each lit window in the top row, tap the window right below it, and the top row goes dark. Do the same for each row in turn, down to the bottom.'**
+  String get tutNightfallS1;
+
+  /// No description provided for @tutNightfallS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Here a chase leaves lit windows in the bottom row: the top row needs a tap too. Tap the marked window first, then chase the lights down again.'**
+  String get tutNightfallS2;
+
+  /// No description provided for @tutNightfallS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A real board with no move limit. Chase the lights down; if some stay lit in the bottom row, start over with a tap or two in the top row and chase again, until the bottom row goes dark too.'**
+  String get tutNightfallS3;
+
+  /// No description provided for @tagSwitch.
+  ///
+  /// In en, this message translates to:
+  /// **'lights, switch, toggle, on and off, dark, night, windows, flip, invert'**
+  String get tagSwitch;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

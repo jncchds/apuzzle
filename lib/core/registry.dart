@@ -32,6 +32,7 @@ import '../puzzles/mambo/mambo_type.dart';
 import '../puzzles/merge/merge_type.dart';
 import '../puzzles/mines/mines_type.dart';
 import '../puzzles/mosaic/mosaic_type.dart';
+import '../puzzles/nightfall/nightfall_type.dart';
 import '../puzzles/orbits/orbits_type.dart';
 import '../puzzles/pebbles/pebbles_type.dart';
 import '../puzzles/pairs/pairs_type.dart';
@@ -80,6 +81,7 @@ const List<PuzzleType> puzzleTypes = [
   BlendType(),
   PopType(),
   MergeType(),
+  NightfallType(),
   SnakeType(),
   JunctionType(),
   TurnaboutType(),
@@ -246,6 +248,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('flood', [MosaicType(), BlendType()]),
       PuzzleFamily('pop', [PopType()]),
       PuzzleFamily('merge', [MergeType()]),
+      PuzzleFamily('nightfall', [NightfallType()]),
       PuzzleFamily('snake', [SnakeType()]),
       PuzzleFamily('junction', [JunctionType()]),
       PuzzleFamily('turnabout', [TurnaboutType()]),

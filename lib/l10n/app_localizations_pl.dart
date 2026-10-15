@@ -6213,4 +6213,82 @@ class AppLocalizationsPl extends AppLocalizations {
   String exMercuryFailPair(Object lines) {
     return 'Ale wtedy $lines nie mogą już jednocześnie zgodzić się ze swoimi liczbami.';
   }
+
+  @override
+  String get nightfallName => 'Zmierzch';
+
+  @override
+  String get nightfallTagline => 'Stukaj w okna, aż cały dom pogrąży się w ciemności';
+
+  @override
+  String get nightfallRules =>
+      '• Każde pole to okno, jasne albo ciemne.\n• Stuknięcie okna przełącza je i sąsiednie okna nad nim, pod nim, z lewej i z prawej: jasne gasną, ciemne się zapalają.\n• Zgaś wszystkie okna, w limicie ruchów, jeśli gra go ma.\n\nKolejność stuknięć nigdy nie ma znaczenia, a dwa stuknięcia w to samo okno niczego nie zmieniają. Gdy krawędzie się łączą, okno na krawędzi przełącza też okno po drugiej stronie planszy.';
+
+  @override
+  String get nightfallEdges => 'Krawędzie';
+
+  @override
+  String get nightfallEdgesFlat => 'Zwykłe';
+
+  @override
+  String get nightfallEdgesFlatHint => 'Okna na krawędzi mają mniej sąsiadów.';
+
+  @override
+  String get nightfallEdgesWrap => 'Połączone';
+
+  @override
+  String get nightfallEdgesWrapHint =>
+      'Krawędzie się łączą: okno na krawędzi przełącza też okno po drugiej stronie planszy.';
+
+  @override
+  String get nightfallGoalMoves => 'Limit ruchów';
+
+  @override
+  String get nightfallGoalMovesHint =>
+      'Zgaś wszystko w kilku ruchach ponad najmniejszą liczbę (na trudnym bez zapasu).';
+
+  @override
+  String get nightfallGoalFree => 'Gra swobodna';
+
+  @override
+  String get nightfallGoalFreeHint => 'Bez limitu: wykonaj tyle ruchów, ile potrzebujesz.';
+
+  @override
+  String nightfallMoves(int count) {
+    return 'Ruchy: $count';
+  }
+
+  @override
+  String get nightfallFewest => 'Ciemność w najmniejszej liczbie ruchów!';
+
+  @override
+  String get tutNightfall1 =>
+      'Stuknięcie przełącza okno i sąsiednie okna nad nim, pod nim, z lewej i z prawej: jasne gasną, ciemne się zapalają. Stuknij środkowe okno, żeby zgasić wszystkie okna.';
+
+  @override
+  String get tutNightfall2 =>
+      'Okno na krawędzi lub w rogu ma mniej sąsiadów, więc stuknięcie w nie przełącza mniej okien. Zgaś wszystkie okna.';
+
+  @override
+  String get tutNightfall3 =>
+      'Dwa stuknięcia przełączające to samo okno zostawiają je bez zmian. Kolejność stuknięć nigdy nie ma znaczenia, a dwa stuknięcia w to samo okno niczego nie zmieniają, więc każde okno potrzebuje jednego stuknięcia albo żadnego.';
+
+  @override
+  String get tutNightfall4 =>
+      'Prawdziwa plansza. Licznik pokazuje twoje ruchy i limit: kilka więcej niż najmniejsza liczba, która gasi wszystkie okna. Cofnięcie oddaje ruch.';
+
+  @override
+  String get tutNightfallS1 =>
+      'Przeganiaj światło w dół: pod każdym jasnym oknem w górnym rzędzie stuknij okno tuż pod nim, a górny rząd zgaśnie. Zrób to samo z każdym rzędem po kolei, aż do dolnego.';
+
+  @override
+  String get tutNightfallS2 =>
+      'Tutaj pogoń zostawia jasne okna w dolnym rzędzie: górny rząd też potrzebuje stuknięcia. Najpierw stuknij zaznaczone okno, potem znowu przeganiaj światło w dół.';
+
+  @override
+  String get tutNightfallS3 =>
+      'Prawdziwa plansza bez limitu ruchów. Przeganiaj światło w dół; jeśli coś zostanie w dolnym rzędzie, zacznij od nowa od stuknięcia lub dwóch w górnym rzędzie i przeganiaj znowu, aż zgaśnie też dolny rząd.';
+
+  @override
+  String get tagSwitch => 'światło, światła, włącznik, przełącznik, włącz, wyłącz, ciemność, noc, okna';
 }

@@ -6143,4 +6143,88 @@ class AppLocalizationsDe extends AppLocalizations {
   String exMercuryFailPair(Object lines) {
     return 'Aber dann können die Zahlen der $lines nicht mehr beide aufgehen.';
   }
+
+  @override
+  String get nightfallName => 'Dämmerung';
+
+  @override
+  String get nightfallTagline => 'Tippe auf die Fenster, bis das ganze Haus dunkel ist';
+
+  @override
+  String get nightfallRules =>
+      '• Jedes Feld ist ein Fenster, hell oder dunkel.\n• Ein Tipp auf ein Fenster schaltet es um und dazu seine Nachbarn darüber, darunter, links und rechts: helle werden dunkel, dunkle werden hell.\n• Mach alle Fenster dunkel, innerhalb des Zuglimits, falls das Spiel eines hat.\n\nDie Reihenfolge der Tipps spielt nie eine Rolle, und zweimal auf dasselbe Fenster tippen ändert nichts. Wenn die Ränder verbunden sind, schaltet ein Fenster am Rand auch das gegenüber auf der anderen Seite um.';
+
+  @override
+  String get nightfallEdges => 'Ränder';
+
+  @override
+  String get nightfallEdgesFlat => 'Offen';
+
+  @override
+  String get nightfallEdgesFlatHint => 'Fenster am Rand haben weniger Nachbarn.';
+
+  @override
+  String get nightfallEdgesWrap => 'Verbunden';
+
+  @override
+  String get nightfallEdgesWrapHint =>
+      'Die Ränder hängen zusammen: Ein Fenster am Rand schaltet auch das gegenüber auf der anderen Seite um.';
+
+  @override
+  String get nightfallGoalMoves => 'Zuglimit';
+
+  @override
+  String get nightfallGoalMovesHint =>
+      'Mach alles dunkel mit ein paar Zügen mehr als den wenigsten (auf schwer ohne Reserve).';
+
+  @override
+  String get nightfallGoalFree => 'Freies Spiel';
+
+  @override
+  String get nightfallGoalFreeHint => 'Kein Limit: Nimm so viele Züge, wie du brauchst.';
+
+  @override
+  String nightfallMoves(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Züge',
+      one: '$count Zug',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nightfallFewest => 'Dunkel mit den wenigsten Zügen!';
+
+  @override
+  String get tutNightfall1 =>
+      'Ein Tipp schaltet ein Fenster um und dazu seine Nachbarn darüber, darunter, links und rechts: helle werden dunkel, dunkle werden hell. Tippe auf das mittlere Fenster, um alle Fenster dunkel zu machen.';
+
+  @override
+  String get tutNightfall2 =>
+      'Ein Fenster am Rand oder in einer Ecke hat weniger Nachbarn, also schaltet ein Tipp dort weniger Fenster um. Mach alle Fenster dunkel.';
+
+  @override
+  String get tutNightfall3 =>
+      'Zwei Tipps, die dasselbe Fenster umschalten, lassen es, wie es war. Die Reihenfolge der Tipps spielt nie eine Rolle, und zweimal auf dasselbe Fenster tippen ändert nichts, also braucht jedes Fenster einen Tipp oder keinen.';
+
+  @override
+  String get tutNightfall4 =>
+      'Ein echtes Brett. Der Zähler zeigt deine Züge und das Limit: ein paar mehr als die wenigsten, die alle Fenster dunkel machen. Rückgängig gibt einen Zug zurück.';
+
+  @override
+  String get tutNightfallS1 =>
+      'Treib das Licht nach unten: Tippe unter jedem hellen Fenster der obersten Reihe auf das Fenster direkt darunter, dann wird die oberste Reihe dunkel. Mach dasselbe mit jeder Reihe der Reihe nach, bis ganz unten.';
+
+  @override
+  String get tutNightfallS2 =>
+      'Hier lässt das Treiben helle Fenster in der untersten Reihe: Auch die oberste Reihe braucht einen Tipp. Tippe zuerst auf das markierte Fenster und treib das Licht dann wieder nach unten.';
+
+  @override
+  String get tutNightfallS3 =>
+      'Ein echtes Brett ohne Zuglimit. Treib das Licht nach unten; bleibt in der untersten Reihe etwas hell, fang neu an mit ein, zwei Tipps in der obersten Reihe und treib es wieder, bis auch die unterste Reihe dunkel ist.';
+
+  @override
+  String get tagSwitch => 'Licht, Lichter, Schalter, umschalten, an und aus, dunkel, Nacht, Fenster';
 }
