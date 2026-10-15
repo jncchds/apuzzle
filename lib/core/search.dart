@@ -58,6 +58,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
 const Map<String, List<GameTag>> gameTags = {
   'mambo': [GameTag.binary, GameTag.place],
   'sudoku': [GameTag.numbers, GameTag.latin],
+  'pockets': [GameTag.numbers, GameTag.latin, GameTag.sums, GameTag.regions],
   'skyline': [GameTag.numbers, GameTag.latin],
   'cages': [GameTag.numbers, GameTag.latin, GameTag.sums, GameTag.regions],
   'totals': [GameTag.numbers, GameTag.sums],
@@ -112,6 +113,16 @@ const Map<String, List<GameTag>> gameTags = {
 const Map<String, List<String>> gameAliases = {
   'mambo': ['Takuzu', 'Binairo', 'Tango', 'Binary puzzle', 'Unruly', '0h h1'],
   'sudoku': ['Number place'],
+  'pockets': [
+    'Killer Sudoku',
+    'Killer',
+    'Sum Doku',
+    'Sumdoku',
+    'Samunamupure',
+    'Add-up Sudoku',
+    'Киллер-судоку',
+    'Кілер-судоку',
+  ],
   'skyline': ['Skyscrapers', 'Skyscraper', 'Towers', 'Buildings', 'Хмарочоси', 'Drapacze chmur', 'Wolkenkratzer'],
   'totals': ['Kakuro', 'Cross Sums', 'Cross Sum', 'Kreuzsummen', 'Какуро'],
   'cages': ['KenKen', 'Ken Ken', 'Calcudoku', 'Mathdoku', 'KenDoku', 'Inky', 'Кенкен', 'Калькудоку'],

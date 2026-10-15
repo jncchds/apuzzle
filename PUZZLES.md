@@ -4,11 +4,12 @@ Every game in APuzzle, grouped by the home screen's categories. Each one is show
 
 ## Numbers
 
-Skyline, Cages and Signs are one family on the home screen, Latin squares.
+Sudoku and Pockets are one family on the home screen, Sudoku; Skyline, Cages and Signs are another, Latin squares.
 
 | Dark | Light | Puzzle | Goal |
 |---|---|---|---|
 | <img src="docs/screenshots/sudoku_dark.png" width="90" alt="Sudoku, dark theme"> | <img src="docs/screenshots/sudoku_light.png" width="90" alt="Sudoku, light theme"> | **Sudoku** | 4×4, 6×6 or 9×9 grids. Every number appears once per row, column and box. Supports pencil marks. |
+| <img src="docs/screenshots/pockets_dark.png" width="90" alt="Pockets, dark theme"> | <img src="docs/screenshots/pockets_light.png" width="90" alt="Pockets, light theme"> | **Pockets** | A Sudoku with no digits given: the grid is cut into dashed pockets instead. The digits of each pocket add up to the number in its corner and never repeat. 4×4, 6×6 or 9×9. Supports pencil marks. |
 | <img src="docs/screenshots/skyline_dark.png" width="90" alt="Skyline, dark theme"> | <img src="docs/screenshots/skyline_light.png" width="90" alt="Skyline, light theme"> | **Skyline** | Put a tower in every cell, each height once per row and column. The clues around the grid say how many towers can be seen from there; taller towers hide shorter ones behind them. Supports pencil marks. |
 | <img src="docs/screenshots/cages_dark.png" width="90" alt="Cages, dark theme"> | <img src="docs/screenshots/cages_light.png" width="90" alt="Cages, light theme"> | **Cages** | Fill the grid so every number appears once per row and column. The numbers in each outlined cage make the clue in its corner: added, multiplied, or, in a cage of two cells, subtracted or divided. Supports pencil marks. |
 | <img src="docs/screenshots/signs_dark.png" width="90" alt="Signs, dark theme"> | <img src="docs/screenshots/signs_light.png" width="90" alt="Signs, light theme"> | **Signs** | Fill the grid so every number appears once per row and column. A sign between two cells points at the smaller number. Supports pencil marks. |

@@ -14,7 +14,8 @@ void main() {
   });
 
   test('names match by word prefix, case- and accent-insensitive', () {
-    expect(found('sudoku'), ['sudoku']);
+    expect(found('sudoku'), ['sudoku', 'pockets']);
+    expect(alt('killer'), ['pockets']);
     expect(found('SUD'), contains('sudoku'));
     expect(found('moon'), contains('mambo'));
     expect(found('sun moo'), ['mambo']);
@@ -81,7 +82,7 @@ void main() {
   List<String> similar(String q) => [for (final t in searchGames(q).similar) t.id];
 
   test('typos lead to similar games, only when nothing else matched', () {
-    expect(similar('sudoko'), ['sudoku']);
+    expect(similar('sudoko'), ['sudoku', 'pockets']);
     expect(similar('nurikabi'), ['islands']);
     expect(similar('slitherlnk'), ['fence']);
     expect(similar('peralrs'), contains('pearls'), reason: 'swapped letters');
@@ -93,7 +94,7 @@ void main() {
   test('failing that, the closest games, also by part of a word', () {
     expect(similar('ipes'), ['pipes']);
     expect(similar('abyrint'), ['labyrinth']);
-    expect(similar('udok'), ['sudoku']);
+    expect(similar('udok'), ['sudoku', 'pockets']);
     for (final q in ['qwxzv', 'x', 'zzzzzzzzzzzzzzzz', 'ъ', '42']) {
       expect(similar(q), isNotEmpty, reason: q);
       expect(similar(q).length, lessThanOrEqualTo(5), reason: q);

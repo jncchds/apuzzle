@@ -5308,4 +5308,138 @@ class AppLocalizationsUk extends AppLocalizations {
   String exTotalsFailRun(Object sum, Object run) {
     return 'Але тоді $run уже не може дати $sum.';
   }
+
+  @override
+  String get famSudoku => 'Судоку';
+
+  @override
+  String get famSudokuAbout => 'Кожна цифра раз у рядку, стовпці й блоці, а згори ще підказки';
+
+  @override
+  String get pocketsName => 'Кишеньки';
+
+  @override
+  String get pocketsTagline => 'Судоку, де пунктирні кишеньки дають свої суми';
+
+  @override
+  String get pocketsRules =>
+      '• Заповніть кожну клітинку цифрою від 1 до N (N — розмір сітки): кожна цифра по разу в кожному рядку, стовпці й блоці, як у судоку.\n• Сітку також поділено на кишеньки з пунктирними рамками. Цифри кишеньки в сумі дають число в її куті, і жодна цифра в кишеньці не повторюється.\n• Заданих цифр немає: усе підкажуть суми.\n\nВиберіть цифру в палітрі й торкайтеся клітинок, щоб поставити її, або спершу торкніться клітинки, а потім цифри. Кнопка з олівцем вмикає дрібні позначки. Довге натискання / правий клік очищає клітинку. Сума блідне, коли її кишеньку заповнено й вона дає цю суму.';
+
+  @override
+  String get tutPockets1 =>
+      'Як у судоку, кожен рядок, стовпець і блок (товсті рамки) містить кожну цифру від 1 до 4 по разу. Пунктирні кишеньки додають своє: їхні цифри в сумі дають число в куті. 3 у двох клітинках — це лише 1 + 2, а 7 — лише 3 + 4; що куди, підкажуть стовпці.';
+
+  @override
+  String get tutPockets2 =>
+      'У кишеньці жодна цифра не повторюється, навіть коли її клітинки стоять у різних рядках і стовпцях. Тож три клітинки на полі 4 × 4 пропускають лише одну цифру: 6 — це 1 + 2 + 3, а 8 — 1 + 3 + 4.';
+
+  @override
+  String get tutPockets3 =>
+      'На цьому полі немає жодної цифри. Почніть із кишеньок, чию суму можна скласти лише одним способом, а далі — як у судоку.';
+
+  @override
+  String get tutPockets4 =>
+      'Тепер справжнє поле. Позначайте, які цифри може містити кишенька, і пам\'ятайте: цілий рядок, стовпець чи блок дає 1 + 2 + … + 6 = 21.';
+
+  @override
+  String get tutPocketsS1 =>
+      'Цілий рядок, стовпець чи блок завжди дає ту саму суму: 21 на полі 6 × 6, 45 на 9 × 9. Відніміть суми кишеньок, що лежать у ньому повністю, і залишиться сума решти його клітинок. Коли залишається одна-дві клітинки, це часто їх і визначає.';
+
+  @override
+  String get tutPocketsS2 =>
+      'Це працює й навпаки. Додайте суми кишеньок, що заходять у рядок, стовпець чи блок, відніміть його суму, і отримаєте суму їхніх клітинок, що виступають назовні. Смуги з цілих блоків працюють так само.';
+
+  @override
+  String get tutPocketsS3 =>
+      'Найважчі поля потребують припущення, яке можна спростувати. Припустіть, що в клітинці одна з двох-трьох останніх цифр, і міркуйте далі; якщо якась кишенька вже не може дати свою суму або цифрі не лишилося місця, викресліть цю цифру.';
+
+  @override
+  String exPocketsCombo(Object sum, Object pocket, Object digits, Object cell, Object gone) {
+    return 'Щоб скласти $sum у кишеньці $pocket, вільні клітинки можуть містити лише $digits, тож у $cell не може бути $gone.';
+  }
+
+  @override
+  String exPocketsMust(Object sum, Object pocket, Object value, Object cell) {
+    return 'У $cell має бути $value: кожен спосіб скласти $sum у кишеньці $pocket використовує $value, а жодна інша клітинка там її не прийме.';
+  }
+
+  @override
+  String exPocketsFill(Object sum, Object pocket, Object gone, Object cell) {
+    return 'Жоден спосіб заповнити кишеньку $pocket різними цифрами із сумою $sum не ставить $gone у $cell.';
+  }
+
+  @override
+  String exPocketsLineRow(Object sum, Object pocket, Object value, Object row) {
+    return 'Кожен спосіб скласти $sum у кишеньці $pocket використовує $value, а там вона може стояти лише в рядку $row, тож у решті рядка $row $value бути не може.';
+  }
+
+  @override
+  String exPocketsLineCol(Object sum, Object pocket, Object value, Object col) {
+    return 'Кожен спосіб скласти $sum у кишеньці $pocket використовує $value, а там вона може стояти лише в стовпці $col, тож у решті стовпця $col $value бути не може.';
+  }
+
+  @override
+  String exPocketsLineBox(Object sum, Object pocket, Object value, Object box) {
+    return 'Кожен спосіб скласти $sum у кишеньці $pocket використовує $value, а там вона може стояти лише в блоці $box, тож у решті блоку $box $value бути не може.';
+  }
+
+  @override
+  String exPocketsFailSum(Object pocket, Object sum) {
+    return 'Але тоді кишенька $pocket уже не може дати $sum.';
+  }
+
+  @override
+  String exPocketsFailCells(Object cells, Object sum) {
+    return 'Але тоді $cells уже не можуть дати в сумі $sum.';
+  }
+
+  @override
+  String exPocketsRegionRow(Object row) {
+    return 'у рядку $row';
+  }
+
+  @override
+  String exPocketsRegionCol(Object col) {
+    return 'у стовпці $col';
+  }
+
+  @override
+  String exPocketsRegionBox(Object box) {
+    return 'у блоці $box';
+  }
+
+  @override
+  String exPocketsRegionRows(Object from, Object to) {
+    return 'у рядках $from–$to';
+  }
+
+  @override
+  String exPocketsRegionCols(Object from, Object to) {
+    return 'у стовпцях $from–$to';
+  }
+
+  @override
+  String exPocketsInnie(Object region, Object total, Object inside, Object cells, Object sum) {
+    return 'Цифри $region дають у сумі $total, а кишеньки, що повністю лежать там, — $inside, тож $cells дають у сумі $sum';
+  }
+
+  @override
+  String exPocketsOutie(Object region, Object total, Object reach, Object cells, Object sum) {
+    return 'Цифри $region дають у сумі $total, а кишеньки, що туди заходять, — $reach, тож $cells поза цією частиною дають у сумі $sum';
+  }
+
+  @override
+  String exPocketsAreaCombo(Object lead, Object digits, Object cell, Object gone) {
+    return '$lead. Ці клітинки можуть містити лише $digits, тож у $cell не може бути $gone.';
+  }
+
+  @override
+  String exPocketsAreaMust(Object lead, Object value, Object cell) {
+    return '$lead. Кожен такий спосіб використовує $value, і з цих клітинок прийняти її може лише $cell.';
+  }
+
+  @override
+  String exPocketsAreaFill(Object lead, Object gone, Object cell) {
+    return '$lead. Жоден спосіб зробити це різними цифрами не ставить $gone у $cell.';
+  }
 }

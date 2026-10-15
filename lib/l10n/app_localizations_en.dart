@@ -5170,4 +5170,138 @@ class AppLocalizationsEn extends AppLocalizations {
   String exTotalsFailRun(Object sum, Object run) {
     return 'But then $run can no longer make $sum.';
   }
+
+  @override
+  String get famSudoku => 'Sudoku';
+
+  @override
+  String get famSudokuAbout => 'Every digit once per row, column and box, with more clues on top';
+
+  @override
+  String get pocketsName => 'Pockets';
+
+  @override
+  String get pocketsTagline => 'Sudoku whose dashed pockets add up to their sums';
+
+  @override
+  String get pocketsRules =>
+      '• Fill every cell with a digit from 1 to N (N = grid size): each digit once in every row, every column and every box, as in Sudoku.\n• The grid is also cut into pockets with dashed outlines. The digits of a pocket add up to the number in its corner, and a pocket never holds a digit twice.\n• There are no given digits: the sums tell you everything.\n\nPick a digit in the palette and tap cells to place it, or tap a cell first and then a digit. The pencil button toggles small notes. Long-press / right-click clears a cell. A sum fades once its pocket is full and adds up.';
+
+  @override
+  String get tutPockets1 =>
+      'As in Sudoku, every row, column and box (the thick outlines) holds each digit from 1 to 4 once. The dashed pockets add more: their digits add up to the number in the corner. 3 in two cells can only be 1 + 2, and 7 only 3 + 4; the columns tell you which goes where.';
+
+  @override
+  String get tutPockets2 =>
+      'A pocket never holds a digit twice, even where its cells sit in different rows and columns. So three cells of a 4 × 4 leave out just one digit: 6 is 1 + 2 + 3, and 8 is 1 + 3 + 4.';
+
+  @override
+  String get tutPockets3 =>
+      'This board has no digits at all. Start with the pockets whose sum can be made only one way, then go on as in Sudoku.';
+
+  @override
+  String get tutPockets4 =>
+      'Now a real board. Note the digits a pocket can hold, and remember: a whole row, column or box adds up to 1 + 2 + … + 6 = 21.';
+
+  @override
+  String get tutPocketsS1 =>
+      'A whole row, column or box always adds up to the same total: 21 on a 6 × 6, 45 on a 9 × 9. Take away the sums of the pockets lying wholly inside it, and what is left is the sum of its other cells. When one or two cells are left over, that often settles them.';
+
+  @override
+  String get tutPocketsS2 =>
+      'It works the other way round too. Add up the pockets that reach into a row, column or box, take away its total, and you have the sum of their cells sticking out of it. Bands of whole boxes work just the same.';
+
+  @override
+  String get tutPocketsS3 =>
+      'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three digits and follow on; if a pocket can no longer make its sum, or a digit has no place left, cross the digit off.';
+
+  @override
+  String exPocketsCombo(Object sum, Object pocket, Object digits, Object cell, Object gone) {
+    return 'To make $sum in the pocket at $pocket, its open cells can only hold $digits, so $cell can\'t be $gone.';
+  }
+
+  @override
+  String exPocketsMust(Object sum, Object pocket, Object value, Object cell) {
+    return '$cell must be $value: every way to make $sum in the pocket at $pocket uses $value, and no other cell there can take it.';
+  }
+
+  @override
+  String exPocketsFill(Object sum, Object pocket, Object gone, Object cell) {
+    return 'No way to fill the pocket at $pocket with different digits that make $sum puts $gone into $cell.';
+  }
+
+  @override
+  String exPocketsLineRow(Object sum, Object pocket, Object value, Object row) {
+    return 'Every way to make $sum in the pocket at $pocket uses $value, and there it can only go in row $row, so $value is ruled out in the rest of row $row.';
+  }
+
+  @override
+  String exPocketsLineCol(Object sum, Object pocket, Object value, Object col) {
+    return 'Every way to make $sum in the pocket at $pocket uses $value, and there it can only go in column $col, so $value is ruled out in the rest of column $col.';
+  }
+
+  @override
+  String exPocketsLineBox(Object sum, Object pocket, Object value, Object box) {
+    return 'Every way to make $sum in the pocket at $pocket uses $value, and there it can only go in box $box, so $value is ruled out in the rest of box $box.';
+  }
+
+  @override
+  String exPocketsFailSum(Object pocket, Object sum) {
+    return 'But then the pocket at $pocket can no longer make $sum.';
+  }
+
+  @override
+  String exPocketsFailCells(Object cells, Object sum) {
+    return 'But then $cells can no longer add up to $sum.';
+  }
+
+  @override
+  String exPocketsRegionRow(Object row) {
+    return 'row $row';
+  }
+
+  @override
+  String exPocketsRegionCol(Object col) {
+    return 'column $col';
+  }
+
+  @override
+  String exPocketsRegionBox(Object box) {
+    return 'box $box';
+  }
+
+  @override
+  String exPocketsRegionRows(Object from, Object to) {
+    return 'rows $from–$to';
+  }
+
+  @override
+  String exPocketsRegionCols(Object from, Object to) {
+    return 'columns $from–$to';
+  }
+
+  @override
+  String exPocketsInnie(Object region, Object total, Object inside, Object cells, Object sum) {
+    return 'The digits in $region add up to $total and the pockets wholly inside it to $inside, so $cells add up to $sum';
+  }
+
+  @override
+  String exPocketsOutie(Object region, Object total, Object reach, Object cells, Object sum) {
+    return 'The digits in $region add up to $total and the pockets reaching into it to $reach, so $cells, outside it, add up to $sum';
+  }
+
+  @override
+  String exPocketsAreaCombo(Object lead, Object digits, Object cell, Object gone) {
+    return '$lead. These cells can only hold $digits, so $cell can\'t be $gone.';
+  }
+
+  @override
+  String exPocketsAreaMust(Object lead, Object value, Object cell) {
+    return '$lead. Every way to do that uses $value, and of these cells only $cell can take it.';
+  }
+
+  @override
+  String exPocketsAreaFill(Object lead, Object gone, Object cell) {
+    return '$lead. No way to do that with different digits puts $gone into $cell.';
+  }
 }

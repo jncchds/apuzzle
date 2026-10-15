@@ -5274,4 +5274,138 @@ class AppLocalizationsPl extends AppLocalizations {
   String exTotalsFailRun(Object sum, Object run) {
     return 'Ale wtedy $run nie może już dać $sum.';
   }
+
+  @override
+  String get famSudoku => 'Sudoku';
+
+  @override
+  String get famSudokuAbout => 'Każda cyfra raz w wierszu, kolumnie i bloku, a do tego dodatkowe wskazówki';
+
+  @override
+  String get pocketsName => 'Kieszonki';
+
+  @override
+  String get pocketsTagline => 'Sudoku, w którym przerywane kieszonki dają swoje sumy';
+
+  @override
+  String get pocketsRules =>
+      '• Wpisz w każde pole cyfrę od 1 do N (N = rozmiar siatki): każda cyfra raz w każdym wierszu, kolumnie i bloku, jak w sudoku.\n• Siatka jest też podzielona na kieszonki z przerywanymi ramkami. Cyfry kieszonki sumują się do liczby w jej rogu i żadna cyfra nie powtarza się w jednej kieszonce.\n• Nie ma podanych cyfr: wszystko podpowiedzą sumy.\n\nWybierz cyfrę z palety i dotykaj pól, aby ją wpisać, albo najpierw dotknij pola, a potem cyfry. Przycisk ołówka włącza małe notatki. Długie naciśnięcie / prawy przycisk czyści pole. Suma blednie, gdy jej kieszonka jest pełna i się zgadza.';
+
+  @override
+  String get tutPockets1 =>
+      'Jak w sudoku, każdy wiersz, kolumna i blok (grube ramki) zawiera każdą cyfrę od 1 do 4 raz. Przerywane kieszonki dodają swoje: ich cyfry sumują się do liczby w rogu. 3 w dwóch polach to tylko 1 + 2, a 7 tylko 3 + 4; co gdzie, podpowiedzą kolumny.';
+
+  @override
+  String get tutPockets2 =>
+      'W kieszonce żadna cyfra się nie powtarza, nawet gdy jej pola leżą w różnych wierszach i kolumnach. Dlatego trzy pola na planszy 4 × 4 pomijają tylko jedną cyfrę: 6 to 1 + 2 + 3, a 8 to 1 + 3 + 4.';
+
+  @override
+  String get tutPockets3 =>
+      'Na tej planszy nie ma żadnej cyfry. Zacznij od kieszonek, których sumę da się ułożyć tylko na jeden sposób, a dalej jak w sudoku.';
+
+  @override
+  String get tutPockets4 =>
+      'Teraz prawdziwa plansza. Notuj, jakie cyfry może mieć kieszonka, i pamiętaj: cały wiersz, kolumna czy blok daje 1 + 2 + … + 6 = 21.';
+
+  @override
+  String get tutPocketsS1 =>
+      'Cały wiersz, kolumna czy blok zawsze daje tę samą sumę: 21 na planszy 6 × 6, 45 na 9 × 9. Odejmij sumy kieszonek leżących w nim w całości, a zostanie suma pozostałych pól. Gdy zostają jedno lub dwa pola, często to je rozstrzyga.';
+
+  @override
+  String get tutPocketsS2 =>
+      'Działa to też w drugą stronę. Dodaj sumy kieszonek, które wchodzą do wiersza, kolumny czy bloku, odejmij jego sumę, a dostaniesz sumę ich pól wystających na zewnątrz. Pasy z całych bloków działają tak samo.';
+
+  @override
+  String get tutPocketsS3 =>
+      'Najtrudniejsze plansze wymagają założenia, które da się obalić. Załóż, że w polu jest jedna z dwóch lub trzech ostatnich cyfr, i rozumuj dalej; jeśli jakaś kieszonka nie może już dać swojej sumy albo cyfra nie ma już miejsca, skreśl tę cyfrę.';
+
+  @override
+  String exPocketsCombo(Object sum, Object pocket, Object digits, Object cell, Object gone) {
+    return 'Aby ułożyć $sum w kieszonce $pocket, wolne pola mogą mieć tylko $digits, więc w $cell nie może być $gone.';
+  }
+
+  @override
+  String exPocketsMust(Object sum, Object pocket, Object value, Object cell) {
+    return 'W $cell musi być $value: każdy sposób ułożenia $sum w kieszonce $pocket używa $value, a żadne inne pole tam jej nie przyjmie.';
+  }
+
+  @override
+  String exPocketsFill(Object sum, Object pocket, Object gone, Object cell) {
+    return 'Żaden sposób wypełnienia kieszonki $pocket różnymi cyframi o sumie $sum nie stawia $gone w $cell.';
+  }
+
+  @override
+  String exPocketsLineRow(Object sum, Object pocket, Object value, Object row) {
+    return 'Każdy sposób ułożenia $sum w kieszonce $pocket używa $value, a tam może ona stać tylko w wierszu $row, więc w reszcie wiersza $row nie będzie $value.';
+  }
+
+  @override
+  String exPocketsLineCol(Object sum, Object pocket, Object value, Object col) {
+    return 'Każdy sposób ułożenia $sum w kieszonce $pocket używa $value, a tam może ona stać tylko w kolumnie $col, więc w reszcie kolumny $col nie będzie $value.';
+  }
+
+  @override
+  String exPocketsLineBox(Object sum, Object pocket, Object value, Object box) {
+    return 'Każdy sposób ułożenia $sum w kieszonce $pocket używa $value, a tam może ona stać tylko w bloku $box, więc w reszcie bloku $box nie będzie $value.';
+  }
+
+  @override
+  String exPocketsFailSum(Object pocket, Object sum) {
+    return 'Ale wtedy kieszonka $pocket nie może już dać $sum.';
+  }
+
+  @override
+  String exPocketsFailCells(Object cells, Object sum) {
+    return 'Ale wtedy $cells nie mogą już dać w sumie $sum.';
+  }
+
+  @override
+  String exPocketsRegionRow(Object row) {
+    return 'w wierszu $row';
+  }
+
+  @override
+  String exPocketsRegionCol(Object col) {
+    return 'w kolumnie $col';
+  }
+
+  @override
+  String exPocketsRegionBox(Object box) {
+    return 'w bloku $box';
+  }
+
+  @override
+  String exPocketsRegionRows(Object from, Object to) {
+    return 'w wierszach $from–$to';
+  }
+
+  @override
+  String exPocketsRegionCols(Object from, Object to) {
+    return 'w kolumnach $from–$to';
+  }
+
+  @override
+  String exPocketsInnie(Object region, Object total, Object inside, Object cells, Object sum) {
+    return 'Cyfry $region dają w sumie $total, a kieszonki leżące tam w całości – $inside, więc $cells dają w sumie $sum';
+  }
+
+  @override
+  String exPocketsOutie(Object region, Object total, Object reach, Object cells, Object sum) {
+    return 'Cyfry $region dają w sumie $total, a kieszonki, które tam wchodzą – $reach, więc $cells poza tym obszarem dają w sumie $sum';
+  }
+
+  @override
+  String exPocketsAreaCombo(Object lead, Object digits, Object cell, Object gone) {
+    return '$lead. Te pola mogą mieć tylko $digits, więc w $cell nie może być $gone.';
+  }
+
+  @override
+  String exPocketsAreaMust(Object lead, Object value, Object cell) {
+    return '$lead. Każdy taki sposób używa $value, a z tych pól przyjąć ją może tylko $cell.';
+  }
+
+  @override
+  String exPocketsAreaFill(Object lead, Object gone, Object cell) {
+    return '$lead. Żaden sposób zrobienia tego różnymi cyframi nie stawia $gone w $cell.';
+  }
 }

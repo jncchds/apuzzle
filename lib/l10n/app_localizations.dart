@@ -7041,6 +7041,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then {run} can no longer make {sum}.'**
   String exTotalsFailRun(Object sum, Object run);
+
+  /// No description provided for @famSudoku.
+  ///
+  /// In en, this message translates to:
+  /// **'Sudoku'**
+  String get famSudoku;
+
+  /// No description provided for @famSudokuAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'Every digit once per row, column and box, with more clues on top'**
+  String get famSudokuAbout;
+
+  /// No description provided for @pocketsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Pockets'**
+  String get pocketsName;
+
+  /// No description provided for @pocketsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Sudoku whose dashed pockets add up to their sums'**
+  String get pocketsTagline;
+
+  /// No description provided for @pocketsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Fill every cell with a digit from 1 to N (N = grid size): each digit once in every row, every column and every box, as in Sudoku.\n• The grid is also cut into pockets with dashed outlines. The digits of a pocket add up to the number in its corner, and a pocket never holds a digit twice.\n• There are no given digits: the sums tell you everything.\n\nPick a digit in the palette and tap cells to place it, or tap a cell first and then a digit. The pencil button toggles small notes. Long-press / right-click clears a cell. A sum fades once its pocket is full and adds up.'**
+  String get pocketsRules;
+
+  /// No description provided for @tutPockets1.
+  ///
+  /// In en, this message translates to:
+  /// **'As in Sudoku, every row, column and box (the thick outlines) holds each digit from 1 to 4 once. The dashed pockets add more: their digits add up to the number in the corner. 3 in two cells can only be 1 + 2, and 7 only 3 + 4; the columns tell you which goes where.'**
+  String get tutPockets1;
+
+  /// No description provided for @tutPockets2.
+  ///
+  /// In en, this message translates to:
+  /// **'A pocket never holds a digit twice, even where its cells sit in different rows and columns. So three cells of a 4 × 4 leave out just one digit: 6 is 1 + 2 + 3, and 8 is 1 + 3 + 4.'**
+  String get tutPockets2;
+
+  /// No description provided for @tutPockets3.
+  ///
+  /// In en, this message translates to:
+  /// **'This board has no digits at all. Start with the pockets whose sum can be made only one way, then go on as in Sudoku.'**
+  String get tutPockets3;
+
+  /// No description provided for @tutPockets4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Note the digits a pocket can hold, and remember: a whole row, column or box adds up to 1 + 2 + … + 6 = 21.'**
+  String get tutPockets4;
+
+  /// No description provided for @tutPocketsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'A whole row, column or box always adds up to the same total: 21 on a 6 × 6, 45 on a 9 × 9. Take away the sums of the pockets lying wholly inside it, and what is left is the sum of its other cells. When one or two cells are left over, that often settles them.'**
+  String get tutPocketsS1;
+
+  /// No description provided for @tutPocketsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'It works the other way round too. Add up the pockets that reach into a row, column or box, take away its total, and you have the sum of their cells sticking out of it. Bands of whole boxes work just the same.'**
+  String get tutPocketsS2;
+
+  /// No description provided for @tutPocketsS3.
+  ///
+  /// In en, this message translates to:
+  /// **'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three digits and follow on; if a pocket can no longer make its sum, or a digit has no place left, cross the digit off.'**
+  String get tutPocketsS3;
+
+  /// No description provided for @exPocketsCombo.
+  ///
+  /// In en, this message translates to:
+  /// **'To make {sum} in the pocket at {pocket}, its open cells can only hold {digits}, so {cell} can\'t be {gone}.'**
+  String exPocketsCombo(Object sum, Object pocket, Object digits, Object cell, Object gone);
+
+  /// No description provided for @exPocketsMust.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: every way to make {sum} in the pocket at {pocket} uses {value}, and no other cell there can take it.'**
+  String exPocketsMust(Object sum, Object pocket, Object value, Object cell);
+
+  /// No description provided for @exPocketsFill.
+  ///
+  /// In en, this message translates to:
+  /// **'No way to fill the pocket at {pocket} with different digits that make {sum} puts {gone} into {cell}.'**
+  String exPocketsFill(Object sum, Object pocket, Object gone, Object cell);
+
+  /// No description provided for @exPocketsLineRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Every way to make {sum} in the pocket at {pocket} uses {value}, and there it can only go in row {row}, so {value} is ruled out in the rest of row {row}.'**
+  String exPocketsLineRow(Object sum, Object pocket, Object value, Object row);
+
+  /// No description provided for @exPocketsLineCol.
+  ///
+  /// In en, this message translates to:
+  /// **'Every way to make {sum} in the pocket at {pocket} uses {value}, and there it can only go in column {col}, so {value} is ruled out in the rest of column {col}.'**
+  String exPocketsLineCol(Object sum, Object pocket, Object value, Object col);
+
+  /// No description provided for @exPocketsLineBox.
+  ///
+  /// In en, this message translates to:
+  /// **'Every way to make {sum} in the pocket at {pocket} uses {value}, and there it can only go in box {box}, so {value} is ruled out in the rest of box {box}.'**
+  String exPocketsLineBox(Object sum, Object pocket, Object value, Object box);
+
+  /// No description provided for @exPocketsFailSum.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the pocket at {pocket} can no longer make {sum}.'**
+  String exPocketsFailSum(Object pocket, Object sum);
+
+  /// No description provided for @exPocketsFailCells.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cells} can no longer add up to {sum}.'**
+  String exPocketsFailCells(Object cells, Object sum);
+
+  /// No description provided for @exPocketsRegionRow.
+  ///
+  /// In en, this message translates to:
+  /// **'row {row}'**
+  String exPocketsRegionRow(Object row);
+
+  /// No description provided for @exPocketsRegionCol.
+  ///
+  /// In en, this message translates to:
+  /// **'column {col}'**
+  String exPocketsRegionCol(Object col);
+
+  /// No description provided for @exPocketsRegionBox.
+  ///
+  /// In en, this message translates to:
+  /// **'box {box}'**
+  String exPocketsRegionBox(Object box);
+
+  /// No description provided for @exPocketsRegionRows.
+  ///
+  /// In en, this message translates to:
+  /// **'rows {from}–{to}'**
+  String exPocketsRegionRows(Object from, Object to);
+
+  /// No description provided for @exPocketsRegionCols.
+  ///
+  /// In en, this message translates to:
+  /// **'columns {from}–{to}'**
+  String exPocketsRegionCols(Object from, Object to);
+
+  /// No description provided for @exPocketsInnie.
+  ///
+  /// In en, this message translates to:
+  /// **'The digits in {region} add up to {total} and the pockets wholly inside it to {inside}, so {cells} add up to {sum}'**
+  String exPocketsInnie(Object region, Object total, Object inside, Object cells, Object sum);
+
+  /// No description provided for @exPocketsOutie.
+  ///
+  /// In en, this message translates to:
+  /// **'The digits in {region} add up to {total} and the pockets reaching into it to {reach}, so {cells}, outside it, add up to {sum}'**
+  String exPocketsOutie(Object region, Object total, Object reach, Object cells, Object sum);
+
+  /// No description provided for @exPocketsAreaCombo.
+  ///
+  /// In en, this message translates to:
+  /// **'{lead}. These cells can only hold {digits}, so {cell} can\'t be {gone}.'**
+  String exPocketsAreaCombo(Object lead, Object digits, Object cell, Object gone);
+
+  /// No description provided for @exPocketsAreaMust.
+  ///
+  /// In en, this message translates to:
+  /// **'{lead}. Every way to do that uses {value}, and of these cells only {cell} can take it.'**
+  String exPocketsAreaMust(Object lead, Object value, Object cell);
+
+  /// No description provided for @exPocketsAreaFill.
+  ///
+  /// In en, this message translates to:
+  /// **'{lead}. No way to do that with different digits puts {gone} into {cell}.'**
+  String exPocketsAreaFill(Object lead, Object gone, Object cell);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

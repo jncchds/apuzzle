@@ -34,6 +34,7 @@ import '../puzzles/pebbles/pebbles_type.dart';
 import '../puzzles/pairs/pairs_type.dart';
 import '../puzzles/pearls/pearls_type.dart';
 import '../puzzles/plots/plots_type.dart';
+import '../puzzles/pockets/pockets_type.dart';
 import '../puzzles/pop/pop_type.dart';
 import '../puzzles/pipes/pipes_type.dart';
 import '../puzzles/rails/rails_type.dart';
@@ -56,6 +57,7 @@ import 'puzzle_type.dart';
 const List<PuzzleType> puzzleTypes = [
   MamboType(),
   SudokuType(),
+  PocketsType(),
   SkylineType(),
   CagesType(),
   SignsType(),
@@ -119,6 +121,7 @@ class PuzzleFamily {
   String name(AppLocalizations l) => switch (id) {
     'flood' => l.famFlood,
     'latin' => l.famLatin,
+    'sudokus' => l.famSudoku,
     'memory' => l.famMemory,
     'plumbing' => l.famPlumbing,
     _ => types.first.name(l),
@@ -128,6 +131,7 @@ class PuzzleFamily {
   String about(AppLocalizations l) => switch (id) {
     'flood' => l.famFloodAbout,
     'latin' => l.famLatinAbout,
+    'sudokus' => l.famSudokuAbout,
     'memory' => l.famMemoryAbout,
     'plumbing' => l.famPlumbingAbout,
     _ => types.first.tagline(l),
@@ -164,7 +168,7 @@ const List<PuzzleCategory> puzzleCategories = [
     icon: Icons.calculate_rounded,
     accent: Color(0xFF6FA8FF),
     [
-      PuzzleFamily('sudoku', [SudokuType()]),
+      PuzzleFamily('sudokus', [SudokuType(), PocketsType()]),
       PuzzleFamily('latin', [SkylineType(), CagesType(), SignsType()]),
       PuzzleFamily('totals', [TotalsType()]),
       PuzzleFamily('blocks', [BlocksType()]),

@@ -5191,4 +5191,138 @@ class AppLocalizationsDe extends AppLocalizations {
   String exTotalsFailRun(Object sum, Object run) {
     return 'Dann kann $run aber $sum nicht mehr erreichen.';
   }
+
+  @override
+  String get famSudoku => 'Sudoku';
+
+  @override
+  String get famSudokuAbout => 'Jede Ziffer einmal pro Zeile, Spalte und Block, dazu weitere Hinweise';
+
+  @override
+  String get pocketsName => 'Taschen';
+
+  @override
+  String get pocketsTagline => 'Sudoku, dessen gestrichelte Taschen ihre Summen ergeben';
+
+  @override
+  String get pocketsRules =>
+      '• Füll jedes Feld mit einer Ziffer von 1 bis N (N = Gittergröße): jede Ziffer einmal in jeder Zeile, jeder Spalte und jedem Block, wie beim Sudoku.\n• Das Gitter ist außerdem in Taschen mit gestrichelten Rahmen geteilt. Die Ziffern einer Tasche ergeben zusammen die Zahl in ihrer Ecke, und in einer Tasche kommt keine Ziffer doppelt vor.\n• Es gibt keine vorgegebenen Ziffern: Die Summen verraten alles.\n\nWähle eine Ziffer in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Ziffer. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld. Eine Summe verblasst, sobald ihre Tasche voll ist und aufgeht.';
+
+  @override
+  String get tutPockets1 =>
+      'Wie beim Sudoku enthält jede Zeile, Spalte und jeder Block (die dicken Rahmen) jede Ziffer von 1 bis 4 einmal. Die gestrichelten Taschen kommen dazu: Ihre Ziffern ergeben zusammen die Zahl in der Ecke. 3 in zwei Feldern geht nur als 1 + 2, 7 nur als 3 + 4; was wohin gehört, verraten die Spalten.';
+
+  @override
+  String get tutPockets2 =>
+      'In einer Tasche kommt keine Ziffer doppelt vor, auch wenn ihre Felder in verschiedenen Zeilen und Spalten liegen. Drei Felder im 4 × 4 lassen also nur eine Ziffer aus: 6 ist 1 + 2 + 3, und 8 ist 1 + 3 + 4.';
+
+  @override
+  String get tutPockets3 =>
+      'Dieses Gitter hat gar keine Ziffern. Fang mit den Taschen an, deren Summe sich nur auf eine Art bilden lässt, und mach dann weiter wie beim Sudoku.';
+
+  @override
+  String get tutPockets4 =>
+      'Jetzt ein echtes Gitter. Notiere, welche Ziffern eine Tasche haben kann, und denk daran: Eine ganze Zeile, Spalte oder ein Block ergibt 1 + 2 + … + 6 = 21.';
+
+  @override
+  String get tutPocketsS1 =>
+      'Eine ganze Zeile, Spalte oder ein Block ergibt immer dieselbe Summe: 21 im 6 × 6, 45 im 9 × 9. Zieh die Summen der Taschen ab, die ganz darin liegen, und es bleibt die Summe der übrigen Felder. Bleiben ein oder zwei Felder übrig, steht damit oft schon fest, was hineingehört.';
+
+  @override
+  String get tutPocketsS2 =>
+      'Es geht auch andersherum. Zähl die Summen der Taschen zusammen, die in eine Zeile, Spalte oder einen Block hineinreichen, zieh deren Summe ab, und du hast die Summe ihrer Felder, die herausragen. Streifen aus ganzen Blöcken funktionieren genauso.';
+
+  @override
+  String get tutPocketsS3 =>
+      'Die schwersten Gitter brauchen eine Annahme, die sich widerlegen lässt. Nimm an, ein Feld hat eine seiner letzten zwei oder drei Ziffern, und denk weiter; kann eine Tasche ihre Summe nicht mehr erreichen oder hat eine Ziffer keinen Platz mehr, streich die Ziffer.';
+
+  @override
+  String exPocketsCombo(Object sum, Object pocket, Object digits, Object cell, Object gone) {
+    return 'Um $sum in der Tasche bei $pocket zu bilden, können die freien Felder nur $digits haben, also ist $cell nicht $gone.';
+  }
+
+  @override
+  String exPocketsMust(Object sum, Object pocket, Object value, Object cell) {
+    return '$cell muss $value sein: Jede Art, $sum in der Tasche bei $pocket zu bilden, braucht $value, und kein anderes Feld dort kann sie aufnehmen.';
+  }
+
+  @override
+  String exPocketsFill(Object sum, Object pocket, Object gone, Object cell) {
+    return 'Keine Art, die Tasche bei $pocket mit verschiedenen Ziffern zur Summe $sum zu füllen, setzt $gone in $cell.';
+  }
+
+  @override
+  String exPocketsLineRow(Object sum, Object pocket, Object value, Object row) {
+    return 'Jede Art, $sum in der Tasche bei $pocket zu bilden, braucht $value, und dort kann sie nur in Zeile $row stehen, also kommt $value sonst nirgends in Zeile $row vor.';
+  }
+
+  @override
+  String exPocketsLineCol(Object sum, Object pocket, Object value, Object col) {
+    return 'Jede Art, $sum in der Tasche bei $pocket zu bilden, braucht $value, und dort kann sie nur in Spalte $col stehen, also kommt $value sonst nirgends in Spalte $col vor.';
+  }
+
+  @override
+  String exPocketsLineBox(Object sum, Object pocket, Object value, Object box) {
+    return 'Jede Art, $sum in der Tasche bei $pocket zu bilden, braucht $value, und dort kann sie nur im Block $box stehen, also kommt $value sonst nirgends im Block $box vor.';
+  }
+
+  @override
+  String exPocketsFailSum(Object pocket, Object sum) {
+    return 'Dann kann die Tasche bei $pocket aber $sum nicht mehr erreichen.';
+  }
+
+  @override
+  String exPocketsFailCells(Object cells, Object sum) {
+    return 'Dann können $cells aber zusammen nicht mehr $sum ergeben.';
+  }
+
+  @override
+  String exPocketsRegionRow(Object row) {
+    return 'in Zeile $row';
+  }
+
+  @override
+  String exPocketsRegionCol(Object col) {
+    return 'in Spalte $col';
+  }
+
+  @override
+  String exPocketsRegionBox(Object box) {
+    return 'im Block $box';
+  }
+
+  @override
+  String exPocketsRegionRows(Object from, Object to) {
+    return 'in den Zeilen $from–$to';
+  }
+
+  @override
+  String exPocketsRegionCols(Object from, Object to) {
+    return 'in den Spalten $from–$to';
+  }
+
+  @override
+  String exPocketsInnie(Object region, Object total, Object inside, Object cells, Object sum) {
+    return 'Die Ziffern $region ergeben zusammen $total und die Taschen, die ganz darin liegen, $inside, also ergeben $cells zusammen $sum';
+  }
+
+  @override
+  String exPocketsOutie(Object region, Object total, Object reach, Object cells, Object sum) {
+    return 'Die Ziffern $region ergeben zusammen $total und die Taschen, die hineinreichen, $reach, also ergeben $cells außerhalb davon zusammen $sum';
+  }
+
+  @override
+  String exPocketsAreaCombo(Object lead, Object digits, Object cell, Object gone) {
+    return '$lead. Diese Felder können nur $digits haben, also ist $cell nicht $gone.';
+  }
+
+  @override
+  String exPocketsAreaMust(Object lead, Object value, Object cell) {
+    return '$lead. Jede Art, das zu schaffen, braucht $value, und von diesen Feldern kann nur $cell sie aufnehmen.';
+  }
+
+  @override
+  String exPocketsAreaFill(Object lead, Object gone, Object cell) {
+    return '$lead. Keine Art, das mit verschiedenen Ziffern zu schaffen, setzt $gone in $cell.';
+  }
 }
