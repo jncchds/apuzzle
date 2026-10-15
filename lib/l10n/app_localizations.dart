@@ -7443,6 +7443,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then the {count} at {clue} can\'t see exactly {count} cells: no view of the right length ends at the edge or at a cell that can be shaded.'**
   String exLookoutFailWays(Object clue, int count);
+
+  /// No description provided for @rampartName.
+  ///
+  /// In en, this message translates to:
+  /// **'Rampart'**
+  String get rampartName;
+
+  /// No description provided for @rampartTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Build one winding wall that fits the clues around it'**
+  String get rampartTagline;
+
+  /// No description provided for @rampartRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Shade cells so that all shaded cells form one wall, joined side by side.\n• No 2×2 block is all shaded.\n• Clue cells are never shaded. A clue lists the runs of shaded cells among its eight neighbours, diagonals included, read round the clue: \"3 1\" means a run of three cells in a row and a separate single cell, in either order. A 0 means none of them is shaded.\n\nTap a cell to cycle: shaded → dot (your \"this one stays\" note) → empty. Right-click cycles back. A long press dots the last cell of a 2×2 block with three cells shaded and the cells round every clue the shaded cells already make. Dots are optional: the puzzle is done once the right cells are shaded.'**
+  String get rampartRules;
+
+  /// No description provided for @tutRampart1.
+  ///
+  /// In en, this message translates to:
+  /// **'Shade cells to build one wall. Each clue tells which of its eight neighbours, diagonals included, are shaded: a 3 is a run of three in a row round it, and a 0 means none of them is. Clue cells are never shaded.'**
+  String get tutRampart1;
+
+  /// No description provided for @tutRampart2.
+  ///
+  /// In en, this message translates to:
+  /// **'No 2×2 block may be all shaded. Shade what the clues ask for, and the top-left cell must stay, or its block fills up. Tap a cell twice to dot it (your note that it stays).'**
+  String get tutRampart2;
+
+  /// No description provided for @tutRampart3.
+  ///
+  /// In en, this message translates to:
+  /// **'A clue of several numbers has that many separate runs: 2 2 is two runs of two, with cells that stay between them. All shaded cells join into one wall, so the two runs meet round the left side.'**
+  String get tutRampart3;
+
+  /// No description provided for @tutRampart4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with clues that leave one way to place their runs, like big numbers and 0s, and keep the wall in one piece.'**
+  String get tutRampart4;
+
+  /// No description provided for @tutRampartS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Every run round a clue must still join the rest of the wall. The 1 1 needs two single shaded cells apart. A top corner shaded alone would be shut in by the clue and the cells that stay round it, so both corners stay, and the only pair left is the cells either side of the middle.'**
+  String get tutRampartS1;
+
+  /// No description provided for @tutRampartS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Weigh each way of making a clue against the other rules: a way that fills a 2×2 block or shuts part of the wall in is out. Also, a cell that would cut the wall in two if it stayed is shaded, and cells the wall can\'t reach stay.'**
+  String get tutRampartS2;
+
+  /// No description provided for @tutRampartS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When stuck, shade a cell and follow on: if a clue can\'t be made, a 2×2 block fills up or the wall falls apart, that cell stays.'**
+  String get tutRampartS3;
+
+  /// No description provided for @exRampartClueShade.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: every way to make the clue at {clue} shades it.'**
+  String exRampartClueShade(Object cell, Object clue);
+
+  /// No description provided for @exRampartClueKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: no way to make the clue at {clue} shades it.'**
+  String exRampartClueKeep(Object cell, Object clue);
+
+  /// No description provided for @exRampartWaysShade.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: every way to make the clue at {clue} without a shaded 2×2 block or a shut-in part of the wall shades it.'**
+  String exRampartWaysShade(Object cell, Object clue);
+
+  /// No description provided for @exRampartWaysKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: no way to make the clue at {clue} without a shaded 2×2 block or a shut-in part of the wall shades it.'**
+  String exRampartWaysKeep(Object cell, Object clue);
+
+  /// No description provided for @exRampartPool.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: the rest of the 2×2 block {area} is shaded.'**
+  String exRampartPool(Object cell, Object area);
+
+  /// No description provided for @exRampartEscape.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: it is the only way out for the part of the wall at {other}.'**
+  String exRampartEscape(Object cell, Object other);
+
+  /// No description provided for @exRampartCut.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: if it stayed, the wall would be cut in two.'**
+  String exRampartCut(Object cell);
+
+  /// No description provided for @exRampartAway.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: the wall can\'t reach it.'**
+  String exRampartAway(Object cell);
+
+  /// No description provided for @exRampartFailClue.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the clue at {clue} can\'t be made.'**
+  String exRampartFailClue(Object clue);
+
+  /// No description provided for @exRampartFailPool.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the 2×2 block {area} is all shaded.'**
+  String exRampartFailPool(Object area);
+
+  /// No description provided for @exRampartFailShut.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the part of the wall at {cell} is shut in.'**
+  String exRampartFailShut(Object cell);
+
+  /// No description provided for @exRampartFailWays.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the clue at {clue} can\'t be made without a shaded 2×2 block or a shut-in part of the wall.'**
+  String exRampartFailWays(Object clue);
+
+  /// No description provided for @exRampartFailApart.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the shaded cells {a} and {b} can\'t join up.'**
+  String exRampartFailApart(Object a, Object b);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

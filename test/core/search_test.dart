@@ -61,6 +61,7 @@ void main() {
     expect(alt('hitori'), ['solo']);
     expect(alt('heyawake'), ['chambers']);
     expect(alt('kurodoko'), ['lookout']);
+    expect(alt('tapa'), ['rampart']);
     expect(alt('dominosa'), ['domino']);
     expect(alt('bimaru'), ['fleet']);
     expect(alt('battleships'), ['fleet']);

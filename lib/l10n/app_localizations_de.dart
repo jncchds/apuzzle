@@ -5527,4 +5527,107 @@ class AppLocalizationsDe extends AppLocalizations {
   String exLookoutFailWays(Object clue, int count) {
     return 'Aber dann kann die $count in $clue nicht genau $count Felder sehen: Kein Blick der richtigen Länge endet am Rand oder an einem Feld, das geschwärzt werden kann.';
   }
+
+  @override
+  String get rampartName => 'Wall';
+
+  @override
+  String get rampartTagline => 'Baue eine gewundene Mauer, die zu den Hinweisen ringsum passt';
+
+  @override
+  String get rampartRules =>
+      '• Schwärze Felder so, dass alle geschwärzten Felder eine Mauer bilden, über Seiten verbunden.\n• Kein 2×2-Block ist ganz geschwärzt.\n• Hinweisfelder werden nie geschwärzt. Ein Hinweis nennt die Reihen geschwärzter Felder unter seinen acht Nachbarn, diagonale mitgezählt, rund um ihn gelesen: „3 1“ heißt eine Reihe aus drei Feldern am Stück und ein einzelnes Feld getrennt davon, in beliebiger Reihenfolge. Eine 0 heißt, dass keines davon geschwärzt ist.\n\nTippe auf ein Feld, um zu wechseln: geschwärzt → Punkt (deine Notiz „bleibt“) → leer. Rechtsklick wechselt zurück. Langes Drücken setzt einen Punkt in das letzte Feld eines 2×2-Blocks mit drei geschwärzten Feldern und rund um jeden Hinweis, den die geschwärzten Felder schon erfüllen. Punkte sind freiwillig: Das Rätsel ist gelöst, sobald die richtigen Felder geschwärzt sind.';
+
+  @override
+  String get tutRampart1 =>
+      'Schwärze Felder, um eine Mauer zu bauen. Jeder Hinweis sagt, welche seiner acht Nachbarn, diagonale mitgezählt, geschwärzt sind: Eine 3 ist eine Reihe aus drei am Stück rund um ihn, und eine 0 heißt, dass keiner geschwärzt ist. Hinweisfelder werden nie geschwärzt.';
+
+  @override
+  String get tutRampart2 =>
+      'Kein 2×2-Block darf ganz geschwärzt sein. Schwärze, was die Hinweise verlangen, und das Feld oben links muss bleiben, sonst füllt sich sein Block. Tippe ein Feld zweimal an, um einen Punkt zu setzen (deine Notiz, dass es bleibt).';
+
+  @override
+  String get tutRampart3 =>
+      'Ein Hinweis aus mehreren Zahlen hat ebenso viele getrennte Reihen: 2 2 sind zwei Reihen aus zwei Feldern, mit Feldern dazwischen, die bleiben. Alle geschwärzten Felder bilden eine Mauer, also treffen sich die beiden Reihen links herum.';
+
+  @override
+  String get tutRampart4 =>
+      'Jetzt ein echtes Gitter. Beginne mit Hinweisen, die ihren Reihen nur einen Platz lassen, wie große Zahlen und Nullen, und halte die Mauer in einem Stück.';
+
+  @override
+  String get tutRampartS1 =>
+      'Jede Reihe um einen Hinweis muss sich noch mit dem Rest der Mauer verbinden können. Die 1 1 braucht zwei getrennte einzelne geschwärzte Felder. Eine obere Ecke, allein geschwärzt, wäre vom Hinweis und den bleibenden Feldern ringsum eingeschlossen, also bleiben beide Ecken, und als einziges Paar bleiben die Felder links und rechts der Mitte.';
+
+  @override
+  String get tutRampartS2 =>
+      'Wäge jeden Weg, einen Hinweis zu erfüllen, gegen die anderen Regeln ab: Ein Weg, der einen 2×2-Block füllt oder einen Teil der Mauer einschließt, fällt weg. Außerdem ist ein Feld geschwärzt, ohne das die Mauer in zwei Teile zerfiele, und Felder, die die Mauer nicht erreicht, bleiben.';
+
+  @override
+  String get tutRampartS3 =>
+      'Ein schweres Gitter. Wenn du feststeckst, schwärze ein Feld und folge den Folgen: Lässt sich dann ein Hinweis nicht erfüllen, füllt sich ein 2×2-Block oder zerfällt die Mauer, dann bleibt dieses Feld.';
+
+  @override
+  String exRampartClueShade(Object cell, Object clue) {
+    return '$cell ist geschwärzt: Jeder Weg, den Hinweis in $clue zu erfüllen, schwärzt es.';
+  }
+
+  @override
+  String exRampartClueKeep(Object cell, Object clue) {
+    return '$cell bleibt: Kein Weg, den Hinweis in $clue zu erfüllen, schwärzt es.';
+  }
+
+  @override
+  String exRampartWaysShade(Object cell, Object clue) {
+    return '$cell ist geschwärzt: Jeder Weg, den Hinweis in $clue ohne geschwärzten 2×2-Block und ohne eingeschlossenen Teil der Mauer zu erfüllen, schwärzt es.';
+  }
+
+  @override
+  String exRampartWaysKeep(Object cell, Object clue) {
+    return '$cell bleibt: Kein Weg, den Hinweis in $clue ohne geschwärzten 2×2-Block und ohne eingeschlossenen Teil der Mauer zu erfüllen, schwärzt es.';
+  }
+
+  @override
+  String exRampartPool(Object cell, Object area) {
+    return '$cell bleibt: Der Rest des 2×2-Blocks $area ist geschwärzt.';
+  }
+
+  @override
+  String exRampartEscape(Object cell, Object other) {
+    return '$cell ist geschwärzt: Es ist der einzige Ausweg für den Teil der Mauer bei $other.';
+  }
+
+  @override
+  String exRampartCut(Object cell) {
+    return '$cell ist geschwärzt: Bliebe es, zerfiele die Mauer in zwei Teile.';
+  }
+
+  @override
+  String exRampartAway(Object cell) {
+    return '$cell bleibt: Die Mauer kann es nicht erreichen.';
+  }
+
+  @override
+  String exRampartFailClue(Object clue) {
+    return 'Aber dann lässt sich der Hinweis in $clue nicht erfüllen.';
+  }
+
+  @override
+  String exRampartFailPool(Object area) {
+    return 'Aber dann ist der 2×2-Block $area ganz geschwärzt.';
+  }
+
+  @override
+  String exRampartFailShut(Object cell) {
+    return 'Aber dann ist der Teil der Mauer bei $cell eingeschlossen.';
+  }
+
+  @override
+  String exRampartFailWays(Object clue) {
+    return 'Aber dann lässt sich der Hinweis in $clue nicht ohne geschwärzten 2×2-Block oder eingeschlossenen Teil der Mauer erfüllen.';
+  }
+
+  @override
+  String exRampartFailApart(Object a, Object b) {
+    return 'Aber dann können sich die geschwärzten Felder $a und $b nicht verbinden.';
+  }
 }

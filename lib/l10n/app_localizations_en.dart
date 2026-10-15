@@ -5512,4 +5512,107 @@ class AppLocalizationsEn extends AppLocalizations {
   String exLookoutFailWays(Object clue, int count) {
     return 'But then the $count at $clue can\'t see exactly $count cells: no view of the right length ends at the edge or at a cell that can be shaded.';
   }
+
+  @override
+  String get rampartName => 'Rampart';
+
+  @override
+  String get rampartTagline => 'Build one winding wall that fits the clues around it';
+
+  @override
+  String get rampartRules =>
+      '• Shade cells so that all shaded cells form one wall, joined side by side.\n• No 2×2 block is all shaded.\n• Clue cells are never shaded. A clue lists the runs of shaded cells among its eight neighbours, diagonals included, read round the clue: \"3 1\" means a run of three cells in a row and a separate single cell, in either order. A 0 means none of them is shaded.\n\nTap a cell to cycle: shaded → dot (your \"this one stays\" note) → empty. Right-click cycles back. A long press dots the last cell of a 2×2 block with three cells shaded and the cells round every clue the shaded cells already make. Dots are optional: the puzzle is done once the right cells are shaded.';
+
+  @override
+  String get tutRampart1 =>
+      'Shade cells to build one wall. Each clue tells which of its eight neighbours, diagonals included, are shaded: a 3 is a run of three in a row round it, and a 0 means none of them is. Clue cells are never shaded.';
+
+  @override
+  String get tutRampart2 =>
+      'No 2×2 block may be all shaded. Shade what the clues ask for, and the top-left cell must stay, or its block fills up. Tap a cell twice to dot it (your note that it stays).';
+
+  @override
+  String get tutRampart3 =>
+      'A clue of several numbers has that many separate runs: 2 2 is two runs of two, with cells that stay between them. All shaded cells join into one wall, so the two runs meet round the left side.';
+
+  @override
+  String get tutRampart4 =>
+      'Now a real board. Start with clues that leave one way to place their runs, like big numbers and 0s, and keep the wall in one piece.';
+
+  @override
+  String get tutRampartS1 =>
+      'Every run round a clue must still join the rest of the wall. The 1 1 needs two single shaded cells apart. A top corner shaded alone would be shut in by the clue and the cells that stay round it, so both corners stay, and the only pair left is the cells either side of the middle.';
+
+  @override
+  String get tutRampartS2 =>
+      'Weigh each way of making a clue against the other rules: a way that fills a 2×2 block or shuts part of the wall in is out. Also, a cell that would cut the wall in two if it stayed is shaded, and cells the wall can\'t reach stay.';
+
+  @override
+  String get tutRampartS3 =>
+      'A hard board. When stuck, shade a cell and follow on: if a clue can\'t be made, a 2×2 block fills up or the wall falls apart, that cell stays.';
+
+  @override
+  String exRampartClueShade(Object cell, Object clue) {
+    return '$cell is shaded: every way to make the clue at $clue shades it.';
+  }
+
+  @override
+  String exRampartClueKeep(Object cell, Object clue) {
+    return '$cell stays: no way to make the clue at $clue shades it.';
+  }
+
+  @override
+  String exRampartWaysShade(Object cell, Object clue) {
+    return '$cell is shaded: every way to make the clue at $clue without a shaded 2×2 block or a shut-in part of the wall shades it.';
+  }
+
+  @override
+  String exRampartWaysKeep(Object cell, Object clue) {
+    return '$cell stays: no way to make the clue at $clue without a shaded 2×2 block or a shut-in part of the wall shades it.';
+  }
+
+  @override
+  String exRampartPool(Object cell, Object area) {
+    return '$cell stays: the rest of the 2×2 block $area is shaded.';
+  }
+
+  @override
+  String exRampartEscape(Object cell, Object other) {
+    return '$cell is shaded: it is the only way out for the part of the wall at $other.';
+  }
+
+  @override
+  String exRampartCut(Object cell) {
+    return '$cell is shaded: if it stayed, the wall would be cut in two.';
+  }
+
+  @override
+  String exRampartAway(Object cell) {
+    return '$cell stays: the wall can\'t reach it.';
+  }
+
+  @override
+  String exRampartFailClue(Object clue) {
+    return 'But then the clue at $clue can\'t be made.';
+  }
+
+  @override
+  String exRampartFailPool(Object area) {
+    return 'But then the 2×2 block $area is all shaded.';
+  }
+
+  @override
+  String exRampartFailShut(Object cell) {
+    return 'But then the part of the wall at $cell is shut in.';
+  }
+
+  @override
+  String exRampartFailWays(Object clue) {
+    return 'But then the clue at $clue can\'t be made without a shaded 2×2 block or a shut-in part of the wall.';
+  }
+
+  @override
+  String exRampartFailApart(Object a, Object b) {
+    return 'But then the shaded cells $a and $b can\'t join up.';
+  }
 }

@@ -5648,4 +5648,107 @@ class AppLocalizationsPl extends AppLocalizations {
     );
     return 'Ale wtedy liczba $count w $clue nie może widzieć dokładnie $_temp0: żaden widok właściwej długości nie kończy się na krawędzi ani na polu, które można zamalować.';
   }
+
+  @override
+  String get rampartName => 'Wał';
+
+  @override
+  String get rampartTagline => 'Zbuduj jeden kręty mur pasujący do wskazówek wokół';
+
+  @override
+  String get rampartRules =>
+      '• Zamaluj pola tak, aby wszystkie zamalowane pola tworzyły jeden mur, połączony bokami.\n• Żaden blok 2×2 nie jest cały zamalowany.\n• Pola ze wskazówkami nigdy nie są zamalowane. Wskazówka podaje ciągi zamalowanych pól wśród jej ośmiu sąsiadów, także po przekątnej, czytane dookoła niej: „3 1” oznacza ciąg trzech pól z rzędu i osobne pojedyncze pole, w dowolnej kolejności. 0 oznacza, że żadne z nich nie jest zamalowane.\n\nDotknij pola, aby przełączać: zamalowane → kropka (twoja notatka „zostaje”) → puste. Prawy przycisk przełącza wstecz. Długie naciśnięcie stawia kropkę na ostatnim polu bloku 2×2 z trzema zamalowanymi polami i wokół każdej wskazówki, którą zamalowane pola już spełniają. Kropki są opcjonalne: łamigłówka jest rozwiązana, gdy właściwe pola są zamalowane.';
+
+  @override
+  String get tutRampart1 =>
+      'Zamalowuj pola, aby zbudować jeden mur. Każda wskazówka mówi, które z jej ośmiu sąsiadów, także po przekątnej, są zamalowane: 3 to ciąg trzech z rzędu wokół niej, a 0 oznacza, że żaden nie jest. Pola ze wskazówkami nigdy nie są zamalowane.';
+
+  @override
+  String get tutRampart2 =>
+      'Żaden blok 2×2 nie może być cały zamalowany. Zamaluj to, czego wymagają wskazówki, a lewe górne pole musi zostać, bo inaczej jego blok się zapełni. Dotknij pola dwa razy, aby postawić kropkę (twoja notatka, że zostaje).';
+
+  @override
+  String get tutRampart3 =>
+      'Wskazówka z kilku liczb ma tyle samo osobnych ciągów: 2 2 to dwa ciągi po dwa pola, a między nimi pola, które zostają. Wszystkie zamalowane pola łączą się w jeden mur, więc oba ciągi spotykają się po lewej stronie.';
+
+  @override
+  String get tutRampart4 =>
+      'Teraz prawdziwa plansza. Zacznij od wskazówek, które zostawiają jeden sposób ułożenia ciągów, jak duże liczby i zera, i utrzymuj mur w jednym kawałku.';
+
+  @override
+  String get tutRampartS1 =>
+      'Każdy ciąg wokół wskazówki musi nadal móc połączyć się z resztą muru. Wskazówka 1 1 potrzebuje dwóch osobnych zamalowanych pól. Górny róg zamalowany sam zostałby zamknięty przez wskazówkę i pola wokół, które zostają, więc oba rogi zostają, a jedyna para, jaka zostaje, to pola po obu stronach środkowego.';
+
+  @override
+  String get tutRampartS2 =>
+      'Porównuj każdy sposób spełnienia wskazówki z innymi zasadami: sposób, który zapełnia blok 2×2 albo zamyka część muru, odpada. Poza tym pole, bez którego mur rozpadłby się na dwie części, jest zamalowane, a pola, do których mur nie dosięgnie, zostają.';
+
+  @override
+  String get tutRampartS3 =>
+      'Trudna plansza. Gdy utkniesz, zamaluj pole i zobacz, co dalej: jeśli jakiejś wskazówki nie da się wtedy spełnić, blok 2×2 się zapełnia albo mur się rozpada, to pole zostaje.';
+
+  @override
+  String exRampartClueShade(Object cell, Object clue) {
+    return '$cell jest zamalowane: każdy sposób spełnienia wskazówki w $clue je zamalowuje.';
+  }
+
+  @override
+  String exRampartClueKeep(Object cell, Object clue) {
+    return '$cell zostaje: żaden sposób spełnienia wskazówki w $clue go nie zamalowuje.';
+  }
+
+  @override
+  String exRampartWaysShade(Object cell, Object clue) {
+    return '$cell jest zamalowane: każdy sposób spełnienia wskazówki w $clue bez zamalowanego bloku 2×2 i bez zamkniętej części muru je zamalowuje.';
+  }
+
+  @override
+  String exRampartWaysKeep(Object cell, Object clue) {
+    return '$cell zostaje: żaden sposób spełnienia wskazówki w $clue bez zamalowanego bloku 2×2 i bez zamkniętej części muru go nie zamalowuje.';
+  }
+
+  @override
+  String exRampartPool(Object cell, Object area) {
+    return '$cell zostaje: reszta bloku 2×2 $area jest zamalowana.';
+  }
+
+  @override
+  String exRampartEscape(Object cell, Object other) {
+    return '$cell jest zamalowane: to jedyne wyjście dla części muru w $other.';
+  }
+
+  @override
+  String exRampartCut(Object cell) {
+    return '$cell jest zamalowane: gdyby zostało, mur rozpadłby się na dwie części.';
+  }
+
+  @override
+  String exRampartAway(Object cell) {
+    return '$cell zostaje: mur do niego nie dosięgnie.';
+  }
+
+  @override
+  String exRampartFailClue(Object clue) {
+    return 'Ale wtedy wskazówki w $clue nie da się spełnić.';
+  }
+
+  @override
+  String exRampartFailPool(Object area) {
+    return 'Ale wtedy blok 2×2 $area jest cały zamalowany.';
+  }
+
+  @override
+  String exRampartFailShut(Object cell) {
+    return 'Ale wtedy część muru w $cell jest zamknięta.';
+  }
+
+  @override
+  String exRampartFailWays(Object clue) {
+    return 'Ale wtedy wskazówki w $clue nie da się spełnić bez zamalowanego bloku 2×2 albo zamkniętej części muru.';
+  }
+
+  @override
+  String exRampartFailApart(Object a, Object b) {
+    return 'Ale wtedy zamalowanych pól $a i $b nie da się połączyć.';
+  }
 }
