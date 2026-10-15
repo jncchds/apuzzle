@@ -5630,4 +5630,139 @@ class AppLocalizationsDe extends AppLocalizations {
   String exRampartFailApart(Object a, Object b) {
     return 'Aber dann können sich die geschwärzten Felder $a und $b nicht verbinden.';
   }
+
+  @override
+  String get waymarksName => 'Wegmarken';
+
+  @override
+  String get waymarksTagline => 'Jedes Zeichen weist den Weg zur nächsten Zahl';
+
+  @override
+  String get waymarksRules =>
+      '• In jedem Feld steht ein Pfeil, außer im letzten, das einen Ring hat.\n• Nummeriere die Felder 1, 2, 3, … bis zum letzten so, dass jeder Pfeil auf das Feld mit der nächsten Zahl zeigt. Dieses Feld kann beliebig weit entfernt auf der Linie des Pfeils liegen, mit anderen Feldern dazwischen.\n• Einige Zahlen sind vorgegeben, immer die 1 und die letzte.\n\nZiehe von einem Feld zu dem Feld, das darauf folgt, oder tippe erst das eine, dann das andere an, um sie zu verbinden. Verbundene Felder zählen von einer vorgegebenen Zahl in ihrer Kette weiter; eine Kette ohne eine bekommt einen Buchstaben (a, a+1, …), bis sie sich einer anschließt. Tippe ein gewähltes Feld noch einmal an, um seine Verbindung zu lösen, oder halte ein Feld gedrückt (Rechtsklick), um alle seine Verbindungen zu trennen.';
+
+  @override
+  String get tutWaymarks1 =>
+      'Nummeriere die Felder von 1 bis zum Ring: Jeder Pfeil zeigt auf die nächste Zahl, beliebig weit entlang seiner Linie. Ein Pfeil mit nur einem freien Feld vor sich führt dorthin. Ziehe von einem Feld zum nächsten, um sie zu verbinden, oder tippe erst das eine, dann das andere an.';
+
+  @override
+  String get tutWaymarks2 =>
+      'Schau auch rückwärts: Jedes Feld außer der 1 braucht ein Feld davor. Zeigt nur ein freier Pfeil auf ein Feld, folgt dieses Feld direkt auf das Feld des Pfeils.';
+
+  @override
+  String get tutWaymarks3 =>
+      'Verbundene Felder zählen von einer vorgegebenen Zahl weiter, und eine Kette ohne eine bekommt einen Buchstaben: a, a+1, … Zwei vorgegebene Zahlen, die eins auseinander liegen, wie 12 und 13, sind immer verbunden, und Felder, deren Zahlen nicht eins auseinander liegen, nie.';
+
+  @override
+  String get tutWaymarks4 =>
+      'Eine Kette führt nie zu ihrem eigenen ersten Feld zurück: Das schlösse eine Schleife, und die Zahlen steigen nur. Das Ende einer Kette kann sich also nicht mit dem Anfang derselben Kette verbinden.';
+
+  @override
+  String get tutWaymarks5 =>
+      'Jetzt ein echtes Brett. Verbinde Felder mit nur einem Weg weiter oder nur einem Weg hinein, zähle von den vorgegebenen Zahlen weiter und lass keine Kette zu ihrem Anfang zurückführen.';
+
+  @override
+  String get tutWaymarksS1 =>
+      'Überlege, welche Zahlen ein Feld noch sein kann. Seine Zahl ist eins mehr als eine Zahl eines Feldes, das zu ihm führen kann, und eins weniger als eine Zahl eines Feldes, zu dem es führen kann, und keine Zahl kommt zweimal vor. Grenze die Felder so ein, bis für eine Verbindung nur eine Wahl bleibt.';
+
+  @override
+  String get tutWaymarksS2 =>
+      'Zwei Felder können nur verbunden sein, wenn ihre Zahlen eins auseinander liegen können. Ist keine mögliche Zahl des zweiten Feldes eins mehr als eine mögliche Zahl des ersten, streiche diese Verbindung und schau, was übrig bleibt.';
+
+  @override
+  String get tutWaymarksS3 =>
+      'Ein schweres Brett. Wenn du feststeckst, nimm eine Verbindung an und folge ihr: Bleibt einem Feld kein Weg weiter, kein Weg hinein oder keine Zahl, ist die Verbindung falsch.';
+
+  @override
+  String exWaymarksOnlyOut(Object from, Object to) {
+    return '$from kann nur zu $to führen: Vor seinem Pfeil ist kein anderes Feld übrig.';
+  }
+
+  @override
+  String exWaymarksOnlyIn(Object from, Object to) {
+    return 'Nur $from kann noch zu $to führen, also folgt $to direkt darauf.';
+  }
+
+  @override
+  String exWaymarksTaken(Object from, Object to) {
+    return '$from führt zu $to, also verlässt keine andere Verbindung $from oder erreicht $to.';
+  }
+
+  @override
+  String exWaymarksConsecutive(Object from, Object to, Object a, Object b) {
+    return '$from ist $a und $to ist $b, also folgt $to direkt auf $from.';
+  }
+
+  @override
+  String exWaymarksApart(Object from, Object to, Object a, Object b) {
+    return '$from ist $a und $to ist $b, nicht die nächste Zahl, also führt $from nicht zu $to.';
+  }
+
+  @override
+  String exWaymarksLoop(Object from, Object to) {
+    return '$from kann nicht zu $to führen: Die Kette durch $from beginnt bei $to, das schlösse eine Schleife.';
+  }
+
+  @override
+  String exWaymarksNoFit(Object from, Object to) {
+    return '$from kann nicht zu $to führen: Keine mögliche Zahl von $to ist eins mehr als eine mögliche Zahl von $from.';
+  }
+
+  @override
+  String exWaymarksNumberOn(Object cell, Object nums) {
+    return '$cell ist $nums: Seine Kette zählt von einer vorgegebenen Zahl weiter.';
+  }
+
+  @override
+  String exWaymarksFailStuck(Object cell) {
+    return 'Aber dann hat $cell kein Feld mehr, zu dem es weiterführen kann.';
+  }
+
+  @override
+  String exWaymarksFailNoPrev(Object cell) {
+    return 'Aber dann kann kein Feld zu $cell führen.';
+  }
+
+  @override
+  String exWaymarksFailNumber(Object cell) {
+    return 'Aber dann passt keine Zahl zu $cell.';
+  }
+
+  @override
+  String exWaymarksFailLoop(Object cell) {
+    return 'Aber dann schließt die Kette durch $cell eine Schleife.';
+  }
+
+  @override
+  String exWaymarksFailLink(Object from, Object to) {
+    return 'Aber dann widersprechen sich die Verbindungen bei $from und $to.';
+  }
+
+  @override
+  String exWaymarksSupposeOn(Object from, Object to) {
+    return 'Angenommen, $from führte zu $to.';
+  }
+
+  @override
+  String exWaymarksSupposeOff(Object from, Object to) {
+    return 'Angenommen, $from führte nicht zu $to.';
+  }
+
+  @override
+  String exWaymarksRefutedOff(Object from, Object to) {
+    return 'Also führt $from nicht zu $to.';
+  }
+
+  @override
+  String exWaymarksRefutedOn(Object from, Object to) {
+    return 'Also führt $from zu $to.';
+  }
+
+  @override
+  String get tagArrow => 'Pfeil, Pfeile, Richtung, Zeiger';
+
+  @override
+  String exWaymarksNumbers(Object cell, Object nums) {
+    return '$cell kann nur $nums sein.';
+  }
 }

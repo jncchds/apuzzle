@@ -53,6 +53,7 @@ import '../puzzles/totals/totals_type.dart';
 import '../puzzles/trail/trail_type.dart';
 import '../puzzles/turnabout/turnabout_type.dart';
 import '../puzzles/vanish/vanish_type.dart';
+import '../puzzles/waymarks/waymarks_type.dart';
 import '../l10n/app_localizations.dart';
 import 'puzzle_type.dart';
 
@@ -104,6 +105,7 @@ const List<PuzzleType> puzzleTypes = [
   ChambersType(),
   LookoutType(),
   RampartType(),
+  WaymarksType(),
   IslandsType(),
   LampsType(),
   FenceType(),
@@ -217,6 +219,7 @@ const List<PuzzleCategory> puzzleCategories = [
     [
       PuzzleFamily('trail', [TrailType()]),
       PuzzleFamily('links', [LinksType()]),
+      PuzzleFamily('waymarks', [WaymarksType()]),
       PuzzleFamily('labyrinth', [LabyrinthType()]),
       PuzzleFamily('homeward', [HomewardType()]),
       PuzzleFamily('blockade', [BlockadeType()]),

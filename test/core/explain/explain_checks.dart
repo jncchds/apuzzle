@@ -12,6 +12,8 @@ import 'package:apuzzle/puzzles/mines/mines_model.dart';
 import 'package:apuzzle/puzzles/orbits/orbits_model.dart';
 import 'package:apuzzle/puzzles/shikaku/shikaku_model.dart';
 import 'package:apuzzle/puzzles/trail/trail_model.dart';
+import 'package:apuzzle/puzzles/waymarks/waymarks_explain.dart';
+import 'package:apuzzle/puzzles/waymarks/waymarks_model.dart';
 import 'package:apuzzle/puzzles/rails/rails_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -67,6 +69,14 @@ Object? wrongOther(Object puzzle, Object start) {
         (j) => j >= 0 && j < p.rows * cols && trailAdjacent(start, j, cols) && j != p.solution[1],
       );
       return TrailState([start, next]);
+    case (final WaymarksPuzzle p, final WaymarksState s):
+      // A cell linked to a cell its arrow points at, but not the next one.
+      final want = WaymarksExplainer.solutionNext(p);
+      for (var c = 0; c < p.cells; c++) {
+        for (final d in p.targets[c]) {
+          if (d != want[c]) return WaymarksState(List.of(s.next)..[c] = d);
+        }
+      }
     case (final LinksPuzzle p, final LinksState s):
       final path = p.paths.first;
       final g = LatticeLoop(p.rows, p.cols);

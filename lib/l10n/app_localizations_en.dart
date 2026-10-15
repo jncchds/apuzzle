@@ -5615,4 +5615,139 @@ class AppLocalizationsEn extends AppLocalizations {
   String exRampartFailApart(Object a, Object b) {
     return 'But then the shaded cells $a and $b can\'t join up.';
   }
+
+  @override
+  String get waymarksName => 'Waymarks';
+
+  @override
+  String get waymarksTagline => 'Each sign points the way to the next number';
+
+  @override
+  String get waymarksRules =>
+      '• Every cell has an arrow, except the last one, which has a ring.\n• Number the cells 1, 2, 3, … up to the last, so that each arrow points at the cell with the next number. That cell can be any distance away along the arrow\'s line, with other cells in between.\n• Some numbers are shown, always 1 and the last.\n\nDrag from a cell to the cell it leads on to, or tap one and then the other, to link them. Linked cells count on from a shown number in their chain; a chain without one gets a letter (a, a+1, …) until it joins one. Tap a picked cell again to undo its link, or long-press (right-click) a cell to cut all its links.';
+
+  @override
+  String get tutWaymarks1 =>
+      'Number the cells from 1 to the ring: each arrow points at the next number, any distance along its line. An arrow with only one free cell in its way leads there. Drag from a cell to the next one to link them, or tap one and then the other.';
+
+  @override
+  String get tutWaymarks2 =>
+      'Look backwards too: every cell except 1 needs a cell before it. If only one free arrow points at a cell, that cell comes right after the arrow\'s cell.';
+
+  @override
+  String get tutWaymarks3 =>
+      'Linked cells count on from a shown number, and a chain without one gets a letter: a, a+1, … Two shown numbers one apart, like 12 and 13, are always linked, and cells whose numbers aren\'t one apart never are.';
+
+  @override
+  String get tutWaymarks4 =>
+      'A chain never leads back to its own first cell: that would close a loop, and the numbers only go up. So the end of a chain can\'t link to the start of the same chain.';
+
+  @override
+  String get tutWaymarks5 =>
+      'Now a real board. Link the cells with only one way on or one way in, count on from the shown numbers, and keep every chain from looping back to its start.';
+
+  @override
+  String get tutWaymarksS1 =>
+      'Think about which numbers a cell can still be. Its number is one more than a number of a cell that can lead to it, and one less than a number of a cell it can lead to, and no number is used twice. Narrow the cells down this way until a link is left with only one choice.';
+
+  @override
+  String get tutWaymarksS2 =>
+      'Two cells can only be linked if their numbers can be one apart. When no number the second cell can be is one more than a number the first can be, cross that link off, and look for what is left.';
+
+  @override
+  String get tutWaymarksS3 =>
+      'A hard board. When stuck, suppose a link and follow on: if a cell is left with no way on, no way in or no number, that link is wrong.';
+
+  @override
+  String exWaymarksOnlyOut(Object from, Object to) {
+    return '$from can only lead on to $to: its arrow has no other cell left.';
+  }
+
+  @override
+  String exWaymarksOnlyIn(Object from, Object to) {
+    return 'Only $from can still lead to $to, so $to comes right after it.';
+  }
+
+  @override
+  String exWaymarksTaken(Object from, Object to) {
+    return '$from leads on to $to, so no other link leaves $from or reaches $to.';
+  }
+
+  @override
+  String exWaymarksConsecutive(Object from, Object to, Object a, Object b) {
+    return '$from is $a and $to is $b, so $to comes right after $from.';
+  }
+
+  @override
+  String exWaymarksApart(Object from, Object to, Object a, Object b) {
+    return '$from is $a and $to is $b, not the next number, so $from doesn\'t lead on to $to.';
+  }
+
+  @override
+  String exWaymarksLoop(Object from, Object to) {
+    return '$from can\'t lead on to $to: the chain through $from starts at $to, so that would close a loop.';
+  }
+
+  @override
+  String exWaymarksNoFit(Object from, Object to) {
+    return '$from can\'t lead on to $to: no number $to can be is one more than a number $from can be.';
+  }
+
+  @override
+  String exWaymarksNumberOn(Object cell, Object nums) {
+    return '$cell is $nums: its chain counts on from a shown number.';
+  }
+
+  @override
+  String exWaymarksFailStuck(Object cell) {
+    return 'But then $cell has no cell left to lead on to.';
+  }
+
+  @override
+  String exWaymarksFailNoPrev(Object cell) {
+    return 'But then no cell can lead to $cell.';
+  }
+
+  @override
+  String exWaymarksFailNumber(Object cell) {
+    return 'But then no number fits $cell.';
+  }
+
+  @override
+  String exWaymarksFailLoop(Object cell) {
+    return 'But then the chain through $cell closes a loop.';
+  }
+
+  @override
+  String exWaymarksFailLink(Object from, Object to) {
+    return 'But then the links at $from and $to clash.';
+  }
+
+  @override
+  String exWaymarksSupposeOn(Object from, Object to) {
+    return 'Suppose $from led on to $to.';
+  }
+
+  @override
+  String exWaymarksSupposeOff(Object from, Object to) {
+    return 'Suppose $from didn\'t lead on to $to.';
+  }
+
+  @override
+  String exWaymarksRefutedOff(Object from, Object to) {
+    return 'So $from doesn\'t lead on to $to.';
+  }
+
+  @override
+  String exWaymarksRefutedOn(Object from, Object to) {
+    return 'So $from leads on to $to.';
+  }
+
+  @override
+  String get tagArrow => 'arrow, arrows, pointer, direction';
+
+  @override
+  String exWaymarksNumbers(Object cell, Object nums) {
+    return '$cell can only be $nums.';
+  }
 }

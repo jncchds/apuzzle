@@ -5751,4 +5751,139 @@ class AppLocalizationsPl extends AppLocalizations {
   String exRampartFailApart(Object a, Object b) {
     return 'Ale wtedy zamalowanych pól $a i $b nie da się połączyć.';
   }
+
+  @override
+  String get waymarksName => 'Znaki szlaku';
+
+  @override
+  String get waymarksTagline => 'Każdy znak wskazuje drogę do następnej liczby';
+
+  @override
+  String get waymarksRules =>
+      '• W każdym polu jest strzałka, poza ostatnim, w którym jest pierścień.\n• Ponumeruj pola 1, 2, 3, … aż do ostatniego tak, aby każda strzałka wskazywała pole z następną liczbą. To pole może leżeć w dowolnej odległości na linii strzałki, z innymi polami pomiędzy.\n• Niektóre liczby są pokazane, zawsze 1 i ostatnia.\n\nPrzeciągnij od pola do pola, które następuje po nim, albo dotknij jednego, a potem drugiego, aby je połączyć. Połączone pola liczą dalej od pokazanej liczby w ich łańcuchu; łańcuch bez niej dostaje literę (a, a+1, …), dopóki się z taką nie połączy. Dotknij wybranego pola jeszcze raz, aby cofnąć jego połączenie, albo przytrzymaj pole (prawy klik), aby zerwać wszystkie jego połączenia.';
+
+  @override
+  String get tutWaymarks1 =>
+      'Ponumeruj pola od 1 do pierścienia: każda strzałka wskazuje następną liczbę, w dowolnej odległości na swojej linii. Strzałka, przed którą jest tylko jedno wolne pole, prowadzi tam. Przeciągnij od pola do następnego, aby je połączyć, albo dotknij jednego, a potem drugiego.';
+
+  @override
+  String get tutWaymarks2 =>
+      'Patrz też wstecz: każde pole poza 1 potrzebuje pola przed sobą. Jeśli na pole wskazuje tylko jedna wolna strzałka, to pole następuje zaraz po polu tej strzałki.';
+
+  @override
+  String get tutWaymarks3 =>
+      'Połączone pola liczą dalej od pokazanej liczby, a łańcuch bez niej dostaje literę: a, a+1, … Dwie pokazane liczby różniące się o jeden, jak 12 i 13, są zawsze połączone, a pola, których liczby nie różnią się o jeden, nigdy.';
+
+  @override
+  String get tutWaymarks4 =>
+      'Łańcuch nigdy nie prowadzi z powrotem do swojego pierwszego pola: zamknąłby pętlę, a liczby tylko rosną. Więc koniec łańcucha nie może połączyć się z początkiem tego samego łańcucha.';
+
+  @override
+  String get tutWaymarks5 =>
+      'Teraz prawdziwa plansza. Łącz pola, z których jest tylko jedna droga dalej albo do których prowadzi tylko jedna, licz od pokazanych liczb i nie pozwól łańcuchom wracać do swojego początku.';
+
+  @override
+  String get tutWaymarksS1 =>
+      'Pomyśl, jakimi liczbami pole może jeszcze być. Jego liczba jest o jeden większa od liczby pola, które może do niego prowadzić, i o jeden mniejsza od liczby pola, do którego może prowadzić, a żadna liczba się nie powtarza. Zawężaj tak pola, aż dla jakiegoś połączenia zostanie jeden wybór.';
+
+  @override
+  String get tutWaymarksS2 =>
+      'Dwa pola można połączyć tylko wtedy, gdy ich liczby mogą różnić się o jeden. Gdy żadna możliwa liczba drugiego pola nie jest o jeden większa od możliwej liczby pierwszego, skreśl to połączenie i szukaj tego, co zostało.';
+
+  @override
+  String get tutWaymarksS3 =>
+      'Trudna plansza. Gdy utkniesz, załóż jakieś połączenie i rozumuj dalej: jeśli któremuś polu nie zostanie droga dalej, droga do niego albo liczba, to połączenie jest błędne.';
+
+  @override
+  String exWaymarksOnlyOut(Object from, Object to) {
+    return '$from może prowadzić tylko do $to: przed jego strzałką nie zostało inne pole.';
+  }
+
+  @override
+  String exWaymarksOnlyIn(Object from, Object to) {
+    return 'Tylko $from może jeszcze prowadzić do $to, więc $to następuje zaraz po nim.';
+  }
+
+  @override
+  String exWaymarksTaken(Object from, Object to) {
+    return '$from prowadzi do $to, więc żadne inne połączenie nie wychodzi z $from ani nie dochodzi do $to.';
+  }
+
+  @override
+  String exWaymarksConsecutive(Object from, Object to, Object a, Object b) {
+    return '$from to $a, a $to to $b, więc $to następuje zaraz po $from.';
+  }
+
+  @override
+  String exWaymarksApart(Object from, Object to, Object a, Object b) {
+    return '$from to $a, a $to to $b, nie następna liczba, więc $from nie prowadzi do $to.';
+  }
+
+  @override
+  String exWaymarksLoop(Object from, Object to) {
+    return '$from nie może prowadzić do $to: łańcuch przez $from zaczyna się w $to, więc zamknęłoby to pętlę.';
+  }
+
+  @override
+  String exWaymarksNoFit(Object from, Object to) {
+    return '$from nie może prowadzić do $to: żadna możliwa liczba $to nie jest o jeden większa od możliwej liczby $from.';
+  }
+
+  @override
+  String exWaymarksNumberOn(Object cell, Object nums) {
+    return '$cell to $nums: jego łańcuch liczy od pokazanej liczby.';
+  }
+
+  @override
+  String exWaymarksFailStuck(Object cell) {
+    return 'Ale wtedy $cell nie ma pola, do którego mogłoby prowadzić dalej.';
+  }
+
+  @override
+  String exWaymarksFailNoPrev(Object cell) {
+    return 'Ale wtedy żadne pole nie może prowadzić do $cell.';
+  }
+
+  @override
+  String exWaymarksFailNumber(Object cell) {
+    return 'Ale wtedy żadna liczba nie pasuje do $cell.';
+  }
+
+  @override
+  String exWaymarksFailLoop(Object cell) {
+    return 'Ale wtedy łańcuch przez $cell zamyka pętlę.';
+  }
+
+  @override
+  String exWaymarksFailLink(Object from, Object to) {
+    return 'Ale wtedy połączenia w $from i $to są sprzeczne.';
+  }
+
+  @override
+  String exWaymarksSupposeOn(Object from, Object to) {
+    return 'Załóżmy, że $from prowadzi do $to.';
+  }
+
+  @override
+  String exWaymarksSupposeOff(Object from, Object to) {
+    return 'Załóżmy, że $from nie prowadzi do $to.';
+  }
+
+  @override
+  String exWaymarksRefutedOff(Object from, Object to) {
+    return 'Zatem $from nie prowadzi do $to.';
+  }
+
+  @override
+  String exWaymarksRefutedOn(Object from, Object to) {
+    return 'Zatem $from prowadzi do $to.';
+  }
+
+  @override
+  String get tagArrow => 'strzałka, strzałki, kierunek, wskaźnik';
+
+  @override
+  String exWaymarksNumbers(Object cell, Object nums) {
+    return '$cell może być tylko $nums.';
+  }
 }

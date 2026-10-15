@@ -5777,4 +5777,139 @@ class AppLocalizationsUk extends AppLocalizations {
   String exRampartFailApart(Object a, Object b) {
     return 'Але тоді зафарбовані клітинки $a і $b не з\'єднати.';
   }
+
+  @override
+  String get waymarksName => 'Віхи';
+
+  @override
+  String get waymarksTagline => 'Кожен знак указує шлях до наступного числа';
+
+  @override
+  String get waymarksRules =>
+      '• У кожній клітинці стрілка, крім останньої — у ній кільце.\n• Пронумеруйте клітинки 1, 2, 3, … до останньої так, щоб кожна стрілка вказувала на клітинку з наступним числом. Ця клітинка може бути на будь-якій відстані вздовж лінії стрілки, з іншими клітинками між ними.\n• Деякі числа показано, завжди 1 і останнє.\n\nПроведіть від клітинки до тієї, що йде за нею, або торкніться однієї, а потім іншої, щоб їх зв\'язати. Зв\'язані клітинки рахуються далі від показаного числа в їхньому ланцюжку; ланцюжок без нього отримує літеру (a, a+1, …), доки не приєднається до такого. Торкніться вибраної клітинки ще раз, щоб скасувати її зв\'язок, або натисніть і утримуйте (правий клік), щоб розірвати всі її зв\'язки.';
+
+  @override
+  String get tutWaymarks1 =>
+      'Пронумеруйте клітинки від 1 до кільця: кожна стрілка вказує на наступне число, на будь-якій відстані вздовж своєї лінії. Стрілка, перед якою лише одна вільна клітинка, веде туди. Проведіть від клітинки до наступної, щоб їх зв\'язати, або торкніться однієї, а потім іншої.';
+
+  @override
+  String get tutWaymarks2 =>
+      'Дивіться й назад: кожній клітинці, крім 1, потрібна клітинка перед нею. Якщо на клітинку вказує лише одна вільна стрілка, ця клітинка йде одразу після клітинки цієї стрілки.';
+
+  @override
+  String get tutWaymarks3 =>
+      'Зв\'язані клітинки рахуються далі від показаного числа, а ланцюжок без нього отримує літеру: a, a+1, … Два показані числа, що відрізняються на один, як 12 і 13, завжди зв\'язані, а клітинки, чиї числа не відрізняються на один, — ніколи.';
+
+  @override
+  String get tutWaymarks4 =>
+      'Ланцюжок ніколи не веде назад до своєї першої клітинки: це замкнуло б петлю, а числа лише зростають. Тож кінець ланцюжка не може зв\'язатися з початком того самого ланцюжка.';
+
+  @override
+  String get tutWaymarks5 =>
+      'Тепер справжнє поле. Зв\'язуйте клітинки, у яких лише один шлях далі чи один шлях до них, рахуйте від показаних чисел і не давайте ланцюжкам повертатися до свого початку.';
+
+  @override
+  String get tutWaymarksS1 =>
+      'Подумайте, якими числами клітинка ще може бути. Її число на один більше за число клітинки, що може вести до неї, і на один менше за число клітинки, до якої вона може вести, і жодне число не повторюється. Звужуйте так клітинки, доки для якогось зв\'язку не лишиться один вибір.';
+
+  @override
+  String get tutWaymarksS2 =>
+      'Дві клітинки можна зв\'язати, лише якщо їхні числа можуть відрізнятися на один. Коли жодне можливе число другої клітинки не на один більше за можливе число першої, викресліть цей зв\'язок і шукайте, що лишилося.';
+
+  @override
+  String get tutWaymarksS3 =>
+      'Складне поле. Коли застрягнете, припустіть якийсь зв\'язок і міркуйте далі: якщо якійсь клітинці не лишиться шляху далі, шляху до неї чи числа, цей зв\'язок хибний.';
+
+  @override
+  String exWaymarksOnlyOut(Object from, Object to) {
+    return '$from може вести лише до $to: перед її стрілкою не лишилося іншої клітинки.';
+  }
+
+  @override
+  String exWaymarksOnlyIn(Object from, Object to) {
+    return 'Лише $from ще може вести до $to, тож $to іде одразу після неї.';
+  }
+
+  @override
+  String exWaymarksTaken(Object from, Object to) {
+    return '$from веде до $to, тож жоден інший зв\'язок не виходить із $from і не входить у $to.';
+  }
+
+  @override
+  String exWaymarksConsecutive(Object from, Object to, Object a, Object b) {
+    return '$from — це $a, а $to — це $b, тож $to іде одразу після $from.';
+  }
+
+  @override
+  String exWaymarksApart(Object from, Object to, Object a, Object b) {
+    return '$from — це $a, а $to — це $b, не наступне число, тож $from не веде до $to.';
+  }
+
+  @override
+  String exWaymarksLoop(Object from, Object to) {
+    return '$from не може вести до $to: ланцюжок через $from починається в $to, тож це замкнуло б петлю.';
+  }
+
+  @override
+  String exWaymarksNoFit(Object from, Object to) {
+    return '$from не може вести до $to: жодне можливе число $to не на один більше за можливе число $from.';
+  }
+
+  @override
+  String exWaymarksNumberOn(Object cell, Object nums) {
+    return '$cell — це $nums: її ланцюжок рахується від показаного числа.';
+  }
+
+  @override
+  String exWaymarksFailStuck(Object cell) {
+    return 'Але тоді $cell не має клітинки, до якої вести далі.';
+  }
+
+  @override
+  String exWaymarksFailNoPrev(Object cell) {
+    return 'Але тоді жодна клітинка не може вести до $cell.';
+  }
+
+  @override
+  String exWaymarksFailNumber(Object cell) {
+    return 'Але тоді жодне число не пасує до $cell.';
+  }
+
+  @override
+  String exWaymarksFailLoop(Object cell) {
+    return 'Але тоді ланцюжок через $cell замикає петлю.';
+  }
+
+  @override
+  String exWaymarksFailLink(Object from, Object to) {
+    return 'Але тоді зв\'язки в $from і $to суперечать один одному.';
+  }
+
+  @override
+  String exWaymarksSupposeOn(Object from, Object to) {
+    return 'Припустімо, що $from веде до $to.';
+  }
+
+  @override
+  String exWaymarksSupposeOff(Object from, Object to) {
+    return 'Припустімо, що $from не веде до $to.';
+  }
+
+  @override
+  String exWaymarksRefutedOff(Object from, Object to) {
+    return 'Отже, $from не веде до $to.';
+  }
+
+  @override
+  String exWaymarksRefutedOn(Object from, Object to) {
+    return 'Отже, $from веде до $to.';
+  }
+
+  @override
+  String get tagArrow => 'стрілка, стрілки, напрямок, вказівник';
+
+  @override
+  String exWaymarksNumbers(Object cell, Object nums) {
+    return '$cell може бути лише $nums.';
+  }
 }

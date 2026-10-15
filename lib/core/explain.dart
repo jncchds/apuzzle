@@ -76,7 +76,7 @@ class ExplainTrace {
 /// One sentence of an explanation and the cells it talks about. The text
 /// holds tokens (see [cellTok] and friends) that the UI draws as chips.
 class ExplainLine {
-  const ExplainLine(this.text, [this.cells = const {}, this.key]);
+  const ExplainLine(this.text, [this.cells = const {}, this.key, this.latest = false]);
 
   final Tr text;
   final Set<Pos> cells;
@@ -84,14 +84,23 @@ class ExplainLine {
   /// Lines with the same key say the same thing (one deduction that ruled
   /// out several cells): a story tells it once.
   final Object? key;
+
+  /// Of the lines with this key, tell the last one instead of the first (a
+  /// cell's narrowing numbers: only what it ends up with matters).
+  final bool latest;
 }
 
 /// [lines] without repeats of a keyed line.
 List<ExplainLine> _once(Iterable<ExplainLine> lines) {
+  final all = lines.toList();
+  final last = <Object, int>{
+    for (var i = 0; i < all.length; i++)
+      if (all[i].key != null && all[i].latest) all[i].key!: i,
+  };
   final seen = <Object>{};
   return [
-    for (final l in lines)
-      if (l.key == null || seen.add(l.key!)) l,
+    for (var i = 0; i < all.length; i++)
+      if (all[i].key == null || (all[i].latest ? last[all[i].key] == i : seen.add(all[i].key!))) all[i],
   ];
 }
 

@@ -7581,6 +7581,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then the shaded cells {a} and {b} can\'t join up.'**
   String exRampartFailApart(Object a, Object b);
+
+  /// No description provided for @waymarksName.
+  ///
+  /// In en, this message translates to:
+  /// **'Waymarks'**
+  String get waymarksName;
+
+  /// No description provided for @waymarksTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Each sign points the way to the next number'**
+  String get waymarksTagline;
+
+  /// No description provided for @waymarksRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Every cell has an arrow, except the last one, which has a ring.\n• Number the cells 1, 2, 3, … up to the last, so that each arrow points at the cell with the next number. That cell can be any distance away along the arrow\'s line, with other cells in between.\n• Some numbers are shown, always 1 and the last.\n\nDrag from a cell to the cell it leads on to, or tap one and then the other, to link them. Linked cells count on from a shown number in their chain; a chain without one gets a letter (a, a+1, …) until it joins one. Tap a picked cell again to undo its link, or long-press (right-click) a cell to cut all its links.'**
+  String get waymarksRules;
+
+  /// No description provided for @tutWaymarks1.
+  ///
+  /// In en, this message translates to:
+  /// **'Number the cells from 1 to the ring: each arrow points at the next number, any distance along its line. An arrow with only one free cell in its way leads there. Drag from a cell to the next one to link them, or tap one and then the other.'**
+  String get tutWaymarks1;
+
+  /// No description provided for @tutWaymarks2.
+  ///
+  /// In en, this message translates to:
+  /// **'Look backwards too: every cell except 1 needs a cell before it. If only one free arrow points at a cell, that cell comes right after the arrow\'s cell.'**
+  String get tutWaymarks2;
+
+  /// No description provided for @tutWaymarks3.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked cells count on from a shown number, and a chain without one gets a letter: a, a+1, … Two shown numbers one apart, like 12 and 13, are always linked, and cells whose numbers aren\'t one apart never are.'**
+  String get tutWaymarks3;
+
+  /// No description provided for @tutWaymarks4.
+  ///
+  /// In en, this message translates to:
+  /// **'A chain never leads back to its own first cell: that would close a loop, and the numbers only go up. So the end of a chain can\'t link to the start of the same chain.'**
+  String get tutWaymarks4;
+
+  /// No description provided for @tutWaymarks5.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Link the cells with only one way on or one way in, count on from the shown numbers, and keep every chain from looping back to its start.'**
+  String get tutWaymarks5;
+
+  /// No description provided for @tutWaymarksS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Think about which numbers a cell can still be. Its number is one more than a number of a cell that can lead to it, and one less than a number of a cell it can lead to, and no number is used twice. Narrow the cells down this way until a link is left with only one choice.'**
+  String get tutWaymarksS1;
+
+  /// No description provided for @tutWaymarksS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Two cells can only be linked if their numbers can be one apart. When no number the second cell can be is one more than a number the first can be, cross that link off, and look for what is left.'**
+  String get tutWaymarksS2;
+
+  /// No description provided for @tutWaymarksS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When stuck, suppose a link and follow on: if a cell is left with no way on, no way in or no number, that link is wrong.'**
+  String get tutWaymarksS3;
+
+  /// No description provided for @exWaymarksOnlyOut.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} can only lead on to {to}: its arrow has no other cell left.'**
+  String exWaymarksOnlyOut(Object from, Object to);
+
+  /// No description provided for @exWaymarksOnlyIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Only {from} can still lead to {to}, so {to} comes right after it.'**
+  String exWaymarksOnlyIn(Object from, Object to);
+
+  /// No description provided for @exWaymarksTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} leads on to {to}, so no other link leaves {from} or reaches {to}.'**
+  String exWaymarksTaken(Object from, Object to);
+
+  /// No description provided for @exWaymarksConsecutive.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} is {a} and {to} is {b}, so {to} comes right after {from}.'**
+  String exWaymarksConsecutive(Object from, Object to, Object a, Object b);
+
+  /// No description provided for @exWaymarksApart.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} is {a} and {to} is {b}, not the next number, so {from} doesn\'t lead on to {to}.'**
+  String exWaymarksApart(Object from, Object to, Object a, Object b);
+
+  /// No description provided for @exWaymarksLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} can\'t lead on to {to}: the chain through {from} starts at {to}, so that would close a loop.'**
+  String exWaymarksLoop(Object from, Object to);
+
+  /// No description provided for @exWaymarksNoFit.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} can\'t lead on to {to}: no number {to} can be is one more than a number {from} can be.'**
+  String exWaymarksNoFit(Object from, Object to);
+
+  /// No description provided for @exWaymarksNumberOn.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is {nums}: its chain counts on from a shown number.'**
+  String exWaymarksNumberOn(Object cell, Object nums);
+
+  /// No description provided for @exWaymarksFailStuck.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cell} has no cell left to lead on to.'**
+  String exWaymarksFailStuck(Object cell);
+
+  /// No description provided for @exWaymarksFailNoPrev.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no cell can lead to {cell}.'**
+  String exWaymarksFailNoPrev(Object cell);
+
+  /// No description provided for @exWaymarksFailNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no number fits {cell}.'**
+  String exWaymarksFailNumber(Object cell);
+
+  /// No description provided for @exWaymarksFailLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the chain through {cell} closes a loop.'**
+  String exWaymarksFailLoop(Object cell);
+
+  /// No description provided for @exWaymarksFailLink.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the links at {from} and {to} clash.'**
+  String exWaymarksFailLink(Object from, Object to);
+
+  /// No description provided for @exWaymarksSupposeOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {from} led on to {to}.'**
+  String exWaymarksSupposeOn(Object from, Object to);
+
+  /// No description provided for @exWaymarksSupposeOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {from} didn\'t lead on to {to}.'**
+  String exWaymarksSupposeOff(Object from, Object to);
+
+  /// No description provided for @exWaymarksRefutedOff.
+  ///
+  /// In en, this message translates to:
+  /// **'So {from} doesn\'t lead on to {to}.'**
+  String exWaymarksRefutedOff(Object from, Object to);
+
+  /// No description provided for @exWaymarksRefutedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'So {from} leads on to {to}.'**
+  String exWaymarksRefutedOn(Object from, Object to);
+
+  /// No description provided for @tagArrow.
+  ///
+  /// In en, this message translates to:
+  /// **'arrow, arrows, pointer, direction'**
+  String get tagArrow;
+
+  /// No description provided for @exWaymarksNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can only be {nums}.'**
+  String exWaymarksNumbers(Object cell, Object nums);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
