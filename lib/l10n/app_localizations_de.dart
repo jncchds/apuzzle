@@ -5451,4 +5451,80 @@ class AppLocalizationsDe extends AppLocalizations {
     );
     return 'Aber dann lassen sich in Kammer $room keine $_temp0 schwärzen, ohne dass sie sich berühren und jede lange Linie unterbrochen ist.';
   }
+
+  @override
+  String get lookoutName => 'Ausguck';
+
+  @override
+  String get lookoutTagline => 'Schwärze Felder, sodass jede Zahl genau so viele sieht, wie sie sagt';
+
+  @override
+  String get lookoutRules =>
+      '• Jede Zahl sagt, wie viele Felder sie waagrecht und senkrecht sieht, sich selbst mitgezählt: entlang ihrer Zeile und Spalte bis zum ersten geschwärzten Feld oder zum Rand.\n• Felder mit Zahlen werden nie geschwärzt.\n• Geschwärzte Felder berühren sich nie mit einer Seite.\n• Die nicht geschwärzten Felder bilden ein zusammenhängendes Gebiet.\n\nTippe auf ein Feld, um zu wechseln: geschwärzt → Punkt (deine Notiz „bleibt“) → leer. Rechtsklick wechselt zurück. Langes Drücken setzt Punkte neben geschwärzte Felder und in jedes Feld, das eine Zahl sieht, sobald geschwärzte Felder ihren Blick genau bei ihrer Zahl abschließen. Punkte sind freiwillig: Das Rätsel ist gelöst, sobald die richtigen Felder geschwärzt sind.';
+
+  @override
+  String get tutLookout1 =>
+      'Jede Zahl zählt die Felder, die sie entlang ihrer Zeile und Spalte sieht, sich selbst mitgezählt, bis zu einem geschwärzten Feld oder zum Rand. Geschwärzte Felder berühren sich nie mit einer Seite, und Felder mit Zahlen werden nie geschwärzt. Die untere 2 sieht schon sich selbst und die 4 darüber, also muss ihr Blick überall sonst enden: Schwärze die Felder neben ihr und das Feld hinter der 4.';
+
+  @override
+  String get tutLookout2 =>
+      'Zähle, wie weit eine Zahl höchstens sehen könnte. Die 5 könnte höchstens fünf Felder sehen: sich selbst, die zwei daneben und die zwei darüber. Also sieht sie alle, und alle bleiben. Löse dann das Gitter.';
+
+  @override
+  String get tutLookout3 =>
+      'Die nicht geschwärzten Felder müssen ein Stück bleiben. Sobald das Feld unter der 3 geschwärzt ist, erreicht die Ecke unten rechts die anderen nur noch über das Feld links von ihr, also bleibt dieses. Tippe ein Feld zweimal an, um einen Punkt zu setzen (deine Notiz, dass es bleibt), und löse dann das Gitter.';
+
+  @override
+  String get tutLookout4 =>
+      'Jetzt ein echtes Gitter. Beginne mit Zahlen, die in einer Richtung schon alles sehen, was sie dürfen, und mit großen Zahlen, die gerade so weit genug sehen können.';
+
+  @override
+  String get tutLookoutS1 =>
+      'Der Blick einer Zahl endet am Rand oder an einem geschwärzten Feld, nie an einer anderen Zahl. Die 2 sieht ein Feld außer sich selbst. Nach links kann ihr Blick nicht nach einem Feld enden, weil das nächste die 3 ist, also sieht sie das Feld unter sich: Das Feld links von ihr und das zweite Feld nach unten sind geschwärzt.';
+
+  @override
+  String get tutLookoutS2 =>
+      'Probiere jede Art, die Zahl auf ihre vier Richtungen aufzuteilen, wobei jeder Blick am Rand oder an einem Feld endet, das geschwärzt werden kann. Ein Feld, das jede Art sieht, bleibt, ein Feld, an dem jede Art endet, ist geschwärzt. Außerdem bleibt ein Feld, dessen Schwärzen die übrigen Felder in zwei Teile schneiden würde.';
+
+  @override
+  String get tutLookoutS3 =>
+      'Ein schweres Gitter. Wenn du feststeckst, schwärze ein Feld und folge den Folgen: Sieht eine Zahl dann zu viele oder zu wenige Felder, berühren sich zwei geschwärzte Felder oder werden Felder abgeschnitten, dann bleibt dieses Feld.';
+
+  @override
+  String get tagSight => 'sehen, Sicht, Blick, sichtbar, schauen, Sichtlinie, Aussicht';
+
+  @override
+  String exLookoutReach(Object cell, Object clue, int count) {
+    return '$cell bleibt: Die $count in $clue sieht in den anderen Richtungen nicht genug Felder, also sieht sie mindestens bis hierher.';
+  }
+
+  @override
+  String exLookoutClose(Object cell, Object clue, int count) {
+    return '$cell ist geschwärzt: Die $count in $clue sieht in dieser Richtung schon so viele Felder, wie sie darf, also endet ihr Blick hier.';
+  }
+
+  @override
+  String exLookoutWaysShade(Object cell, Object clue, int count) {
+    return '$cell ist geschwärzt: Jede Art, wie die $count in $clue genau $count Felder sieht, endet hier.';
+  }
+
+  @override
+  String exLookoutWaysKeep(Object cell, Object clue, int count) {
+    return '$cell bleibt: Jede Art, wie die $count in $clue genau $count Felder sieht, sieht dieses Feld.';
+  }
+
+  @override
+  String exLookoutFailMany(Object clue, int count) {
+    return 'Aber dann sieht die $count in $clue mehr als $count Felder.';
+  }
+
+  @override
+  String exLookoutFailFew(Object clue, int count) {
+    return 'Aber dann kann die $count in $clue keine $count Felder sehen.';
+  }
+
+  @override
+  String exLookoutFailWays(Object clue, int count) {
+    return 'Aber dann kann die $count in $clue nicht genau $count Felder sehen: Kein Blick der richtigen Länge endet am Rand oder an einem Feld, das geschwärzt werden kann.';
+  }
 }

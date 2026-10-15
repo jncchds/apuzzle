@@ -27,6 +27,7 @@ enum GameTag {
   water,
   memory,
   drive,
+  sight,
 }
 
 String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
@@ -52,6 +53,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
   GameTag.water => l.tagWater,
   GameTag.memory => l.tagMemory,
   GameTag.drive => l.tagDrive,
+  GameTag.sight => l.tagSight,
 };
 
 /// Tags of every type, by id.
@@ -100,6 +102,7 @@ const Map<String, List<GameTag>> gameTags = {
   'basins': [GameTag.water, GameTag.regions],
   'pebbles': [GameTag.shade, GameTag.binary, GameTag.connect],
   'chambers': [GameTag.shade, GameTag.regions],
+  'lookout': [GameTag.shade, GameTag.sight],
   'islands': [GameTag.shade],
   'lamps': [GameTag.place],
   'fence': [GameTag.loop],
@@ -181,6 +184,7 @@ const Map<String, List<String>> gameAliases = {
     'Schiffe versenken',
   ],
   'basins': ['Aquarium', 'Акваріум', 'Аквариум', 'Akwarium'],
+  'lookout': ['Kurodoko', 'Kuromasu', 'Where is Black Cells', 'Куродоко', 'Куромасу'],
   'chambers': ['Heyawake', 'Heya-wake', 'Heya wake', 'Room division', 'Хеяваке', 'Хэявакэ'],
   'pebbles': ['Yin-Yang', 'Yin Yang', 'Shiromaru-Kuromaru', 'Інь-Ян', 'Инь-Янь', 'Инь-Ян'],
   'islands': ['Nurikabe'],

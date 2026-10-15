@@ -7335,6 +7335,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then there\'s no way to fit {count, plural, =1{1 shaded cell} other{{count} shaded cells}} into room {room}.'**
   String exChambersFailWays(Object room, int count);
+
+  /// No description provided for @lookoutName.
+  ///
+  /// In en, this message translates to:
+  /// **'Lookout'**
+  String get lookoutName;
+
+  /// No description provided for @lookoutTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Shade cells so each number sees exactly as many as it says'**
+  String get lookoutTagline;
+
+  /// No description provided for @lookoutRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Each number tells how many cells it sees across and down, itself included: along its row and column, out to the first shaded cell or the edge.\n• Numbered cells are never shaded.\n• Shaded cells never touch side by side.\n• The unshaded cells form one connected area.\n\nTap a cell to cycle: shaded → dot (your \"this one stays\" note) → empty. Right-click cycles back. A long press dots the cells next to shaded ones and every cell a number sees once shaded cells close its view at its count. Dots are optional: the puzzle is done once the right cells are shaded.'**
+  String get lookoutRules;
+
+  /// No description provided for @tutLookout1.
+  ///
+  /// In en, this message translates to:
+  /// **'Each number counts the cells it sees along its row and column, itself included, up to a shaded cell or the edge. Shaded cells never touch side by side, and numbered cells are never shaded. The bottom 2 already sees itself and the 4 above it, so its view must stop everywhere else: shade the cells beside it and the one beyond the 4.'**
+  String get tutLookout1;
+
+  /// No description provided for @tutLookout2.
+  ///
+  /// In en, this message translates to:
+  /// **'Count how far a number could see at most. The 5 could see five cells at most: itself, the two beside it and the two above it. So it sees all of them, and they all stay. Finish the board.'**
+  String get tutLookout2;
+
+  /// No description provided for @tutLookout3.
+  ///
+  /// In en, this message translates to:
+  /// **'The unshaded cells must stay in one piece. Once the cell under the 3 is shaded, the bottom-right corner can only reach the others through the cell to its left, so that cell stays. Tap a cell twice to dot it (your note that it stays), then finish the board.'**
+  String get tutLookout3;
+
+  /// No description provided for @tutLookout4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with numbers that already see all they may in some direction, and big numbers that can barely see far enough.'**
+  String get tutLookout4;
+
+  /// No description provided for @tutLookoutS1.
+  ///
+  /// In en, this message translates to:
+  /// **'A number\'s view ends at the edge or at a shaded cell, never at another number. The 2 sees one cell besides itself. To the left its view can\'t stop after one cell, because the next one is the 3, so it sees the cell below it instead: the cell to its left and the second cell down are shaded.'**
+  String get tutLookoutS1;
+
+  /// No description provided for @tutLookoutS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Try every way to split a number\'s count among its four directions, each view ending at the edge or at a cell that can be shaded. A cell every way sees stays, a cell where every way stops is shaded. Also, a cell whose shading would cut the unshaded cells in two stays.'**
+  String get tutLookoutS2;
+
+  /// No description provided for @tutLookoutS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When stuck, shade a cell and follow on: if a number then sees too many or too few cells, two shaded cells touch, or some cells get cut off, that cell stays.'**
+  String get tutLookoutS3;
+
+  /// No description provided for @tagSight.
+  ///
+  /// In en, this message translates to:
+  /// **'sight, see, view, visible, look, line of sight, watch'**
+  String get tagSight;
+
+  /// No description provided for @exLookoutReach.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: the {count} at {clue} can\'t see enough cells in the other directions, so it sees at least this far.'**
+  String exLookoutReach(Object cell, Object clue, int count);
+
+  /// No description provided for @exLookoutClose.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: the {count} at {clue} already sees as many cells as it may this way, so its view stops here.'**
+  String exLookoutClose(Object cell, Object clue, int count);
+
+  /// No description provided for @exLookoutWaysShade.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: every way for the {count} at {clue} to see exactly {count} cells stops its view here.'**
+  String exLookoutWaysShade(Object cell, Object clue, int count);
+
+  /// No description provided for @exLookoutWaysKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays: every way for the {count} at {clue} to see exactly {count} cells sees it.'**
+  String exLookoutWaysKeep(Object cell, Object clue, int count);
+
+  /// No description provided for @exLookoutFailMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the {count} at {clue} sees more than {count} cells.'**
+  String exLookoutFailMany(Object clue, int count);
+
+  /// No description provided for @exLookoutFailFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the {count} at {clue} can\'t see {count} cells.'**
+  String exLookoutFailFew(Object clue, int count);
+
+  /// No description provided for @exLookoutFailWays.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the {count} at {clue} can\'t see exactly {count} cells: no view of the right length ends at the edge or at a cell that can be shaded.'**
+  String exLookoutFailWays(Object clue, int count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

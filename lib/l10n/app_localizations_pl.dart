@@ -5540,4 +5540,112 @@ class AppLocalizationsPl extends AppLocalizations {
     );
     return 'Ale wtedy w komnacie $room nie da się zamalować $_temp0 tak, by się nie stykały, a każda długa linia była przerwana.';
   }
+
+  @override
+  String get lookoutName => 'Widok';
+
+  @override
+  String get lookoutTagline => 'Zamaluj pola tak, by każda liczba widziała dokładnie tyle, ile mówi';
+
+  @override
+  String get lookoutRules =>
+      '• Każda liczba mówi, ile pól widzi w poziomie i w pionie, licząc siebie: wzdłuż swojego wiersza i kolumny aż do pierwszego zamalowanego pola lub krawędzi.\n• Pola z liczbami nigdy nie są zamalowane.\n• Zamalowane pola nigdy nie stykają się bokami.\n• Niezamalowane pola tworzą jeden spójny obszar.\n\nDotknij pola, aby przełączać: zamalowane → kropka (twoja notatka „zostaje”) → puste. Prawy przycisk przełącza wstecz. Długie naciśnięcie stawia kropki obok zamalowanych pól i na każdym polu, które widzi liczba, gdy zamalowane pola zamknęły już jej widok dokładnie na jej wartości. Kropki są opcjonalne: łamigłówka jest rozwiązana, gdy właściwe pola są zamalowane.';
+
+  @override
+  String get tutLookout1 =>
+      'Każda liczba liczy pola, które widzi wzdłuż swojego wiersza i kolumny, łącznie z sobą, aż do zamalowanego pola lub krawędzi. Zamalowane pola nigdy nie stykają się bokami, a pola z liczbami nigdy nie są zamalowane. Dolna 2 widzi już siebie i 4 nad sobą, więc we wszystkich innych kierunkach jej widok musi się zatrzymać: zamaluj pola obok niej i pole za 4.';
+
+  @override
+  String get tutLookout2 =>
+      'Policz, jak daleko liczba mogłaby widzieć najwyżej. 5 mogłaby widzieć najwyżej pięć pól: siebie, dwa po bokach i dwa nad sobą. Widzi więc je wszystkie i wszystkie zostają. Dokończ planszę.';
+
+  @override
+  String get tutLookout3 =>
+      'Niezamalowane pola muszą tworzyć jedną całość. Gdy pole pod 3 jest zamalowane, prawy dolny róg może dotrzeć do reszty tylko przez pole na lewo od niego, więc to pole zostaje. Dotknij pola dwa razy, aby postawić kropkę (twoja notatka, że zostaje), a potem dokończ planszę.';
+
+  @override
+  String get tutLookout4 =>
+      'Teraz prawdziwa plansza. Zacznij od liczb, które w jakimś kierunku widzą już wszystko, co mogą, i od dużych liczb, które ledwo widzą wystarczająco daleko.';
+
+  @override
+  String get tutLookoutS1 =>
+      'Widok liczby kończy się na krawędzi lub na zamalowanym polu, nigdy na innej liczbie. 2 widzi jedno pole oprócz siebie. W lewo jej widok nie może się zatrzymać po jednym polu, bo następne to 3, więc widzi pole pod sobą: pole na lewo od niej i drugie pole w dół są zamalowane.';
+
+  @override
+  String get tutLookoutS2 =>
+      'Sprawdzaj każdy sposób rozdzielenia liczby między cztery kierunki tak, by każdy widok kończył się na krawędzi lub na polu, które można zamalować. Pole widziane w każdym sposobie zostaje, a pole, na którym zatrzymuje się każdy sposób, jest zamalowane. Zostaje też pole, którego zamalowanie przecięłoby niezamalowane pola na dwie części.';
+
+  @override
+  String get tutLookoutS3 =>
+      'Trudna plansza. Gdy utkniesz, zamaluj pole i zobacz, co dalej: jeśli jakaś liczba widzi wtedy za dużo lub za mało pól, dwa zamalowane pola się stykają albo jakieś pola zostaną odcięte, to pole zostaje.';
+
+  @override
+  String get tagSight => 'widzieć, widok, widoczność, patrzeć, wzrok, linia wzroku, obserwacja';
+
+  @override
+  String exLookoutReach(Object cell, Object clue, int count) {
+    return '$cell zostaje: liczba $count w $clue nie widzi dość pól w innych kierunkach, więc widzi co najmniej aż dotąd.';
+  }
+
+  @override
+  String exLookoutClose(Object cell, Object clue, int count) {
+    return '$cell jest zamalowane: liczba $count w $clue widzi już w tym kierunku tyle pól, ile może, więc jej widok kończy się tutaj.';
+  }
+
+  @override
+  String exLookoutWaysShade(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: '$count pole',
+    );
+    return '$cell jest zamalowane: każdy sposób, w jaki liczba $count w $clue widzi dokładnie $_temp0, zatrzymuje jej widok tutaj.';
+  }
+
+  @override
+  String exLookoutWaysKeep(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: '$count pole',
+    );
+    return '$cell zostaje: widzi je każdy sposób, w jaki liczba $count w $clue widzi dokładnie $_temp0.';
+  }
+
+  @override
+  String exLookoutFailMany(Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: '$count pole',
+    );
+    return 'Ale wtedy liczba $count w $clue widzi więcej niż $_temp0.';
+  }
+
+  @override
+  String exLookoutFailFew(Object clue, int count) {
+    return 'Ale wtedy liczba $count w $clue widzi za mało pól: mniej niż $count.';
+  }
+
+  @override
+  String exLookoutFailWays(Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pola',
+      many: '$count pól',
+      few: '$count pola',
+      one: '$count pole',
+    );
+    return 'Ale wtedy liczba $count w $clue nie może widzieć dokładnie $_temp0: żaden widok właściwej długości nie kończy się na krawędzi ani na polu, które można zamalować.';
+  }
 }
