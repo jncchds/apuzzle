@@ -5944,4 +5944,240 @@ class AppLocalizationsEn extends AppLocalizations {
   String exPolesFailColFill(Object col) {
     return 'But then column $col can\'t be filled to fit its numbers.';
   }
+
+  @override
+  String get mercuryName => 'Mercury';
+
+  @override
+  String get mercuryTagline => 'Fill the tubes from the bulb up to match the counts';
+
+  @override
+  String get mercuryRules =>
+      '• The grid is covered with tubes, straight or bent, each starting at a round bulb.\n• Fill some cells with mercury. In every tube it starts at the bulb and goes on without gaps, as far as you like: a tube may stay empty, fill part of the way or fill up to its tip.\n• The numbers outside the grid tell how many filled cells each row and column holds. On harder boards some are hidden.\n\nTap a cell to cycle: mercury → empty (your note) → unmarked. Right-click cycles back. Slide across cells to fill them all in one go. A long press fills every cell between your mercury and its bulb, and marks empty the cells past your empty marks and in rows and columns that have all their mercury. Empty marks are optional: the puzzle is done once all the mercury is in place.';
+
+  @override
+  String get famFilling => 'Filling';
+
+  @override
+  String get famFillingAbout => 'Fill each container from one end up to a level so that the counts outside come out';
+
+  @override
+  String get tagTemperature => 'temperature, heat, fever, degrees, gauge, tube, bulb, mercury, fill, level';
+
+  @override
+  String get tutMercury1 =>
+      'The grid is covered with tubes, and mercury fills each one from its round bulb. The numbers outside tell how many filled cells each row and column holds. Tap a cell to fill it, tap again to mark it empty.';
+
+  @override
+  String get tutMercury2 =>
+      'Mercury always starts at the bulb and leaves no gaps: when a cell is filled, so is every cell between it and the bulb, even round a bend. And a cell left empty keeps the rest of its tube empty, up to the tip. Finish the board.';
+
+  @override
+  String get tutMercury3 =>
+      'Think ahead: filling a cell fills everything back to its bulb. When that would put more filled cells into a row or column than its number allows, the cell stays empty. Leaving a cell empty empties its tube up to the tip, so when that would leave a line short, the cell is filled. Finish the board.';
+
+  @override
+  String get tutMercury4 =>
+      'Now a real board. Start with rows and columns that are empty or full, fill back to the bulbs, and before you fill a cell, count how much mercury it brings along.';
+
+  @override
+  String get tutMercuryS1 =>
+      'Two lines that share several tubes are worth counting together: each shared tube fills them in a set order from its bulb, so not every split of mercury between them is possible. Here columns D and E share three tubes. Try the ways those tubes can make both numbers at once: a cell that comes out the same every time is settled.';
+
+  @override
+  String get tutMercuryS2 =>
+      'A medium board: some counts are hidden, and some steps need two lines counted together. Look for rows and columns that share tubes, such as a tube that bends from one into the other.';
+
+  @override
+  String get tutMercuryS3 =>
+      'A hard board: more counts are hidden. When stuck, suppose a cell is filled and fill back to its bulb: if a row or column overflows or can no longer reach its count, that cell stays empty.';
+
+  @override
+  String exMercurySupposeFull(Object cell) {
+    return 'Suppose $cell were filled.';
+  }
+
+  @override
+  String exMercurySupposeEmpty(Object cell) {
+    return 'Suppose $cell stayed empty.';
+  }
+
+  @override
+  String exMercuryRefutedFull(Object cell) {
+    return '$cell stays empty: filling it leads to a contradiction.';
+  }
+
+  @override
+  String exMercuryRefutedEmpty(Object cell) {
+    return '$cell is filled: leaving it empty leads to a contradiction.';
+  }
+
+  @override
+  String exMercuryToBulb(Object cell, Object other) {
+    return '$cell is filled: the mercury at $other reaches it from the bulb, with no gaps.';
+  }
+
+  @override
+  String exMercuryPastEmpty(Object cell, Object other) {
+    return '$cell stays empty: $other, nearer the bulb of the same tube, is empty, and the mercury never jumps a gap.';
+  }
+
+  @override
+  String exMercuryRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'already has all its $count filled cells',
+      one: 'already has its filled cell',
+      zero: 'holds no filled cells',
+    );
+    return '$cell stays empty: row $row $_temp0.';
+  }
+
+  @override
+  String exMercuryColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'already has all its $count filled cells',
+      one: 'already has its filled cell',
+      zero: 'holds no filled cells',
+    );
+    return '$cell stays empty: column $col $_temp0.';
+  }
+
+  @override
+  String exMercuryRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count filled cells',
+      one: 'a filled cell',
+    );
+    return '$cell is filled: row $row needs $_temp0, and only that many cells are left.';
+  }
+
+  @override
+  String exMercuryColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count filled cells',
+      one: 'a filled cell',
+    );
+    return '$cell is filled: column $col needs $_temp0, and only that many cells are left.';
+  }
+
+  @override
+  String exMercuryTooMuchRow(Object cell, Object row, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'a cell',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'needs only $need more',
+      one: 'needs only one more',
+      zero: 'already has all its filled cells',
+    );
+    return '$cell stays empty: filling it back to its bulb would fill $_temp0 of row $row, which $_temp1.';
+  }
+
+  @override
+  String exMercuryTooMuchCol(Object cell, Object col, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'a cell',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'needs only $need more',
+      one: 'needs only one more',
+      zero: 'already has all its filled cells',
+    );
+    return '$cell stays empty: filling it back to its bulb would fill $_temp0 of column $col, which $_temp1.';
+  }
+
+  @override
+  String exMercuryTooLittleRow(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'a cell',
+    );
+    return '$cell is filled: empty, it would keep $_temp0 of row $row empty up to the tip, and the row could no longer reach its count.';
+  }
+
+  @override
+  String exMercuryTooLittleCol(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'a cell',
+    );
+    return '$cell is filled: empty, it would keep $_temp0 of column $col empty up to the tip, and the column could no longer reach its count.';
+  }
+
+  @override
+  String exMercuryLinesRows(Object a, Object b) {
+    return 'rows $a and $b';
+  }
+
+  @override
+  String exMercuryLinesCols(Object a, Object b) {
+    return 'columns $a and $b';
+  }
+
+  @override
+  String exMercuryLinesRowCol(Object row, Object col) {
+    return 'row $row and column $col';
+  }
+
+  @override
+  String exMercuryPairFull(Object cell, Object lines) {
+    return '$cell is filled: $lines share tubes, and counted together, their numbers can only both come out with this cell filled.';
+  }
+
+  @override
+  String exMercuryPairEmpty(Object cell, Object lines) {
+    return '$cell stays empty: $lines share tubes, and counted together, their numbers can only both come out with this cell empty.';
+  }
+
+  @override
+  String exMercuryFailOrder(Object full, Object empty) {
+    return 'But then $full is filled while $empty, nearer the bulb of the same tube, stays empty.';
+  }
+
+  @override
+  String exMercuryFailRowMany(Object row, int count) {
+    return 'But then row $row gets more than $count filled cells.';
+  }
+
+  @override
+  String exMercuryFailColMany(Object col, int count) {
+    return 'But then column $col gets more than $count filled cells.';
+  }
+
+  @override
+  String exMercuryFailRowFew(Object row, int count) {
+    return 'But then row $row can no longer get $count filled cells.';
+  }
+
+  @override
+  String exMercuryFailColFew(Object col, int count) {
+    return 'But then column $col can no longer get $count filled cells.';
+  }
+
+  @override
+  String exMercuryFailPair(Object lines) {
+    return 'But then the numbers of $lines can no longer both come out.';
+  }
 }

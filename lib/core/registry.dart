@@ -38,6 +38,7 @@ import '../puzzles/pairs/pairs_type.dart';
 import '../puzzles/pearls/pearls_type.dart';
 import '../puzzles/plots/plots_type.dart';
 import '../puzzles/pockets/pockets_type.dart';
+import '../puzzles/mercury/mercury_type.dart';
 import '../puzzles/poles/poles_type.dart';
 import '../puzzles/pop/pop_type.dart';
 import '../puzzles/pipes/pipes_type.dart';
@@ -102,6 +103,7 @@ const List<PuzzleType> puzzleTypes = [
   CampType(),
   FleetType(),
   BasinsType(),
+  MercuryType(),
   PolesType(),
   PebblesType(),
   ChambersType(),
@@ -134,6 +136,7 @@ class PuzzleFamily {
     'sudokus' => l.famSudoku,
     'memory' => l.famMemory,
     'plumbing' => l.famPlumbing,
+    'filling' => l.famFilling,
     _ => types.first.name(l),
   };
 
@@ -144,6 +147,7 @@ class PuzzleFamily {
     'sudokus' => l.famSudokuAbout,
     'memory' => l.famMemoryAbout,
     'plumbing' => l.famPlumbingAbout,
+    'filling' => l.famFillingAbout,
     _ => types.first.tagline(l),
   };
 
@@ -202,7 +206,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('lits', [LitsType()]),
       PuzzleFamily('camp', [CampType()]),
       PuzzleFamily('fleet', [FleetType()]),
-      PuzzleFamily('basins', [BasinsType()]),
+      PuzzleFamily('filling', [BasinsType(), MercuryType()]),
       PuzzleFamily('poles', [PolesType()]),
       PuzzleFamily('pebbles', [PebblesType()]),
       PuzzleFamily('chambers', [ChambersType()]),

@@ -6028,4 +6028,189 @@ class AppLocalizationsPl extends AppLocalizations {
   String exPolesFailColFill(Object col) {
     return 'Ale wtedy kolumny $col nie da się wypełnić zgodnie z jej liczbami.';
   }
+
+  @override
+  String get mercuryName => 'Rtęć';
+
+  @override
+  String get mercuryTagline => 'Napełnij rurki od kulki zgodnie z liczbami';
+
+  @override
+  String get mercuryRules =>
+      '• Siatkę pokrywają rurki, proste lub zagięte, każda zaczyna się od okrągłej kulki.\n• Napełnij niektóre pola rtęcią. W każdej rurce zaczyna się ona od kulki i biegnie dalej bez przerw, jak daleko chcesz: rurka może zostać pusta, napełnić się częściowo albo aż do końca.\n• Liczby na zewnątrz mówią, ile napełnionych pól jest w każdym wierszu i kolumnie. Na trudniejszych planszach niektóre są ukryte.\n\nDotknij pola, by przełączać: rtęć → puste (twoja notatka) → bez znacznika. Prawy klik przełącza wstecz. Przeciągnij po polach, by napełnić je wszystkie naraz. Długie przytrzymanie napełnia każde pole między twoją rtęcią a jej kulką i oznacza jako puste pola za twoimi pustymi znacznikami oraz w wierszach i kolumnach, które mają już całą rtęć. Puste znaczniki są opcjonalne: zagadka jest rozwiązana, gdy cała rtęć jest na miejscu.';
+
+  @override
+  String get famFilling => 'Napełnianie';
+
+  @override
+  String get famFillingAbout =>
+      'Napełniaj każde naczynie od jednego końca do pewnego poziomu, aby zgadzały się liczby na zewnątrz';
+
+  @override
+  String get tagTemperature => 'temperatura, ciepło, gorączka, stopnie, skala, rurka, kulka, rtęć, napełnić, poziom';
+
+  @override
+  String get tutMercury1 =>
+      'Siatkę pokrywają rurki, a rtęć napełnia każdą od jej okrągłej kulki. Liczby na zewnątrz mówią, ile napełnionych pól jest w każdym wierszu i kolumnie. Dotknij pola, by je napełnić, jeszcze raz – by oznaczyć je jako puste.';
+
+  @override
+  String get tutMercury2 =>
+      'Rtęć zawsze zaczyna się od kulki i nie zostawia przerw: gdy pole jest napełnione, to także każde pole między nim a kulką, nawet za zakrętem. A puste pole zostawia pustą resztę swojej rurki, aż do końca. Dokończ planszę.';
+
+  @override
+  String get tutMercury3 =>
+      'Myśl naprzód: napełnione pole napełnia wszystko aż do swojej kulki. Gdy przez to wiersz lub kolumna miałyby więcej napełnionych pól, niż pozwala ich liczba, pole zostaje puste. Puste pole opróżnia swoją rurkę do końca, więc gdy przez to linii zabrakłoby pól, pole jest napełnione. Dokończ planszę.';
+
+  @override
+  String get tutMercury4 =>
+      'Teraz prawdziwa plansza. Zacznij od pustych lub pełnych wierszy i kolumn, napełniaj do kulek, a zanim napełnisz pole, policz, ile rtęci pociągnie za sobą.';
+
+  @override
+  String get tutMercuryS1 =>
+      'Dwie linie o kilku wspólnych rurkach warto liczyć razem: każda wspólna rurka napełnia je w ustalonej kolejności od swojej kulki, więc nie każdy podział rtęci między nimi jest możliwy. Tu kolumny D i E mają trzy wspólne rurki. Wypróbuj sposoby, na jakie te rurki dają obie liczby naraz: pole, które za każdym razem wychodzi tak samo, jest ustalone.';
+
+  @override
+  String get tutMercuryS2 =>
+      'Średnia plansza: niektóre liczby są ukryte, a niektóre kroki wymagają liczenia dwóch linii razem. Szukaj wierszy i kolumn o wspólnych rurkach, na przykład rurki, która skręca z jednej w drugą.';
+
+  @override
+  String get tutMercuryS3 =>
+      'Trudna plansza: ukrytych liczb jest więcej. Gdy utkniesz, załóż, że pole jest napełnione, i napełnij wszystko do jego kulki: jeśli wiersz lub kolumna się przepełni albo nie osiągnie już swojej liczby, to pole zostaje puste.';
+
+  @override
+  String exMercurySupposeFull(Object cell) {
+    return 'Załóżmy, że $cell jest napełnione.';
+  }
+
+  @override
+  String exMercurySupposeEmpty(Object cell) {
+    return 'Załóżmy, że $cell zostaje puste.';
+  }
+
+  @override
+  String exMercuryRefutedFull(Object cell) {
+    return '$cell zostaje puste: napełnienie go prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exMercuryRefutedEmpty(Object cell) {
+    return '$cell jest napełnione: zostawienie go pustym prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exMercuryToBulb(Object cell, Object other) {
+    return '$cell jest napełnione: rtęć na $other dochodzi tu od kulki bez przerw.';
+  }
+
+  @override
+  String exMercuryPastEmpty(Object cell, Object other) {
+    return '$cell zostaje puste: $other, bliżej kulki tej samej rurki, jest puste, a rtęć nie przeskakuje przerw.';
+  }
+
+  @override
+  String exMercuryRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'wiersz $row ma już wszystkie napełnione pola ($count)',
+      zero: 'wiersz $row nie ma napełnionych pól',
+    );
+    return '$cell zostaje puste: $_temp0.';
+  }
+
+  @override
+  String exMercuryColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'kolumna $col ma już wszystkie napełnione pola ($count)',
+      zero: 'kolumna $col nie ma napełnionych pól',
+    );
+    return '$cell zostaje puste: $_temp0.';
+  }
+
+  @override
+  String exMercuryRowNeed(Object cell, Object row, int count) {
+    return '$cell jest napełnione: wiersz $row potrzebuje napełnionych pól: $count, i zostało dokładnie tyle.';
+  }
+
+  @override
+  String exMercuryColNeed(Object cell, Object col, int count) {
+    return '$cell jest napełnione: kolumna $col potrzebuje napełnionych pól: $count, i zostało dokładnie tyle.';
+  }
+
+  @override
+  String exMercuryTooMuchRow(Object cell, Object row, int count, int need) {
+    return '$cell zostaje puste: napełnione aż do kulki, napełniłoby pól wiersza $row: $count, a on potrzebuje jeszcze tylko $need.';
+  }
+
+  @override
+  String exMercuryTooMuchCol(Object cell, Object col, int count, int need) {
+    return '$cell zostaje puste: napełnione aż do kulki, napełniłoby pól kolumny $col: $count, a ona potrzebuje jeszcze tylko $need.';
+  }
+
+  @override
+  String exMercuryTooLittleRow(Object cell, Object row, int count) {
+    return '$cell jest napełnione: puste zostawiłoby pustymi aż do końca rurki pól wiersza $row: $count, a wiersz nie osiągnąłby już swojej liczby.';
+  }
+
+  @override
+  String exMercuryTooLittleCol(Object cell, Object col, int count) {
+    return '$cell jest napełnione: puste zostawiłoby pustymi aż do końca rurki pól kolumny $col: $count, a kolumna nie osiągnęłaby już swojej liczby.';
+  }
+
+  @override
+  String exMercuryLinesRows(Object a, Object b) {
+    return 'wiersze $a i $b';
+  }
+
+  @override
+  String exMercuryLinesCols(Object a, Object b) {
+    return 'kolumny $a i $b';
+  }
+
+  @override
+  String exMercuryLinesRowCol(Object row, Object col) {
+    return 'wiersz $row i kolumna $col';
+  }
+
+  @override
+  String exMercuryPairFull(Object cell, Object lines) {
+    return '$cell jest napełnione: $lines mają wspólne rurki, a liczone razem mogą zgodzić się ze swoimi liczbami tylko z tym polem napełnionym.';
+  }
+
+  @override
+  String exMercuryPairEmpty(Object cell, Object lines) {
+    return '$cell zostaje puste: $lines mają wspólne rurki, a liczone razem mogą zgodzić się ze swoimi liczbami tylko z tym polem pustym.';
+  }
+
+  @override
+  String exMercuryFailOrder(Object full, Object empty) {
+    return 'Ale wtedy $full jest napełnione, a $empty, bliżej kulki tej samej rurki, zostaje puste.';
+  }
+
+  @override
+  String exMercuryFailRowMany(Object row, int count) {
+    return 'Ale wtedy wiersz $row ma więcej niż $count napełnionych pól.';
+  }
+
+  @override
+  String exMercuryFailColMany(Object col, int count) {
+    return 'Ale wtedy kolumna $col ma więcej niż $count napełnionych pól.';
+  }
+
+  @override
+  String exMercuryFailRowFew(Object row, int count) {
+    return 'Ale wtedy wiersz $row nie zbierze już napełnionych pól: $count.';
+  }
+
+  @override
+  String exMercuryFailColFew(Object col, int count) {
+    return 'Ale wtedy kolumna $col nie zbierze już napełnionych pól: $count.';
+  }
+
+  @override
+  String exMercuryFailPair(Object lines) {
+    return 'Ale wtedy $lines nie mogą już jednocześnie zgodzić się ze swoimi liczbami.';
+  }
 }

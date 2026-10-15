@@ -6055,4 +6055,188 @@ class AppLocalizationsUk extends AppLocalizations {
   String exPolesFailColFill(Object col) {
     return 'Але тоді стовпець $col не можна заповнити за його числами.';
   }
+
+  @override
+  String get mercuryName => 'Ртуть';
+
+  @override
+  String get mercuryTagline => 'Наповніть трубки від кульки за числами по краях';
+
+  @override
+  String get mercuryRules =>
+      '• Сітку вкрито трубками, прямими чи вигнутими, кожна починається з круглої кульки.\n• Наповніть деякі клітинки ртуттю. У кожній трубці вона починається з кульки й іде далі без проміжків, скільки завгодно: трубка може лишитися порожньою, наповнитися частково або аж до кінця.\n• Числа ззовні показують, скільки наповнених клітинок у кожному рядку й стовпці. На складніших полях деякі приховано.\n\nТоркніться клітинки, щоб перебрати: ртуть → порожня (ваша позначка) → без позначки. Правий клік перебирає назад. Проведіть по клітинках, щоб наповнити їх усі разом. Довге натискання наповнює кожну клітинку між вашою ртуттю та її кулькою й позначає порожніми клітинки за вашими порожніми позначками та в рядках і стовпцях, де вже вся ртуть. Порожні позначки необов\'язкові: головоломку розв\'язано, щойно вся ртуть на місці.';
+
+  @override
+  String get famFilling => 'Наповнення';
+
+  @override
+  String get famFillingAbout => 'Наповнюйте кожну посудину з одного кінця до певного рівня, щоб зійшлися числа ззовні';
+
+  @override
+  String get tagTemperature => 'температура, тепло, жар, градуси, шкала, трубка, кулька, ртуть, наповнити, рівень';
+
+  @override
+  String get tutMercury1 =>
+      'Сітку вкрито трубками, і ртуть наповнює кожну від її круглої кульки. Числа ззовні показують, скільки наповнених клітинок у кожному рядку й стовпці. Торкніться клітинки, щоб наповнити її, ще раз — щоб позначити порожньою.';
+
+  @override
+  String get tutMercury2 =>
+      'Ртуть завжди починається з кульки й не лишає проміжків: якщо клітинку наповнено, то й кожну клітинку між нею та кулькою, навіть за вигином. А порожня клітинка лишає порожньою решту своєї трубки, до самого кінця. Завершіть поле.';
+
+  @override
+  String get tutMercury3 =>
+      'Думайте наперед: наповнена клітинка наповнює все аж до своєї кульки. Якщо так у рядку чи стовпці стане більше наповнених клітинок, ніж дозволяє його число, клітинка лишається порожньою. Порожня клітинка спорожнює свою трубку до кінця, тож якщо так лінії забракне клітинок, клітинку наповнено. Завершіть поле.';
+
+  @override
+  String get tutMercury4 =>
+      'Тепер справжнє поле. Почніть з порожніх або повних рядків і стовпців, наповнюйте до кульок, а перш ніж наповнити клітинку, порахуйте, скільки ртуті вона потягне за собою.';
+
+  @override
+  String get tutMercuryS1 =>
+      'Дві лінії з кількома спільними трубками варто рахувати разом: кожна спільна трубка наповнює їх у певному порядку від своєї кульки, тож не кожен розподіл ртуті між ними можливий. Тут стовпці D і E мають три спільні трубки. Спробуйте способи, якими ці трубки дають обидва числа разом: клітинка, що щоразу виходить однаковою, визначена.';
+
+  @override
+  String get tutMercuryS2 =>
+      'Середнє поле: деякі числа приховано, а деякі кроки потребують рахувати дві лінії разом. Шукайте рядки й стовпці зі спільними трубками, наприклад трубку, що завертає з одного в інший.';
+
+  @override
+  String get tutMercuryS3 =>
+      'Складне поле: прихованих чисел більше. Коли застрягли, припустіть, що клітинку наповнено, і наповніть усе до її кульки: якщо рядок чи стовпець переповниться або вже не досягне свого числа, ця клітинка порожня.';
+
+  @override
+  String exMercurySupposeFull(Object cell) {
+    return 'Припустімо, що $cell наповнено.';
+  }
+
+  @override
+  String exMercurySupposeEmpty(Object cell) {
+    return 'Припустімо, що $cell порожня.';
+  }
+
+  @override
+  String exMercuryRefutedFull(Object cell) {
+    return '$cell порожня: якщо її наповнити, виходить суперечність.';
+  }
+
+  @override
+  String exMercuryRefutedEmpty(Object cell) {
+    return '$cell наповнено: якщо лишити її порожньою, виходить суперечність.';
+  }
+
+  @override
+  String exMercuryToBulb(Object cell, Object other) {
+    return '$cell наповнено: ртуть у $other доходить сюди від кульки без проміжків.';
+  }
+
+  @override
+  String exMercuryPastEmpty(Object cell, Object other) {
+    return '$cell порожня: $other, ближча до кульки тієї самої трубки, порожня, а ртуть не перестрибує проміжків.';
+  }
+
+  @override
+  String exMercuryRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'у рядку $row уже всі наповнені клітинки ($count)',
+      zero: 'у рядку $row немає наповнених клітинок',
+    );
+    return '$cell порожня: $_temp0.';
+  }
+
+  @override
+  String exMercuryColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'у стовпці $col уже всі наповнені клітинки ($count)',
+      zero: 'у стовпці $col немає наповнених клітинок',
+    );
+    return '$cell порожня: $_temp0.';
+  }
+
+  @override
+  String exMercuryRowNeed(Object cell, Object row, int count) {
+    return '$cell наповнено: рядку $row потрібно наповнених клітинок: $count, і лишилося саме стільки.';
+  }
+
+  @override
+  String exMercuryColNeed(Object cell, Object col, int count) {
+    return '$cell наповнено: стовпцю $col потрібно наповнених клітинок: $count, і лишилося саме стільки.';
+  }
+
+  @override
+  String exMercuryTooMuchRow(Object cell, Object row, int count, int need) {
+    return '$cell порожня: наповнена до кульки, вона наповнила б клітинок рядка $row: $count, а йому потрібно ще лише $need.';
+  }
+
+  @override
+  String exMercuryTooMuchCol(Object cell, Object col, int count, int need) {
+    return '$cell порожня: наповнена до кульки, вона наповнила б клітинок стовпця $col: $count, а йому потрібно ще лише $need.';
+  }
+
+  @override
+  String exMercuryTooLittleRow(Object cell, Object row, int count) {
+    return '$cell наповнено: порожня, вона лишила б порожніми до кінця трубки клітинок рядка $row: $count, і рядок уже не досяг би свого числа.';
+  }
+
+  @override
+  String exMercuryTooLittleCol(Object cell, Object col, int count) {
+    return '$cell наповнено: порожня, вона лишила б порожніми до кінця трубки клітинок стовпця $col: $count, і стовпець уже не досяг би свого числа.';
+  }
+
+  @override
+  String exMercuryLinesRows(Object a, Object b) {
+    return 'рядки $a і $b';
+  }
+
+  @override
+  String exMercuryLinesCols(Object a, Object b) {
+    return 'стовпці $a і $b';
+  }
+
+  @override
+  String exMercuryLinesRowCol(Object row, Object col) {
+    return 'рядок $row і стовпець $col';
+  }
+
+  @override
+  String exMercuryPairFull(Object cell, Object lines) {
+    return '$cell наповнено: $lines мають спільні трубки, і якщо рахувати їх разом, обидва числа сходяться лише з наповненою клітинкою.';
+  }
+
+  @override
+  String exMercuryPairEmpty(Object cell, Object lines) {
+    return '$cell порожня: $lines мають спільні трубки, і якщо рахувати їх разом, обидва числа сходяться лише з порожньою клітинкою.';
+  }
+
+  @override
+  String exMercuryFailOrder(Object full, Object empty) {
+    return 'Але тоді $full наповнено, а $empty, ближча до кульки тієї самої трубки, порожня.';
+  }
+
+  @override
+  String exMercuryFailRowMany(Object row, int count) {
+    return 'Але тоді в рядку $row понад $count наповнених клітинок.';
+  }
+
+  @override
+  String exMercuryFailColMany(Object col, int count) {
+    return 'Але тоді в стовпці $col понад $count наповнених клітинок.';
+  }
+
+  @override
+  String exMercuryFailRowFew(Object row, int count) {
+    return 'Але тоді рядок $row уже не набере наповнених клітинок: $count.';
+  }
+
+  @override
+  String exMercuryFailColFew(Object col, int count) {
+    return 'Але тоді стовпець $col уже не набере наповнених клітинок: $count.';
+  }
+
+  @override
+  String exMercuryFailPair(Object lines) {
+    return 'Але тоді $lines уже не можуть разом зійтися зі своїми числами.';
+  }
 }

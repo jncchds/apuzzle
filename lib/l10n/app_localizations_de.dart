@@ -5907,4 +5907,240 @@ class AppLocalizationsDe extends AppLocalizations {
   String exPolesFailColFill(Object col) {
     return 'Aber dann lässt sich Spalte $col nicht passend zu ihren Zahlen füllen.';
   }
+
+  @override
+  String get mercuryName => 'Quecksilber';
+
+  @override
+  String get mercuryTagline => 'Fülle die Röhren ab der Kugel passend zu den Zahlen';
+
+  @override
+  String get mercuryRules =>
+      '• Das Gitter ist mit Röhren bedeckt, gerade oder geknickt, jede beginnt an einer runden Kugel.\n• Fülle einige Felder mit Quecksilber. In jeder Röhre beginnt es an der Kugel und geht ohne Lücke weiter, so weit du willst: Eine Röhre kann leer bleiben, teilweise oder bis zur Spitze gefüllt sein.\n• Die Zahlen außen sagen, wie viele gefüllte Felder jede Zeile und Spalte enthält. Auf schwereren Feldern sind manche verborgen.\n\nTippe auf ein Feld zum Durchschalten: Quecksilber → leer (deine Notiz) → unmarkiert. Rechtsklick schaltet zurück. Wische über Felder, um sie alle auf einmal zu füllen. Langes Drücken füllt jedes Feld zwischen deinem Quecksilber und seiner Kugel und markiert die Felder hinter deinen Leer-Notizen sowie in Zeilen und Spalten mit all ihrem Quecksilber als leer. Leer-Notizen sind freiwillig: Das Rätsel ist gelöst, sobald alles Quecksilber an seinem Platz ist.';
+
+  @override
+  String get famFilling => 'Füllen';
+
+  @override
+  String get famFillingAbout => 'Fülle jedes Gefäß von einem Ende bis zu einer Höhe, sodass die Zahlen außen stimmen';
+
+  @override
+  String get tagTemperature => 'Temperatur, Wärme, Fieber, Grad, Skala, Röhre, Kugel, Quecksilber, füllen, Pegel';
+
+  @override
+  String get tutMercury1 =>
+      'Das Gitter ist mit Röhren bedeckt, und Quecksilber füllt jede von ihrer runden Kugel aus. Die Zahlen außen sagen, wie viele gefüllte Felder jede Zeile und Spalte enthält. Tippe auf ein Feld, um es zu füllen, noch einmal, um es als leer zu markieren.';
+
+  @override
+  String get tutMercury2 =>
+      'Quecksilber beginnt immer an der Kugel und lässt keine Lücke: Ist ein Feld gefüllt, dann auch jedes Feld zwischen ihm und der Kugel, sogar um einen Knick. Und ein leeres Feld lässt den Rest seiner Röhre bis zur Spitze leer. Löse das Feld.';
+
+  @override
+  String get tutMercury3 =>
+      'Denk voraus: Ein gefülltes Feld füllt alles bis zu seiner Kugel. Kämen so in eine Zeile oder Spalte mehr gefüllte Felder, als ihre Zahl erlaubt, bleibt das Feld leer. Ein leeres Feld leert seine Röhre bis zur Spitze; fehlen einer Linie dann Felder, ist das Feld gefüllt. Löse das Feld.';
+
+  @override
+  String get tutMercury4 =>
+      'Jetzt ein echtes Feld. Beginne mit leeren oder vollen Zeilen und Spalten, fülle bis zu den Kugeln und zähle, bevor du ein Feld füllst, wie viel Quecksilber es mit sich bringt.';
+
+  @override
+  String get tutMercuryS1 =>
+      'Zwei Linien mit mehreren gemeinsamen Röhren lohnt es sich zusammen zu zählen: Jede gemeinsame Röhre füllt sie in fester Reihenfolge von ihrer Kugel aus, also ist nicht jede Aufteilung des Quecksilbers zwischen ihnen möglich. Hier teilen sich die Spalten D und E drei Röhren. Probiere die Arten, wie diese Röhren beide Zahlen zugleich ergeben: Ein Feld, das jedes Mal gleich ausfällt, steht fest.';
+
+  @override
+  String get tutMercuryS2 =>
+      'Ein mittleres Feld: Manche Zahlen sind verborgen, und manche Schritte brauchen zwei Linien zusammen gezählt. Suche Zeilen und Spalten mit gemeinsamen Röhren, etwa eine Röhre, die von der einen in die andere abbiegt.';
+
+  @override
+  String get tutMercuryS3 =>
+      'Ein schweres Feld: Mehr Zahlen sind verborgen. Wenn du feststeckst, nimm an, dass ein Feld gefüllt ist, und fülle bis zu seiner Kugel: Läuft eine Zeile oder Spalte über oder erreicht ihre Zahl nicht mehr, bleibt das Feld leer.';
+
+  @override
+  String exMercurySupposeFull(Object cell) {
+    return 'Angenommen, $cell wäre gefüllt.';
+  }
+
+  @override
+  String exMercurySupposeEmpty(Object cell) {
+    return 'Angenommen, $cell bliebe leer.';
+  }
+
+  @override
+  String exMercuryRefutedFull(Object cell) {
+    return '$cell bleibt leer: Es zu füllen führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exMercuryRefutedEmpty(Object cell) {
+    return '$cell ist gefüllt: Es leer zu lassen führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exMercuryToBulb(Object cell, Object other) {
+    return '$cell ist gefüllt: Das Quecksilber auf $other reicht ohne Lücke von der Kugel bis dorthin.';
+  }
+
+  @override
+  String exMercuryPastEmpty(Object cell, Object other) {
+    return '$cell bleibt leer: $other, näher an der Kugel derselben Röhre, ist leer, und Quecksilber überspringt keine Lücke.';
+  }
+
+  @override
+  String exMercuryRowDone(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'hat schon alle $count gefüllten Felder',
+      one: 'hat schon ihr gefülltes Feld',
+      zero: 'hat keine gefüllten Felder',
+    );
+    return '$cell bleibt leer: Zeile $row $_temp0.';
+  }
+
+  @override
+  String exMercuryColDone(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'hat schon alle $count gefüllten Felder',
+      one: 'hat schon ihr gefülltes Feld',
+      zero: 'hat keine gefüllten Felder',
+    );
+    return '$cell bleibt leer: Spalte $col $_temp0.';
+  }
+
+  @override
+  String exMercuryRowNeed(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count gefüllte Felder',
+      one: 'ein gefülltes Feld',
+    );
+    return '$cell ist gefüllt: Zeile $row braucht $_temp0, und genau so viele Felder sind übrig.';
+  }
+
+  @override
+  String exMercuryColNeed(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count gefüllte Felder',
+      one: 'ein gefülltes Feld',
+    );
+    return '$cell ist gefüllt: Spalte $col braucht $_temp0, und genau so viele Felder sind übrig.';
+  }
+
+  @override
+  String exMercuryTooMuchRow(Object cell, Object row, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: 'ein Feld',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'nur noch $need braucht',
+      one: 'nur noch eins braucht',
+      zero: 'schon all ihre gefüllten Felder hat',
+    );
+    return '$cell bleibt leer: Bis zur Kugel gefüllt, würde es $_temp0 von Zeile $row füllen, die $_temp1.';
+  }
+
+  @override
+  String exMercuryTooMuchCol(Object cell, Object col, int count, int need) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: 'ein Feld',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      need,
+      locale: localeName,
+      other: 'nur noch $need braucht',
+      one: 'nur noch eins braucht',
+      zero: 'schon all ihre gefüllten Felder hat',
+    );
+    return '$cell bleibt leer: Bis zur Kugel gefüllt, würde es $_temp0 von Spalte $col füllen, die $_temp1.';
+  }
+
+  @override
+  String exMercuryTooLittleRow(Object cell, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: 'ein Feld',
+    );
+    return '$cell ist gefüllt: Leer hielte es $_temp0 von Zeile $row bis zur Spitze leer, und die Zeile käme nicht mehr auf ihre Zahl.';
+  }
+
+  @override
+  String exMercuryTooLittleCol(Object cell, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Felder',
+      one: 'ein Feld',
+    );
+    return '$cell ist gefüllt: Leer hielte es $_temp0 von Spalte $col bis zur Spitze leer, und die Spalte käme nicht mehr auf ihre Zahl.';
+  }
+
+  @override
+  String exMercuryLinesRows(Object a, Object b) {
+    return 'Zeilen $a und $b';
+  }
+
+  @override
+  String exMercuryLinesCols(Object a, Object b) {
+    return 'Spalten $a und $b';
+  }
+
+  @override
+  String exMercuryLinesRowCol(Object row, Object col) {
+    return 'Zeile $row und Spalte $col';
+  }
+
+  @override
+  String exMercuryPairFull(Object cell, Object lines) {
+    return '$cell ist gefüllt: $lines teilen sich Röhren, und zusammen gezählt gehen ihre Zahlen nur mit diesem Feld gefüllt beide auf.';
+  }
+
+  @override
+  String exMercuryPairEmpty(Object cell, Object lines) {
+    return '$cell bleibt leer: $lines teilen sich Röhren, und zusammen gezählt gehen ihre Zahlen nur mit diesem Feld leer beide auf.';
+  }
+
+  @override
+  String exMercuryFailOrder(Object full, Object empty) {
+    return 'Aber dann ist $full gefüllt, während $empty, näher an der Kugel derselben Röhre, leer bleibt.';
+  }
+
+  @override
+  String exMercuryFailRowMany(Object row, int count) {
+    return 'Aber dann bekommt Zeile $row mehr als $count gefüllte Felder.';
+  }
+
+  @override
+  String exMercuryFailColMany(Object col, int count) {
+    return 'Aber dann bekommt Spalte $col mehr als $count gefüllte Felder.';
+  }
+
+  @override
+  String exMercuryFailRowFew(Object row, int count) {
+    return 'Aber dann kommt Zeile $row nicht mehr auf $count gefüllte Felder.';
+  }
+
+  @override
+  String exMercuryFailColFew(Object col, int count) {
+    return 'Aber dann kommt Spalte $col nicht mehr auf $count gefüllte Felder.';
+  }
+
+  @override
+  String exMercuryFailPair(Object lines) {
+    return 'Aber dann können die Zahlen der $lines nicht mehr beide aufgehen.';
+  }
 }

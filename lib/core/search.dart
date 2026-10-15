@@ -30,6 +30,7 @@ enum GameTag {
   sight,
   arrow,
   charge,
+  temperature,
 }
 
 String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
@@ -58,6 +59,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
   GameTag.sight => l.tagSight,
   GameTag.arrow => l.tagArrow,
   GameTag.charge => l.tagCharge,
+  GameTag.temperature => l.tagTemperature,
 };
 
 /// Tags of every type, by id.
@@ -105,6 +107,7 @@ const Map<String, List<GameTag>> gameTags = {
   'camp': [GameTag.place],
   'fleet': [GameTag.place, GameTag.ships],
   'basins': [GameTag.water, GameTag.regions],
+  'mercury': [GameTag.temperature, GameTag.water],
   'poles': [GameTag.place, GameTag.charge],
   'pebbles': [GameTag.shade, GameTag.binary, GameTag.connect],
   'chambers': [GameTag.shade, GameTag.regions],
@@ -192,6 +195,18 @@ const Map<String, List<String>> gameAliases = {
     'Schiffe versenken',
   ],
   'basins': ['Aquarium', 'Акваріум', 'Аквариум', 'Akwarium'],
+  'mercury': [
+    'Thermometers',
+    'Thermometer',
+    'Thermometer puzzle',
+    'Thermometer-Rätsel',
+    'Thermometerrätsel',
+    'Termometry',
+    'Termometr',
+    'Термометри',
+    'Термометр',
+    'Термометры',
+  ],
   'poles': ['Magnets', 'Magnetic', 'Magnetplatten', 'Elektrik', 'Magnete', 'Magnesy', 'Магніти', 'Магниты'],
   'lookout': ['Kurodoko', 'Kuromasu', 'Where is Black Cells', 'Куродоко', 'Куромасу'],
   'rampart': ['Tapa', 'Тапа'],
