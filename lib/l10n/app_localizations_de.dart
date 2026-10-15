@@ -5123,4 +5123,72 @@ class AppLocalizationsDe extends AppLocalizations {
   String exPebblesFailApart(Object a, Object b) {
     return 'Aber dann sind $a und $b voneinander abgeschnitten.';
   }
+
+  @override
+  String get totalsName => 'Summen';
+
+  @override
+  String get totalsTagline => 'Ein Kreuzworträtsel aus Ziffern, die sich waagrecht und senkrecht addieren';
+
+  @override
+  String get totalsRules =>
+      '• Füll jedes leere Feld mit einer Ziffer von 1 bis 9.\n• Die Hinweisfelder geben Summen vor: Die Zahl über der Diagonale ist die Summe der Reihe von Feldern rechts davon, die Zahl unter der Diagonale die Summe der Reihe darunter. Eine Reihe endet am nächsten Hinweisfeld oder am Rand.\n• In einer Reihe kommt keine Ziffer doppelt vor.\n\nWähle eine Ziffer in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Ziffer. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld. Eine Summe verblasst, sobald ihre Reihe voll ist und aufgeht.';
+
+  @override
+  String get tutTotals1 =>
+      'Füll die leeren Felder mit Ziffern von 1 bis 9. In einem Hinweisfeld ist die Zahl über der Diagonale die Summe der Reihe rechts davon, die Zahl darunter die Summe der Reihe unten. 3 in zwei Feldern geht nur als 1 + 2, 4 nur als 1 + 3: Das Eckfeld gehört zu beiden Reihen, also kommt dort die 1 hin.';
+
+  @override
+  String get tutTotals2 =>
+      'In einer Reihe kommt keine Ziffer doppelt vor: 4 in zwei Feldern ist 1 + 3, nie 2 + 2. Füll dieses Gitter.';
+
+  @override
+  String get tutTotals3 =>
+      'Manche Summen gehen nur auf eine Art: 24 in drei Feldern braucht 7, 8 und 9, und 7 in drei Feldern braucht 1, 2 und 4. Jedes Feld bekommt eine Ziffer, die beide seiner Reihen erlauben.';
+
+  @override
+  String get tutTotals4 =>
+      'Jetzt ein echtes Gitter. Fang mit den Reihen an, deren Summe nur auf eine Art geht, und schau dann, wo sich Reihen kreuzen.';
+
+  @override
+  String get tutTotalsS1 =>
+      'Zähl die Sätze verschiedener Ziffern auf, die die Summe einer Reihe ergeben. Eine Ziffer, die in jedem Satz steckt, muss irgendwo in die Reihe: Kann nur ein Feld der Reihe sie aufnehmen, kommt sie dorthin.';
+
+  @override
+  String get tutTotalsS2 =>
+      'Manchmal passt jede Ziffer für sich in ein Feld, aber nicht zusammen mit den anderen: Können zwei Felder einer Reihe nur 1 oder 3 haben, nehmen sie beide, und kein anderes Feld der Reihe hat sie. Probier jede Art, eine kurze Reihe mit verschiedenen Ziffern zu füllen.';
+
+  @override
+  String get tutTotalsS3 =>
+      'Die schwersten Gitter brauchen eine Annahme, die sich widerlegen lässt. Nimm an, ein Feld hat eine seiner letzten zwei oder drei Ziffern, und denk weiter; kann eine Reihe ihre Summe nicht mehr erreichen, streich die Ziffer.';
+
+  @override
+  String exTotalsCombo(Object sum, Object run, Object digits, Object cell, Object gone) {
+    return 'Um $sum in $run zu bilden, können die freien Felder nur $digits haben, also ist $cell nicht $gone.';
+  }
+
+  @override
+  String exTotalsMust(Object sum, Object run, Object value, Object cell) {
+    return '$cell muss $value sein: Jede Art, $sum in $run zu bilden, braucht $value, und kein anderes Feld dort kann sie aufnehmen.';
+  }
+
+  @override
+  String exTotalsFill(Object sum, Object run, Object gone, Object cell) {
+    return 'Keine Art, $run mit verschiedenen Ziffern zur Summe $sum zu füllen, setzt $gone in $cell.';
+  }
+
+  @override
+  String exTotalsNaked(Object cell, Object value) {
+    return '$cell muss $value sein: Alle anderen Ziffern sind dort ausgeschlossen.';
+  }
+
+  @override
+  String exTotalsFailEmpty(Object cell) {
+    return 'Dann bleibt aber für $cell keine Ziffer übrig.';
+  }
+
+  @override
+  String exTotalsFailRun(Object sum, Object run) {
+    return 'Dann kann $run aber $sum nicht mehr erreichen.';
+  }
 }

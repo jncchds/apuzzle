@@ -60,6 +60,7 @@ const Map<String, List<GameTag>> gameTags = {
   'sudoku': [GameTag.numbers, GameTag.latin],
   'skyline': [GameTag.numbers, GameTag.latin],
   'cages': [GameTag.numbers, GameTag.latin, GameTag.sums, GameTag.regions],
+  'totals': [GameTag.numbers, GameTag.sums],
   'signs': [GameTag.numbers, GameTag.latin, GameTag.compare],
   'kings': [GameTag.place, GameTag.regions],
   'blocks': [GameTag.numbers, GameTag.regions],
@@ -112,6 +113,7 @@ const Map<String, List<String>> gameAliases = {
   'mambo': ['Takuzu', 'Binairo', 'Tango', 'Binary puzzle', 'Unruly', '0h h1'],
   'sudoku': ['Number place'],
   'skyline': ['Skyscrapers', 'Skyscraper', 'Towers', 'Buildings', 'Хмарочоси', 'Drapacze chmur', 'Wolkenkratzer'],
+  'totals': ['Kakuro', 'Cross Sums', 'Cross Sum', 'Kreuzsummen', 'Какуро'],
   'cages': ['KenKen', 'Ken Ken', 'Calcudoku', 'Mathdoku', 'KenDoku', 'Inky', 'Кенкен', 'Калькудоку'],
   'signs': [
     'Futoshiki',

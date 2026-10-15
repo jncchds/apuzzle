@@ -6945,6 +6945,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then {a} and {b} are cut off from each other.'**
   String exPebblesFailApart(Object a, Object b);
+
+  /// No description provided for @totalsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Totals'**
+  String get totalsName;
+
+  /// No description provided for @totalsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'A crossword of digits that add up across and down'**
+  String get totalsTagline;
+
+  /// No description provided for @totalsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Fill every empty cell with a digit from 1 to 9.\n• The clue cells give sums: the number above the diagonal is the sum of the run of cells to its right, the number below the diagonal the sum of the run below it. A run ends at the next clue cell or the edge.\n• A run never holds a digit twice.\n\nPick a digit in the palette and tap cells to place it, or tap a cell first and then a digit. The pencil button toggles small notes. Long-press / right-click clears a cell. A sum fades once its run is full and adds up.'**
+  String get totalsRules;
+
+  /// No description provided for @tutTotals1.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill the empty cells with digits 1 to 9. In a clue cell, the number above the diagonal is the sum of the run to its right, the number below it the sum of the run below. 3 in two cells can only be 1 + 2, and 4 only 1 + 3: the corner cell is in both runs, so it takes the 1.'**
+  String get tutTotals1;
+
+  /// No description provided for @tutTotals2.
+  ///
+  /// In en, this message translates to:
+  /// **'A run never holds a digit twice: 4 in two cells is 1 + 3, never 2 + 2. Fill in this board.'**
+  String get tutTotals2;
+
+  /// No description provided for @tutTotals3.
+  ///
+  /// In en, this message translates to:
+  /// **'Some sums can be made only one way: 24 in three cells needs 7, 8 and 9, and 7 in three cells needs 1, 2 and 4. Each cell takes a digit that both its runs allow.'**
+  String get tutTotals3;
+
+  /// No description provided for @tutTotals4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with the runs whose sum can be made only one way, then look where runs cross.'**
+  String get tutTotals4;
+
+  /// No description provided for @tutTotalsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'List the sets of different digits that make a run\'s sum. A digit that is in every set has to go somewhere in the run: if only one cell of the run can take it, it goes there.'**
+  String get tutTotalsS1;
+
+  /// No description provided for @tutTotalsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Sometimes every digit fits a cell on its own, but not together with the others: if two cells of a run can only hold 1 or 3, they take both, and no other cell of the run can. Try every way to fill a short run with different digits.'**
+  String get tutTotalsS2;
+
+  /// No description provided for @tutTotalsS3.
+  ///
+  /// In en, this message translates to:
+  /// **'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three digits and follow on; if a run can no longer make its sum, cross the digit off.'**
+  String get tutTotalsS3;
+
+  /// No description provided for @exTotalsCombo.
+  ///
+  /// In en, this message translates to:
+  /// **'To make {sum} in {run}, the open cells can only hold {digits}, so {cell} can\'t be {gone}.'**
+  String exTotalsCombo(Object sum, Object run, Object digits, Object cell, Object gone);
+
+  /// No description provided for @exTotalsMust.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: every way to make {sum} in {run} uses {value}, and no other cell there can take it.'**
+  String exTotalsMust(Object sum, Object run, Object value, Object cell);
+
+  /// No description provided for @exTotalsFill.
+  ///
+  /// In en, this message translates to:
+  /// **'No way to fill {run} with different digits that make {sum} puts {gone} into {cell}.'**
+  String exTotalsFill(Object sum, Object run, Object gone, Object cell);
+
+  /// No description provided for @exTotalsNaked.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: every other digit is ruled out there.'**
+  String exTotalsNaked(Object cell, Object value);
+
+  /// No description provided for @exTotalsFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no digit is left for {cell}.'**
+  String exTotalsFailEmpty(Object cell);
+
+  /// No description provided for @exTotalsFailRun.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {run} can no longer make {sum}.'**
+  String exTotalsFailRun(Object sum, Object run);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

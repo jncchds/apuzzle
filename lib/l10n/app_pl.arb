@@ -1171,5 +1171,21 @@
   "exPebblesFailClosed": "Ale wtedy grupa w {cell} jest zamknięta i odcięta od reszty swojego rodzaju.",
   "exPebblesFailEdge": "Ale wtedy brzeg zmienia rodzaj w {a}, {b}, {c} i {d}, i oba rodzaje musiałyby się przeciąć.",
   "exPebblesFailChecker": "Ale wtedy kwadrat 2×2 w {cell} jest naprzemienny.",
-  "exPebblesFailApart": "Ale wtedy {a} i {b} są od siebie odcięte."
+  "exPebblesFailApart": "Ale wtedy {a} i {b} są od siebie odcięte.",
+  "totalsName": "Sumy",
+  "totalsTagline": "Krzyżówka z cyfr, które sumują się wzdłuż i w poprzek",
+  "totalsRules": "• Wpisz w każde puste pole cyfrę od 1 do 9.\n• Pola ze wskazówkami podają sumy: liczba nad przekątną to suma ciągu pól na prawo od niego, liczba pod przekątną – suma ciągu pod nim. Ciąg kończy się na następnym polu ze wskazówką albo na krawędzi.\n• W ciągu żadna cyfra się nie powtarza.\n\nWybierz cyfrę z palety i dotykaj pól, aby ją wpisać, albo najpierw dotknij pola, a potem cyfry. Przycisk ołówka włącza małe notatki. Długie naciśnięcie / prawy przycisk czyści pole. Suma blednie, gdy jej ciąg jest pełny i się zgadza.",
+  "tutTotals1": "Wpisz w puste pola cyfry od 1 do 9. W polu ze wskazówką liczba nad przekątną to suma ciągu na prawo, liczba pod nią – suma ciągu poniżej. 3 w dwóch polach to tylko 1 + 2, a 4 tylko 1 + 3: pole w rogu należy do obu ciągów, więc jest w nim 1.",
+  "tutTotals2": "W ciągu żadna cyfra się nie powtarza: 4 w dwóch polach to 1 + 3, nigdy 2 + 2. Wypełnij tę planszę.",
+  "tutTotals3": "Niektóre sumy da się ułożyć tylko na jeden sposób: 24 w trzech polach wymaga 7, 8 i 9, a 7 w trzech polach – 1, 2 i 4. W każdym polu stoi cyfra, na którą pozwalają oba jego ciągi.",
+  "tutTotals4": "Teraz prawdziwa plansza. Zacznij od ciągów, których sumę da się ułożyć tylko na jeden sposób, a potem patrz, gdzie ciągi się krzyżują.",
+  "tutTotalsS1": "Wypisz zestawy różnych cyfr, które dają sumę ciągu. Cyfra, która jest w każdym zestawie, musi stać gdzieś w ciągu: jeśli może ją przyjąć tylko jedno pole ciągu, stoi właśnie tam.",
+  "tutTotalsS2": "Czasem każda cyfra pasuje do pola sama, ale nie razem z innymi: jeśli dwa pola ciągu mogą mieć tylko 1 albo 3, zabierają obie, i żadne inne pole ciągu ich nie ma. Sprawdź każdy sposób wypełnienia krótkiego ciągu różnymi cyframi.",
+  "tutTotalsS3": "Najtrudniejsze plansze wymagają założenia, które da się obalić. Załóż, że w polu jest jedna z dwóch lub trzech ostatnich cyfr, i rozumuj dalej; jeśli jakiś ciąg nie może już dać swojej sumy, skreśl tę cyfrę.",
+  "exTotalsCombo": "Aby ułożyć {sum} w {run}, wolne pola mogą mieć tylko {digits}, więc w {cell} nie może być {gone}.",
+  "exTotalsMust": "W {cell} musi być {value}: każdy sposób ułożenia {sum} w {run} używa {value}, a żadne inne pole tam go nie przyjmie.",
+  "exTotalsFill": "Żaden sposób wypełnienia {run} różnymi cyframi o sumie {sum} nie stawia {gone} w {cell}.",
+  "exTotalsNaked": "W {cell} musi być {value}: wszystkie inne cyfry są tam wykluczone.",
+  "exTotalsFailEmpty": "Ale wtedy dla {cell} nie zostaje żadna cyfra.",
+  "exTotalsFailRun": "Ale wtedy {run} nie może już dać {sum}."
 }

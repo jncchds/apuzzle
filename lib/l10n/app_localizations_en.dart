@@ -5103,4 +5103,71 @@ class AppLocalizationsEn extends AppLocalizations {
   String exPebblesFailApart(Object a, Object b) {
     return 'But then $a and $b are cut off from each other.';
   }
+
+  @override
+  String get totalsName => 'Totals';
+
+  @override
+  String get totalsTagline => 'A crossword of digits that add up across and down';
+
+  @override
+  String get totalsRules =>
+      '• Fill every empty cell with a digit from 1 to 9.\n• The clue cells give sums: the number above the diagonal is the sum of the run of cells to its right, the number below the diagonal the sum of the run below it. A run ends at the next clue cell or the edge.\n• A run never holds a digit twice.\n\nPick a digit in the palette and tap cells to place it, or tap a cell first and then a digit. The pencil button toggles small notes. Long-press / right-click clears a cell. A sum fades once its run is full and adds up.';
+
+  @override
+  String get tutTotals1 =>
+      'Fill the empty cells with digits 1 to 9. In a clue cell, the number above the diagonal is the sum of the run to its right, the number below it the sum of the run below. 3 in two cells can only be 1 + 2, and 4 only 1 + 3: the corner cell is in both runs, so it takes the 1.';
+
+  @override
+  String get tutTotals2 => 'A run never holds a digit twice: 4 in two cells is 1 + 3, never 2 + 2. Fill in this board.';
+
+  @override
+  String get tutTotals3 =>
+      'Some sums can be made only one way: 24 in three cells needs 7, 8 and 9, and 7 in three cells needs 1, 2 and 4. Each cell takes a digit that both its runs allow.';
+
+  @override
+  String get tutTotals4 =>
+      'Now a real board. Start with the runs whose sum can be made only one way, then look where runs cross.';
+
+  @override
+  String get tutTotalsS1 =>
+      'List the sets of different digits that make a run\'s sum. A digit that is in every set has to go somewhere in the run: if only one cell of the run can take it, it goes there.';
+
+  @override
+  String get tutTotalsS2 =>
+      'Sometimes every digit fits a cell on its own, but not together with the others: if two cells of a run can only hold 1 or 3, they take both, and no other cell of the run can. Try every way to fill a short run with different digits.';
+
+  @override
+  String get tutTotalsS3 =>
+      'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three digits and follow on; if a run can no longer make its sum, cross the digit off.';
+
+  @override
+  String exTotalsCombo(Object sum, Object run, Object digits, Object cell, Object gone) {
+    return 'To make $sum in $run, the open cells can only hold $digits, so $cell can\'t be $gone.';
+  }
+
+  @override
+  String exTotalsMust(Object sum, Object run, Object value, Object cell) {
+    return '$cell must be $value: every way to make $sum in $run uses $value, and no other cell there can take it.';
+  }
+
+  @override
+  String exTotalsFill(Object sum, Object run, Object gone, Object cell) {
+    return 'No way to fill $run with different digits that make $sum puts $gone into $cell.';
+  }
+
+  @override
+  String exTotalsNaked(Object cell, Object value) {
+    return '$cell must be $value: every other digit is ruled out there.';
+  }
+
+  @override
+  String exTotalsFailEmpty(Object cell) {
+    return 'But then no digit is left for $cell.';
+  }
+
+  @override
+  String exTotalsFailRun(Object sum, Object run) {
+    return 'But then $run can no longer make $sum.';
+  }
 }

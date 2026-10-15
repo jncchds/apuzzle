@@ -1171,5 +1171,21 @@
   "exPebblesFailClosed": "Aber dann ist die Gruppe bei {cell} eingeschlossen, vom Rest ihrer Sorte abgeschnitten.",
   "exPebblesFailEdge": "Aber dann wechselt der Rand bei {a}, {b}, {c} und {d} die Sorte, und die beiden Sorten müssten sich kreuzen.",
   "exPebblesFailChecker": "Aber dann wechselt der 2×2-Block bei {cell} ab.",
-  "exPebblesFailApart": "Aber dann sind {a} und {b} voneinander abgeschnitten."
+  "exPebblesFailApart": "Aber dann sind {a} und {b} voneinander abgeschnitten.",
+  "totalsName": "Summen",
+  "totalsTagline": "Ein Kreuzworträtsel aus Ziffern, die sich waagrecht und senkrecht addieren",
+  "totalsRules": "• Füll jedes leere Feld mit einer Ziffer von 1 bis 9.\n• Die Hinweisfelder geben Summen vor: Die Zahl über der Diagonale ist die Summe der Reihe von Feldern rechts davon, die Zahl unter der Diagonale die Summe der Reihe darunter. Eine Reihe endet am nächsten Hinweisfeld oder am Rand.\n• In einer Reihe kommt keine Ziffer doppelt vor.\n\nWähle eine Ziffer in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Ziffer. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld. Eine Summe verblasst, sobald ihre Reihe voll ist und aufgeht.",
+  "tutTotals1": "Füll die leeren Felder mit Ziffern von 1 bis 9. In einem Hinweisfeld ist die Zahl über der Diagonale die Summe der Reihe rechts davon, die Zahl darunter die Summe der Reihe unten. 3 in zwei Feldern geht nur als 1 + 2, 4 nur als 1 + 3: Das Eckfeld gehört zu beiden Reihen, also kommt dort die 1 hin.",
+  "tutTotals2": "In einer Reihe kommt keine Ziffer doppelt vor: 4 in zwei Feldern ist 1 + 3, nie 2 + 2. Füll dieses Gitter.",
+  "tutTotals3": "Manche Summen gehen nur auf eine Art: 24 in drei Feldern braucht 7, 8 und 9, und 7 in drei Feldern braucht 1, 2 und 4. Jedes Feld bekommt eine Ziffer, die beide seiner Reihen erlauben.",
+  "tutTotals4": "Jetzt ein echtes Gitter. Fang mit den Reihen an, deren Summe nur auf eine Art geht, und schau dann, wo sich Reihen kreuzen.",
+  "tutTotalsS1": "Zähl die Sätze verschiedener Ziffern auf, die die Summe einer Reihe ergeben. Eine Ziffer, die in jedem Satz steckt, muss irgendwo in die Reihe: Kann nur ein Feld der Reihe sie aufnehmen, kommt sie dorthin.",
+  "tutTotalsS2": "Manchmal passt jede Ziffer für sich in ein Feld, aber nicht zusammen mit den anderen: Können zwei Felder einer Reihe nur 1 oder 3 haben, nehmen sie beide, und kein anderes Feld der Reihe hat sie. Probier jede Art, eine kurze Reihe mit verschiedenen Ziffern zu füllen.",
+  "tutTotalsS3": "Die schwersten Gitter brauchen eine Annahme, die sich widerlegen lässt. Nimm an, ein Feld hat eine seiner letzten zwei oder drei Ziffern, und denk weiter; kann eine Reihe ihre Summe nicht mehr erreichen, streich die Ziffer.",
+  "exTotalsCombo": "Um {sum} in {run} zu bilden, können die freien Felder nur {digits} haben, also ist {cell} nicht {gone}.",
+  "exTotalsMust": "{cell} muss {value} sein: Jede Art, {sum} in {run} zu bilden, braucht {value}, und kein anderes Feld dort kann sie aufnehmen.",
+  "exTotalsFill": "Keine Art, {run} mit verschiedenen Ziffern zur Summe {sum} zu füllen, setzt {gone} in {cell}.",
+  "exTotalsNaked": "{cell} muss {value} sein: Alle anderen Ziffern sind dort ausgeschlossen.",
+  "exTotalsFailEmpty": "Dann bleibt aber für {cell} keine Ziffer übrig.",
+  "exTotalsFailRun": "Dann kann {run} aber {sum} nicht mehr erreichen."
 }

@@ -5206,4 +5206,72 @@ class AppLocalizationsPl extends AppLocalizations {
   String exPebblesFailApart(Object a, Object b) {
     return 'Ale wtedy $a i $b są od siebie odcięte.';
   }
+
+  @override
+  String get totalsName => 'Sumy';
+
+  @override
+  String get totalsTagline => 'Krzyżówka z cyfr, które sumują się wzdłuż i w poprzek';
+
+  @override
+  String get totalsRules =>
+      '• Wpisz w każde puste pole cyfrę od 1 do 9.\n• Pola ze wskazówkami podają sumy: liczba nad przekątną to suma ciągu pól na prawo od niego, liczba pod przekątną – suma ciągu pod nim. Ciąg kończy się na następnym polu ze wskazówką albo na krawędzi.\n• W ciągu żadna cyfra się nie powtarza.\n\nWybierz cyfrę z palety i dotykaj pól, aby ją wpisać, albo najpierw dotknij pola, a potem cyfry. Przycisk ołówka włącza małe notatki. Długie naciśnięcie / prawy przycisk czyści pole. Suma blednie, gdy jej ciąg jest pełny i się zgadza.';
+
+  @override
+  String get tutTotals1 =>
+      'Wpisz w puste pola cyfry od 1 do 9. W polu ze wskazówką liczba nad przekątną to suma ciągu na prawo, liczba pod nią – suma ciągu poniżej. 3 w dwóch polach to tylko 1 + 2, a 4 tylko 1 + 3: pole w rogu należy do obu ciągów, więc jest w nim 1.';
+
+  @override
+  String get tutTotals2 =>
+      'W ciągu żadna cyfra się nie powtarza: 4 w dwóch polach to 1 + 3, nigdy 2 + 2. Wypełnij tę planszę.';
+
+  @override
+  String get tutTotals3 =>
+      'Niektóre sumy da się ułożyć tylko na jeden sposób: 24 w trzech polach wymaga 7, 8 i 9, a 7 w trzech polach – 1, 2 i 4. W każdym polu stoi cyfra, na którą pozwalają oba jego ciągi.';
+
+  @override
+  String get tutTotals4 =>
+      'Teraz prawdziwa plansza. Zacznij od ciągów, których sumę da się ułożyć tylko na jeden sposób, a potem patrz, gdzie ciągi się krzyżują.';
+
+  @override
+  String get tutTotalsS1 =>
+      'Wypisz zestawy różnych cyfr, które dają sumę ciągu. Cyfra, która jest w każdym zestawie, musi stać gdzieś w ciągu: jeśli może ją przyjąć tylko jedno pole ciągu, stoi właśnie tam.';
+
+  @override
+  String get tutTotalsS2 =>
+      'Czasem każda cyfra pasuje do pola sama, ale nie razem z innymi: jeśli dwa pola ciągu mogą mieć tylko 1 albo 3, zabierają obie, i żadne inne pole ciągu ich nie ma. Sprawdź każdy sposób wypełnienia krótkiego ciągu różnymi cyframi.';
+
+  @override
+  String get tutTotalsS3 =>
+      'Najtrudniejsze plansze wymagają założenia, które da się obalić. Załóż, że w polu jest jedna z dwóch lub trzech ostatnich cyfr, i rozumuj dalej; jeśli jakiś ciąg nie może już dać swojej sumy, skreśl tę cyfrę.';
+
+  @override
+  String exTotalsCombo(Object sum, Object run, Object digits, Object cell, Object gone) {
+    return 'Aby ułożyć $sum w $run, wolne pola mogą mieć tylko $digits, więc w $cell nie może być $gone.';
+  }
+
+  @override
+  String exTotalsMust(Object sum, Object run, Object value, Object cell) {
+    return 'W $cell musi być $value: każdy sposób ułożenia $sum w $run używa $value, a żadne inne pole tam go nie przyjmie.';
+  }
+
+  @override
+  String exTotalsFill(Object sum, Object run, Object gone, Object cell) {
+    return 'Żaden sposób wypełnienia $run różnymi cyframi o sumie $sum nie stawia $gone w $cell.';
+  }
+
+  @override
+  String exTotalsNaked(Object cell, Object value) {
+    return 'W $cell musi być $value: wszystkie inne cyfry są tam wykluczone.';
+  }
+
+  @override
+  String exTotalsFailEmpty(Object cell) {
+    return 'Ale wtedy dla $cell nie zostaje żadna cyfra.';
+  }
+
+  @override
+  String exTotalsFailRun(Object sum, Object run) {
+    return 'Ale wtedy $run nie może już dać $sum.';
+  }
 }

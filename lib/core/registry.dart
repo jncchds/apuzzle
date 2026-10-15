@@ -45,6 +45,7 @@ import '../puzzles/snake/snake_type.dart';
 import '../puzzles/solo/solo_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
 import '../puzzles/tally/tally_type.dart';
+import '../puzzles/totals/totals_type.dart';
 import '../puzzles/trail/trail_type.dart';
 import '../puzzles/turnabout/turnabout_type.dart';
 import '../puzzles/vanish/vanish_type.dart';
@@ -58,6 +59,7 @@ const List<PuzzleType> puzzleTypes = [
   SkylineType(),
   CagesType(),
   SignsType(),
+  TotalsType(),
   KingsType(),
   BlocksType(),
   TallyType(),
@@ -164,6 +166,7 @@ const List<PuzzleCategory> puzzleCategories = [
     [
       PuzzleFamily('sudoku', [SudokuType()]),
       PuzzleFamily('latin', [SkylineType(), CagesType(), SignsType()]),
+      PuzzleFamily('totals', [TotalsType()]),
       PuzzleFamily('blocks', [BlocksType()]),
       PuzzleFamily('tally', [TallyType()]),
       PuzzleFamily('solo', [SoloType()]),

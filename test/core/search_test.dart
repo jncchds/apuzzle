@@ -63,6 +63,8 @@ void main() {
     expect(alt('battleships'), ['fleet']);
     expect(alt('aquarium'), ['basins']);
     expect(alt('yin yang'), ['pebbles']);
+    expect(alt('kakuro'), ['totals']);
+    expect(found('cross sums').first, 'totals');
     expect(alt('pet detective'), ['homeward']);
     expect(alt('katamino'), ['inlay']);
     expect(alt('disconnection'), ['channel']);

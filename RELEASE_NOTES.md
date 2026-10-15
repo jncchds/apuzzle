@@ -2,6 +2,7 @@
 
 ## 0.11.0 - 2026-10-15
 - New game: Pebbles. Put a filled or a hollow stone in every cell: all filled stones must form one group, joined side by side, and so must all hollow ones, and no 2×2 block may hold four stones of one kind. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-16
+- New game: Totals. A crossword of digits: fill every empty cell with a digit from 1 to 9 so that each run across or down adds up to the sum in the clue cell before it, with no digit twice in a run. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-16
 
 ## 0.10.0 - 2026-10-14
 - New game: Fleet. A fleet of ships hides in the grid: find every ship from the counts outside, which tell how many ship cells each row and column holds. Ships are straight and never touch, not even diagonally, and the pieces shown from the start tell where their ships go on. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-15
