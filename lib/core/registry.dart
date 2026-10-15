@@ -38,6 +38,7 @@ import '../puzzles/pairs/pairs_type.dart';
 import '../puzzles/pearls/pearls_type.dart';
 import '../puzzles/plots/plots_type.dart';
 import '../puzzles/pockets/pockets_type.dart';
+import '../puzzles/poles/poles_type.dart';
 import '../puzzles/pop/pop_type.dart';
 import '../puzzles/pipes/pipes_type.dart';
 import '../puzzles/rails/rails_type.dart';
@@ -101,6 +102,7 @@ const List<PuzzleType> puzzleTypes = [
   CampType(),
   FleetType(),
   BasinsType(),
+  PolesType(),
   PebblesType(),
   ChambersType(),
   LookoutType(),
@@ -201,6 +203,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('camp', [CampType()]),
       PuzzleFamily('fleet', [FleetType()]),
       PuzzleFamily('basins', [BasinsType()]),
+      PuzzleFamily('poles', [PolesType()]),
       PuzzleFamily('pebbles', [PebblesType()]),
       PuzzleFamily('chambers', [ChambersType()]),
       PuzzleFamily('lookout', [LookoutType()]),

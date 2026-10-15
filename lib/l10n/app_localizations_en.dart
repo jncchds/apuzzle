@@ -5750,4 +5750,198 @@ class AppLocalizationsEn extends AppLocalizations {
   String exWaymarksNumbers(Object cell, Object nums) {
     return '$cell can only be $nums.';
   }
+
+  @override
+  String get polesName => 'Poles';
+
+  @override
+  String get polesTagline => 'Give each tile a + and a − end, or none, to match the edge counts';
+
+  @override
+  String get polesRules =>
+      '• The grid is cut into dominoes. Each domino is either charged, with a + at one end and a − at the other, or blank.\n• Two + cells never touch side by side, and neither do two − cells.\n• The numbers left of and above the grid tell how many + cells each row and column holds; the numbers right of and below it count the − cells. On hard boards some numbers are hidden.\n\nTap a cell to cycle: + → − → dot (blank) → empty. Right-click cycles back. Slide across cells to set them all in one go. A long press fills in the other end of every domino you started (a − across from a +, a dot across from a dot) and dots the rest of each line that has all its + and − cells. Dots are optional: the puzzle is done once every + and − is in place. A number fades once its line has that many.';
+
+  @override
+  String get tutPoles1 =>
+      'The grid is cut into dominoes. Each one is either charged, with a + at one end and a − at the other, or blank. The numbers left and above count the + cells of each row and column, the numbers right and below count the − cells. Tap a cell to cycle +, −, dot (blank).';
+
+  @override
+  String get tutPoles2 =>
+      'Two + cells never touch side by side, and neither do two − cells. That tells you which way round a domino goes: its + can\'t sit next to another +. Finish the board.';
+
+  @override
+  String get tutPoles3 =>
+      'Add a line\'s two numbers: that many of its cells are charged. When the line already has that many, its other cells are blank; when it needs every cell that can still be charged, none of those is blank. Finish the board.';
+
+  @override
+  String get tutPoles4 =>
+      'Now a real board. Start with lines whose numbers are zero, or that need every cell they have, and remember that the other end of a domino is always the opposite.';
+
+  @override
+  String get tutPolesS1 =>
+      'Think through every way to fill one line: its numbers, its dominoes and the rule that like ends never touch leave only a few. A value that no way puts into a cell is ruled out there. Look at the long rows of this board.';
+
+  @override
+  String get tutPolesS2 =>
+      'A hard board: some numbers are hidden. When stuck, suppose a cell holds a + and follow on: if a line can\'t get its numbers or two like ends meet, that cell holds no +.';
+
+  @override
+  String get tagCharge => 'plus, minus, positive, negative, charge, electric, polarity, attract, repel';
+
+  @override
+  String exPolesPartner(Object cell, Object value, Object other, Object opposite) {
+    return '$cell is $value: the other end of its domino, $other, is $opposite.';
+  }
+
+  @override
+  String exPolesPartnerOut(Object cell, Object value, Object other, Object opposite) {
+    return '$cell can\'t be $value: the other end of its domino, $other, can\'t be $opposite.';
+  }
+
+  @override
+  String exPolesRepel(Object cell, Object value, Object other) {
+    return '$cell can\'t be $value: it touches the $value at $other.';
+  }
+
+  @override
+  String exPolesRowDone(Object value, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'already has all its $count $value cells, so no other cell is $value',
+      one: 'already has its $value cell, so no other cell is $value',
+      zero: 'has no $value cells',
+    );
+    return 'Row $row $_temp0.';
+  }
+
+  @override
+  String exPolesColDone(Object value, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'already has all its $count $value cells, so no other cell is $value',
+      one: 'already has its $value cell, so no other cell is $value',
+      zero: 'has no $value cells',
+    );
+    return 'Column $col $_temp0.';
+  }
+
+  @override
+  String exPolesRowNeed(Object cell, Object value, Object row, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count $value cells, and only that many cells can still be $value',
+      one: 'a $value cell, and only one cell can still be $value',
+    );
+    return '$cell is $value: row $row needs $_temp0.';
+  }
+
+  @override
+  String exPolesColNeed(Object cell, Object value, Object col, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count $value cells, and only that many cells can still be $value',
+      one: 'a $value cell, and only one cell can still be $value',
+    );
+    return '$cell is $value: column $col needs $_temp0.';
+  }
+
+  @override
+  String exPolesRowBlank(Object cell, Object row, int count, Object plus, Object minus) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'already has all its $count cells with $plus or $minus',
+      one: 'already has its one cell with $plus or $minus',
+      zero: 'has no cells with $plus or $minus',
+    );
+    return '$cell is blank: row $row $_temp0.';
+  }
+
+  @override
+  String exPolesColBlank(Object cell, Object col, int count, Object plus, Object minus) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'already has all its $count cells with $plus or $minus',
+      one: 'already has its one cell with $plus or $minus',
+      zero: 'has no cells with $plus or $minus',
+    );
+    return '$cell is blank: column $col $_temp0.';
+  }
+
+  @override
+  String exPolesRowCharged(Object row, int count, Object plus, Object minus) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells with $plus or $minus, and only that many can still hold one: none of them is blank',
+      one: 'a cell with $plus or $minus, and only one cell can still hold one: it isn\'t blank',
+    );
+    return 'Row $row needs $_temp0.';
+  }
+
+  @override
+  String exPolesColCharged(Object col, int count, Object plus, Object minus) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells with $plus or $minus, and only that many can still hold one: none of them is blank',
+      one: 'a cell with $plus or $minus, and only one cell can still hold one: it isn\'t blank',
+    );
+    return 'Column $col needs $_temp0.';
+  }
+
+  @override
+  String exPolesLast(Object cell, Object value) {
+    return '$cell is $value: nothing else is left for it.';
+  }
+
+  @override
+  String exPolesRowFill(Object cell, Object value, Object row) {
+    return '$cell can\'t be $value: no way of filling row $row that fits its numbers puts it there.';
+  }
+
+  @override
+  String exPolesColFill(Object cell, Object value, Object col) {
+    return '$cell can\'t be $value: no way of filling column $col that fits its numbers puts it there.';
+  }
+
+  @override
+  String exPolesFailEmpty(Object cell) {
+    return 'But then nothing fits in $cell.';
+  }
+
+  @override
+  String exPolesFailRowMany(Object row, Object value, int count) {
+    return 'But then row $row has too many $value cells (it needs $count).';
+  }
+
+  @override
+  String exPolesFailColMany(Object col, Object value, int count) {
+    return 'But then column $col has too many $value cells (it needs $count).';
+  }
+
+  @override
+  String exPolesFailRowFew(Object row, Object value, int count) {
+    return 'But then row $row can\'t get enough $value cells (it needs $count).';
+  }
+
+  @override
+  String exPolesFailColFew(Object col, Object value, int count) {
+    return 'But then column $col can\'t get enough $value cells (it needs $count).';
+  }
+
+  @override
+  String exPolesFailRowFill(Object row) {
+    return 'But then row $row can\'t be filled to fit its numbers.';
+  }
+
+  @override
+  String exPolesFailColFill(Object col) {
+    return 'But then column $col can\'t be filled to fit its numbers.';
+  }
 }

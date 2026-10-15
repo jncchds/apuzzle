@@ -5765,4 +5765,146 @@ class AppLocalizationsDe extends AppLocalizations {
   String exWaymarksNumbers(Object cell, Object nums) {
     return '$cell kann nur $nums sein.';
   }
+
+  @override
+  String get polesName => 'Pole';
+
+  @override
+  String get polesTagline => 'Gib jedem Stein ein Plus- und ein Minusende, oder keins, passend zu den Zahlen am Rand';
+
+  @override
+  String get polesRules =>
+      '• Das Gitter ist in Dominos geteilt. Jedes Domino ist entweder geladen, mit + an einem Ende und − am anderen, oder neutral.\n• Zwei Felder mit + berühren sich nie seitlich, ebenso wenig zwei Felder mit −.\n• Die Zahlen links und über dem Gitter sagen, wie viele Felder mit + jede Zeile und Spalte hat; die Zahlen rechts und unter dem Gitter zählen die Felder mit −. Auf schweren Rätseln sind manche Zahlen verborgen.\n\nTippe auf ein Feld zum Wechseln: + → − → Punkt (neutral) → leer. Rechtsklick wechselt zurück. Wische über Felder, um sie alle auf einmal zu setzen. Langes Drücken ergänzt das andere Ende jedes begonnenen Dominos (− gegenüber +, Punkt gegenüber Punkt) und setzt Punkte in den Rest jeder Linie, die schon alle ihre + und − hat. Punkte sind freiwillig: Das Rätsel ist gelöst, sobald alle + und − stehen. Eine Zahl verblasst, sobald ihre Linie so viele hat.';
+
+  @override
+  String get tutPoles1 =>
+      'Das Gitter ist in Dominos geteilt. Jedes ist entweder geladen, mit + an einem Ende und − am anderen, oder neutral. Die Zahlen links und oben zählen die Felder mit + jeder Zeile und Spalte, die Zahlen rechts und unten die Felder mit −. Tippe auf ein Feld zum Wechseln: +, −, Punkt (neutral).';
+
+  @override
+  String get tutPoles2 =>
+      'Zwei Felder mit + berühren sich nie seitlich, ebenso wenig zwei mit −. Das verrät, wie herum ein Domino liegt: Sein + kann nicht neben einem anderen + stehen. Löse das Rätsel zu Ende.';
+
+  @override
+  String get tutPoles3 =>
+      'Zähle die beiden Zahlen einer Linie zusammen: So viele ihrer Felder sind geladen. Hat die Linie schon so viele, sind ihre übrigen Felder neutral; braucht sie jedes Feld, das noch geladen sein kann, ist keines davon neutral. Löse das Rätsel zu Ende.';
+
+  @override
+  String get tutPoles4 =>
+      'Jetzt ein echtes Rätsel. Beginne mit Linien, deren Zahlen null sind oder die jedes Feld brauchen, und denk daran: Am anderen Ende eines Dominos steht immer das Gegenteil.';
+
+  @override
+  String get tutPolesS1 =>
+      'Geh alle Arten durch, eine Linie zu füllen: Ihre Zahlen, ihre Dominos und die Regel, dass gleiche Enden sich nie berühren, lassen nur wenige übrig. Ein Wert, den keine Art in ein Feld setzt, ist dort ausgeschlossen. Sieh dir die langen Zeilen dieses Rätsels an.';
+
+  @override
+  String get tutPolesS2 =>
+      'Ein schweres Rätsel: Manche Zahlen sind verborgen. Wenn du feststeckst, nimm an, in einem Feld stehe +, und folge den Schlüssen: Bekommt eine Linie ihre Zahlen nicht oder treffen gleiche Enden aufeinander, steht dort kein +.';
+
+  @override
+  String get tagCharge => 'Plus, Minus, positiv, negativ, Ladung, elektrisch, Polarität, anziehen, abstoßen';
+
+  @override
+  String exPolesPartner(Object cell, Object value, Object other, Object opposite) {
+    return 'In $cell steht $value: Am anderen Ende des Dominos, in $other, steht $opposite.';
+  }
+
+  @override
+  String exPolesPartnerOut(Object cell, Object value, Object other, Object opposite) {
+    return 'In $cell kann kein $value stehen: Am anderen Ende des Dominos, in $other, kann kein $opposite stehen.';
+  }
+
+  @override
+  String exPolesRepel(Object cell, Object value, Object other) {
+    return 'In $cell kann kein $value stehen: Das Feld berührt das $value in $other.';
+  }
+
+  @override
+  String exPolesRowDone(Object value, Object row, int count) {
+    return 'Zeile $row hat schon so viele $value, wie sie braucht ($count): Weitere $value hat sie nicht.';
+  }
+
+  @override
+  String exPolesColDone(Object value, Object col, int count) {
+    return 'Spalte $col hat schon so viele $value, wie sie braucht ($count): Weitere $value hat sie nicht.';
+  }
+
+  @override
+  String exPolesRowNeed(Object cell, Object value, Object row, int count) {
+    return 'In $cell steht $value: Zeile $row braucht so viele $value ($count), wie Felder sie noch haben können.';
+  }
+
+  @override
+  String exPolesColNeed(Object cell, Object value, Object col, int count) {
+    return 'In $cell steht $value: Spalte $col braucht so viele $value ($count), wie Felder sie noch haben können.';
+  }
+
+  @override
+  String exPolesRowBlank(Object cell, Object row, int count, Object plus, Object minus) {
+    return '$cell ist neutral: Zeile $row hat schon alle Felder mit $plus oder $minus ($count).';
+  }
+
+  @override
+  String exPolesColBlank(Object cell, Object col, int count, Object plus, Object minus) {
+    return '$cell ist neutral: Spalte $col hat schon alle Felder mit $plus oder $minus ($count).';
+  }
+
+  @override
+  String exPolesRowCharged(Object row, int count, Object plus, Object minus) {
+    return 'Zeile $row braucht so viele Felder mit $plus oder $minus ($count), wie sie noch haben können: Keines davon ist neutral.';
+  }
+
+  @override
+  String exPolesColCharged(Object col, int count, Object plus, Object minus) {
+    return 'Spalte $col braucht so viele Felder mit $plus oder $minus ($count), wie sie noch haben können: Keines davon ist neutral.';
+  }
+
+  @override
+  String exPolesLast(Object cell, Object value) {
+    return 'In $cell steht $value: Nichts anderes bleibt übrig.';
+  }
+
+  @override
+  String exPolesRowFill(Object cell, Object value, Object row) {
+    return 'In $cell kann kein $value stehen: Keine Art, Zeile $row passend zu ihren Zahlen zu füllen, setzt es dorthin.';
+  }
+
+  @override
+  String exPolesColFill(Object cell, Object value, Object col) {
+    return 'In $cell kann kein $value stehen: Keine Art, Spalte $col passend zu ihren Zahlen zu füllen, setzt es dorthin.';
+  }
+
+  @override
+  String exPolesFailEmpty(Object cell) {
+    return 'Aber dann passt nichts in $cell.';
+  }
+
+  @override
+  String exPolesFailRowMany(Object row, Object value, int count) {
+    return 'Aber dann hat Zeile $row zu viele $value (sie braucht $count).';
+  }
+
+  @override
+  String exPolesFailColMany(Object col, Object value, int count) {
+    return 'Aber dann hat Spalte $col zu viele $value (sie braucht $count).';
+  }
+
+  @override
+  String exPolesFailRowFew(Object row, Object value, int count) {
+    return 'Aber dann bekommt Zeile $row nicht genug $value (sie braucht $count).';
+  }
+
+  @override
+  String exPolesFailColFew(Object col, Object value, int count) {
+    return 'Aber dann bekommt Spalte $col nicht genug $value (sie braucht $count).';
+  }
+
+  @override
+  String exPolesFailRowFill(Object row) {
+    return 'Aber dann lässt sich Zeile $row nicht passend zu ihren Zahlen füllen.';
+  }
+
+  @override
+  String exPolesFailColFill(Object col) {
+    return 'Aber dann lässt sich Spalte $col nicht passend zu ihren Zahlen füllen.';
+  }
 }

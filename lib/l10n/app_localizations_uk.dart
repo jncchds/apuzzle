@@ -5912,4 +5912,147 @@ class AppLocalizationsUk extends AppLocalizations {
   String exWaymarksNumbers(Object cell, Object nums) {
     return '$cell може бути лише $nums.';
   }
+
+  @override
+  String get polesName => 'Полюси';
+
+  @override
+  String get polesTagline => 'Дайте кожній плитці кінці + і −, або жодного, щоб зійшлися числа по краях';
+
+  @override
+  String get polesRules =>
+      '• Сітку поділено на доміно. Кожне доміно або заряджене, з + на одному кінці й − на іншому, або нейтральне.\n• Дві клітинки з + ніколи не торкаються стороною, як і дві клітинки з −.\n• Числа ліворуч і над сіткою показують, скільки клітинок з + у кожному рядку й стовпці; числа праворуч і під сіткою рахують клітинки з −. На складних полях деякі числа приховано.\n\nТоркніться клітинки, щоб перемикати: + → − → крапка (нейтральна) → порожньо. Правий клік перемикає назад. Проведіть по клітинках, щоб заповнити їх усі разом. Довге натискання заповнює інший кінець кожного розпочатого доміно (− навпроти +, крапку навпроти крапки) і ставить крапки в решті кожного рядка чи стовпця, де вже є всі + і −. Крапки необов’язкові: головоломку розв’язано, щойно всі + і − на місці. Число блідне, коли в його лінії стільки й є.';
+
+  @override
+  String get tutPoles1 =>
+      'Сітку поділено на доміно. Кожне або заряджене, з + на одному кінці й − на іншому, або нейтральне. Числа ліворуч і зверху рахують клітинки з + у кожному рядку й стовпці, числа праворуч і знизу — клітинки з −. Торкніться клітинки, щоб перемикати +, −, крапку (нейтральна).';
+
+  @override
+  String get tutPoles2 =>
+      'Дві клітинки з + ніколи не торкаються стороною, як і дві з −. Це підказує, як повернуто доміно: його + не може стояти поруч з іншим +. Завершіть поле.';
+
+  @override
+  String get tutPoles3 =>
+      'Додайте два числа лінії: стільки її клітинок заряджено. Коли в лінії вже стільки є, решта її клітинок нейтральні; коли їй потрібна кожна клітинка, яка ще може бути зарядженою, жодна з них не нейтральна. Завершіть поле.';
+
+  @override
+  String get tutPoles4 =>
+      'Тепер справжнє поле. Почніть з ліній, де числа нульові або де потрібна кожна клітинка, і пам’ятайте: на іншому кінці доміно завжди протилежне.';
+
+  @override
+  String get tutPolesS1 =>
+      'Переберіть усі способи заповнити одну лінію: її числа, її доміно й правило, що однакові кінці не торкаються, лишають їх небагато. Значення, яке жоден спосіб не ставить у клітинку, там неможливе. Подивіться на довгі рядки цього поля.';
+
+  @override
+  String get tutPolesS2 =>
+      'Складне поле: деякі числа приховано. Коли застрягнете, припустіть, що в клітинці +, і йдіть далі: якщо лінія не набирає своїх чисел або зустрічаються однакові кінці, + там немає.';
+
+  @override
+  String get tagCharge =>
+      'плюс, мінус, позитивний, негативний, заряд, електрика, полярність, притягувати, відштовхувати';
+
+  @override
+  String exPolesPartner(Object cell, Object value, Object other, Object opposite) {
+    return 'У $cell стоїть $value: на іншому кінці доміно, у $other, стоїть $opposite.';
+  }
+
+  @override
+  String exPolesPartnerOut(Object cell, Object value, Object other, Object opposite) {
+    return 'У $cell не може бути $value: на іншому кінці доміно, у $other, не може бути $opposite.';
+  }
+
+  @override
+  String exPolesRepel(Object cell, Object value, Object other) {
+    return 'У $cell не може бути $value: клітинка торкається $value у $other.';
+  }
+
+  @override
+  String exPolesRowDone(Object value, Object row, int count) {
+    return 'Рядок $row уже має стільки $value, скільки треба ($count): інших $value у ньому немає.';
+  }
+
+  @override
+  String exPolesColDone(Object value, Object col, int count) {
+    return 'Стовпець $col уже має стільки $value, скільки треба ($count): інших $value у ньому немає.';
+  }
+
+  @override
+  String exPolesRowNeed(Object cell, Object value, Object row, int count) {
+    return 'У $cell стоїть $value: рядку $row потрібно стільки $value ($count), скільки клітинок ще можуть їх мати.';
+  }
+
+  @override
+  String exPolesColNeed(Object cell, Object value, Object col, int count) {
+    return 'У $cell стоїть $value: стовпцю $col потрібно стільки $value ($count), скільки клітинок ще можуть їх мати.';
+  }
+
+  @override
+  String exPolesRowBlank(Object cell, Object row, int count, Object plus, Object minus) {
+    return '$cell нейтральна: рядок $row уже має всі клітинки з $plus або $minus ($count).';
+  }
+
+  @override
+  String exPolesColBlank(Object cell, Object col, int count, Object plus, Object minus) {
+    return '$cell нейтральна: стовпець $col уже має всі клітинки з $plus або $minus ($count).';
+  }
+
+  @override
+  String exPolesRowCharged(Object row, int count, Object plus, Object minus) {
+    return 'Рядку $row потрібно стільки клітинок з $plus або $minus ($count), скільки ще можуть їх мати: жодна з них не нейтральна.';
+  }
+
+  @override
+  String exPolesColCharged(Object col, int count, Object plus, Object minus) {
+    return 'Стовпцю $col потрібно стільки клітинок з $plus або $minus ($count), скільки ще можуть їх мати: жодна з них не нейтральна.';
+  }
+
+  @override
+  String exPolesLast(Object cell, Object value) {
+    return 'У $cell стоїть $value: нічого іншого не лишилося.';
+  }
+
+  @override
+  String exPolesRowFill(Object cell, Object value, Object row) {
+    return 'У $cell не може бути $value: жоден спосіб заповнити рядок $row за його числами не ставить його туди.';
+  }
+
+  @override
+  String exPolesColFill(Object cell, Object value, Object col) {
+    return 'У $cell не може бути $value: жоден спосіб заповнити стовпець $col за його числами не ставить його туди.';
+  }
+
+  @override
+  String exPolesFailEmpty(Object cell) {
+    return 'Але тоді в $cell нічого не підходить.';
+  }
+
+  @override
+  String exPolesFailRowMany(Object row, Object value, int count) {
+    return 'Але тоді в рядку $row забагато $value (потрібно $count).';
+  }
+
+  @override
+  String exPolesFailColMany(Object col, Object value, int count) {
+    return 'Але тоді в стовпці $col забагато $value (потрібно $count).';
+  }
+
+  @override
+  String exPolesFailRowFew(Object row, Object value, int count) {
+    return 'Але тоді рядок $row не набере досить $value (потрібно $count).';
+  }
+
+  @override
+  String exPolesFailColFew(Object col, Object value, int count) {
+    return 'Але тоді стовпець $col не набере досить $value (потрібно $count).';
+  }
+
+  @override
+  String exPolesFailRowFill(Object row) {
+    return 'Але тоді рядок $row не можна заповнити за його числами.';
+  }
+
+  @override
+  String exPolesFailColFill(Object col) {
+    return 'Але тоді стовпець $col не можна заповнити за його числами.';
+  }
 }

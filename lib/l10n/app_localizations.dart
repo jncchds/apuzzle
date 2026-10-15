@@ -7761,6 +7761,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{cell} can only be {nums}.'**
   String exWaymarksNumbers(Object cell, Object nums);
+
+  /// No description provided for @polesName.
+  ///
+  /// In en, this message translates to:
+  /// **'Poles'**
+  String get polesName;
+
+  /// No description provided for @polesTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Give each tile a + and a − end, or none, to match the edge counts'**
+  String get polesTagline;
+
+  /// No description provided for @polesRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• The grid is cut into dominoes. Each domino is either charged, with a + at one end and a − at the other, or blank.\n• Two + cells never touch side by side, and neither do two − cells.\n• The numbers left of and above the grid tell how many + cells each row and column holds; the numbers right of and below it count the − cells. On hard boards some numbers are hidden.\n\nTap a cell to cycle: + → − → dot (blank) → empty. Right-click cycles back. Slide across cells to set them all in one go. A long press fills in the other end of every domino you started (a − across from a +, a dot across from a dot) and dots the rest of each line that has all its + and − cells. Dots are optional: the puzzle is done once every + and − is in place. A number fades once its line has that many.'**
+  String get polesRules;
+
+  /// No description provided for @tutPoles1.
+  ///
+  /// In en, this message translates to:
+  /// **'The grid is cut into dominoes. Each one is either charged, with a + at one end and a − at the other, or blank. The numbers left and above count the + cells of each row and column, the numbers right and below count the − cells. Tap a cell to cycle +, −, dot (blank).'**
+  String get tutPoles1;
+
+  /// No description provided for @tutPoles2.
+  ///
+  /// In en, this message translates to:
+  /// **'Two + cells never touch side by side, and neither do two − cells. That tells you which way round a domino goes: its + can\'t sit next to another +. Finish the board.'**
+  String get tutPoles2;
+
+  /// No description provided for @tutPoles3.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a line\'s two numbers: that many of its cells are charged. When the line already has that many, its other cells are blank; when it needs every cell that can still be charged, none of those is blank. Finish the board.'**
+  String get tutPoles3;
+
+  /// No description provided for @tutPoles4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with lines whose numbers are zero, or that need every cell they have, and remember that the other end of a domino is always the opposite.'**
+  String get tutPoles4;
+
+  /// No description provided for @tutPolesS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Think through every way to fill one line: its numbers, its dominoes and the rule that like ends never touch leave only a few. A value that no way puts into a cell is ruled out there. Look at the long rows of this board.'**
+  String get tutPolesS1;
+
+  /// No description provided for @tutPolesS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board: some numbers are hidden. When stuck, suppose a cell holds a + and follow on: if a line can\'t get its numbers or two like ends meet, that cell holds no +.'**
+  String get tutPolesS2;
+
+  /// No description provided for @tagCharge.
+  ///
+  /// In en, this message translates to:
+  /// **'plus, minus, positive, negative, charge, electric, polarity, attract, repel'**
+  String get tagCharge;
+
+  /// No description provided for @exPolesPartner.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is {value}: the other end of its domino, {other}, is {opposite}.'**
+  String exPolesPartner(Object cell, Object value, Object other, Object opposite);
+
+  /// No description provided for @exPolesPartnerOut.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: the other end of its domino, {other}, can\'t be {opposite}.'**
+  String exPolesPartnerOut(Object cell, Object value, Object other, Object opposite);
+
+  /// No description provided for @exPolesRepel.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: it touches the {value} at {other}.'**
+  String exPolesRepel(Object cell, Object value, Object other);
+
+  /// No description provided for @exPolesRowDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Row {row} {count, plural, =0{has no {value} cells} =1{already has its {value} cell, so no other cell is {value}} other{already has all its {count} {value} cells, so no other cell is {value}}}.'**
+  String exPolesRowDone(Object value, Object row, int count);
+
+  /// No description provided for @exPolesColDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Column {col} {count, plural, =0{has no {value} cells} =1{already has its {value} cell, so no other cell is {value}} other{already has all its {count} {value} cells, so no other cell is {value}}}.'**
+  String exPolesColDone(Object value, Object col, int count);
+
+  /// No description provided for @exPolesRowNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is {value}: row {row} needs {count, plural, =1{a {value} cell, and only one cell can still be {value}} other{{count} {value} cells, and only that many cells can still be {value}}}.'**
+  String exPolesRowNeed(Object cell, Object value, Object row, int count);
+
+  /// No description provided for @exPolesColNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is {value}: column {col} needs {count, plural, =1{a {value} cell, and only one cell can still be {value}} other{{count} {value} cells, and only that many cells can still be {value}}}.'**
+  String exPolesColNeed(Object cell, Object value, Object col, int count);
+
+  /// No description provided for @exPolesRowBlank.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is blank: row {row} {count, plural, =0{has no cells with {plus} or {minus}} =1{already has its one cell with {plus} or {minus}} other{already has all its {count} cells with {plus} or {minus}}}.'**
+  String exPolesRowBlank(Object cell, Object row, int count, Object plus, Object minus);
+
+  /// No description provided for @exPolesColBlank.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is blank: column {col} {count, plural, =0{has no cells with {plus} or {minus}} =1{already has its one cell with {plus} or {minus}} other{already has all its {count} cells with {plus} or {minus}}}.'**
+  String exPolesColBlank(Object cell, Object col, int count, Object plus, Object minus);
+
+  /// No description provided for @exPolesRowCharged.
+  ///
+  /// In en, this message translates to:
+  /// **'Row {row} needs {count, plural, =1{a cell with {plus} or {minus}, and only one cell can still hold one: it isn\'t blank} other{{count} cells with {plus} or {minus}, and only that many can still hold one: none of them is blank}}.'**
+  String exPolesRowCharged(Object row, int count, Object plus, Object minus);
+
+  /// No description provided for @exPolesColCharged.
+  ///
+  /// In en, this message translates to:
+  /// **'Column {col} needs {count, plural, =1{a cell with {plus} or {minus}, and only one cell can still hold one: it isn\'t blank} other{{count} cells with {plus} or {minus}, and only that many can still hold one: none of them is blank}}.'**
+  String exPolesColCharged(Object col, int count, Object plus, Object minus);
+
+  /// No description provided for @exPolesLast.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is {value}: nothing else is left for it.'**
+  String exPolesLast(Object cell, Object value);
+
+  /// No description provided for @exPolesRowFill.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: no way of filling row {row} that fits its numbers puts it there.'**
+  String exPolesRowFill(Object cell, Object value, Object row);
+
+  /// No description provided for @exPolesColFill.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: no way of filling column {col} that fits its numbers puts it there.'**
+  String exPolesColFill(Object cell, Object value, Object col);
+
+  /// No description provided for @exPolesFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then nothing fits in {cell}.'**
+  String exPolesFailEmpty(Object cell);
+
+  /// No description provided for @exPolesFailRowMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} has too many {value} cells (it needs {count}).'**
+  String exPolesFailRowMany(Object row, Object value, int count);
+
+  /// No description provided for @exPolesFailColMany.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} has too many {value} cells (it needs {count}).'**
+  String exPolesFailColMany(Object col, Object value, int count);
+
+  /// No description provided for @exPolesFailRowFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} can\'t get enough {value} cells (it needs {count}).'**
+  String exPolesFailRowFew(Object row, Object value, int count);
+
+  /// No description provided for @exPolesFailColFew.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} can\'t get enough {value} cells (it needs {count}).'**
+  String exPolesFailColFew(Object col, Object value, int count);
+
+  /// No description provided for @exPolesFailRowFill.
+  ///
+  /// In en, this message translates to:
+  /// **'But then row {row} can\'t be filled to fit its numbers.'**
+  String exPolesFailRowFill(Object row);
+
+  /// No description provided for @exPolesFailColFill.
+  ///
+  /// In en, this message translates to:
+  /// **'But then column {col} can\'t be filled to fit its numbers.'**
+  String exPolesFailColFill(Object col);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

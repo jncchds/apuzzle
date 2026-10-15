@@ -29,6 +29,7 @@ enum GameTag {
   drive,
   sight,
   arrow,
+  charge,
 }
 
 String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
@@ -56,6 +57,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
   GameTag.drive => l.tagDrive,
   GameTag.sight => l.tagSight,
   GameTag.arrow => l.tagArrow,
+  GameTag.charge => l.tagCharge,
 };
 
 /// Tags of every type, by id.
@@ -103,6 +105,7 @@ const Map<String, List<GameTag>> gameTags = {
   'camp': [GameTag.place],
   'fleet': [GameTag.place, GameTag.ships],
   'basins': [GameTag.water, GameTag.regions],
+  'poles': [GameTag.place, GameTag.charge],
   'pebbles': [GameTag.shade, GameTag.binary, GameTag.connect],
   'chambers': [GameTag.shade, GameTag.regions],
   'lookout': [GameTag.shade, GameTag.sight],
@@ -189,6 +192,7 @@ const Map<String, List<String>> gameAliases = {
     'Schiffe versenken',
   ],
   'basins': ['Aquarium', 'Акваріум', 'Аквариум', 'Akwarium'],
+  'poles': ['Magnets', 'Magnetic', 'Magnetplatten', 'Elektrik', 'Magnete', 'Magnesy', 'Магніти', 'Магниты'],
   'lookout': ['Kurodoko', 'Kuromasu', 'Where is Black Cells', 'Куродоко', 'Куромасу'],
   'rampart': ['Tapa', 'Тапа'],
   'chambers': ['Heyawake', 'Heya-wake', 'Heya wake', 'Room division', 'Хеяваке', 'Хэявакэ'],

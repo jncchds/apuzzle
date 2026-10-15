@@ -18,10 +18,10 @@ You choose the grid size and the difficulty.
 
 ## Puzzles
 
-54 games in four categories. See [PUZZLES.md](PUZZLES.md) for the rules of each, with screenshots in both themes.
+55 games in four categories. See [PUZZLES.md](PUZZLES.md) for the rules of each, with screenshots in both themes.
 
 - **Numbers:** Sudoku, Pockets, Skyline, Cages, Signs, Totals, Blocks, Tally, Solo, Dominoes, Formula, Plots, Shikaku
-- **Logic grids:** Sun & Moon, Crowns, Pairs, Hues, Tetra, Campsite, Fleet, Basins, Pebbles, Chambers, Lookout, Rampart, Islands, Lamps, Orbits, Inlay, Mines
+- **Logic grids:** Sun & Moon, Crowns, Pairs, Hues, Tetra, Campsite, Fleet, Basins, Poles, Pebbles, Chambers, Lookout, Rampart, Islands, Lamps, Orbits, Inlay, Mines
 - **Paths & loops:** Trail, Links, Waymarks, Labyrinth, Homeward, Blockade, Pipes, Channel, Atoms, Fence, Pearls, Rails, Arrows
 - **Casual:** Mosaic, Blend, Pop, 2048, Snake, Junction, Turnabout, Glimpse, Vanish, Hopper, Rebound
 
@@ -38,7 +38,7 @@ You choose the grid size and the difficulty.
 - **Game options.** A puzzle can offer extra choices when you start a game, like Pop's mode and goal. They are part of the share code, and stats are kept per choice.
 - **Variable grid sizes.** A size is only offered if it fits the screen, so there's no zooming.
 - **Two input styles.** Tap a cell to cycle its values, or pick a value from a palette and stamp it. Slide across cells to mark them all in one go. Pencil marks are available where useful.
-- **Notes done for you.** In Crowns, Campsite, Pairs and Fleet, a long press dots every cell that the pieces you have placed already rule out. In Basins it lets the water settle: it fills the cells below your water and marks the cells it can't reach dry.
+- **Notes done for you.** In Crowns, Campsite, Pairs and Fleet, a long press dots every cell that the pieces you have placed already rule out. In Basins it lets the water settle: it fills the cells below your water and marks the cells it can't reach dry. In Poles it finishes the dominoes you started and dots the rest of every line that has all its + and − cells.
 - **Checked on submit.** Mistakes aren't highlighted while you play; live highlighting is an option in Settings.
 - **Undo, redo, restart and hints.** There's a timer, and stats (best time, or best score for the score games) are kept per puzzle and difficulty.
 - **Auto-save.** Leave at any time and continue where you stopped.
