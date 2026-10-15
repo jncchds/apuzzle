@@ -30,6 +30,7 @@ import '../puzzles/merge/merge_type.dart';
 import '../puzzles/mines/mines_type.dart';
 import '../puzzles/mosaic/mosaic_type.dart';
 import '../puzzles/orbits/orbits_type.dart';
+import '../puzzles/pebbles/pebbles_type.dart';
 import '../puzzles/pairs/pairs_type.dart';
 import '../puzzles/pearls/pearls_type.dart';
 import '../puzzles/plots/plots_type.dart';
@@ -92,6 +93,7 @@ const List<PuzzleType> puzzleTypes = [
   CampType(),
   FleetType(),
   BasinsType(),
+  PebblesType(),
   IslandsType(),
   LampsType(),
   FenceType(),
@@ -184,6 +186,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('camp', [CampType()]),
       PuzzleFamily('fleet', [FleetType()]),
       PuzzleFamily('basins', [BasinsType()]),
+      PuzzleFamily('pebbles', [PebblesType()]),
       PuzzleFamily('islands', [IslandsType()]),
       PuzzleFamily('lamps', [LampsType()]),
       PuzzleFamily('orbits', [OrbitsType()]),

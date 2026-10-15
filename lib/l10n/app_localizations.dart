@@ -6813,6 +6813,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A real board: each round you get right adds a bumper next time, and a miss takes one away. Get 3 rounds right.'**
   String get tutRebound3;
+
+  /// No description provided for @pebblesName.
+  ///
+  /// In en, this message translates to:
+  /// **'Pebbles'**
+  String get pebblesName;
+
+  /// No description provided for @pebblesTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Two kinds of stones, each kind all in one piece'**
+  String get pebblesTagline;
+
+  /// No description provided for @pebblesRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Put a stone in every cell: filled or hollow.\n• All filled stones form one group, joined side by side, and so do all hollow stones.\n• No 2×2 block holds four stones of one kind.\n• Some stones are shown from the start.\n\nTap a cell to cycle: filled → hollow → empty. Long-press / right-click cycles back. Slide across cells to put the same stone in all of them. Stones of one kind side by side are drawn joined, so you can see the groups.'**
+  String get pebblesRules;
+
+  /// No description provided for @tutPebbles1.
+  ///
+  /// In en, this message translates to:
+  /// **'Put a stone in every cell. All filled stones must form one group, joined side by side, and so must all hollow stones. Tap an empty cell once for a filled stone, twice for a hollow one. Fill in this board.'**
+  String get tutPebbles1;
+
+  /// No description provided for @tutPebbles2.
+  ///
+  /// In en, this message translates to:
+  /// **'No 2×2 block may hold four stones of one kind. The highlighted block already has three hollow stones, so its last cell gets a filled one. Finish the board the same way.'**
+  String get tutPebbles2;
+
+  /// No description provided for @tutPebbles3.
+  ///
+  /// In en, this message translates to:
+  /// **'Every group must reach the rest of its kind. The hollow stone in the corner is walled in but for one cell, so that cell gets a hollow stone too. Follow the hollow stones until they meet the others.'**
+  String get tutPebbles3;
+
+  /// No description provided for @tutPebbles4.
+  ///
+  /// In en, this message translates to:
+  /// **'A cell surrounded by filled stones can\'t hold a hollow one: it would be cut off from the other hollow stones. The same goes the other way round. Fill the highlighted cell, then finish the board.'**
+  String get tutPebbles4;
+
+  /// No description provided for @tutPebbles5.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Look for blocks with three stones alike, and for groups with only one way out.'**
+  String get tutPebbles5;
+
+  /// No description provided for @tutPebblesS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Going round the edge of the board, the filled stones form one unbroken run and the hollow stones another: if the edge switched kinds four times, the two groups would have to cross. A1 and D4 hold filled stones and C4 a hollow one, so the edge from A1 along the top and down to D4 is all filled.'**
+  String get tutPebblesS1;
+
+  /// No description provided for @tutPebblesS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A 2×2 block never alternates, with filled stones on one diagonal and hollow ones on the other: the filled pair could only meet by going round one of the hollow stones and cutting it off. So when one diagonal holds two stones alike and the other one stone of the other kind, the last cell matches the diagonal.'**
+  String get tutPebblesS2;
+
+  /// No description provided for @tutPebblesS3.
+  ///
+  /// In en, this message translates to:
+  /// **'Some cells hold a kind together: if the other kind took such a cell, the stones on either side of it could no longer meet. Such a cell gets the kind it holds together. Look for narrow passages between the groups.'**
+  String get tutPebblesS3;
+
+  /// No description provided for @exPebblesBlock.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds {stone}: the rest of its 2×2 block holds {other}, and a block never holds four alike.'**
+  String exPebblesBlock(Object cell, Object stone, Object other);
+
+  /// No description provided for @exPebblesEnclosed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds {stone}: it is walled in by {stone}, so {other} there would be cut off from the rest of its kind.'**
+  String exPebblesEnclosed(Object cell, Object stone, Object other);
+
+  /// No description provided for @exPebblesExit.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds {stone}: it is the only way out for the group at {group}.'**
+  String exPebblesExit(Object cell, Object stone, Object group);
+
+  /// No description provided for @exPebblesEdge.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds {stone}: round the edge each kind forms one run. {a} and {b} hold {stone} and {c} holds {other}, so the stretch from {a} to {b} through {cell} holds {stone}.'**
+  String exPebblesEdge(Object cell, Object stone, Object other, Object a, Object b, Object c);
+
+  /// No description provided for @exPebblesChecker.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds {stone}: {a} and {b} hold {stone} on one diagonal of a 2×2 block and {c} holds {other}, and a block never alternates.'**
+  String exPebblesChecker(Object cell, Object stone, Object other, Object a, Object b, Object c);
+
+  /// No description provided for @exPebblesCut.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds {stone}: {other} there would split the {stone} stones into parts that can\'t meet.'**
+  String exPebblesCut(Object cell, Object stone, Object other);
+
+  /// No description provided for @exPebblesFailBlock.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the 2×2 block at {cell} holds four alike.'**
+  String exPebblesFailBlock(Object cell);
+
+  /// No description provided for @exPebblesFailClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the group at {cell} is walled in, cut off from the rest of its kind.'**
+  String exPebblesFailClosed(Object cell);
+
+  /// No description provided for @exPebblesFailEdge.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the edge switches kinds at {a}, {b}, {c} and {d}, and the two kinds would have to cross.'**
+  String exPebblesFailEdge(Object a, Object b, Object c, Object d);
+
+  /// No description provided for @exPebblesFailChecker.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the 2×2 block at {cell} alternates.'**
+  String exPebblesFailChecker(Object cell);
+
+  /// No description provided for @exPebblesFailApart.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {a} and {b} are cut off from each other.'**
+  String exPebblesFailApart(Object a, Object b);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

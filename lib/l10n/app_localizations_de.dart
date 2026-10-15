@@ -5026,4 +5026,101 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutRebound3 =>
       'Ein echtes Brett: jede richtige Runde bringt beim nächsten Mal einen Abweiser mehr, ein Fehler einen weniger. Schaffe 3 Runden.';
+
+  @override
+  String get pebblesName => 'Kiesel';
+
+  @override
+  String get pebblesTagline => 'Zwei Sorten Steine, jede Sorte in einem Stück';
+
+  @override
+  String get pebblesRules =>
+      '• Lege in jedes Feld einen Stein: voll oder hohl.\n• Alle vollen Steine bilden eine Gruppe, über Seiten verbunden, und ebenso alle hohlen.\n• Kein 2×2-Block enthält vier Steine einer Sorte.\n• Einige Steine sind von Anfang an zu sehen.\n\nTippe auf ein Feld zum Wechseln: voll → hohl → leer. Langes Drücken / Rechtsklick wechselt zurück. Wische über Felder, um in alle denselben Stein zu legen. Benachbarte Steine einer Sorte sind verbunden gezeichnet, damit du die Gruppen siehst.';
+
+  @override
+  String get tutPebbles1 =>
+      'Lege in jedes Feld einen Stein. Alle vollen Steine müssen eine Gruppe bilden, über Seiten verbunden, und ebenso alle hohlen. Tippe einmal auf ein leeres Feld für einen vollen Stein, zweimal für einen hohlen. Fülle dieses Feld.';
+
+  @override
+  String get tutPebbles2 =>
+      'Kein 2×2-Block darf vier Steine einer Sorte enthalten. Der markierte Block hat schon drei hohle Steine, also kommt in sein letztes Feld ein voller. Löse den Rest genauso.';
+
+  @override
+  String get tutPebbles3 =>
+      'Jede Gruppe muss den Rest ihrer Sorte erreichen. Der hohle Stein in der Ecke ist bis auf ein Feld eingeschlossen, also kommt dorthin auch ein hohler. Folge den hohlen Steinen, bis sie die anderen treffen.';
+
+  @override
+  String get tutPebbles4 =>
+      'Ein Feld, das von vollen Steinen umgeben ist, kann keinen hohlen enthalten: Er wäre von den anderen hohlen Steinen abgeschnitten. Umgekehrt genauso. Fülle das markierte Feld, dann löse den Rest.';
+
+  @override
+  String get tutPebbles5 =>
+      'Jetzt ein echtes Rätsel. Achte auf Blöcke mit drei gleichen Steinen und auf Gruppen mit nur einem Ausweg.';
+
+  @override
+  String get tutPebblesS1 =>
+      'Am Rand des Rätsels entlang bilden die vollen Steine einen durchgehenden Abschnitt und die hohlen einen anderen: Wechselte der Rand viermal die Sorte, müssten sich die beiden Gruppen kreuzen. A1 und D4 haben volle Steine und C4 einen hohlen, also ist der Rand von A1 oben entlang und hinunter bis D4 ganz voll.';
+
+  @override
+  String get tutPebblesS2 =>
+      'Ein 2×2-Block wechselt nie ab, mit vollen Steinen auf einer Diagonale und hohlen auf der anderen: Das volle Paar könnte sich nur treffen, indem es einen der hohlen Steine umrundet und abschneidet. Hat also eine Diagonale zwei gleiche Steine und die andere einen Stein der anderen Sorte, passt das letzte Feld zur Diagonale.';
+
+  @override
+  String get tutPebblesS3 =>
+      'Manche Felder halten eine Sorte zusammen: Nähme die andere Sorte ein solches Feld, könnten sich die Steine auf beiden Seiten nicht mehr treffen. Ein solches Feld bekommt die Sorte, die es zusammenhält. Achte auf schmale Durchgänge zwischen den Gruppen.';
+
+  @override
+  String exPebblesBlock(Object cell, Object stone, Object other) {
+    return '$cell hat $stone: Der Rest seines 2×2-Blocks hat $other, und ein Block hat nie vier gleiche.';
+  }
+
+  @override
+  String exPebblesEnclosed(Object cell, Object stone, Object other) {
+    return '$cell hat $stone: Es ist von $stone umgeben, also wäre $other dort vom Rest seiner Sorte abgeschnitten.';
+  }
+
+  @override
+  String exPebblesExit(Object cell, Object stone, Object group) {
+    return '$cell hat $stone: Es ist der einzige Ausweg für die Gruppe bei $group.';
+  }
+
+  @override
+  String exPebblesEdge(Object cell, Object stone, Object other, Object a, Object b, Object c) {
+    return '$cell hat $stone: Am Rand bildet jede Sorte einen Abschnitt. $a und $b haben $stone und $c hat $other, also hat der Abschnitt von $a bis $b über $cell $stone.';
+  }
+
+  @override
+  String exPebblesChecker(Object cell, Object stone, Object other, Object a, Object b, Object c) {
+    return '$cell hat $stone: $a und $b haben $stone auf einer Diagonale eines 2×2-Blocks und $c hat $other, und ein Block wechselt nie ab.';
+  }
+
+  @override
+  String exPebblesCut(Object cell, Object stone, Object other) {
+    return '$cell hat $stone: $other dort würde die Steine $stone in Teile trennen, die sich nicht treffen können.';
+  }
+
+  @override
+  String exPebblesFailBlock(Object cell) {
+    return 'Aber dann hat der 2×2-Block bei $cell vier gleiche.';
+  }
+
+  @override
+  String exPebblesFailClosed(Object cell) {
+    return 'Aber dann ist die Gruppe bei $cell eingeschlossen, vom Rest ihrer Sorte abgeschnitten.';
+  }
+
+  @override
+  String exPebblesFailEdge(Object a, Object b, Object c, Object d) {
+    return 'Aber dann wechselt der Rand bei $a, $b, $c und $d die Sorte, und die beiden Sorten müssten sich kreuzen.';
+  }
+
+  @override
+  String exPebblesFailChecker(Object cell) {
+    return 'Aber dann wechselt der 2×2-Block bei $cell ab.';
+  }
+
+  @override
+  String exPebblesFailApart(Object a, Object b) {
+    return 'Aber dann sind $a und $b voneinander abgeschnitten.';
+  }
 }

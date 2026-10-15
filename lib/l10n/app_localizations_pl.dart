@@ -5109,4 +5109,101 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutRebound3 =>
       'Prawdziwa plansza: każda dobra runda dodaje następnym razem jeden odbijacz, a pomyłka zabiera jeden. Zalicz 3 rundy.';
+
+  @override
+  String get pebblesName => 'Kamyki';
+
+  @override
+  String get pebblesTagline => 'Dwa rodzaje kamyków, każdy rodzaj w jednym kawałku';
+
+  @override
+  String get pebblesRules =>
+      '• Połóż kamyk w każdym polu: pełny albo drążony.\n• Wszystkie pełne kamyki tworzą jedną grupę, połączoną bokami, i tak samo wszystkie drążone.\n• Żaden kwadrat 2×2 nie zawiera czterech kamyków jednego rodzaju.\n• Niektóre kamyki są widoczne od początku.\n\nDotknij pola, aby przełączać: pełny → drążony → puste. Długie przytrzymanie / prawy przycisk przełącza wstecz. Przeciągnij po polach, aby położyć we wszystkich ten sam kamyk. Sąsiednie kamyki jednego rodzaju są narysowane jako połączone, więc grupy są widoczne.';
+
+  @override
+  String get tutPebbles1 =>
+      'Połóż kamyk w każdym polu. Wszystkie pełne kamyki muszą tworzyć jedną grupę, połączoną bokami, i tak samo wszystkie drążone. Dotknij pustego pola raz, aby położyć pełny kamyk, dwa razy – drążony. Wypełnij tę planszę.';
+
+  @override
+  String get tutPebbles2 =>
+      'Żaden kwadrat 2×2 nie może zawierać czterech kamyków jednego rodzaju. Zaznaczony kwadrat ma już trzy drążone kamyki, więc w ostatnim polu leży pełny. Dokończ planszę w ten sam sposób.';
+
+  @override
+  String get tutPebbles3 =>
+      'Każda grupa musi dotrzeć do reszty swojego rodzaju. Drążony kamyk w rogu jest zamknięty z wyjątkiem jednego pola, więc tam też leży drążony. Prowadź drążone kamyki, aż spotkają pozostałe.';
+
+  @override
+  String get tutPebbles4 =>
+      'W polu otoczonym pełnymi kamykami nie może leżeć drążony: zostałby odcięty od pozostałych drążonych. I na odwrót tak samo. Wypełnij zaznaczone pole, a potem dokończ planszę.';
+
+  @override
+  String get tutPebbles5 =>
+      'Teraz prawdziwa plansza. Szukaj kwadratów z trzema jednakowymi kamykami i grup, które mają tylko jedno wyjście.';
+
+  @override
+  String get tutPebblesS1 =>
+      'Idąc wzdłuż brzegu planszy, pełne kamyki tworzą jeden nieprzerwany odcinek, a drążone drugi: gdyby brzeg czterokrotnie zmieniał rodzaj, obie grupy musiałyby się przeciąć. W A1 i D4 leżą pełne kamyki, a w C4 drążony, więc brzeg od A1 górą i w dół do D4 jest cały pełny.';
+
+  @override
+  String get tutPebblesS2 =>
+      'Kwadrat 2×2 nigdy nie jest naprzemienny, z pełnymi kamykami na jednej przekątnej i drążonymi na drugiej: pełna para mogłaby się spotkać tylko, obchodząc jeden z drążonych kamyków i odcinając go. Gdy więc jedna przekątna ma dwa jednakowe kamyki, a druga jeden kamyk innego rodzaju, ostatnie pole jest takie jak przekątna.';
+
+  @override
+  String get tutPebblesS3 =>
+      'Niektóre pola trzymają rodzaj razem: gdyby takie pole zajął drugi rodzaj, kamyki po obu jego stronach nie mogłyby się już spotkać. Takie pole dostaje rodzaj, który trzyma razem. Szukaj wąskich przejść między grupami.';
+
+  @override
+  String exPebblesBlock(Object cell, Object stone, Object other) {
+    return 'W $cell jest $stone: reszta jego kwadratu 2×2 to $other, a kwadrat nigdy nie zawiera czterech jednakowych.';
+  }
+
+  @override
+  String exPebblesEnclosed(Object cell, Object stone, Object other) {
+    return 'W $cell jest $stone: otaczają je $stone, więc $other byłby tam odcięty od reszty swojego rodzaju.';
+  }
+
+  @override
+  String exPebblesExit(Object cell, Object stone, Object group) {
+    return 'W $cell jest $stone: to jedyne wyjście dla grupy w $group.';
+  }
+
+  @override
+  String exPebblesEdge(Object cell, Object stone, Object other, Object a, Object b, Object c) {
+    return 'W $cell jest $stone: wzdłuż brzegu każdy rodzaj tworzy jeden odcinek. W $a i $b jest $stone, a w $c $other, więc odcinek od $a do $b przez $cell to $stone.';
+  }
+
+  @override
+  String exPebblesChecker(Object cell, Object stone, Object other, Object a, Object b, Object c) {
+    return 'W $cell jest $stone: $a i $b to $stone na jednej przekątnej kwadratu 2×2, a $c to $other, a kwadrat nigdy nie jest naprzemienny.';
+  }
+
+  @override
+  String exPebblesCut(Object cell, Object stone, Object other) {
+    return 'W $cell jest $stone: $other tam podzieliłby kamyki $stone na części, które nie mogą się spotkać.';
+  }
+
+  @override
+  String exPebblesFailBlock(Object cell) {
+    return 'Ale wtedy kwadrat 2×2 w $cell zawiera cztery jednakowe.';
+  }
+
+  @override
+  String exPebblesFailClosed(Object cell) {
+    return 'Ale wtedy grupa w $cell jest zamknięta i odcięta od reszty swojego rodzaju.';
+  }
+
+  @override
+  String exPebblesFailEdge(Object a, Object b, Object c, Object d) {
+    return 'Ale wtedy brzeg zmienia rodzaj w $a, $b, $c i $d, i oba rodzaje musiałyby się przeciąć.';
+  }
+
+  @override
+  String exPebblesFailChecker(Object cell) {
+    return 'Ale wtedy kwadrat 2×2 w $cell jest naprzemienny.';
+  }
+
+  @override
+  String exPebblesFailApart(Object a, Object b) {
+    return 'Ale wtedy $a i $b są od siebie odcięte.';
+  }
 }

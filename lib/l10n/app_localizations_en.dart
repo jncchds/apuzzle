@@ -5006,4 +5006,101 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutRebound3 =>
       'A real board: each round you get right adds a bumper next time, and a miss takes one away. Get 3 rounds right.';
+
+  @override
+  String get pebblesName => 'Pebbles';
+
+  @override
+  String get pebblesTagline => 'Two kinds of stones, each kind all in one piece';
+
+  @override
+  String get pebblesRules =>
+      '• Put a stone in every cell: filled or hollow.\n• All filled stones form one group, joined side by side, and so do all hollow stones.\n• No 2×2 block holds four stones of one kind.\n• Some stones are shown from the start.\n\nTap a cell to cycle: filled → hollow → empty. Long-press / right-click cycles back. Slide across cells to put the same stone in all of them. Stones of one kind side by side are drawn joined, so you can see the groups.';
+
+  @override
+  String get tutPebbles1 =>
+      'Put a stone in every cell. All filled stones must form one group, joined side by side, and so must all hollow stones. Tap an empty cell once for a filled stone, twice for a hollow one. Fill in this board.';
+
+  @override
+  String get tutPebbles2 =>
+      'No 2×2 block may hold four stones of one kind. The highlighted block already has three hollow stones, so its last cell gets a filled one. Finish the board the same way.';
+
+  @override
+  String get tutPebbles3 =>
+      'Every group must reach the rest of its kind. The hollow stone in the corner is walled in but for one cell, so that cell gets a hollow stone too. Follow the hollow stones until they meet the others.';
+
+  @override
+  String get tutPebbles4 =>
+      'A cell surrounded by filled stones can\'t hold a hollow one: it would be cut off from the other hollow stones. The same goes the other way round. Fill the highlighted cell, then finish the board.';
+
+  @override
+  String get tutPebbles5 =>
+      'Now a real board. Look for blocks with three stones alike, and for groups with only one way out.';
+
+  @override
+  String get tutPebblesS1 =>
+      'Going round the edge of the board, the filled stones form one unbroken run and the hollow stones another: if the edge switched kinds four times, the two groups would have to cross. A1 and D4 hold filled stones and C4 a hollow one, so the edge from A1 along the top and down to D4 is all filled.';
+
+  @override
+  String get tutPebblesS2 =>
+      'A 2×2 block never alternates, with filled stones on one diagonal and hollow ones on the other: the filled pair could only meet by going round one of the hollow stones and cutting it off. So when one diagonal holds two stones alike and the other one stone of the other kind, the last cell matches the diagonal.';
+
+  @override
+  String get tutPebblesS3 =>
+      'Some cells hold a kind together: if the other kind took such a cell, the stones on either side of it could no longer meet. Such a cell gets the kind it holds together. Look for narrow passages between the groups.';
+
+  @override
+  String exPebblesBlock(Object cell, Object stone, Object other) {
+    return '$cell holds $stone: the rest of its 2×2 block holds $other, and a block never holds four alike.';
+  }
+
+  @override
+  String exPebblesEnclosed(Object cell, Object stone, Object other) {
+    return '$cell holds $stone: it is walled in by $stone, so $other there would be cut off from the rest of its kind.';
+  }
+
+  @override
+  String exPebblesExit(Object cell, Object stone, Object group) {
+    return '$cell holds $stone: it is the only way out for the group at $group.';
+  }
+
+  @override
+  String exPebblesEdge(Object cell, Object stone, Object other, Object a, Object b, Object c) {
+    return '$cell holds $stone: round the edge each kind forms one run. $a and $b hold $stone and $c holds $other, so the stretch from $a to $b through $cell holds $stone.';
+  }
+
+  @override
+  String exPebblesChecker(Object cell, Object stone, Object other, Object a, Object b, Object c) {
+    return '$cell holds $stone: $a and $b hold $stone on one diagonal of a 2×2 block and $c holds $other, and a block never alternates.';
+  }
+
+  @override
+  String exPebblesCut(Object cell, Object stone, Object other) {
+    return '$cell holds $stone: $other there would split the $stone stones into parts that can\'t meet.';
+  }
+
+  @override
+  String exPebblesFailBlock(Object cell) {
+    return 'But then the 2×2 block at $cell holds four alike.';
+  }
+
+  @override
+  String exPebblesFailClosed(Object cell) {
+    return 'But then the group at $cell is walled in, cut off from the rest of its kind.';
+  }
+
+  @override
+  String exPebblesFailEdge(Object a, Object b, Object c, Object d) {
+    return 'But then the edge switches kinds at $a, $b, $c and $d, and the two kinds would have to cross.';
+  }
+
+  @override
+  String exPebblesFailChecker(Object cell) {
+    return 'But then the 2×2 block at $cell alternates.';
+  }
+
+  @override
+  String exPebblesFailApart(Object a, Object b) {
+    return 'But then $a and $b are cut off from each other.';
+  }
 }
