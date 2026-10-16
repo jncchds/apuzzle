@@ -197,6 +197,9 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
   /// Content of an empty cell (a printed digit...), or null for none.
   Widget? buildEmpty(BuildContext context, P puzzle, Pos pos, double size) => null;
 
+  /// Cells outside the board's shape: not drawn, and never touched.
+  bool cellHidden(P puzzle, Pos pos) => false;
+
   @override
   Widget buildValueChip(BuildContext context, P puzzle, int value, double size) =>
       valuesFor(puzzle)[value].build(context, size);
@@ -302,6 +305,7 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
       overlayBuilder: (context, m) => buildOverlayIn(context, p, s, m),
       underlayBuilder: (context, m) => buildUnderlay(context, p, m),
       cellBuilder: (context, pos, m) {
+        if (cellHidden(p, pos)) return const SizedBox.shrink();
         final cell = s.at(pos);
         final Widget content;
         if (cell.value != null) {
@@ -346,6 +350,7 @@ abstract class ValueGridType<P extends ValueGridPuzzle> extends PuzzleType<P, Va
   void onCellTap(GameController ctrl, Pos pos) {
     final s = ctrl.state as ValueGrid;
     final cell = s.at(pos);
+    if (cellHidden(ctrl.puzzle as P, pos)) return;
     if (cell.given) {
       ctrl.select(ctrl.inputMode == InputMode.palette && ctrl.selectedCell != pos ? pos : null);
       return;

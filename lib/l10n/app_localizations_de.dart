@@ -6311,4 +6311,243 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutGlideS3 =>
       'Ein echtes Brett. Leg die oberste Zeile, dann die linke Spalte, dann die nächste Zeile, sodass das Brett immer kleiner wird. Die letzten zwei Plättchen einer Spalte kommen zusammen hinein, wie das Ende einer Zeile, auf die Seite gedreht. Am Ende bleibt eine kleine Ecke: Lass ihre Plättchen im Kreis wandern, bis sie an ihrem Platz sind.';
+
+  @override
+  String get layersName => 'Schichten';
+
+  @override
+  String get layersTagline => 'Strich über Strich: Der letzte ist zu sehen';
+
+  @override
+  String get layersRules =>
+      '• Jede Zeile und jede Spalte wurde einmal gestrichen, von Rand zu Rand, in der Farbe des Strichs an ihrem Anfang.\n• Die Striche kamen nacheinander, in einer Reihenfolge, die du nicht kennst. Ein späterer Strich deckt einen früheren zu, also hat jedes Feld die Farbe dessen von Zeile und Spalte, der zuletzt kam.\n• Einige Felder sind von Anfang an gezeigt (mit einem Punkt). Färbe den Rest.\n• Ein Strich mit Fragezeichen verbirgt seine Farbe: Finde sie heraus.\n\nWähle eine Farbe in der Palette und tippe auf Felder, um sie zu färben (erneutes Tippen leert sie), oder tippe auf ein Feld, um die Farben durchzugehen. Wische über Felder, um sie alle zu färben.';
+
+  @override
+  String get tutLayers1 =>
+      'Jede Zeile und jede Spalte wurde einmal gestrichen, von Rand zu Rand, in der Farbe des Strichs an ihrem Anfang. Die Striche kamen nacheinander, und zu sehen ist der letzte über einem Feld. Haben Zeile und Spalte eines Feldes dieselbe Farbe, kann das Feld nur diese Farbe haben. Wähle eine Farbe in der Palette und färbe die leeren Felder.';
+
+  @override
+  String get tutLayers2 =>
+      'Ein gezeigtes Feld verrät, welcher seiner beiden Striche später kam. A1 hat die Farbe von Zeile 1, also wurde Zeile 1 nach Spalte A gestrichen. A3 hat die Farbe von Spalte A: Spalte A kam nach Zeile 3. C3 hat die von Zeile 3: Zeile 3 kam nach Spalte C. Also kam Zeile 1 auch nach Spalte C, und C1 bekommt die Farbe von Zeile 1. Löse den Rest.';
+
+  @override
+  String get tutLayers3 =>
+      'Ein Strich mit Fragezeichen verbirgt seine Farbe. A1 hat nicht die Farbe von Spalte A, also wurde Zeile 1 nach Spalte A gestrichen, und A1 zeigt die Farbe von Zeile 1. Jetzt haben Zeile und Spalte von B1 dieselbe Farbe. Löse den Rest.';
+
+  @override
+  String get tutLayers4 =>
+      'Jetzt ein echtes Rätsel. Färbe die Felder, deren Zeile und Spalte dieselbe Farbe haben, und folge dann der Reihenfolge um Rechtecke aus gezeigten Feldern.';
+
+  @override
+  String get tutLayersS1 =>
+      'Die Reihenfolge läuft auch durch Felder, die sie nicht zeigen. Kam Zeile 2 nach Spalte B und Spalte B nach Zeile 5, dann kam Zeile 2 nach Zeile 5, auch wenn kein Feld das sagt. Solche Ketten klären Felder, die kein einzelnes Rechteck erreicht. Manche Striche verbergen hier ihre Farbe: Lies sie an einem Feld ab, wo diese Linie zuletzt kam.';
+
+  @override
+  String get tutLayersS2 =>
+      'Wenn nichts anderes hilft, probiere eine Farbe: Nimm an, ein verborgener Strich hätte eine Farbe oder ein Feld eine seiner beiden, und folge der Reihenfolge, bis sie im Kreis läuft (ein Strich müsste nach sich selbst kommen) oder einem Feld keine Farbe bleibt. Dann ist es andersherum.';
+
+  @override
+  String exLayersSame(Object cell, Object value, Object row, Object col) {
+    return '$cell hat $value: Zeile $row und Spalte $col haben beide $value, also ist egal, welche zuletzt kam.';
+  }
+
+  @override
+  String exLayersOptions(Object cell, Object value, Object row, Object col) {
+    return '$cell hat $value: Von den Farben, die Zeile $row und Spalte $col haben können, bleibt dafür nur $value.';
+  }
+
+  @override
+  String exLayersSeen(Object cell, Object a, String aKind, Object b, String bKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'Zeile $b',
+        'other': 'Spalte $b',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'Zeile $a',
+        'other': 'Spalte $a',
+      },
+    );
+    return '$cell hat nicht die Farbe von $_temp0, also wurde $_temp1 danach gestrichen.';
+  }
+
+  @override
+  String exLayersLater(Object cell, Object value, Object a, String aKind, Object b, String bKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'Zeile $a',
+        'other': 'Spalte $a',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'Zeile $b',
+        'other': 'Spalte $b',
+      },
+    );
+    return '$cell hat $value: $_temp0 wurde nach $_temp1 gestrichen, also deckt ihr $value das Feld.';
+  }
+
+  @override
+  String exLayersLineColor(Object line, String kind, Object value, Object cell, Object other, String otherKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      otherKind,
+      {
+        'row': 'Zeile $other',
+        'other': 'Spalte $other',
+      },
+    );
+    return '$_temp0 hat $value: Sie kam nach $_temp1, also zeigt sie sich in $cell, und das hat $value.';
+  }
+
+  @override
+  String exLayersRectangle(Object cell, Object value, Object a, String aKind, Object b, Object c, Object d) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row':
+            'Zeile $a wurde nach Spalte $b gestrichen, Spalte $b nach Zeile $c und Zeile $c nach Spalte $d, also kam Zeile $a nach Spalte $d',
+        'other':
+            'Spalte $a wurde nach Zeile $b gestrichen, Zeile $b nach Spalte $c und Spalte $c nach Zeile $d, also kam Spalte $a nach Zeile $d',
+      },
+    );
+    return '$cell hat $value: $_temp0.';
+  }
+
+  @override
+  String exLayersChain(Object a, String aKind, Object b, String bKind, Object c, String cKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'Zeile $a',
+        'other': 'Spalte $a',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'Zeile $b',
+        'other': 'Spalte $b',
+      },
+    );
+    String _temp2 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'Zeile $b',
+        'other': 'Spalte $b',
+      },
+    );
+    String _temp3 = intl.Intl.selectLogic(
+      cKind,
+      {
+        'row': 'Zeile $c',
+        'other': 'Spalte $c',
+      },
+    );
+    String _temp4 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'Zeile $a',
+        'other': 'Spalte $a',
+      },
+    );
+    String _temp5 = intl.Intl.selectLogic(
+      cKind,
+      {
+        'row': 'Zeile $c',
+        'other': 'Spalte $c',
+      },
+    );
+    return '$_temp0 wurde nach $_temp1 gestrichen und $_temp2 nach $_temp3, also kam $_temp4 auch nach $_temp5.';
+  }
+
+  @override
+  String exLayersOnly(Object cell, Object value) {
+    return '$cell hat $value: Jede andere Farbe führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exLayersOnlyLine(Object line, String kind, Object value) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return '$_temp0 hat $value: Jede andere Farbe führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exLayersSupposeLine(Object line, String kind, Object value) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'Angenommen, $_temp0 hätte $value.';
+  }
+
+  @override
+  String exLayersRefutedLine(Object line, String kind, Object value) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return '$_temp0 kann nicht $value haben: Das führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exLayersFailEmpty(Object cell) {
+    return 'Aber dann passt keine Farbe zu $cell.';
+  }
+
+  @override
+  String exLayersFailLine(Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'Aber dann passt keine Farbe zu $_temp0.';
+  }
+
+  @override
+  String exLayersFailCycle(Object a, String aKind, Object b, String bKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'Zeile $a',
+        'other': 'Spalte $a',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'Zeile $b',
+        'other': 'Spalte $b',
+      },
+    );
+    return 'Aber dann wären $_temp0 und $_temp1 jeweils nach der anderen gestrichen worden.';
+  }
 }

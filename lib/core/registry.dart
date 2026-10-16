@@ -27,6 +27,7 @@ import '../puzzles/junction/junction_type.dart';
 import '../puzzles/kings/kings_type.dart';
 import '../puzzles/labyrinth/labyrinth_type.dart';
 import '../puzzles/lamps/lamps_type.dart';
+import '../puzzles/layers/layers_type.dart';
 import '../puzzles/links/links_type.dart';
 import '../puzzles/lits/lits_type.dart';
 import '../puzzles/mambo/mambo_type.dart';
@@ -110,6 +111,7 @@ const List<PuzzleType> puzzleTypes = [
   MercuryType(),
   PolesType(),
   PebblesType(),
+  LayersType(),
   ChambersType(),
   LookoutType(),
   RampartType(),
@@ -213,6 +215,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('filling', [BasinsType(), MercuryType()]),
       PuzzleFamily('poles', [PolesType()]),
       PuzzleFamily('pebbles', [PebblesType()]),
+      PuzzleFamily('layers', [LayersType()]),
       PuzzleFamily('chambers', [ChambersType()]),
       PuzzleFamily('lookout', [LookoutType()]),
       PuzzleFamily('rampart', [RampartType()]),

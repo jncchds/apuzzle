@@ -8439,6 +8439,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A real board. Place the top row, then the left column, then the next row, so the board keeps shrinking. The last two tiles of a column go in together, like the end of a row turned on its side. A small corner is left at the end: circle its tiles round until they fall into place.'**
   String get tutGlideS3;
+
+  /// No description provided for @layersName.
+  ///
+  /// In en, this message translates to:
+  /// **'Layers'**
+  String get layersName;
+
+  /// No description provided for @layersTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Strokes over strokes: the last one shows'**
+  String get layersTagline;
+
+  /// No description provided for @layersRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Every row and every column was painted once, from end to end, in the color of the stroke at its start.\n• The strokes came one after another, in an order you don\'t know. A later stroke covers an earlier one, so each cell has the color of whichever of its row and column came last.\n• Some cells are shown from the start (with a dot). Paint the rest.\n• A stroke with a question mark hides its color: work it out.\n\nPick a color in the palette and tap cells to paint them (tap again to clear), or tap a cell to cycle through the colors. Slide across cells to paint them all.'**
+  String get layersRules;
+
+  /// No description provided for @tutLayers1.
+  ///
+  /// In en, this message translates to:
+  /// **'Every row and every column was painted once, end to end, in the color of the stroke at its start. The strokes came one after another, and the last one over a cell is the one you see. When a cell\'s row and column have the same color, the cell can only be that color. Pick a color in the palette and paint the empty cells.'**
+  String get tutLayers1;
+
+  /// No description provided for @tutLayers2.
+  ///
+  /// In en, this message translates to:
+  /// **'A shown cell tells you which of its two strokes came later. A1 has row 1\'s color, so row 1 was painted after column A. A3 has column A\'s color: column A came after row 3. C3 has row 3\'s: row 3 came after column C. So row 1 came after column C too, and C1 gets row 1\'s color. Finish the board.'**
+  String get tutLayers2;
+
+  /// No description provided for @tutLayers3.
+  ///
+  /// In en, this message translates to:
+  /// **'A stroke with a question mark hides its color. A1 doesn\'t have column A\'s color, so row 1 was painted after column A, and A1 shows row 1\'s color. Now B1\'s row and column have the same color. Finish the board.'**
+  String get tutLayers3;
+
+  /// No description provided for @tutLayers4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Paint the cells whose row and column share a color, then follow the order around rectangles of shown cells.'**
+  String get tutLayers4;
+
+  /// No description provided for @tutLayersS1.
+  ///
+  /// In en, this message translates to:
+  /// **'The order also runs through cells that don\'t show it. If row 2 came after column B and column B after row 5, then row 2 came after row 5, even if no cell says so. Chains like that settle cells no single rectangle reaches. Some strokes hide their color here: read it from a cell where that line came last.'**
+  String get tutLayersS1;
+
+  /// No description provided for @tutLayersS2.
+  ///
+  /// In en, this message translates to:
+  /// **'When nothing else helps, try a color: suppose a hidden stroke had one color, or a cell one of its two, and follow the order until it runs in a circle (a stroke would come after itself) or a cell has no color left. Then it\'s the other way.'**
+  String get tutLayersS2;
+
+  /// No description provided for @exLayersSame.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is {value}: row {row} and column {col} both have {value}, so it doesn\'t matter which came last.'**
+  String exLayersSame(Object cell, Object value, Object row, Object col);
+
+  /// No description provided for @exLayersOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is {value}: of the colors row {row} and column {col} can have, only {value} is left for it.'**
+  String exLayersOptions(Object cell, Object value, Object row, Object col);
+
+  /// No description provided for @exLayersSeen.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} doesn\'t have the color of {bKind, select, row{row {b}} other{column {b}}}, so {aKind, select, row{row {a}} other{column {a}}} was painted after it.'**
+  String exLayersSeen(Object cell, Object a, String aKind, Object b, String bKind);
+
+  /// No description provided for @exLayersLater.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is {value}: {aKind, select, row{row {a}} other{column {a}}} was painted after {bKind, select, row{row {b}} other{column {b}}}, so its {value} covers the cell.'**
+  String exLayersLater(Object cell, Object value, Object a, String aKind, Object b, String bKind);
+
+  /// No description provided for @exLayersLineColor.
+  ///
+  /// In en, this message translates to:
+  /// **'{kind, select, row{Row {line}} other{Column {line}}} has {value}: it came after {otherKind, select, row{row {other}} other{column {other}}}, so it shows at {cell}, which is {value}.'**
+  String exLayersLineColor(Object line, String kind, Object value, Object cell, Object other, String otherKind);
+
+  /// No description provided for @exLayersRectangle.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is {value}: {aKind, select, row{row {a} was painted after column {b}, column {b} after row {c}, and row {c} after column {d}, so row {a} came after column {d}} other{column {a} was painted after row {b}, row {b} after column {c}, and column {c} after row {d}, so column {a} came after row {d}}}.'**
+  String exLayersRectangle(Object cell, Object value, Object a, String aKind, Object b, Object c, Object d);
+
+  /// No description provided for @exLayersChain.
+  ///
+  /// In en, this message translates to:
+  /// **'{aKind, select, row{Row {a}} other{Column {a}}} was painted after {bKind, select, row{row {b}} other{column {b}}}, and {bKind, select, row{row {b}} other{column {b}}} after {cKind, select, row{row {c}} other{column {c}}}, so {aKind, select, row{row {a}} other{column {a}}} came after {cKind, select, row{row {c}} other{column {c}}} too.'**
+  String exLayersChain(Object a, String aKind, Object b, String bKind, Object c, String cKind);
+
+  /// No description provided for @exLayersOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is {value}: every other color leads to a contradiction.'**
+  String exLayersOnly(Object cell, Object value);
+
+  /// No description provided for @exLayersOnlyLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{kind, select, row{Row {line}} other{Column {line}}} has {value}: every other color leads to a contradiction.'**
+  String exLayersOnlyLine(Object line, String kind, Object value);
+
+  /// No description provided for @exLayersSupposeLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {kind, select, row{row {line}} other{column {line}}} had {value}.'**
+  String exLayersSupposeLine(Object line, String kind, Object value);
+
+  /// No description provided for @exLayersRefutedLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{kind, select, row{Row {line}} other{Column {line}}} can\'t have {value}: it leads to a contradiction.'**
+  String exLayersRefutedLine(Object line, String kind, Object value);
+
+  /// No description provided for @exLayersFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no color fits {cell}.'**
+  String exLayersFailEmpty(Object cell);
+
+  /// No description provided for @exLayersFailLine.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no color fits {kind, select, row{row {line}} other{column {line}}}.'**
+  String exLayersFailLine(Object line, String kind);
+
+  /// No description provided for @exLayersFailCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {aKind, select, row{row {a}} other{column {a}}} and {bKind, select, row{row {b}} other{column {b}}} would each have been painted after the other.'**
+  String exLayersFailCycle(Object a, String aKind, Object b, String bKind);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

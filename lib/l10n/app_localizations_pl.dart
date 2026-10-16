@@ -6369,4 +6369,250 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutGlideS3 =>
       'Prawdziwa plansza. Ułóż górny wiersz, potem lewą kolumnę, potem następny wiersz, aby plansza się zmniejszała. Dwie ostatnie płytki kolumny wstawia się razem, jak koniec wiersza obrócony na bok. Na końcu zostaje mały róg: obracaj jego płytki w kółko, aż trafią na miejsca.';
+
+  @override
+  String get layersName => 'Warstwy';
+
+  @override
+  String get layersTagline => 'Pociągnięcie na pociągnięciu: widać ostatnie';
+
+  @override
+  String get layersRules =>
+      '• Każdy wiersz i każdą kolumnę pomalowano raz, od brzegu do brzegu, kolorem pociągnięcia na jej początku.\n• Pociągnięcia szły jedno po drugim, w nieznanej kolejności. Późniejsze zakrywa wcześniejsze, więc pole ma kolor tego ze swojego wiersza i kolumny, które było ostatnie.\n• Niektóre pola są pokazane od początku (z kropką). Pomaluj resztę.\n• Pociągnięcie ze znakiem zapytania ukrywa swój kolor: ustal go.\n\nWybierz kolor z palety i dotykaj pól, aby je malować (ponowne dotknięcie czyści), albo dotykaj pola, aby przełączać kolory. Przeciągnij po polach, aby pomalować je wszystkie.';
+
+  @override
+  String get tutLayers1 =>
+      'Każdy wiersz i każdą kolumnę pomalowano raz, od brzegu do brzegu, kolorem pociągnięcia na jej początku. Pociągnięcia szły jedno po drugim, a widać to, które przeszło przez pole ostatnie. Gdy wiersz i kolumna pola mają ten sam kolor, pole może mieć tylko ten kolor. Wybierz kolor z palety i pomaluj puste pola.';
+
+  @override
+  String get tutLayers2 =>
+      'Pokazane pole mówi, które z jego dwóch pociągnięć było później. A1 ma kolor wiersza 1, więc wiersz 1 pomalowano po kolumnie A. A3 ma kolor kolumny A: kolumna A była po wierszu 3. C3 ma kolor wiersza 3: wiersz 3 był po kolumnie C. Zatem wiersz 1 był też po kolumnie C i C1 dostaje kolor wiersza 1. Dokończ planszę.';
+
+  @override
+  String get tutLayers3 =>
+      'Pociągnięcie ze znakiem zapytania ukrywa swój kolor. A1 nie ma koloru kolumny A, więc wiersz 1 pomalowano po kolumnie A, a A1 pokazuje kolor wiersza 1. Teraz wiersz i kolumna B1 mają ten sam kolor. Dokończ planszę.';
+
+  @override
+  String get tutLayers4 =>
+      'Teraz prawdziwa plansza. Pomaluj pola, których wiersz i kolumna mają ten sam kolor, a potem śledź kolejność wokół prostokątów z pokazanych pól.';
+
+  @override
+  String get tutLayersS1 =>
+      'Kolejność biegnie też przez pola, które jej nie pokazują. Jeśli wiersz 2 był po kolumnie B, a kolumna B po wierszu 5, to wiersz 2 był po wierszu 5, choć żadne pole tego nie mówi. Takie łańcuchy rozstrzygają pola, do których nie sięga żaden prostokąt. Niektóre pociągnięcia ukrywają tu kolor: odczytaj go z pola, gdzie ta linia była ostatnia.';
+
+  @override
+  String get tutLayersS2 =>
+      'Gdy nic innego nie pomaga, spróbuj koloru: załóż, że ukryte pociągnięcie ma jeden kolor albo pole jeden ze swoich dwóch, i śledź kolejność, aż zamknie się w koło (pociągnięcie musiałoby być po sobie samym) albo polu zabraknie koloru. Wtedy jest na odwrót.';
+
+  @override
+  String exLayersSame(Object cell, Object value, Object row, Object col) {
+    return '$cell ma kolor $value: wiersz $row i kolumna $col oba mają $value, więc nieważne, które było ostatnie.';
+  }
+
+  @override
+  String exLayersOptions(Object cell, Object value, Object row, Object col) {
+    return '$cell ma kolor $value: z kolorów, jakie mogą mieć wiersz $row i kolumna $col, zostaje dla niego tylko $value.';
+  }
+
+  @override
+  String exLayersSeen(Object cell, Object a, String aKind, Object b, String bKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'wiersza $b',
+        'other': 'kolumny $b',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'wiersz $a',
+        'other': 'kolumnę $a',
+      },
+    );
+    String _temp2 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'wierszu $b',
+        'other': 'kolumnie $b',
+      },
+    );
+    return '$cell nie ma koloru $_temp0, więc $_temp1 pomalowano po $_temp2.';
+  }
+
+  @override
+  String exLayersLater(Object cell, Object value, Object a, String aKind, Object b, String bKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'wiersz $a',
+        'other': 'kolumnę $a',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'wierszu $b',
+        'other': 'kolumnie $b',
+      },
+    );
+    return '$cell ma kolor $value: $_temp0 pomalowano po $_temp1, więc $value zakrywa pole.';
+  }
+
+  @override
+  String exLayersLineColor(Object line, String kind, Object value, Object cell, Object other, String otherKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Wiersz $line',
+        'other': 'Kolumna $line',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      otherKind,
+      {
+        'row': 'wierszu $other',
+        'other': 'kolumnie $other',
+      },
+    );
+    return '$_temp0 ma kolor $value: ta linia była po $_temp1, więc widać ją w $cell, a tam jest $value.';
+  }
+
+  @override
+  String exLayersRectangle(Object cell, Object value, Object a, String aKind, Object b, Object c, Object d) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row':
+            'wiersz $a pomalowano po kolumnie $b, kolumnę $b po wierszu $c, a wiersz $c po kolumnie $d, więc wiersz $a był po kolumnie $d',
+        'other':
+            'kolumnę $a pomalowano po wierszu $b, wiersz $b po kolumnie $c, a kolumnę $c po wierszu $d, więc kolumna $a była po wierszu $d',
+      },
+    );
+    return '$cell ma kolor $value: $_temp0.';
+  }
+
+  @override
+  String exLayersChain(Object a, String aKind, Object b, String bKind, Object c, String cKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'Wiersz $a',
+        'other': 'Kolumnę $a',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'wierszu $b',
+        'other': 'kolumnie $b',
+      },
+    );
+    String _temp2 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'wiersz $b',
+        'other': 'kolumnę $b',
+      },
+    );
+    String _temp3 = intl.Intl.selectLogic(
+      cKind,
+      {
+        'row': 'wierszu $c',
+        'other': 'kolumnie $c',
+      },
+    );
+    String _temp4 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'wiersz $a',
+        'other': 'kolumnę $a',
+      },
+    );
+    String _temp5 = intl.Intl.selectLogic(
+      cKind,
+      {
+        'row': 'wierszu $c',
+        'other': 'kolumnie $c',
+      },
+    );
+    return '$_temp0 pomalowano po $_temp1, a $_temp2 po $_temp3, więc $_temp4 pomalowano też po $_temp5.';
+  }
+
+  @override
+  String exLayersOnly(Object cell, Object value) {
+    return '$cell ma kolor $value: każdy inny kolor prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exLayersOnlyLine(Object line, String kind, Object value) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Wiersz $line',
+        'other': 'Kolumna $line',
+      },
+    );
+    return '$_temp0 ma kolor $value: każdy inny kolor prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exLayersSupposeLine(Object line, String kind, Object value) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersz $line',
+        'other': 'kolumna $line',
+      },
+    );
+    return 'Załóżmy, że $_temp0 ma kolor $value.';
+  }
+
+  @override
+  String exLayersRefutedLine(Object line, String kind, Object value) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Wiersz $line',
+        'other': 'Kolumna $line',
+      },
+    );
+    return '$_temp0 nie może mieć koloru $value: to prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exLayersFailEmpty(Object cell) {
+    return 'Ale wtedy do $cell nie pasuje żaden kolor.';
+  }
+
+  @override
+  String exLayersFailLine(Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersza $line',
+        'other': 'kolumny $line',
+      },
+    );
+    return 'Ale wtedy do $_temp0 nie pasuje żaden kolor.';
+  }
+
+  @override
+  String exLayersFailCycle(Object a, String aKind, Object b, String bKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'wiersz $a',
+        'other': 'kolumna $a',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'wiersz $b',
+        'other': 'kolumna $b',
+      },
+    );
+    return 'Ale wtedy $_temp0 i $_temp1 musiałyby być pomalowane każde po drugim.';
+  }
 }

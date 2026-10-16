@@ -6394,4 +6394,243 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get tutGlideS3 =>
       'Справжнє поле. Поставте верхній рядок, потім лівий стовпець, потім наступний рядок, щоб поле меншало. Дві останні плитки стовпця ставлять разом, як кінець рядка, повернутий набік. Наприкінці лишиться маленький кут: обертайте його плитки по колу, доки вони не стануть на місця.';
+
+  @override
+  String get layersName => 'Шари';
+
+  @override
+  String get layersTagline => 'Мазок на мазку: видно останній';
+
+  @override
+  String get layersRules =>
+      '• Кожен рядок і кожен стовпець пофарбовано один раз, від краю до краю, кольором мазка на його початку.\n• Мазки йшли один за одним, у невідомому порядку. Пізніший мазок перекриває раніший, тож клітинка має колір того з її рядка й стовпця, що був останнім.\n• Деякі клітинки показано від початку (з крапкою). Розфарбуйте решту.\n• Мазок зі знаком питання ховає свій колір: з\'ясуйте його.\n\nВиберіть колір у палітрі й торкайтеся клітинок, щоб фарбувати (повторний дотик очищає), або торкайтеся клітинки, щоб перебирати кольори. Проведіть по клітинках, щоб пофарбувати їх усі.';
+
+  @override
+  String get tutLayers1 =>
+      'Кожен рядок і кожен стовпець пофарбовано один раз, від краю до краю, кольором мазка на його початку. Мазки йшли один за одним, і видно той, що ліг на клітинку останнім. Якщо рядок і стовпець клітинки мають однаковий колір, вона може бути лише цього кольору. Виберіть колір у палітрі й розфарбуйте порожні клітинки.';
+
+  @override
+  String get tutLayers2 =>
+      'Показана клітинка каже, який із двох її мазків був пізніше. A1 має колір рядка 1, тож рядок 1 пофарбовано після стовпця A. A3 має колір стовпця A: стовпець A був після рядка 3. C3 має колір рядка 3: рядок 3 був після стовпця C. Отже, рядок 1 був і після стовпця C, і C1 отримує колір рядка 1. Розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutLayers3 =>
+      'Мазок зі знаком питання ховає свій колір. A1 не має кольору стовпця A, тож рядок 1 пофарбовано після стовпця A, і A1 показує колір рядка 1. Тепер рядок і стовпець B1 мають однаковий колір. Розв\'яжіть поле до кінця.';
+
+  @override
+  String get tutLayers4 =>
+      'Тепер справжнє поле. Розфарбуйте клітинки, чиї рядок і стовпець мають однаковий колір, а далі стежте за порядком довкола прямокутників із показаних клітинок.';
+
+  @override
+  String get tutLayersS1 =>
+      'Порядок проходить і крізь клітинки, які його не показують. Якщо рядок 2 був після стовпця B, а стовпець B після рядка 5, то рядок 2 був після рядка 5, хоч жодна клітинка цього не каже. Такі ланцюжки вирішують клітинки, до яких не дістає жоден прямокутник. Деякі мазки тут ховають колір: прочитайте його з клітинки, де ця лінія була останньою.';
+
+  @override
+  String get tutLayersS2 =>
+      'Коли більше ніщо не допомагає, спробуйте колір: припустіть, що схований мазок має один колір або клітинка — один зі своїх двох, і стежте за порядком, доки він не замкнеться в коло (мазок мав би бути після самого себе) або клітинці не забракне кольору. Тоді все навпаки.';
+
+  @override
+  String exLayersSame(Object cell, Object value, Object row, Object col) {
+    return '$cell має колір $value: рядок $row і стовпець $col обидва мають $value, тож неважливо, хто був останнім.';
+  }
+
+  @override
+  String exLayersOptions(Object cell, Object value, Object row, Object col) {
+    return '$cell має колір $value: з кольорів, які можуть мати рядок $row і стовпець $col, для неї лишився тільки $value.';
+  }
+
+  @override
+  String exLayersSeen(Object cell, Object a, String aKind, Object b, String bKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'рядка $b',
+        'other': 'стовпця $b',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'рядок $a',
+        'other': 'стовпець $a',
+      },
+    );
+    return '$cell не має кольору $_temp0, тож $_temp1 пофарбовано після нього.';
+  }
+
+  @override
+  String exLayersLater(Object cell, Object value, Object a, String aKind, Object b, String bKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'рядок $a',
+        'other': 'стовпець $a',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'рядка $b',
+        'other': 'стовпця $b',
+      },
+    );
+    return '$cell має колір $value: $_temp0 пофарбовано після $_temp1, тож його $value перекриває клітинку.';
+  }
+
+  @override
+  String exLayersLineColor(Object line, String kind, Object value, Object cell, Object other, String otherKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Рядок $line',
+        'other': 'Стовпець $line',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      otherKind,
+      {
+        'row': 'рядка $other',
+        'other': 'стовпця $other',
+      },
+    );
+    return '$_temp0 має колір $value: він був після $_temp1, тож видний у $cell, а там $value.';
+  }
+
+  @override
+  String exLayersRectangle(Object cell, Object value, Object a, String aKind, Object b, Object c, Object d) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row':
+            'рядок $a пофарбовано після стовпця $b, стовпець $b — після рядка $c, а рядок $c — після стовпця $d, тож рядок $a був після стовпця $d',
+        'other':
+            'стовпець $a пофарбовано після рядка $b, рядок $b — після стовпця $c, а стовпець $c — після рядка $d, тож стовпець $a був після рядка $d',
+      },
+    );
+    return '$cell має колір $value: $_temp0.';
+  }
+
+  @override
+  String exLayersChain(Object a, String aKind, Object b, String bKind, Object c, String cKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'Рядок $a',
+        'other': 'Стовпець $a',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'рядка $b',
+        'other': 'стовпця $b',
+      },
+    );
+    String _temp2 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'рядок $b',
+        'other': 'стовпець $b',
+      },
+    );
+    String _temp3 = intl.Intl.selectLogic(
+      cKind,
+      {
+        'row': 'рядка $c',
+        'other': 'стовпця $c',
+      },
+    );
+    String _temp4 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'рядок $a',
+        'other': 'стовпець $a',
+      },
+    );
+    String _temp5 = intl.Intl.selectLogic(
+      cKind,
+      {
+        'row': 'рядка $c',
+        'other': 'стовпця $c',
+      },
+    );
+    return '$_temp0 пофарбовано після $_temp1, а $_temp2 — після $_temp3, тож $_temp4 був і після $_temp5.';
+  }
+
+  @override
+  String exLayersOnly(Object cell, Object value) {
+    return '$cell має колір $value: будь-який інший колір веде до суперечності.';
+  }
+
+  @override
+  String exLayersOnlyLine(Object line, String kind, Object value) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Рядок $line',
+        'other': 'Стовпець $line',
+      },
+    );
+    return '$_temp0 має колір $value: будь-який інший колір веде до суперечності.';
+  }
+
+  @override
+  String exLayersSupposeLine(Object line, String kind, Object value) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядок $line',
+        'other': 'стовпець $line',
+      },
+    );
+    return 'Припустімо, що $_temp0 має колір $value.';
+  }
+
+  @override
+  String exLayersRefutedLine(Object line, String kind, Object value) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Рядок $line',
+        'other': 'Стовпець $line',
+      },
+    );
+    return '$_temp0 не може мати колір $value: це веде до суперечності.';
+  }
+
+  @override
+  String exLayersFailEmpty(Object cell) {
+    return 'Але тоді $cell не пасує жоден колір.';
+  }
+
+  @override
+  String exLayersFailLine(Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядку $line',
+        'other': 'стовпцю $line',
+      },
+    );
+    return 'Але тоді $_temp0 не пасує жоден колір.';
+  }
+
+  @override
+  String exLayersFailCycle(Object a, String aKind, Object b, String bKind) {
+    String _temp0 = intl.Intl.selectLogic(
+      aKind,
+      {
+        'row': 'рядок $a',
+        'other': 'стовпець $a',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      bKind,
+      {
+        'row': 'рядок $b',
+        'other': 'стовпець $b',
+      },
+    );
+    return 'Але тоді $_temp0 і $_temp1 мали б бути пофарбовані кожен після іншого.';
+  }
 }
