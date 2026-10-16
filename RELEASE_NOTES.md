@@ -2,6 +2,7 @@
 
 ## 0.12.0 - 2026-10-17
 - New game: Layers. Every row and every column was painted once in its own color, in an order you don't know, and the last stroke over a cell is the one you see. Finish the picture from the cells shown, working out which strokes came later; on medium and hard boards some strokes hide their color. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-18
+- Fixed: in the web version, medium and hard Rampart boards could not be generated
 
 ## 0.11.0 - 2026-10-15
 - New game: Pebbles. Put a filled or a hollow stone in every cell: all filled stones must form one group, joined side by side, and so must all hollow ones, and no 2×2 block may hold four stones of one kind. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-16
