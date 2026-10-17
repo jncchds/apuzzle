@@ -109,4 +109,16 @@ void main() {
       expect(SudokuSolver(9, disabled: below).solveLogic(List.of(g), 3), isFalse, reason: 'lesson ${k + 2} too easy');
     }
   });
+
+  test('version 1 boards (before 2026-10-18) still generate: unique, easy to hard at their old tiers', () {
+    for (final n in [6, 9]) {
+      for (final d in Difficulty.values) {
+        final p = generateSudoku(GenParams(size: GridSize.square(n), difficulty: d, seed: 3, version: 1));
+        final g = [for (final v in p.givens) v ?? -1];
+        final solver = SudokuSolver(n);
+        expect(solver.countSolutions(g), 1);
+        if (d != Difficulty.expert) expect(solver.solveLogic(List.of(g), sudokuTier(d)), isTrue);
+      }
+    }
+  });
 }

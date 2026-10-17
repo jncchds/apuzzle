@@ -336,7 +336,7 @@ class GameController extends ChangeNotifier {
     final puzzle = type.decodePuzzle(json['puzzle'] as Map<String, dynamic>);
     return GameController(
       type: type,
-      params: GenParams.fromJson(json['params'] as Map<String, dynamic>),
+      params: type.savedParams(json['params'] as Map<String, dynamic>),
       puzzle: puzzle as Object,
       state: type.decodeState(json['state'] as Map<String, dynamic>) as Object,
       settings: settings,

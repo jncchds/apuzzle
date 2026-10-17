@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/day.dart';
 import '../../core/difficulty.dart';
 import '../../core/game_controller.dart';
 import '../../core/grid.dart';
@@ -97,9 +98,8 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
     _ => null,
   };
 
-  /// Bump when [generate] changes what a seed produces.
   @override
-  int get generatorVersion => 2;
+  List<(int, Day?)> get generatorVersions => const [(2, null)];
 
   @override
   PopPuzzle generate(GenParams params) {

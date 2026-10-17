@@ -83,6 +83,7 @@ GenParams dailyParams(Day day, PuzzleType type, Difficulty difficulty) => GenPar
   difficulty: difficulty,
   seed: dailySeed(day),
   options: type.resolveOptions(const {}),
+  version: type.versionOn(day),
 );
 
 /// Whether [code] is one of [day]'s puzzles and [day] is playable.

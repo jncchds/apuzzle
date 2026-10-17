@@ -17,7 +17,13 @@ enum Difficulty {
 
 /// Everything needed to (re)generate a puzzle deterministically.
 class GenParams {
-  const GenParams({required this.size, required this.difficulty, required this.seed, this.options = const {}});
+  const GenParams({
+    required this.size,
+    required this.difficulty,
+    required this.seed,
+    this.options = const {},
+    this.version,
+  });
 
   final GridSize size;
   final Difficulty difficulty;
@@ -27,7 +33,12 @@ class GenParams {
   /// [PuzzleType.optionsFor]; types fill in defaults for missing ones.
   final Map<String, String> options;
 
-  GenParams withSeed(int seed) => GenParams(size: size, difficulty: difficulty, seed: seed, options: options);
+  /// The generator version (see [PuzzleType.generatorVersions]); null for
+  /// the newest.
+  final int? version;
+
+  GenParams withSeed(int seed, {int? version}) =>
+      GenParams(size: size, difficulty: difficulty, seed: seed, options: options, version: version ?? this.version);
 
   /// Stats bucket: difficulty plus the chosen options, e.g. `hard.std.clear`.
   String get variant => [difficulty.name, ...options.values].join('.');
@@ -37,6 +48,7 @@ class GenParams {
     'difficulty': difficulty.name,
     'seed': seed,
     if (options.isNotEmpty) 'options': options,
+    'version': ?version,
   };
 
   factory GenParams.fromJson(Map<String, dynamic> j) => GenParams(
@@ -44,5 +56,6 @@ class GenParams {
     difficulty: Difficulty.values.byName(j['difficulty'] as String),
     seed: j['seed'] as int,
     options: (j['options'] as Map<String, dynamic>?)?.cast<String, String>() ?? const {},
+    version: j['version'] as int?,
   );
 }

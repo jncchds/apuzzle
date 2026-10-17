@@ -100,9 +100,48 @@ abstract class PuzzleType<P, S> {
   /// Pure and deterministic for a given [params] (same seed → same puzzle).
   P generate(GenParams params);
 
-  /// Part of the shareable puzzle code. Bump it whenever a change to [generate]
-  /// makes an old seed produce a different puzzle, so stale codes are rejected.
-  int get generatorVersion => 1;
+  /// Generator versions [generate] still makes ([GenParams.version]), oldest
+  /// first, each with the day new games and daily puzzles start using it
+  /// (null for the first). Add one whenever a change to [generate] makes an
+  /// old seed produce a different puzzle, starting the day after the release,
+  /// and keep the old code path: shared links, saves and earlier days' daily
+  /// puzzles carry their version. Versions dropped from here are rejected.
+  List<(int, Day?)> get generatorVersions => const [(1, null)];
+
+  /// The newest version; part of the shareable puzzle code.
+  int get generatorVersion => generatorVersions.last.$1;
+
+  /// The version new puzzles of [day] use.
+  int versionOn(Day day) {
+    var v = generatorVersions.first.$1;
+    for (final (version, since) in generatorVersions) {
+      if (since == null || since <= day) v = version;
+    }
+    return v;
+  }
+
+  /// [params] for a new puzzle started today.
+  GenParams fresh(GenParams params) => GenParams(
+    size: params.size,
+    difficulty: params.difficulty,
+    seed: params.seed,
+    options: params.options,
+    version: versionOn(Day.today()),
+  );
+
+  /// Saved [GenParams]; saves from before versions were stored are the
+  /// oldest version still made.
+  GenParams savedParams(Map<String, dynamic> json) {
+    final p = GenParams.fromJson(json);
+    if (p.version != null) return p;
+    return GenParams(
+      size: p.size,
+      difficulty: p.difficulty,
+      seed: p.seed,
+      options: p.options,
+      version: generatorVersions.first.$1,
+    );
+  }
 
   S initialState(P puzzle);
   bool isComplete(P puzzle, S state);

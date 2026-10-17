@@ -30,6 +30,15 @@ int _reference(String s) {
 }
 
 void main() {
+  test('daily puzzles keep the generator version of their day', () {
+    final sudoku = puzzleTypeById('sudoku');
+    String code(Day day) => PuzzleCode.format(sudoku, dailyParams(day, sudoku, Difficulty.expert));
+    expect(code(const Day(2026, 10, 17)), endsWith('-v1'));
+    expect(code(const Day(2026, 10, 18)), endsWith('-v2'));
+    final old = PuzzleCode.parse(code(const Day(2026, 10, 17)), puzzleTypes);
+    expect(dailyParams(const Day(2026, 10, 17), sudoku, Difficulty.expert).version, old.params.version);
+  });
+
   setUp(() => dailyChoices = const []);
   tearDown(() => dailyChoices = const []);
 

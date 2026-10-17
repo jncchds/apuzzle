@@ -1,3 +1,4 @@
+import 'package:apuzzle/core/day.dart';
 import 'package:apuzzle/core/difficulty.dart';
 import 'package:apuzzle/core/grid.dart';
 import 'package:apuzzle/core/puzzle_code.dart';
@@ -52,6 +53,27 @@ void main() {
     ]) {
       expect(() => PuzzleCode.parse(bad, puzzleTypes), throwsFormatException, reason: bad);
     }
+  });
+
+  test('older generator versions stay playable, and new puzzles switch on their day', () {
+    final sudoku = puzzleTypeById('sudoku');
+    expect(sudoku.versionOn(const Day(2026, 10, 17)), 1);
+    expect(sudoku.versionOn(const Day(2026, 10, 18)), 2);
+    for (final v in [1, 2]) {
+      final code = 'sudoku-9x9-expert-10Z-v$v';
+      final parsed = PuzzleCode.parse(code, puzzleTypes);
+      expect(parsed.params.version, v);
+      expect(parsed.toString(), code);
+    }
+    expect(() => PuzzleCode.parse('sudoku-9x9-expert-10Z-v3', puzzleTypes), throwsFormatException);
+    // Pop dropped its first version.
+    expect(() => PuzzleCode.parse('pop-10x8-hard-10Z-v1', puzzleTypes), throwsFormatException);
+    // A fresh puzzle takes today's version; saves from before versions were
+    // stored are the oldest one.
+    final params = GenParams(size: const GridSize.square(9), difficulty: Difficulty.hard, seed: 5);
+    expect(sudoku.fresh(params).version, sudoku.versionOn(Day.today()));
+    expect(sudoku.savedParams(params.toJson()).version, 1);
+    expect(sudoku.savedParams(sudoku.fresh(params).toJson()).version, sudoku.versionOn(Day.today()));
   });
 
   test('non-square sizes keep cols×rows order', () {

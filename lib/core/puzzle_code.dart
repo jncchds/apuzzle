@@ -31,7 +31,7 @@ class PuzzleCode {
     final s = params.size;
     final options = type.resolveOptions(params.options).values;
     return '${type.id}-${s.cols}x${s.rows}-${[params.difficulty.name, ...options].join('.')}-'
-        '${params.seed.toRadixString(36).toUpperCase()}-v${type.generatorVersion}';
+        '${params.seed.toRadixString(36).toUpperCase()}-v${params.version ?? type.generatorVersion}';
   }
 
   static String link(PuzzleType type, GenParams params) => '$linkBase?p=${format(type, params)}';
@@ -70,15 +70,20 @@ class PuzzleCode {
     final seed = int.tryParse(parts[3], radix: 36);
     if (seed == null || seed < 0 || seed > maxSeed) throw PuzzleCodeException((l) => l.codeBadSeed(parts[3]));
 
+    int? version;
     if (parts.length == 5) {
-      final version = RegExp(r'^v(\d+)$').firstMatch(parts[4]);
-      if (version == null) throw PuzzleCodeException((l) => l.codeBadVersion(parts[4]));
-      if (int.parse(version[1]!) != type.generatorVersion) {
+      final v = RegExp(r'^v(\d+)$').firstMatch(parts[4]);
+      if (v == null) throw PuzzleCodeException((l) => l.codeBadVersion(parts[4]));
+      version = int.parse(v[1]!);
+      if (!type.generatorVersions.any((e) => e.$1 == version)) {
         throw PuzzleCodeException((l) => l.codeOtherVersion);
       }
     }
 
-    return PuzzleCode(type, GenParams(size: size, difficulty: difficulty, seed: seed, options: options));
+    return PuzzleCode(
+      type,
+      GenParams(size: size, difficulty: difficulty, seed: seed, options: options, version: version),
+    );
   }
 
   /// Maps positional choice ids onto [type]'s options (later options may

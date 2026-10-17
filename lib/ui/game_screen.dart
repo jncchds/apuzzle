@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -109,7 +108,10 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
         debugPrint('Could not restore save: $e');
       }
     }
-    _newGame(widget.params ?? GenParams(size: type.defaultSize, difficulty: type.difficulties.first, seed: _seed()));
+    _newGame(
+      widget.params ??
+          type.fresh(GenParams(size: type.defaultSize, difficulty: type.difficulties.first, seed: _seed())),
+    );
   }
 
   int _seed() => Random().nextInt(1 << 31);
@@ -124,7 +126,8 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
   Map<String, dynamic>? _resumable(Map<String, dynamic>? save) {
     final params = widget.params;
     if (save == null || params == null) return save;
-    return jsonEncode(save['params']) == jsonEncode(params.toJson()) ? save : null;
+    final saved = type.savedParams(save['params'] as Map<String, dynamic>);
+    return PuzzleCode.format(type, saved) == PuzzleCode.format(type, params) ? save : null;
   }
 
   Future<void> _newGame(GenParams params) async {
@@ -133,6 +136,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
       difficulty: params.difficulty,
       seed: params.seed,
       options: type.resolveOptions(params.options),
+      version: params.version,
     );
     widget.onPuzzleChanged?.call(params);
     final settings = context.read<Settings>();
@@ -305,7 +309,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
             onSelected: (v) {
               switch (v) {
                 case 'new' when c != null:
-                  _newGame(c.params.withSeed(_seed()));
+                  _newGame(type.fresh(c.params.withSeed(_seed())));
                 case 'copy' when c != null:
                   copyWithToast(context, c.link, l.shareLinkCopied);
                 case 'code':
@@ -333,7 +337,8 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
               const SizedBox(height: 12),
               FilledButton(
                 onPressed: () => _newGame(
-                  widget.params ?? GenParams(size: type.defaultSize, difficulty: Difficulty.easy, seed: _seed()),
+                  widget.params ??
+                      type.fresh(GenParams(size: type.defaultSize, difficulty: Difficulty.easy, seed: _seed())),
                 ),
                 child: Text(l.tryAgain),
               ),
@@ -483,7 +488,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver, Ti
     backLabel: context.l10n.home,
     onBack: () => Navigator.of(context).pop(),
     nextLabel: context.l10n.newPuzzle,
-    onNext: () => _newGame(c.params.withSeed(_seed())),
+    onNext: () => _newGame(type.fresh(c.params.withSeed(_seed()))),
   );
 
   /// Back leads to the calendar; next is the day's next unsolved puzzle.

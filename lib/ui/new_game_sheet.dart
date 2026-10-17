@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../core/day.dart';
 import '../core/difficulty.dart';
 import '../core/grid.dart';
 import '../core/persistence.dart';
@@ -43,6 +44,7 @@ GenParams quickParams(PuzzleType type, GameStore store, Size screen) {
     difficulty: Difficulty.values.asNameMap()[last?['difficulty']] ?? type.difficulties.first,
     seed: Random().nextInt(1 << 31),
     options: type.resolveOptions((last?['options'] as Map<String, dynamic>?)?.cast<String, String>() ?? const {}),
+    version: type.versionOn(Day.today()),
   );
 }
 
@@ -80,7 +82,13 @@ class _NewGameSheetState extends State<_NewGameSheet> {
 
   late Map<String, String> _options;
 
-  GenParams _params(int seed) => GenParams(size: _size, difficulty: _difficulty, seed: seed, options: _options);
+  GenParams _params(int seed) => GenParams(
+    size: _size,
+    difficulty: _difficulty,
+    seed: seed,
+    options: _options,
+    version: widget.type.versionOn(Day.today()),
+  );
 
   void _go({required bool resume}) {
     final store = context.read<GameStore>();
@@ -90,7 +98,7 @@ class _NewGameSheetState extends State<_NewGameSheet> {
     if (resume) {
       // The address names the saved puzzle; GameScreen resumes it.
       try {
-        params = GenParams.fromJson(store.readSave(widget.type.id)!['params'] as Map<String, dynamic>);
+        params = widget.type.savedParams(store.readSave(widget.type.id)!['params'] as Map<String, dynamic>);
       } catch (e) {
         debugPrint('Could not read the saved puzzle: $e');
       }

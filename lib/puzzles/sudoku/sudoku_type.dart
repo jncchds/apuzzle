@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/day.dart';
 import '../../core/difficulty.dart';
 import '../../core/explain.dart';
 import '../../core/grid.dart';
@@ -99,7 +100,7 @@ class SudokuType extends ValueGridType<SudokuPuzzle> {
 
   // 2: hard and expert boards need their tier (expert: fish and wings).
   @override
-  int get generatorVersion => 2;
+  List<(int, Day?)> get generatorVersions => const [(1, null), (2, Day(2026, 10, 18))];
 
   @override
   bool isSolved(SudokuPuzzle puzzle, ValueGrid state) =>
