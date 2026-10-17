@@ -1441,6 +1441,18 @@ class AppLocalizationsUk extends AppLocalizations {
       'Ще два прийоми. Пари: дві клітинки лінії чи блоку, де можливі лише ті самі два числа, забирають їх собі. Вказівка: якщо місця для числа в блоці лежать на одній лінії, у решті цієї лінії його немає.';
 
   @override
+  String get tutSudokuS3 =>
+      'Приховані пари: коли два числа поміщаються лише в ті самі дві клітинки рядка, стовпця чи блоку, ці клітинки належать їм, тож усі інші нотатки в них можна прибрати. Так само працюють три числа в трьох клітинках.';
+
+  @override
+  String get tutSudokuS4 =>
+      'Ікс-крило: у двох рядках число поміщається лише в ті самі два стовпці. Один рядок займе ліве місце, другий — праве, тож у решті обох стовпців його немає. З трьома рядками й стовпцями це «Рибка-меч».';
+
+  @override
+  String get tutSudokuS5 =>
+      'Ігрек-крило: клітинка, де може бути x або y, бачить одну клітинку з x або z і одну з y або z. Хоч би що було в першій, в одній з інших буде z, тож z немає там, де їх бачать обидві.';
+
+  @override
   String get tutKings1 =>
       'Поставте рівно одну корону в кожен рядок, кожен стовпець і кожну кольорову область. Три вже стоять, а для останньої лишилося одне місце. Торкніться його двічі: спершу крапка, потім корона.';
 
@@ -2126,18 +2138,102 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
-  String exSudokuPairRow(Object a, Object b, Object v1, Object v2, Object row) {
-    return 'У $a і $b можуть бути лише $v1 і $v2, тож в решті рядка $row цих цифр бути не може.';
+  String exSudokuPair(Object a, Object b, Object v1, Object v2, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядка $unit',
+        'col': 'стовпця $unit',
+        'other': 'блоку $unit',
+      },
+    );
+    return 'У $a і $b можуть бути лише $v1 і $v2, тож в решті $_temp0 цих цифр бути не може.';
   }
 
   @override
-  String exSudokuPairCol(Object a, Object b, Object v1, Object v2, Object col) {
-    return 'У $a і $b можуть бути лише $v1 і $v2, тож в решті стовпця $col цих цифр бути не може.';
+  String exSudokuTriple(Object cells, Object v1, Object v2, Object v3, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядка $unit',
+        'col': 'стовпця $unit',
+        'other': 'блоку $unit',
+      },
+    );
+    return 'У $cells разом можуть бути лише $v1, $v2 і $v3, тож в решті $_temp0 цих цифр бути не може.';
   }
 
   @override
-  String exSudokuPairBox(Object a, Object b, Object v1, Object v2, Object box) {
-    return 'У $a і $b можуть бути лише $v1 і $v2, тож в решті блоку $box цих цифр бути не може.';
+  String exSudokuHiddenPair(Object a, Object b, Object v1, Object v2, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядку $unit',
+        'col': 'стовпці $unit',
+        'other': 'блоці $unit',
+      },
+    );
+    return 'У $_temp0 цифри $v1 і $v2 можуть бути лише в $a і $b, тож інших цифр у цих клітинках бути не може.';
+  }
+
+  @override
+  String exSudokuHiddenTriple(Object cells, Object v1, Object v2, Object v3, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядку $unit',
+        'col': 'стовпці $unit',
+        'other': 'блоці $unit',
+      },
+    );
+    return 'У $_temp0 цифри $v1, $v2 і $v3 можуть бути лише в $cells, тож інших цифр у цих клітинках бути не може.';
+  }
+
+  @override
+  String exSudokuXWing(Object value, String kind, Object b1, Object b2, Object c1, Object c2) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'У рядках $b1 і $b2 цифра $value може бути лише в стовпцях $c1 і $c2. Кожен із цих стовпців отримає її з одного з рядків, тож в решті стовпців $c1 і $c2 її бути не може.',
+        'other':
+            'У стовпцях $b1 і $b2 цифра $value може бути лише в рядках $c1 і $c2. Кожен із цих рядків отримає її з одного зі стовпців, тож в решті рядків $c1 і $c2 її бути не може.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuSwordfish(
+    Object value,
+    String kind,
+    Object b1,
+    Object b2,
+    Object b3,
+    Object c1,
+    Object c2,
+    Object c3,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'У рядках $b1, $b2 і $b3 цифра $value може бути лише в стовпцях $c1, $c2 і $c3. Ці три рядки заповнять усі три стовпці, тож у решті цих стовпців її бути не може.',
+        'other':
+            'У стовпцях $b1, $b2 і $b3 цифра $value може бути лише в рядках $c1, $c2 і $c3. Ці три стовпці заповнять усі три рядки, тож у решті цих рядків її бути не може.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuXyWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
+    return 'У $pivot буде $x або $y. Якщо $x, то в $a буде $z; якщо $y, то в $b буде $z. Так чи так одна з них — $z, тож клітинка, яка бачить обидві, не може бути $z.';
+  }
+
+  @override
+  String exSudokuXyzWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
+    return 'У $pivot буде $x, $y або $z, у $a — $x або $z, у $b — $y або $z. Одна з трьох неодмінно $z, тож клітинка, яка бачить усі три, не може бути $z.';
   }
 
   @override

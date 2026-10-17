@@ -1405,6 +1405,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'Two more tricks. Pairs: two cells of a line or box that can only hold the same two numbers claim them. Pointing: if a box\'s spots for a number share a line, the rest of that line can\'t have it.';
 
   @override
+  String get tutSudokuS3 =>
+      'Hidden pairs: when two numbers fit only in the same two cells of a row, column or box, those cells belong to them, so every other note there can go. The same works for three numbers in three cells.';
+
+  @override
+  String get tutSudokuS4 =>
+      'X-Wing: in two rows a number fits only in the same two columns. One row takes the left spot and the other the right one, so the rest of both columns can\'t have it. With three rows and columns it\'s a Swordfish.';
+
+  @override
+  String get tutSudokuS5 =>
+      'Y-Wing: a cell that holds x or y sees one cell of x or z and one of y or z. Whatever the first one is, one of the others is z, so z is ruled out wherever both of them see.';
+
+  @override
   String get tutKings1 =>
       'Put exactly one crown in every row, every column and every colored region. Three are placed, and the last one has just one spot left. Tap it twice: first a dot, then a crown.';
 
@@ -2090,18 +2102,102 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String exSudokuPairRow(Object a, Object b, Object v1, Object v2, Object row) {
-    return '$a and $b can only hold $v1 and $v2, so those digits are ruled out in the rest of row $row.';
+  String exSudokuPair(Object a, Object b, Object v1, Object v2, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'box $unit',
+      },
+    );
+    return '$a and $b can only hold $v1 and $v2, so those digits are ruled out in the rest of $_temp0.';
   }
 
   @override
-  String exSudokuPairCol(Object a, Object b, Object v1, Object v2, Object col) {
-    return '$a and $b can only hold $v1 and $v2, so those digits are ruled out in the rest of column $col.';
+  String exSudokuTriple(Object cells, Object v1, Object v2, Object v3, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'box $unit',
+      },
+    );
+    return '$cells can only hold $v1, $v2 and $v3 between them, so those digits are ruled out in the rest of $_temp0.';
   }
 
   @override
-  String exSudokuPairBox(Object a, Object b, Object v1, Object v2, Object box) {
-    return '$a and $b can only hold $v1 and $v2, so those digits are ruled out in the rest of box $box.';
+  String exSudokuHiddenPair(Object a, Object b, Object v1, Object v2, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'box $unit',
+      },
+    );
+    return 'In $_temp0, $v1 and $v2 can only go in $a and $b, so those two cells can\'t hold anything else.';
+  }
+
+  @override
+  String exSudokuHiddenTriple(Object cells, Object v1, Object v2, Object v3, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'box $unit',
+      },
+    );
+    return 'In $_temp0, $v1, $v2 and $v3 can only go in $cells, so those cells can\'t hold anything else.';
+  }
+
+  @override
+  String exSudokuXWing(Object value, String kind, Object b1, Object b2, Object c1, Object c2) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'In rows $b1 and $b2, $value can only go in columns $c1 and $c2. Each of those columns gets one of them, so $value is ruled out in the rest of columns $c1 and $c2.',
+        'other':
+            'In columns $b1 and $b2, $value can only go in rows $c1 and $c2. Each of those rows gets one of them, so $value is ruled out in the rest of rows $c1 and $c2.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuSwordfish(
+    Object value,
+    String kind,
+    Object b1,
+    Object b2,
+    Object b3,
+    Object c1,
+    Object c2,
+    Object c3,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'In rows $b1, $b2 and $b3, $value can only go in columns $c1, $c2 and $c3. Those three rows fill all three columns, so $value is ruled out in the rest of them.',
+        'other':
+            'In columns $b1, $b2 and $b3, $value can only go in rows $c1, $c2 and $c3. Those three columns fill all three rows, so $value is ruled out in the rest of them.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuXyWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
+    return '$pivot is $x or $y. If it\'s $x, $a is $z; if it\'s $y, $b is $z. Either way one of them is $z, so a cell that sees both can\'t be $z.';
+  }
+
+  @override
+  String exSudokuXyzWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
+    return '$pivot is $x, $y or $z, $a is $x or $z, and $b is $y or $z. One of the three is $z whatever happens, so a cell that sees all three can\'t be $z.';
   }
 
   @override

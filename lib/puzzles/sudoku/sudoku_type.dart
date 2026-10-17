@@ -97,6 +97,10 @@ class SudokuType extends ValueGridType<SudokuPuzzle> {
   @override
   SudokuPuzzle generate(GenParams params) => generateSudoku(params);
 
+  // 2: hard and expert boards need their tier (expert: fish and wings).
+  @override
+  int get generatorVersion => 2;
+
   @override
   bool isSolved(SudokuPuzzle puzzle, ValueGrid state) =>
       state.isFull && sudokuConflicts(puzzle.n, state.toFlat()).isEmpty;

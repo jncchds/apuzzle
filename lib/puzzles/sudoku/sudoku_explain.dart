@@ -18,7 +18,8 @@ class SudokuKnowledge {
 }
 
 /// Explains Sudoku with [SudokuSolver]: singles, then locked candidates and
-/// naked pairs, then probing two- and three-candidate cells.
+/// pairs and triples, then fish and wings, then probing two- and
+/// three-candidate cells.
 class SudokuExplainer extends ValueGridExplainer<SudokuPuzzle, SudokuKnowledge> {
   const SudokuExplainer();
 
@@ -26,10 +27,10 @@ class SudokuExplainer extends ValueGridExplainer<SudokuPuzzle, SudokuKnowledge> 
   static final _solvers = <int, SudokuSolver>{};
 
   @override
-  int get levels => 3;
+  int get levels => 4;
 
   @override
-  bool probes(int level) => level == 3;
+  bool probes(int level) => level == 4;
 
   @override
   SudokuKnowledge seed(SudokuPuzzle p, ValueGrid s) {
@@ -93,6 +94,10 @@ class SudokuExplainer extends ValueGridExplainer<SudokuPuzzle, SudokuKnowledge> 
     final a = f.args;
     final at = f.slot >= 0 ? cell(f.slot) : '';
     final v = valTok(f.value);
+    List<String> digits(int mask) => [
+      for (var d = 0; d < n; d++)
+        if (mask & (1 << d) != 0) valTok(d),
+    ];
     final here = {...cells(f.premises), if (f.slot >= 0) pos(f.slot)};
     switch (f.rule) {
       case ruleAssume:
@@ -131,20 +136,50 @@ class SudokuExplainer extends ValueGridExplainer<SudokuPuzzle, SudokuKnowledge> 
               : l.exSudokuClaimingCol(colTok(line - n), d, box(a[2])),
           {...cells(geo.units[line]), ...cells(geo.units[a[2]])},
         );
-      case SudokuRule.pair:
+      case SudokuRule.pair || SudokuRule.triple || SudokuRule.hiddenPair || SudokuRule.hiddenTriple:
         final ui = a[0];
-        final ds = [
-          for (var d = 0; d < n; d++)
-            if (a[3] & (1 << d) != 0) valTok(d),
-        ];
-        final c1 = cell(a[1]), c2 = cell(a[2]);
+        final kind = ui < n ? 'row' : (ui < 2 * n ? 'col' : 'box');
+        final unit = ui < n ? rowTok(ui) : (ui < 2 * n ? colTok(ui - n) : box(ui));
+        final ds = digits(a[1]);
+        final set = [for (final i in a.sublist(2)) cell(i)];
+        final rule = SudokuRule.values[f.rule];
         return ExplainLine(
-          (l) => ui < n
-              ? l.exSudokuPairRow(c1, c2, ds[0], ds[1], rowTok(ui))
-              : ui < 2 * n
-              ? l.exSudokuPairCol(c1, c2, ds[0], ds[1], colTok(ui - n))
-              : l.exSudokuPairBox(c1, c2, ds[0], ds[1], box(ui)),
+          (l) => switch (rule) {
+            SudokuRule.pair => l.exSudokuPair(set[0], set[1], ds[0], ds[1], kind, unit),
+            SudokuRule.triple => l.exSudokuTriple(cellsTok(cells(a.sublist(2))), ds[0], ds[1], ds[2], kind, unit),
+            SudokuRule.hiddenPair => l.exSudokuHiddenPair(set[0], set[1], ds[0], ds[1], kind, unit),
+            _ => l.exSudokuHiddenTriple(cellsTok(cells(a.sublist(2))), ds[0], ds[1], ds[2], kind, unit),
+          },
           cells(geo.units[ui]),
+          'subset:${f.rule}:${a.join(',')}',
+        );
+      case SudokuRule.xWing || SudokuRule.swordfish:
+        final k = f.rule == SudokuRule.xWing.index ? 2 : 3;
+        final d = valTok(a[0]), rows = a[1] == 0;
+        final base = [for (final x in a.sublist(2, 2 + k)) rows ? rowTok(x) : colTok(x)];
+        final cover = [for (final x in a.sublist(2 + k)) rows ? colTok(x) : rowTok(x)];
+        final kind = rows ? 'row' : 'col';
+        final lines = {
+          for (var x = 0; x < k; x++) ...[
+            ...cells(geo.units[rows ? a[2 + x] : n + a[2 + x]]),
+            ...cells(geo.units[rows ? n + a[2 + k + x] : a[2 + k + x]]),
+          ],
+        };
+        return ExplainLine(
+          (l) => k == 2
+              ? l.exSudokuXWing(d, kind, base[0], base[1], cover[0], cover[1])
+              : l.exSudokuSwordfish(d, kind, base[0], base[1], base[2], cover[0], cover[1], cover[2]),
+          lines,
+          'fish:${a.join(',')}',
+        );
+      case SudokuRule.xyWing || SudokuRule.xyzWing:
+        final pivot = a[0], wa = a[1], wb = a[2], z = a[3], x = valTok(a[4]), y = valTok(a[5]);
+        return ExplainLine(
+          (l) => f.rule == SudokuRule.xyWing.index
+              ? l.exSudokuXyWing(cell(pivot), x, y, cell(wa), cell(wb), valTok(z))
+              : l.exSudokuXyzWing(cell(pivot), x, y, cell(wa), cell(wb), valTok(z)),
+          {pos(pivot), pos(wa), pos(wb), pos(f.slot)},
+          'wing:${a.join(',')}',
         );
       case SudokuRule.failEmpty:
         return ExplainLine((l) => l.exSudokuFailEmpty(cell(a[0])), here);

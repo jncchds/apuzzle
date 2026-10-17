@@ -114,11 +114,14 @@ class PocketsExplainer extends MaskGridExplainer<PocketsPuzzle> {
         final ds = totalsDigits(a[3]).map(valTok).toList();
         final c1 = cell(a[1]), c2 = cell(a[2]);
         return ExplainLine(
-          (l) => u < n
-              ? l.exSudokuPairRow(c1, c2, ds[0], ds[1], rowTok(u))
-              : u < 2 * n
-              ? l.exSudokuPairCol(c1, c2, ds[0], ds[1], colTok(u - n))
-              : l.exSudokuPairBox(c1, c2, ds[0], ds[1], box(u)),
+          (l) => l.exSudokuPair(
+            c1,
+            c2,
+            ds[0],
+            ds[1],
+            u < n ? 'row' : (u < 2 * n ? 'col' : 'box'),
+            u < n ? rowTok(u) : (u < 2 * n ? colTok(u - n) : box(u)),
+          ),
           cells(s.geo.units[u]),
         );
       case PocketsRule.failEmpty:

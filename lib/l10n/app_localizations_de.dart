@@ -1414,6 +1414,18 @@ class AppLocalizationsDe extends AppLocalizations {
       'Zwei neue Tricks. Paare: Zwei Felder einer Linie oder eines Blocks, in die nur dieselben zwei Zahlen passen, beanspruchen sie. Zeigen: Liegen die Plätze eines Blocks für eine Zahl auf einer Linie, fehlt sie im Rest dieser Linie.';
 
   @override
+  String get tutSudokuS3 =>
+      'Versteckte Paare: Passen zwei Zahlen in einer Zeile, Spalte oder einem Block nur in dieselben zwei Felder, gehören diese Felder ihnen, also können alle anderen Notizen dort weg. Mit drei Zahlen in drei Feldern geht es genauso.';
+
+  @override
+  String get tutSudokuS4 =>
+      'X-Wing: In zwei Zeilen passt eine Zahl nur in dieselben zwei Spalten. Eine Zeile nimmt den linken Platz, die andere den rechten, also fehlt sie im Rest beider Spalten. Mit drei Zeilen und Spalten heißt das Schwertfisch.';
+
+  @override
+  String get tutSudokuS5 =>
+      'Y-Wing: Ein Feld mit x oder y sieht ein Feld mit x oder z und eines mit y oder z. Was auch im ersten steht, eines der anderen ist z, also fällt z überall weg, wo beide hinsehen.';
+
+  @override
   String get tutKings1 =>
       'Setze genau eine Krone in jede Zeile, jede Spalte und jeden farbigen Bereich. Drei stehen schon, und für die letzte ist nur ein Platz frei. Tippe zweimal darauf: erst ein Punkt, dann eine Krone.';
 
@@ -2102,18 +2114,102 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String exSudokuPairRow(Object a, Object b, Object v1, Object v2, Object row) {
-    return 'In $a und $b können nur $v1 und $v2 stehen, also kommen diese Ziffern sonst nirgends in Zeile $row vor.';
+  String exSudokuPair(Object a, Object b, Object v1, Object v2, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'in Zeile $unit',
+        'col': 'in Spalte $unit',
+        'other': 'im Block $unit',
+      },
+    );
+    return 'In $a und $b können nur $v1 und $v2 stehen, also kommen diese Ziffern sonst nirgends $_temp0 vor.';
   }
 
   @override
-  String exSudokuPairCol(Object a, Object b, Object v1, Object v2, Object col) {
-    return 'In $a und $b können nur $v1 und $v2 stehen, also kommen diese Ziffern sonst nirgends in Spalte $col vor.';
+  String exSudokuTriple(Object cells, Object v1, Object v2, Object v3, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'in Zeile $unit',
+        'col': 'in Spalte $unit',
+        'other': 'im Block $unit',
+      },
+    );
+    return 'In $cells können zusammen nur $v1, $v2 und $v3 stehen, also kommen diese Ziffern sonst nirgends $_temp0 vor.';
   }
 
   @override
-  String exSudokuPairBox(Object a, Object b, Object v1, Object v2, Object box) {
-    return 'In $a und $b können nur $v1 und $v2 stehen, also kommen diese Ziffern sonst nirgends im Block $box vor.';
+  String exSudokuHiddenPair(Object a, Object b, Object v1, Object v2, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'In Zeile $unit',
+        'col': 'In Spalte $unit',
+        'other': 'Im Block $unit',
+      },
+    );
+    return '$_temp0 können $v1 und $v2 nur in $a und $b stehen, also steht dort nichts anderes.';
+  }
+
+  @override
+  String exSudokuHiddenTriple(Object cells, Object v1, Object v2, Object v3, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'In Zeile $unit',
+        'col': 'In Spalte $unit',
+        'other': 'Im Block $unit',
+      },
+    );
+    return '$_temp0 können $v1, $v2 und $v3 nur in $cells stehen, also steht dort nichts anderes.';
+  }
+
+  @override
+  String exSudokuXWing(Object value, String kind, Object b1, Object b2, Object c1, Object c2) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'In den Zeilen $b1 und $b2 kann $value nur in den Spalten $c1 und $c2 stehen. Jede dieser Spalten bekommt sie aus einer der Zeilen, also steht $value sonst nirgends in den Spalten $c1 und $c2.',
+        'other':
+            'In den Spalten $b1 und $b2 kann $value nur in den Zeilen $c1 und $c2 stehen. Jede dieser Zeilen bekommt sie aus einer der Spalten, also steht $value sonst nirgends in den Zeilen $c1 und $c2.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuSwordfish(
+    Object value,
+    String kind,
+    Object b1,
+    Object b2,
+    Object b3,
+    Object c1,
+    Object c2,
+    Object c3,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'In den Zeilen $b1, $b2 und $b3 kann $value nur in den Spalten $c1, $c2 und $c3 stehen. Die drei Zeilen füllen alle drei Spalten, also steht $value sonst nirgends in ihnen.',
+        'other':
+            'In den Spalten $b1, $b2 und $b3 kann $value nur in den Zeilen $c1, $c2 und $c3 stehen. Die drei Spalten füllen alle drei Zeilen, also steht $value sonst nirgends in ihnen.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuXyWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
+    return 'In $pivot steht $x oder $y. Bei $x steht in $a eine $z, bei $y in $b. So oder so ist eine von beiden $z, also kann ein Feld, das beide sieht, keine $z sein.';
+  }
+
+  @override
+  String exSudokuXyzWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
+    return 'In $pivot steht $x, $y oder $z, in $a $x oder $z und in $b $y oder $z. Eines der drei ist auf jeden Fall $z, also kann ein Feld, das alle drei sieht, keine $z sein.';
   }
 
   @override

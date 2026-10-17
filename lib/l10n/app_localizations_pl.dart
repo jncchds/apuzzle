@@ -1440,6 +1440,18 @@ class AppLocalizationsPl extends AppLocalizations {
       'Dwie nowe sztuczki. Pary: dwa pola linii lub bloku, w których pasują tylko te same dwie liczby, zabierają je dla siebie. Wskazywanie: jeśli miejsca na liczbę w bloku leżą na jednej linii, reszta tej linii jej nie ma.';
 
   @override
+  String get tutSudokuS3 =>
+      'Ukryte pary: gdy dwie liczby pasują tylko do tych samych dwóch pól wiersza, kolumny lub bloku, te pola należą do nich, więc wszystkie inne notatki w nich można usunąć. Tak samo działają trzy liczby w trzech polach.';
+
+  @override
+  String get tutSudokuS4 =>
+      'X-Wing: w dwóch wierszach liczba pasuje tylko do tych samych dwóch kolumn. Jeden wiersz zajmie lewe miejsce, drugi prawe, więc w reszcie obu kolumn jej nie ma. Z trzema wierszami i kolumnami to „Miecznik”.';
+
+  @override
+  String get tutSudokuS5 =>
+      'Y-Wing: pole, w którym może być x lub y, widzi jedno pole z x lub z i jedno z y lub z. Cokolwiek stanie w pierwszym, w jednym z pozostałych będzie z, więc z odpada tam, gdzie widzą oba.';
+
+  @override
   String get tutKings1 =>
       'Umieść dokładnie jedną koronę w każdym wierszu, każdej kolumnie i każdym kolorowym obszarze. Trzy już stoją, a na ostatnią zostało jedno miejsce. Dotknij go dwa razy: najpierw kropka, potem korona.';
 
@@ -2125,18 +2137,102 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String exSudokuPairRow(Object a, Object b, Object v1, Object v2, Object row) {
-    return 'W $a i $b mogą być tylko $v1 i $v2, więc w reszcie wiersza $row tych cyfr nie będzie.';
+  String exSudokuPair(Object a, Object b, Object v1, Object v2, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersza $unit',
+        'col': 'kolumny $unit',
+        'other': 'bloku $unit',
+      },
+    );
+    return 'W $a i $b mogą być tylko $v1 i $v2, więc w reszcie $_temp0 tych cyfr nie będzie.';
   }
 
   @override
-  String exSudokuPairCol(Object a, Object b, Object v1, Object v2, Object col) {
-    return 'W $a i $b mogą być tylko $v1 i $v2, więc w reszcie kolumny $col tych cyfr nie będzie.';
+  String exSudokuTriple(Object cells, Object v1, Object v2, Object v3, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersza $unit',
+        'col': 'kolumny $unit',
+        'other': 'bloku $unit',
+      },
+    );
+    return 'W $cells mogą być razem tylko $v1, $v2 i $v3, więc w reszcie $_temp0 tych cyfr nie będzie.';
   }
 
   @override
-  String exSudokuPairBox(Object a, Object b, Object v1, Object v2, Object box) {
-    return 'W $a i $b mogą być tylko $v1 i $v2, więc w reszcie bloku $box tych cyfr nie będzie.';
+  String exSudokuHiddenPair(Object a, Object b, Object v1, Object v2, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wierszu $unit',
+        'col': 'kolumnie $unit',
+        'other': 'bloku $unit',
+      },
+    );
+    return 'W $_temp0 cyfry $v1 i $v2 mogą stać tylko w $a i $b, więc innych cyfr w tych polach nie będzie.';
+  }
+
+  @override
+  String exSudokuHiddenTriple(Object cells, Object v1, Object v2, Object v3, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wierszu $unit',
+        'col': 'kolumnie $unit',
+        'other': 'bloku $unit',
+      },
+    );
+    return 'W $_temp0 cyfry $v1, $v2 i $v3 mogą stać tylko w $cells, więc innych cyfr w tych polach nie będzie.';
+  }
+
+  @override
+  String exSudokuXWing(Object value, String kind, Object b1, Object b2, Object c1, Object c2) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'W wierszach $b1 i $b2 cyfra $value może stać tylko w kolumnach $c1 i $c2. Każda z tych kolumn dostanie ją z jednego z wierszy, więc w reszcie kolumn $c1 i $c2 jej nie będzie.',
+        'other':
+            'W kolumnach $b1 i $b2 cyfra $value może stać tylko w wierszach $c1 i $c2. Każdy z tych wierszy dostanie ją z jednej z kolumn, więc w reszcie wierszy $c1 i $c2 jej nie będzie.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuSwordfish(
+    Object value,
+    String kind,
+    Object b1,
+    Object b2,
+    Object b3,
+    Object c1,
+    Object c2,
+    Object c3,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'W wierszach $b1, $b2 i $b3 cyfra $value może stać tylko w kolumnach $c1, $c2 i $c3. Te trzy wiersze wypełnią wszystkie trzy kolumny, więc w reszcie tych kolumn jej nie będzie.',
+        'other':
+            'W kolumnach $b1, $b2 i $b3 cyfra $value może stać tylko w wierszach $c1, $c2 i $c3. Te trzy kolumny wypełnią wszystkie trzy wiersze, więc w reszcie tych wierszy jej nie będzie.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuXyWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
+    return 'W $pivot jest $x lub $y. Jeśli $x, w $a jest $z; jeśli $y, w $b jest $z. Tak czy inaczej jedno z nich to $z, więc pole, które widzi oba, nie może być $z.';
+  }
+
+  @override
+  String exSudokuXyzWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
+    return 'W $pivot jest $x, $y lub $z, w $a $x lub $z, a w $b $y lub $z. Jedno z tych trzech pól na pewno to $z, więc pole, które widzi wszystkie trzy, nie może być $z.';
   }
 
   @override

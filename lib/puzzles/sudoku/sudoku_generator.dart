@@ -4,8 +4,16 @@ import '../../core/difficulty.dart';
 import 'sudoku_model.dart';
 import 'sudoku_solver.dart';
 
+/// The logic tier each difficulty is solvable at (see [SudokuSolver]).
+int sudokuTier(Difficulty d) => switch (d) {
+  Difficulty.easy || Difficulty.medium => 1,
+  Difficulty.hard => 2,
+  Difficulty.expert => 3,
+};
+
 /// Random full grid → remove symmetric pairs of givens while the puzzle stays
-/// solvable with the logic tier of the difficulty (or merely unique for expert).
+/// solvable with the logic tier of the difficulty; hard and expert keep the
+/// first board that needs its tier.
 SudokuPuzzle generateSudoku(GenParams params) {
   final n = params.size.rows;
   final rng = Random(params.seed);
@@ -14,14 +22,12 @@ SudokuPuzzle generateSudoku(GenParams params) {
   final cells = n * n;
   SudokuPuzzle? fallback;
 
-  bool ok(List<int> g) => switch (d) {
-    Difficulty.easy || Difficulty.medium => solver.solveLogic(List.of(g), 1),
-    Difficulty.hard => solver.solveLogic(List.of(g), 2),
-    Difficulty.expert => solver.countSolutions(g) == 1,
-  };
+  final tier = sudokuTier(d);
+  bool ok(List<int> g) => solver.solveLogic(List.of(g), tier);
 
   final keep = d == Difficulty.easy ? (cells * 0.47).round() : 0;
-  final attempts = n <= 4 ? 3 : 12;
+  // A board that needs its tier comes about one try in 10–20 (9×9 expert).
+  final attempts = n <= 4 ? 3 : (tier >= 2 ? 80 : 12);
 
   for (var attempt = 0; attempt < attempts; attempt++) {
     final solution = solver.randomSolution(rng);
@@ -45,11 +51,7 @@ SudokuPuzzle generateSudoku(GenParams params) {
 
     final puzzle = SudokuPuzzle(n: n, givens: [for (final v in g) v < 0 ? null : v], solution: solution);
     // Hard/expert should actually need their tier.
-    final needsMore = switch (d) {
-      Difficulty.hard => n >= 6 && solver.solveLogic(List.of(g), 1),
-      Difficulty.expert => n >= 9 && solver.solveLogic(List.of(g), 2),
-      _ => false,
-    };
+    final needsMore = tier >= 2 && n >= 6 && solver.solveLogic(List.of(g), tier - 1);
     if (!needsMore) return puzzle;
     fallback ??= puzzle;
   }

@@ -5,7 +5,50 @@ import 'sudoku_model.dart';
 
 /// What a traced [SudokuSolver.propagate] records ([Fact.rule]). Placements
 /// carry the digit as [Fact.value], eliminations the removed digits' bits.
-enum SudokuRule { naked, hidden, ruledOut, pointing, claiming, pair, failEmpty, failNoPlace, failClash }
+enum SudokuRule {
+  naked,
+  hidden,
+  ruledOut,
+  pointing,
+  claiming,
+  pair,
+  failEmpty,
+  failNoPlace,
+  failClash,
+  triple,
+  hiddenPair,
+  hiddenTriple,
+  xWing,
+  swordfish,
+  xyWing,
+  xyzWing,
+}
+
+/// The tier a deduction rule belongs to (1 singles, 2 locked candidates and
+/// subsets, 3 fish and wings).
+int sudokuRuleTier(SudokuRule r) => switch (r) {
+  SudokuRule.pointing ||
+  SudokuRule.claiming ||
+  SudokuRule.pair ||
+  SudokuRule.triple ||
+  SudokuRule.hiddenPair ||
+  SudokuRule.hiddenTriple => 2,
+  SudokuRule.xWing || SudokuRule.swordfish || SudokuRule.xyWing || SudokuRule.xyzWing => 3,
+  _ => 1,
+};
+
+/// Combinations of [k] items of [items] (in order).
+Iterable<List<int>> _combos(List<int> items, int k, [int from = 0]) sync* {
+  if (k == 0) {
+    yield const [];
+    return;
+  }
+  for (var i = from; i <= items.length - k; i++) {
+    for (final rest in _combos(items, k - 1, i + 1)) {
+      yield [items[i], ...rest];
+    }
+  }
+}
 
 int _pop(int x) {
   var c = 0;
@@ -22,12 +65,17 @@ int _low(int x) => (x & -x).bitLength - 1;
 ///
 /// Tiers (for grading):
 ///  1. naked + hidden singles
-///  2. + locked candidates (pointing / claiming) + naked pairs
+///  2. + locked candidates (pointing / claiming), naked and hidden pairs
+///     and triples
+///  3. + X-Wing, Swordfish, XY-Wing, XYZ-Wing
 /// All tiers are sound, so a full logical solve implies uniqueness.
 class SudokuSolver {
-  SudokuSolver(this.n) : geo = SudokuGeometry.of(n), full = (1 << n) - 1;
+  SudokuSolver(this.n, {this.disabled = const {}}) : geo = SudokuGeometry.of(n), full = (1 << n) - 1;
 
   final int n;
+
+  /// Rules left out (for tests and strategy boards).
+  final Set<SudokuRule> disabled;
   final SudokuGeometry geo;
   final int full;
 
@@ -133,73 +181,266 @@ class SudokuSolver {
       }
       if (progress) continue;
       if (tier < 2 || !g.contains(-1)) return true;
-
-      // locked candidates: box/line intersections
-      for (var bu = 2 * n; bu < 3 * n; bu++) {
-        final boxCells = geo.units[bu];
-        for (var d = 0; d < n; d++) {
-          final bit = 1 << d;
-          final cells = [
-            for (final i in boxCells)
-              if (g[i] < 0 && cand[i] & bit != 0) i,
-          ];
-          if (cells.isEmpty) continue;
-          for (final lineKind in const [0, 1]) {
-            final line = geo.unitsOf[cells.first][lineKind];
-            if (cells.every((i) => geo.unitsOf[i][lineKind] == line)) {
-              for (final j in geo.units[line]) {
-                if (g[j] < 0 && !boxCells.contains(j) && cand[j] & bit != 0) {
-                  if (!_remove(cand, j, bit, t, SudokuRule.pointing, boxCells, [d, bu, line])) return false;
-                  progress = true;
-                }
-              }
-            }
-          }
-        }
-      }
-      for (var lu = 0; lu < 2 * n; lu++) {
-        final lineCells = geo.units[lu];
-        for (var d = 0; d < n; d++) {
-          final bit = 1 << d;
-          final cells = [
-            for (final i in lineCells)
-              if (g[i] < 0 && cand[i] & bit != 0) i,
-          ];
-          if (cells.isEmpty) continue;
-          final b = geo.unitsOf[cells.first][2];
-          if (cells.every((i) => geo.unitsOf[i][2] == b)) {
-            for (final j in geo.units[b]) {
-              if (g[j] < 0 && !lineCells.contains(j) && cand[j] & bit != 0) {
-                if (!_remove(cand, j, bit, t, SudokuRule.claiming, lineCells, [d, lu, b])) return false;
-                progress = true;
-              }
-            }
-          }
-        }
-      }
-      // naked pairs
-      for (var ui = 0; ui < geo.units.length; ui++) {
-        final u = geo.units[ui];
-        for (var a = 0; a < u.length; a++) {
-          final ia = u[a];
-          if (g[ia] >= 0 || _pop(cand[ia]) != 2) continue;
-          for (var b = a + 1; b < u.length; b++) {
-            final ib = u[b];
-            if (g[ib] >= 0 || cand[ib] != cand[ia]) continue;
-            for (final j in u) {
-              if (j == ia || j == ib || g[j] >= 0) continue;
-              if (cand[j] & cand[ia] != 0) {
-                if (!_remove(cand, j, cand[j] & cand[ia], t, SudokuRule.pair, [ia, ib], [ui, ia, ib, cand[ia]])) {
-                  return false;
-                }
-                progress = true;
-              }
-            }
-          }
+      // The other rules, simplest first; after any progress, singles again.
+      for (final rule in _rules) {
+        if (sudokuRuleTier(rule) > tier || disabled.contains(rule)) continue;
+        final r = switch (rule) {
+          SudokuRule.pointing => _pointing(g, cand, t),
+          SudokuRule.claiming => _claiming(g, cand, t),
+          SudokuRule.pair => _nakedSubsets(g, cand, 2, t),
+          SudokuRule.hiddenPair => _hiddenSubsets(g, cand, 2, t),
+          SudokuRule.triple => _nakedSubsets(g, cand, 3, t),
+          SudokuRule.hiddenTriple => _hiddenSubsets(g, cand, 3, t),
+          SudokuRule.xWing => _fish(g, cand, 2, t),
+          SudokuRule.swordfish => _fish(g, cand, 3, t),
+          SudokuRule.xyWing => _wing(g, cand, false, t),
+          SudokuRule.xyzWing => _wing(g, cand, true, t),
+          _ => 0,
+        };
+        if (r < 0) return false;
+        if (r > 0) {
+          progress = true;
+          break;
         }
       }
       if (!progress) return true;
     }
+  }
+
+  static const _rules = [
+    SudokuRule.pointing,
+    SudokuRule.claiming,
+    SudokuRule.pair,
+    SudokuRule.hiddenPair,
+    SudokuRule.triple,
+    SudokuRule.hiddenTriple,
+    SudokuRule.xWing,
+    SudokuRule.xyWing,
+    SudokuRule.swordfish,
+    SudokuRule.xyzWing,
+  ];
+
+  // Each rule below returns 1 on progress, 0 on none, -1 on a contradiction.
+
+  /// A box's spots for a digit all in one line: the rest of the line loses it.
+  int _pointing(List<int> g, List<int> cand, ExplainTrace? t) {
+    var progress = 0;
+    for (var bu = 2 * n; bu < 3 * n; bu++) {
+      final boxCells = geo.units[bu];
+      for (var d = 0; d < n; d++) {
+        final bit = 1 << d;
+        final cells = [
+          for (final i in boxCells)
+            if (g[i] < 0 && cand[i] & bit != 0) i,
+        ];
+        if (cells.isEmpty) continue;
+        for (final lineKind in const [0, 1]) {
+          final line = geo.unitsOf[cells.first][lineKind];
+          if (!cells.every((i) => geo.unitsOf[i][lineKind] == line)) continue;
+          for (final j in geo.units[line]) {
+            if (g[j] < 0 && !boxCells.contains(j) && cand[j] & bit != 0) {
+              if (!_remove(cand, j, bit, t, SudokuRule.pointing, boxCells, [d, bu, line])) return -1;
+              progress = 1;
+            }
+          }
+        }
+      }
+    }
+    return progress;
+  }
+
+  /// A line's spots for a digit all in one box: the rest of the box loses it.
+  int _claiming(List<int> g, List<int> cand, ExplainTrace? t) {
+    var progress = 0;
+    for (var lu = 0; lu < 2 * n; lu++) {
+      final lineCells = geo.units[lu];
+      for (var d = 0; d < n; d++) {
+        final bit = 1 << d;
+        final cells = [
+          for (final i in lineCells)
+            if (g[i] < 0 && cand[i] & bit != 0) i,
+        ];
+        if (cells.isEmpty) continue;
+        final b = geo.unitsOf[cells.first][2];
+        if (!cells.every((i) => geo.unitsOf[i][2] == b)) continue;
+        for (final j in geo.units[b]) {
+          if (g[j] < 0 && !lineCells.contains(j) && cand[j] & bit != 0) {
+            if (!_remove(cand, j, bit, t, SudokuRule.claiming, lineCells, [d, lu, b])) return -1;
+            progress = 1;
+          }
+        }
+      }
+    }
+    return progress;
+  }
+
+  /// [k] cells of a unit holding only [k] digits between them: the rest of
+  /// the unit loses those digits. Args: unit, digit bits, then the cells.
+  int _nakedSubsets(List<int> g, List<int> cand, int k, ExplainTrace? t) {
+    final rule = k == 2 ? SudokuRule.pair : SudokuRule.triple;
+    for (var ui = 0; ui < geo.units.length; ui++) {
+      final u = geo.units[ui];
+      final open = [
+        for (final i in u)
+          if (g[i] < 0) i,
+      ];
+      if (open.length <= k) continue;
+      final small = [
+        for (final i in open)
+          if (_pop(cand[i]) <= k) i,
+      ];
+      for (final set in _combos(small, k)) {
+        var mask = 0;
+        for (final i in set) {
+          mask |= cand[i];
+        }
+        if (_pop(mask) != k) continue;
+        var progress = 0;
+        for (final j in open) {
+          if (set.contains(j) || cand[j] & mask == 0) continue;
+          if (!_remove(cand, j, cand[j] & mask, t, rule, set, [ui, mask, ...set])) return -1;
+          progress = 1;
+        }
+        if (progress > 0) return 1;
+      }
+    }
+    return 0;
+  }
+
+  /// [k] digits of a unit that can only go in the same [k] cells: those cells
+  /// lose every other digit. Args: unit, digit bits, then the cells.
+  int _hiddenSubsets(List<int> g, List<int> cand, int k, ExplainTrace? t) {
+    final rule = k == 2 ? SudokuRule.hiddenPair : SudokuRule.hiddenTriple;
+    for (var ui = 0; ui < geo.units.length; ui++) {
+      final u = geo.units[ui];
+      final open = [
+        for (final i in u)
+          if (g[i] < 0) i,
+      ];
+      if (open.length <= k) continue;
+      // Where each missing digit can go, as bits over [open].
+      final spots = List<int>.filled(n, 0);
+      for (var x = 0; x < open.length; x++) {
+        for (var d = 0; d < n; d++) {
+          if (cand[open[x]] & (1 << d) != 0) spots[d] |= 1 << x;
+        }
+      }
+      final digits = [
+        for (var d = 0; d < n; d++)
+          if (spots[d] != 0 && _pop(spots[d]) <= k) d,
+      ];
+      for (final set in _combos(digits, k)) {
+        var where = 0, mask = 0;
+        for (final d in set) {
+          where |= spots[d];
+          mask |= 1 << d;
+        }
+        if (_pop(where) != k) continue;
+        final cells = [
+          for (var x = 0; x < open.length; x++)
+            if (where & (1 << x) != 0) open[x],
+        ];
+        var progress = 0;
+        for (final j in cells) {
+          if (cand[j] & ~mask == 0) continue;
+          if (!_remove(cand, j, cand[j] & ~mask, t, rule, u, [ui, mask, ...cells])) return -1;
+          progress = 1;
+        }
+        if (progress > 0) return 1;
+      }
+    }
+    return 0;
+  }
+
+  /// X-Wing ([k] 2) and Swordfish ([k] 3): a digit's spots in [k] rows lie in
+  /// [k] columns, so the rest of those columns lose it (and the same with
+  /// rows and columns swapped). Args: digit, 0 for rows as the base lines or
+  /// 1 for columns, the [k] base lines, the [k] cover lines (line indexes).
+  int _fish(List<int> g, List<int> cand, int k, ExplainTrace? t) {
+    final rule = k == 2 ? SudokuRule.xWing : SudokuRule.swordfish;
+    for (var d = 0; d < n; d++) {
+      final bit = 1 << d;
+      for (final base in const [0, 1]) {
+        int at(int line, int x) => base == 0 ? line * n + x : x * n + line;
+        // Spots of the digit per base line, as bits over the cross lines.
+        final lines = <int>[];
+        final spots = List<int>.filled(n, 0);
+        for (var line = 0; line < n; line++) {
+          for (var x = 0; x < n; x++) {
+            final i = at(line, x);
+            if (g[i] < 0 && cand[i] & bit != 0) spots[line] |= 1 << x;
+          }
+          final c = _pop(spots[line]);
+          if (c >= 2 && c <= k) lines.add(line);
+        }
+        for (final set in _combos(lines, k)) {
+          var cover = 0;
+          for (final line in set) {
+            cover |= spots[line];
+          }
+          if (_pop(cover) != k) continue;
+          final covers = [
+            for (var x = 0; x < n; x++)
+              if (cover & (1 << x) != 0) x,
+          ];
+          final premises = [
+            for (final line in set)
+              for (final x in covers)
+                if (spots[line] & (1 << x) != 0) at(line, x),
+          ];
+          var progress = 0;
+          for (final x in covers) {
+            for (var line = 0; line < n; line++) {
+              final j = at(line, x);
+              if (set.contains(line) || g[j] >= 0 || cand[j] & bit == 0) continue;
+              if (!_remove(cand, j, bit, t, rule, premises, [d, base, ...set, ...covers])) return -1;
+              progress = 1;
+            }
+          }
+          if (progress > 0) return 1;
+        }
+      }
+    }
+    return 0;
+  }
+
+  /// XY-Wing: a pivot of {x, y} sees a cell of {x, z} and one of {y, z}; one
+  /// of those two holds z, so a cell seeing both can't. XYZ-Wing ([xyz]): the
+  /// pivot is {x, y, z}, and only cells that see all three lose z. Args:
+  /// pivot, the two wings, z, then the other digit of each wing.
+  int _wing(List<int> g, List<int> cand, bool xyz, ExplainTrace? t) {
+    final rule = xyz ? SudokuRule.xyzWing : SudokuRule.xyWing;
+    for (var p = 0; p < g.length; p++) {
+      if (g[p] >= 0 || _pop(cand[p]) != (xyz ? 3 : 2)) continue;
+      final pm = cand[p];
+      final wings = [
+        for (final q in geo.peers[p])
+          if (g[q] < 0 && _pop(cand[q]) == 2 && _pop(cand[q] & pm) == (xyz ? 2 : 1)) q,
+      ];
+      for (var a = 0; a < wings.length; a++) {
+        for (var b = a + 1; b < wings.length; b++) {
+          final wa = wings[a], wb = wings[b];
+          final ma = cand[wa], mb = cand[wb];
+          if (ma == mb) continue;
+          // Both wings share z with each other; in XY-Wing it's outside the
+          // pivot, in XYZ-Wing it's the pivot's digit both wings hold.
+          final z = ma & mb;
+          if (_pop(z) != 1) continue;
+          if (xyz ? (ma | mb) != pm : (z & pm != 0 || (ma | mb) & pm != pm)) continue;
+          final seen = {...geo.peers[wa]}..retainAll(geo.peers[wb]);
+          if (xyz) seen.retainAll(geo.peers[p]);
+          var progress = 0;
+          for (final j in seen) {
+            if (j == p || g[j] >= 0 || cand[j] & z == 0) continue;
+            final args = [p, wa, wb, _low(z), _low(ma & ~z), _low(mb & ~z)];
+            if (!_remove(cand, j, z, t, rule, [p, wa, wb], args)) return -1;
+            progress = 1;
+          }
+          if (progress > 0) return 1;
+        }
+      }
+    }
+    return 0;
   }
 
   /// Number of solutions up to [limit].

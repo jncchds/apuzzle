@@ -75,9 +75,22 @@ final List<TutorialStep> sudokuStrategies = [
         for (var c = 0; c < 3; c++) Pos(r, c),
     },
   ),
-  // Needs pointing or pairs (checked: singles alone get stuck).
-  TutorialStep.generated(
-    text: (l) => l.tutSudokuS2,
-    make: () => generateSudoku(const GenParams(size: GridSize.square(9), difficulty: Difficulty.hard, seed: 1)),
-  ),
+  // Each generated board needs its lesson's rule (checked in sudoku_test:
+  // the rules before it get stuck, adding it solves the board).
+  // Pointing or pairs.
+  _lesson((l) => l.tutSudokuS2, Difficulty.hard, sudokuLessonSeeds[0]),
+  // Hidden pairs.
+  _lesson((l) => l.tutSudokuS3, Difficulty.hard, sudokuLessonSeeds[1]),
+  // X-Wing.
+  _lesson((l) => l.tutSudokuS4, Difficulty.expert, sudokuLessonSeeds[2]),
+  // XY-Wing.
+  _lesson((l) => l.tutSudokuS5, Difficulty.expert, sudokuLessonSeeds[3]),
 ];
+
+/// Generator seeds of the 9×9 strategy boards, in lesson order.
+const sudokuLessonSeeds = [1, 6, 15, 1];
+
+TutorialStep _lesson(Tr text, Difficulty difficulty, int seed) => TutorialStep.generated(
+  text: text,
+  make: () => generateSudoku(GenParams(size: const GridSize.square(9), difficulty: difficulty, seed: seed)),
+);
