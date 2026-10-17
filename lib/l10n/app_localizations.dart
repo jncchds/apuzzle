@@ -2392,6 +2392,18 @@ abstract class AppLocalizations {
   /// **'Y-Wing: a cell that holds x or y sees one cell of x or z and one of y or z. Whatever the first one is, one of the others is z, so z is ruled out wherever both of them see.'**
   String get tutSudokuS5;
 
+  /// No description provided for @tutSudokuS6.
+  ///
+  /// In en, this message translates to:
+  /// **'Two links: when a number has only two spots in a row, one of them holds it. Take two such rows where one end of each shares a column: those two ends can\'t both hold it, so one of the other two ends does, and cells that see both of those can\'t. A row and a column whose ends share a box work the same way.'**
+  String get tutSudokuS6;
+
+  /// No description provided for @tutSudokuS7.
+  ///
+  /// In en, this message translates to:
+  /// **'W-Wing: two cells far apart that can only be x or y. If x has only two spots in some line or box, one seeing each cell, the two cells can\'t both be x. So one of them is y, and y is ruled out wherever both of them see.'**
+  String get tutSudokuS7;
+
   /// No description provided for @tutKings1.
   ///
   /// In en, this message translates to:
@@ -3459,6 +3471,59 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{pivot} is {x}, {y} or {z}, {a} is {x} or {z}, and {b} is {y} or {z}. One of the three is {z} whatever happens, so a cell that sees all three can\'t be {z}.'**
   String exSudokuXyzWing(Object pivot, Object x, Object y, Object a, Object b, Object z);
+
+  /// No description provided for @exSudokuTwoLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'In {kind1, select, row{row {unit1}} col{column {unit1}} other{box {unit1}}}, {value} can only go in {a1} or {a2}; in {kind2, select, row{row {unit2}} col{column {unit2}} other{box {unit2}}}, only in {b1} or {b2}. {a1} and {b1} can\'t both hold {value}, so {a2} or {b2} does, and a cell that sees both can\'t be {value}.'**
+  String exSudokuTwoLinks(
+    Object value,
+    String kind1,
+    Object unit1,
+    Object a1,
+    Object a2,
+    String kind2,
+    Object unit2,
+    Object b1,
+    Object b2,
+  );
+
+  /// No description provided for @exSudokuEmptyRectangle.
+  ///
+  /// In en, this message translates to:
+  /// **'In box {box}, {value} can only go in row {row} or column {col}. In {kind, select, row{row {unit}} col{column {unit}} other{box {unit}}}, it can only go in {a} or {b}. If {cell} were {value}, {b} couldn\'t be, so {a} would be, and box {box} would have no place left for {value}.'**
+  String exSudokuEmptyRectangle(
+    Object value,
+    Object box,
+    Object row,
+    Object col,
+    String kind,
+    Object unit,
+    Object a,
+    Object b,
+    Object cell,
+  );
+
+  /// No description provided for @exSudokuFinnedXWing.
+  ///
+  /// In en, this message translates to:
+  /// **'{kind, select, row{In rows {b1} and {b2}, {value} can only go in columns {c1} and {c2}, besides {fins}. If none of those holds it, the rows make an X-Wing; either way, the cells of box {box} in columns {c1} and {c2} can\'t be {value}.} other{In columns {b1} and {b2}, {value} can only go in rows {c1} and {c2}, besides {fins}. If none of those holds it, the columns make an X-Wing; either way, the cells of box {box} in rows {c1} and {c2} can\'t be {value}.}}'**
+  String exSudokuFinnedXWing(
+    Object value,
+    String kind,
+    Object b1,
+    Object b2,
+    Object c1,
+    Object c2,
+    Object fins,
+    Object box,
+  );
+
+  /// No description provided for @exSudokuWWing.
+  ///
+  /// In en, this message translates to:
+  /// **'{p} and {q} both hold {x} or {y}. In {kind, select, row{row {unit}} col{column {unit}} other{box {unit}}}, {x} can only go in {a} or {b}, which see {p} and {q}. So {p} and {q} can\'t both be {x}: one of them is {y}, and a cell that sees both can\'t be {y}.'**
+  String exSudokuWWing(Object p, Object q, Object x, Object y, String kind, Object unit, Object a, Object b);
 
   /// No description provided for @exSudokuFailEmpty.
   ///

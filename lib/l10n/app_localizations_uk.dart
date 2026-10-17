@@ -1453,6 +1453,14 @@ class AppLocalizationsUk extends AppLocalizations {
       'Ігрек-крило: клітинка, де може бути x або y, бачить одну клітинку з x або z і одну з y або z. Хоч би що було в першій, в одній з інших буде z, тож z немає там, де їх бачать обидві.';
 
   @override
+  String get tutSudokuS6 =>
+      'Два зв\'язки: якщо число має в рядку лише два місця, в одному з них воно й буде. Візьміть два такі рядки, де по одному кінцю стоять в одному стовпці: ці два кінці не можуть обидва мати число, тож його має один з двох інших, і клітинки, що бачать обидва інші, його не мають. Рядок і стовпець, кінці яких в одному блоці, працюють так само.';
+
+  @override
+  String get tutSudokuS7 =>
+      'W-крило: дві віддалені клітинки, де може бути лише x або y. Якщо x має лише два місця в якійсь лінії чи блоці і кожне бачить одну з клітинок, обидві клітинки не можуть бути x. Тож одна з них — y, і y немає там, де їх бачать обидві.';
+
+  @override
   String get tutKings1 =>
       'Поставте рівно одну корону в кожен рядок, кожен стовпець і кожну кольорову область. Три вже стоять, а для останньої лишилося одне місце. Торкніться його двічі: спершу крапка, потім корона.';
 
@@ -2234,6 +2242,96 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String exSudokuXyzWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
     return 'У $pivot буде $x, $y або $z, у $a — $x або $z, у $b — $y або $z. Одна з трьох неодмінно $z, тож клітинка, яка бачить усі три, не може бути $z.';
+  }
+
+  @override
+  String exSudokuTwoLinks(
+    Object value,
+    String kind1,
+    Object unit1,
+    Object a1,
+    Object a2,
+    String kind2,
+    Object unit2,
+    Object b1,
+    Object b2,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind1,
+      {
+        'row': 'рядку $unit1',
+        'col': 'стовпці $unit1',
+        'other': 'блоці $unit1',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      kind2,
+      {
+        'row': 'рядку $unit2',
+        'col': 'стовпці $unit2',
+        'other': 'блоці $unit2',
+      },
+    );
+    return 'У $_temp0 цифра $value може бути лише в $a1 або $a2; у $_temp1 — лише в $b1 або $b2. У $a1 і $b1 водночас її бути не може, тож вона в $a2 або $b2, і клітинка, яка бачить обидві, не може бути $value.';
+  }
+
+  @override
+  String exSudokuEmptyRectangle(
+    Object value,
+    Object box,
+    Object row,
+    Object col,
+    String kind,
+    Object unit,
+    Object a,
+    Object b,
+    Object cell,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядку $unit',
+        'col': 'стовпці $unit',
+        'other': 'блоці $unit',
+      },
+    );
+    return 'У блоці $box цифра $value може бути лише в рядку $row або стовпці $col. У $_temp0 вона може бути лише в $a або $b. Якби $cell була $value, то $b не могла б, тож $a була б $value, і в блоці $box для неї не лишилося б місця.';
+  }
+
+  @override
+  String exSudokuFinnedXWing(
+    Object value,
+    String kind,
+    Object b1,
+    Object b2,
+    Object c1,
+    Object c2,
+    Object fins,
+    Object box,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'У рядках $b1 і $b2 цифра $value може бути лише в стовпцях $c1 і $c2, крім $fins. Якщо її немає в жодній із них, рядки утворюють Ікс-крило; так чи так клітинки блоку $box у стовпцях $c1 і $c2 не можуть бути $value.',
+        'other':
+            'У стовпцях $b1 і $b2 цифра $value може бути лише в рядках $c1 і $c2, крім $fins. Якщо її немає в жодній із них, стовпці утворюють Ікс-крило; так чи так клітинки блоку $box у рядках $c1 і $c2 не можуть бути $value.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuWWing(Object p, Object q, Object x, Object y, String kind, Object unit, Object a, Object b) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядку $unit',
+        'col': 'стовпці $unit',
+        'other': 'блоці $unit',
+      },
+    );
+    return 'У $p і $q може бути лише $x або $y. У $_temp0 цифра $x може бути лише в $a або $b, а вони бачать $p і $q. Тож $p і $q не можуть обидві бути $x: одна з них — $y, і клітинка, яка бачить обидві, не може бути $y.';
   }
 
   @override

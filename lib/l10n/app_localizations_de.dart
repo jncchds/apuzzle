@@ -1426,6 +1426,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Y-Wing: Ein Feld mit x oder y sieht ein Feld mit x oder z und eines mit y oder z. Was auch im ersten steht, eines der anderen ist z, also fällt z überall weg, wo beide hinsehen.';
 
   @override
+  String get tutSudokuS6 =>
+      'Zwei Verbindungen: Hat eine Zahl in einer Zeile nur zwei Plätze, steht sie auf einem davon. Nimm zwei solche Zeilen, bei denen je ein Ende in derselben Spalte liegt: Diese Enden können sie nicht beide haben, also hat sie eines der anderen beiden Enden, und Felder, die beide sehen, haben sie nicht. Eine Zeile und eine Spalte, deren Enden in einem Block liegen, funktionieren genauso.';
+
+  @override
+  String get tutSudokuS7 =>
+      'W-Wing: Zwei entfernte Felder, in denen nur x oder y stehen kann. Hat x in einer Linie oder einem Block nur zwei Plätze, die je eines der Felder sehen, können nicht beide Felder x sein. Also ist eines y, und y fällt überall weg, wo beide hinsehen.';
+
+  @override
   String get tutKings1 =>
       'Setze genau eine Krone in jede Zeile, jede Spalte und jeden farbigen Bereich. Drei stehen schon, und für die letzte ist nur ein Platz frei. Tippe zweimal darauf: erst ein Punkt, dann eine Krone.';
 
@@ -2210,6 +2218,96 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String exSudokuXyzWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
     return 'In $pivot steht $x, $y oder $z, in $a $x oder $z und in $b $y oder $z. Eines der drei ist auf jeden Fall $z, also kann ein Feld, das alle drei sieht, keine $z sein.';
+  }
+
+  @override
+  String exSudokuTwoLinks(
+    Object value,
+    String kind1,
+    Object unit1,
+    Object a1,
+    Object a2,
+    String kind2,
+    Object unit2,
+    Object b1,
+    Object b2,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind1,
+      {
+        'row': 'In Zeile $unit1',
+        'col': 'In Spalte $unit1',
+        'other': 'Im Block $unit1',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      kind2,
+      {
+        'row': 'in Zeile $unit2',
+        'col': 'in Spalte $unit2',
+        'other': 'im Block $unit2',
+      },
+    );
+    return '$_temp0 kann $value nur in $a1 oder $a2 stehen, $_temp1 nur in $b1 oder $b2. $a1 und $b1 können sie nicht beide haben, also steht sie in $a2 oder $b2, und ein Feld, das beide sieht, kann keine $value sein.';
+  }
+
+  @override
+  String exSudokuEmptyRectangle(
+    Object value,
+    Object box,
+    Object row,
+    Object col,
+    String kind,
+    Object unit,
+    Object a,
+    Object b,
+    Object cell,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'In Zeile $unit',
+        'col': 'In Spalte $unit',
+        'other': 'Im Block $unit',
+      },
+    );
+    return 'Im Block $box kann $value nur in Zeile $row oder Spalte $col stehen. $_temp0 kann sie nur in $a oder $b stehen. Wäre $cell eine $value, könnte $b keine sein, also wäre $a eine, und im Block $box bliebe kein Platz für $value.';
+  }
+
+  @override
+  String exSudokuFinnedXWing(
+    Object value,
+    String kind,
+    Object b1,
+    Object b2,
+    Object c1,
+    Object c2,
+    Object fins,
+    Object box,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'In den Zeilen $b1 und $b2 kann $value außer in $fins nur in den Spalten $c1 und $c2 stehen. Steht sie in keinem davon, bilden die Zeilen einen X-Wing; so oder so können die Felder von Block $box in den Spalten $c1 und $c2 keine $value sein.',
+        'other':
+            'In den Spalten $b1 und $b2 kann $value außer in $fins nur in den Zeilen $c1 und $c2 stehen. Steht sie in keinem davon, bilden die Spalten einen X-Wing; so oder so können die Felder von Block $box in den Zeilen $c1 und $c2 keine $value sein.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuWWing(Object p, Object q, Object x, Object y, String kind, Object unit, Object a, Object b) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'In Zeile $unit',
+        'col': 'In Spalte $unit',
+        'other': 'Im Block $unit',
+      },
+    );
+    return 'In $p und $q steht $x oder $y. $_temp0 kann $x nur in $a oder $b stehen, die $p und $q sehen. Also können $p und $q nicht beide $x sein: Eines ist $y, und ein Feld, das beide sieht, kann keine $y sein.';
   }
 
   @override

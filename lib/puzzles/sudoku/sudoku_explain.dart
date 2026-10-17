@@ -94,6 +94,8 @@ class SudokuExplainer extends ValueGridExplainer<SudokuPuzzle, SudokuKnowledge> 
     final a = f.args;
     final at = f.slot >= 0 ? cell(f.slot) : '';
     final v = valTok(f.value);
+    String kindOf(int ui) => ui < n ? 'row' : (ui < 2 * n ? 'col' : 'box');
+    String unitOf(int ui) => ui < n ? rowTok(ui) : (ui < 2 * n ? colTok(ui - n) : box(ui));
     List<String> digits(int mask) => [
       for (var d = 0; d < n; d++)
         if (mask & (1 << d) != 0) valTok(d),
@@ -138,8 +140,8 @@ class SudokuExplainer extends ValueGridExplainer<SudokuPuzzle, SudokuKnowledge> 
         );
       case SudokuRule.pair || SudokuRule.triple || SudokuRule.hiddenPair || SudokuRule.hiddenTriple:
         final ui = a[0];
-        final kind = ui < n ? 'row' : (ui < 2 * n ? 'col' : 'box');
-        final unit = ui < n ? rowTok(ui) : (ui < 2 * n ? colTok(ui - n) : box(ui));
+        final kind = kindOf(ui);
+        final unit = unitOf(ui);
         final ds = digits(a[1]);
         final set = [for (final i in a.sublist(2)) cell(i)];
         final rule = SudokuRule.values[f.rule];
@@ -180,6 +182,71 @@ class SudokuExplainer extends ValueGridExplainer<SudokuPuzzle, SudokuKnowledge> 
               : l.exSudokuXyzWing(cell(pivot), x, y, cell(wa), cell(wb), valTok(z)),
           {pos(pivot), pos(wa), pos(wb), pos(f.slot)},
           'wing:${a.join(',')}',
+        );
+      case SudokuRule.skyscraper || SudokuRule.kite:
+        return ExplainLine(
+          (l) => l.exSudokuTwoLinks(
+            valTok(a[0]),
+            kindOf(a[1]),
+            unitOf(a[1]),
+            cell(a[2]),
+            cell(a[3]),
+            kindOf(a[4]),
+            unitOf(a[4]),
+            cell(a[5]),
+            cell(a[6]),
+          ),
+          {...cells(geo.units[a[1]]), ...cells(geo.units[a[4]]), pos(f.slot)},
+          'links:${a.join(',')}',
+        );
+      case SudokuRule.emptyRectangle:
+        return ExplainLine(
+          (l) => l.exSudokuEmptyRectangle(
+            valTok(a[0]),
+            box(a[1]),
+            rowTok(a[2]),
+            colTok(a[3]),
+            kindOf(a[4]),
+            unitOf(a[4]),
+            cell(a[5]),
+            cell(a[6]),
+            cell(f.slot),
+          ),
+          {...cells(geo.units[a[1]]), ...cells(geo.units[a[4]]), pos(f.slot)},
+          'er:${a.join(',')}',
+        );
+      case SudokuRule.finnedXWing:
+        final rows = a[1] == 0;
+        String line(int x) => rows ? rowTok(x) : colTok(x);
+        String cover(int x) => rows ? colTok(x) : rowTok(x);
+        return ExplainLine(
+          (l) => l.exSudokuFinnedXWing(
+            valTok(a[0]),
+            rows ? 'row' : 'col',
+            line(a[2]),
+            line(a[3]),
+            cover(a[4]),
+            cover(a[5]),
+            cellsTok(cells(a.sublist(7))),
+            box(a[6]),
+          ),
+          {...cells(f.premises), ...cells(geo.units[a[6]])},
+          'finned:${a.join(',')}',
+        );
+      case SudokuRule.wWing:
+        return ExplainLine(
+          (l) => l.exSudokuWWing(
+            cell(a[0]),
+            cell(a[1]),
+            valTok(a[2]),
+            valTok(a[3]),
+            kindOf(a[4]),
+            unitOf(a[4]),
+            cell(a[5]),
+            cell(a[6]),
+          ),
+          {pos(a[0]), pos(a[1]), ...cells(geo.units[a[4]]), pos(f.slot)},
+          'wwing:${a.join(',')}',
         );
       case SudokuRule.failEmpty:
         return ExplainLine((l) => l.exSudokuFailEmpty(cell(a[0])), here);

@@ -1417,6 +1417,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Y-Wing: a cell that holds x or y sees one cell of x or z and one of y or z. Whatever the first one is, one of the others is z, so z is ruled out wherever both of them see.';
 
   @override
+  String get tutSudokuS6 =>
+      'Two links: when a number has only two spots in a row, one of them holds it. Take two such rows where one end of each shares a column: those two ends can\'t both hold it, so one of the other two ends does, and cells that see both of those can\'t. A row and a column whose ends share a box work the same way.';
+
+  @override
+  String get tutSudokuS7 =>
+      'W-Wing: two cells far apart that can only be x or y. If x has only two spots in some line or box, one seeing each cell, the two cells can\'t both be x. So one of them is y, and y is ruled out wherever both of them see.';
+
+  @override
   String get tutKings1 =>
       'Put exactly one crown in every row, every column and every colored region. Three are placed, and the last one has just one spot left. Tap it twice: first a dot, then a crown.';
 
@@ -2198,6 +2206,96 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String exSudokuXyzWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
     return '$pivot is $x, $y or $z, $a is $x or $z, and $b is $y or $z. One of the three is $z whatever happens, so a cell that sees all three can\'t be $z.';
+  }
+
+  @override
+  String exSudokuTwoLinks(
+    Object value,
+    String kind1,
+    Object unit1,
+    Object a1,
+    Object a2,
+    String kind2,
+    Object unit2,
+    Object b1,
+    Object b2,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind1,
+      {
+        'row': 'row $unit1',
+        'col': 'column $unit1',
+        'other': 'box $unit1',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      kind2,
+      {
+        'row': 'row $unit2',
+        'col': 'column $unit2',
+        'other': 'box $unit2',
+      },
+    );
+    return 'In $_temp0, $value can only go in $a1 or $a2; in $_temp1, only in $b1 or $b2. $a1 and $b1 can\'t both hold $value, so $a2 or $b2 does, and a cell that sees both can\'t be $value.';
+  }
+
+  @override
+  String exSudokuEmptyRectangle(
+    Object value,
+    Object box,
+    Object row,
+    Object col,
+    String kind,
+    Object unit,
+    Object a,
+    Object b,
+    Object cell,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'box $unit',
+      },
+    );
+    return 'In box $box, $value can only go in row $row or column $col. In $_temp0, it can only go in $a or $b. If $cell were $value, $b couldn\'t be, so $a would be, and box $box would have no place left for $value.';
+  }
+
+  @override
+  String exSudokuFinnedXWing(
+    Object value,
+    String kind,
+    Object b1,
+    Object b2,
+    Object c1,
+    Object c2,
+    Object fins,
+    Object box,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'In rows $b1 and $b2, $value can only go in columns $c1 and $c2, besides $fins. If none of those holds it, the rows make an X-Wing; either way, the cells of box $box in columns $c1 and $c2 can\'t be $value.',
+        'other':
+            'In columns $b1 and $b2, $value can only go in rows $c1 and $c2, besides $fins. If none of those holds it, the columns make an X-Wing; either way, the cells of box $box in rows $c1 and $c2 can\'t be $value.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuWWing(Object p, Object q, Object x, Object y, String kind, Object unit, Object a, Object b) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'box $unit',
+      },
+    );
+    return '$p and $q both hold $x or $y. In $_temp0, $x can only go in $a or $b, which see $p and $q. So $p and $q can\'t both be $x: one of them is $y, and a cell that sees both can\'t be $y.';
   }
 
   @override

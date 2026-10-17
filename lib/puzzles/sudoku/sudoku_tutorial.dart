@@ -85,10 +85,14 @@ final List<TutorialStep> sudokuStrategies = [
   _lesson((l) => l.tutSudokuS4, Difficulty.expert, sudokuLessonSeeds[2]),
   // XY-Wing.
   _lesson((l) => l.tutSudokuS5, Difficulty.expert, sudokuLessonSeeds[3]),
+  // Two links (Skyscraper, 2-String Kite).
+  _lesson((l) => l.tutSudokuS6, Difficulty.expert, sudokuLessonSeeds[4]),
+  // W-Wing.
+  _lesson((l) => l.tutSudokuS7, Difficulty.expert, sudokuLessonSeeds[5]),
 ];
 
 /// Generator seeds of the 9×9 strategy boards, in lesson order.
-const sudokuLessonSeeds = [1, 6, 15, 1];
+const sudokuLessonSeeds = [1, 6, 22, 4, 3, 1];
 
 TutorialStep _lesson(Tr text, Difficulty difficulty, int seed) => TutorialStep.generated(
   text: text,

@@ -1,5 +1,8 @@
 # Release notes
 
+## 0.12.1 - 2026-10-17
+- Sudoku: expert boards from 2026-10-18 draw on more techniques: Skyscraper, 2-String Kite, Empty Rectangle, finned X-Wing and W-Wing join X-Wing, Swordfish, Y-Wing and XYZ-Wing. Two new strategy lessons teach linked pairs and the W-Wing, and explain mode walks through every one
+
 ## 0.12.0 - 2026-10-17
 - New game: Layers. Every row and every column was painted once in its own color, in an order you don't know, and the last stroke over a cell is the one you see. Finish the picture from the cells shown, working out which strokes came later; on medium and hard boards some strokes hide their color. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-10-18
 - Sudoku: from 2026-10-18, new expert boards always solve by reasoning and need an advanced technique (X-Wing, Swordfish, Y-Wing or XYZ-Wing), and hard boards may need hidden pairs or triples. Shared links and earlier daily puzzles keep their boards. Three new strategy lessons teach the techniques, and explain mode walks through every one

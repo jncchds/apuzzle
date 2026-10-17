@@ -1452,6 +1452,14 @@ class AppLocalizationsPl extends AppLocalizations {
       'Y-Wing: pole, w którym może być x lub y, widzi jedno pole z x lub z i jedno z y lub z. Cokolwiek stanie w pierwszym, w jednym z pozostałych będzie z, więc z odpada tam, gdzie widzą oba.';
 
   @override
+  String get tutSudokuS6 =>
+      'Dwa łącza: gdy liczba ma w wierszu tylko dwa miejsca, stoi w jednym z nich. Weź dwa takie wiersze, w których po jednym końcu leży w tej samej kolumnie: te końce nie mogą obie jej mieć, więc ma ją jeden z dwóch pozostałych, a pola widzące oba pozostałe jej nie mają. Wiersz i kolumna, których końce leżą w jednym bloku, działają tak samo.';
+
+  @override
+  String get tutSudokuS7 =>
+      'W-Wing: dwa odległe pola, w których może być tylko x lub y. Jeśli x ma tylko dwa miejsca w jakiejś linii lub bloku, a każde widzi jedno z tych pól, oba pola nie mogą być x. Więc jedno z nich to y, a y odpada wszędzie, gdzie widzą oba.';
+
+  @override
   String get tutKings1 =>
       'Umieść dokładnie jedną koronę w każdym wierszu, każdej kolumnie i każdym kolorowym obszarze. Trzy już stoją, a na ostatnią zostało jedno miejsce. Dotknij go dwa razy: najpierw kropka, potem korona.';
 
@@ -2233,6 +2241,96 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String exSudokuXyzWing(Object pivot, Object x, Object y, Object a, Object b, Object z) {
     return 'W $pivot jest $x, $y lub $z, w $a $x lub $z, a w $b $y lub $z. Jedno z tych trzech pól na pewno to $z, więc pole, które widzi wszystkie trzy, nie może być $z.';
+  }
+
+  @override
+  String exSudokuTwoLinks(
+    Object value,
+    String kind1,
+    Object unit1,
+    Object a1,
+    Object a2,
+    String kind2,
+    Object unit2,
+    Object b1,
+    Object b2,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind1,
+      {
+        'row': 'wierszu $unit1',
+        'col': 'kolumnie $unit1',
+        'other': 'bloku $unit1',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      kind2,
+      {
+        'row': 'wierszu $unit2',
+        'col': 'kolumnie $unit2',
+        'other': 'bloku $unit2',
+      },
+    );
+    return 'W $_temp0 cyfra $value może stać tylko w $a1 lub $a2; w $_temp1 tylko w $b1 lub $b2. $a1 i $b1 nie mogą obie jej mieć, więc ma ją $a2 lub $b2, a pole, które widzi oba, nie może być $value.';
+  }
+
+  @override
+  String exSudokuEmptyRectangle(
+    Object value,
+    Object box,
+    Object row,
+    Object col,
+    String kind,
+    Object unit,
+    Object a,
+    Object b,
+    Object cell,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wierszu $unit',
+        'col': 'kolumnie $unit',
+        'other': 'bloku $unit',
+      },
+    );
+    return 'W bloku $box cyfra $value może stać tylko w wierszu $row lub kolumnie $col. W $_temp0 może stać tylko w $a lub $b. Gdyby $cell było $value, $b nie mogłoby, więc $a byłoby $value, a w bloku $box nie zostałoby dla niej miejsca.';
+  }
+
+  @override
+  String exSudokuFinnedXWing(
+    Object value,
+    String kind,
+    Object b1,
+    Object b2,
+    Object c1,
+    Object c2,
+    Object fins,
+    Object box,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row':
+            'W wierszach $b1 i $b2 cyfra $value może stać tylko w kolumnach $c1 i $c2, poza $fins. Jeśli nie ma jej w żadnym z nich, wiersze tworzą X-Wing; tak czy inaczej pola bloku $box w kolumnach $c1 i $c2 nie mogą być $value.',
+        'other':
+            'W kolumnach $b1 i $b2 cyfra $value może stać tylko w wierszach $c1 i $c2, poza $fins. Jeśli nie ma jej w żadnym z nich, kolumny tworzą X-Wing; tak czy inaczej pola bloku $box w wierszach $c1 i $c2 nie mogą być $value.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String exSudokuWWing(Object p, Object q, Object x, Object y, String kind, Object unit, Object a, Object b) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wierszu $unit',
+        'col': 'kolumnie $unit',
+        'other': 'bloku $unit',
+      },
+    );
+    return 'W $p i $q może być tylko $x lub $y. W $_temp0 cyfra $x może stać tylko w $a lub $b, które widzą $p i $q. Więc $p i $q nie mogą obie być $x: jedno z nich to $y, a pole, które widzi oba, nie może być $y.';
   }
 
   @override

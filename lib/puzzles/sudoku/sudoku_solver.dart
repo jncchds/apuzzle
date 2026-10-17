@@ -22,6 +22,11 @@ enum SudokuRule {
   swordfish,
   xyWing,
   xyzWing,
+  skyscraper,
+  kite,
+  emptyRectangle,
+  finnedXWing,
+  wWing,
 }
 
 /// The tier a deduction rule belongs to (1 singles, 2 locked candidates and
@@ -33,7 +38,15 @@ int sudokuRuleTier(SudokuRule r) => switch (r) {
   SudokuRule.triple ||
   SudokuRule.hiddenPair ||
   SudokuRule.hiddenTriple => 2,
-  SudokuRule.xWing || SudokuRule.swordfish || SudokuRule.xyWing || SudokuRule.xyzWing => 3,
+  SudokuRule.xWing ||
+  SudokuRule.swordfish ||
+  SudokuRule.xyWing ||
+  SudokuRule.xyzWing ||
+  SudokuRule.skyscraper ||
+  SudokuRule.kite ||
+  SudokuRule.emptyRectangle ||
+  SudokuRule.finnedXWing ||
+  SudokuRule.wWing => 3,
   _ => 1,
 };
 
@@ -67,7 +80,8 @@ int _low(int x) => (x & -x).bitLength - 1;
 ///  1. naked + hidden singles
 ///  2. + locked candidates (pointing / claiming), naked and hidden pairs
 ///     and triples
-///  3. + X-Wing, Swordfish, XY-Wing, XYZ-Wing
+///  3. + X-Wing, Swordfish, XY-Wing, XYZ-Wing, Skyscraper, 2-String Kite,
+///     Empty Rectangle, finned X-Wing, W-Wing
 /// All tiers are sound, so a full logical solve implies uniqueness.
 class SudokuSolver {
   SudokuSolver(this.n, {this.disabled = const {}}) : geo = SudokuGeometry.of(n), full = (1 << n) - 1;
@@ -195,6 +209,11 @@ class SudokuSolver {
           SudokuRule.swordfish => _fish(g, cand, 3, t),
           SudokuRule.xyWing => _wing(g, cand, false, t),
           SudokuRule.xyzWing => _wing(g, cand, true, t),
+          SudokuRule.skyscraper => _twoLinks(g, cand, false, t),
+          SudokuRule.kite => _twoLinks(g, cand, true, t),
+          SudokuRule.emptyRectangle => _emptyRectangle(g, cand, t),
+          SudokuRule.finnedXWing => _finnedXWing(g, cand, t),
+          SudokuRule.wWing => _wWing(g, cand, t),
           _ => 0,
         };
         if (r < 0) return false;
@@ -215,7 +234,12 @@ class SudokuSolver {
     SudokuRule.triple,
     SudokuRule.hiddenTriple,
     SudokuRule.xWing,
+    SudokuRule.skyscraper,
+    SudokuRule.kite,
     SudokuRule.xyWing,
+    SudokuRule.wWing,
+    SudokuRule.emptyRectangle,
+    SudokuRule.finnedXWing,
     SudokuRule.swordfish,
     SudokuRule.xyzWing,
   ];
@@ -437,6 +461,271 @@ class SudokuSolver {
             progress = 1;
           }
           if (progress > 0) return 1;
+        }
+      }
+    }
+    return 0;
+  }
+
+  int _row(int i) => i ~/ n;
+  int _col(int i) => i % n;
+
+  /// Whether cells [a] and [b] share a row, column or box.
+  bool _sees(int a, int b) {
+    final ua = geo.unitsOf[a], ub = geo.unitsOf[b];
+    return a != b && (ua[0] == ub[0] || ua[1] == ub[1] || ua[2] == ub[2]);
+  }
+
+  /// Strong links of [d]: units where it has exactly two spots, as (unit,
+  /// cell, cell). [lines] leaves out boxes.
+  List<(int, int, int)> _links(List<int> g, List<int> cand, int d, {bool lines = false}) {
+    final bit = 1 << d;
+    final out = <(int, int, int)>[];
+    for (var ui = 0; ui < (lines ? 2 * n : geo.units.length); ui++) {
+      var a = -1, b = -1, count = 0;
+      for (final i in geo.units[ui]) {
+        if (g[i] == d) {
+          count = 3;
+          break;
+        }
+        if (g[i] < 0 && cand[i] & bit != 0) {
+          if (count++ == 0) {
+            a = i;
+          } else {
+            b = i;
+          }
+        }
+      }
+      if (count == 2) out.add((ui, a, b));
+    }
+    return out;
+  }
+
+  /// Removes [d] from the open cells that see both [a] and [b] (other than
+  /// [skip]); 1 on progress, -1 on a contradiction.
+  int _seenByBoth(
+    List<int> g,
+    List<int> cand,
+    int d,
+    int a,
+    int b,
+    List<int> skip,
+    ExplainTrace? t,
+    SudokuRule rule,
+    List<int> premises,
+    List<int> args,
+  ) {
+    final bit = 1 << d;
+    var progress = 0;
+    for (final j in geo.peers[a]) {
+      if (g[j] >= 0 || cand[j] & bit == 0 || skip.contains(j) || !_sees(j, b)) continue;
+      if (!_remove(cand, j, bit, t, rule, premises, args)) return -1;
+      progress = 1;
+    }
+    return progress;
+  }
+
+  /// Skyscraper (two row links or two column links whose near ends share a
+  /// column or row) and 2-String Kite ([kite]: a row link and a column link
+  /// whose near ends share a box): the near ends can't both hold the digit,
+  /// so one far end does, and cells seeing both far ends lose it. Args:
+  /// digit, then each link as unit, near end, far end.
+  int _twoLinks(List<int> g, List<int> cand, bool kite, ExplainTrace? t) {
+    final rule = kite ? SudokuRule.kite : SudokuRule.skyscraper;
+    for (var d = 0; d < n; d++) {
+      final links = _links(g, cand, d, lines: true);
+      for (var x = 0; x < links.length; x++) {
+        for (var y = x + 1; y < links.length; y++) {
+          final (u1, p1, p2) = links[x];
+          final (u2, q1, q2) = links[y];
+          if ((u1 < n) == (u2 < n) ? kite : !kite) continue;
+          if (p1 == q1 || p1 == q2 || p2 == q1 || p2 == q2) continue;
+          for (final (a1, a2) in [(p1, p2), (p2, p1)]) {
+            for (final (b1, b2) in [(q1, q2), (q2, q1)]) {
+              if (kite) {
+                if (geo.unitsOf[a1][2] != geo.unitsOf[b1][2]) continue;
+              } else {
+                // The near ends share the cross line, the far ends don't
+                // (else it's an X-Wing).
+                final cross = u1 < n ? 1 : 0;
+                if (geo.unitsOf[a1][cross] != geo.unitsOf[b1][cross]) continue;
+                if (geo.unitsOf[a2][cross] == geo.unitsOf[b2][cross]) continue;
+              }
+              final r = _seenByBoth(g, cand, d, a2, b2, [a1, b1], t, rule, [a1, a2, b1, b2], [
+                d,
+                u1,
+                a1,
+                a2,
+                u2,
+                b1,
+                b2,
+              ]);
+              if (r != 0) return r;
+            }
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
+  /// Empty Rectangle: a box's spots for a digit lie in one of its rows and
+  /// one of its columns. A line link with one end on that row (or column)
+  /// outside the box rules the digit out where the link's other end meets
+  /// the box's column (or row): there the far end would be empty, the near
+  /// end hold the digit, and the box have no place left. Args: digit, box,
+  /// row, column, link unit, near end, far end.
+  int _emptyRectangle(List<int> g, List<int> cand, ExplainTrace? t) {
+    for (var d = 0; d < n; d++) {
+      final bit = 1 << d;
+      final links = _links(g, cand, d, lines: true);
+      if (links.isEmpty) continue;
+      for (var bu = 2 * n; bu < 3 * n; bu++) {
+        final spots = [
+          for (final i in geo.units[bu])
+            if (g[i] < 0 && cand[i] & bit != 0) i,
+        ];
+        if (spots.length < 2) continue;
+        final rows = {for (final i in geo.units[bu]) _row(i)};
+        final cols = {for (final i in geo.units[bu]) _col(i)};
+        for (final r in rows) {
+          for (final c in cols) {
+            if (!spots.every((i) => _row(i) == r || _col(i) == c)) continue;
+            // All on one line is pointing.
+            if (spots.every((i) => _row(i) == r) || spots.every((i) => _col(i) == c)) continue;
+            for (final (lu, e1, e2) in links) {
+              for (final (a, b) in [(e1, e2), (e2, e1)]) {
+                int target;
+                if (lu >= n) {
+                  // A column link: near end on row r, far end outside the
+                  // box's rows; the target is on the far end's row, column c.
+                  if (_row(a) != r || cols.contains(_col(a)) || rows.contains(_row(b))) continue;
+                  target = _row(b) * n + c;
+                } else {
+                  if (_col(a) != c || rows.contains(_row(a)) || cols.contains(_col(b))) continue;
+                  target = r * n + _col(b);
+                }
+                if (g[target] >= 0 || cand[target] & bit == 0) continue;
+                if (!_remove(
+                  cand,
+                  target,
+                  bit,
+                  t,
+                  SudokuRule.emptyRectangle,
+                  [...spots, a, b],
+                  [d, bu, r, c, lu, a, b],
+                )) {
+                  return -1;
+                }
+                return 1;
+              }
+            }
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
+  /// Finned X-Wing (sashimi too): two rows hold a digit only in two columns,
+  /// but for a few extra spots (fins) in one row, all in one box. Either a
+  /// fin holds it or the rows make an X-Wing, so the cells of the fins' box
+  /// in those columns (outside the rows) lose it. Rows and columns may swap.
+  /// Args: digit, 0 for rows or 1 for columns, the clean line, the finned
+  /// line, the two cover lines, the fins' box, then the fins.
+  int _finnedXWing(List<int> g, List<int> cand, ExplainTrace? t) {
+    for (var d = 0; d < n; d++) {
+      final bit = 1 << d;
+      for (final base in const [0, 1]) {
+        int at(int line, int x) => base == 0 ? line * n + x : x * n + line;
+        final spots = List<int>.filled(n, 0);
+        for (var line = 0; line < n; line++) {
+          for (var x = 0; x < n; x++) {
+            final i = at(line, x);
+            if (g[i] < 0 && cand[i] & bit != 0) spots[line] |= 1 << x;
+          }
+        }
+        for (var clean = 0; clean < n; clean++) {
+          final cover = spots[clean];
+          if (_pop(cover) != 2) continue;
+          for (var finned = 0; finned < n; finned++) {
+            if (finned == clean || spots[finned] & cover == 0) continue;
+            final finBits = spots[finned] & ~cover;
+            if (finBits == 0) continue;
+            final fins = [
+              for (var x = 0; x < n; x++)
+                if (finBits & (1 << x) != 0) at(finned, x),
+            ];
+            final box = geo.unitsOf[fins.first][2];
+            if (fins.any((i) => geo.unitsOf[i][2] != box)) continue;
+            final covers = [
+              for (var x = 0; x < n; x++)
+                if (cover & (1 << x) != 0) x,
+            ];
+            var progress = 0;
+            for (final x in covers) {
+              for (var line = 0; line < n; line++) {
+                final j = at(line, x);
+                if (line == clean || line == finned || geo.unitsOf[j][2] != box) continue;
+                if (g[j] >= 0 || cand[j] & bit == 0) continue;
+                final premises = [
+                  for (final l in [clean, finned])
+                    for (var y = 0; y < n; y++)
+                      if (spots[l] & (1 << y) != 0) at(l, y),
+                ];
+                final args = [d, base, clean, finned, covers[0], covers[1], box, ...fins];
+                if (!_remove(cand, j, bit, t, SudokuRule.finnedXWing, premises, args)) return -1;
+                progress = 1;
+              }
+            }
+            if (progress > 0) return 1;
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
+  /// W-Wing: two cells that can only be x or y, not seeing each other, and a
+  /// link of x whose ends see one cell each. Both cells being x would leave
+  /// the link empty, so one of them is y, and cells seeing both lose y.
+  /// Args: the two cells, x, y, link unit, the end by the first cell, the
+  /// end by the second.
+  int _wWing(List<int> g, List<int> cand, ExplainTrace? t) {
+    final pairs = [
+      for (var i = 0; i < g.length; i++)
+        if (g[i] < 0 && _pop(cand[i]) == 2) i,
+    ];
+    if (pairs.length < 2) return 0;
+    final links = [for (var d = 0; d < n; d++) _links(g, cand, d)];
+    for (var x = 0; x < pairs.length; x++) {
+      for (var y = x + 1; y < pairs.length; y++) {
+        final p = pairs[x], q = pairs[y];
+        if (cand[p] != cand[q] || _sees(p, q)) continue;
+        for (final dx in [_low(cand[p]), _low(cand[p] & (cand[p] - 1))]) {
+          final dy = _low(cand[p] & ~(1 << dx));
+          for (final (u, e1, e2) in links[dx]) {
+            if (e1 == p || e1 == q || e2 == p || e2 == q) continue;
+            final (a, b) = _sees(e1, p) && _sees(e2, q)
+                ? (e1, e2)
+                : _sees(e2, p) && _sees(e1, q)
+                ? (e2, e1)
+                : (-1, -1);
+            if (a < 0) continue;
+            final r = _seenByBoth(
+              g,
+              cand,
+              dy,
+              p,
+              q,
+              const [],
+              t,
+              SudokuRule.wWing,
+              [p, q, a, b],
+              [p, q, dx, dy, u, a, b],
+            );
+            if (r != 0) return r;
+          }
         }
       }
     }

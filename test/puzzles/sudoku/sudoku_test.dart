@@ -90,15 +90,22 @@ void main() {
   });
 
   test('strategy boards need their lesson', () {
-    const fish = {SudokuRule.xWing, SudokuRule.swordfish, SudokuRule.xyWing, SudokuRule.xyzWing};
+    final tier3 = {
+      for (final r in SudokuRule.values)
+        if (sudokuRuleTier(r) == 3) r,
+    };
     const subsets = {SudokuRule.triple, SudokuRule.hiddenPair, SudokuRule.hiddenTriple};
-    // (difficulty, rules the lesson may use are all but these, rules before it)
+    Set<SudokuRule> tier3But(Set<SudokuRule> keep) => tier3.difference(keep);
+    // (difficulty, rules left out of the lesson, rules left out before it)
     final lessons = [
-      (Difficulty.hard, {...fish, ...subsets}, {...SudokuRule.values}),
-      (Difficulty.hard, {...fish, SudokuRule.triple, SudokuRule.hiddenTriple}, {...fish, ...subsets}),
-      (Difficulty.expert, {SudokuRule.swordfish, SudokuRule.xyWing, SudokuRule.xyzWing}, fish),
-      (Difficulty.expert, {SudokuRule.xWing, SudokuRule.swordfish, SudokuRule.xyzWing}, fish),
+      (Difficulty.hard, {...tier3, ...subsets}, {...SudokuRule.values}),
+      (Difficulty.hard, {...tier3, SudokuRule.triple, SudokuRule.hiddenTriple}, {...tier3, ...subsets}),
+      (Difficulty.expert, tier3But({SudokuRule.xWing}), tier3),
+      (Difficulty.expert, tier3But({SudokuRule.xyWing}), tier3),
+      (Difficulty.expert, tier3But({SudokuRule.skyscraper, SudokuRule.kite}), tier3),
+      (Difficulty.expert, tier3But({SudokuRule.wWing}), tier3),
     ];
+    expect(sudokuLessonSeeds, hasLength(lessons.length));
     for (var k = 0; k < lessons.length; k++) {
       final (d, off, below) = lessons[k];
       final p = generateSudoku(
