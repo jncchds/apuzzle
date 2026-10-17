@@ -31,8 +31,10 @@ ChambersPuzzle generateChambers(GenParams params) {
     Difficulty.medium => 6,
     _ => 8,
   };
+  // No `-1 << 30` sentinel: on the web shifts give unsigned 32-bit results,
+  // so it would be positive and no board would ever beat it.
   ChambersPuzzle? best;
-  var bestScore = -1 << 30;
+  var bestScore = 0;
   var failedLayouts = 0;
 
   for (var attempt = 0, made = 0; made < tries && attempt < 60 + failedLayouts && failedLayouts < 1000; attempt++) {
@@ -94,7 +96,7 @@ ChambersPuzzle generateChambers(GenParams params) {
     // Score: the tier below should get stuck, givens are a last resort.
     final below = stuck(tier - 1, puzzle).length;
     final score = (below > 0 ? 1000 : 0) + min(below, cells ~/ 4) * 4 - givens.length * 20;
-    if (score > bestScore) (best, bestScore) = (puzzle, score);
+    if (best == null || score > bestScore) (best, bestScore) = (puzzle, score);
   }
   return best ?? generateChambers(params.withSeed(params.seed + 1));
 }

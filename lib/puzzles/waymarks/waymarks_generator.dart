@@ -24,8 +24,10 @@ WaymarksPuzzle generateWaymarks(GenParams params) {
     Difficulty.medium => 10,
     _ => 16,
   };
+  // No `-1 << 30` sentinel: on the web shifts give unsigned 32-bit results,
+  // so it would be positive and no board would ever beat it.
   WaymarksPuzzle? best;
-  var bestScore = -1 << 30;
+  var bestScore = 0;
 
   for (var attempt = 0; attempt < tries; attempt++) {
     final path = waymarksPath(n, rng);
@@ -53,7 +55,7 @@ WaymarksPuzzle generateWaymarks(GenParams params) {
     // Score: the tier below should get stuck, the further behind the better.
     final below = WaymarksSolver(puzzle).slack(tier - 1);
     final score = (below > 0 ? 1000 : 0) + min(below, cells ~/ 3) * 4 - shown.where((s) => s).length;
-    if (score > bestScore) (best, bestScore) = (puzzle, score);
+    if (best == null || score > bestScore) (best, bestScore) = (puzzle, score);
     if (below >= cells ~/ 3) break;
   }
   return best!;

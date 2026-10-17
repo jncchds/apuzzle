@@ -28,8 +28,10 @@ BlockadePuzzle generateBlockade(GenParams params) {
   final shape = blockadeShape(rows, cols, params.difficulty);
   final easy = params.difficulty == Difficulty.easy;
   final tries = easy ? 40 : 80;
+  // No `-1 << 30` sentinel: on the web shifts give unsigned 32-bit results,
+  // so it would be positive and no board would ever beat it.
   BlockadePuzzle? best;
-  var bestScore = -1 << 30;
+  var bestScore = 0;
   for (var t = 0; t < tries || best == null; t++) {
     final sea = blockadeSea(rows, cols, shape.ships, shape.reach, rng);
     if (sea == null) continue;
@@ -46,14 +48,14 @@ BlockadePuzzle generateBlockade(GenParams params) {
     final score = easy
         ? min(delay, 2) * 10 - (delay - 2).abs()
         : min(delay, shape.delay + 2) * 10 + miss * 6 + (waitOnly ? 0 : 12) + min(opt, 3 * max(rows, cols)) ~/ 4;
-    if (score > bestScore) {
+    if (best == null || score > bestScore) {
       bestScore = score;
       best = _withLimit(sea, opt, limit);
     }
     if (easy && delay >= shape.delay && delay <= 3 && t >= 4) break;
     if (!easy && delay >= shape.delay + 1 && greedy == null && !waitOnly && t >= 20) break;
   }
-  return best!;
+  return best;
 }
 
 BlockadePuzzle _withLimit(BlockadePuzzle p, int best, int limit) => BlockadePuzzle(

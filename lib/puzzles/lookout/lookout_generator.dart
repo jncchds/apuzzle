@@ -26,8 +26,10 @@ LookoutPuzzle generateLookout(GenParams params) {
     Difficulty.medium => 8,
     _ => 10,
   };
+  // No `-1 << 30` sentinel: on the web shifts give unsigned 32-bit results,
+  // so it would be positive and no board would ever beat it.
   LookoutPuzzle? best;
-  var bestScore = -1 << 30;
+  var bestScore = 0;
 
   for (var attempt = 0; attempt < tries; attempt++) {
     final shaded = _shade(n, nb, rng);
@@ -55,7 +57,7 @@ LookoutPuzzle generateLookout(GenParams params) {
     // Score: the tier below should get stuck, the further behind the better.
     final below = LookoutSolver(puzzle).slack(tier - 1);
     final score = (below > 0 ? 1000 : 0) + min(below, cells ~/ 3) * 4;
-    if (score > bestScore) (best, bestScore) = (puzzle, score);
+    if (best == null || score > bestScore) (best, bestScore) = (puzzle, score);
     if (below >= cells ~/ 3) break;
   }
   return best!;

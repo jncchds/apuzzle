@@ -27,8 +27,10 @@ OrbitsPuzzle generateOrbits(GenParams params) {
   };
   // One-cell regions solve themselves: only a few are welcome.
   final fewOnes = max(2, n ~/ 12);
+  // No `-1 << 30` sentinel: on the web shifts give unsigned 32-bit results,
+  // so it would be positive and no board would ever beat it.
   OrbitsPuzzle? best;
-  var bestScore = -1 << 30;
+  var bestScore = 0;
 
   // Small boards rarely need the harder tiers, and are quick to try.
   final attempts = n <= 49 ? 200 : 40;
@@ -64,7 +66,7 @@ OrbitsPuzzle generateOrbits(GenParams params) {
     final ones = sizes.where((x) => x == 1).length;
     if (grade == tier && ones <= fewOnes) return puzzle;
     final score = grade * 1000 - max<int>(0, ones - fewOnes);
-    if (score > bestScore) {
+    if (best == null || score > bestScore) {
       best = puzzle;
       bestScore = score;
     }
