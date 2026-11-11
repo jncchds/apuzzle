@@ -9932,6 +9932,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then {kind, select, row{row {line}} other{column {line}}} can no longer have {sum} between its shaded cells.'**
   String exBetweenFailLine(Object line, String kind, Object sum);
+
+  /// No description provided for @straightsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Ladders'**
+  String get straightsName;
+
+  /// No description provided for @straightsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill every run with consecutive numbers'**
+  String get straightsTagline;
+
+  /// No description provided for @straightsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Fill the empty cells with the numbers 1 to N (N = grid size), never the same number twice in a row or column.\n• Walls split the rows and columns into runs of cells. Every run holds consecutive numbers in any order, like 4, 2, 3.\n• A number on a wall belongs to no run, but it still counts for its row and column: that number can\'t appear there again.\n\nPick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.'**
+  String get straightsRules;
+
+  /// No description provided for @tutStraights1.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill the empty cells with 1 to 4, never a number twice in a row or column. Walls split the lines into runs, and every run holds consecutive numbers in any order, like 3, 1, 2.'**
+  String get tutStraights1;
+
+  /// No description provided for @tutStraights2.
+  ///
+  /// In en, this message translates to:
+  /// **'A number on a wall belongs to no run, but it still counts for its row and column. Here the 4 keeps 4 out of the top row, so its run of three holds 1, 2 and 3. Finish the board.'**
+  String get tutStraights2;
+
+  /// No description provided for @tutStraights3.
+  ///
+  /// In en, this message translates to:
+  /// **'Some numbers are in every stretch a run can hold: four cells out of 1 to 5 hold 1–4 or 2–5, so always 2, 3 and 4. Those numbers can\'t be anywhere else in the run\'s row or column. Finish the board.'**
+  String get tutStraights3;
+
+  /// No description provided for @tutStraights4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a whole board. For every run, ask which stretches of consecutive numbers still fit it, and note what a cell can still hold with the pencil.'**
+  String get tutStraights4;
+
+  /// No description provided for @tutStraightsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Stuck? Look for two cells of a row or column that can only hold the same two numbers between them (or three cells with three numbers): those numbers can\'t go anywhere else in that line. And try every way to fill a run with your notes: a number that never fits a cell can be crossed off there.'**
+  String get tutStraightsS1;
+
+  /// No description provided for @tutStraightsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three numbers and follow on; if that runs into a contradiction, cross the number off.'**
+  String get tutStraightsS2;
+
+  /// No description provided for @exStraightsNaked.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: everything else is ruled out there.'**
+  String exStraightsNaked(Object cell, Object value);
+
+  /// No description provided for @exStraightsRange.
+  ///
+  /// In en, this message translates to:
+  /// **'The run {run} holds consecutive numbers, and with what its cells can still hold, only {digits} can be among them, so {cell} can\'t be {gone}.'**
+  String exStraightsRange(Object run, Object digits, Object cell, Object gone);
+
+  /// No description provided for @exStraightsSure.
+  ///
+  /// In en, this message translates to:
+  /// **'Whatever consecutive numbers the run {run} holds, they include {gone}, so {cell}, elsewhere in {kind, select, row{row {line}} other{column {line}}}, can\'t be {gone}.'**
+  String exStraightsSure(Object run, Object gone, Object cell, Object line, String kind);
+
+  /// No description provided for @exStraightsHidden.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: the run {run} needs a {value}, and no other cell of it can hold one.'**
+  String exStraightsHidden(Object cell, Object value, Object run);
+
+  /// No description provided for @exStraightsSubset.
+  ///
+  /// In en, this message translates to:
+  /// **'{cells} can only hold {digits} between them, so {cell}, elsewhere in {kind, select, row{row {line}} other{column {line}}}, can\'t be {gone}.'**
+  String exStraightsSubset(Object cells, Object digits, Object cell, Object line, String kind, Object gone);
+
+  /// No description provided for @exStraightsFill.
+  ///
+  /// In en, this message translates to:
+  /// **'No way to fill the run {run} with different consecutive numbers that fit its cells puts {gone} into {cell}.'**
+  String exStraightsFill(Object run, Object gone, Object cell);
+
+  /// No description provided for @exStraightsFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then nothing is left for {cell}.'**
+  String exStraightsFailEmpty(Object cell);
+
+  /// No description provided for @exStraightsFailRun.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the run {run} can\'t hold consecutive numbers.'**
+  String exStraightsFailRun(Object run);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

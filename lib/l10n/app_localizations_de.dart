@@ -7912,4 +7912,92 @@ class AppLocalizationsDe extends AppLocalizations {
     );
     return 'Aber dann kann $_temp0 nicht mehr $sum zwischen ihren geschwärzten Feldern haben.';
   }
+
+  @override
+  String get straightsName => 'Leitern';
+
+  @override
+  String get straightsTagline => 'Fülle jede Strecke mit aufeinanderfolgenden Zahlen';
+
+  @override
+  String get straightsRules =>
+      '• Fülle die leeren Felder mit den Zahlen 1 bis N (N = Gittergröße), nie zweimal dieselbe Zahl in einer Zeile oder Spalte.\n• Wände teilen die Zeilen und Spalten in Strecken von Feldern. Jede Strecke enthält aufeinanderfolgende Zahlen in beliebiger Reihenfolge, etwa 4, 2, 3.\n• Eine Zahl auf einer Wand gehört zu keiner Strecke, zählt aber für ihre Zeile und Spalte: Dort darf sie nicht noch einmal stehen.\n\nWähle eine Zahl in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Zahl. Der Stift schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld.';
+
+  @override
+  String get tutStraights1 =>
+      'Fülle die leeren Felder mit 1 bis 4, nie eine Zahl zweimal in einer Zeile oder Spalte. Wände teilen die Linien in Strecken, und jede Strecke enthält aufeinanderfolgende Zahlen in beliebiger Reihenfolge, etwa 3, 1, 2.';
+
+  @override
+  String get tutStraights2 =>
+      'Eine Zahl auf einer Wand gehört zu keiner Strecke, zählt aber für ihre Zeile und Spalte. Hier hält die 4 die 4 aus der obersten Zeile fern, also enthält deren Strecke aus drei Feldern 1, 2 und 3. Löse das Feld fertig.';
+
+  @override
+  String get tutStraights3 =>
+      'Manche Zahlen stecken in jeder Folge, die eine Strecke enthalten kann: Vier Felder aus den Zahlen 1 bis 5 enthalten 1–4 oder 2–5, also immer 2, 3 und 4. Diese Zahlen können nirgends sonst in der Zeile oder Spalte der Strecke stehen. Löse das Feld fertig.';
+
+  @override
+  String get tutStraights4 =>
+      'Jetzt ein ganzes Feld. Frage dich bei jeder Strecke, welche Folgen aufeinanderfolgender Zahlen noch hineinpassen, und notiere mit dem Stift, was in einem Feld noch stehen kann.';
+
+  @override
+  String get tutStraightsS1 =>
+      'Kommst du nicht weiter? Suche zwei Felder einer Zeile oder Spalte, in denen nur dieselben zwei Zahlen stehen können (oder drei Felder mit drei Zahlen): Diese Zahlen können nirgends sonst in dieser Linie stehen. Und probiere jede Art, eine Strecke passend zu deinen Notizen zu füllen: Eine Zahl, die nie in ein Feld passt, kannst du dort streichen.';
+
+  @override
+  String get tutStraightsS2 =>
+      'Die schwersten Felder brauchen eine Annahme, die du widerlegen kannst. Nimm an, ein Feld hat eine seiner letzten zwei oder drei Zahlen, und folgere weiter; führt das zu einem Widerspruch, streiche die Zahl.';
+
+  @override
+  String exStraightsNaked(Object cell, Object value) {
+    return 'In $cell muss $value stehen: alles andere ist dort ausgeschlossen.';
+  }
+
+  @override
+  String exStraightsRange(Object run, Object digits, Object cell, Object gone) {
+    return 'Die Strecke $run enthält aufeinanderfolgende Zahlen, und nach dem, was in ihren Feldern noch stehen kann, kommen nur $digits dafür in Frage, also kann $cell nicht $gone sein.';
+  }
+
+  @override
+  String exStraightsSure(Object run, Object gone, Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'Welche aufeinanderfolgenden Zahlen die Strecke $run auch enthält, $gone ist dabei, also kann $cell, anderswo in $_temp0, nicht $gone sein.';
+  }
+
+  @override
+  String exStraightsHidden(Object cell, Object value, Object run) {
+    return 'In $cell muss $value stehen: Die Strecke $run braucht eine $value, und kein anderes ihrer Felder kann sie aufnehmen.';
+  }
+
+  @override
+  String exStraightsSubset(Object cells, Object digits, Object cell, Object line, String kind, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'In $cells können nur $digits stehen, also kann $cell, anderswo in $_temp0, nicht $gone sein.';
+  }
+
+  @override
+  String exStraightsFill(Object run, Object gone, Object cell) {
+    return 'Keine Art, die Strecke $run mit verschiedenen aufeinanderfolgenden Zahlen zu füllen, die in ihre Felder passen, setzt $gone in $cell.';
+  }
+
+  @override
+  String exStraightsFailEmpty(Object cell) {
+    return 'Aber dann bleibt für $cell nichts übrig.';
+  }
+
+  @override
+  String exStraightsFailRun(Object run) {
+    return 'Aber dann kann die Strecke $run keine aufeinanderfolgenden Zahlen enthalten.';
+  }
 }

@@ -1664,5 +1664,22 @@
   "exBetweenFailEmpty": "Aber dann bleibt für {cell} nichts übrig.",
   "exBetweenFailNoPlace": "Aber dann hat {value} keinen Platz mehr in {kind, select, row{Zeile {line}} other{Spalte {line}}}.",
   "exBetweenFailShade": "Aber dann kann {kind, select, row{Zeile {line}} other{Spalte {line}}} keine zwei geschwärzten Felder haben.",
-  "exBetweenFailLine": "Aber dann kann {kind, select, row{Zeile {line}} other{Spalte {line}}} nicht mehr {sum} zwischen ihren geschwärzten Feldern haben."
+  "exBetweenFailLine": "Aber dann kann {kind, select, row{Zeile {line}} other{Spalte {line}}} nicht mehr {sum} zwischen ihren geschwärzten Feldern haben.",
+  "straightsName": "Leitern",
+  "straightsTagline": "Fülle jede Strecke mit aufeinanderfolgenden Zahlen",
+  "straightsRules": "• Fülle die leeren Felder mit den Zahlen 1 bis N (N = Gittergröße), nie zweimal dieselbe Zahl in einer Zeile oder Spalte.\n• Wände teilen die Zeilen und Spalten in Strecken von Feldern. Jede Strecke enthält aufeinanderfolgende Zahlen in beliebiger Reihenfolge, etwa 4, 2, 3.\n• Eine Zahl auf einer Wand gehört zu keiner Strecke, zählt aber für ihre Zeile und Spalte: Dort darf sie nicht noch einmal stehen.\n\nWähle eine Zahl in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Zahl. Der Stift schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld.",
+  "tutStraights1": "Fülle die leeren Felder mit 1 bis 4, nie eine Zahl zweimal in einer Zeile oder Spalte. Wände teilen die Linien in Strecken, und jede Strecke enthält aufeinanderfolgende Zahlen in beliebiger Reihenfolge, etwa 3, 1, 2.",
+  "tutStraights2": "Eine Zahl auf einer Wand gehört zu keiner Strecke, zählt aber für ihre Zeile und Spalte. Hier hält die 4 die 4 aus der obersten Zeile fern, also enthält deren Strecke aus drei Feldern 1, 2 und 3. Löse das Feld fertig.",
+  "tutStraights3": "Manche Zahlen stecken in jeder Folge, die eine Strecke enthalten kann: Vier Felder aus den Zahlen 1 bis 5 enthalten 1–4 oder 2–5, also immer 2, 3 und 4. Diese Zahlen können nirgends sonst in der Zeile oder Spalte der Strecke stehen. Löse das Feld fertig.",
+  "tutStraights4": "Jetzt ein ganzes Feld. Frage dich bei jeder Strecke, welche Folgen aufeinanderfolgender Zahlen noch hineinpassen, und notiere mit dem Stift, was in einem Feld noch stehen kann.",
+  "tutStraightsS1": "Kommst du nicht weiter? Suche zwei Felder einer Zeile oder Spalte, in denen nur dieselben zwei Zahlen stehen können (oder drei Felder mit drei Zahlen): Diese Zahlen können nirgends sonst in dieser Linie stehen. Und probiere jede Art, eine Strecke passend zu deinen Notizen zu füllen: Eine Zahl, die nie in ein Feld passt, kannst du dort streichen.",
+  "tutStraightsS2": "Die schwersten Felder brauchen eine Annahme, die du widerlegen kannst. Nimm an, ein Feld hat eine seiner letzten zwei oder drei Zahlen, und folgere weiter; führt das zu einem Widerspruch, streiche die Zahl.",
+  "exStraightsNaked": "In {cell} muss {value} stehen: alles andere ist dort ausgeschlossen.",
+  "exStraightsRange": "Die Strecke {run} enthält aufeinanderfolgende Zahlen, und nach dem, was in ihren Feldern noch stehen kann, kommen nur {digits} dafür in Frage, also kann {cell} nicht {gone} sein.",
+  "exStraightsSure": "Welche aufeinanderfolgenden Zahlen die Strecke {run} auch enthält, {gone} ist dabei, also kann {cell}, anderswo in {kind, select, row{Zeile {line}} other{Spalte {line}}}, nicht {gone} sein.",
+  "exStraightsHidden": "In {cell} muss {value} stehen: Die Strecke {run} braucht eine {value}, und kein anderes ihrer Felder kann sie aufnehmen.",
+  "exStraightsSubset": "In {cells} können nur {digits} stehen, also kann {cell}, anderswo in {kind, select, row{Zeile {line}} other{Spalte {line}}}, nicht {gone} sein.",
+  "exStraightsFill": "Keine Art, die Strecke {run} mit verschiedenen aufeinanderfolgenden Zahlen zu füllen, die in ihre Felder passen, setzt {gone} in {cell}.",
+  "exStraightsFailEmpty": "Aber dann bleibt für {cell} nichts übrig.",
+  "exStraightsFailRun": "Aber dann kann die Strecke {run} keine aufeinanderfolgenden Zahlen enthalten."
 }

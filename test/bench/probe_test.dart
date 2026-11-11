@@ -17,6 +17,8 @@ import 'package:apuzzle/puzzles/orbits/orbits_solver.dart';
 import 'package:apuzzle/puzzles/shikaku/shikaku_generator.dart';
 import 'package:apuzzle/puzzles/shikaku/shikaku_solver.dart';
 import 'package:apuzzle/puzzles/trail/trail_generator.dart';
+import 'package:apuzzle/puzzles/straights/straights_generator.dart';
+import 'package:apuzzle/puzzles/straights/straights_solver.dart';
 import 'package:apuzzle/puzzles/trail/trail_logic.dart';
 import 'package:apuzzle/puzzles/trail/trail_model.dart';
 import 'package:apuzzle/puzzles/trail/trail_solver.dart';
@@ -106,6 +108,13 @@ void main() {
         sizes[k]++;
       }
       return 't${s.grade()} u$u s${p.stars.length} ones${sizes.where((x) => x == 1).length} max${sizes.reduce(max)}';
+    });
+  }
+  if (probe == 'straights') {
+    run(probe, (params) {
+      final p = generateStraights(params);
+      final t = StraightsSolver(p).grade(p.givens);
+      return 't$t g${p.givens.where((g) => g != null).length} w${p.clues.where((c) => c != null).length}';
     });
   }
 }

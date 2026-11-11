@@ -4,6 +4,7 @@ import '../puzzles/arrows/arrows_type.dart';
 import '../puzzles/atoms/atoms_type.dart';
 import '../puzzles/blockade/blockade_type.dart';
 import '../puzzles/between/between_type.dart';
+import '../puzzles/straights/straights_type.dart';
 import '../puzzles/blocks/blocks_type.dart';
 import '../puzzles/cages/cages_type.dart';
 import '../puzzles/chambers/chambers_type.dart';
@@ -80,6 +81,7 @@ const List<PuzzleType> puzzleTypes = [
   SignsType(),
   TotalsType(),
   BetweenType(),
+  StraightsType(),
   KingsType(),
   StarsType(),
   BlocksType(),
@@ -210,6 +212,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('latin', [SkylineType(), CagesType(), SignsType()]),
       PuzzleFamily('totals', [TotalsType()]),
       PuzzleFamily('between', [BetweenType()]),
+      PuzzleFamily('straights', [StraightsType()]),
       PuzzleFamily('blocks', [BlocksType()]),
       PuzzleFamily('tally', [TallyType()]),
       PuzzleFamily('solo', [SoloType()]),

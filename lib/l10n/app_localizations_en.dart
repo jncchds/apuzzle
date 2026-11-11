@@ -7945,4 +7945,92 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return 'But then $_temp0 can no longer have $sum between its shaded cells.';
   }
+
+  @override
+  String get straightsName => 'Ladders';
+
+  @override
+  String get straightsTagline => 'Fill every run with consecutive numbers';
+
+  @override
+  String get straightsRules =>
+      '• Fill the empty cells with the numbers 1 to N (N = grid size), never the same number twice in a row or column.\n• Walls split the rows and columns into runs of cells. Every run holds consecutive numbers in any order, like 4, 2, 3.\n• A number on a wall belongs to no run, but it still counts for its row and column: that number can\'t appear there again.\n\nPick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.';
+
+  @override
+  String get tutStraights1 =>
+      'Fill the empty cells with 1 to 4, never a number twice in a row or column. Walls split the lines into runs, and every run holds consecutive numbers in any order, like 3, 1, 2.';
+
+  @override
+  String get tutStraights2 =>
+      'A number on a wall belongs to no run, but it still counts for its row and column. Here the 4 keeps 4 out of the top row, so its run of three holds 1, 2 and 3. Finish the board.';
+
+  @override
+  String get tutStraights3 =>
+      'Some numbers are in every stretch a run can hold: four cells out of 1 to 5 hold 1–4 or 2–5, so always 2, 3 and 4. Those numbers can\'t be anywhere else in the run\'s row or column. Finish the board.';
+
+  @override
+  String get tutStraights4 =>
+      'Now a whole board. For every run, ask which stretches of consecutive numbers still fit it, and note what a cell can still hold with the pencil.';
+
+  @override
+  String get tutStraightsS1 =>
+      'Stuck? Look for two cells of a row or column that can only hold the same two numbers between them (or three cells with three numbers): those numbers can\'t go anywhere else in that line. And try every way to fill a run with your notes: a number that never fits a cell can be crossed off there.';
+
+  @override
+  String get tutStraightsS2 =>
+      'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three numbers and follow on; if that runs into a contradiction, cross the number off.';
+
+  @override
+  String exStraightsNaked(Object cell, Object value) {
+    return '$cell must be $value: everything else is ruled out there.';
+  }
+
+  @override
+  String exStraightsRange(Object run, Object digits, Object cell, Object gone) {
+    return 'The run $run holds consecutive numbers, and with what its cells can still hold, only $digits can be among them, so $cell can\'t be $gone.';
+  }
+
+  @override
+  String exStraightsSure(Object run, Object gone, Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return 'Whatever consecutive numbers the run $run holds, they include $gone, so $cell, elsewhere in $_temp0, can\'t be $gone.';
+  }
+
+  @override
+  String exStraightsHidden(Object cell, Object value, Object run) {
+    return '$cell must be $value: the run $run needs a $value, and no other cell of it can hold one.';
+  }
+
+  @override
+  String exStraightsSubset(Object cells, Object digits, Object cell, Object line, String kind, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return '$cells can only hold $digits between them, so $cell, elsewhere in $_temp0, can\'t be $gone.';
+  }
+
+  @override
+  String exStraightsFill(Object run, Object gone, Object cell) {
+    return 'No way to fill the run $run with different consecutive numbers that fit its cells puts $gone into $cell.';
+  }
+
+  @override
+  String exStraightsFailEmpty(Object cell) {
+    return 'But then nothing is left for $cell.';
+  }
+
+  @override
+  String exStraightsFailRun(Object run) {
+    return 'But then the run $run can\'t hold consecutive numbers.';
+  }
 }

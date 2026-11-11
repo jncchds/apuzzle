@@ -7976,4 +7976,92 @@ class AppLocalizationsPl extends AppLocalizations {
     );
     return 'Ale wtedy $_temp0 nie może już mieć $sum między zamalowanymi polami.';
   }
+
+  @override
+  String get straightsName => 'Drabinki';
+
+  @override
+  String get straightsTagline => 'Wypełnij każdy odcinek kolejnymi liczbami';
+
+  @override
+  String get straightsRules =>
+      '• Wypełnij puste pola liczbami od 1 do N (N = rozmiar planszy), nigdy nie powtarzając liczby w wierszu ani w kolumnie.\n• Ściany dzielą wiersze i kolumny na odcinki pól. Każdy odcinek zawiera kolejne liczby w dowolnej kolejności, np. 4, 2, 3.\n• Liczba na ścianie nie należy do żadnego odcinka, ale liczy się dla swojego wiersza i kolumny: nie może się tam już pojawić.\n\nWybierz liczbę z palety i dotykaj pól, aby ją wstawić, albo najpierw dotknij pola, a potem liczby. Przycisk z ołówkiem włącza małe notatki. Długie naciśnięcie / prawy klik czyści pole.';
+
+  @override
+  String get tutStraights1 =>
+      'Wypełnij puste pola liczbami od 1 do 4, bez powtórzeń w wierszu i kolumnie. Ściany dzielą linie na odcinki, a każdy odcinek zawiera kolejne liczby w dowolnej kolejności, np. 3, 1, 2.';
+
+  @override
+  String get tutStraights2 =>
+      'Liczba na ścianie nie należy do żadnego odcinka, ale liczy się dla swojego wiersza i kolumny. Tu 4 nie wpuszcza 4 do górnego wiersza, więc jego odcinek z trzech pól zawiera 1, 2 i 3. Dokończ planszę.';
+
+  @override
+  String get tutStraights3 =>
+      'Niektóre liczby są w każdym ciągu, jaki może zawierać odcinek: cztery pola z liczb od 1 do 5 to 1–4 albo 2–5, więc zawsze 2, 3 i 4. Tych liczb nie może być nigdzie indziej w wierszu ani kolumnie odcinka. Dokończ planszę.';
+
+  @override
+  String get tutStraights4 =>
+      'Teraz cała plansza. Dla każdego odcinka zastanów się, jakie ciągi kolejnych liczb jeszcze do niego pasują, i zapisuj ołówkiem, co jeszcze może być w polu.';
+
+  @override
+  String get tutStraightsS1 =>
+      'Utknąłeś? Szukaj dwóch pól wiersza lub kolumny, w których mogą być tylko te same dwie liczby (albo trzech pól z trzema liczbami): tych liczb nie może być nigdzie indziej w tej linii. I sprawdź każdy sposób wypełnienia odcinka zgodny z notatkami: liczbę, która nigdy nie pasuje do pola, można tam skreślić.';
+
+  @override
+  String get tutStraightsS2 =>
+      'Najtrudniejsze plansze wymagają założenia, które da się obalić. Załóż, że w polu jest jedna z jego dwóch-trzech ostatnich liczb, i rozumuj dalej; jeśli dojdziesz do sprzeczności, skreśl tę liczbę.';
+
+  @override
+  String exStraightsNaked(Object cell, Object value) {
+    return 'W $cell musi być $value: wszystko inne jest tam wykluczone.';
+  }
+
+  @override
+  String exStraightsRange(Object run, Object digits, Object cell, Object gone) {
+    return 'Odcinek $run zawiera kolejne liczby, a przy tym, co jeszcze może być w jego polach, mogą być wśród nich tylko $digits, więc w $cell nie może być $gone.';
+  }
+
+  @override
+  String exStraightsSure(Object run, Object gone, Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'w wierszu $line',
+        'other': 'w kolumnie $line',
+      },
+    );
+    return 'Jakiekolwiek kolejne liczby zawiera odcinek $run, jest wśród nich $gone, więc w $cell, gdzie indziej $_temp0, nie może być $gone.';
+  }
+
+  @override
+  String exStraightsHidden(Object cell, Object value, Object run) {
+    return 'W $cell musi być $value: odcinek $run potrzebuje $value, a żadne inne jego pole tego nie pomieści.';
+  }
+
+  @override
+  String exStraightsSubset(Object cells, Object digits, Object cell, Object line, String kind, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'w wierszu $line',
+        'other': 'w kolumnie $line',
+      },
+    );
+    return 'W $cells mogą być tylko $digits, więc w $cell, gdzie indziej $_temp0, nie może być $gone.';
+  }
+
+  @override
+  String exStraightsFill(Object run, Object gone, Object cell) {
+    return 'Żaden sposób wypełnienia odcinka $run różnymi kolejnymi liczbami pasującymi do jego pól nie wstawia $gone w $cell.';
+  }
+
+  @override
+  String exStraightsFailEmpty(Object cell) {
+    return 'Ale wtedy dla $cell nic nie zostaje.';
+  }
+
+  @override
+  String exStraightsFailRun(Object run) {
+    return 'Ale wtedy odcinek $run nie może zawierać kolejnych liczb.';
+  }
 }

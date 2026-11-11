@@ -8007,4 +8007,92 @@ class AppLocalizationsUk extends AppLocalizations {
     );
     return 'Але тоді $_temp0 уже не може мати $sum між зафарбованими клітинками.';
   }
+
+  @override
+  String get straightsName => 'Драбинки';
+
+  @override
+  String get straightsTagline => 'Заповніть кожен відрізок числами поспіль';
+
+  @override
+  String get straightsRules =>
+      '• Заповніть порожні клітинки числами від 1 до N (N — розмір сітки), ніколи не повторюючи число в рядку чи стовпці.\n• Стіни ділять рядки й стовпці на відрізки клітинок. Кожен відрізок містить числа поспіль у будь-якому порядку, як-от 4, 2, 3.\n• Число на стіні не належить жодному відрізку, але все одно рахується для свого рядка й стовпця: там воно вже не може з’явитися.\n\nВиберіть число в палітрі й торкайтеся клітинок, щоб поставити його, або спершу торкніться клітинки, а потім числа. Кнопка з олівцем вмикає дрібні позначки. Довге натискання / правий клік очищає клітинку.';
+
+  @override
+  String get tutStraights1 =>
+      'Заповніть порожні клітинки числами від 1 до 4, не повторюючи число в рядку чи стовпці. Стіни ділять лінії на відрізки, і кожен відрізок містить числа поспіль у будь-якому порядку, як-от 3, 1, 2.';
+
+  @override
+  String get tutStraights2 =>
+      'Число на стіні не належить жодному відрізку, але рахується для свого рядка й стовпця. Тут 4 не пускає 4 у верхній рядок, тож його відрізок із трьох клітинок містить 1, 2 і 3. Завершіть поле.';
+
+  @override
+  String get tutStraights3 =>
+      'Деякі числа є в кожному проміжку, який може містити відрізок: чотири клітинки з чисел від 1 до 5 містять 1–4 або 2–5, тож завжди 2, 3 і 4. Цих чисел не може бути більше ніде в рядку чи стовпці відрізка. Завершіть поле.';
+
+  @override
+  String get tutStraights4 =>
+      'Тепер ціле поле. Для кожного відрізка думайте, які проміжки чисел поспіль ще йому пасують, і позначайте олівцем, що ще може бути в клітинці.';
+
+  @override
+  String get tutStraightsS1 =>
+      'Застрягли? Шукайте дві клітинки рядка чи стовпця, у яких можуть бути лише ті самі два числа (або три клітинки з трьома числами): цих чисел не може бути більше ніде в цій лінії. І переберіть усі способи заповнити відрізок за вашими позначками: число, яке ніколи не пасує клітинці, там можна викреслити.';
+
+  @override
+  String get tutStraightsS2 =>
+      'Найважчі поля потребують припущення, яке можна спростувати. Припустіть, що в клітинці одне з двох-трьох останніх чисел, і міркуйте далі; якщо дійдете до суперечності, викресліть це число.';
+
+  @override
+  String exStraightsNaked(Object cell, Object value) {
+    return 'У $cell має бути $value: усе інше там виключено.';
+  }
+
+  @override
+  String exStraightsRange(Object run, Object digits, Object cell, Object gone) {
+    return 'Відрізок $run містить числа поспіль, і з огляду на те, що ще може бути в його клітинках, серед них можуть бути лише $digits, тож у $cell не може бути $gone.';
+  }
+
+  @override
+  String exStraightsSure(Object run, Object gone, Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'в рядку $line',
+        'other': 'у стовпці $line',
+      },
+    );
+    return 'Хоч би які числа поспіль містив відрізок $run, серед них є $gone, тож у $cell, деінде $_temp0, не може бути $gone.';
+  }
+
+  @override
+  String exStraightsHidden(Object cell, Object value, Object run) {
+    return 'У $cell має бути $value: відрізку $run потрібне $value, а жодна інша його клітинка його не вмістить.';
+  }
+
+  @override
+  String exStraightsSubset(Object cells, Object digits, Object cell, Object line, String kind, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'в рядку $line',
+        'other': 'у стовпці $line',
+      },
+    );
+    return 'У $cells можуть бути лише $digits, тож у $cell, деінде $_temp0, не може бути $gone.';
+  }
+
+  @override
+  String exStraightsFill(Object run, Object gone, Object cell) {
+    return 'Жоден спосіб заповнити відрізок $run різними числами поспіль, що пасують його клітинкам, не ставить $gone у $cell.';
+  }
+
+  @override
+  String exStraightsFailEmpty(Object cell) {
+    return 'Але тоді для $cell нічого не лишається.';
+  }
+
+  @override
+  String exStraightsFailRun(Object run) {
+    return 'Але тоді відрізок $run не може містити числа поспіль.';
+  }
 }

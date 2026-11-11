@@ -58,6 +58,7 @@ void main() {
     expect(alt('mochikoro'), ['glades']);
     expect(alt('statue park'), ['quarry']);
     expect(alt('doppelblock'), ['between']);
+    expect(alt('str8ts'), ['straights']);
     expect(alt('yajilin'), ['arrows']);
     expect(alt('takuzu'), ['mambo']);
     expect(alt('binairo'), ['mambo']);
