@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'blocks_generator.dart';
 import 'blocks_model.dart';
+import '../../core/explain.dart';
+import 'blocks_solver.dart';
 
 /// A board from rows of region letters, the solution's digits, and the
 /// shown digits ('.' for an empty cell).
@@ -41,10 +43,12 @@ final List<TutorialStep> blocksStrategies = [
   // Medium boards need pointing or pairs (checked: singles get stuck).
   TutorialStep.generated(
     text: (l) => l.tutBlocksS1,
+    teaches: {BlocksRule.pointing.index},
     make: () => generateBlocks(const GenParams(size: GridSize.square(5), difficulty: Difficulty.medium, seed: 1)),
   ),
   TutorialStep.generated(
     text: (l) => l.tutBlocksS2,
+    teaches: {ruleRefuted},
     make: () => generateBlocks(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

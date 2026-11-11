@@ -4,6 +4,8 @@ import '../../core/lattice_loop.dart';
 import '../../core/tutorial.dart';
 import 'pearls_generator.dart';
 import 'pearls_model.dart';
+import '../../core/explain.dart';
+import 'pearls_solver.dart';
 
 /// A board whose loop runs through [loop] (cells as row * cols + column, in
 /// order) with pearls at the given cells.
@@ -49,11 +51,13 @@ final List<TutorialStep> pearlsStrategies = [
   // Both black pearls are too close to two edges to turn toward them.
   TutorialStep(
     text: (l) => l.tutPearlsS1,
+    teaches: {loopRuleCount + PearlsRule.blackFar.index},
     puzzle: _board(4, 4, [5, 6, 7, 11, 15, 14, 13, 9], black: [5, 15]),
     focus: {const Pos(1, 1), const Pos(3, 3)},
   ),
   TutorialStep.generated(
     text: (l) => l.tutPearlsS2,
+    teaches: {ruleRefuted},
     make: () => generatePearls(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

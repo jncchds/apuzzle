@@ -93,8 +93,8 @@ class WaymarksType extends PuzzleType<WaymarksPuzzle, WaymarksState> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(WaymarksPuzzle puzzle, WaymarksState state) =>
-      explainStep(const WaymarksExplainer(), puzzle, state);
+  Explanation? explain(WaymarksPuzzle puzzle, WaymarksState state, {Set<int> prefer = const {}}) =>
+      explainStep(const WaymarksExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Widget buildBoard(BuildContext context, GameController controller) => _WaymarksBoard(controller: controller);

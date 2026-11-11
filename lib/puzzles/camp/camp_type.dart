@@ -185,7 +185,8 @@ class CampType extends ValueGridType<CampPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(CampPuzzle puzzle, ValueGrid state) => explainStep(const CampExplainer(), puzzle, state);
+  Explanation? explain(CampPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const CampExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(CampPuzzle puzzle) => puzzle.toJson();

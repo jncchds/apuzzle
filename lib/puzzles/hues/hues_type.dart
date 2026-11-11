@@ -122,7 +122,8 @@ class HuesType extends ValueGridType<HuesPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(HuesPuzzle puzzle, ValueGrid state) => explainStep(const HuesExplainer(), puzzle, state);
+  Explanation? explain(HuesPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const HuesExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(HuesPuzzle puzzle) => puzzle.toJson();

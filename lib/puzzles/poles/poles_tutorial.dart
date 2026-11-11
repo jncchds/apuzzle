@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'poles_generator.dart';
 import 'poles_model.dart';
+import '../../core/explain.dart';
+import 'poles_solver.dart';
 
 /// A board from its dominoes (two cells with the same letter, rows split by
 /// |) and values (+, −, . for blank); the counts follow from the values.
@@ -44,7 +46,12 @@ final List<TutorialStep> polesStrategies = [
   // Every way to fill a line: needs tier 2.
   TutorialStep(
     text: (l) => l.tutPolesS1,
+    teaches: {PolesRule.fill.index},
     puzzle: polesBoard('abccd|abeed|fgghi|fjjhi', '-+-+-|+-+-+|-+-.-|+-+.+'),
   ),
-  TutorialStep.generated(text: (l) => l.tutPolesS2, make: () => generatePoles(polesStrategyParams)),
+  TutorialStep.generated(
+    text: (l) => l.tutPolesS2,
+    teaches: {ruleRefuted},
+    make: () => generatePoles(polesStrategyParams),
+  ),
 ];

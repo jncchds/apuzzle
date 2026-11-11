@@ -126,7 +126,7 @@ class PopType extends PuzzleType<PopPuzzle, PopState> {
   @override
   HintResult<PopState>? hint(PopPuzzle puzzle, PopState state) {
     final g = popSuggest(puzzle, state);
-    return g == null ? null : HintResult(state, {for (final i in g) puzzle.size.pos(i)});
+    return g == null ? null : HintResult(state, {for (final i in g) puzzle.size.pos(i)}, why: (l) => l.popHintWhy);
   }
 
   @override

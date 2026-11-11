@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'lookout_generator.dart';
 import 'lookout_model.dart';
+import '../../core/explain.dart';
+import 'lookout_solver.dart';
 
 /// A board from rows separated by |: `#` is shaded, a digit is a number
 /// (its count of seen cells), `.` any other cell that stays.
@@ -53,9 +55,18 @@ final List<TutorialStep> lookoutStrategies = [
   // The 2 sees one more cell; its view can't stop on the 3, so it goes down.
   TutorialStep(
     text: (l) => l.tutLookoutS1,
+    teaches: {LookoutRule.ways.index},
     puzzle: lookoutBoard('3#2|...|..#'),
     focus: {const Pos(0, 2), const Pos(0, 1), const Pos(0, 0), const Pos(1, 2)},
   ),
-  TutorialStep.generated(text: (l) => l.tutLookoutS2, make: () => generateLookout(lookoutStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutLookoutS3, make: () => generateLookout(lookoutStrategyParams[1])),
+  TutorialStep.generated(
+    text: (l) => l.tutLookoutS2,
+    teaches: {LookoutRule.ways.index, LookoutRule.cut.index},
+    make: () => generateLookout(lookoutStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutLookoutS3,
+    teaches: {ruleRefuted},
+    make: () => generateLookout(lookoutStrategyParams[1]),
+  ),
 ];

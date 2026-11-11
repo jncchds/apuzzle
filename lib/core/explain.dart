@@ -119,6 +119,8 @@ class Explanation {
     this.edges = const {},
     this.fix = false,
     this.fallback = false,
+    this.rules = const {},
+    this.ruleOf = const {},
   });
 
   final GridSize size;
@@ -143,7 +145,20 @@ class Explanation {
   /// Logic found nothing: the step is revealed from the solution.
   final bool fallback;
 
+  /// Every rule the step rests on: its own, its reasons' and, for a refuted
+  /// assumption, [ruleRefuted] (quiet facts too, though they get no line).
+  final Set<int> rules;
+
+  /// The rule behind each line (by identity).
+  final Map<ExplainLine, int> ruleOf;
+
   bool get hasDetails => why.isNotEmpty || suppose != null || probe.isNotEmpty;
+
+  /// Whether the step uses one of [taught] (a strategy lesson's rules).
+  bool uses(Set<int> taught) => taught.isNotEmpty && rules.any(taught.contains);
+
+  /// Whether [line] comes from one of [taught].
+  bool teaches(ExplainLine line, Set<int> taught) => taught.contains(ruleOf[line]);
 }
 
 /// A type's bridge between its solver and explanations. [K] is the solver's
@@ -200,6 +215,10 @@ abstract class Explainer<P, S, K> {
   /// marking a dot it implies.
   int rank(P p, Fact f) => 0;
 
+  /// The technique [f] shows, for strategy lessons ([Explanation.rules]):
+  /// its rule, unless one rule covers techniques the lessons teach apart.
+  int technique(P p, Fact f) => f.rule;
+
   /// The text for a fact, or null for one that goes without saying (a value
   /// ruled out next to a placed one). [ruleAssume] and [ruleRefuted] facts
   /// come here too, as does the [ExplainTrace.failure].
@@ -223,8 +242,10 @@ const int ruleRefuted = -3;
 /// How many refuting probes get traced to pick the shortest story.
 const int _probeTries = 6;
 
-/// The next step for [s], or null when there is nothing left to do.
-Explanation? explainStep<P, S, K>(Explainer<P, S, K> x, P p, S s) {
+/// The next step for [s], or null when there is nothing left to do. With
+/// [prefer], a step that uses one of those techniques comes first among the
+/// steps of the easiest level that has any (a strategy lesson's "Show me").
+Explanation? explainStep<P, S, K>(Explainer<P, S, K> x, P p, S s, {Set<int> prefer = const {}}) {
   if (x.done(p, s)) return null;
   final size = x.size(p);
   final wrong = x.wrongEntry(p, s);
@@ -249,7 +270,7 @@ Explanation? explainStep<P, S, K>(Explainer<P, S, K> x, P p, S s) {
     final inner = probing ? level - 1 : level;
     while (true) {
       final ok = x.propagate(p, k, inner, t);
-      final best = _best(x, p, s, t);
+      final best = _best(x, p, s, t, prefer);
       if (best != null) return _build(x, p, s, t, best, refutedBy);
       if (!ok || !probing) break;
       final probes = _probe(x, p, s, k, inner, t);
@@ -283,22 +304,34 @@ Explanation? explainStep<P, S, K>(Explainer<P, S, K> x, P p, S s) {
 }
 
 /// The shown fact of the best [Explainer.rank] with the shortest story (then
-/// the earliest).
-Fact? _best<P, S, K>(Explainer<P, S, K> x, P p, S s, ExplainTrace t) {
+/// the earliest). With [prefer] (a strategy lesson's techniques), a fact
+/// whose story uses one of them comes first.
+Fact? _best<P, S, K>(Explainer<P, S, K> x, P p, S s, ExplainTrace t, Set<int> prefer) {
   Fact? best;
-  var bestRank = 0, bestLen = 0;
+  var bestMiss = 0, bestRank = 0, bestLen = 0;
   for (final f in t.facts) {
     if (f.rule == ruleAssume || x.move(p, s, f) == null) continue;
     final rank = x.rank(p, f);
-    if (best != null && rank > bestRank) continue;
-    final len = t.chainOf(f).length;
-    if (best == null || rank < bestRank || len < bestLen) {
-      best = f;
-      bestRank = rank;
-      bestLen = len;
-    }
+    final chain = t.chainOf(f);
+    final miss =
+        prefer.isEmpty || prefer.contains(x.technique(p, f)) || chain.any((c) => prefer.contains(x.technique(p, c)))
+        ? 0
+        : 1;
+    if (best != null && (miss, rank, chain.length).compareTo((bestMiss, bestRank, bestLen)) >= 0) continue;
+    best = f;
+    bestMiss = miss;
+    bestRank = rank;
+    bestLen = chain.length;
   }
   return best;
+}
+
+extension on (int, int, int) {
+  int compareTo((int, int, int) o) => $1 != o.$1
+      ? $1 - o.$1
+      : $2 != o.$2
+      ? $2 - o.$2
+      : $3 - o.$3;
 }
 
 /// Refuting assumptions as (slot, value, trace or null to trace later):
@@ -355,11 +388,19 @@ Explanation _build<P, S, K>(
   Fact f,
   Map<int, (ExplainTrace, int)> refutedBy,
 ) {
-  final headline = x.describe(p, f) ?? const ExplainLine(_empty);
+  final ruleOf = Map<ExplainLine, int>.identity();
+  ExplainLine? said(Fact c) {
+    final line = x.describe(p, c);
+    if (line != null) ruleOf[line] = x.technique(p, c);
+    return line;
+  }
+
+  final headline = said(f) ?? const ExplainLine(_empty);
   final chain = t.chainOf(f);
+  final rules = {x.technique(p, f), for (final c in chain) x.technique(p, c)};
   final why = _once([
     for (final c in chain)
-      if (!x.quiet(p, c)) ?x.describe(p, c),
+      if (!x.quiet(p, c)) ?said(c),
   ]);
   // The assumption behind the step: its own, or the latest one it rests on.
   final refuted = refutedBy[f.id] ?? [for (final c in chain.reversed) ?refutedBy[c.id]].firstOrNull;
@@ -369,16 +410,19 @@ Explanation _build<P, S, K>(
     final (fork, base) = refuted;
     for (final c in fork.chainOf(fork.failure!)) {
       if (c.id < base) continue; // known before the assumption: told in [why]
+      if (c.rule != ruleAssume) rules.add(x.technique(p, c));
       if (c.rule != ruleAssume && x.quiet(p, c)) continue;
-      final line = x.describe(p, c);
+      final line = said(c);
       if (line == null) continue;
       if (c.rule == ruleAssume) {
         suppose = line;
+        ruleOf[line] = ruleRefuted;
       } else {
         probe.add(line);
       }
     }
-    final fail = x.describe(p, fork.failure!);
+    rules.add(x.technique(p, fork.failure!));
+    final fail = said(fork.failure!);
     probe = _once([...probe, ?fail]);
   }
   final targets = x.targets(p, f);
@@ -392,6 +436,8 @@ Explanation _build<P, S, K>(
     targets: targets,
     involved: {...headline.cells, for (final l in why) ...l.cells}.difference(targets),
     edges: x.targetEdges(p, f),
+    rules: rules,
+    ruleOf: ruleOf,
   );
 }
 

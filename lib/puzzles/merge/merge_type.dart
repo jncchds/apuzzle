@@ -95,7 +95,11 @@ class MergeType extends PuzzleType<MergePuzzle, MergeState> {
     final dir = mergeSuggest(puzzle, state);
     if (dir == null) return null;
     final next = mergeMove(puzzle, state, dir)!;
-    return HintResult(next, {for (final (_, at) in next.merged) puzzle.size.pos(at)});
+    return HintResult(
+      next,
+      {for (final (_, at) in next.merged) puzzle.size.pos(at)},
+      why: (l) => l.mergeHintWhy,
+    );
   }
 
   @override

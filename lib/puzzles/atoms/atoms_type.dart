@@ -125,7 +125,8 @@ class AtomsType extends PuzzleType<AtomsPuzzle, AtomsState> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(AtomsPuzzle puzzle, AtomsState state) => explainStep(const AtomsExplainer(), puzzle, state);
+  Explanation? explain(AtomsPuzzle puzzle, AtomsState state, {Set<int> prefer = const {}}) =>
+      explainStep(const AtomsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(AtomsPuzzle puzzle) => puzzle.toJson();

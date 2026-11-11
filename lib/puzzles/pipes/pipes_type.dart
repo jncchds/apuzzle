@@ -78,7 +78,7 @@ class PipesType extends PuzzleType<PipesPuzzle, PipesState> {
       while (rotateMask(puzzle.masks[i], turns[i]) != puzzle.masks[i] && k++ < 4) {
         turns[i]++;
       }
-      return HintResult(PipesState(turns), {puzzle.size.pos(i)});
+      return HintResult(PipesState(turns), {puzzle.size.pos(i)}, why: (l) => l.pipesHintWhy);
     }
     return null;
   }

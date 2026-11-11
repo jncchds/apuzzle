@@ -123,7 +123,8 @@ class RipplesType extends ValueGridType<RipplesPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(RipplesPuzzle puzzle, ValueGrid state) => explainStep(const RipplesExplainer(), puzzle, state);
+  Explanation? explain(RipplesPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const RipplesExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(RipplesPuzzle puzzle) => puzzle.toJson();

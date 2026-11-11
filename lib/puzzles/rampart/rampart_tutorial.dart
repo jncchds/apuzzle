@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'rampart_generator.dart';
 import 'rampart_model.dart';
+import '../../core/explain.dart';
+import 'rampart_solver.dart';
 
 /// A board from rows separated by |: `#` is shaded, `.` any other cell that
 /// stays, a digit a clue of one number and `(31)` a clue of several.
@@ -57,9 +59,18 @@ final List<TutorialStep> rampartStrategies = [
   // A top corner shaded alone would be shut in, so the 1 1 takes the cells beside the middle.
   TutorialStep(
     text: (l) => l.tutRampartS1,
+    teaches: {RampartRule.ways.index},
     puzzle: rampartBoard('.(11).|#.#|###'),
     focus: {const Pos(0, 1), const Pos(0, 0), const Pos(0, 2), const Pos(1, 0), const Pos(1, 2)},
   ),
-  TutorialStep.generated(text: (l) => l.tutRampartS2, make: () => generateRampart(rampartStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutRampartS3, make: () => generateRampart(rampartStrategyParams[1])),
+  TutorialStep.generated(
+    text: (l) => l.tutRampartS2,
+    teaches: {RampartRule.ways.index, RampartRule.cut.index, RampartRule.away.index},
+    make: () => generateRampart(rampartStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutRampartS3,
+    teaches: {ruleRefuted},
+    make: () => generateRampart(rampartStrategyParams[1]),
+  ),
 ];

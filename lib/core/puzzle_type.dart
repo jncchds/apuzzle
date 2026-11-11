@@ -24,9 +24,13 @@ class GameOption {
 }
 
 class HintResult<S> {
-  const HintResult(this.state, this.cells);
+  const HintResult(this.state, this.cells, {this.why});
   final S state;
   final Set<Pos> cells;
+
+  /// Why this is a good move, for a tutorial's "Show me" (types without
+  /// explain mode). Talks about "the highlighted" cells: no coordinates.
+  final Tr? why;
 }
 
 /// Plug-in contract for one puzzle type.
@@ -159,8 +163,9 @@ abstract class PuzzleType<P, S> {
   bool get canExplain => false;
 
   /// The next logical step and its reasons, or null when nothing is left.
-  /// Types usually return `explainStep(theirExplainer, puzzle, state)`.
-  Explanation? explain(P puzzle, S state) => null;
+  /// Types usually return `explainStep(theirExplainer, puzzle, state, prefer: prefer)`;
+  /// [prefer] is a strategy lesson's techniques ([TutorialStep.teaches]).
+  Explanation? explain(P puzzle, S state, {Set<int> prefer = const {}}) => null;
 
   /// A value as a chip inside explanation texts (see [valTok]).
   Widget buildValueChip(BuildContext context, P puzzle, int value, double size) => const SizedBox.shrink();

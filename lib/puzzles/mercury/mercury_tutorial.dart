@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'mercury_generator.dart';
 import 'mercury_model.dart';
+import '../../core/explain.dart';
+import 'mercury_solver.dart';
 
 /// A board from rows separated by |: every cell names the way on to the next
 /// cell of its tube (r, l, u, d), or x at a tube's tip; a tube starts at the
@@ -73,11 +75,20 @@ const mercuryPairBoard = 'RXxlL|rxRRX|uXLrd|XLxLx';
 final List<TutorialStep> mercuryStrategies = [
   TutorialStep(
     text: (l) => l.tutMercuryS1,
+    teaches: {MercuryRule.pair.index},
     puzzle: mercuryBoard(mercuryPairBoard),
     focus: {
       for (var r = 0; r < 4; r++) ...[Pos(r, 3), Pos(r, 4)],
     },
   ),
-  TutorialStep.generated(text: (l) => l.tutMercuryS2, make: () => generateMercury(mercuryStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutMercuryS3, make: () => generateMercury(mercuryStrategyParams[1])),
+  TutorialStep.generated(
+    text: (l) => l.tutMercuryS2,
+    teaches: {MercuryRule.pair.index},
+    make: () => generateMercury(mercuryStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutMercuryS3,
+    teaches: {ruleRefuted},
+    make: () => generateMercury(mercuryStrategyParams[1]),
+  ),
 ];

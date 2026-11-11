@@ -3,6 +3,7 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'atoms_generator.dart';
 import 'atoms_model.dart';
+import 'atoms_solver.dart';
 
 /// A board from its atoms (row, column) and the bonds of the solution, as
 /// (atom, atom, count) with atoms by their place in [atoms]. Numbers follow
@@ -43,11 +44,13 @@ final List<TutorialStep> atomsStrategies = [
   // The corner 4 has two neighbours: double bonds to both.
   TutorialStep(
     text: (l) => l.tutAtomsS1,
+    teaches: {AtomsRule.atLeast.index},
     puzzle: _board(3, 3, [(0, 0), (0, 2), (2, 0), (2, 2)], [(0, 1, 2), (0, 2, 2), (1, 3, 1)]),
     focus: {const Pos(0, 0)},
   ),
   TutorialStep.generated(
     text: (l) => l.tutAtomsS2,
+    teaches: {AtomsRule.failConnect.index},
     make: () => generateAtoms(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

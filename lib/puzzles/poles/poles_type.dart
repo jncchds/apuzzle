@@ -234,7 +234,8 @@ class PolesType extends ValueGridType<PolesPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(PolesPuzzle puzzle, ValueGrid state) => explainStep(const PolesExplainer(), puzzle, state);
+  Explanation? explain(PolesPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const PolesExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(PolesPuzzle puzzle) => puzzle.toJson();

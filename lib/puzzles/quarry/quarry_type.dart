@@ -289,7 +289,8 @@ class QuarryType extends ValueGridType<QuarryPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(QuarryPuzzle puzzle, ValueGrid state) => explainStep(const QuarryExplainer(), puzzle, state);
+  Explanation? explain(QuarryPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const QuarryExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(QuarryPuzzle puzzle) => puzzle.toJson();

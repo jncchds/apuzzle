@@ -198,15 +198,23 @@ void explainShard(int shard) {
         if (step.openEnded) continue;
         final puzzle = step.puzzle;
         var state = step.state ?? type.initialState(puzzle) as Object;
+        var taught = false;
         for (var k = 0; k < 500 && !(type.isComplete(puzzle, state) && type.isSolved(puzzle, state)); k++) {
-          final e = type.explain(puzzle, state);
+          // As "Show me" tells it: the lesson's trick first where it applies.
+          final e = type.explain(puzzle, state, prefer: step.teaches);
           if (e == null) break;
           if (type is ValueGridType) {
             expect(e.fallback, isFalse, reason: 'no logic at step $k of ${step.text(langs['en']!)}');
           }
+          taught |= e.uses(step.teaches);
           state = e.next!;
         }
         expect(type.isComplete(puzzle, state) && type.isSolved(puzzle, state), isTrue);
+        // "Show me" names the lesson's trick when a step uses it: the board
+        // must need it at least once.
+        if (step.teaches.isNotEmpty) {
+          expect(taught, isTrue, reason: 'never uses its trick: ${step.text(langs['en']!)}');
+        }
       }
     });
   }

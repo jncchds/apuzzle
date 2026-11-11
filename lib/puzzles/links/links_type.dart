@@ -125,7 +125,8 @@ class LinksType extends PuzzleType<LinksPuzzle, LinksState> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(LinksPuzzle puzzle, LinksState state) => explainStep(const LinksExplainer(), puzzle, state);
+  Explanation? explain(LinksPuzzle puzzle, LinksState state, {Set<int> prefer = const {}}) =>
+      explainStep(const LinksExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(LinksPuzzle puzzle) => puzzle.toJson();

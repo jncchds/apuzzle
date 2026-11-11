@@ -126,7 +126,8 @@ class SignsType extends ValueGridType<SignsPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(SignsPuzzle puzzle, ValueGrid state) => explainStep(const SignsExplainer(), puzzle, state);
+  Explanation? explain(SignsPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const SignsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(SignsPuzzle puzzle) => puzzle.toJson();

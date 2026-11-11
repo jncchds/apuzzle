@@ -3,6 +3,7 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'pebbles_generator.dart';
 import 'pebbles_model.dart';
+import 'pebbles_solver.dart';
 
 /// A board from rows separated by |: x a filled stone, o a hollow one, in
 /// upper case when shown from the start.
@@ -49,15 +50,21 @@ final List<TutorialStep> pebblesStrategies = [
   // Filled at A1 and D4, hollow at C4: the edge from A1 round to D4 is filled.
   TutorialStep(
     text: (l) => l.tutPebblesS1,
+    teaches: {PebblesRule.edge.index},
     puzzle: pebblesBoard('Xxxx|oXox|oxox|ooOX'),
     focus: {const Pos(0, 0), const Pos(3, 3), const Pos(3, 2)},
   ),
   // Once B3 is hollow, A3 and B4 are a filled diagonal beside it: A4 is filled.
   TutorialStep(
     text: (l) => l.tutPebblesS2,
+    teaches: {PebblesRule.checker.index},
     puzzle: pebblesBoard('Xoooo|xXxxo|XooOo|xXxxo|Ooooo'),
     focus: {const Pos(2, 0), const Pos(2, 1), const Pos(3, 0), const Pos(3, 1)},
   ),
   // The filled stones at C2 and D4 can only meet round the left side.
-  TutorialStep(text: (l) => l.tutPebblesS3, puzzle: pebblesBoard('Ooooo|xxXxO|xOOOo|xxxXo|Ooooo')),
+  TutorialStep(
+    text: (l) => l.tutPebblesS3,
+    teaches: {PebblesRule.cut.index},
+    puzzle: pebblesBoard('Ooooo|xxXxO|xOOOo|xxxXo|Ooooo'),
+  ),
 ];

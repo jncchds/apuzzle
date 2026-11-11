@@ -5,6 +5,7 @@ import '../../core/tutorial.dart';
 import 'domino_generator.dart';
 import 'domino_model.dart';
 import 'domino_solver.dart';
+import '../../core/explain.dart';
 
 /// A board from rows of digits; its one solution comes from the solver.
 DominoPuzzle _board(List<String> rows) {
@@ -63,14 +64,20 @@ final List<TutorialStep> dominoStrategies = [
   // Every 3–3 left covers the cell in row 4, column D.
   TutorialStep(
     text: (l) => l.tutDominoS1,
+    teaches: {DominoRule.pairAtCell.index},
     puzzle: _board(['2130', '0120', '0121', '2133', '3023']),
     focus: {const Pos(3, 3)},
   ),
   // The cell in row 4, column A can only be in a 1–3.
   TutorialStep(
     text: (l) => l.tutDominoS2,
+    teaches: {DominoRule.cellOnePair.index},
     puzzle: _board(['3300', '2230', '1130', '3112', '0122']),
     focus: {const Pos(3, 0)},
   ),
-  TutorialStep.generated(text: (l) => l.tutDominoS3, make: () => generateDomino(dominoStrategyParams)),
+  TutorialStep.generated(
+    text: (l) => l.tutDominoS3,
+    teaches: {ruleRefuted},
+    make: () => generateDomino(dominoStrategyParams),
+  ),
 ];

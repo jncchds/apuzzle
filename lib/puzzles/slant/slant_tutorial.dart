@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'slant_generator.dart';
 import 'slant_model.dart';
+import '../../core/explain.dart';
+import 'slant_solver.dart';
 
 /// A board from rows of diagonals (`\` or `/`, upper case none: `L` for a
 /// shown `\`, `R` for a shown `/`) and rows of corners (a digit or `.`).
@@ -51,6 +53,14 @@ const slantPairParams = GenParams(size: GridSize.square(6), difficulty: Difficul
 const slantProbeParams = GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 7);
 
 final List<TutorialStep> slantStrategies = [
-  TutorialStep.generated(text: (l) => l.tutSlantS1, make: () => generateSlant(slantPairParams)),
-  TutorialStep.generated(text: (l) => l.tutSlantS2, make: () => generateSlant(slantProbeParams)),
+  TutorialStep.generated(
+    text: (l) => l.tutSlantS1,
+    teaches: {SlantRule.pair.index},
+    make: () => generateSlant(slantPairParams),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutSlantS2,
+    teaches: {ruleRefuted},
+    make: () => generateSlant(slantProbeParams),
+  ),
 ];

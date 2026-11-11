@@ -4,6 +4,8 @@ import '../../core/grid_graph.dart';
 import '../../core/tutorial.dart';
 import 'quarry_generator.dart';
 import 'quarry_model.dart';
+import '../../core/explain.dart';
+import 'quarry_solver.dart';
 
 /// A board from rows separated by `|`: `#` stone, `.` empty, `@` stone with
 /// a filled circle, `o` empty with a hollow circle. The tray holds the
@@ -76,7 +78,15 @@ final quarryCutBoard = quarryBoard('o.....|#.#@.@|#.@.@#|#.#.#.|o.#...|......');
 const quarryProbeParams = GenParams(size: GridSize.square(7), difficulty: Difficulty.hard, seed: 1);
 
 final List<TutorialStep> quarryStrategies = [
-  TutorialStep(text: (l) => l.tutQuarryS1, puzzle: quarryRoomBoard),
-  TutorialStep(text: (l) => l.tutQuarryS2, puzzle: quarryCutBoard),
-  TutorialStep.generated(text: (l) => l.tutQuarryS3, make: () => generateQuarry(quarryProbeParams)),
+  TutorialStep(
+    text: (l) => l.tutQuarryS1,
+    teaches: {QuarryRule.room.index, QuarryRule.roomBeside.index},
+    puzzle: quarryRoomBoard,
+  ),
+  TutorialStep(text: (l) => l.tutQuarryS2, teaches: {QuarryRule.cut.index}, puzzle: quarryCutBoard),
+  TutorialStep.generated(
+    text: (l) => l.tutQuarryS3,
+    teaches: {ruleRefuted},
+    make: () => generateQuarry(quarryProbeParams),
+  ),
 ];

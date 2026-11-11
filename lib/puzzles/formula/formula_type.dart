@@ -75,7 +75,7 @@ class FormulaType extends PuzzleType<FormulaPuzzle, FormulaState> {
   @override
   HintResult<FormulaState>? hint(FormulaPuzzle puzzle, FormulaState state) {
     final h = formulaHint(puzzle, state);
-    return h == null ? null : HintResult(h.$1, {Pos(state.guesses.length, h.$2)});
+    return h == null ? null : HintResult(h.$1, {Pos(state.guesses.length, h.$2)}, why: (l) => l.formulaHintWhy);
   }
 
   @override

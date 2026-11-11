@@ -11,6 +11,11 @@ import 'pockets_solver.dart';
 
 final _solvers = Expando<PocketsSolver>();
 
+/// [Explainer.technique] ids for sums read off a region: what is left once
+/// the pockets wholly inside it are taken out, and what sticks out of it
+/// from the pockets reaching in.
+const int pocketsInnie = 100, pocketsOutie = 101;
+
 /// Explains a board with [PocketsSolver]: singles and the digit sets of each
 /// pocket, then locked candidates, pairs, every way to fill a pocket and the
 /// sums whole regions give away, then probing.
@@ -39,6 +44,19 @@ class PocketsExplainer extends MaskGridExplainer<PocketsPuzzle> {
 
   @override
   bool propagate(PocketsPuzzle p, List<int> k, int level, ExplainTrace? t) => _solver(p).propagate(k, min(level, 2), t);
+
+  /// Sums read off a row, column, box or band are lessons of their own.
+  @override
+  int technique(PocketsPuzzle p, Fact f) {
+    if (f.rule < 0) return f.rule;
+    switch (PocketsRule.values[f.rule]) {
+      case PocketsRule.combo || PocketsRule.must || PocketsRule.fill || PocketsRule.line || PocketsRule.failSum:
+        final area = _solver(p).areas[f.args[0]];
+        if (area.pocket < 0) return area.outside ? pocketsOutie : pocketsInnie;
+      case _:
+    }
+    return f.rule;
+  }
 
   @override
   ExplainLine? describe(PocketsPuzzle p, Fact f) {

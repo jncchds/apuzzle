@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'orbits_generator.dart';
 import 'orbits_model.dart';
+import '../../core/explain.dart';
+import 'orbits_solver.dart';
 
 /// A board from its regions, one letter each.
 OrbitsPuzzle _board(List<String> rows) =>
@@ -25,10 +27,12 @@ final List<TutorialStep> orbitsStrategies = [
   // rule, the second probing.
   TutorialStep.generated(
     text: (l) => l.tutOrbitsS1,
+    teaches: {OrbitsRule.bridge.index},
     make: () => generateOrbits(const GenParams(size: GridSize.square(6), difficulty: Difficulty.medium, seed: 1)),
   ),
   TutorialStep.generated(
     text: (l) => l.tutOrbitsS2,
+    teaches: {ruleRefuted},
     make: () => generateOrbits(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 6)),
   ),
 ];

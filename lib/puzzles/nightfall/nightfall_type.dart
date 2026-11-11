@@ -123,7 +123,7 @@ class NightfallType extends PuzzleType<NightfallPuzzle, NightfallState> {
     final left = puzzle.limit == null ? null : puzzle.limit! - state.moves;
     if (left == null || need.where((b) => b).length <= left) {
       final i = need.indexOf(true);
-      return HintResult(nightfallTap(puzzle, state, i), {puzzle.size.pos(i)});
+      return HintResult(nightfallTap(puzzle, state, i), {puzzle.size.pos(i)}, why: (l) => l.nightfallHintWhy);
     }
     final target = g.fewest(puzzle.start, keep: state.pressed, within: puzzle.limit)!;
     final kept = [for (var i = 0; i < target.length; i++) state.pressed[i] && target[i]];
@@ -133,7 +133,7 @@ class NightfallType extends PuzzleType<NightfallPuzzle, NightfallState> {
       kept.where((b) => b).length,
     );
     final next = [for (var i = 0; i < target.length; i++) target[i] && !kept[i]].indexOf(true);
-    return HintResult(rewound, {if (next >= 0) puzzle.size.pos(next)});
+    return HintResult(rewound, {if (next >= 0) puzzle.size.pos(next)}, why: (l) => l.nightfallHintBack);
   }
 
   void _tap(GameController ctrl, int i) {

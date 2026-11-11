@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'tally_generator.dart';
 import 'tally_model.dart';
+import '../../core/explain.dart';
+import 'tally_solver.dart';
 
 /// A board from rows of digits, a * after each one that stays.
 TallyPuzzle _board(List<String> rows) {
@@ -37,11 +39,13 @@ final List<TutorialStep> tallyStrategies = [
   // Medium boards need every way to make a sum (checked: grade 2).
   TutorialStep.generated(
     text: (l) => l.tutTallyS1,
+    teaches: {TallyRule.everyWay.index},
     make: () => generateTally(const GenParams(size: GridSize.square(5), difficulty: Difficulty.medium, seed: 1)),
   ),
   // Hard boards need probing (checked: grade 3).
   TutorialStep.generated(
     text: (l) => l.tutTallyS2,
+    teaches: {ruleRefuted},
     make: () => generateTally(const GenParams(size: GridSize.square(7), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

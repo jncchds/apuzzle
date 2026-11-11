@@ -6,6 +6,7 @@ import 'package:apuzzle/puzzles/fence/fence_type.dart';
 import 'package:apuzzle/puzzles/mambo/mambo_type.dart';
 import 'package:apuzzle/puzzles/mines/mines_type.dart';
 import 'package:apuzzle/ui/app_router.dart';
+import 'package:apuzzle/ui/explain_panel.dart';
 import 'package:apuzzle/ui/tutorial_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -36,10 +37,10 @@ Future<GameStore> _pump(WidgetTester tester, Widget home, {Map<String, Object> p
   return store;
 }
 
-/// Presses "Show me" until the step is done, then Next (or Finish).
+/// Presses "Show me" and "Do it" until the step is done, then Next (or Finish).
 Future<void> _finishStep(WidgetTester tester) async {
   for (var k = 0; k < 60; k++) {
-    // Next / Finish is the step's only filled button.
+    // Next / Finish is the step's only filled button while the panel is closed.
     final next = tester.widget<FilledButton>(find.byWidgetPredicate((w) => w is FilledButton));
     if (next.onPressed != null) {
       next.onPressed!();
@@ -47,6 +48,8 @@ Future<void> _finishStep(WidgetTester tester) async {
       return;
     }
     await tester.tap(find.text('Show me'));
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.tap(find.text('Do it'));
     await tester.pump(const Duration(milliseconds: 300));
   }
   fail('the step never finished');
@@ -69,6 +72,42 @@ void main() {
       await tester.pump(const Duration(seconds: 2));
     });
   }
+
+  testWidgets('"Show me" explains the step before it moves', (tester) async {
+    await _pump(tester, const TutorialScreen(type: MamboType()));
+    final panel = find.byType(ExplainPanel);
+    expect(panel, findsNothing);
+    await tester.tap(find.text('Show me'));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(panel, findsOneWidget);
+    expect(find.text('Show me'), findsNothing);
+    // Close leaves the board as it was: the step is still open.
+    await tester.tap(find.byTooltip('Close'));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(panel, findsNothing);
+    expect(find.text('Nice!'), findsNothing);
+    // Do it plays the step and closes the panel.
+    await tester.tap(find.text('Show me'));
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.tap(find.text('Do it'));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(panel, findsNothing);
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 2));
+  });
+
+  testWidgets('a step with its own goal says how before it plays the answer', (tester) async {
+    await _pump(tester, const TutorialScreen(type: MinesType()));
+    await tester.tap(find.text('Show me'));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.textContaining('Long-press or right-click it', findRichText: true), findsOneWidget);
+    expect(find.text('Nice!'), findsNothing);
+    await tester.tap(find.text('Do it'));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Nice!'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 2));
+  });
 
   group('offerTutorial', () {
     Future<(GameStore, List<String>)> offer(WidgetTester tester, {Map<String, Object> prefs = const {}}) async {

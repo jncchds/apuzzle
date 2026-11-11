@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import 'lamps_generator.dart';
 import 'lamps_model.dart';
+import '../../core/explain.dart';
+import 'lamps_solver.dart';
 
 /// A board from rows of # (wall), digits (numbered wall), L (lamp) and . (open).
 LampsPuzzle _board(List<String> rows) {
@@ -41,9 +43,15 @@ final List<TutorialStep> lampsTutorial = [
 final _corner = _board(['L.1L', '.0..', '#.L.']);
 
 final List<TutorialStep> lampsStrategies = [
-  TutorialStep(text: (l) => l.tutLampsS1, puzzle: _corner, focus: {const Pos(0, 0)}),
+  TutorialStep(
+    text: (l) => l.tutLampsS1,
+    teaches: {LampsRule.onlySource.index},
+    puzzle: _corner,
+    focus: {const Pos(0, 0)},
+  ),
   TutorialStep.generated(
     text: (l) => l.tutLampsS2,
+    teaches: {ruleRefuted},
     make: () => generateLamps(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

@@ -162,7 +162,8 @@ class FenceType extends PuzzleType<FencePuzzle, LoopMarks> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(FencePuzzle puzzle, LoopMarks state) => explainStep(const FenceExplainer(), puzzle, state);
+  Explanation? explain(FencePuzzle puzzle, LoopMarks state, {Set<int> prefer = const {}}) =>
+      explainStep(const FenceExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(FencePuzzle puzzle) => puzzle.toJson();

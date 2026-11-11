@@ -158,7 +158,8 @@ class PairsType extends ValueGridType<PairsPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(PairsPuzzle puzzle, ValueGrid state) => explainStep(const PairsExplainer(), puzzle, state);
+  Explanation? explain(PairsPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const PairsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(PairsPuzzle puzzle) => puzzle.toJson();

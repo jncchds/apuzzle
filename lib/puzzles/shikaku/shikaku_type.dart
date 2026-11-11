@@ -113,8 +113,8 @@ class ShikakuType extends PuzzleType<ShikakuPuzzle, ShikakuState> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(ShikakuPuzzle puzzle, ShikakuState state) =>
-      explainStep(const ShikakuExplainer(), puzzle, state);
+  Explanation? explain(ShikakuPuzzle puzzle, ShikakuState state, {Set<int> prefer = const {}}) =>
+      explainStep(const ShikakuExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(ShikakuPuzzle puzzle) => puzzle.toJson();

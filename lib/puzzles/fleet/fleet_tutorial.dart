@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'fleet_generator.dart';
 import 'fleet_model.dart';
+import '../../core/explain.dart';
+import 'fleet_solver.dart';
 
 /// A board from rows of S (ship), . (water), G (ship shown from the start)
 /// and ~ (water shown from the start); the counts and fleet follow from it.
@@ -56,6 +58,14 @@ const fleetStrategyParams = [
 ];
 
 final List<TutorialStep> fleetStrategies = [
-  TutorialStep.generated(text: (l) => l.tutFleetS1, make: () => generateFleet(fleetStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutFleetS2, make: () => generateFleet(fleetStrategyParams[1])),
+  TutorialStep.generated(
+    text: (l) => l.tutFleetS1,
+    teaches: {FleetRule.noFit.index, FleetRule.mustCover.index, FleetRule.onlySpots.index},
+    make: () => generateFleet(fleetStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutFleetS2,
+    teaches: {ruleRefuted},
+    make: () => generateFleet(fleetStrategyParams[1]),
+  ),
 ];

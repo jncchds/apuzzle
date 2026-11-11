@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import 'islands_generator.dart';
 import 'islands_model.dart';
+import '../../core/explain.dart';
+import 'islands_solver.dart';
 
 /// A board from rows of ~ (sea), . (land) and digits (land showing its
 /// island's size).
@@ -38,6 +40,7 @@ final List<TutorialStep> islandsTutorial = [
     focus: {const Pos(0, 1)},
     done: (s) => (s as ValueGrid).valueAt(const Pos(0, 1)) == islandsSea,
     answer: _withSea(_between, const [Pos(0, 1)]),
+    how: (l) => l.tutIslands2How,
   ),
   TutorialStep(text: (l) => l.tutIslands3, puzzle: _three, state: _withSea(_three, const [Pos(1, 0)])),
   TutorialStep.generated(
@@ -53,11 +56,13 @@ final _reach = _board(['3~~~', '.~.2', '.~~~', '~~1~']);
 final List<TutorialStep> islandsStrategies = [
   TutorialStep(
     text: (l) => l.tutIslandsS1,
+    teaches: {IslandsRule.unreachable.index},
     puzzle: _reach,
     focus: {const Pos(2, 1), const Pos(2, 2), const Pos(3, 0), const Pos(3, 1), const Pos(3, 3)},
   ),
   TutorialStep.generated(
     text: (l) => l.tutIslandsS2,
+    teaches: {ruleRefuted, IslandsRule.seaExit.index},
     make: () => generateIslands(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

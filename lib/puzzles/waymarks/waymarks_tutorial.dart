@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'waymarks_generator.dart';
 import 'waymarks_model.dart';
+import '../../core/explain.dart';
+import 'waymarks_solver.dart';
 
 /// A board from its path (cells as row * n + column, in number order) and
 /// the numbers shown (1 and the last are added).
@@ -41,12 +43,14 @@ final List<TutorialStep> waymarksTutorial = [
 final List<TutorialStep> waymarksStrategies = [
   TutorialStep(
     text: (l) => l.tutWaymarksS1,
+    teaches: {WaymarksRule.before.index, WaymarksRule.after.index, WaymarksRule.used.index},
     puzzle: waymarksBoard(4, [11, 7, 3, 15, 12, 0, 1, 13, 8, 4, 14, 2, 10, 6, 5, 9], const [13]),
   ),
   TutorialStep(
     text: (l) => l.tutWaymarksS2,
+    teaches: {WaymarksRule.noFit.index},
     puzzle: waymarksBoard(4, [10, 2, 14, 11, 7, 6, 1, 3, 15, 0, 12, 13, 5, 9, 4, 8], const [4]),
   ),
   for (final params in waymarksStrategyParams)
-    TutorialStep.generated(text: (l) => l.tutWaymarksS3, make: () => generateWaymarks(params)),
+    TutorialStep.generated(text: (l) => l.tutWaymarksS3, teaches: {ruleRefuted}, make: () => generateWaymarks(params)),
 ];

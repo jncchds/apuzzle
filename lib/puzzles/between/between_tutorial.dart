@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import 'between_generator.dart';
 import 'between_model.dart';
+import '../../core/explain.dart';
+import 'between_solver.dart';
 
 /// A board from rows of cells: `#` a shaded given, `x` a cell to shade,
 /// digits given numbers, letters a–g the numbers 1–7 to fill in. [shown]
@@ -56,8 +58,16 @@ final List<TutorialStep> betweenTutorial = [
 ];
 
 final List<TutorialStep> betweenStrategies = [
-  TutorialStep.generated(text: (l) => l.tutBetweenS1, make: () => generateBetween(betweenStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutBetweenS2, make: () => generateBetween(betweenStrategyParams[1])),
+  TutorialStep.generated(
+    text: (l) => l.tutBetweenS1,
+    teaches: {BetweenRule.line.index},
+    make: () => generateBetween(betweenStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutBetweenS2,
+    teaches: {ruleRefuted},
+    make: () => generateBetween(betweenStrategyParams[1]),
+  ),
 ];
 
 /// The strategy boards: each needs the tier it teaches (checked in tests).

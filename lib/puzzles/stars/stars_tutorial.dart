@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import 'stars_generator.dart';
 import 'stars_model.dart';
+import '../../core/explain.dart';
+import 'stars_solver.dart';
 
 /// A board from rows of region letters and rows marking the stars with `*`.
 StarsPuzzle _board(List<String> rows, List<String> stars) {
@@ -98,6 +100,7 @@ final List<TutorialStep> starsTutorial = [
       focus: around.toSet(),
       done: (s) => around.every((p) => (s as ValueGrid).valueAt(p) == sDot),
       answer: answer,
+      how: (l) => l.tutStars2How,
     );
   }(),
   () {
@@ -115,6 +118,7 @@ final List<TutorialStep> starsTutorial = [
       focus: {const Pos(4, 0), const Pos(4, 1), const Pos(4, 2)},
       done: (s) => ends.every((p) => (s as ValueGrid).valueAt(p) == sStar),
       answer: answer,
+      how: (l) => l.tutStars3How,
     );
   }(),
   TutorialStep.generated(
@@ -131,18 +135,21 @@ const starsBandSeed = 5, starsAttackSeed = 1, starsProbeSeed = 1;
 final List<TutorialStep> starsStrategies = [
   TutorialStep.generated(
     text: (l) => l.tutStarsS1,
+    teaches: {StarsRule.bandIn.index, StarsRule.bandOut.index},
     make: () => generateStars(
       const GenParams(size: GridSize.square(9), difficulty: Difficulty.medium, seed: starsBandSeed),
     ),
   ),
   TutorialStep.generated(
     text: (l) => l.tutStarsS2,
+    teaches: {StarsRule.attack.index},
     make: () => generateStars(
       const GenParams(size: GridSize.square(9), difficulty: Difficulty.medium, seed: starsAttackSeed),
     ),
   ),
   TutorialStep.generated(
     text: (l) => l.tutStarsS3,
+    teaches: {ruleRefuted},
     make: () => generateStars(
       const GenParams(size: GridSize.square(9), difficulty: Difficulty.hard, seed: starsProbeSeed),
     ),

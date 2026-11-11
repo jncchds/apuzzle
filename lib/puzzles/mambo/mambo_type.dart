@@ -68,7 +68,8 @@ class MamboType extends ValueGridType<MamboPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(MamboPuzzle puzzle, ValueGrid state) => explainStep(const MamboExplainer(), puzzle, state);
+  Explanation? explain(MamboPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const MamboExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(MamboPuzzle puzzle) => puzzle.toJson();

@@ -193,7 +193,8 @@ class BasinsType extends ValueGridType<BasinsPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(BasinsPuzzle puzzle, ValueGrid state) => explainStep(const BasinsExplainer(), puzzle, state);
+  Explanation? explain(BasinsPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const BasinsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(BasinsPuzzle puzzle) => puzzle.toJson();

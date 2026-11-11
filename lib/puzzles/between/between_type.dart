@@ -178,7 +178,8 @@ class BetweenType extends ValueGridType<BetweenPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(BetweenPuzzle puzzle, ValueGrid state) => explainStep(const BetweenExplainer(), puzzle, state);
+  Explanation? explain(BetweenPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const BetweenExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(BetweenPuzzle puzzle) => puzzle.toJson();

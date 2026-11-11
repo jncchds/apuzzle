@@ -164,32 +164,66 @@ class GameController extends ChangeNotifier {
 
   bool get canExplain => type.canExplain && !practice;
 
+  /// Where [explanation] comes from while [explaining]: the type's explainer,
+  /// or a tutorial's own (see [showExplanation]).
+  Explanation? Function()? _source;
+
+  /// The panel closes on the player's next change instead of following it.
+  bool _closeOnChange = false;
+
   /// Entering the mode counts as a hint, and so does every step it applies.
   void toggleExplain() {
     if (solved || !canExplain) return;
-    explaining = !explaining;
     if (explaining) {
-      hintsUsed++;
-      _explain();
-      save();
-    } else {
-      explanation = null;
-      explainFocus = const {};
+      closeExplain();
+      return;
     }
+    hintsUsed++;
+    showExplanation(() => type.explain(puzzle, _state));
+    save();
+  }
+
+  /// Opens explain mode on [source] (a tutorial's "Show me"; works in
+  /// practice too). It is asked again after every change, or with
+  /// [closeOnChange] the mode closes instead (a fixed answer or a hint that
+  /// the player's own move makes stale).
+  void showExplanation(Explanation? Function() source, {bool closeOnChange = false}) {
+    if (solved) return;
+    explaining = true;
+    _source = source;
+    _closeOnChange = closeOnChange;
+    _explain();
+    notifyListeners();
+  }
+
+  void closeExplain() {
+    if (!explaining) return;
+    explaining = false;
+    _source = null;
+    explanation = null;
+    explainFocus = const {};
     notifyListeners();
   }
 
   void _explain() {
-    explanation = type.explain(puzzle, _state);
+    explanation = _source?.call();
     explainFocus = const {};
   }
 
-  void applyExplanation() {
+  /// Plays the explained step; with [close] explain mode ends with it.
+  void applyExplanation({bool close = false}) {
     final next = explanation?.next;
     if (solved || next == null) return;
     hintsUsed++;
     flashHints = explanation!.targets;
     flashTick++;
+    if (close) {
+      explaining = false;
+      _source = null;
+      explanation = null;
+      explainFocus = const {};
+      notifyListeners();
+    }
     apply(next);
   }
 
@@ -289,7 +323,16 @@ class GameController extends ChangeNotifier {
       _win();
       return;
     }
-    if (explaining) _explain();
+    if (explaining) {
+      if (_closeOnChange) {
+        explaining = false;
+        _source = null;
+        explanation = null;
+        explainFocus = const {};
+      } else {
+        _explain();
+      }
+    }
     if (persist) save();
     notifyListeners();
   }
@@ -298,6 +341,7 @@ class GameController extends ChangeNotifier {
     solved = true;
     selectedCell = null;
     explaining = false;
+    _source = null;
     explanation = null;
     explainFocus = const {};
     pause();

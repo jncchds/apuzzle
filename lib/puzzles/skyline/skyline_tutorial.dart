@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import 'skyline_generator.dart';
 import 'skyline_model.dart';
+import '../../core/explain.dart';
+import 'skyline_solver.dart';
 
 /// A 4×4 board from rows of heights (given) and letters a–d (a cell to fill
 /// with 1–4). [shown] picks the clues (top, bottom, left, right; x = shown).
@@ -49,14 +51,17 @@ final List<TutorialStep> skylineTutorial = [
 final List<TutorialStep> skylineStrategies = [
   TutorialStep.generated(
     text: (l) => l.tutSkylineS1,
+    teaches: {SkylineRule.bound.id, SkylineRule.tallest.id},
     make: () => generateSkyline(skylineStrategyParams[0]),
   ),
   TutorialStep.generated(
     text: (l) => l.tutSkylineS2,
+    teaches: {SkylineRule.line.id},
     make: () => generateSkyline(skylineStrategyParams[1]),
   ),
   TutorialStep.generated(
     text: (l) => l.tutSkylineS3,
+    teaches: {ruleRefuted},
     make: () => generateSkyline(skylineStrategyParams[2]),
   ),
 ];

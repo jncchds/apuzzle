@@ -3,6 +3,7 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'camp_generator.dart';
 import 'camp_model.dart';
+import '../../core/explain.dart';
 
 /// A board from rows of T (tree), A (tent) and . (grass); [counts] shows the
 /// row and column counts, [given] lists tents shown from the start.
@@ -51,9 +52,15 @@ const _ends = CampPuzzle(
 );
 
 final List<TutorialStep> campStrategies = [
-  TutorialStep(text: (l) => l.tutCampS1, puzzle: _ends, focus: {const Pos(0, 0), const Pos(0, 1), const Pos(0, 2)}),
+  TutorialStep(
+    text: (l) => l.tutCampS1,
+    teaches: {ruleRefuted},
+    puzzle: _ends,
+    focus: {const Pos(0, 0), const Pos(0, 1), const Pos(0, 2)},
+  ),
   TutorialStep.generated(
     text: (l) => l.tutCampS2,
+    teaches: {ruleRefuted},
     make: () => generateCamp(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

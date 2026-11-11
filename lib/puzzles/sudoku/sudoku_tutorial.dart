@@ -5,6 +5,7 @@ import '../../core/value_grid.dart';
 import '../../l10n/l10n.dart';
 import 'sudoku_generator.dart';
 import 'sudoku_model.dart';
+import 'sudoku_solver.dart';
 
 /// A 4×4 board from rows of digits (given) and letters a–d (a cell to fill
 /// with 1–4).
@@ -50,6 +51,7 @@ final List<TutorialStep> sudokuTutorial = [
       focus: {cell},
       done: done,
       answer: start.set(cell, const CellValue(marks: {1, 3})),
+      how: (l) => l.tutSudoku4How,
     );
   }(),
   TutorialStep(text: (l) => l.tutSudoku5, puzzle: _full),
@@ -66,6 +68,7 @@ final List<TutorialStep> sudokuStrategies = [
   // Hidden single: the top-left box's 1 has one spot left.
   TutorialStep(
     text: (l) => l.tutSudokuS1,
+    teaches: {SudokuRule.hidden.index},
     puzzle: _board6(
       ['123456', '456123', '231564', '564231', '312645', '645312'],
       ['....56', '...12.', '2315.4', '564.31', '31264.', '6.5312'],
@@ -78,23 +81,49 @@ final List<TutorialStep> sudokuStrategies = [
   // Each generated board needs its lesson's rule (checked in sudoku_test:
   // the rules before it get stuck, adding it solves the board).
   // Pointing or pairs.
-  _lesson((l) => l.tutSudokuS2, Difficulty.hard, sudokuLessonSeeds[0]),
+  _lesson(
+    (l) => l.tutSudokuS2,
+    {SudokuRule.pointing.index, SudokuRule.claiming.index, SudokuRule.pair.index},
+    Difficulty.hard,
+    sudokuLessonSeeds[0],
+  ),
   // Hidden pairs.
-  _lesson((l) => l.tutSudokuS3, Difficulty.hard, sudokuLessonSeeds[1]),
+  _lesson(
+    (l) => l.tutSudokuS3,
+    {SudokuRule.hiddenPair.index, SudokuRule.hiddenTriple.index},
+    Difficulty.hard,
+    sudokuLessonSeeds[1],
+  ),
   // X-Wing.
-  _lesson((l) => l.tutSudokuS4, Difficulty.expert, sudokuLessonSeeds[2]),
+  _lesson(
+    (l) => l.tutSudokuS4,
+    {SudokuRule.xWing.index, SudokuRule.swordfish.index, SudokuRule.finnedXWing.index},
+    Difficulty.expert,
+    sudokuLessonSeeds[2],
+  ),
   // XY-Wing.
-  _lesson((l) => l.tutSudokuS5, Difficulty.expert, sudokuLessonSeeds[3]),
+  _lesson(
+    (l) => l.tutSudokuS5,
+    {SudokuRule.xyWing.index, SudokuRule.xyzWing.index},
+    Difficulty.expert,
+    sudokuLessonSeeds[3],
+  ),
   // Two links (Skyscraper, 2-String Kite).
-  _lesson((l) => l.tutSudokuS6, Difficulty.expert, sudokuLessonSeeds[4]),
+  _lesson(
+    (l) => l.tutSudokuS6,
+    {SudokuRule.skyscraper.index, SudokuRule.kite.index},
+    Difficulty.expert,
+    sudokuLessonSeeds[4],
+  ),
   // W-Wing.
-  _lesson((l) => l.tutSudokuS7, Difficulty.expert, sudokuLessonSeeds[5]),
+  _lesson((l) => l.tutSudokuS7, {SudokuRule.wWing.index}, Difficulty.expert, sudokuLessonSeeds[5]),
 ];
 
 /// Generator seeds of the 9×9 strategy boards, in lesson order.
 const sudokuLessonSeeds = [1, 6, 22, 4, 3, 1];
 
-TutorialStep _lesson(Tr text, Difficulty difficulty, int seed) => TutorialStep.generated(
+TutorialStep _lesson(Tr text, Set<int> teaches, Difficulty difficulty, int seed) => TutorialStep.generated(
   text: text,
+  teaches: teaches,
   make: () => generateSudoku(GenParams(size: const GridSize.square(9), difficulty: difficulty, seed: seed)),
 );

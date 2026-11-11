@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'glades_generator.dart';
 import 'glades_model.dart';
+import '../../core/explain.dart';
+import 'glades_solver.dart';
 
 /// A board from rows separated by `|`, cells by spaces: `#` is shaded, `.`
 /// unshaded, an unshaded cell followed by its number (`.2`).
@@ -58,7 +60,20 @@ const gladesStrategyParams = [
 final gladesRectBoard = gladesBoard('# # .1 # #|# .1 # .2 .|.1 # # # #|# . . . .4|# # # # #');
 
 final List<TutorialStep> gladesStrategies = [
-  TutorialStep(text: (l) => l.tutGladesS1, puzzle: gladesRectBoard, focus: {const Pos(3, 4)}),
-  TutorialStep.generated(text: (l) => l.tutGladesS2, make: () => generateGlades(gladesStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutGladesS3, make: () => generateGlades(gladesStrategyParams[1])),
+  TutorialStep(
+    text: (l) => l.tutGladesS1,
+    teaches: {GladesRule.rectIn.index, GladesRule.rectOut.index},
+    puzzle: gladesRectBoard,
+    focus: {const Pos(3, 4)},
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutGladesS2,
+    teaches: {GladesRule.orphan.index, GladesRule.cut.index},
+    make: () => generateGlades(gladesStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutGladesS3,
+    teaches: {ruleRefuted},
+    make: () => generateGlades(gladesStrategyParams[1]),
+  ),
 ];

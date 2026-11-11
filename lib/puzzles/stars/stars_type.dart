@@ -143,7 +143,8 @@ class StarsType extends ValueGridType<StarsPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(StarsPuzzle puzzle, ValueGrid state) => explainStep(const StarsExplainer(), puzzle, state);
+  Explanation? explain(StarsPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const StarsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(StarsPuzzle puzzle) => puzzle.toJson();

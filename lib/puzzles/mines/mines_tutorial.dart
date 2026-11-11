@@ -3,6 +3,7 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'mines_generator.dart';
 import 'mines_model.dart';
+import 'mines_solver.dart';
 
 /// A board from rows of * (mine), o (open at the start) and . (closed).
 MinesPuzzle _board(List<String> rows) {
@@ -28,6 +29,7 @@ final List<TutorialStep> minesTutorial = [
     focus: {const Pos(0, 0)},
     done: (s) => (s as MinesState).flags[0],
     answer: _flagged(_flag, 0),
+    how: (l) => l.tutMines1How,
   ),
   TutorialStep(text: (l) => l.tutMines2, puzzle: _chord, state: _flagged(_chord, 0), focus: {const Pos(1, 1)}),
   TutorialStep(text: (l) => l.tutMines3, puzzle: _board(['*...', '....', '....', '....']), focus: {const Pos(3, 3)}),
@@ -41,11 +43,18 @@ final List<TutorialStep> minesStrategies = [
   // 1-2-1: the mines sit above the 1s.
   TutorialStep(
     text: (l) => l.tutMinesS1,
+    teaches: {MinesRule.pairSafe.index, MinesRule.pairMines.index},
     puzzle: _board(['*.*', 'ooo', 'ooo']),
     focus: {const Pos(0, 0), const Pos(0, 1), const Pos(0, 2)},
   ),
   TutorialStep.generated(
     text: (l) => l.tutMinesS2,
+    teaches: {
+      MinesRule.pairSafe.index,
+      MinesRule.pairMines.index,
+      MinesRule.totalSafe.index,
+      MinesRule.totalMines.index,
+    },
     make: () => generateMines(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

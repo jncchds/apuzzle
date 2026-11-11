@@ -4,6 +4,7 @@ import '../../core/lattice_loop.dart';
 import '../../core/tutorial.dart';
 import 'fence_generator.dart';
 import 'fence_model.dart';
+import '../../core/explain.dart';
 
 /// A board whose loop is the outline of the cells marked # or X; X and o
 /// (outside) cells show their number, . and # don't.
@@ -55,6 +56,7 @@ final List<TutorialStep> fenceStrategies = [
   ),
   TutorialStep.generated(
     text: (l) => l.tutFenceS3,
+    teaches: {ruleRefuted},
     make: () => generateFence(const GenParams(size: GridSize.square(5), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

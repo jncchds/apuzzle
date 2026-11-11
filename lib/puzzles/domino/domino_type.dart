@@ -163,7 +163,8 @@ class DominoType extends PuzzleType<DominoPuzzle, LoopMarks> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(DominoPuzzle puzzle, LoopMarks state) => explainStep(const DominoExplainer(), puzzle, state);
+  Explanation? explain(DominoPuzzle puzzle, LoopMarks state, {Set<int> prefer = const {}}) =>
+      explainStep(const DominoExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(DominoPuzzle puzzle) => puzzle.toJson();

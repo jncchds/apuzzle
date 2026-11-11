@@ -183,7 +183,8 @@ class LookoutType extends ValueGridType<LookoutPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(LookoutPuzzle puzzle, ValueGrid state) => explainStep(const LookoutExplainer(), puzzle, state);
+  Explanation? explain(LookoutPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const LookoutExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(LookoutPuzzle puzzle) => puzzle.toJson();

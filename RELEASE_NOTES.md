@@ -1,6 +1,9 @@
 # Release notes
 
 ## 0.13.1 - 2026-11-11
+- Tutorials and strategy lessons: "Show me" now explains before it moves. It tells the next step in words and highlights the cells it talks about; "Do it" then plays it. In a strategy lesson, a step that uses the lesson's trick comes first and is marked as such
+- Games without explain mode say in "Show me" why the move is a good one, and tutorial steps that teach a gesture say how to do it
+- Shikaku: the first strategy lesson has a new board that really needs its idea
 - Quarry: a stone in the set under the board fades whenever the board shows an area of its shape, so you can see at a glance which stones are already laid out
 
 ## 0.13.0 - 2026-11-11

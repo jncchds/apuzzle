@@ -91,7 +91,11 @@ class LabyrinthType extends PuzzleType<LabyrinthPuzzle, LabyrinthState> {
       if (exits(puzzle, sol[j]) > 2) break;
     }
     final next = [...sol.sublist(0, k), ...added];
-    return HintResult(LabyrinthState(next), {for (final i in added) puzzle.size.pos(i)});
+    return HintResult(
+      LabyrinthState(next),
+      {for (final i in added) puzzle.size.pos(i)},
+      why: k < state.path.length ? (l) => l.labyrinthHintBack : (l) => l.labyrinthHintWhy,
+    );
   }
 
   @override

@@ -85,7 +85,8 @@ class TrailType extends PuzzleType<TrailPuzzle, TrailState> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(TrailPuzzle puzzle, TrailState state) => explainStep(const TrailExplainer(), puzzle, state);
+  Explanation? explain(TrailPuzzle puzzle, TrailState state, {Set<int> prefer = const {}}) =>
+      explainStep(const TrailExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(TrailPuzzle puzzle) => puzzle.toJson();

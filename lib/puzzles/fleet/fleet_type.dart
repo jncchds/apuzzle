@@ -273,7 +273,8 @@ class FleetType extends ValueGridType<FleetPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(FleetPuzzle puzzle, ValueGrid state) => explainStep(const FleetExplainer(), puzzle, state);
+  Explanation? explain(FleetPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const FleetExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(FleetPuzzle puzzle) => puzzle.toJson();

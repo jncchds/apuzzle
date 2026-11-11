@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'plots_generator.dart';
 import 'plots_model.dart';
+import '../../core/explain.dart';
+import 'plots_solver.dart';
 
 /// A board from the solution's digits and the shown ones ('.' for empty).
 PlotsPuzzle _board(List<String> solution, List<String> shown) => PlotsPuzzle(
@@ -35,12 +37,14 @@ final List<TutorialStep> plotsStrategies = [
   // 1s can't touch: a plot of 2.
   TutorialStep(
     text: (l) => l.tutPlotsS1,
+    teaches: {PlotsRule.exit.index, PlotsRule.only.index},
     puzzle: _board(['3331', '4422', '4413', '2233'], ['3331', '44..', '4413', '2.33']),
     focus: {const Pos(1, 2), const Pos(1, 3)},
   ),
   // Hard boards need probing (checked: group logic alone gets stuck).
   TutorialStep.generated(
     text: (l) => l.tutPlotsS2,
+    teaches: {ruleRefuted},
     make: () => generatePlots(const GenParams(size: GridSize.square(5), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

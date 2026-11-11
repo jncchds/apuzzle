@@ -29,7 +29,7 @@ You choose the grid size and the difficulty.
 
 - **Endless puzzles.** Generation is seeded and deterministic, and runs in a background isolate.
 - **Daily challenges.** Every day picks three games, each at every difficulty, the same for everyone. Results are kept in a calendar, and you can choose which games the days draw from.
-- **Interactive tutorials.** Every game teaches its rules on a few tiny boards you play, ending with a small real one. Optional strategy lessons then show the techniques strong players use, each on a board that needs it.
+- **Interactive tutorials.** Every game teaches its rules on a few tiny boards you play, ending with a small real one. Optional strategy lessons then show the techniques strong players use, each on a board that needs it. Stuck? "Show me" explains the next step in words, highlights the cells it talks about, and marks the steps that use the lesson's trick before playing them for you.
 - **Explain mode.** For every logic puzzle, the button next to Hint explains the next step in words ("E4 must be a crown, because…"), highlights the cells it talks about, and can play the step for you.
 - **Memory games.** Glimpse, Vanish, Hopper and Rebound show something for a moment (or until you tap Ready), hides it, and asks for it back. Rounds get harder as you get them right and easier after a miss; play a set number of rounds or until your third miss, for a best score. Rounds come from the seed, so a share code replays the same game.
 - **Real-time games.** Snake, Junction and Turnabout run on their own clock: they wait for your first move, pause with a tap (or when you leave the app), and draw everything that happens from the seed, so a share code replays the same game.

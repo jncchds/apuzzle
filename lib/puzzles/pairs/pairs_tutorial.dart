@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import 'pairs_generator.dart';
 import 'pairs_model.dart';
+import '../../core/explain.dart';
+import 'pairs_solver.dart';
 
 /// A board from rows of cells: a region letter, then # (shaded) or . each.
 PairsPuzzle _board(List<String> rows) {
@@ -42,11 +44,13 @@ final List<TutorialStep> pairsStrategies = [
   // Medium boards need region-wide reasoning (checked: grade 2).
   TutorialStep.generated(
     text: (l) => l.tutPairsS1,
+    teaches: {PairsRule.everyWay.index},
     make: () => generatePairs(const GenParams(size: GridSize.square(5), difficulty: Difficulty.medium, seed: 1)),
   ),
   // Hard boards need probing (checked: grade 3).
   TutorialStep.generated(
     text: (l) => l.tutPairsS2,
+    teaches: {ruleRefuted},
     make: () => generatePairs(const GenParams(size: GridSize.square(5), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

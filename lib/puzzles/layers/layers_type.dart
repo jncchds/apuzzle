@@ -129,7 +129,8 @@ class LayersType extends ValueGridType<LayersPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(LayersPuzzle puzzle, ValueGrid state) => explainStep(const LayersExplainer(), puzzle, state);
+  Explanation? explain(LayersPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const LayersExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(LayersPuzzle puzzle) => puzzle.toJson();

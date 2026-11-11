@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'wedges_generator.dart';
 import 'wedges_model.dart';
+import '../../core/explain.dart';
+import 'wedges_solver.dart';
 
 const _wedgeChars = '◤◥◢◣';
 
@@ -58,6 +60,14 @@ const wedgesPairParams = GenParams(size: GridSize.square(6), difficulty: Difficu
 const wedgesProbeParams = GenParams(size: GridSize.square(7), difficulty: Difficulty.hard, seed: 3);
 
 final List<TutorialStep> wedgesStrategies = [
-  TutorialStep.generated(text: (l) => l.tutWedgesS1, make: () => generateWedges(wedgesPairParams)),
-  TutorialStep.generated(text: (l) => l.tutWedgesS2, make: () => generateWedges(wedgesProbeParams)),
+  TutorialStep.generated(
+    text: (l) => l.tutWedgesS1,
+    teaches: {WedgesRule.pair.index, WedgesRule.ring.index},
+    make: () => generateWedges(wedgesPairParams),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutWedgesS2,
+    teaches: {ruleRefuted},
+    make: () => generateWedges(wedgesProbeParams),
+  ),
 ];

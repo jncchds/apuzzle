@@ -160,7 +160,8 @@ class TallyType extends ValueGridType<TallyPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(TallyPuzzle puzzle, ValueGrid state) => explainStep(const TallyExplainer(), puzzle, state);
+  Explanation? explain(TallyPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const TallyExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(TallyPuzzle puzzle) => puzzle.toJson();

@@ -124,7 +124,11 @@ class HomewardType extends PuzzleType<HomewardPuzzle, HomewardState> {
       if (next == null) return null;
     }
     final out = HomewardState([...route.sublist(0, k), next.first]);
-    return HintResult(out, {puzzle.size.pos(next.first)});
+    return HintResult(
+      out,
+      {puzzle.size.pos(next.first)},
+      why: k < route.length ? (l) => l.homewardHintBack : (l) => l.homewardHintWhy,
+    );
   }
 
   @override

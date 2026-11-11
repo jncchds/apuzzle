@@ -90,7 +90,8 @@ class PebblesType extends ValueGridType<PebblesPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(PebblesPuzzle puzzle, ValueGrid state) => explainStep(const PebblesExplainer(), puzzle, state);
+  Explanation? explain(PebblesPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const PebblesExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(PebblesPuzzle puzzle) => puzzle.toJson();

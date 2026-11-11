@@ -4,6 +4,7 @@ import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import 'kings_generator.dart';
 import 'kings_model.dart';
+import 'kings_solver.dart';
 
 /// A board from rows of region letters and the crown's column in each row.
 KingsPuzzle _board(List<String> rows, List<int> crowns) => KingsPuzzle(
@@ -58,6 +59,7 @@ final List<TutorialStep> kingsTutorial = [
       focus: around.toSet(),
       done: (s) => around.every((p) => (s as ValueGrid).valueAt(p) == kDot),
       answer: answer,
+      how: (l) => l.tutKings2How,
     );
   }(),
   () {
@@ -71,6 +73,7 @@ final List<TutorialStep> kingsTutorial = [
       focus: {const Pos(1, 3), const Pos(1, 4), const Pos(2, 3), const Pos(2, 4), const Pos(3, 4)},
       done: (s) => (s as ValueGrid).valueAt(const Pos(2, 4)) == kKing,
       answer: start.set(const Pos(2, 4), const CellValue(value: kKing)),
+      how: (l) => l.tutKings3How,
     );
   }(),
   TutorialStep(text: (l) => l.tutKings4, puzzle: _five),
@@ -83,11 +86,13 @@ final _confined = _board(['ABCCC', 'ABBCC', 'ABCCC', 'ADCCC', 'DDEEE'], [0, 2, 4
 final List<TutorialStep> kingsStrategies = [
   TutorialStep(
     text: (l) => l.tutKingsS1,
+    teaches: {KingsRule.confine.index},
     puzzle: _confined,
     focus: {const Pos(4, 2), const Pos(4, 3), const Pos(4, 4)},
   ),
   TutorialStep.generated(
     text: (l) => l.tutKingsS2,
+    teaches: {KingsRule.attack.index},
     make: () => generateKings(const GenParams(size: GridSize.square(6), difficulty: Difficulty.medium, seed: 1)),
   ),
 ];

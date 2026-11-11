@@ -218,7 +218,8 @@ class SlabsType extends ValueGridType<SlabsPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(SlabsPuzzle puzzle, ValueGrid state) => explainStep(const SlabsExplainer(), puzzle, state);
+  Explanation? explain(SlabsPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const SlabsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(SlabsPuzzle puzzle) => puzzle.toJson();

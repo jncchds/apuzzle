@@ -115,7 +115,8 @@ class SudokuType extends ValueGridType<SudokuPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(SudokuPuzzle puzzle, ValueGrid state) => explainStep(const SudokuExplainer(), puzzle, state);
+  Explanation? explain(SudokuPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const SudokuExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(SudokuPuzzle puzzle) => puzzle.toJson();

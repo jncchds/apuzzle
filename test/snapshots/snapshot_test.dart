@@ -29,6 +29,7 @@ import 'package:apuzzle/puzzles/pop/pop_model.dart';
 import 'package:apuzzle/puzzles/rails/rails_model.dart';
 import 'package:apuzzle/puzzles/signs/signs_model.dart';
 import 'package:apuzzle/ui/app_router.dart';
+import 'package:apuzzle/ui/explain_panel.dart';
 import 'package:apuzzle/ui/game_screen.dart';
 import 'package:apuzzle/ui/home_screen.dart';
 import 'package:apuzzle/ui/tutorial_screen.dart';
@@ -218,14 +219,22 @@ void main() {
   }
 
   // Every tutorial step as tutorial_<id>_<step>.png (dark), ..._light.png, and
-  // ..._done.png (dark, after "Show me" until the step is done); strategy
+  // ..._show.png (dark, the "Show me" panel open on the first step),
+  // ..._trick.png (strategy lessons: the first step that uses its trick), and
+  // ..._done.png (dark, after "Show me" and "Do it" until the step is done); strategy
   // lessons as tutorial_<id>_s<step>*.png.
   for (final type in puzzleTypes) {
     for (final strategies in [false, true]) {
       final steps = strategies ? type.strategies() : type.tutorial();
       for (var k = 0; k < steps.length; k++) {
         final name = '${type.id}_${strategies ? 's' : ''}${k + 1}';
-        for (final (mode, tag) in [(ThemeMode.dark, ''), (ThemeMode.light, '_light'), (ThemeMode.dark, '_done')]) {
+        for (final (mode, tag) in [
+          (ThemeMode.dark, ''),
+          (ThemeMode.light, '_light'),
+          (ThemeMode.dark, '_show'),
+          if (strategies && steps[k].teaches.isNotEmpty) (ThemeMode.dark, '_trick'),
+          (ThemeMode.dark, '_done'),
+        ]) {
           testWidgets('snapshot tutorial $name$tag', (tester) async {
             tester.view.physicalSize = _phone;
             tester.view.devicePixelRatio = 3;
@@ -266,10 +275,37 @@ void main() {
               ),
             );
             await tester.pump(const Duration(seconds: 1));
-            if (tag == '_done') {
-              final showMe = find.byIcon(Icons.lightbulb_outline_rounded);
+            final showMe = find.byIcon(Icons.lightbulb_outline_rounded);
+            final doIt = find.descendant(of: find.byType(ExplainPanel), matching: find.byType(FilledButton));
+            if (tag == '_show' && showMe.evaluate().isNotEmpty) {
+              await tester.tap(showMe);
+              // The coordinate band starts easing in on the next frame.
+              await tester.pump();
+              await tester.pump(const Duration(seconds: 1));
+            }
+            if (tag == '_trick') {
+              // Plays on until "Show me" names the lesson's trick.
+              final badge = find.descendant(
+                of: find.byType(ExplainPanel),
+                matching: find.byIcon(Icons.psychology_alt_rounded),
+              );
               for (var i = 0; i < 400 && showMe.evaluate().isNotEmpty; i++) {
                 await tester.tap(showMe);
+                await tester.pump(const Duration(milliseconds: 50));
+                if (badge.evaluate().isNotEmpty) break;
+                await tester.tap(doIt);
+                await tester.pump(const Duration(milliseconds: 50));
+              }
+              // The panel scrolls the trick's line into view from the next frame.
+              await tester.pump(const Duration(milliseconds: 50));
+              await tester.pump(const Duration(seconds: 2));
+            }
+            if (tag == '_done') {
+              for (var i = 0; i < 400 && showMe.evaluate().isNotEmpty; i++) {
+                await tester.tap(showMe);
+                await tester.pump(const Duration(milliseconds: 50));
+                if (doIt.evaluate().isEmpty || tester.widget<FilledButton>(doIt).onPressed == null) break;
+                await tester.tap(doIt);
                 await tester.pump(const Duration(milliseconds: 50));
               }
               await tester.pump(const Duration(seconds: 3));

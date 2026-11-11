@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../core/difficulty.dart';
+import '../core/explain.dart';
 import '../core/game_controller.dart';
 import '../core/persistence.dart';
 import '../core/puzzle_type.dart';
@@ -13,6 +14,7 @@ import '../core/settings.dart';
 import '../core/tutorial.dart';
 import '../l10n/l10n.dart';
 import 'app_router.dart';
+import 'explain_panel.dart';
 import 'new_game_sheet.dart' show landscapePanelWidth;
 
 /// Before a first game of [type], offers its tutorial. [play] starts the
@@ -90,6 +92,7 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
   int _seenFlash = 0;
   int _seenShake = 0;
   int _seenToast = 0;
+  bool _wasExplaining = false;
 
   late final AnimationController _win = AnimationController(vsync: this, duration: const Duration(milliseconds: 1600));
   late final AnimationController _shake = AnimationController(vsync: this, duration: const Duration(milliseconds: 420));
@@ -139,6 +142,7 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
     _seenFlash = c.flashTick;
     _seenShake = c.shakeTick;
     _seenToast = c.toastTick;
+    _wasExplaining = false;
     setState(() {
       _index = k;
       _ctrl = c;
@@ -166,6 +170,12 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
         c.clearFlash();
         if (!_done) c.pointAt(_step.focus);
       });
+    }
+    final closed = _wasExplaining && !c.explaining;
+    _wasExplaining = c.explaining;
+    if (closed && !_done && !(_flashTimer?.isActive ?? false)) {
+      // "Show me" closed without a move: point at the step's cells again.
+      c.pointAt(_step.focus);
     }
     if (!identical(c.state, _lastState)) {
       _lastState = c.state;
@@ -203,13 +213,40 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(content: Text(text), duration: const Duration(seconds: 2)));
 
+  /// Opens the "Show me" panel: the next step and why (explain mode), how to
+  /// meet a custom goal, or the type's hint with its reason. Nothing moves
+  /// until the player taps "Do it".
   void _showMe() {
     final c = _ctrl!;
-    if (_step.answer case final answer?) {
-      c.apply(answer);
-    } else {
-      c.hint();
+    final step = _step;
+    final size = c.params.size;
+    if (step.answer case final answer?) {
+      final line = ExplainLine(step.how!, step.focus);
+      c.pointAt(type.canExplain ? const {} : step.focus);
+      c.showExplanation(
+        () => Explanation(size: size, headline: line, next: answer, targets: step.focus),
+        closeOnChange: true,
+      );
+      return;
     }
+    if (type.canExplain) {
+      final e = type.explain(c.puzzle, c.state, prefer: step.teaches);
+      if (e != null) {
+        c.pointAt(const {});
+        c.showExplanation(() => type.explain(c.puzzle, c.state, prefer: step.teaches));
+        return;
+      }
+    }
+    final h = type.hint(c.puzzle, c.state);
+    if (h == null) return;
+    final e = Explanation(
+      size: size,
+      headline: ExplainLine(h.why ?? (l) => l.tutorialHintMove),
+      next: identical(h.state, c.state) ? null : h.state,
+      targets: h.cells,
+    );
+    c.pointAt(h.cells);
+    c.showExplanation(() => e, closeOnChange: true);
   }
 
   void _next() {
@@ -245,7 +282,14 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
     final l = context.l10n;
     final step = _step;
     final playing = !step.look && !_done;
-    final controls = playing ? type.buildControls(context, c) : null;
+    final landscape = MediaQuery.orientationOf(context) == Orientation.landscape;
+    final explaining = playing && c.explaining;
+    final controls = !playing
+        ? null
+        : explaining
+        // In landscape the card and the panel share the side column.
+        ? ExplainPanel(controller: c, tutor: true, teaches: step.teaches, capHeight: !landscape)
+        : type.buildControls(context, c);
     final last = _index == _steps.length - 1;
     final progress = LinearProgressIndicator(value: (_index + (_done ? 1 : 0)) / _steps.length, minHeight: 3);
     final header = Padding(
@@ -298,7 +342,14 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(step.text(l), style: theme.textTheme.bodyLarge),
+              // Read already: with "Show me" open the board and the reasons
+              // need the room.
+              Text(
+                step.text(l),
+                style: theme.textTheme.bodyLarge,
+                maxLines: explaining ? 2 : null,
+                overflow: explaining ? TextOverflow.ellipsis : null,
+              ),
               AnimatedSize(
                 duration: const Duration(milliseconds: 200),
                 child: _done && !step.look
@@ -357,7 +408,7 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
           Expanded(
             child: Align(
               alignment: Alignment.centerLeft,
-              child: playing && !type.realTime
+              child: playing && !type.realTime && !c.explaining
                   ? TextButton(
                       onPressed: _showMe,
                       child: Row(
@@ -381,7 +432,7 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
         ],
       ),
     );
-    if (MediaQuery.orientationOf(context) == Orientation.landscape) {
+    if (landscape) {
       // Board on the left at full height, the lesson in a side panel.
       return Column(
         children: [
@@ -395,13 +446,26 @@ class _TutorialScreenState extends State<TutorialScreen> with TickerProviderStat
                   child: Column(
                     children: [
                       header,
-                      Expanded(
-                        child: SingleChildScrollView(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: card,
+                      // While "Show me" is open the panel takes the card's
+                      // place (a landscape phone has no room for both).
+                      if (explaining) ...[
+                        const SizedBox(height: 8),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Padding(padding: const EdgeInsets.fromLTRB(16, 0, 16, 8), child: controls),
+                          ),
                         ),
-                      ),
-                      if (controls != null) Padding(padding: const EdgeInsets.fromLTRB(16, 0, 16, 8), child: controls),
+                      ] else ...[
+                        Expanded(
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: card,
+                          ),
+                        ),
+                        if (controls != null)
+                          Padding(padding: const EdgeInsets.fromLTRB(16, 0, 16, 8), child: controls),
+                      ],
                       buttons,
                     ],
                   ),

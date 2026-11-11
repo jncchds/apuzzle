@@ -5,6 +5,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'layers_generator.dart';
 import 'layers_model.dart';
+import '../../core/explain.dart';
+import 'layers_solver.dart';
 
 /// A board from its line colors and picture. [lines]: a letter per row,
 /// then '/', then one per column (a, b, c are the colors, upper case for a
@@ -59,10 +61,12 @@ final List<TutorialStep> layersTutorial = [
 final List<TutorialStep> layersStrategies = [
   TutorialStep.generated(
     text: (l) => l.tutLayersS1,
+    teaches: {LayersRule.chain.index},
     make: () => generateLayers(const GenParams(size: GridSize.square(6), difficulty: Difficulty.medium, seed: 1)),
   ),
   TutorialStep.generated(
     text: (l) => l.tutLayersS2,
+    teaches: {ruleRefuted, LayersRule.only.index},
     make: () => generateLayers(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

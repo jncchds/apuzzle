@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import 'totals_generator.dart';
 import 'totals_model.dart';
+import '../../core/explain.dart';
+import 'totals_solver.dart';
 
 /// A board from rows of `#` (clue cells) and digits (cells to fill).
 TotalsPuzzle totalsBoard(List<String> rows) => TotalsPuzzle(
@@ -38,9 +40,21 @@ final List<TutorialStep> totalsTutorial = [
 ];
 
 final List<TutorialStep> totalsStrategies = [
-  TutorialStep.generated(text: (l) => l.tutTotalsS1, make: () => generateTotals(totalsStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutTotalsS2, make: () => generateTotals(totalsStrategyParams[1])),
-  TutorialStep.generated(text: (l) => l.tutTotalsS3, make: () => generateTotals(totalsStrategyParams[2])),
+  TutorialStep.generated(
+    text: (l) => l.tutTotalsS1,
+    teaches: {TotalsRule.must.index},
+    make: () => generateTotals(totalsStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutTotalsS2,
+    teaches: {TotalsRule.fill.index},
+    make: () => generateTotals(totalsStrategyParams[1]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutTotalsS3,
+    teaches: {ruleRefuted},
+    make: () => generateTotals(totalsStrategyParams[2]),
+  ),
 ];
 
 /// The strategy boards: each needs the tier it teaches (checked in tests).

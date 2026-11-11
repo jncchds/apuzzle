@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import 'hues_generator.dart';
 import 'hues_model.dart';
+import '../../core/explain.dart';
+import 'hues_solver.dart';
 
 /// A board from rows of cells: a color letter (b blue, p pink, y yellow) for a
 /// cell to paint, or the letter and a digit (e.g. "b3") for a clue. Clue
@@ -57,6 +59,7 @@ final _zeros = _board([
 final List<TutorialStep> huesStrategies = [
   TutorialStep(
     text: (l) => l.tutHuesS1,
+    teaches: {HuesRule.full.index, HuesRule.single.index},
     puzzle: _zeros,
     state: ValueGrid.fromGivens(_zeros.size, _zeros.givenAt)
         .set(const Pos(1, 0), const CellValue(value: 1))
@@ -66,6 +69,7 @@ final List<TutorialStep> huesStrategies = [
   ),
   TutorialStep.generated(
     text: (l) => l.tutHuesS2,
+    teaches: {ruleRefuted},
     make: () => generateHues(const GenParams(size: GridSize.square(5), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

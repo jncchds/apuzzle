@@ -160,7 +160,8 @@ class PearlsType extends PuzzleType<PearlsPuzzle, LoopMarks> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(PearlsPuzzle puzzle, LoopMarks state) => explainStep(const PearlsExplainer(), puzzle, state);
+  Explanation? explain(PearlsPuzzle puzzle, LoopMarks state, {Set<int> prefer = const {}}) =>
+      explainStep(const PearlsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(PearlsPuzzle puzzle) => puzzle.toJson();

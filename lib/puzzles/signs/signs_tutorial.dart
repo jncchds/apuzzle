@@ -4,6 +4,9 @@ import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import 'signs_generator.dart';
 import 'signs_model.dart';
+import '../../core/explain.dart';
+import '../../core/latin_square.dart';
+import 'signs_solver.dart';
 
 /// A 4×4 board from rows of numbers (given) and letters a–d (a cell to fill
 /// with 1–4), with signs between cells in a row ([across]: one string per
@@ -62,9 +65,21 @@ final List<TutorialStep> signsTutorial = [
 const signsTutorialParams = GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 1);
 
 final List<TutorialStep> signsStrategies = [
-  TutorialStep.generated(text: (l) => l.tutSignsS1, make: () => generateSigns(signsStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutSignsS2, make: () => generateSigns(signsStrategyParams[1])),
-  TutorialStep.generated(text: (l) => l.tutSignsS3, make: () => generateSigns(signsStrategyParams[2])),
+  TutorialStep.generated(
+    text: (l) => l.tutSignsS1,
+    teaches: {SignsRule.bound.id},
+    make: () => generateSigns(signsStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutSignsS2,
+    teaches: {SignsRule.group.id, LatinRule.pair.index},
+    make: () => generateSigns(signsStrategyParams[1]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutSignsS3,
+    teaches: {ruleRefuted},
+    make: () => generateSigns(signsStrategyParams[2]),
+  ),
 ];
 
 /// The strategy boards: each needs the tier it teaches (checked in tests).

@@ -79,7 +79,11 @@ class ChannelType extends PuzzleType<ChannelPuzzle, PipesState> {
     final turn = channelHintTurn(puzzle, state);
     if (turn == null) return null;
     final (i, t) = turn;
-    return HintResult(PipesState(List.of(state.turns)..[i] = t), {puzzle.size.pos(i)});
+    return HintResult(
+      PipesState(List.of(state.turns)..[i] = t),
+      {puzzle.size.pos(i)},
+      why: (l) => l.channelHintWhy,
+    );
   }
 
   void _rotate(GameController ctrl, Pos pos, int delta) {

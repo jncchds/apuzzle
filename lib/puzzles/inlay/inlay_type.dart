@@ -106,7 +106,7 @@ HintResult<InlayState>? inlayHint(InlayPuzzle p, InlayState s) {
 
   // A piece in a mirrored orientation that isn't allowed goes back first.
   for (var k = 0; k < n; k++) {
-    if (s.placed(k) && s.orient[k] >= p.orientations) return HintResult(s.withPiece(k, at: -1), cellsOf(k));
+    if (s.placed(k) && s.orient[k] >= p.orientations) return HintResult(s.withPiece(k, at: -1), cellsOf(k), why: _back);
   }
   final cover = solver.complete(fixedOf(null), cap: _hintCap);
   if (cover != null) {
@@ -118,14 +118,14 @@ HintResult<InlayState>? inlayHint(InlayPuzzle p, InlayState s) {
       final (o, at) = cover[k];
       final cells = p.cover(k, o, at ~/ p.cols, at % p.cols)!;
       if (empty < 0 || cells.contains(empty)) {
-        return HintResult(s.withPiece(k, orient: o, at: at), {for (final i in cells) p.size.pos(i)});
+        return HintResult(s.withPiece(k, orient: o, at: at), {for (final i in cells) p.size.pos(i)}, why: _place);
       }
     }
   }
   // Take back a piece without which the rest still fits.
   for (var k = n - 1; k >= 0; k--) {
     if (s.placed(k) && solver.complete(fixedOf(k), cap: _hintCap) != null) {
-      return HintResult(s.withPiece(k, at: -1), cellsOf(k));
+      return HintResult(s.withPiece(k, at: -1), cellsOf(k), why: _back);
     }
   }
   // Else the first piece that isn't where any piece of the known cover lies.
@@ -138,7 +138,7 @@ HintResult<InlayState>? inlayHint(InlayPuzzle p, InlayState s) {
   };
   for (var k = 0; k < n; k++) {
     if (s.placed(k) && !known.contains(cellsKey([for (final i in pieceCells(p, s, k)) (i ~/ p.cols, i % p.cols)]))) {
-      return HintResult(s.withPiece(k, at: -1), cellsOf(k));
+      return HintResult(s.withPiece(k, at: -1), cellsOf(k), why: _back);
     }
   }
   // Every laid piece lies as in the known cover: lay the next one from it.
@@ -148,9 +148,12 @@ HintResult<InlayState>? inlayHint(InlayPuzzle p, InlayState s) {
       final cells = p.cover(k, o, at ~/ p.cols, at % p.cols)!;
       final owner = inlayOwners(p, s);
       if (cells.every((i) => owner[i] < 0)) {
-        return HintResult(s.withPiece(k, orient: o, at: at), {for (final i in cells) p.size.pos(i)});
+        return HintResult(s.withPiece(k, orient: o, at: at), {for (final i in cells) p.size.pos(i)}, why: _place);
       }
     }
   }
   return null;
 }
+
+String _place(AppLocalizations l) => l.inlayHintPlace;
+String _back(AppLocalizations l) => l.inlayHintBack;

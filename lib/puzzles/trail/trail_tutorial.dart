@@ -3,6 +3,7 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'trail_generator.dart';
 import 'trail_model.dart';
+import 'trail_logic.dart';
 
 /// A 3×3 board from its path (cells as row * 3 + column) and the cells
 /// showing the numbers 1, 2, ….
@@ -29,6 +30,7 @@ final List<TutorialStep> trailStrategies = [
   ),
   TutorialStep.generated(
     text: (l) => l.tutTrailS2,
+    teaches: {TrailRule.failConnect.index, TrailRule.early.index, TrailRule.failStuck.index},
     make: () => generateTrail(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

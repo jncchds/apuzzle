@@ -199,7 +199,8 @@ class RampartType extends ValueGridType<RampartPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(RampartPuzzle puzzle, ValueGrid state) => explainStep(const RampartExplainer(), puzzle, state);
+  Explanation? explain(RampartPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const RampartExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(RampartPuzzle puzzle) => puzzle.toJson();

@@ -156,8 +156,8 @@ class StraightsType extends ValueGridType<StraightsPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(StraightsPuzzle puzzle, ValueGrid state) =>
-      explainStep(const StraightsExplainer(), puzzle, state);
+  Explanation? explain(StraightsPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const StraightsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(StraightsPuzzle puzzle) => puzzle.toJson();

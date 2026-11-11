@@ -618,6 +618,10 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Der farbige Bereich in der oberen linken Ecke gehört dir.\n• Wähle eine Farbe: Dein Bereich nimmt diese Farbe an und schluckt alle angrenzenden Felder derselben Farbe.\n• Färbe das ganze Brett innerhalb des Zuglimits in einer Farbe.\n\nTippe auf eine Farbe in der Palette oder auf ein beliebiges Feld, um dessen Farbe zu nutzen.';
 
   @override
+  String get mosaicHintWhy =>
+      'Dein Bereich wächst aus der markierten Ecke. Die Farbe dieses Zugs beginnt den kürzesten gefundenen Weg, das ganze Brett in einer Farbe zu färben.';
+
+  @override
   String get blendName => 'Fusion';
 
   @override
@@ -628,6 +632,10 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Das Brett besteht aus farbigen Flecken (angrenzende Felder derselben Farbe).\n• Wähle eine Farbe und tippe auf einen beliebigen Fleck, um ihn zu übermalen. Er verschmilzt mit allen angrenzenden Flecken dieser Farbe.\n• Färbe das ganze Brett innerhalb des Zuglimits in einer Farbe.\n\nDie Farbe in der Palette bleibt ausgewählt, sodass du mehrere Flecken hintereinander übermalen kannst.';
 
   @override
+  String get blendHintWhy =>
+      'Dieser Zug übermalt den markierten Fleck: Er beginnt den kürzesten gefundenen Weg, das ganze Brett in einer Farbe zu färben.';
+
+  @override
   String get popName => 'Blasen';
 
   @override
@@ -636,6 +644,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get popRules =>
       '• Tippe auf eine Gruppe von 2 oder mehr angrenzenden Blasen einer Farbe, um sie auszuwählen; tippe erneut, um sie platzen zu lassen.\n• Eine Gruppe von n Blasen bringt n × (n − 1) Punkte, große Gruppen lohnen sich also.\n• Blasen darüber fallen nach unten, und leere Spalten rücken nach rechts zusammen.\n\nModi\n• Standard: nur das.\n• Schieber: Jede Zeile rutscht außerdem nach rechts, um Lücken zu schließen.\n• Endlos: Neue Spalten rollen von links herein, sobald Platz frei wird.\n• Mega: Schieber und Endlos zusammen.\n\nZiele\n• Brett leeren: Lass alle Blasen platzen (nur Standard; es gibt immer einen Weg).\n• Zielpunktzahl: Erreiche die Punktzahl, bevor keine Züge mehr übrig sind.\n• Freies Spiel: kein Ziel, schlag einfach deinen Rekord.\n\nDas Spiel endet, wenn keine Zweiergruppe mehr übrig ist.';
+
+  @override
+  String get popHintWhy =>
+      'Lass die markierte Gruppe platzen: Von den ausprobierten Spielweisen beginnt sie die mit den meisten Punkten.';
 
   @override
   String get popMode => 'Modus';
@@ -740,6 +752,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get mergeRules =>
       '• Wische (oder drück eine Pfeiltaste), um alle Kacheln so weit wie möglich in diese Richtung zu schieben.\n• Zwei Kacheln mit derselben Zahl, die aufeinandertreffen, verschmelzen zu einer mit ihrer Summe. Pro Zug verschmilzt eine Kachel nur einmal.\n• Nach jedem Zug erscheint auf einem leeren Feld eine neue 2 (manchmal eine 4).\n• Jede Verschmelzung bringt so viele Punkte, wie auf der neuen Kachel steht.\n\nZiele\n• Bau die Kachel: Erreiche die Zielkachel (sie hängt von Feldgröße und Schwierigkeit ab).\n• Freies Spiel: Spiel, bis das Feld blockiert ist, und schlag deinen Rekord.\n\nDas Spiel endet, wenn das Feld voll ist und keine Nachbarn zusammenpassen.';
+
+  @override
+  String get mergeHintWhy =>
+      'Zwei Züge vorausgedacht lässt dieses Schieben am meisten Raum zum Verschmelzen. Die markierten Kacheln verschmelzen dabei.';
 
   @override
   String get mergeGoalTarget => 'Bau die Kachel';
@@ -963,6 +979,10 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Drehe die Kacheln so, dass jedes Rohr mit der Quelle (der Kachel mit Ring) verbunden ist.\n• Kein Rohrende darf offen bleiben, und das Netz darf keine Schleifen enthalten.\n• Wasser fließt durch alles, was bereits mit der Quelle verbunden ist.\n• Kacheln mit einem Punkt in der Ecke sind fest und schon an ihrem Platz.\n\nTippe auf eine Kachel, um sie im Uhrzeigersinn zu drehen; langes Drücken / Rechtsklick dreht sie zurück.';
 
   @override
+  String get pipesHintWhy =>
+      'Dieser Zug dreht die markierte Kachel so, wie sie in einem Netz liegt, das alle Rohre verbindet.';
+
+  @override
   String get famPlumbing => 'Wasserleitungen';
 
   @override
@@ -977,6 +997,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get channelRules =>
       '• Drehe die Kacheln so, dass ein Rohr das Wasser von der Quelle (der Kachel mit Ring) zum Abfluss (der Kachel mit Quadrat) leitet.\n• Die übrigen Kacheln spielen keine Rolle, und Rohrenden dürfen offen bleiben.\n• Wasser verlässt eine Kachel durch alle anderen Enden, über eine Brücke (eine Kreuzung) aber nur geradeaus, sodass das Rohr eine Brücke zweimal passieren kann.\n• Kacheln mit einem Punkt in der Ecke sind fest und schon an ihrem Platz.\n\nTippe auf eine Kachel, um sie im Uhrzeigersinn zu drehen; langes Drücken / Rechtsklick dreht sie zurück.';
+
+  @override
+  String get channelHintWhy =>
+      'Dieser Zug dreht die markierte Kachel, damit das Wasser eine Kachel weiter kommt, entlang des Rohrs, für das am wenigsten Kacheln gedreht werden müssen.';
 
   @override
   String get shikakuName => 'Shikaku';
@@ -1029,6 +1053,14 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Finde den Weg durch das Labyrinth vom Eingang in der linken oberen Ecke zum Ausgang in der rechten unteren Ecke.\n• Durch Wände kommst du nicht hindurch.\n\nZiehe vom Ende deines Wegs aus, um weiterzugehen. Ziehe zurück, um umzukehren, oder tippe auf ein Feld des Wegs, um dorthin zurückzugehen.';
 
   @override
+  String get labyrinthHintWhy =>
+      'Dieser Zug führt den Weg über die markierten Felder Richtung Ausgang bis zur nächsten Abzweigung.';
+
+  @override
+  String get labyrinthHintBack =>
+      'Der Weg hat den Weg zum Ausgang verlassen: Dieser Zug kürzt ihn bis dorthin und führt ihn über die markierten Felder bis zur nächsten Abzweigung weiter.';
+
+  @override
   String get tagDrive => 'fahren, Auto, Taxi, abholen, liefern, Haustiere, Tiere, Benzin, Tank, Route';
 
   @override
@@ -1040,6 +1072,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get homewardRules =>
       '• Fahre mit dem Auto über die Straßen. Jedes Straßenstück zwischen zwei Kreuzungen kostet eine Einheit Benzin.\n• Fahre zu einem Tier, um es abzuholen, und dann zum Haus mit demselben Symbol, um es abzusetzen. Beides geschieht von selbst.\n• Das Auto hat nur wenige Plätze: Ein Tier, das du erreichst, während alle Plätze besetzt sind, wartet weiter. Ist ein Platz frei, steigt es immer ein.\n• Bring alle Tiere nach Hause, bevor das Benzin ausgeht.\n\nTippe auf eine Kreuzung neben dem Auto oder weiter entlang einer geraden Straße, um dorthin zu fahren. Oder ziehe entlang der Straßen. Geht das Benzin aus, mache Züge rückgängig oder starte neu.';
+
+  @override
+  String get homewardHintWhy =>
+      'Fahre zur markierten Kreuzung: Das ist die erste Straße eines kürzesten Plans, der mit dem übrigen Benzin jedes Tier nach Hause bringt.';
+
+  @override
+  String get homewardHintBack =>
+      'Von hier reicht das Benzin nicht mehr, also nimmt dieser Zug die Route bis dahin zurück, wo es noch reicht, und fährt dann zur markierten Kreuzung.';
 
   @override
   String homewardFuel(int left, int limit) {
@@ -1082,6 +1122,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get blockadeRules =>
       '• Bring das Boot in den Hafen. In jedem Zug fährt das Boot ein Feld weit (nach oben, unten, links oder rechts) oder wartet, wo es ist. Felsen versperren den Weg.\n• Nach jedem Zug fährt jedes Patrouillenschiff ein Feld auf seiner Route weiter: auf einer Linie hin und her oder immer im Kreis. Die Route ist auf dem Brett eingezeichnet, und ein Ring zeigt, wo das Schiff nach deinem nächsten Zug sein wird.\n• Lass dich nicht erwischen: Beende nie einen Zug auf dem Feld eines Schiffs, und tausche nie mit einem Schiff die Plätze. Kein Schiff fährt je auf den Start oder in den Hafen.\n• Erreiche den Hafen mit den Zügen, die du hast.\n\nTippe auf ein Feld neben dem Boot, um dorthin zu fahren, oder ziehe. Tippe auf das Boot oder auf „Warten“, um einen Zug auszusetzen. Auf der Tastatur: Pfeiltasten und Leertaste. Wenn du erwischt wirst oder keine Züge mehr hast, mach rückgängig oder starte neu.';
+
+  @override
+  String get blockadeHintWhy =>
+      'Fahre das Boot auf das markierte Feld (oder warte dort): Das ist der erste Zug der schnellsten Fahrt, bei der dich kein Patrouillenschiff erwischt.';
+
+  @override
+  String get blockadeHintBack =>
+      'Von hier ist der Hafen in den übrigen Zügen nicht mehr sicher zu erreichen, also nimmt dieser Zug Züge zurück, bis es wieder geht, und fährt dann auf das markierte Feld.';
 
   @override
   String blockadeTurn(int turn, int limit) {
@@ -1308,6 +1356,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get tutorialShowMe => 'Zeig\'s mir';
 
   @override
+  String get tutorialLessonTrick => 'Der Trick aus dieser Lektion';
+
+  @override
+  String get tutorialHintMove => 'Ein guter Zug: Sieh dir die markierten Felder an.';
+
+  @override
   String get tutorialPrevious => 'Voriger Schritt';
 
   @override
@@ -1397,6 +1451,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Noch unsicher? Mach Notizen. Schalte den Stift neben der Palette ein, wähle das markierte Feld und notiere jede Zahl, die dort noch möglich ist.';
 
   @override
+  String get tutSudoku4How =>
+      'Schalte den Stift ein, wähle das markierte Feld und tippe 2 und 4: Alle anderen Zahlen stehen schon in seiner Zeile, Spalte oder seinem Block.';
+
+  @override
   String get tutSudoku5 =>
       'Jetzt ein ganzes Rätsel. Ein ausgewähltes Feld tönt seine Zeile, Spalte und seinen Block ein und hebt dieselbe Zahl anderswo hervor. In den Einstellungen können Notizen automatisch entfernt werden.';
 
@@ -1437,8 +1495,16 @@ class AppLocalizationsDe extends AppLocalizations {
       'Kronen berühren sich nie, auch nicht an den Ecken. Tippe einmal, um einen Punkt (deine Notiz „keine Krone hier“) auf jedes Feld um diese Krone zu setzen.';
 
   @override
+  String get tutKings2How =>
+      'Tippe jedes markierte Feld einmal an: Alle berühren die Krone, also bekommt jedes einen Punkt.';
+
+  @override
   String get tutKings3 =>
       'Die Zeilen der Kronen und die Berührungsregel lassen im markierten Bereich nur ein Feld ohne Punkt übrig. Setze dort seine Krone.';
+
+  @override
+  String get tutKings3How =>
+      'Jedes andere Feld der markierten Region berührt eine Krone oder liegt mit einer in derselben Zeile, also kommt die Krone der Region in das eine übrige Feld. Tippe es an, bis die Krone erscheint.';
 
   @override
   String get tutKings4 =>
@@ -1751,6 +1817,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Inseln berühren sich nie. Ein Feld zwischen zwei Zahlen muss Meer sein, sonst würde es sie zu einer Insel verbinden.';
 
   @override
+  String get tutIslands2How =>
+      'Das markierte Feld berührt zwei Zahlen. Als Land würde es ihre Inseln zu einer verbinden, also ist es Meer: Markiere es als Meer.';
+
+  @override
   String get tutIslands3 =>
       'Das Meer muss zusammenhängen und darf nie ein 2×2-Becken bilden. Lass die 3 so wachsen, dass beides eingehalten wird. Tippe zweimal für einen Punkt, deine Notiz für Land.';
 
@@ -1958,6 +2028,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutMines1 =>
       'Eine Zahl zählt die Minen in den 8 Feldern um sie herum. Jede 1 hier berührt nur ein geschlossenes Feld, also liegt dort eine Mine. Markiere sie: langes Drücken oder Rechtsklick, oder wechsle unten zu „Flagge“ und tippe darauf.';
+
+  @override
+  String get tutMines1How =>
+      'Das markierte Feld ist das einzige geschlossene neben den Einsen, also liegt dort die Mine. Drücke es lange oder klicke es rechts an, um eine Flagge zu setzen.';
 
   @override
   String get tutMines2 =>
@@ -3884,6 +3958,9 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Eine Gleichung ist versteckt. Finde sie in sechs Versuchen.\n• Jeder Versuch muss eine wahre Gleichung sein, die die Zeile füllt: eine Rechnung, dann = und ihr Ergebnis.\n• Jedes Feld eines Versuchs wird markiert. Gefüllt: richtiges Zeichen am richtigen Platz. Umrandet: kommt in der Gleichung vor, aber woanders. Blass: kommt nicht vor (oder nicht so oft).\n• Die übliche Reihenfolge: erst Klammern, dann Potenzen, dann × und ÷, dann + und −.\n\nLeichte Gleichungen addieren und subtrahieren nur, mittlere multiplizieren oder dividieren auch, schwere haben Klammern oder Potenzen (3² = 3 × 3, 2³ = 2 × 2 × 2). Die Tasten merken sich die Markierungen. Tippe ein Feld an, um dort zu schreiben. Ein Versuch lässt sich nicht zurücknehmen; sind die Zeilen voll, starte neu.';
 
   @override
+  String get formulaHintWhy => 'Dieser Zug zeigt ein Zeichen der versteckten Gleichung auf dem markierten Feld.';
+
+  @override
   String get formulaIncomplete => 'Fülle erst die ganze Zeile';
 
   @override
@@ -3911,6 +3988,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Hinter diesem Brett steckt eine Gleichung. Jeder Versuch ist eine wahre Gleichung, die eine Zeile füllt. Tippe 1+4=5 (oder eine andere) und drücke „Prüfen“.';
 
   @override
+  String get tutFormula1How =>
+      'Tippe 1+4=5 mit den Tasten unten und drücke „Prüfen“. Jede wahre Gleichung ist ein guter erster Versuch: Die Markierungen zeigen dir, wie es weitergeht.';
+
+  @override
   String get tutFormula2 =>
       'Ein Versuch markiert seine Felder. Gefüllt: richtiges Zeichen am richtigen Platz. Umrandet: kommt vor, aber woanders. Blass: kommt nicht vor. Hier steht = richtig, 4, 5 und 9 gehören woandershin, und ein + gibt es nicht. Finde die Gleichung.';
 
@@ -3925,6 +4006,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutFormulaS1 =>
       'Beginne mit einem Versuch, der viele verschiedene Zeichen prüft: Je mehr Felder markiert werden, desto mehr erfährst du. Gib eine Gleichung mit mindestens sieben verschiedenen Zeichen ein, etwa 9×8−7=65.';
+
+  @override
+  String get tutFormulaS1How =>
+      'Tippe 9×8−7=65 und drücke „Prüfen“: Ihre acht verschiedenen Zeichen markieren auf einmal die meisten Tasten.';
 
   @override
   String get tutFormulaS2 =>
@@ -4017,6 +4102,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get inlayRules =>
       '• Fülle die Form mit allen Teilen aus der Ablage. Jedes Feld der Form wird bedeckt, und Teile überlappen sich nie.\n• Jede Lösung, bei der alle Teile passen, gewinnt.\n• Teile dürfen gedreht werden. Auf schweren Gittern dürfen sie auch gespiegelt werden.\n\nZieh ein Teil auf die Form: Es rastet an den Feldern ein. Zieh ein gelegtes Teil, um es zu verschieben, oder aus der Form heraus, um es in die Ablage zurückzulegen. Tippe auf ein Teil, um es eine Vierteldrehung zu drehen. Auf schweren Gittern spiegelt „Spiegeln“ das zuletzt berührte Teil (am Computer: Rechtsklick auf ein Teil).';
+
+  @override
+  String get inlayHintPlace =>
+      'Dieser Zug legt ein Teil auf die markierten Felder: Liegt es dort, können die anderen Teile die Form noch füllen.';
+
+  @override
+  String get inlayHintBack =>
+      'Das markierte Teil ist im Weg: Die anderen Teile können die Form um es herum nicht füllen, also legt dieser Zug es zurück in die Ablage.';
 
   @override
   String get inlayFlip => 'Spiegeln';
@@ -6344,6 +6437,14 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Jedes Feld ist ein Fenster, hell oder dunkel.\n• Ein Tipp auf ein Fenster schaltet es um und dazu seine Nachbarn darüber, darunter, links und rechts: helle werden dunkel, dunkle werden hell.\n• Mach alle Fenster dunkel, innerhalb des Zuglimits, falls das Spiel eines hat.\n\nDie Reihenfolge der Tipps spielt nie eine Rolle, und zweimal auf dasselbe Fenster tippen ändert nichts. Wenn die Ränder verbunden sind, schaltet ein Fenster am Rand auch das gegenüber auf der anderen Seite um.';
 
   @override
+  String get nightfallHintWhy =>
+      'Tippe das markierte Fenster an: Es ist einer der Tipps einer Lösung mit den wenigsten Tipps. Ihre Reihenfolge spielt keine Rolle.';
+
+  @override
+  String get nightfallHintBack =>
+      'Von hier reichen die übrigen Züge nicht, also nimmt dieser Zug die Tipps zurück, die keine beste Lösung behält. Danach kommt das markierte Fenster.';
+
+  @override
   String get nightfallEdges => 'Ränder';
 
   @override
@@ -6426,6 +6527,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get glideRules =>
       '• Im Rahmen liegen nummerierte Plättchen und eine Lücke.\n• Tippe ein Plättchen neben der Lücke an, um es hineinzuschieben. Ein Plättchen weiter hinten in der Zeile oder Spalte der Lücke schiebt sich mit allen Plättchen dazwischen auf einmal. Du kannst auch wischen oder die Pfeiltasten nehmen.\n• Bring die Plättchen in Reihenfolge: 1, 2, 3, … Zeile für Zeile von oben, die Lücke unten rechts.\n\nJedes Plättchen, das sich bewegt, zählt als ein Zug. Mit farbigen Plättchen baust du stattdessen den Farbverlauf nach: jedes Plättchen gehört dorthin, wo seine Farbe passt.';
+
+  @override
+  String get glideHintWhy =>
+      'Dieser Zug schiebt ein Plättchen in die markierte Lücke: der nächste Zug eines Wegs, das Brett zu ordnen.';
+
+  @override
+  String get glideHintBack =>
+      'Von hier reichen die übrigen Züge nicht, also nimmt dieser Zug Züge zurück, bis sie wieder reichen. Danach bewegt sich das markierte Plättchen.';
 
   @override
   String get glideFace => 'Plättchen';
@@ -6765,8 +6874,16 @@ class AppLocalizationsDe extends AppLocalizations {
       'Sterne berühren sich nie, auch nicht diagonal. Tippe einmal, um einen Punkt (deine Notiz „kein Stern hier“) auf jedes Feld um diesen Stern zu setzen.';
 
   @override
+  String get tutStars2How =>
+      'Tippe jedes markierte Feld einmal an: Alle berühren den Stern, also bekommt jedes einen Punkt.';
+
+  @override
   String get tutStars3 =>
       'Die übrigen Felder dieser Zeile fallen weg, es bleiben drei freie Felder nebeneinander. Zwei Sterne, die sich nicht berühren dürfen, passen nur an die beiden Enden: setze sie.';
+
+  @override
+  String get tutStars3How =>
+      'Zwei Sterne, die sich nicht berühren dürfen, passen in drei Felder nebeneinander nur an beiden Enden, nicht in die Mitte. Tippe jedes der beiden Endfelder an, bis sein Stern erscheint.';
 
   @override
   String get tutStars4 =>

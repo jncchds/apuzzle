@@ -134,7 +134,8 @@ class KingsType extends ValueGridType<KingsPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(KingsPuzzle puzzle, ValueGrid state) => explainStep(const KingsExplainer(), puzzle, state);
+  Explanation? explain(KingsPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const KingsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(KingsPuzzle puzzle) => puzzle.toJson();

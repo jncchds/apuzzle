@@ -627,6 +627,10 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Kolorowy obszar w lewym górnym rogu jest twój.\n• Wybierz kolor: twój obszar przyjmuje ten kolor i wchłania wszystkie stykające się pola tego koloru.\n• Pomaluj całą planszę jednym kolorem w limicie ruchów.\n\nDotknij koloru w palecie albo dowolnego pola, aby użyć jego koloru.';
 
   @override
+  String get mosaicHintWhy =>
+      'Twój obszar rośnie z wyróżnionego rogu. Kolor wybrany w tym ruchu zaczyna najkrótszą znalezioną drogę do pomalowania całej planszy jednym kolorem.';
+
+  @override
   String get blendName => 'Fuzja';
 
   @override
@@ -637,6 +641,10 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Plansza składa się z kolorowych plam (stykających się pól jednego koloru).\n• Wybierz kolor, a potem dotknij dowolnej plamy, aby ją przemalować. Łączy się ona ze wszystkimi stykającymi się plamami tego koloru.\n• Pomaluj całą planszę na jeden kolor w limicie ruchów.\n\nKolor w palecie pozostaje wybrany, więc możesz przemalować kilka plam z rzędu.';
 
   @override
+  String get blendHintWhy =>
+      'Ten ruch przemalowuje wyróżnioną plamę: zaczyna najkrótszą znalezioną drogę do pomalowania całej planszy jednym kolorem.';
+
+  @override
   String get popName => 'Bąbelki';
 
   @override
@@ -645,6 +653,10 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get popRules =>
       '• Dotknij grupy 2 lub więcej stykających się bąbelków jednego koloru, aby ją zaznaczyć; dotknij jeszcze raz, aby ją zbić.\n• Grupa n bąbelków daje n × (n − 1) punktów, więc opłaca się zbierać duże grupy.\n• Bąbelki powyżej spadają w dół, a puste kolumny przesuwają się w prawo.\n\nTryby\n• Standardowy: tylko tyle.\n• Przesuwanie: każdy wiersz też przesuwa się w prawo, zamykając luki.\n• Ciągły: gdy zwalnia się miejsce, z lewej wjeżdżają nowe kolumny.\n• Mega: Przesuwanie i Ciągły razem.\n\nCele\n• Wyczyść planszę: zbij wszystkie bąbelki (tylko tryb Standardowy; zawsze jest sposób).\n• Wynik docelowy: osiągnij wynik, zanim skończą się ruchy.\n• Gra swobodna: bez celu, po prostu pobij swój rekord.\n\nGra kończy się, gdy nie zostaje żadna grupa 2 bąbelków.';
+
+  @override
+  String get popHintWhy =>
+      'Zbij wyróżnioną grupę: spośród sprawdzonych sposobów dalszej gry zaczyna ten z najlepszym wynikiem.';
 
   @override
   String get popMode => 'Tryb';
@@ -753,6 +765,10 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get mergeRules =>
       '• Przesuń palcem (lub naciśnij strzałkę), aby wszystkie kafelki przesunęły się w tę stronę do oporu.\n• Dwa kafelki z tą samą liczbą, które na siebie wpadną, łączą się w jeden z ich sumą. W jednym ruchu kafelek łączy się tylko raz.\n• Po każdym ruchu na pustym polu pojawia się nowa 2 (czasem 4).\n• Każde połączenie daje tyle punktów, ile wynosi nowy kafelek.\n\nCele\n• Zbuduj kafelek: osiągnij docelowy kafelek (zależy od rozmiaru planszy i poziomu trudności).\n• Gra swobodna: graj, aż plansza się zablokuje, i pobij swój rekord.\n\nGra kończy się, gdy plansza jest pełna i żadni sąsiedzi do siebie nie pasują.';
+
+  @override
+  String get mergeHintWhy =>
+      'Patrząc dwa ruchy do przodu, to przesunięcie zostawia najwięcej miejsca na łączenie. Wyróżnione kafelki przy tym się łączą.';
 
   @override
   String get mergeGoalTarget => 'Zbuduj kafelek';
@@ -988,6 +1004,9 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Obracaj kafelki tak, aby każda rura łączyła się ze źródłem (kafelek z pierścieniem).\n• Żaden koniec rury nie może zostać otwarty, a sieć nie może mieć pętli.\n• Woda płynie przez wszystko, co jest już połączone ze źródłem.\n• Kafelki z kropką w rogu są zablokowane i już na miejscu.\n\nDotknij kafelka, aby obrócić go zgodnie z ruchem wskazówek zegara; długie naciśnięcie / prawy przycisk obraca go z powrotem.';
 
   @override
+  String get pipesHintWhy => 'Ten ruch obraca wyróżniony kafelek tak, jak leży w sieci łączącej wszystkie rury.';
+
+  @override
   String get famPlumbing => 'Hydraulika';
 
   @override
@@ -1002,6 +1021,10 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get channelRules =>
       '• Obracaj kafelki tak, aby jedna rura prowadziła wodę ze źródła (kafelek z pierścieniem) do odpływu (kafelek z kwadratem).\n• Pozostałe kafelki nie mają znaczenia, a końce rur mogą zostać otwarte.\n• Woda wypływa z kafelka wszystkimi pozostałymi końcami, ale przez most (skrzyżowanie) płynie tylko prosto, więc rura może przejść przez most dwa razy.\n• Kafelki z kropką w rogu są zablokowane i już na miejscu.\n\nDotknij kafelka, aby obrócić go zgodnie z ruchem wskazówek zegara; długie naciśnięcie / prawy przycisk obraca go z powrotem.';
+
+  @override
+  String get channelHintWhy =>
+      'Ten ruch obraca wyróżniony kafelek, aby woda dotarła o kafelek dalej wzdłuż rury, która wymaga obrócenia najmniejszej liczby kafelków.';
 
   @override
   String get shikakuName => 'Shikaku';
@@ -1054,6 +1077,14 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Znajdź drogę przez labirynt od wejścia w lewym górnym rogu do wyjścia w prawym dolnym.\n• Nie można przechodzić przez ściany.\n\nPrzeciągaj od końca ścieżki, aby iść dalej. Przeciągnij z powrotem, aby się cofnąć, albo dotknij pola ścieżki, aby do niego wrócić.';
 
   @override
+  String get labyrinthHintWhy =>
+      'Ten ruch prowadzi ścieżkę wyróżnionymi polami w stronę wyjścia, aż do następnego rozwidlenia.';
+
+  @override
+  String get labyrinthHintBack =>
+      'Ścieżka zboczyła z drogi do wyjścia: ten ruch skraca ją do miejsca, gdzie to się stało, i prowadzi dalej wyróżnionymi polami do następnego rozwidlenia.';
+
+  @override
   String get tagDrive => 'jazda, auto, samochód, taksówka, zabrać, dowieźć, zwierzęta, zwierzaki, paliwo, trasa';
 
   @override
@@ -1065,6 +1096,14 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get homewardRules =>
       '• Jedź autem po drogach. Każdy odcinek drogi między dwoma skrzyżowaniami kosztuje jedną jednostkę paliwa.\n• Podjedź do zwierzaka, aby go zabrać, a potem do domu z tym samym symbolem, aby go wysadzić. Jedno i drugie dzieje się samo.\n• Auto ma niewiele miejsc: zwierzak, do którego dojedziesz, gdy wszystkie miejsca są zajęte, czeka dalej. Gdy jest wolne miejsce, zawsze wsiada.\n• Odwieź wszystkie zwierzaki do domu, zanim skończy się paliwo.\n\nDotknij skrzyżowania obok auta albo dalej na prostej drodze, aby tam pojechać. Możesz też przeciągać wzdłuż dróg. Gdy skończy się paliwo, cofnij lub zacznij od nowa.';
+
+  @override
+  String get homewardHintWhy =>
+      'Jedź do wyróżnionego skrzyżowania: to pierwszy odcinek najkrótszego planu, który odwiezie wszystkie zwierzaki do domu z paliwem, które zostało.';
+
+  @override
+  String get homewardHintBack =>
+      'Stąd paliwa już nie starczy, więc ten ruch cofa trasę do miejsca, gdzie jeszcze wystarcza, a potem jedzie do wyróżnionego skrzyżowania.';
 
   @override
   String homewardFuel(int left, int limit) {
@@ -1107,6 +1146,14 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get blockadeRules =>
       '• Doprowadź łódź do portu. W każdej turze łódź przesuwa się o jedno pole (w górę, w dół, w lewo lub w prawo) albo czeka w miejscu. Skały zagradzają drogę.\n• Po każdej turze każdy okręt patrolowy płynie o jedno pole swoją trasą: tam i z powrotem wzdłuż linii albo w kółko po pętli. Trasa jest narysowana na planszy, a pierścień pokazuje, gdzie okręt będzie po twojej następnej turze.\n• Nie daj się złapać: nigdy nie kończ tury na polu okrętu i nie zamieniaj się z okrętem miejscami. Żaden okręt nie wpływa na start ani do portu.\n• Dotrzyj do portu w dostępnej liczbie tur.\n\nDotknij pola obok łodzi, aby tam popłynąć, albo przeciągnij. Dotknij łodzi lub „Czekaj”, aby przeczekać turę. Na klawiaturze: strzałki i spacja. Jeśli cię złapią albo skończą się tury, cofnij lub zacznij od nowa.';
+
+  @override
+  String get blockadeHintWhy =>
+      'Przesuń łódź na wyróżnione pole (albo tam czekaj): to pierwsza tura najszybszej drogi, na której żaden patrol jej nie złapie.';
+
+  @override
+  String get blockadeHintBack =>
+      'Stąd nie da się już bezpiecznie dotrzeć do portu w pozostałych turach, więc ten ruch cofa tury do miejsca, skąd jeszcze się da, a potem idzie na wyróżnione pole.';
 
   @override
   String blockadeTurn(int turn, int limit) {
@@ -1335,6 +1382,12 @@ class AppLocalizationsPl extends AppLocalizations {
   String get tutorialShowMe => 'Pokaż';
 
   @override
+  String get tutorialLessonTrick => 'Sztuczka z tej lekcji';
+
+  @override
+  String get tutorialHintMove => 'Oto dobry ruch: spójrz na wyróżnione pola.';
+
+  @override
   String get tutorialPrevious => 'Poprzedni krok';
 
   @override
@@ -1423,6 +1476,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'Nie masz pewności? Rób notatki. Włącz ołówek obok palety, wybierz zaznaczone pole i zanotuj wszystkie liczby, które mogą się tam jeszcze znaleźć.';
 
   @override
+  String get tutSudoku4How =>
+      'Włącz ołówek, wybierz wyróżnione pole i dotknij 2 i 4: wszystkie inne liczby są już w jego wierszu, kolumnie lub kwadracie.';
+
+  @override
   String get tutSudoku5 =>
       'Teraz cała łamigłówka. Wybrane pole podświetla swój wiersz, kolumnę i blok oraz tę samą liczbę gdzie indziej. W ustawieniach możesz włączyć automatyczne usuwanie notatek.';
 
@@ -1463,8 +1520,16 @@ class AppLocalizationsPl extends AppLocalizations {
       'Korony nigdy się nie stykają, nawet rogami. Dotknij raz, aby postawić kropkę (notatkę „tu nie ma korony”) na każdym polu wokół tej korony.';
 
   @override
+  String get tutKings2How =>
+      'Dotknij raz każdego wyróżnionego pola: wszystkie stykają się z koroną, więc każde dostaje kropkę.';
+
+  @override
   String get tutKings3 =>
       'Wiersze koron i zasada stykania zostawiają w zaznaczonym obszarze tylko jedno pole bez kropki. Postaw tam koronę.';
+
+  @override
+  String get tutKings3How =>
+      'Każde inne pole wyróżnionego obszaru styka się z koroną albo leży z nią w jednym wierszu, więc korona obszaru trafia na jedyne wolne pole. Dotykaj go, aż pojawi się korona.';
 
   @override
   String get tutKings4 =>
@@ -1777,6 +1842,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'Wyspy nigdy się nie stykają. Pole między dwiema liczbami musi być morzem, inaczej połączyłoby je w jedną wyspę.';
 
   @override
+  String get tutIslands2How =>
+      'Wyróżnione pole styka się z dwiema liczbami. Jako ląd połączyłoby ich wyspy w jedną, więc jest morzem: oznacz je jako morze.';
+
+  @override
   String get tutIslands3 =>
       'Morze musi być połączone i nie może tworzyć basenów 2×2. Powiększ 3 tak, aby nie złamać żadnej z tych zasad. Dotknij dwa razy, aby postawić kropkę, notatkę „ląd”.';
 
@@ -1981,6 +2050,10 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutMines1 =>
       'Liczba mówi, ile min jest w 8 polach wokół niej. Każda 1 tutaj dotyka tylko jednego zakrytego pola, więc tam jest mina. Postaw flagę: długie naciśnięcie lub prawy przycisk, albo włącz „Flaga” poniżej i dotknij.';
+
+  @override
+  String get tutMines1How =>
+      'Wyróżnione pole jest jedynym zakrytym obok jedynek, więc to w nim jest mina. Przytrzymaj je lub kliknij prawym przyciskiem, aby postawić flagę.';
 
   @override
   String get tutMines2 =>
@@ -3943,6 +4016,9 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Ukryte jest równanie. Znajdź je w sześciu próbach.\n• Każda próba musi być prawdziwym równaniem na cały rząd: działanie, potem = i jego wynik.\n• Każda płytka próby dostaje oznaczenie. Wypełniona: właściwy symbol na właściwym miejscu. W ramce: jest w równaniu, ale gdzie indziej. Wyblakła: nie ma go w równaniu (albo nie aż tyle razy).\n• Zwykła kolejność działań: najpierw nawiasy, potem potęgi, potem × i ÷, potem + i −.\n\nŁatwe równania tylko dodają i odejmują, średnie także mnożą lub dzielą, trudne mają nawiasy lub potęgi (3² = 3 × 3, 2³ = 2 × 2 × 2). Klawisze pamiętają oznaczenia. Dotknij płytki, by w niej pisać. Próby nie da się cofnąć; gdy skończą się rzędy, zacznij od nowa.';
 
   @override
+  String get formulaHintWhy => 'Ten ruch pokazuje jeden symbol ukrytego równania na wyróżnionej płytce.';
+
+  @override
   String get formulaIncomplete => 'Najpierw wypełnij cały rząd';
 
   @override
@@ -3970,6 +4046,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'Za tą planszą kryje się równanie. Każda próba to prawdziwe równanie na cały rząd. Wpisz 1+4=5 (albo dowolne inne) i naciśnij „Sprawdź”.';
 
   @override
+  String get tutFormula1How =>
+      'Wpisz 1+4=5 klawiszami poniżej i naciśnij „Sprawdź”. Każde prawdziwe równanie nada się na pierwszą próbę: oznaczenia powiedzą, co dalej.';
+
+  @override
   String get tutFormula2 =>
       'Próba oznacza swoje płytki. Wypełniona: właściwy symbol na właściwym miejscu. W ramce: jest w równaniu, ale gdzie indziej. Wyblakła: nie ma go. Tutaj = jest na miejscu, 4, 5 i 9 stoją gdzie indziej, a + nie ma. Znajdź równanie.';
 
@@ -3984,6 +4064,10 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get tutFormulaS1 =>
       'Zacznij od próby, która sprawdza wiele różnych symboli: im więcej płytek dostanie oznaczenie, tym więcej wiesz. Wpisz równanie z co najmniej siedmioma różnymi symbolami, na przykład 9×8−7=65.';
+
+  @override
+  String get tutFormulaS1How =>
+      'Wpisz 9×8−7=65 i naciśnij „Sprawdź”: osiem różnych symboli od razu oznacza większość klawiszy.';
 
   @override
   String get tutFormulaS2 =>
@@ -4076,6 +4160,14 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get inlayRules =>
       '• Wypełnij kształt wszystkimi elementami z tacki. Każde pole kształtu musi być zakryte, a elementy nie mogą na siebie nachodzić.\n• Wygrywa każdy sposób, w jaki mieszczą się wszystkie elementy.\n• Elementy można obracać. Na trudnych planszach można je też odwracać.\n\nPrzeciągnij element na kształt: przyciągnie się do pól. Przeciągnij ułożony element, by go przesunąć, albo poza kształt, by odłożyć go na tackę. Dotknij elementu, by obrócić go o ćwierć obrotu. Na trudnych planszach „Odwróć” robi lustrzane odbicie elementu, którego dotknąłeś ostatnio (na komputerze kliknij element prawym przyciskiem).';
+
+  @override
+  String get inlayHintPlace =>
+      'Ten ruch kładzie element na wyróżnionych polach: gdy tam leży, pozostałe elementy wciąż mogą wypełnić kształt.';
+
+  @override
+  String get inlayHintBack =>
+      'Wyróżniony element przeszkadza: pozostałe elementy nie wypełnią wokół niego kształtu, więc ten ruch odkłada go na tackę.';
 
   @override
   String get inlayFlip => 'Odwróć';
@@ -6414,6 +6506,14 @@ class AppLocalizationsPl extends AppLocalizations {
       '• Każde pole to okno, jasne albo ciemne.\n• Stuknięcie okna przełącza je i sąsiednie okna nad nim, pod nim, z lewej i z prawej: jasne gasną, ciemne się zapalają.\n• Zgaś wszystkie okna, w limicie ruchów, jeśli gra go ma.\n\nKolejność stuknięć nigdy nie ma znaczenia, a dwa stuknięcia w to samo okno niczego nie zmieniają. Gdy krawędzie się łączą, okno na krawędzi przełącza też okno po drugiej stronie planszy.';
 
   @override
+  String get nightfallHintWhy =>
+      'Stuknij wyróżnione okno: to jedno ze stuknięć rozwiązania z najmniejszą liczbą stuknięć. Ich kolejność nie ma znaczenia.';
+
+  @override
+  String get nightfallHintBack =>
+      'Stąd pozostałe ruchy nie wystarczą, więc ten ruch cofa stuknięcia, których nie ma w żadnym najlepszym rozwiązaniu. Następne jest wyróżnione okno.';
+
+  @override
   String get nightfallEdges => 'Krawędzie';
 
   @override
@@ -6490,6 +6590,14 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get glideRules =>
       '• W ramce są ponumerowane płytki i jedno puste pole.\n• Stuknij płytkę obok pustego pola, aby ją tam wsunąć. Stuknięcie płytki dalej w tym samym wierszu lub kolumnie przesuwa ją razem ze wszystkimi płytkami pomiędzy. Możesz też przesuwać palcem albo używać strzałek.\n• Ułóż płytki po kolei: 1, 2, 3, … w każdym wierszu od góry, z pustym polem w prawym dolnym rogu.\n\nKażda przesunięta płytka to jeden ruch. Przy kolorowych płytkach odtwórz gradient: każda płytka należy tam, gdzie pasuje jej kolor.';
+
+  @override
+  String get glideHintWhy =>
+      'Ten ruch wsuwa płytkę na wyróżnione puste pole: to następny ruch sposobu na ułożenie planszy po kolei.';
+
+  @override
+  String get glideHintBack =>
+      'Stąd pozostałe ruchy nie wystarczą, więc ten ruch cofa ruchy do miejsca, skąd jeszcze wystarczają. Następna rusza się wyróżniona płytka.';
 
   @override
   String get glideFace => 'Płytki';
@@ -6830,8 +6938,16 @@ class AppLocalizationsPl extends AppLocalizations {
       'Gwiazdy nigdy się nie stykają, nawet po przekątnej. Dotknij raz, aby postawić kropkę (notatkę „tu nie ma gwiazdy”) na każdym polu wokół tej gwiazdy.';
 
   @override
+  String get tutStars2How =>
+      'Dotknij raz każdego wyróżnionego pola: wszystkie stykają się z gwiazdą, więc każde dostaje kropkę.';
+
+  @override
   String get tutStars3 =>
       'Pozostałe pola tego wiersza odpadają i zostają trzy wolne pola obok siebie. Dwie gwiazdy, które nie mogą się stykać, mieszczą się tylko na końcach: postaw je.';
+
+  @override
+  String get tutStars3How =>
+      'Dwie gwiazdy, które nie mogą się stykać, mieszczą się w trzech polach obok siebie tylko na obu końcach, nie pośrodku. Dotykaj każdego z dwóch skrajnych pól, aż pojawi się gwiazda.';
 
   @override
   String get tutStars4 =>

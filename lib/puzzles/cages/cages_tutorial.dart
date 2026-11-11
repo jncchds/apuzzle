@@ -4,6 +4,9 @@ import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import 'cages_generator.dart';
 import 'cages_model.dart';
+import '../../core/explain.dart';
+import '../../core/latin_square.dart';
+import 'cages_solver.dart';
 
 /// A 4×4 board from rows of numbers (given) and letters a–d (a cell to fill
 /// with 1–4), and [layout] rows naming each cell's cage, whose operation is
@@ -84,9 +87,21 @@ final List<TutorialStep> cagesTutorial = [
 ];
 
 final List<TutorialStep> cagesStrategies = [
-  TutorialStep.generated(text: (l) => l.tutCagesS1, make: () => generateCages(cagesStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutCagesS2, make: () => generateCages(cagesStrategyParams[1])),
-  TutorialStep.generated(text: (l) => l.tutCagesS3, make: () => generateCages(cagesStrategyParams[2])),
+  TutorialStep.generated(
+    text: (l) => l.tutCagesS1,
+    teaches: {CagesRule.combo.id},
+    make: () => generateCages(cagesStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutCagesS2,
+    teaches: {CagesRule.required.id, LatinRule.pair.index},
+    make: () => generateCages(cagesStrategyParams[1]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutCagesS3,
+    teaches: {ruleRefuted},
+    make: () => generateCages(cagesStrategyParams[2]),
+  ),
 ];
 
 /// The strategy boards: each needs the tier it teaches (checked in tests).

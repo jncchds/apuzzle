@@ -137,7 +137,8 @@ class IslandsType extends ValueGridType<IslandsPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(IslandsPuzzle puzzle, ValueGrid state) => explainStep(const IslandsExplainer(), puzzle, state);
+  Explanation? explain(IslandsPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const IslandsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(IslandsPuzzle puzzle) => puzzle.toJson();

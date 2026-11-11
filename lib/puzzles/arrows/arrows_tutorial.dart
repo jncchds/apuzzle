@@ -3,6 +3,9 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'arrows_generator.dart';
 import 'arrows_model.dart';
+import '../../core/explain.dart';
+import '../../core/lattice_loop.dart';
+import 'arrows_solver.dart';
 
 // Clue in the middle (0 shaded above): the loop runs round the edge.
 final _ring = ArrowsPuzzle.fromJson(const {
@@ -38,11 +41,13 @@ final List<TutorialStep> arrowsStrategies = [
   // (the top row's has two, around a clue).
   TutorialStep.generated(
     text: (l) => l.tutArrowsS1,
+    teaches: {loopRuleCount + ArrowsRule.clueNeed.index},
     make: () => generateArrows(const GenParams(size: GridSize.square(5), difficulty: Difficulty.easy, seed: 7)),
     focus: {for (var c = 2; c < 5; c++) Pos(2, c)},
   ),
   TutorialStep.generated(
     text: (l) => l.tutArrowsS2,
+    teaches: {ruleRefuted},
     make: () => generateArrows(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

@@ -617,6 +617,10 @@ class AppLocalizationsEn extends AppLocalizations {
       '• The colored area in the top-left corner is yours.\n• Pick a color: your area takes that color and absorbs every touching cell of the same color.\n• Paint the whole board in one color within the move limit.\n\nTap a palette color, or tap any cell to use its color.';
 
   @override
+  String get mosaicHintWhy =>
+      'Your area grows from the highlighted corner. The color this move picks starts the shortest way found to make the whole board one color.';
+
+  @override
   String get blendName => 'Blend';
 
   @override
@@ -627,6 +631,10 @@ class AppLocalizationsEn extends AppLocalizations {
       '• The board is made of colored patches (touching cells of the same color).\n• Pick a color, then tap any patch to repaint it. It merges with every touching patch of that color.\n• Make the whole board one color within the move limit.\n\nThe palette color stays selected, so you can paint several patches in a row.';
 
   @override
+  String get blendHintWhy =>
+      'This move repaints the highlighted patch: it starts the shortest way found to make the whole board one color.';
+
+  @override
   String get popName => 'Pop';
 
   @override
@@ -635,6 +643,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get popRules =>
       '• Tap a group of 2 or more touching bubbles of one color to select it; tap it again to pop it.\n• A group of n bubbles scores n × (n − 1), so saving up for big groups pays off.\n• Bubbles above fall down, and empty columns close up to the right.\n\nModes\n• Standard: just that.\n• Shifter: every row also slides right to close its gaps.\n• Continuous: new columns roll in from the left as space frees up.\n• Mega: Shifter and Continuous together.\n\nGoals\n• Clear the board: pop every bubble (Standard only; there is always a way).\n• Target score: reach the score before no moves are left.\n• Free play: no target, just beat your best score.\n\nThe game ends when no group of 2 is left.';
+
+  @override
+  String get popHintWhy =>
+      'Pop the highlighted group: of the ways to play on that were tried, it starts the one with the best score.';
 
   @override
   String get popMode => 'Mode';
@@ -739,6 +751,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get mergeRules =>
       '• Swipe (or press an arrow key) to slide every tile as far as it goes that way.\n• Two tiles with the same number that run into each other merge into one with their sum. A tile merges only once per move.\n• After every move a new 2 (sometimes a 4) appears on an empty cell.\n• Each merge scores the new tile\'s value.\n\nGoals\n• Build the tile: reach the target tile (it depends on the board size and difficulty).\n• Free play: keep going until the board locks up, and beat your best score.\n\nThe game ends when the board is full and no two neighbours match.';
+
+  @override
+  String get mergeHintWhy =>
+      'Looking two moves ahead, this slide keeps the most room for merges. The highlighted tiles merge on the way.';
 
   @override
   String get mergeGoalTarget => 'Build the tile';
@@ -956,6 +972,9 @@ class AppLocalizationsEn extends AppLocalizations {
       '• Rotate the tiles so that every pipe connects back to the source (the ringed tile).\n• No pipe end may be left open, and the network may not contain loops.\n• Water flows through everything already connected to the source.\n• Tiles with a dot in the corner are fixed and already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.';
 
   @override
+  String get pipesHintWhy => 'This move turns the highlighted tile the way it lies in a network that joins every pipe.';
+
+  @override
   String get famPlumbing => 'Plumbing';
 
   @override
@@ -970,6 +989,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get channelRules =>
       '• Turn the tiles so that one pipe carries the water from the source (the ringed tile) to the drain (the tile with the square).\n• The other tiles don\'t matter, and pipe ends may stay open.\n• Water leaves a tile by all its other ends, but it goes straight across a bridge (a crossing), so the pipe can pass a bridge twice.\n• Tiles with a dot in the corner are fixed and already in place.\n\nTap a tile to rotate it clockwise; long-press / right-click rotates it back.';
+
+  @override
+  String get channelHintWhy =>
+      'This move turns the highlighted tile so the water gets one tile further, along the pipe that needs the fewest tiles turned.';
 
   @override
   String get shikakuName => 'Shikaku';
@@ -1022,6 +1045,14 @@ class AppLocalizationsEn extends AppLocalizations {
       '• Find the way through the maze from the entrance in the top-left corner to the exit in the bottom-right corner.\n• You can\'t pass through walls.\n\nDrag from the end of your path to walk on. Drag back to retrace your steps, or tap a cell of the path to go back there.';
 
   @override
+  String get labyrinthHintWhy =>
+      'This move draws the path along the highlighted cells, on the way out, up to the next junction.';
+
+  @override
+  String get labyrinthHintBack =>
+      'The path has left the way out: this move cuts it back to where it did and goes on along the highlighted cells to the next junction.';
+
+  @override
   String get tagDrive => 'drive, car, taxi, pick up, deliver, pets, animals, fuel, route planning';
 
   @override
@@ -1033,6 +1064,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get homewardRules =>
       '• Drive the car along the roads. Every road between two crossings takes one unit of fuel.\n• Drive to a pet to pick it up, then drive to the home with the same symbol to drop it off. Both happen by themselves.\n• The car has only so many seats: a pet you reach while every seat is taken keeps waiting. With a seat free, it always gets in.\n• Bring every pet home before the fuel runs out.\n\nTap a crossing next to the car, or one further along a straight road, to drive there. Or drag along the roads. If the fuel runs out, undo or restart.';
+
+  @override
+  String get homewardHintWhy =>
+      'Drive to the highlighted crossing: it is the first road of a shortest plan that brings every pet home with the fuel left.';
+
+  @override
+  String get homewardHintBack =>
+      'From here the fuel left isn\'t enough, so this move takes the route back to where it still is, then drives to the highlighted crossing.';
 
   @override
   String homewardFuel(int left, int limit) {
@@ -1075,6 +1114,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get blockadeRules =>
       '• Sail the boat to the harbour. Each turn the boat moves one cell (up, down, left or right) or waits where it is. Rocks block the way.\n• After every turn, each patrol ship sails one cell along its beat: back and forth along a line, or round and round a loop. Its beat is drawn on the board, and a ring shows where the ship will be after your next turn.\n• Don\'t get caught: never end a turn on a ship\'s cell, and never swap places with a ship. No ship ever enters the start or the harbour.\n• Reach the harbour within the turns you have.\n\nTap a cell next to the boat to sail there, or drag. Tap the boat or Wait to stay put for a turn. On a keyboard, use the arrow keys and the space bar. If you\'re caught or out of turns, undo or restart.';
+
+  @override
+  String get blockadeHintWhy =>
+      'Take the boat to the highlighted cell (or wait there): it is the first turn of a fastest passage that no patrol ship catches.';
+
+  @override
+  String get blockadeHintBack =>
+      'From here the harbour can\'t be reached safely in the turns left, so this move takes turns back to where it still can, then goes to the highlighted cell.';
 
   @override
   String blockadeTurn(int turn, int limit) {
@@ -1300,6 +1347,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tutorialShowMe => 'Show me';
 
   @override
+  String get tutorialLessonTrick => 'The trick from this lesson';
+
+  @override
+  String get tutorialHintMove => 'Here is a good move: look at the highlighted cells.';
+
+  @override
   String get tutorialPrevious => 'Previous step';
 
   @override
@@ -1388,6 +1441,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Not sure yet? Take notes. Turn on the pencil next to the palette, select the highlighted cell and note every number it could still hold.';
 
   @override
+  String get tutSudoku4How =>
+      'Turn on the pencil, select the highlighted cell and tap 2 and 4: its row, column and box already hold every other number.';
+
+  @override
   String get tutSudoku5 =>
       'Now a whole puzzle. Selecting a cell tints its row, column and box, and highlights the same number elsewhere. Settings can remove notes for you when you place a number.';
 
@@ -1428,8 +1485,15 @@ class AppLocalizationsEn extends AppLocalizations {
       'Crowns never touch, not even at the corners. Tap once to put a dot (your \"no crown here\" note) on each cell around this crown.';
 
   @override
+  String get tutKings2How => 'Tap each highlighted cell once: they all touch the crown, so each gets a dot.';
+
+  @override
   String get tutKings3 =>
       'The crowns\' rows and the touching rule leave just one cell of the highlighted region without a dot. Place its crown.';
+
+  @override
+  String get tutKings3How =>
+      'Every other cell of the highlighted region touches a crown or shares a row with one, so the region\'s crown goes in the one cell left. Tap it until the crown shows.';
 
   @override
   String get tutKings4 =>
@@ -1741,6 +1805,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Islands never touch each other. A cell between two numbers must be sea, or it would join them into one island.';
 
   @override
+  String get tutIslands2How =>
+      'The highlighted cell touches two numbers. As land it would join their islands into one, so it is sea: mark it as sea.';
+
+  @override
   String get tutIslands3 =>
       'The sea must stay connected and may never form a 2×2 pool. Grow the 3 so that neither happens. Tap twice for a dot, your note for land.';
 
@@ -1946,6 +2014,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutMines1 =>
       'A number counts the mines in the 8 cells around it. Each 1 here touches just one closed cell, so that cell is a mine. Flag it: long-press or right-click it, or switch to Flag below and tap it.';
+
+  @override
+  String get tutMines1How =>
+      'The highlighted cell is the only closed cell next to the 1s, so it is the mine. Long-press or right-click it to put a flag on it.';
 
   @override
   String get tutMines2 =>
@@ -3872,6 +3944,9 @@ class AppLocalizationsEn extends AppLocalizations {
       '• An equation is hidden. Find it in six guesses.\n• Every guess must be a true equation that fills the row: a calculation, then = and its value.\n• Each tile of a guess gets a mark. Filled: the right symbol in the right place. Outlined: in the equation, but somewhere else. Faded: not in the equation, or not that many times.\n• The usual order: brackets first, then powers, then × and ÷, then + and −.\n\nEasy equations only add and subtract, medium ones multiply or divide too, hard ones have brackets or powers (3² = 3 × 3, 2³ = 2 × 2 × 2). The keys remember the marks. Tap a tile to type there. A guess can\'t be taken back; when the rows run out, restart to try again.';
 
   @override
+  String get formulaHintWhy => 'This move shows one symbol of the hidden equation on the highlighted tile.';
+
+  @override
   String get formulaIncomplete => 'Fill the whole row first';
 
   @override
@@ -3899,6 +3974,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'An equation is hidden behind this board. Every guess is a true equation that fills a row. Type 1+4=5 (or any other) and press Submit.';
 
   @override
+  String get tutFormula1How =>
+      'Type 1+4=5 with the keys below and press Submit. Any true equation is a fine first guess: the marks tell you where to go from there.';
+
+  @override
   String get tutFormula2 =>
       'A guess marks its tiles. Filled: right symbol, right place. Outlined: in the equation, but elsewhere. Faded: not in it. Here = is in place, 4, 5 and 9 belong elsewhere and there is no +. Find the equation.';
 
@@ -3912,6 +3991,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutFormulaS1 =>
       'Open with a guess that tests many different symbols: the more tiles get a mark, the more you learn. Enter an equation with at least seven different symbols, like 9×8−7=65.';
+
+  @override
+  String get tutFormulaS1How =>
+      'Type 9×8−7=65 and press Submit: its eight different symbols put a mark on most keys at once.';
 
   @override
   String get tutFormulaS2 =>
@@ -4004,6 +4087,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get inlayRules =>
       '• Fill the shape with all the pieces from the tray. Every cell of the shape gets covered, and pieces never overlap.\n• Any way that fits them all wins.\n• Pieces may be turned. On hard boards they may be flipped over too.\n\nDrag a piece onto the shape: it snaps to the cells. Drag a laid piece to move it, or off the shape to put it back in the tray. Tap a piece to turn it a quarter. On hard boards, Flip mirrors the piece you touched last (on a computer, right-click a piece).';
+
+  @override
+  String get inlayHintPlace =>
+      'This move lays a piece on the highlighted cells: with it there, the other pieces can still fill the shape.';
+
+  @override
+  String get inlayHintBack =>
+      'The highlighted piece is in the way: the other pieces can\'t fill the shape around it, so this move puts it back in the tray.';
 
   @override
   String get inlayFlip => 'Flip';
@@ -6381,6 +6472,14 @@ class AppLocalizationsEn extends AppLocalizations {
       '• Every cell is a window, lit or dark.\n• Tapping a window flips it and its neighbours above, below, left and right: lit windows go dark, dark ones light up.\n• Make every window dark, within the move limit if the game has one.\n\nThe order of taps never matters, and tapping a window twice changes nothing. When the edges wrap around, a window on the edge also flips the one across the board.';
 
   @override
+  String get nightfallHintWhy =>
+      'Tap the highlighted window: it is one of the taps of a way out with the fewest taps. Their order never matters.';
+
+  @override
+  String get nightfallHintBack =>
+      'From here the moves left aren\'t enough, so this move takes back the taps that no best way out keeps. The highlighted window comes next.';
+
+  @override
   String get nightfallEdges => 'Edges';
 
   @override
@@ -6461,6 +6560,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get glideRules =>
       '• The frame holds numbered tiles and one gap.\n• Tap a tile next to the gap to slide it in. Tapping a tile further along the gap\'s row or column slides it and every tile between at once. You can also swipe, or use the arrow keys.\n• Put the tiles in order: 1, 2, 3, … along each row from the top, with the gap in the bottom right corner.\n\nEvery tile that moves counts as a move. With colored tiles, rebuild the gradient instead: each tile belongs where its color fits.';
+
+  @override
+  String get glideHintWhy =>
+      'This move slides a tile into the highlighted gap: the next move of a way to put the board in order.';
+
+  @override
+  String get glideHintBack =>
+      'From here the moves left aren\'t enough, so this move takes moves back to where they still are. The highlighted tile moves next.';
 
   @override
   String get glideFace => 'Tiles';
@@ -6800,8 +6907,15 @@ class AppLocalizationsEn extends AppLocalizations {
       'Stars never touch, not even diagonally. Tap once to put a dot (your \"no star here\" note) on each cell around this star.';
 
   @override
+  String get tutStars2How => 'Tap each highlighted cell once: they all touch the star, so each gets a dot.';
+
+  @override
   String get tutStars3 =>
       'The other cells of this row are ruled out, leaving three free cells side by side. Two stars that may not touch only fit at both ends: place them.';
+
+  @override
+  String get tutStars3How =>
+      'Two stars that may not touch fit in three cells side by side only at both ends, not in the middle. Tap each of the two end cells until its star shows.';
 
   @override
   String get tutStars4 =>

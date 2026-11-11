@@ -297,7 +297,8 @@ class RailsType extends PuzzleType<RailsPuzzle, RailsState> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(RailsPuzzle puzzle, RailsState state) => explainStep(const RailsExplainer(), puzzle, state);
+  Explanation? explain(RailsPuzzle puzzle, RailsState state, {Set<int> prefer = const {}}) =>
+      explainStep(const RailsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(RailsPuzzle puzzle) => puzzle.toJson();

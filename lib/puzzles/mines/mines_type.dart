@@ -287,7 +287,8 @@ class MinesType extends PuzzleType<MinesPuzzle, MinesState> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(MinesPuzzle puzzle, MinesState state) => explainStep(const MinesExplainer(), puzzle, state);
+  Explanation? explain(MinesPuzzle puzzle, MinesState state, {Set<int> prefer = const {}}) =>
+      explainStep(const MinesExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(MinesPuzzle puzzle) => puzzle.toJson();

@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'ripples_generator.dart';
 import 'ripples_model.dart';
+import '../../core/explain.dart';
+import 'ripples_solver.dart';
 
 /// A board from rows of region letters, the solution's digits, and the
 /// shown digits ('.' for an empty cell).
@@ -48,6 +50,14 @@ final List<TutorialStep> ripplesTutorial = [
 ];
 
 final List<TutorialStep> ripplesStrategies = [
-  TutorialStep.generated(text: (l) => l.tutRipplesS1, make: () => generateRipples(ripplesPointingParams)),
-  TutorialStep.generated(text: (l) => l.tutRipplesS2, make: () => generateRipples(ripplesProbeParams)),
+  TutorialStep.generated(
+    text: (l) => l.tutRipplesS1,
+    teaches: {RipplesRule.pointing.index, RipplesRule.pair.index},
+    make: () => generateRipples(ripplesPointingParams),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutRipplesS2,
+    teaches: {ruleRefuted},
+    make: () => generateRipples(ripplesProbeParams),
+  ),
 ];

@@ -99,7 +99,7 @@ class MosaicType extends PuzzleType<MosaicPuzzle, MosaicState> {
     if (floodDone(state.cells)) return null;
     final best = floodSolve(state.cells, puzzle.rows, puzzle.cols, puzzle.colors).first;
     final next = MosaicState(floodApply(state.cells, puzzle.rows, puzzle.cols, best), state.moves + 1);
-    return HintResult(next, {const Pos(0, 0)});
+    return HintResult(next, {const Pos(0, 0)}, why: (l) => l.mosaicHintWhy);
   }
 
   void _play(GameController ctrl, int color) {

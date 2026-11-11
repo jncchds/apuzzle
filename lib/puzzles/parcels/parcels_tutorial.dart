@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'parcels_generator.dart';
 import 'parcels_model.dart';
+import '../../core/explain.dart';
+import 'parcels_solver.dart';
 
 /// A board from region letters (one per cell) and a mask of the cells that
 /// show their number ('#'); the numbers come from the regions.
@@ -45,6 +47,14 @@ const parcelsWaysParams = GenParams(size: GridSize.square(5), difficulty: Diffic
 const parcelsProbeParams = GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1);
 
 final List<TutorialStep> parcelsStrategies = [
-  TutorialStep.generated(text: (l) => l.tutParcelsS1, make: () => generateParcels(parcelsWaysParams)),
-  TutorialStep.generated(text: (l) => l.tutParcelsS2, make: () => generateParcels(parcelsProbeParams)),
+  TutorialStep.generated(
+    text: (l) => l.tutParcelsS1,
+    teaches: {ParcelsRule.everyWay.index},
+    make: () => generateParcels(parcelsWaysParams),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutParcelsS2,
+    teaches: {ruleRefuted},
+    make: () => generateParcels(parcelsProbeParams),
+  ),
 ];

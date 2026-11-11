@@ -205,7 +205,8 @@ class MercuryType extends ValueGridType<MercuryPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(MercuryPuzzle puzzle, ValueGrid state) => explainStep(const MercuryExplainer(), puzzle, state);
+  Explanation? explain(MercuryPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const MercuryExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(MercuryPuzzle puzzle) => puzzle.toJson();

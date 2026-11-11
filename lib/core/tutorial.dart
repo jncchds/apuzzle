@@ -14,8 +14,11 @@ class TutorialStep {
     this.answer,
     this.look = false,
     this.openEnded = false,
+    this.teaches = const {},
+    this.how,
   }) : _make = (() => puzzle),
-       assert(done == null || answer != null, 'a custom goal needs an answer');
+       assert(done == null || answer != null, 'a custom goal needs an answer'),
+       assert(answer == null || how != null, 'an answer needs a text saying how');
 
   /// A step on a board made by [make] (usually the type's generator), built
   /// only when the step opens.
@@ -24,10 +27,12 @@ class TutorialStep {
     required Object Function() make,
     this.focus = const {},
     this.look = false,
+    this.teaches = const {},
   }) : _make = (() => make()),
        state = null,
        done = null,
        answer = null,
+       how = null,
        openEnded = false;
 
   /// What to read (and do) at this step.
@@ -56,4 +61,13 @@ class TutorialStep {
 
   /// Several solutions are fine (the step shows a rule, not a deduction).
   final bool openEnded;
+
+  /// The explain rules a strategy lesson teaches (the type's rule enum
+  /// indices, or [ruleRefuted] for probing): "Show me" says so when its
+  /// step uses one, and a test checks that the board needs one.
+  final Set<int> teaches;
+
+  /// For a step with an [answer]: how to get there (the gesture or move it
+  /// asks for), shown by "Show me" before it plays the answer.
+  final Tr? how;
 }

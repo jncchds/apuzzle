@@ -239,7 +239,8 @@ class ArrowsType extends PuzzleType<ArrowsPuzzle, ArrowsState> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(ArrowsPuzzle puzzle, ArrowsState state) => explainStep(const ArrowsExplainer(), puzzle, state);
+  Explanation? explain(ArrowsPuzzle puzzle, ArrowsState state, {Set<int> prefer = const {}}) =>
+      explainStep(const ArrowsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(ArrowsPuzzle puzzle) => puzzle.toJson();

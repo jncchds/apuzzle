@@ -111,7 +111,11 @@ class BlockadeType extends PuzzleType<BlockadePuzzle, BlockadeState> {
     }
     final next = from(lo);
     if (next == null || next.first < 0) return null;
-    return HintResult(BlockadeState([...route.sublist(0, lo), next.first]), {puzzle.size.pos(next.first)});
+    return HintResult(
+      BlockadeState([...route.sublist(0, lo), next.first]),
+      {puzzle.size.pos(next.first)},
+      why: lo < route.length ? (l) => l.blockadeHintBack : (l) => l.blockadeHintWhy,
+    );
   }
 
   @override

@@ -129,7 +129,7 @@ class GlideType extends PuzzleType<GlidePuzzle, GlideState> {
     final solver = GlideSolver.of(puzzle.rows, puzzle.cols);
     HintResult<GlideState> play(GlideState s, String d) {
       final next = glideMove(puzzle, s, d);
-      return HintResult(next, {puzzle.size.pos(s.gap)});
+      return HintResult(next, {puzzle.size.pos(s.gap)}, why: (l) => l.glideHintWhy);
     }
 
     if (puzzle.plan.startsWith(state.path)) return play(state, puzzle.plan[state.moves]);
@@ -159,7 +159,7 @@ class GlideType extends PuzzleType<GlidePuzzle, GlideState> {
     final back = at(lo);
     final d = lo > common || !puzzle.plan.startsWith(back.path) ? solver.solve(back.tiles)[0] : puzzle.plan[lo];
     final tile = glideStep(puzzle.rows, puzzle.cols, back.gap, d);
-    return HintResult(back, {puzzle.size.pos(tile)});
+    return HintResult(back, {puzzle.size.pos(tile)}, why: (l) => l.glideHintBack);
   }
 
   void _play(GameController ctrl, String? moves) {

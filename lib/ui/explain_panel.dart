@@ -7,16 +7,37 @@ import '../l10n/l10n.dart';
 /// Explain mode under the board: the next step, its reasons, and buttons to
 /// do it or to go back to playing.
 class ExplainPanel extends StatefulWidget {
-  const ExplainPanel({super.key, required this.controller});
+  const ExplainPanel({
+    super.key,
+    required this.controller,
+    this.tutor = false,
+    this.teaches = const {},
+    this.capHeight = true,
+  });
 
   final GameController controller;
+
+  /// A tutorial's "Show me": reasons open from the start, and doing the
+  /// step closes the panel.
+  final bool tutor;
+
+  /// The rules a strategy lesson teaches: a step that uses one says so, and
+  /// its lines stand out.
+  final Set<int> teaches;
+
+  /// Caps the height at a share of the screen (else the parent bounds it).
+  final bool capHeight;
 
   @override
   State<ExplainPanel> createState() => _ExplainPanelState();
 }
 
 class _ExplainPanelState extends State<ExplainPanel> {
-  bool _why = false;
+  late bool _why = widget.tutor;
+
+  /// The first line of the lesson's trick, scrolled into view once per step.
+  final _taughtKey = GlobalKey();
+  Explanation? _scrolledFor;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +46,35 @@ class _ExplainPanelState extends State<ExplainPanel> {
     final l = context.l10n;
     final theme = Theme.of(context);
     final details = e != null && e.hasDetails;
+    final taught = e != null && e.uses(widget.teaches);
+    bool strong(ExplainLine line) => taught && e.teaches(line, widget.teaches);
     // One sentence can back several ruled-out cells: tell it once.
     final seen = <String>{};
     final why = [
       for (final line in e?.why ?? const <ExplainLine>[])
         if (seen.add(line.text(l))) line,
     ];
+    final suppose = e?.suppose;
+    final firstTaught = !taught || !_why
+        ? null
+        : why.where(strong).firstOrNull ?? (suppose != null && strong(suppose) ? suppose : null);
+    if (firstTaught != null && !identical(_scrolledFor, e)) {
+      _scrolledFor = e;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final target = _taughtKey.currentContext;
+        if (target != null && target.mounted) {
+          Scrollable.ensureVisible(target, alignment: 0.5, duration: const Duration(milliseconds: 250));
+        }
+      });
+    }
     return Container(
-      constraints: BoxConstraints(
-        maxHeight:
-            MediaQuery.sizeOf(context).height *
-            (MediaQuery.orientationOf(context) == Orientation.landscape ? 0.5 : 0.36),
-      ),
+      constraints: widget.capHeight
+          ? BoxConstraints(
+              maxHeight:
+                  MediaQuery.sizeOf(context).height *
+                  (MediaQuery.orientationOf(context) == Orientation.landscape ? 0.5 : 0.36),
+            )
+          : const BoxConstraints(),
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(16),
@@ -56,14 +94,33 @@ class _ExplainPanelState extends State<ExplainPanel> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    if (taught) _LessonBadge(text: l.tutorialLessonTrick),
                     if (e == null)
                       Text(l.explainNone, style: theme.textTheme.bodyMedium)
                     else
-                      ExplainText(controller: c, line: e.headline, style: theme.textTheme.bodyMedium),
+                      ExplainText(
+                        controller: c,
+                        line: e.headline,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: strong(e.headline) ? FontWeight.w600 : null,
+                        ),
+                      ),
                     if (details && _why) ...[
                       const SizedBox(height: 6),
-                      for (final line in why) _Reason(controller: c, line: line),
-                      if (e.suppose case final s?) _Reason(controller: c, line: s, strong: true),
+                      for (final line in why)
+                        _Reason(
+                          key: identical(line, firstTaught) ? _taughtKey : null,
+                          controller: c,
+                          line: line,
+                          strong: strong(line),
+                        ),
+                      if (suppose != null)
+                        _Reason(
+                          key: identical(suppose, firstTaught) ? _taughtKey : null,
+                          controller: c,
+                          line: suppose,
+                          strong: true,
+                        ),
                       for (final (i, line) in e.probe.indexed)
                         _Reason(controller: c, line: line, indent: true, last: i == e.probe.length - 1),
                     ],
@@ -74,17 +131,26 @@ class _ExplainPanelState extends State<ExplainPanel> {
           ),
           Row(
             children: [
-              if (details)
-                TextButton.icon(
-                  onPressed: () => setState(() => _why = !_why),
-                  icon: Icon(_why ? Icons.expand_less_rounded : Icons.expand_more_rounded),
-                  label: Text(l.explainWhy),
-                ),
-              const Spacer(),
-              TextButton(onPressed: c.toggleExplain, child: Text(l.explainClose)),
+              Expanded(
+                child: details
+                    ? Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: TextButton.icon(
+                          onPressed: () => setState(() => _why = !_why),
+                          icon: Icon(_why ? Icons.expand_less_rounded : Icons.expand_more_rounded),
+                          label: Text(l.explainWhy, maxLines: 1, overflow: TextOverflow.ellipsis),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ),
+              // The tutorial's panel is narrower: Close as an icon.
+              if (widget.tutor)
+                IconButton(onPressed: c.closeExplain, tooltip: l.explainClose, icon: const Icon(Icons.close_rounded))
+              else
+                TextButton(onPressed: c.closeExplain, child: Text(l.explainClose)),
               const SizedBox(width: 4),
               FilledButton.icon(
-                onPressed: e?.next == null ? null : c.applyExplanation,
+                onPressed: e?.next == null ? null : () => c.applyExplanation(close: widget.tutor),
                 icon: const Icon(Icons.check_rounded),
                 label: Text(l.explainApply),
               ),
@@ -96,9 +162,41 @@ class _ExplainPanelState extends State<ExplainPanel> {
   }
 }
 
+/// Says that the step uses the trick a strategy lesson teaches.
+class _LessonBadge extends StatelessWidget {
+  const _LessonBadge({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final color = theme.colorScheme.primary;
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 6),
+        padding: const EdgeInsets.fromLTRB(6, 3, 10, 3),
+        decoration: BoxDecoration(color: color.withValues(alpha: 0.14), borderRadius: BorderRadius.circular(12)),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.psychology_alt_rounded, size: 16, color: color),
+            const SizedBox(width: 4),
+            Flexible(
+              child: Text(text, style: theme.textTheme.labelMedium?.copyWith(color: color)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 /// One supporting line: tap it to see its cells on the board.
 class _Reason extends StatelessWidget {
   const _Reason({
+    super.key,
     required this.controller,
     required this.line,
     this.indent = false,

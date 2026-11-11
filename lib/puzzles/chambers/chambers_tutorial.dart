@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'chambers_generator.dart';
 import 'chambers_model.dart';
+import '../../core/explain.dart';
+import 'chambers_solver.dart';
 
 /// A board from rows separated by |: a letter per cell names its room (a
 /// rectangle), upper case is shaded. Rooms in [hidden] show no number.
@@ -71,9 +73,18 @@ final List<TutorialStep> chambersStrategies = [
   // The right column room of three holds 2: only its two ends.
   TutorialStep(
     text: (l) => l.tutChambersS1,
+    teaches: {ChambersRule.ways.index},
     puzzle: chambersBoard('aabC|aAbc|aabC|ddde', hidden: 'be'),
     focus: {const Pos(0, 3), const Pos(1, 3), const Pos(2, 3)},
   ),
-  TutorialStep.generated(text: (l) => l.tutChambersS2, make: () => generateChambers(chambersStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutChambersS3, make: () => generateChambers(chambersStrategyParams[1])),
+  TutorialStep.generated(
+    text: (l) => l.tutChambersS2,
+    teaches: {ChambersRule.ways.index, ChambersRule.cut.index},
+    make: () => generateChambers(chambersStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutChambersS3,
+    teaches: {ruleRefuted},
+    make: () => generateChambers(chambersStrategyParams[1]),
+  ),
 ];

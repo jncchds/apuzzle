@@ -133,7 +133,8 @@ class OrbitsType extends PuzzleType<OrbitsPuzzle, OrbitsState> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(OrbitsPuzzle puzzle, OrbitsState state) => explainStep(const OrbitsExplainer(), puzzle, state);
+  Explanation? explain(OrbitsPuzzle puzzle, OrbitsState state, {Set<int> prefer = const {}}) =>
+      explainStep(const OrbitsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(OrbitsPuzzle puzzle) => puzzle.toJson();

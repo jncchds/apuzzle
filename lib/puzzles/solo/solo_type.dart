@@ -160,7 +160,8 @@ class SoloType extends ValueGridType<SoloPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(SoloPuzzle puzzle, ValueGrid state) => explainStep(const SoloExplainer(), puzzle, state);
+  Explanation? explain(SoloPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const SoloExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(SoloPuzzle puzzle) => puzzle.toJson();

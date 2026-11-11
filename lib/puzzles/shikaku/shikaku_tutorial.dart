@@ -3,6 +3,7 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'shikaku_generator.dart';
 import 'shikaku_model.dart';
+import 'shikaku_solver.dart';
 
 /// A board from its rectangles, each with the cell (row, column) showing its area.
 ShikakuPuzzle _board(int rows, int cols, List<(CellRect, int, int)> rects) {
@@ -34,18 +35,21 @@ final List<TutorialStep> shikakuTutorial = [
 ];
 
 final List<TutorialStep> shikakuStrategies = [
-  // Only the 2 can reach the bottom-left corner.
+  // Only the 2 can reach the bottom-left corner. No rectangle is forced at the
+  // start, so that is the first step (then the 6 owns B3, and the rest follows).
   TutorialStep(
     text: (l) => l.tutShikakuS1,
+    teaches: {ShikakuRule.owner.index},
     puzzle: _board(3, 4, [
-      (const CellRect(0, 0, 1, 1), 0, 1),
-      (const CellRect(0, 2, 2, 3), 1, 3),
-      (const CellRect(2, 0, 2, 1), 2, 1),
+      (const CellRect(0, 0, 0, 3), 0, 1),
+      (const CellRect(1, 1, 2, 3), 1, 3),
+      (const CellRect(1, 0, 2, 0), 1, 0),
     ]),
     focus: {const Pos(2, 0)},
   ),
   TutorialStep.generated(
     text: (l) => l.tutShikakuS2,
+    teaches: {ShikakuRule.common.index, ShikakuRule.owner.index},
     make: () => generateShikaku(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

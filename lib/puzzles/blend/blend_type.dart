@@ -105,6 +105,7 @@ class BlendType extends PuzzleType<BlendPuzzle, BlendState> {
     return HintResult(
       BlendState(blendApply(state.cells, puzzle.rows, puzzle.cols, cell, color), state.moves + 1),
       patch,
+      why: (l) => l.blendHintWhy,
     );
   }
 

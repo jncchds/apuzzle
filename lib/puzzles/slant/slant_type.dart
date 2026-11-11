@@ -131,7 +131,8 @@ class SlantType extends ValueGridType<SlantPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(SlantPuzzle puzzle, ValueGrid state) => explainStep(const SlantExplainer(), puzzle, state);
+  Explanation? explain(SlantPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const SlantExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(SlantPuzzle puzzle) => puzzle.toJson();

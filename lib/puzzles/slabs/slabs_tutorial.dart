@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'slabs_generator.dart';
 import 'slabs_model.dart';
+import '../../core/explain.dart';
+import 'slabs_solver.dart';
 
 /// A board from rows separated by `|`, cells by spaces: `#` is shaded, `.`
 /// unshaded, either one followed by its number (`#2`, `.5`).
@@ -52,9 +54,18 @@ final List<TutorialStep> slabsStrategies = [
   // No rectangle of 7 cells fits a 4×4 board, so the 7 stays unshaded.
   TutorialStep(
     text: (l) => l.tutSlabsS1,
+    teaches: {SlabsRule.noRect.index, SlabsRule.rectIn.index, SlabsRule.rectOut.index},
     puzzle: slabsBoard('. . . .|. # # #3|# . . .7|. . . .'),
     focus: {const Pos(2, 3), const Pos(1, 3)},
   ),
-  TutorialStep.generated(text: (l) => l.tutSlabsS2, make: () => generateSlabs(slabsStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutSlabsS3, make: () => generateSlabs(slabsStrategyParams[1])),
+  TutorialStep.generated(
+    text: (l) => l.tutSlabsS2,
+    teaches: {SlabsRule.reach.index, SlabsRule.reachAll.index},
+    make: () => generateSlabs(slabsStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutSlabsS3,
+    teaches: {ruleRefuted},
+    make: () => generateSlabs(slabsStrategyParams[1]),
+  ),
 ];

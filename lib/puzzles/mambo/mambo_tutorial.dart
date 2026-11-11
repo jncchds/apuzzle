@@ -4,6 +4,7 @@ import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import 'mambo_generator.dart';
 import 'mambo_model.dart';
+import '../../core/explain.dart';
 
 /// A board from rows of S/M (given sun/moon) and s/m (a cell to fill, with its
 /// solution) and "r,c>=" / "r,c v×" style signs: `>` to the right neighbour,
@@ -52,10 +53,16 @@ final List<TutorialStep> mamboStrategies = [
   // The = pair in the top row can't be two suns (three in a row of four).
   () {
     final step = _step((l) => l.tutMamboS1, ['mmSs', 'ssmm', 'msmS', 'SmSm'], ['0,0>=']);
-    return TutorialStep(text: step.text, puzzle: step.puzzle, focus: {const Pos(0, 0), const Pos(0, 1)});
+    return TutorialStep(
+      text: step.text,
+      puzzle: step.puzzle,
+      teaches: {ruleRefuted},
+      focus: {const Pos(0, 0), const Pos(0, 1)},
+    );
   }(),
   TutorialStep.generated(
     text: (l) => l.tutMamboS2,
+    teaches: {ruleRefuted},
     make: () => generateMambo(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

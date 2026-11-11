@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import 'pockets_generator.dart';
 import 'pockets_model.dart';
+import '../../core/explain.dart';
+import 'pockets_explain.dart';
 
 /// A board from its solution, its pockets (a letter per cell) and the shown
 /// digits ('.' for a cell to fill), each as rows joined by '|'.
@@ -54,9 +56,21 @@ final List<TutorialStep> pocketsTutorial = [
 ];
 
 final List<TutorialStep> pocketsStrategies = [
-  TutorialStep.generated(text: (l) => l.tutPocketsS1, make: () => generatePockets(pocketsStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutPocketsS2, make: () => generatePockets(pocketsStrategyParams[1])),
-  TutorialStep.generated(text: (l) => l.tutPocketsS3, make: () => generatePockets(pocketsStrategyParams[2])),
+  TutorialStep.generated(
+    text: (l) => l.tutPocketsS1,
+    teaches: {pocketsInnie},
+    make: () => generatePockets(pocketsStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutPocketsS2,
+    teaches: {pocketsOutie},
+    make: () => generatePockets(pocketsStrategyParams[1]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutPocketsS3,
+    teaches: {ruleRefuted},
+    make: () => generatePockets(pocketsStrategyParams[2]),
+  ),
 ];
 
 /// The strategy boards: each needs the tier it teaches, and the first two

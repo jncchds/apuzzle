@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import 'solo_generator.dart';
 import 'solo_model.dart';
+import '../../core/explain.dart';
+import 'solo_solver.dart';
 
 /// A board from rows of numbers, a # after each shaded one.
 SoloPuzzle _board(List<String> rows) {
@@ -58,9 +60,18 @@ final List<TutorialStep> soloStrategies = [
   // 4 4 side by side in the top row: the first 4 is shaded.
   TutorialStep(
     text: (l) => l.tutSoloS1,
+    teaches: {SoloRule.pair.index},
     puzzle: _board(['4# 3 4 4#', '1 4# 3 4', '4 1 2 4#', '1# 4 1 2']),
     focus: {const Pos(0, 0)},
   ),
-  TutorialStep.generated(text: (l) => l.tutSoloS2, make: () => generateSolo(soloStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutSoloS3, make: () => generateSolo(soloStrategyParams[1])),
+  TutorialStep.generated(
+    text: (l) => l.tutSoloS2,
+    teaches: {SoloRule.cut.index},
+    make: () => generateSolo(soloStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutSoloS3,
+    teaches: {ruleRefuted},
+    make: () => generateSolo(soloStrategyParams[1]),
+  ),
 ];

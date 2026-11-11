@@ -4,6 +4,7 @@ import '../../core/tutorial.dart';
 import '../../core/value_grid.dart';
 import 'lits_generator.dart';
 import 'lits_model.dart';
+import '../../core/explain.dart';
 
 // Top region: an I. Left: an L. Right: a T.
 //   A A A A      # # # #
@@ -49,6 +50,7 @@ final List<TutorialStep> litsStrategies = [
   // Needs probing (checked: the first tier gets stuck).
   TutorialStep.generated(
     text: (l) => l.tutLitsS2,
+    teaches: {ruleRefuted},
     make: () => generateLits(const GenParams(size: GridSize.square(5), difficulty: Difficulty.medium, seed: 5)),
   ),
 ];

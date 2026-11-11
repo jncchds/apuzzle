@@ -182,7 +182,8 @@ class SkylineType extends ValueGridType<SkylinePuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(SkylinePuzzle puzzle, ValueGrid state) => explainStep(const SkylineExplainer(), puzzle, state);
+  Explanation? explain(SkylinePuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const SkylineExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(SkylinePuzzle puzzle) => puzzle.toJson();

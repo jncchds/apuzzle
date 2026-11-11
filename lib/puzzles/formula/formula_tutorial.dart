@@ -24,6 +24,7 @@ final List<TutorialStep> formulaTutorial = [
     puzzle: _first,
     done: (s) => (s as FormulaState).guesses.isNotEmpty,
     answer: _after(_first, ['1+4=5']),
+    how: (l) => l.tutFormula1How,
   ),
   // "=" in place, 4, 5 and 9 elsewhere, no "+".
   TutorialStep(text: (l) => l.tutFormula2, puzzle: _marks, state: _after(_marks, ['4+5=9'])),
@@ -42,6 +43,7 @@ final List<TutorialStep> formulaStrategies = [
     puzzle: _opening,
     done: (s) => (s as FormulaState).guesses.any((g) => formulaVariety(g) >= 7),
     answer: _after(_opening, ['9*8-7=65']),
+    how: (l) => l.tutFormulaS1How,
   ),
   TutorialStep(text: (l) => l.tutFormulaS2, puzzle: _powers, state: _after(_powers, ['2³-1=7'])),
   TutorialStep.generated(

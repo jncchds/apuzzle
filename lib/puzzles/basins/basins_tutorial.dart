@@ -3,6 +3,8 @@ import '../../core/grid.dart';
 import '../../core/tutorial.dart';
 import 'basins_generator.dart';
 import 'basins_model.dart';
+import '../../core/explain.dart';
+import 'basins_solver.dart';
 
 /// A board from rows separated by |: a letter per cell names its basin,
 /// upper case holds water, lower case stays dry. The counts follow from it.
@@ -57,7 +59,22 @@ const basinsStrategyParams = [
 
 final List<TutorialStep> basinsStrategies = [
   // Rows whose count only some sets of their basins' pieces make.
-  TutorialStep(text: (l) => l.tutBasinsS1, puzzle: basinsBoard('bbbaa|bgbAA|GGBBd|CFFed|CCCED')),
-  TutorialStep.generated(text: (l) => l.tutBasinsS2, make: () => generateBasins(basinsStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutBasinsS3, make: () => generateBasins(basinsStrategyParams[1])),
+  TutorialStep(
+    text: (l) => l.tutBasinsS1,
+    teaches: {BasinsRule.lineWays.index},
+    puzzle: basinsBoard('bbbaa|bgbAA|GGBBd|CFFed|CCCED'),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutBasinsS2,
+    // Whole levels rarely settle anything that one cell's level checked
+    // against its lines (tooMuch, tooLittle) hasn't already, so those count
+    // as the trick too.
+    teaches: {BasinsRule.levels.index, BasinsRule.tooMuch.index, BasinsRule.tooLittle.index},
+    make: () => generateBasins(basinsStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutBasinsS3,
+    teaches: {ruleRefuted},
+    make: () => generateBasins(basinsStrategyParams[1]),
+  ),
 ];

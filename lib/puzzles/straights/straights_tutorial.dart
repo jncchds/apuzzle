@@ -4,6 +4,8 @@ import '../../core/tutorial.dart';
 import '../../l10n/l10n.dart';
 import 'straights_generator.dart';
 import 'straights_model.dart';
+import '../../core/explain.dart';
+import 'straights_solver.dart';
 
 /// A board from rows of cells: `#` a wall, `A`–`I` a wall with the number
 /// 1–9, digits given numbers, letters `a`–`i` the numbers 1–9 to fill in.
@@ -59,8 +61,16 @@ final List<TutorialStep> straightsTutorial = [
 ];
 
 final List<TutorialStep> straightsStrategies = [
-  TutorialStep.generated(text: (l) => l.tutStraightsS1, make: () => generateStraights(straightsStrategyParams[0])),
-  TutorialStep.generated(text: (l) => l.tutStraightsS2, make: () => generateStraights(straightsStrategyParams[1])),
+  TutorialStep.generated(
+    text: (l) => l.tutStraightsS1,
+    teaches: {StraightsRule.subset.index, StraightsRule.fill.index},
+    make: () => generateStraights(straightsStrategyParams[0]),
+  ),
+  TutorialStep.generated(
+    text: (l) => l.tutStraightsS2,
+    teaches: {ruleRefuted},
+    make: () => generateStraights(straightsStrategyParams[1]),
+  ),
 ];
 
 /// The strategy boards: each needs the tier it teaches (checked in tests).

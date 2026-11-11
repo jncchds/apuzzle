@@ -195,7 +195,8 @@ class PocketsType extends ValueGridType<PocketsPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(PocketsPuzzle puzzle, ValueGrid state) => explainStep(const PocketsExplainer(), puzzle, state);
+  Explanation? explain(PocketsPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const PocketsExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(PocketsPuzzle puzzle) => puzzle.toJson();

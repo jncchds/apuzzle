@@ -4,6 +4,8 @@ import '../../core/lattice_loop.dart';
 import '../../core/tutorial.dart';
 import 'rails_generator.dart';
 import 'rails_model.dart';
+import '../../core/explain.dart';
+import 'rails_solver.dart';
 
 /// A board whose track runs through [track] (cells as row * cols + column,
 /// entry first), showing the pieces of the [given] cells.
@@ -42,11 +44,13 @@ final List<TutorialStep> railsStrategies = [
   // The second row and the right column are full.
   TutorialStep(
     text: (l) => l.tutRailsS1,
+    teaches: {RailsRule.lineNeed.index},
     puzzle: _board(4, 4, [4, 5, 6, 2, 3, 7, 11, 15]),
     focus: {for (var c = 0; c < 4; c++) Pos(1, c), for (var r = 0; r < 4; r++) Pos(r, 3)},
   ),
   TutorialStep.generated(
     text: (l) => l.tutRailsS2,
+    teaches: {ruleRefuted},
     make: () => generateRails(const GenParams(size: GridSize.square(6), difficulty: Difficulty.hard, seed: 1)),
   ),
 ];

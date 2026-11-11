@@ -208,7 +208,8 @@ class ChambersType extends ValueGridType<ChambersPuzzle> {
   bool get canExplain => true;
 
   @override
-  Explanation? explain(ChambersPuzzle puzzle, ValueGrid state) => explainStep(const ChambersExplainer(), puzzle, state);
+  Explanation? explain(ChambersPuzzle puzzle, ValueGrid state, {Set<int> prefer = const {}}) =>
+      explainStep(const ChambersExplainer(), puzzle, state, prefer: prefer);
 
   @override
   Map<String, dynamic> encodePuzzle(ChambersPuzzle puzzle) => puzzle.toJson();
