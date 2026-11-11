@@ -7383,4 +7383,183 @@ class AppLocalizationsPl extends AppLocalizations {
   String exWedgesFailRing(Object wall, int count) {
     return 'Ale wtedy $count na $wall nie da się spełnić tak, by wszystkie cztery jej rogi były proste.';
   }
+
+  @override
+  String get slabsName => 'Płyty';
+
+  @override
+  String get slabsTagline => 'Zamaluj prostokąty, a pozostałe obszary nie mogą być prostokątami';
+
+  @override
+  String get slabsRules =>
+      '• Zamaluj niektóre pola. Pola jednego rodzaju stykające się bokami tworzą obszar.\n• Każdy zamalowany obszar jest prostokątem (lub kwadratem).\n• Żaden niezamalowany obszar nie jest prostokątem.\n• Liczba mówi, ile pól ma jej obszar, zamalowany czy nie. Pola z liczbami też można zamalować.\n\nDotknij pola, aby przełączać: zamalowane → kropka (twoja notatka „to pole zostaje niezamalowane”) → puste. Prawy przycisk przełącza wstecz. Długie naciśnięcie stawia kropki wokół każdego zamalowanego prostokąta, który ma już swoją liczbę pól. Kropki są opcjonalne: łamigłówka jest rozwiązana, gdy zamalowane są właściwe pola.';
+
+  @override
+  String get tutSlabs1 =>
+      'Zamaluj niektóre pola. Pola jednego rodzaju stykające się bokami tworzą obszar: każdy zamalowany obszar musi być prostokątem, a żaden niezamalowany nie może nim być. Liczba mówi, ile pól ma jej obszar. 1 i 2 są zawsze zamalowane, bo jedno pole albo dwa obok siebie zawsze tworzą prostokąt. Każdej 2 brakuje tu jeszcze jednego zamalowanego pola, ale pole między nimi połączyłoby obie w obszar z trzech pól, więc zostaje niezamalowane. Dokończ planszę.';
+
+  @override
+  String get tutSlabs2 =>
+      'Gdy obszar ma już wszystkie pola, których wymaga jego liczba, każde pole obok niego jest innego rodzaju. Dwie 2 obok siebie tworzą już zamalowany obszar z dwóch pól, więc pola wokół nich zostają niezamalowane. Dotknij pola dwa razy, aby postawić kropkę (twoją notatkę, że zostaje niezamalowane), a potem dokończ planszę.';
+
+  @override
+  String get tutSlabs3 =>
+      'Niezamalowany obszar nigdy nie może być prostokątem. 1 jest zamalowana, więc narożniki obok niej zostają niezamalowane. Sam każdy narożnik byłby kwadratem z jednego pola, więc musi rosnąć przez swoje jedyne wyjście: pole pod nim. Dokończ planszę.';
+
+  @override
+  String get tutSlabs4 =>
+      'Teraz prawdziwa plansza. Zacznij od 1 i 2 i pamiętaj, że zamalowany obszar wypełnia cały prostokąt wokół siebie: gdy trzy pola bloku 2×2 są zamalowane, czwarte też.';
+
+  @override
+  String get tutSlabsS1 =>
+      'Zamalowana liczba potrzebuje prostokąta swojej wielkości, który się zmieści. Siedem pól tworzy tylko linię siedmiu, a ta nie mieści się na planszy szerokiej na cztery pola, więc 7 zostaje niezamalowana. Tak samo sprawdzaj każdy prostokąt, którym może być zamalowana liczba: pola pokryte przez wszystkie są zamalowane, a pola leżące obok wszystkich zostają niezamalowane.';
+
+  @override
+  String get tutSlabsS2 =>
+      'Obszar niezamalowanej liczby może rosnąć tylko przez pola, które nie są zamalowane i nie mają innej liczby, i tylko tak daleko, ilu pól mu jeszcze brakuje. Jeśli nie sięga dość pól, liczba jest zamalowana; jeśli sięga dokładnie tylu, wszystkie zostają niezamalowane. Użyj obu pomysłów na tej planszy.';
+
+  @override
+  String get tutSlabsS3 =>
+      'Trudna plansza. Gdy utkniesz, zamaluj pole i śledź skutki: jeśli jakiś obszar wyjdzie złej wielkości lub kształtu albo liczbie zabraknie miejsca, to pole zostaje niezamalowane.';
+
+  @override
+  String exSlabsSupposeKeep(Object cell) {
+    return 'Załóżmy, że $cell zostaje niezamalowane.';
+  }
+
+  @override
+  String exSlabsRefutedShade(Object cell) {
+    return '$cell zostaje niezamalowane: zamalowanie go prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exSlabsRefutedKeep(Object cell) {
+    return '$cell jest zamalowane: pozostawienie go niezamalowanym prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exSlabsBox(Object cell, Object area) {
+    return '$cell jest zamalowane: zamalowany obszar w $area musi być prostokątem, a to pole leży w prostokącie wokół niego.';
+  }
+
+  @override
+  String exSlabsFullShade(Object cell, Object clue, int count) {
+    return '$cell jest zamalowane: niezamalowany obszar liczby $count w $clue ma już wszystkie swoje pola.';
+  }
+
+  @override
+  String exSlabsFullKeep(Object cell, Object clue, int count) {
+    return '$cell zostaje niezamalowane: zamalowany obszar liczby $count w $clue ma już wszystkie swoje pola.';
+  }
+
+  @override
+  String exSlabsGrowShade(Object cell, Object clue, int count) {
+    return '$cell jest zamalowane: zamalowanemu obszarowi liczby $count w $clue brakuje pól, a to jego jedyne wyjście.';
+  }
+
+  @override
+  String exSlabsGrowKeep(Object cell, Object clue, int count) {
+    return '$cell zostaje niezamalowane: niezamalowanemu obszarowi liczby $count w $clue brakuje pól, a to jego jedyne wyjście.';
+  }
+
+  @override
+  String exSlabsGrowRect(Object cell, Object area) {
+    return '$cell zostaje niezamalowane: niezamalowany obszar w $area jest na razie prostokątem, więc musi rosnąć, a to jego jedyne wyjście.';
+  }
+
+  @override
+  String exSlabsJoinBigShade(Object cell, Object clue, int count) {
+    return '$cell jest zamalowane: gdyby zostało niezamalowane, obszar wokół liczby $count w $clue byłby większy niż $count.';
+  }
+
+  @override
+  String exSlabsJoinBigKeep(Object cell, Object clue, int count) {
+    return '$cell zostaje niezamalowane: po zamalowaniu zamalowany obszar wokół liczby $count w $clue byłby większy niż $count.';
+  }
+
+  @override
+  String exSlabsJoinMixShade(Object cell, Object a, Object b) {
+    return '$cell jest zamalowane: gdyby zostało niezamalowane, połączyłoby różne liczby w $a i $b w jeden obszar.';
+  }
+
+  @override
+  String exSlabsJoinMixKeep(Object cell, Object a, Object b) {
+    return '$cell zostaje niezamalowane: po zamalowaniu połączyłoby różne liczby w $a i $b w jeden obszar.';
+  }
+
+  @override
+  String exSlabsCorner(Object cell, Object other) {
+    return '$cell zostaje niezamalowane: po zamalowaniu prostokąt zamalowanego obszaru objąłby niezamalowane $other.';
+  }
+
+  @override
+  String exSlabsSmall(Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'tylko dwa pola',
+      one: 'tylko jedno pole',
+    );
+    return '$cell jest zamalowane: jego obszar ma $_temp0, a to zawsze prostokąt; niezamalowany obszar nie może nim być.';
+  }
+
+  @override
+  String exSlabsNoRect(Object cell, int count) {
+    return '$cell zostaje niezamalowane: nie mieści się tu żaden prostokąt wielkości $count.';
+  }
+
+  @override
+  String exSlabsRectIn(Object cell, Object clue, int count) {
+    return '$cell jest zamalowane: pokrywa je każdy prostokąt pasujący do zamalowanej liczby $count w $clue.';
+  }
+
+  @override
+  String exSlabsRectOut(Object cell, Object clue, int count) {
+    return '$cell zostaje niezamalowane: każdy prostokąt pasujący do zamalowanej liczby $count w $clue leży obok niego.';
+  }
+
+  @override
+  String exSlabsReach(Object cell, int count) {
+    return '$cell jest zamalowane: gdyby zostało niezamalowane, jego obszar nie osiągnąłby wielkości $count.';
+  }
+
+  @override
+  String exSlabsReachAll(Object cell, Object clue, int count) {
+    return '$cell zostaje niezamalowane: niezamalowany obszar liczby $count w $clue potrzebuje każdego pola, które jeszcze może sięgnąć.';
+  }
+
+  @override
+  String exSlabsFailMix(Object a, Object b) {
+    return 'Ale wtedy różne liczby w $a i $b są w jednym obszarze.';
+  }
+
+  @override
+  String exSlabsFailBig(Object clue, int count) {
+    return 'Ale wtedy obszar liczby $count w $clue jest większy niż $count.';
+  }
+
+  @override
+  String exSlabsFailSize(Object clue, int count) {
+    return 'Ale wtedy obszar liczby $count w $clue jest zamknięty ze złą liczbą pól.';
+  }
+
+  @override
+  String exSlabsFailShape(Object area) {
+    return 'Ale wtedy zamalowany obszar w $area nie jest prostokątem.';
+  }
+
+  @override
+  String exSlabsFailRect(Object area) {
+    return 'Ale wtedy niezamalowany obszar w $area jest zamknięty jako prostokąt.';
+  }
+
+  @override
+  String exSlabsFailNoRect(Object clue, int count) {
+    return 'Ale wtedy do zamalowanej liczby $count w $clue nie pasuje żaden prostokąt.';
+  }
+
+  @override
+  String exSlabsFailReach(Object clue, int count) {
+    return 'Ale wtedy niezamalowany obszar liczby $count w $clue nie osiąga wielkości $count.';
+  }
 }

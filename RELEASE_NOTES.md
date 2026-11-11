@@ -1,6 +1,7 @@
 # Release notes
 
 ## 0.13.0 - 2026-11-11
+- New game: Slabs. Shade some cells so that every shaded area is a rectangle and no unshaded area is one; a number tells how many cells its area has, shaded or not. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Wedges. Put wedges (half a cell, cut from corner to corner) into some cells so that every open area left is a rectangle, upright or leaning at 45°; a number on a wall tells how many wedges are in the cells beside it. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Twigs. Draw a diagonal in every cell, one way or the other; a number on a corner tells how many diagonals touch it, and the diagonals never close a loop. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Parcels. Draw borders to split the grid into regions that all have the same size; a number tells how many sides of its cell are borders, and the outline of the grid counts. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13

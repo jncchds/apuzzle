@@ -7319,4 +7319,183 @@ class AppLocalizationsDe extends AppLocalizations {
   String exWedgesFailRing(Object wall, int count) {
     return 'Aber dann geht die $count auf $wall nicht auf, ohne dass eine ihrer vier Ecken schief wird.';
   }
+
+  @override
+  String get slabsName => 'Platten';
+
+  @override
+  String get slabsTagline => 'Schwärze Rechtecke – die übrigen Gebiete dürfen keine sein';
+
+  @override
+  String get slabsRules =>
+      '• Schwärze einige Felder. Felder einer Art, die sich mit einer Seite berühren, bilden ein Gebiet.\n• Jedes geschwärzte Gebiet ist ein Rechteck (oder Quadrat).\n• Kein freies Gebiet ist ein Rechteck.\n• Eine Zahl sagt, wie viele Felder ihr Gebiet hat, geschwärzt oder nicht. Auch Felder mit Zahlen dürfen geschwärzt sein.\n\nTippe auf ein Feld zum Durchschalten: geschwärzt → Punkt (deine Notiz „dieses bleibt frei“) → leer. Rechtsklick schaltet zurück. Langes Drücken setzt Punkte um jedes geschwärzte Rechteck, das schon seine Zahl an Feldern hat. Punkte sind freiwillig: Das Rätsel ist gelöst, sobald die richtigen Felder geschwärzt sind.';
+
+  @override
+  String get tutSlabs1 =>
+      'Schwärze einige Felder. Felder einer Art, die sich mit einer Seite berühren, bilden ein Gebiet: Jedes geschwärzte Gebiet muss ein Rechteck sein, und kein freies Gebiet darf eines sein. Eine Zahl sagt, wie viele Felder ihr Gebiet hat. Eine 1 oder 2 ist immer geschwärzt, denn ein Feld oder zwei nebeneinander sind immer ein Rechteck. Jede 2 hier braucht noch ein geschwärztes Feld, aber das Feld zwischen ihnen würde beide zu einem Gebiet aus drei verbinden, also bleibt es frei. Löse das Feld.';
+
+  @override
+  String get tutSlabs2 =>
+      'Sobald ein Gebiet alle Felder hat, die seine Zahl verlangt, bekommt jedes Feld daneben die andere Art. Die beiden 2en nebeneinander sind schon ein geschwärztes Gebiet aus zwei Feldern, also bleiben die Felder um sie herum frei. Tippe zweimal auf ein Feld, um einen Punkt zu setzen (deine Notiz, dass es frei bleibt), und löse dann das Feld.';
+
+  @override
+  String get tutSlabs3 =>
+      'Ein freies Gebiet darf nie ein Rechteck sein. Die 1 ist geschwärzt, also bleiben die Ecken neben ihr frei. Allein wäre jede Ecke ein Quadrat aus einem Feld, also muss sie durch ihren einzigen Ausgang wachsen: das Feld darunter. Löse das Feld.';
+
+  @override
+  String get tutSlabs4 =>
+      'Jetzt ein echtes Rätsel. Beginne mit den 1en und 2en, und denk daran, dass ein geschwärztes Gebiet das ganze Rechteck um sich füllt: Sind drei Felder eines 2×2-Blocks geschwärzt, dann auch das vierte.';
+
+  @override
+  String get tutSlabsS1 =>
+      'Eine geschwärzte Zahl braucht ein Rechteck ihrer Größe, das hineinpasst. Sieben Felder ergeben nur eine Reihe aus sieben, und die passt nicht in ein Feld, das vier Felder breit ist, also bleibt die 7 frei. Probiere ebenso jedes Rechteck, das eine geschwärzte Zahl sein könnte: Felder, die alle bedecken, sind geschwärzt, und Felder, die neben allen liegen, bleiben frei.';
+
+  @override
+  String get tutSlabsS2 =>
+      'Das Gebiet einer freien Zahl kann nur durch Felder wachsen, die nicht geschwärzt sind und keine andere Zahl tragen, und nur so weit, wie ihm noch Felder fehlen. Erreicht es nicht genug Felder, ist die Zahl geschwärzt; erreicht es genau genug, bleiben alle frei. Nutze beides in diesem Rätsel.';
+
+  @override
+  String get tutSlabsS3 =>
+      'Ein schweres Rätsel. Wenn du feststeckst, schwärze ein Feld und verfolge die Folgen: Hat dann ein Gebiet die falsche Größe oder Form, oder findet eine Zahl keinen Platz, bleibt das Feld frei.';
+
+  @override
+  String exSlabsSupposeKeep(Object cell) {
+    return 'Angenommen, $cell bliebe frei.';
+  }
+
+  @override
+  String exSlabsRefutedShade(Object cell) {
+    return '$cell bleibt frei: Schwärzen führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exSlabsRefutedKeep(Object cell) {
+    return '$cell ist geschwärzt: Freilassen führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exSlabsBox(Object cell, Object area) {
+    return '$cell ist geschwärzt: Das geschwärzte Gebiet bei $area muss ein Rechteck sein, und dieses Feld liegt im Rechteck darum.';
+  }
+
+  @override
+  String exSlabsFullShade(Object cell, Object clue, int count) {
+    return '$cell ist geschwärzt: Das freie Gebiet der $count in $clue hat schon alle seine Felder.';
+  }
+
+  @override
+  String exSlabsFullKeep(Object cell, Object clue, int count) {
+    return '$cell bleibt frei: Das geschwärzte Gebiet der $count in $clue hat schon alle seine Felder.';
+  }
+
+  @override
+  String exSlabsGrowShade(Object cell, Object clue, int count) {
+    return '$cell ist geschwärzt: Dem geschwärzten Gebiet der $count in $clue fehlen Felder, und das ist sein einziger Ausgang.';
+  }
+
+  @override
+  String exSlabsGrowKeep(Object cell, Object clue, int count) {
+    return '$cell bleibt frei: Dem freien Gebiet der $count in $clue fehlen Felder, und das ist sein einziger Ausgang.';
+  }
+
+  @override
+  String exSlabsGrowRect(Object cell, Object area) {
+    return '$cell bleibt frei: Das freie Gebiet bei $area ist bisher ein Rechteck, muss also wachsen, und das ist sein einziger Ausgang.';
+  }
+
+  @override
+  String exSlabsJoinBigShade(Object cell, Object clue, int count) {
+    return '$cell ist geschwärzt: Bliebe es frei, würde das Gebiet um die $count in $clue größer als $count.';
+  }
+
+  @override
+  String exSlabsJoinBigKeep(Object cell, Object clue, int count) {
+    return '$cell bleibt frei: Geschwärzt würde das geschwärzte Gebiet um die $count in $clue größer als $count.';
+  }
+
+  @override
+  String exSlabsJoinMixShade(Object cell, Object a, Object b) {
+    return '$cell ist geschwärzt: Bliebe es frei, würde es die verschiedenen Zahlen in $a und $b zu einem Gebiet verbinden.';
+  }
+
+  @override
+  String exSlabsJoinMixKeep(Object cell, Object a, Object b) {
+    return '$cell bleibt frei: Geschwärzt würde es die verschiedenen Zahlen in $a und $b zu einem Gebiet verbinden.';
+  }
+
+  @override
+  String exSlabsCorner(Object cell, Object other) {
+    return '$cell bleibt frei: Geschwärzt ergäbe es ein geschwärztes Gebiet, dessen Rechteck das freie $other einschließt.';
+  }
+
+  @override
+  String exSlabsSmall(Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'zwei Felder',
+      one: 'ein Feld',
+    );
+    return '$cell ist geschwärzt: Sein Gebiet hat nur $_temp0, und das ist immer ein Rechteck – ein freies Gebiet darf keines sein.';
+  }
+
+  @override
+  String exSlabsNoRect(Object cell, int count) {
+    return '$cell bleibt frei: Hier passt kein Rechteck der Größe $count hin.';
+  }
+
+  @override
+  String exSlabsRectIn(Object cell, Object clue, int count) {
+    return '$cell ist geschwärzt: Jedes Rechteck, das zur geschwärzten $count in $clue passt, bedeckt es.';
+  }
+
+  @override
+  String exSlabsRectOut(Object cell, Object clue, int count) {
+    return '$cell bleibt frei: Jedes Rechteck, das zur geschwärzten $count in $clue passt, liegt daneben.';
+  }
+
+  @override
+  String exSlabsReach(Object cell, int count) {
+    return '$cell ist geschwärzt: Bliebe es frei, könnte sein Gebiet nicht die Größe $count erreichen.';
+  }
+
+  @override
+  String exSlabsReachAll(Object cell, Object clue, int count) {
+    return '$cell bleibt frei: Das freie Gebiet der $count in $clue braucht jedes Feld, das es noch erreichen kann.';
+  }
+
+  @override
+  String exSlabsFailMix(Object a, Object b) {
+    return 'Aber dann liegen die verschiedenen Zahlen in $a und $b in einem Gebiet.';
+  }
+
+  @override
+  String exSlabsFailBig(Object clue, int count) {
+    return 'Aber dann ist das Gebiet der $count in $clue größer als $count.';
+  }
+
+  @override
+  String exSlabsFailSize(Object clue, int count) {
+    return 'Aber dann ist das Gebiet der $count in $clue mit der falschen Zahl an Feldern abgeschlossen.';
+  }
+
+  @override
+  String exSlabsFailShape(Object area) {
+    return 'Aber dann ist das geschwärzte Gebiet bei $area kein Rechteck.';
+  }
+
+  @override
+  String exSlabsFailRect(Object area) {
+    return 'Aber dann ist das freie Gebiet bei $area als Rechteck abgeschlossen.';
+  }
+
+  @override
+  String exSlabsFailNoRect(Object clue, int count) {
+    return 'Aber dann passt kein Rechteck zur geschwärzten $count in $clue.';
+  }
+
+  @override
+  String exSlabsFailReach(Object clue, int count) {
+    return 'Aber dann kann das freie Gebiet der $count in $clue nicht die Größe $count erreichen.';
+  }
 }

@@ -7414,4 +7414,183 @@ class AppLocalizationsUk extends AppLocalizations {
   String exWedgesFailRing(Object wall, int count) {
     return 'Але тоді $count на $wall не виконати так, щоб усі чотири її кути були прямими.';
   }
+
+  @override
+  String get slabsName => 'Плити';
+
+  @override
+  String get slabsTagline => 'Зафарбуйте прямокутники, а решта областей прямокутниками бути не мають';
+
+  @override
+  String get slabsRules =>
+      '• Зафарбуйте деякі клітинки. Клітинки одного виду, що стикаються сторонами, утворюють область.\n• Кожна зафарбована область — прямокутник (або квадрат).\n• Жодна незафарбована область не є прямокутником.\n• Число показує, скільки клітинок у його області, зафарбованої чи ні. Клітинки з числами теж можна зафарбовувати.\n\nТоркніться клітинки, щоб перемикати: зафарбовано → крапка (ваша позначка «ця лишається незафарбованою») → порожньо. Правий клік перемикає назад. Довге натискання ставить крапки навколо кожного зафарбованого прямокутника, що вже має свою кількість клітинок. Крапки необов\'язкові: головоломку розв\'язано, щойно зафарбовано правильні клітинки.';
+
+  @override
+  String get tutSlabs1 =>
+      'Зафарбуйте деякі клітинки. Клітинки одного виду, що стикаються сторонами, утворюють область: кожна зафарбована область має бути прямокутником, а жодна незафарбована — ні. Число показує, скільки клітинок у його області. 1 і 2 завжди зафарбовані, бо одна клітинка чи дві поруч завжди утворюють прямокутник. Кожній 2 тут бракує ще однієї зафарбованої клітинки, але клітинка між ними об\'єднала б обидві в область із трьох, тож вона лишається незафарбованою. Завершіть поле.';
+
+  @override
+  String get tutSlabs2 =>
+      'Щойно область має всі клітинки, яких вимагає її число, кожна клітинка поруч із нею набуває іншого виду. Дві 2 поруч уже утворюють зафарбовану область із двох клітинок, тож клітинки навколо них лишаються незафарбованими. Торкніться клітинки двічі, щоб поставити крапку (вашу позначку, що вона незафарбована), а тоді завершіть поле.';
+
+  @override
+  String get tutSlabs3 =>
+      'Незафарбована область ніколи не може бути прямокутником. 1 зафарбована, тож кутові клітинки поруч із нею незафарбовані. Сам по собі кожен кут був би квадратом з однієї клітинки, тож він мусить рости через свій єдиний вихід — клітинку під ним. Завершіть поле.';
+
+  @override
+  String get tutSlabs4 =>
+      'Тепер справжнє поле. Почніть з 1 і 2 та пам\'ятайте, що зафарбована область заповнює весь прямокутник навколо себе: якщо три клітинки квадрата 2×2 зафарбовано, то й четверту теж.';
+
+  @override
+  String get tutSlabsS1 =>
+      'Зафарбованому числу потрібен прямокутник його розміру, що поміщається. Сім клітинок утворюють лише лінію із семи, а вона не вміщається в поле шириною чотири клітинки, тож 7 лишається незафарбованою. Так само перебирайте всі прямокутники, якими може бути зафарбоване число: клітинки, які вкривають усі вони, зафарбовано, а клітинки, що лежать поруч з усіма, — ні.';
+
+  @override
+  String get tutSlabsS2 =>
+      'Область незафарбованого числа може рости лише через клітинки, які не зафарбовано й де немає іншого числа, і лише так далеко, скільки клітинок їй ще бракує. Якщо вона не дотягується до досить клітинок, число зафарбоване; якщо дотягується рівно до стількох, усі вони незафарбовані. Скористайтеся обома ідеями на цьому полі.';
+
+  @override
+  String get tutSlabsS3 =>
+      'Складне поле. Коли застрягнете, зафарбуйте клітинку й простежте наслідки: якщо якась область вийде не того розміру чи форми або числу забракне місця, ця клітинка незафарбована.';
+
+  @override
+  String exSlabsSupposeKeep(Object cell) {
+    return 'Припустімо, $cell лишилася незафарбованою.';
+  }
+
+  @override
+  String exSlabsRefutedShade(Object cell) {
+    return '$cell незафарбована: якщо її зафарбувати, виникне суперечність.';
+  }
+
+  @override
+  String exSlabsRefutedKeep(Object cell) {
+    return '$cell зафарбовано: якщо лишити її незафарбованою, виникне суперечність.';
+  }
+
+  @override
+  String exSlabsBox(Object cell, Object area) {
+    return '$cell зафарбовано: зафарбована область у $area має бути прямокутником, а ця клітинка лежить у прямокутнику навколо неї.';
+  }
+
+  @override
+  String exSlabsFullShade(Object cell, Object clue, int count) {
+    return '$cell зафарбовано: незафарбована область числа $count у $clue уже має всі свої клітинки.';
+  }
+
+  @override
+  String exSlabsFullKeep(Object cell, Object clue, int count) {
+    return '$cell незафарбована: зафарбована область числа $count у $clue уже має всі свої клітинки.';
+  }
+
+  @override
+  String exSlabsGrowShade(Object cell, Object clue, int count) {
+    return '$cell зафарбовано: зафарбованій області числа $count у $clue бракує клітинок, і це її єдиний вихід.';
+  }
+
+  @override
+  String exSlabsGrowKeep(Object cell, Object clue, int count) {
+    return '$cell незафарбована: незафарбованій області числа $count у $clue бракує клітинок, і це її єдиний вихід.';
+  }
+
+  @override
+  String exSlabsGrowRect(Object cell, Object area) {
+    return '$cell незафарбована: незафарбована область у $area поки що прямокутник, тож мусить рости, і це її єдиний вихід.';
+  }
+
+  @override
+  String exSlabsJoinBigShade(Object cell, Object clue, int count) {
+    return '$cell зафарбовано: якби вона лишилася незафарбованою, область навколо числа $count у $clue стала б більшою за $count.';
+  }
+
+  @override
+  String exSlabsJoinBigKeep(Object cell, Object clue, int count) {
+    return '$cell незафарбована: якби її зафарбувати, зафарбована область навколо числа $count у $clue стала б більшою за $count.';
+  }
+
+  @override
+  String exSlabsJoinMixShade(Object cell, Object a, Object b) {
+    return '$cell зафарбовано: якби вона лишилася незафарбованою, різні числа в $a і $b опинилися б в одній області.';
+  }
+
+  @override
+  String exSlabsJoinMixKeep(Object cell, Object a, Object b) {
+    return '$cell незафарбована: якби її зафарбувати, різні числа в $a і $b опинилися б в одній області.';
+  }
+
+  @override
+  String exSlabsCorner(Object cell, Object other) {
+    return '$cell незафарбована: якби її зафарбувати, прямокутник зафарбованої області охопив би незафарбовану $other.';
+  }
+
+  @override
+  String exSlabsSmall(Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'лише дві клітинки',
+      one: 'лише одна клітинка',
+    );
+    return '$cell зафарбовано: у її області $_temp0, а це завжди прямокутник, тоді як незафарбована область не може ним бути.';
+  }
+
+  @override
+  String exSlabsNoRect(Object cell, int count) {
+    return '$cell незафарбована: сюди не вміщається жоден прямокутник розміром $count.';
+  }
+
+  @override
+  String exSlabsRectIn(Object cell, Object clue, int count) {
+    return '$cell зафарбовано: її вкриває кожен прямокутник, що підходить зафарбованому числу $count у $clue.';
+  }
+
+  @override
+  String exSlabsRectOut(Object cell, Object clue, int count) {
+    return '$cell незафарбована: кожен прямокутник, що підходить зафарбованому числу $count у $clue, лежить поруч із нею.';
+  }
+
+  @override
+  String exSlabsReach(Object cell, int count) {
+    return '$cell зафарбовано: якби вона лишилася незафарбованою, її область не набрала б $count.';
+  }
+
+  @override
+  String exSlabsReachAll(Object cell, Object clue, int count) {
+    return '$cell незафарбована: незафарбованій області числа $count у $clue потрібні всі клітинки, до яких вона ще може дотягтися.';
+  }
+
+  @override
+  String exSlabsFailMix(Object a, Object b) {
+    return 'Але тоді різні числа в $a і $b опиняються в одній області.';
+  }
+
+  @override
+  String exSlabsFailBig(Object clue, int count) {
+    return 'Але тоді область числа $count у $clue більша за $count.';
+  }
+
+  @override
+  String exSlabsFailSize(Object clue, int count) {
+    return 'Але тоді область числа $count у $clue замкнена з неправильною кількістю клітинок.';
+  }
+
+  @override
+  String exSlabsFailShape(Object area) {
+    return 'Але тоді зафарбована область у $area не прямокутник.';
+  }
+
+  @override
+  String exSlabsFailRect(Object area) {
+    return 'Але тоді незафарбована область у $area замкнена як прямокутник.';
+  }
+
+  @override
+  String exSlabsFailNoRect(Object clue, int count) {
+    return 'Але тоді зафарбованому числу $count у $clue не підходить жоден прямокутник.';
+  }
+
+  @override
+  String exSlabsFailReach(Object clue, int count) {
+    return 'Але тоді незафарбована область числа $count у $clue не може набрати $count.';
+  }
 }
