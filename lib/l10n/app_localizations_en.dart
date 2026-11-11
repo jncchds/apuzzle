@@ -7140,4 +7140,97 @@ class AppLocalizationsEn extends AppLocalizations {
   String exParcelsFailEnd(Object cells) {
     return 'But then a border would just end where $cells meet.';
   }
+
+  @override
+  String get tagDiagonal => 'diagonal, diagonals, slash, slanted lines';
+
+  @override
+  String get slantName => 'Twigs';
+
+  @override
+  String get slantTagline => 'Diagonals that never close a loop';
+
+  @override
+  String get slantRules =>
+      '• Draw a diagonal in every cell, from corner to corner, either way.\n• A number on a corner says how many diagonals touch it (0 to 4). Corners on the edge of the board count too.\n• The diagonals never close a loop.\n\nTap a cell to cycle empty → \\ → /. Right-click cycles back. Slide across cells to give them all the same diagonal.';
+
+  @override
+  String get tutSlant1 =>
+      'Draw a diagonal in every cell. A number on a corner counts the diagonals that touch it. This 4 needs all four cells around it to point at it. Tap a cell to cycle through the two diagonals.';
+
+  @override
+  String get tutSlant2 =>
+      'A 0 means no diagonal touches its corner, so every cell around it slants the other way. On the edge of the board a corner has only two cells, and on the board\'s own corners just one.';
+
+  @override
+  String get tutSlant3 =>
+      'The diagonals never close a loop. Three sides of a diamond are already drawn, so the last cell has to slant the other way.';
+
+  @override
+  String get tutSlant4 =>
+      'Now a real board. Start from the 0s, the 4s and the numbers on the edge, and keep an eye out for loops.';
+
+  @override
+  String get tutSlantS1 =>
+      'Two numbers side by side share two cells, and each of those touches exactly one of them. So a 1 beside a 1 gets no diagonal from its other cells, and a 3 beside a 3 gets all of them. On this board, read neighbouring numbers together.';
+
+  @override
+  String get tutSlantS2 =>
+      'When nothing else helps, try a diagonal and follow where it leads. If that ends in a loop or a number that can\'t be met, the cell slants the other way.';
+
+  @override
+  String exSlantSuppose(Object cell, Object diag) {
+    return 'Suppose $cell had $diag.';
+  }
+
+  @override
+  String exSlantRefuted(Object cell, Object diag) {
+    return '$cell gets $diag: the other diagonal leads to a contradiction.';
+  }
+
+  @override
+  String exSlantDone(Object cell, Object diag, Object corner, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'the $count at $corner already has all its diagonals',
+      zero: 'the 0 at $corner takes no diagonal',
+    );
+    return '$cell gets $diag: $_temp0.';
+  }
+
+  @override
+  String exSlantNeed(Object cell, Object diag, Object corner, int count) {
+    return '$cell gets $diag: the $count at $corner needs every diagonal it can still get.';
+  }
+
+  @override
+  String exSlantLoop(Object cell, Object diag, Object cells) {
+    return '$cell gets $diag: the other diagonal would close a loop with $cells.';
+  }
+
+  @override
+  String exSlantPair(Object cell, Object diag, Object first, Object second) {
+    return '$cell gets $diag: every way to meet the numbers at $first and $second together needs it.';
+  }
+
+  @override
+  String exSlantFailClue(Object corner, int count) {
+    return 'But then the $count at $corner can\'t be met.';
+  }
+
+  @override
+  String exSlantFailLoop(Object cells) {
+    return 'But then the diagonals close a loop: $cells.';
+  }
+
+  @override
+  String exSlantFailStuck(Object cell) {
+    return 'But then $cell would close a loop either way.';
+  }
+
+  @override
+  String exSlantFailPair(Object first, Object second) {
+    return 'But then the numbers at $first and $second can\'t both be met.';
+  }
 }

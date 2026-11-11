@@ -239,6 +239,17 @@ class ExplainText extends StatelessWidget {
                             size: fontSize,
                             color: theme.colorScheme.tertiary,
                           ),
+                        if (chip.corner case final corner?)
+                          Icon(
+                            const [
+                              Icons.north_west_rounded,
+                              Icons.north_east_rounded,
+                              Icons.south_west_rounded,
+                              Icons.south_east_rounded,
+                            ][corner],
+                            size: fontSize,
+                            color: theme.colorScheme.tertiary,
+                          ),
                       ],
                     ),
                   ),

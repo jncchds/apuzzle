@@ -9014,6 +9014,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then a border would just end where {cells} meet.'**
   String exParcelsFailEnd(Object cells);
+
+  /// No description provided for @tagDiagonal.
+  ///
+  /// In en, this message translates to:
+  /// **'diagonal, diagonals, slash, slanted lines'**
+  String get tagDiagonal;
+
+  /// No description provided for @slantName.
+  ///
+  /// In en, this message translates to:
+  /// **'Twigs'**
+  String get slantName;
+
+  /// No description provided for @slantTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Diagonals that never close a loop'**
+  String get slantTagline;
+
+  /// No description provided for @slantRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Draw a diagonal in every cell, from corner to corner, either way.\n• A number on a corner says how many diagonals touch it (0 to 4). Corners on the edge of the board count too.\n• The diagonals never close a loop.\n\nTap a cell to cycle empty → \\ → /. Right-click cycles back. Slide across cells to give them all the same diagonal.'**
+  String get slantRules;
+
+  /// No description provided for @tutSlant1.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw a diagonal in every cell. A number on a corner counts the diagonals that touch it. This 4 needs all four cells around it to point at it. Tap a cell to cycle through the two diagonals.'**
+  String get tutSlant1;
+
+  /// No description provided for @tutSlant2.
+  ///
+  /// In en, this message translates to:
+  /// **'A 0 means no diagonal touches its corner, so every cell around it slants the other way. On the edge of the board a corner has only two cells, and on the board\'s own corners just one.'**
+  String get tutSlant2;
+
+  /// No description provided for @tutSlant3.
+  ///
+  /// In en, this message translates to:
+  /// **'The diagonals never close a loop. Three sides of a diamond are already drawn, so the last cell has to slant the other way.'**
+  String get tutSlant3;
+
+  /// No description provided for @tutSlant4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start from the 0s, the 4s and the numbers on the edge, and keep an eye out for loops.'**
+  String get tutSlant4;
+
+  /// No description provided for @tutSlantS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Two numbers side by side share two cells, and each of those touches exactly one of them. So a 1 beside a 1 gets no diagonal from its other cells, and a 3 beside a 3 gets all of them. On this board, read neighbouring numbers together.'**
+  String get tutSlantS1;
+
+  /// No description provided for @tutSlantS2.
+  ///
+  /// In en, this message translates to:
+  /// **'When nothing else helps, try a diagonal and follow where it leads. If that ends in a loop or a number that can\'t be met, the cell slants the other way.'**
+  String get tutSlantS2;
+
+  /// No description provided for @exSlantSuppose.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} had {diag}.'**
+  String exSlantSuppose(Object cell, Object diag);
+
+  /// No description provided for @exSlantRefuted.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets {diag}: the other diagonal leads to a contradiction.'**
+  String exSlantRefuted(Object cell, Object diag);
+
+  /// No description provided for @exSlantDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets {diag}: {count, plural, =0{the 0 at {corner} takes no diagonal} other{the {count} at {corner} already has all its diagonals}}.'**
+  String exSlantDone(Object cell, Object diag, Object corner, int count);
+
+  /// No description provided for @exSlantNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets {diag}: the {count} at {corner} needs every diagonal it can still get.'**
+  String exSlantNeed(Object cell, Object diag, Object corner, int count);
+
+  /// No description provided for @exSlantLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets {diag}: the other diagonal would close a loop with {cells}.'**
+  String exSlantLoop(Object cell, Object diag, Object cells);
+
+  /// No description provided for @exSlantPair.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets {diag}: every way to meet the numbers at {first} and {second} together needs it.'**
+  String exSlantPair(Object cell, Object diag, Object first, Object second);
+
+  /// No description provided for @exSlantFailClue.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the {count} at {corner} can\'t be met.'**
+  String exSlantFailClue(Object corner, int count);
+
+  /// No description provided for @exSlantFailLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the diagonals close a loop: {cells}.'**
+  String exSlantFailLoop(Object cells);
+
+  /// No description provided for @exSlantFailStuck.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cell} would close a loop either way.'**
+  String exSlantFailStuck(Object cell);
+
+  /// No description provided for @exSlantFailPair.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the numbers at {first} and {second} can\'t both be met.'**
+  String exSlantFailPair(Object first, Object second);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -7172,4 +7172,96 @@ class AppLocalizationsPl extends AppLocalizations {
   String exParcelsFailEnd(Object cells) {
     return 'Ale wtedy granica urwałaby się tam, gdzie stykają się $cells.';
   }
+
+  @override
+  String get tagDiagonal => 'przekątna, przekątne, ukośnik, ukośne linie';
+
+  @override
+  String get slantName => 'Gałązki';
+
+  @override
+  String get slantTagline => 'Przekątne, które nigdy nie tworzą pętli';
+
+  @override
+  String get slantRules =>
+      '• Narysuj przekątną w każdej komórce, od rogu do rogu, w dowolną stronę.\n• Liczba w rogu mówi, ile przekątnych go dotyka (od 0 do 4). Rogi na brzegu planszy też się liczą.\n• Przekątne nigdy nie tworzą zamkniętej pętli.\n\nDotknij komórki, aby przełączać: puste → \\ → /. Prawy klik przełącza wstecz. Przesuń po komórkach, aby dać im wszystkim tę samą przekątną.';
+
+  @override
+  String get tutSlant1 =>
+      'Narysuj przekątną w każdej komórce. Liczba w rogu liczy przekątne, które go dotykają. Ta 4 potrzebuje, by wszystkie cztery komórki wokół niej na nią wskazywały. Dotykaj komórki, aby przełączać obie przekątne.';
+
+  @override
+  String get tutSlant2 =>
+      '0 oznacza, że żadna przekątna nie dotyka jego rogu, więc każda komórka wokół jest pochylona w drugą stronę. Na brzegu planszy róg ma tylko dwie komórki, a w rogach samej planszy jedną.';
+
+  @override
+  String get tutSlant3 =>
+      'Przekątne nigdy nie tworzą pętli. Trzy boki rombu są już narysowane, więc ostatnia komórka musi być pochylona w drugą stronę.';
+
+  @override
+  String get tutSlant4 => 'Teraz prawdziwa plansza. Zacznij od zer, czwórek i liczb na brzegu i uważaj na pętle.';
+
+  @override
+  String get tutSlantS1 =>
+      'Dwie sąsiednie liczby mają dwie wspólne komórki, a każda z nich dotyka dokładnie jednej z liczb. Więc 1 obok 1 nie dostaje żadnej przekątnej od pozostałych komórek, a 3 obok 3 dostaje wszystkie. Na tej planszy czytaj sąsiednie liczby razem.';
+
+  @override
+  String get tutSlantS2 =>
+      'Gdy nic innego nie pomaga, spróbuj przekątnej i zobacz, dokąd prowadzi. Jeśli kończy się pętlą albo liczbą, której nie da się spełnić, komórka jest pochylona w drugą stronę.';
+
+  @override
+  String exSlantSuppose(Object cell, Object diag) {
+    return 'Załóżmy, że $cell ma $diag.';
+  }
+
+  @override
+  String exSlantRefuted(Object cell, Object diag) {
+    return '$cell dostaje $diag: druga przekątna prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exSlantDone(Object cell, Object diag, Object corner, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count w $corner ma już wszystkie swoje przekątne',
+      zero: '0 w $corner nie bierze żadnej przekątnej',
+    );
+    return '$cell dostaje $diag: $_temp0.';
+  }
+
+  @override
+  String exSlantNeed(Object cell, Object diag, Object corner, int count) {
+    return '$cell dostaje $diag: $count w $corner potrzebuje każdej przekątnej, jaką jeszcze może dostać.';
+  }
+
+  @override
+  String exSlantLoop(Object cell, Object diag, Object cells) {
+    return '$cell dostaje $diag: druga przekątna zamknęłaby pętlę z $cells.';
+  }
+
+  @override
+  String exSlantPair(Object cell, Object diag, Object first, Object second) {
+    return '$cell dostaje $diag: wymaga tego każdy sposób spełnienia liczb w $first i $second naraz.';
+  }
+
+  @override
+  String exSlantFailClue(Object corner, int count) {
+    return 'Ale wtedy $count w $corner nie da się spełnić.';
+  }
+
+  @override
+  String exSlantFailLoop(Object cells) {
+    return 'Ale wtedy przekątne zamykają pętlę: $cells.';
+  }
+
+  @override
+  String exSlantFailStuck(Object cell) {
+    return 'Ale wtedy $cell zamknęłaby pętlę przy każdej przekątnej.';
+  }
+
+  @override
+  String exSlantFailPair(Object first, Object second) {
+    return 'Ale wtedy liczb w $first i $second nie da się spełnić naraz.';
+  }
 }

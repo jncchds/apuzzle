@@ -420,6 +420,10 @@ String areaTok(Pos from, Pos to) => '⟦a:${from.r}:${from.c}:${to.r}:${to.c}⟧
 /// "C4" with an arrow to that side.
 String sideTok(Pos cell, int dir) => '⟦s:${cell.r}:${cell.c}:$dir⟧';
 
+/// A corner of a cell ([corner]: 0 top-left, 1 top-right, 2 bottom-left, 3
+/// bottom-right), shown as "C4" with a diagonal arrow to that corner.
+String cornerTok(Pos cell, int corner) => '⟦o:${cell.r}:${cell.c}:$corner⟧';
+
 /// The link between two neighbouring cells' centres, shown as "C3–C4".
 String linkTok(Pos a, Pos b) => '⟦j:${a.r}:${a.c}:${b.r}:${b.c}⟧';
 
@@ -442,7 +446,7 @@ class ExplainChip extends ExplainPart {
   const ExplainChip(this.kind, this.args);
 
   /// c (cell), r (row), k (column), v (value), a (area), l (cell list),
-  /// s (cell side), j (link between cells).
+  /// s (cell side), o (cell corner), j (link between cells).
   final String kind;
   final List<int> args;
 
@@ -452,7 +456,7 @@ class ExplainChip extends ExplainPart {
     'k' => colName(args[0]),
     'a' => '${cellName(Pos(args[0], args[1]))}–${cellName(Pos(args[2], args[3]))}',
     'l' => [for (var k = 0; k + 1 < args.length; k += 2) cellName(Pos(args[k], args[k + 1]))].join(' '),
-    's' => cellName(Pos(args[0], args[1])),
+    's' || 'o' => cellName(Pos(args[0], args[1])),
     'j' => '${cellName(Pos(args[0], args[1]))}–${cellName(Pos(args[2], args[3]))}',
     _ => '',
   };
@@ -460,6 +464,10 @@ class ExplainChip extends ExplainPart {
   /// For a cell side: which one (0 top, 1 bottom, 2 left, 3 right), drawn
   /// as an arrow after the label.
   int? get side => kind == 's' ? args[2] : null;
+
+  /// For a cell corner: which one (0 top-left, 1 top-right, 2 bottom-left,
+  /// 3 bottom-right), drawn as a diagonal arrow after the label.
+  int? get corner => kind == 'o' ? args[2] : null;
 
   /// The cells the chip stands for.
   Set<Pos> cells(GridSize size) => switch (kind) {
@@ -471,7 +479,7 @@ class ExplainChip extends ExplainPart {
         for (var c = args[1]; c <= args[3]; c++) Pos(r, c),
     },
     'l' => {for (var k = 0; k + 1 < args.length; k += 2) Pos(args[k], args[k + 1])},
-    's' => {Pos(args[0], args[1])},
+    's' || 'o' => {Pos(args[0], args[1])},
     'j' => {Pos(args[0], args[1]), Pos(args[2], args[3])},
     _ => const {},
   };

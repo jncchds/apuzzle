@@ -53,6 +53,7 @@ import '../puzzles/signs/signs_type.dart';
 import '../puzzles/skyline/skyline_type.dart';
 import '../puzzles/snake/snake_type.dart';
 import '../puzzles/solo/solo_type.dart';
+import '../puzzles/slant/slant_type.dart';
 import '../puzzles/stars/stars_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
 import '../puzzles/tally/tally_type.dart';
@@ -123,6 +124,7 @@ const List<PuzzleType> puzzleTypes = [
   IslandsType(),
   LampsType(),
   FenceType(),
+  SlantType(),
   PearlsType(),
   RailsType(),
   ArrowsType(),
@@ -247,6 +249,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('plumbing', [PipesType(), ChannelType()]),
       PuzzleFamily('atoms', [AtomsType()]),
       PuzzleFamily('fence', [FenceType()]),
+      PuzzleFamily('slant', [SlantType()]),
       PuzzleFamily('pearls', [PearlsType()]),
       PuzzleFamily('rails', [RailsType()]),
       PuzzleFamily('arrows', [ArrowsType()]),

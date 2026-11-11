@@ -7107,4 +7107,97 @@ class AppLocalizationsDe extends AppLocalizations {
   String exParcelsFailEnd(Object cells) {
     return 'Dann würde aber eine Grenze einfach dort enden, wo $cells zusammenstoßen.';
   }
+
+  @override
+  String get tagDiagonal => 'Diagonale, Diagonalen, Schrägstrich, schräge Linien';
+
+  @override
+  String get slantName => 'Zweige';
+
+  @override
+  String get slantTagline => 'Diagonalen, die sich nie zur Schleife schließen';
+
+  @override
+  String get slantRules =>
+      '• Zeichne in jedes Feld eine Diagonale, von Ecke zu Ecke, in eine der beiden Richtungen.\n• Eine Zahl auf einer Ecke sagt, wie viele Diagonalen sie berühren (0 bis 4). Ecken am Rand des Bretts zählen auch.\n• Die Diagonalen schließen sich nie zu einer Schleife.\n\nTippe auf ein Feld, um zu wechseln: leer → \\ → /. Rechtsklick wechselt zurück. Wische über Felder, um ihnen allen dieselbe Diagonale zu geben.';
+
+  @override
+  String get tutSlant1 =>
+      'Zeichne in jedes Feld eine Diagonale. Eine Zahl auf einer Ecke zählt die Diagonalen, die sie berühren. Diese 4 braucht alle vier Felder um sie herum, die auf sie zeigen. Tippe auf ein Feld, um zwischen den beiden Diagonalen zu wechseln.';
+
+  @override
+  String get tutSlant2 =>
+      'Eine 0 heißt, dass keine Diagonale ihre Ecke berührt, also neigt sich jedes Feld um sie herum in die andere Richtung. Am Rand des Bretts hat eine Ecke nur zwei Felder, in den Ecken des Bretts selbst nur eins.';
+
+  @override
+  String get tutSlant3 =>
+      'Die Diagonalen schließen sich nie zu einer Schleife. Drei Seiten einer Raute sind schon gezeichnet, also muss sich das letzte Feld in die andere Richtung neigen.';
+
+  @override
+  String get tutSlant4 =>
+      'Jetzt ein echtes Brett. Fang bei den Nullen, den Vieren und den Zahlen am Rand an und achte auf Schleifen.';
+
+  @override
+  String get tutSlantS1 =>
+      'Zwei Zahlen nebeneinander teilen sich zwei Felder, und jedes davon berührt genau eine der beiden. Eine 1 neben einer 1 bekommt also von ihren anderen Feldern keine Diagonale, eine 3 neben einer 3 bekommt sie alle. Lies auf diesem Brett benachbarte Zahlen zusammen.';
+
+  @override
+  String get tutSlantS2 =>
+      'Wenn nichts anderes hilft, probiere eine Diagonale und verfolge, wohin sie führt. Endet das in einer Schleife oder einer Zahl, die sich nicht erfüllen lässt, neigt sich das Feld in die andere Richtung.';
+
+  @override
+  String exSlantSuppose(Object cell, Object diag) {
+    return 'Angenommen, $cell hätte $diag.';
+  }
+
+  @override
+  String exSlantRefuted(Object cell, Object diag) {
+    return '$cell bekommt $diag: die andere Diagonale führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exSlantDone(Object cell, Object diag, Object corner, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'die $count auf $corner hat schon alle ihre Diagonalen',
+      zero: 'die 0 auf $corner nimmt keine Diagonale',
+    );
+    return '$cell bekommt $diag: $_temp0.';
+  }
+
+  @override
+  String exSlantNeed(Object cell, Object diag, Object corner, int count) {
+    return '$cell bekommt $diag: die $count auf $corner braucht jede Diagonale, die sie noch bekommen kann.';
+  }
+
+  @override
+  String exSlantLoop(Object cell, Object diag, Object cells) {
+    return '$cell bekommt $diag: die andere Diagonale würde mit $cells eine Schleife schließen.';
+  }
+
+  @override
+  String exSlantPair(Object cell, Object diag, Object first, Object second) {
+    return '$cell bekommt $diag: jede Art, die Zahlen auf $first und $second zusammen zu erfüllen, braucht sie.';
+  }
+
+  @override
+  String exSlantFailClue(Object corner, int count) {
+    return 'Dann ließe sich die $count auf $corner aber nicht erfüllen.';
+  }
+
+  @override
+  String exSlantFailLoop(Object cells) {
+    return 'Dann schließen die Diagonalen aber eine Schleife: $cells.';
+  }
+
+  @override
+  String exSlantFailStuck(Object cell) {
+    return 'Dann würde $cell aber mit jeder Diagonale eine Schleife schließen.';
+  }
+
+  @override
+  String exSlantFailPair(Object first, Object second) {
+    return 'Dann ließen sich die Zahlen auf $first und $second aber nicht beide erfüllen.';
+  }
 }

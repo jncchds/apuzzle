@@ -32,6 +32,7 @@ enum GameTag {
   charge,
   temperature,
   switches,
+  diagonal,
 }
 
 String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
@@ -62,6 +63,7 @@ String tagLabel(AppLocalizations l, GameTag tag) => switch (tag) {
   GameTag.charge => l.tagCharge,
   GameTag.temperature => l.tagTemperature,
   GameTag.switches => l.tagSwitch,
+  GameTag.diagonal => l.tagDiagonal,
 };
 
 /// Tags of every type, by id.
@@ -123,6 +125,7 @@ const Map<String, List<GameTag>> gameTags = {
   'islands': [GameTag.shade],
   'lamps': [GameTag.place],
   'fence': [GameTag.loop],
+  'slant': [GameTag.diagonal, GameTag.numbers, GameTag.loop],
   'pearls': [GameTag.loop],
   'rails': [GameTag.path, GameTag.loop],
   'arrows': [GameTag.shade, GameTag.loop],
@@ -252,6 +255,7 @@ const Map<String, List<String>> gameAliases = {
   'islands': ['Nurikabe'],
   'lamps': ['Light Up', 'Akari'],
   'fence': ['Slitherlink', 'Loopy', 'Fences'],
+  'slant': ['Gokigen Naname', 'Gokigen', 'Slant', 'Slants'],
   'pearls': ['Masyu'],
   'rails': ['Train Tracks', 'Tracks'],
   'arrows': ['Yajilin'],

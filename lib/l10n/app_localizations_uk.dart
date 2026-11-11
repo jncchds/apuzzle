@@ -7202,4 +7202,97 @@ class AppLocalizationsUk extends AppLocalizations {
   String exParcelsFailEnd(Object cells) {
     return 'Але тоді межа обірвалася б там, де сходяться $cells.';
   }
+
+  @override
+  String get tagDiagonal => 'діагональ, діагоналі, скісна риска, похилі лінії';
+
+  @override
+  String get slantName => 'Гілочки';
+
+  @override
+  String get slantTagline => 'Діагоналі, що ніколи не замикаються в петлю';
+
+  @override
+  String get slantRules =>
+      '• Проведіть діагональ у кожній клітинці, від кута до кута, у будь-який бік.\n• Число на куті показує, скільки діагоналей його торкається (від 0 до 4). Кути на краю поля теж рахуються.\n• Діагоналі ніколи не замикаються в петлю.\n\nТоркніться клітинки, щоб перемикати: порожньо → \\ → /. Правий клік перемикає назад. Проведіть по клітинках, щоб дати їм усім ту саму діагональ.';
+
+  @override
+  String get tutSlant1 =>
+      'Проведіть діагональ у кожній клітинці. Число на куті рахує діагоналі, що його торкаються. Цій 4 потрібно, щоб усі чотири клітинки навколо вказували на неї. Торкайтеся клітинки, щоб перемикати дві діагоналі.';
+
+  @override
+  String get tutSlant2 =>
+      '0 означає, що жодна діагональ не торкається його кута, тож кожна клітинка навколо нахилена в інший бік. На краю поля в кута лише дві клітинки, а в кутах самого поля — одна.';
+
+  @override
+  String get tutSlant3 =>
+      'Діагоналі ніколи не замикаються в петлю. Три сторони ромба вже проведено, тож остання клітинка мусить бути нахилена в інший бік.';
+
+  @override
+  String get tutSlant4 =>
+      'Тепер справжнє поле. Почніть із нулів, четвірок і чисел на краю, і стежте, щоб не утворилося петлі.';
+
+  @override
+  String get tutSlantS1 =>
+      'Два сусідні числа мають дві спільні клітинки, і кожна з них торкається рівно одного з них. Тож 1 поруч з 1 не отримує жодної діагоналі від інших своїх клітинок, а 3 поруч з 3 отримує всі. На цьому полі читайте сусідні числа разом.';
+
+  @override
+  String get tutSlantS2 =>
+      'Коли ніщо інше не допомагає, спробуйте діагональ і простежте, куди вона веде. Якщо це закінчується петлею або числом, яке не виконати, клітинка нахилена в інший бік.';
+
+  @override
+  String exSlantSuppose(Object cell, Object diag) {
+    return 'Припустімо, що в $cell $diag.';
+  }
+
+  @override
+  String exSlantRefuted(Object cell, Object diag) {
+    return '$cell отримує $diag: інша діагональ веде до суперечності.';
+  }
+
+  @override
+  String exSlantDone(Object cell, Object diag, Object corner, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count на $corner вже має всі свої діагоналі',
+      zero: '0 на $corner не бере жодної діагоналі',
+    );
+    return '$cell отримує $diag: $_temp0.';
+  }
+
+  @override
+  String exSlantNeed(Object cell, Object diag, Object corner, int count) {
+    return '$cell отримує $diag: $count на $corner потрібна кожна діагональ, яку ще можна отримати.';
+  }
+
+  @override
+  String exSlantLoop(Object cell, Object diag, Object cells) {
+    return '$cell отримує $diag: інша діагональ замкнула б петлю з $cells.';
+  }
+
+  @override
+  String exSlantPair(Object cell, Object diag, Object first, Object second) {
+    return '$cell отримує $diag: це потрібно для кожного способу виконати числа на $first і $second разом.';
+  }
+
+  @override
+  String exSlantFailClue(Object corner, int count) {
+    return 'Але тоді $count на $corner не виконати.';
+  }
+
+  @override
+  String exSlantFailLoop(Object cells) {
+    return 'Але тоді діагоналі замикають петлю: $cells.';
+  }
+
+  @override
+  String exSlantFailStuck(Object cell) {
+    return 'Але тоді $cell замкнула б петлю за будь-якої діагоналі.';
+  }
+
+  @override
+  String exSlantFailPair(Object first, Object second) {
+    return 'Але тоді числа на $first і $second не виконати обидва.';
+  }
 }

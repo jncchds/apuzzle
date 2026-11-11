@@ -1,6 +1,7 @@
 # Release notes
 
 ## 0.13.0 - 2026-11-11
+- New game: Twigs. Draw a diagonal in every cell, one way or the other; a number on a corner tells how many diagonals touch it, and the diagonals never close a loop. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Parcels. Draw borders to split the grid into regions that all have the same size; a number tells how many sides of its cell are borders, and the outline of the grid counts. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Stars. Place two stars in every row, every column and every colored region, and no two stars may touch, not even diagonally. Crowns and Stars share a family page, Crowns. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - Waymarks: when you pick a cell, the cells that can come right after it and the cells that can come right before it are striped in opposite directions (crossed for cells that can go either way), instead of small dots that a downward arrow could hide

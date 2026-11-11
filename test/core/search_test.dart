@@ -57,6 +57,7 @@ void main() {
     expect(alt('takuzu'), ['mambo']);
     expect(alt('binairo'), ['mambo']);
     expect(alt('star battle'), ['stars']);
+    expect(alt('gokigen'), ['slant']);
     expect(alt('queens'), ['kings']);
     expect(alt('sumplete'), ['tally']);
     expect(alt('hitori'), ['solo']);
