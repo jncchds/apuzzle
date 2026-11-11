@@ -7562,4 +7562,162 @@ class AppLocalizationsPl extends AppLocalizations {
   String exSlabsFailReach(Object clue, int count) {
     return 'Ale wtedy niezamalowany obszar liczby $count w $clue nie osiąga wielkości $count.';
   }
+
+  @override
+  String get gladesName => 'Polany';
+
+  @override
+  String get gladesTagline => 'Odsłoń prostokąty z liczbami, połączone narożnikami';
+
+  @override
+  String get gladesRules =>
+      '• Zamaluj niektóre pola. Niezamalowane pola stykające się bokami tworzą obszar.\n• Każdy obszar jest prostokątem (lub kwadratem) z dokładnie jedną liczbą: liczbą jego pól.\n• Żaden blok 2×2 nie jest cały zamalowany.\n• Wszystkie obszary tworzą jedną sieć, w której liczy się też styk narożnikami. Zamalowane pola nie muszą być połączone.\n\nDotknij pola, aby przełączać: zamalowane → kropka (twoja notatka „to pole zostaje niezamalowane”) → puste. Prawy przycisk przełącza wstecz. Długie naciśnięcie stawia kropki w każdym obszarze, który ma już swoją liczbę pól, i w ostatnim polu każdego bloku 2×2 z trzema zamalowanymi. Kropki są opcjonalne: łamigłówka jest rozwiązana, gdy zamalowane są właściwe pola.';
+
+  @override
+  String get tutGlades1 =>
+      'Zamaluj niektóre pola tak, by każdy niezamalowany obszar (pola stykające się bokami) był prostokątem z dokładnie jedną liczbą, która mówi, ile ma pól. 1 to jedno pole, więc każde pole obok niej jest zamalowane. Dwójce brakuje jeszcze jednego pola i może urosnąć tylko w jedną stronę. Rozwiąż planszę.';
+
+  @override
+  String get tutGlades2 =>
+      'Żaden blok 2×2 nie może być cały zamalowany. Gdy trzy pola bloku są zamalowane, czwarte zostaje niezamalowane i musi należeć do prostokąta jakiejś liczby. Znajdź tak obszar czwórki na dole, a potem rozwiąż planszę.';
+
+  @override
+  String get tutGlades3 =>
+      'Wszystkie niezamalowane obszary muszą tworzyć jedną sieć, w której liczy się też styk narożnikami. Każda 1 w rogu jest z boków otoczona zamalowanymi polami, więc do reszty dotrze tylko przez pole na skos od niej: te pola zostają niezamalowane. Rozwiąż planszę.';
+
+  @override
+  String get tutGlades4 =>
+      'Obszar zawsze wypełnia prostokąt wokół siebie. Dlatego pole obok obszaru jest zamalowane, jeśli bez tego ten prostokąt zawierałby dwie liczby, więcej pól, niż mówi liczba, albo zamalowane pole. Pole między 3 a 1 połączyłoby obie liczby w jeden obszar, więc jest zamalowane. Rozwiąż planszę.';
+
+  @override
+  String get tutGlades5 =>
+      'Teraz prawdziwa plansza. Zacznij od jedynek, zostawiaj niezamalowane czwarte pole każdego bloku 2×2 z trzema zamalowanymi i pamiętaj, że każdy obszar musi dotrzeć do pozostałych, choćby przez narożnik.';
+
+  @override
+  String get tutGladesS1 =>
+      'Obszar liczby to jeden prostokąt o tylu polach. Wypróbuj każdy prostokąt, którym może być: nie może obejmować zamalowanego pola ani innej liczby, ani stykać się z zewnątrz z niezamalowanym polem. Pola, które pokrywa każdy z nich, zostają niezamalowane, a pola obok każdego z nich są zamalowane. Tak umieść czwórkę.';
+
+  @override
+  String get tutGladesS2 =>
+      'Dwa kolejne pomysły na tę planszę. Pole, do którego nie sięga prostokąt żadnej liczby, jest zamalowane. A jeśli zamalowanie pola rozcięłoby niezamalowane pola na części, które nie mogą się spotkać nawet przez narożniki, zostaje ono niezamalowane.';
+
+  @override
+  String get tutGladesS3 =>
+      'Trudna plansza. Gdy utkniesz, zamaluj pole i śledź skutki: jeśli jakiś blok 2×2 zostanie cały zamalowany, obszar wyjdzie złej wielkości lub kształtu albo niezamalowane pola się rozpadną, to pole zostaje niezamalowane.';
+
+  @override
+  String exGladesPool(Object cell, Object area) {
+    return '$cell zostaje niezamalowane: reszta bloku 2×2 w $area jest zamalowana, a żaden blok nie może być cały zamalowany.';
+  }
+
+  @override
+  String exGladesBox(Object cell, Object area) {
+    return '$cell zostaje niezamalowane: niezamalowany obszar w $area musi być prostokątem, a to pole leży w prostokącie wokół niego.';
+  }
+
+  @override
+  String exGladesFull(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'wszystkie swoje pola',
+      one: 'swoje jedno pole',
+    );
+    return '$cell jest zamalowane: obszar liczby $count w $clue ma już $_temp0.';
+  }
+
+  @override
+  String exGladesGrow(Object cell, Object clue, int count) {
+    return '$cell zostaje niezamalowane: obszarowi liczby $count w $clue brakuje pól, a to jego jedyne wyjście.';
+  }
+
+  @override
+  String exGladesGrowNone(Object cell, Object area) {
+    return '$cell zostaje niezamalowane: niezamalowany obszar w $area nie ma jeszcze liczby, a to jego jedyne wyjście.';
+  }
+
+  @override
+  String exGladesJoinMix(Object cell, Object a, Object b) {
+    return '$cell jest zamalowane: gdyby zostało niezamalowane, jego obszar wypełniłby prostokąt z obiema liczbami w $a i $b.';
+  }
+
+  @override
+  String exGladesJoinBig(Object cell, Object clue, int count) {
+    return '$cell jest zamalowane: gdyby zostało niezamalowane, obszar liczby $count w $clue wypełniłby prostokąt większy niż $count pól.';
+  }
+
+  @override
+  String exGladesCorner(Object cell, Object other) {
+    return '$cell jest zamalowane: gdyby zostało niezamalowane, jego obszar wypełniłby prostokąt obejmujący zamalowane $other.';
+  }
+
+  @override
+  String exGladesIsolated(Object cell) {
+    return '$cell jest zamalowane: zamalowane pola odcinają je od liczb, nawet przez narożniki.';
+  }
+
+  @override
+  String exGladesEscape(Object cell, Object area) {
+    return '$cell zostaje niezamalowane: to jedyna droga, przez bok lub narożnik, którą niezamalowane pola przy $area dotrą do reszty.';
+  }
+
+  @override
+  String exGladesCut(Object cell) {
+    return '$cell zostaje niezamalowane: jego zamalowanie rozcięłoby niezamalowane pola na części, które nie spotkają się nawet przez narożniki.';
+  }
+
+  @override
+  String exGladesRectIn(Object cell, Object clue, int count) {
+    return '$cell zostaje niezamalowane: pokrywa je każdy prostokąt o $count polach pasujący do liczby $count w $clue.';
+  }
+
+  @override
+  String exGladesRectOut(Object cell, Object clue, int count) {
+    return '$cell jest zamalowane: każdy prostokąt pasujący do liczby $count w $clue leży obok niego.';
+  }
+
+  @override
+  String exGladesOrphan(Object cell) {
+    return '$cell jest zamalowane: nie sięga do niego prostokąt żadnej liczby.';
+  }
+
+  @override
+  String exGladesFailPool(Object area) {
+    return 'Ale wtedy blok 2×2 w $area jest cały zamalowany.';
+  }
+
+  @override
+  String exGladesFailMix(Object a, Object b) {
+    return 'Ale wtedy liczby w $a i $b są w jednym obszarze.';
+  }
+
+  @override
+  String exGladesFailBig(Object clue, int count) {
+    return 'Ale wtedy obszar liczby $count w $clue ma więcej niż $count pól.';
+  }
+
+  @override
+  String exGladesFailShape(Object area) {
+    return 'Ale wtedy niezamalowany obszar w $area nie może być prostokątem.';
+  }
+
+  @override
+  String exGladesFailSize(Object clue, int count) {
+    return 'Ale wtedy obszar liczby $count w $clue jest zamknięty ze złą liczbą pól.';
+  }
+
+  @override
+  String exGladesFailNoNum(Object area) {
+    return 'Ale wtedy niezamalowany obszar w $area jest zamknięty bez liczby.';
+  }
+
+  @override
+  String exGladesFailNoRect(Object clue, int count) {
+    return 'Ale wtedy żaden prostokąt o $count polach nie pasuje do liczby $count w $clue.';
+  }
+
+  @override
+  String exGladesFailOrphan(Object cell) {
+    return 'Ale wtedy do niezamalowanego $cell nie sięga prostokąt żadnej liczby.';
+  }
 }

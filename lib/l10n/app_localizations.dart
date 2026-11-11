@@ -9482,6 +9482,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then the unshaded area of the {count} at {clue} can\'t reach {count} cells.'**
   String exSlabsFailReach(Object clue, int count);
+
+  /// No description provided for @gladesName.
+  ///
+  /// In en, this message translates to:
+  /// **'Glades'**
+  String get gladesName;
+
+  /// No description provided for @gladesTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Open numbered rectangles, linked at their corners'**
+  String get gladesTagline;
+
+  /// No description provided for @gladesRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Shade some cells. Unshaded cells joined side by side form an area.\n• Every area is a rectangle (or a square) holding exactly one number: its count of cells.\n• No 2×2 block is all shaded.\n• All areas form one network, where touching at a corner counts. Shaded cells need not be joined.\n\nTap a cell to cycle: shaded → dot (your \"this one stays unshaded\" note) → empty. Right-click cycles back. A long press dots every area that already has its number of cells, and the last cell of every 2×2 block with three shaded. Dots are optional: the puzzle is done once the right cells are shaded.'**
+  String get gladesRules;
+
+  /// No description provided for @tutGlades1.
+  ///
+  /// In en, this message translates to:
+  /// **'Shade some cells so that every unshaded area (cells joined side by side) is a rectangle holding exactly one number, which tells how many cells it has. A 1 is a single cell, so every cell beside it is shaded. The 2 needs one more cell, and it has only one way to grow. Finish the board.'**
+  String get tutGlades1;
+
+  /// No description provided for @tutGlades2.
+  ///
+  /// In en, this message translates to:
+  /// **'No 2×2 block may be all shaded. When three cells of a block are shaded, the fourth stays unshaded, and it has to belong to some number\'s rectangle. Use this to find the area of the 4 at the bottom, then finish the board.'**
+  String get tutGlades2;
+
+  /// No description provided for @tutGlades3.
+  ///
+  /// In en, this message translates to:
+  /// **'All unshaded areas must form one network, where touching at a corner counts. Each 1 in a corner is shaded in on its sides, so it can only reach the rest through the cell diagonally next to it: those cells stay unshaded. Finish the board.'**
+  String get tutGlades3;
+
+  /// No description provided for @tutGlades4.
+  ///
+  /// In en, this message translates to:
+  /// **'An area always fills the rectangle around it. So a cell beside an area is shaded if leaving it unshaded would make that rectangle hold two numbers, more cells than its number, or a shaded cell. The cell between the 3 and the 1 would put both numbers into one area, so it is shaded. Finish the board.'**
+  String get tutGlades4;
+
+  /// No description provided for @tutGlades5.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with the 1s, keep the fourth cell of every 2×2 block with three shaded, and remember that every area needs a way to reach the others, at least through a corner.'**
+  String get tutGlades5;
+
+  /// No description provided for @tutGladesS1.
+  ///
+  /// In en, this message translates to:
+  /// **'A number\'s area is one rectangle of that many cells. Try every rectangle that could be it: it may not take in a shaded cell or another number, nor touch an unshaded cell from outside. Cells every one of them covers stay unshaded, and cells beside every one of them are shaded. Use this to place the 4.'**
+  String get tutGladesS1;
+
+  /// No description provided for @tutGladesS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Two more ideas for this board. A cell that no number\'s rectangle can reach is shaded. And if shading a cell would cut the unshaded cells into parts that can\'t meet, even through corners, it stays unshaded.'**
+  String get tutGladesS2;
+
+  /// No description provided for @tutGladesS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When stuck, shade a cell and follow on: if a 2×2 block fills up, an area ends up the wrong size or shape, or the unshaded cells fall apart, that cell stays unshaded.'**
+  String get tutGladesS3;
+
+  /// No description provided for @exGladesPool.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: the rest of the 2×2 block at {area} is shaded, and no block may be all shaded.'**
+  String exGladesPool(Object cell, Object area);
+
+  /// No description provided for @exGladesBox.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: the unshaded area at {area} must be a rectangle, and this cell lies inside the rectangle around it.'**
+  String exGladesBox(Object cell, Object area);
+
+  /// No description provided for @exGladesFull.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: the area of the {count} at {clue} already has {count, plural, =1{its one cell} other{all its {count} cells}}.'**
+  String exGladesFull(Object cell, Object clue, int count);
+
+  /// No description provided for @exGladesGrow.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: the area of the {count} at {clue} needs more cells, and this is its only way out.'**
+  String exGladesGrow(Object cell, Object clue, int count);
+
+  /// No description provided for @exGladesGrowNone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: the unshaded area at {area} has no number yet, and this is its only way out.'**
+  String exGladesGrowNone(Object cell, Object area);
+
+  /// No description provided for @exGladesJoinMix.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: left unshaded, its area would fill a rectangle holding both the numbers at {a} and {b}.'**
+  String exGladesJoinMix(Object cell, Object a, Object b);
+
+  /// No description provided for @exGladesJoinBig.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: left unshaded, it would make the area of the {count} at {clue} fill a rectangle of more than {count} cells.'**
+  String exGladesJoinBig(Object cell, Object clue, int count);
+
+  /// No description provided for @exGladesCorner.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: left unshaded, its area would fill a rectangle that takes in the shaded {other}.'**
+  String exGladesCorner(Object cell, Object other);
+
+  /// No description provided for @exGladesIsolated.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: shaded cells cut it off from the numbers, even through corners.'**
+  String exGladesIsolated(Object cell);
+
+  /// No description provided for @exGladesEscape.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: it is the only way, through a side or a corner, for the unshaded cells at {area} to reach the rest.'**
+  String exGladesEscape(Object cell, Object area);
+
+  /// No description provided for @exGladesCut.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: shading it would cut the unshaded cells into parts that can\'t meet, even through corners.'**
+  String exGladesCut(Object cell);
+
+  /// No description provided for @exGladesRectIn.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: every rectangle of {count} cells that fits the {count} at {clue} covers it.'**
+  String exGladesRectIn(Object cell, Object clue, int count);
+
+  /// No description provided for @exGladesRectOut.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: every rectangle that fits the {count} at {clue} lies beside it.'**
+  String exGladesRectOut(Object cell, Object clue, int count);
+
+  /// No description provided for @exGladesOrphan.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: no number\'s rectangle can reach it.'**
+  String exGladesOrphan(Object cell);
+
+  /// No description provided for @exGladesFailPool.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the 2×2 block at {area} is all shaded.'**
+  String exGladesFailPool(Object area);
+
+  /// No description provided for @exGladesFailMix.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the numbers at {a} and {b} share one area.'**
+  String exGladesFailMix(Object a, Object b);
+
+  /// No description provided for @exGladesFailBig.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the area of the {count} at {clue} has more than {count} cells.'**
+  String exGladesFailBig(Object clue, int count);
+
+  /// No description provided for @exGladesFailShape.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the unshaded area at {area} can\'t be a rectangle.'**
+  String exGladesFailShape(Object area);
+
+  /// No description provided for @exGladesFailSize.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the area of the {count} at {clue} is closed off with the wrong number of cells.'**
+  String exGladesFailSize(Object clue, int count);
+
+  /// No description provided for @exGladesFailNoNum.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the unshaded area at {area} is closed off without a number.'**
+  String exGladesFailNoNum(Object area);
+
+  /// No description provided for @exGladesFailNoRect.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no rectangle of {count} cells fits the {count} at {clue}.'**
+  String exGladesFailNoRect(Object clue, int count);
+
+  /// No description provided for @exGladesFailOrphan.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no number\'s rectangle can reach the unshaded {cell}.'**
+  String exGladesFailOrphan(Object cell);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

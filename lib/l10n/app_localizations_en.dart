@@ -7531,4 +7531,162 @@ class AppLocalizationsEn extends AppLocalizations {
   String exSlabsFailReach(Object clue, int count) {
     return 'But then the unshaded area of the $count at $clue can\'t reach $count cells.';
   }
+
+  @override
+  String get gladesName => 'Glades';
+
+  @override
+  String get gladesTagline => 'Open numbered rectangles, linked at their corners';
+
+  @override
+  String get gladesRules =>
+      '• Shade some cells. Unshaded cells joined side by side form an area.\n• Every area is a rectangle (or a square) holding exactly one number: its count of cells.\n• No 2×2 block is all shaded.\n• All areas form one network, where touching at a corner counts. Shaded cells need not be joined.\n\nTap a cell to cycle: shaded → dot (your \"this one stays unshaded\" note) → empty. Right-click cycles back. A long press dots every area that already has its number of cells, and the last cell of every 2×2 block with three shaded. Dots are optional: the puzzle is done once the right cells are shaded.';
+
+  @override
+  String get tutGlades1 =>
+      'Shade some cells so that every unshaded area (cells joined side by side) is a rectangle holding exactly one number, which tells how many cells it has. A 1 is a single cell, so every cell beside it is shaded. The 2 needs one more cell, and it has only one way to grow. Finish the board.';
+
+  @override
+  String get tutGlades2 =>
+      'No 2×2 block may be all shaded. When three cells of a block are shaded, the fourth stays unshaded, and it has to belong to some number\'s rectangle. Use this to find the area of the 4 at the bottom, then finish the board.';
+
+  @override
+  String get tutGlades3 =>
+      'All unshaded areas must form one network, where touching at a corner counts. Each 1 in a corner is shaded in on its sides, so it can only reach the rest through the cell diagonally next to it: those cells stay unshaded. Finish the board.';
+
+  @override
+  String get tutGlades4 =>
+      'An area always fills the rectangle around it. So a cell beside an area is shaded if leaving it unshaded would make that rectangle hold two numbers, more cells than its number, or a shaded cell. The cell between the 3 and the 1 would put both numbers into one area, so it is shaded. Finish the board.';
+
+  @override
+  String get tutGlades5 =>
+      'Now a real board. Start with the 1s, keep the fourth cell of every 2×2 block with three shaded, and remember that every area needs a way to reach the others, at least through a corner.';
+
+  @override
+  String get tutGladesS1 =>
+      'A number\'s area is one rectangle of that many cells. Try every rectangle that could be it: it may not take in a shaded cell or another number, nor touch an unshaded cell from outside. Cells every one of them covers stay unshaded, and cells beside every one of them are shaded. Use this to place the 4.';
+
+  @override
+  String get tutGladesS2 =>
+      'Two more ideas for this board. A cell that no number\'s rectangle can reach is shaded. And if shading a cell would cut the unshaded cells into parts that can\'t meet, even through corners, it stays unshaded.';
+
+  @override
+  String get tutGladesS3 =>
+      'A hard board. When stuck, shade a cell and follow on: if a 2×2 block fills up, an area ends up the wrong size or shape, or the unshaded cells fall apart, that cell stays unshaded.';
+
+  @override
+  String exGladesPool(Object cell, Object area) {
+    return '$cell stays unshaded: the rest of the 2×2 block at $area is shaded, and no block may be all shaded.';
+  }
+
+  @override
+  String exGladesBox(Object cell, Object area) {
+    return '$cell stays unshaded: the unshaded area at $area must be a rectangle, and this cell lies inside the rectangle around it.';
+  }
+
+  @override
+  String exGladesFull(Object cell, Object clue, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'all its $count cells',
+      one: 'its one cell',
+    );
+    return '$cell is shaded: the area of the $count at $clue already has $_temp0.';
+  }
+
+  @override
+  String exGladesGrow(Object cell, Object clue, int count) {
+    return '$cell stays unshaded: the area of the $count at $clue needs more cells, and this is its only way out.';
+  }
+
+  @override
+  String exGladesGrowNone(Object cell, Object area) {
+    return '$cell stays unshaded: the unshaded area at $area has no number yet, and this is its only way out.';
+  }
+
+  @override
+  String exGladesJoinMix(Object cell, Object a, Object b) {
+    return '$cell is shaded: left unshaded, its area would fill a rectangle holding both the numbers at $a and $b.';
+  }
+
+  @override
+  String exGladesJoinBig(Object cell, Object clue, int count) {
+    return '$cell is shaded: left unshaded, it would make the area of the $count at $clue fill a rectangle of more than $count cells.';
+  }
+
+  @override
+  String exGladesCorner(Object cell, Object other) {
+    return '$cell is shaded: left unshaded, its area would fill a rectangle that takes in the shaded $other.';
+  }
+
+  @override
+  String exGladesIsolated(Object cell) {
+    return '$cell is shaded: shaded cells cut it off from the numbers, even through corners.';
+  }
+
+  @override
+  String exGladesEscape(Object cell, Object area) {
+    return '$cell stays unshaded: it is the only way, through a side or a corner, for the unshaded cells at $area to reach the rest.';
+  }
+
+  @override
+  String exGladesCut(Object cell) {
+    return '$cell stays unshaded: shading it would cut the unshaded cells into parts that can\'t meet, even through corners.';
+  }
+
+  @override
+  String exGladesRectIn(Object cell, Object clue, int count) {
+    return '$cell stays unshaded: every rectangle of $count cells that fits the $count at $clue covers it.';
+  }
+
+  @override
+  String exGladesRectOut(Object cell, Object clue, int count) {
+    return '$cell is shaded: every rectangle that fits the $count at $clue lies beside it.';
+  }
+
+  @override
+  String exGladesOrphan(Object cell) {
+    return '$cell is shaded: no number\'s rectangle can reach it.';
+  }
+
+  @override
+  String exGladesFailPool(Object area) {
+    return 'But then the 2×2 block at $area is all shaded.';
+  }
+
+  @override
+  String exGladesFailMix(Object a, Object b) {
+    return 'But then the numbers at $a and $b share one area.';
+  }
+
+  @override
+  String exGladesFailBig(Object clue, int count) {
+    return 'But then the area of the $count at $clue has more than $count cells.';
+  }
+
+  @override
+  String exGladesFailShape(Object area) {
+    return 'But then the unshaded area at $area can\'t be a rectangle.';
+  }
+
+  @override
+  String exGladesFailSize(Object clue, int count) {
+    return 'But then the area of the $count at $clue is closed off with the wrong number of cells.';
+  }
+
+  @override
+  String exGladesFailNoNum(Object area) {
+    return 'But then the unshaded area at $area is closed off without a number.';
+  }
+
+  @override
+  String exGladesFailNoRect(Object clue, int count) {
+    return 'But then no rectangle of $count cells fits the $count at $clue.';
+  }
+
+  @override
+  String exGladesFailOrphan(Object cell) {
+    return 'But then no number\'s rectangle can reach the unshaded $cell.';
+  }
 }

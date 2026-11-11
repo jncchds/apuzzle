@@ -8,6 +8,7 @@ import '../puzzles/cages/cages_type.dart';
 import '../puzzles/chambers/chambers_type.dart';
 import '../puzzles/lookout/lookout_type.dart';
 import '../puzzles/slabs/slabs_type.dart';
+import '../puzzles/glades/glades_type.dart';
 import '../puzzles/rampart/rampart_type.dart';
 import '../puzzles/channel/channel_type.dart';
 import '../puzzles/blend/blend_type.dart';
@@ -127,6 +128,7 @@ const List<PuzzleType> puzzleTypes = [
   LampsType(),
   WedgesType(),
   SlabsType(),
+  GladesType(),
   FenceType(),
   SlantType(),
   PearlsType(),
@@ -236,6 +238,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('lamps', [LampsType()]),
       PuzzleFamily('wedges', [WedgesType()]),
       PuzzleFamily('slabs', [SlabsType()]),
+      PuzzleFamily('glades', [GladesType()]),
       PuzzleFamily('orbits', [OrbitsType()]),
       PuzzleFamily('inlay', [InlayType()]),
       PuzzleFamily('mines', [MinesType()]),
