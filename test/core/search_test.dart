@@ -52,6 +52,7 @@ void main() {
     expect(alt('fillomino'), ['plots']);
     expect(alt('norinori'), ['pairs']);
     expect(alt('suguru'), ['blocks']);
+    expect(alt('hakyuu'), ['ripples']);
     expect(alt('akari'), ['lamps']);
     expect(alt('shakashaka'), ['wedges']);
     expect(alt('choco banana'), ['slabs']);

@@ -6,6 +6,7 @@ import '../puzzles/blockade/blockade_type.dart';
 import '../puzzles/between/between_type.dart';
 import '../puzzles/straights/straights_type.dart';
 import '../puzzles/blocks/blocks_type.dart';
+import '../puzzles/ripples/ripples_type.dart';
 import '../puzzles/cages/cages_type.dart';
 import '../puzzles/chambers/chambers_type.dart';
 import '../puzzles/lookout/lookout_type.dart';
@@ -85,6 +86,7 @@ const List<PuzzleType> puzzleTypes = [
   KingsType(),
   StarsType(),
   BlocksType(),
+  RipplesType(),
   TallyType(),
   SoloType(),
   DominoType(),
@@ -214,6 +216,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('between', [BetweenType()]),
       PuzzleFamily('straights', [StraightsType()]),
       PuzzleFamily('blocks', [BlocksType()]),
+      PuzzleFamily('ripples', [RipplesType()]),
       PuzzleFamily('tally', [TallyType()]),
       PuzzleFamily('solo', [SoloType()]),
       PuzzleFamily('domino', [DominoType()]),

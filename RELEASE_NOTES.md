@@ -1,6 +1,7 @@
 # Release notes
 
 ## 0.13.0 - 2026-11-11
+- New game: Echoes. Fill every region of k cells with the numbers 1 to k; when the same number N appears twice in a row or column, there are at least N cells between them. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Ladders. Fill the grid with the numbers 1 to N, never twice in a row or column, so that every run of cells between walls holds consecutive numbers in any order; a number on a wall still counts for its row and column. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Brackets. Shade two cells in every row and column and fill the rest with the numbers 1 to N−2, each once per row and column; a number outside the grid is the sum of the numbers between the two shaded cells of its row or column. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Quarry. Shade every stone shown under the grid, each once, turned or mirrored as you like; stones never touch along a side, a filled circle is part of a stone, a hollow circle stays unshaded, and all unshaded cells form one area. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13

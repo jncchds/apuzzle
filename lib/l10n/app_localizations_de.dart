@@ -8000,4 +8000,73 @@ class AppLocalizationsDe extends AppLocalizations {
   String exStraightsFailRun(Object run) {
     return 'Aber dann kann die Strecke $run keine aufeinanderfolgenden Zahlen enthalten.';
   }
+
+  @override
+  String get ripplesName => 'Echos';
+
+  @override
+  String get ripplesTagline => 'Gleiche Zahlen halten Abstand';
+
+  @override
+  String get ripplesRules =>
+      '• Fülle jedes Feld mit einer Zahl.\n• Ein Bereich aus k Feldern enthält jede Zahl von 1 bis k genau einmal (ein Bereich aus einem Feld enthält eine 1).\n• Steht dieselbe Zahl N zweimal in einer Zeile oder Spalte, liegen mindestens N Felder dazwischen: Zwei 1en stehen nie nebeneinander, zwischen zwei 2en liegen zwei Felder oder mehr, und so weiter.\n• Vorgegebene Zahlen sind fest.\n\nWähle eine Zahl in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Zahl. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld.';
+
+  @override
+  String get tutRipples1 =>
+      'Jeder Bereich aus k Feldern enthält die Zahlen 1 bis k je einmal. Jedes markierte Feld ist die letzte Lücke in seinem Bereich: Wähle die fehlende Zahl in der Palette und tippe auf das Feld.';
+
+  @override
+  String get tutRipples2 =>
+      'Gleiche Zahlen in einer Zeile oder Spalte brauchen Platz: Dazwischen liegen mindestens so viele Felder, wie die Zahl selbst angibt. Zwei 1en stehen also nie nebeneinander. Jedes markierte Feld liegt neben einer 1, also bekommt es die 2 seines Bereichs aus zwei Feldern. Löse das Gitter fertig.';
+
+  @override
+  String get tutRipples3 =>
+      'Größere Zahlen brauchen mehr Platz: Zwischen zwei 3en liegen mindestens drei Felder, zwischen zwei 4en vier. Das markierte Feld ist in seiner Zeile und Spalte zu nah an einer 1, einer 2 und einer 4, also steht dort die 3, die sein Bereich noch braucht. Löse das Gitter fertig.';
+
+  @override
+  String get tutRipples4 =>
+      'Jetzt ein echtes Gitter. Fang mit kleinen Bereichen und großen Zahlen an, die die meisten Felder um sich herum ausschließen. Stift-Notizen helfen.';
+
+  @override
+  String get tutRipplesS1 =>
+      'Zeigen: Notiere, wo ein Bereich eine Zahl noch setzen kann. Ist ein Feld außerhalb des Bereichs in Zeile oder Spalte zu nah an all diesen Stellen, kann dort diese Zahl nicht stehen. Und zwei Felder eines Bereichs, die nur dieselben zwei Zahlen haben können, nehmen sie dem Rest des Bereichs weg.';
+
+  @override
+  String get tutRipplesS2 =>
+      'Ein schweres Gitter. Wenn sonst nichts geht, nimm ein Feld mit nur zwei möglichen Zahlen und probier eine: Hat bald ein Bereich keinen Platz mehr für eine Zahl, ist die andere richtig.';
+
+  @override
+  String exRipplesNaked(Object cell, Object value) {
+    return 'In $cell muss $value stehen: alle anderen Zahlen stehen schon in seinem Bereich oder zu nah in seiner Zeile oder Spalte.';
+  }
+
+  @override
+  String exRipplesHidden(Object cell, Object value) {
+    return 'In $cell muss $value stehen: es ist der einzige Platz für $value in seinem Bereich.';
+  }
+
+  @override
+  String exRipplesPointing(Object cell, Object value, Object region) {
+    return 'In $cell kann keine $value stehen: es liegt in Zeile oder Spalte zu nah an jedem Feld, in dem der Bereich bei $region seine $value noch haben kann.';
+  }
+
+  @override
+  String exRipplesPair(Object a, Object b, Object v1, Object v2) {
+    return '$a und $b teilen sich $v1 und $v2, also kann kein anderes Feld ihres Bereichs sie haben.';
+  }
+
+  @override
+  String exRipplesFailEmpty(Object cell) {
+    return 'Dann bliebe für $cell aber keine Zahl übrig.';
+  }
+
+  @override
+  String exRipplesFailNoPlace(Object region, Object value) {
+    return 'Dann hätte der Bereich bei $region aber keinen Platz mehr für $value.';
+  }
+
+  @override
+  String exRipplesAlone(Object cell) {
+    return 'In $cell muss 1 stehen: sein Bereich besteht nur aus diesem Feld.';
+  }
 }

@@ -8064,4 +8064,73 @@ class AppLocalizationsPl extends AppLocalizations {
   String exStraightsFailRun(Object run) {
     return 'Ale wtedy odcinek $run nie może zawierać kolejnych liczb.';
   }
+
+  @override
+  String get ripplesName => 'Echa';
+
+  @override
+  String get ripplesTagline => 'Równe liczby trzymają dystans';
+
+  @override
+  String get ripplesRules =>
+      '• Wypełnij każde pole liczbą.\n• Obszar z k pól zawiera każdą liczbę od 1 do k dokładnie raz (obszar z jednego pola zawiera 1).\n• Gdy ta sama liczba N pojawia się dwa razy w wierszu lub kolumnie, dzieli je co najmniej N pól: dwie jedynki nigdy nie stoją obok siebie, między dwiema dwójkami są dwa pola lub więcej i tak dalej.\n• Podanych liczb nie można zmieniać.\n\nWybierz liczbę z palety i dotykaj pól, aby ją wpisać, albo najpierw dotknij pola, a potem liczby. Przycisk ołówka włącza małe notatki. Długie naciśnięcie / prawy przycisk czyści pole.';
+
+  @override
+  String get tutRipples1 =>
+      'Każdy obszar z k pól zawiera liczby od 1 do k po jednym razie. Każde podświetlone pole to ostatnia luka w swoim obszarze: wybierz brakującą liczbę z palety i dotknij pola.';
+
+  @override
+  String get tutRipples2 =>
+      'Równe liczby w wierszu lub kolumnie potrzebują miejsca: między nimi jest co najmniej tyle pól, ile wynosi sama liczba. Dlatego dwie jedynki nigdy nie stoją obok siebie. Każde podświetlone pole sąsiaduje z 1, więc dostaje 2 swojego dwupolowego obszaru. Dokończ planszę.';
+
+  @override
+  String get tutRipples3 =>
+      'Większe liczby potrzebują więcej miejsca: dwie trójki dzielą co najmniej trzy pola, dwie czwórki cztery. Podświetlone pole jest za blisko 1, 2 i 4 w swoim wierszu i kolumnie, więc stoi w nim 3, której jego obszar jeszcze potrzebuje. Dokończ planszę.';
+
+  @override
+  String get tutRipples4 =>
+      'Teraz prawdziwa plansza. Zacznij od małych obszarów i dużych liczb, które wykluczają najwięcej pól wokół siebie. Notatki ołówkiem pomagają.';
+
+  @override
+  String get tutRipplesS1 =>
+      'Wskazywanie: zanotuj, gdzie obszar może jeszcze postawić liczbę. Gdy jedno pole poza obszarem jest za blisko wszystkich tych miejsc w ich wierszach i kolumnach, nie może mieć tej liczby. A dwa pola obszaru, które mogą mieć tylko te same dwie liczby, zabierają je reszcie obszaru.';
+
+  @override
+  String get tutRipplesS2 =>
+      'Trudna plansza. Gdy nic innego nie działa, wybierz pole z tylko dwiema możliwymi liczbami i spróbuj jednej: jeśli wkrótce jakiś obszar nie ma miejsca na liczbę, właściwa jest druga.';
+
+  @override
+  String exRipplesNaked(Object cell, Object value) {
+    return 'W $cell musi być $value: wszystkie inne liczby są już w jego obszarze albo za blisko w jego wierszu lub kolumnie.';
+  }
+
+  @override
+  String exRipplesHidden(Object cell, Object value) {
+    return 'W $cell musi być $value: to jedyne miejsce na $value w jego obszarze.';
+  }
+
+  @override
+  String exRipplesPointing(Object cell, Object value, Object region) {
+    return 'W $cell nie może być $value: jest za blisko, w wierszu lub kolumnie, wszystkich pól, w których obszar z $region może jeszcze mieć $value.';
+  }
+
+  @override
+  String exRipplesPair(Object a, Object b, Object v1, Object v2) {
+    return '$a i $b dzielą między siebie $v1 i $v2, więc inne pola ich obszaru ich nie mają.';
+  }
+
+  @override
+  String exRipplesFailEmpty(Object cell) {
+    return 'Ale wtedy dla $cell nie zostaje żadna liczba.';
+  }
+
+  @override
+  String exRipplesFailNoPlace(Object region, Object value) {
+    return 'Ale wtedy w obszarze z $region nie zostaje miejsca na $value.';
+  }
+
+  @override
+  String exRipplesAlone(Object cell) {
+    return 'W $cell musi być 1: jego obszar to tylko to jedno pole.';
+  }
 }

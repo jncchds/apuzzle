@@ -10034,6 +10034,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then the run {run} can\'t hold consecutive numbers.'**
   String exStraightsFailRun(Object run);
+
+  /// No description provided for @ripplesName.
+  ///
+  /// In en, this message translates to:
+  /// **'Echoes'**
+  String get ripplesName;
+
+  /// No description provided for @ripplesTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Equal numbers keep their distance'**
+  String get ripplesTagline;
+
+  /// No description provided for @ripplesRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Fill every cell with a number.\n• A region of k cells holds each number from 1 to k exactly once (a region of one cell holds a 1).\n• When the same number N appears twice in a row or column, there are at least N cells between them: two 1s never sit side by side, two 2s have two or more cells between them, and so on.\n• Given numbers are fixed.\n\nPick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.'**
+  String get ripplesRules;
+
+  /// No description provided for @tutRipples1.
+  ///
+  /// In en, this message translates to:
+  /// **'Every region of k cells holds the numbers 1 to k once each. Each highlighted cell is the last gap in its region: pick the missing number in the palette, then tap the cell.'**
+  String get tutRipples1;
+
+  /// No description provided for @tutRipples2.
+  ///
+  /// In en, this message translates to:
+  /// **'Equal numbers in a row or column need room: at least as many cells between them as the number itself. So two 1s never sit side by side. Each highlighted cell is next to a 1, so it takes the 2 of its two-cell region. Finish the board.'**
+  String get tutRipples2;
+
+  /// No description provided for @tutRipples3.
+  ///
+  /// In en, this message translates to:
+  /// **'Bigger numbers need more room: two 3s need at least three cells between them, two 4s four. The highlighted cell is too close to a 1, a 2 and a 4 in its row and column, so it holds the 3 its region still needs. Finish the board.'**
+  String get tutRipples3;
+
+  /// No description provided for @tutRipples4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start with small regions and with big numbers, which rule out the most cells around them. Pencil notes help.'**
+  String get tutRipples4;
+
+  /// No description provided for @tutRipplesS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Pointing: note where a region can still put a number. When one cell outside the region is too close to all those spots in their rows and columns, it can\'t hold that number. And two cells of a region that can only hold the same two numbers keep them from the rest of the region.'**
+  String get tutRipplesS1;
+
+  /// No description provided for @tutRipplesS2.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When nothing else works, pick a cell with just two possible numbers and try one: if it soon leaves a region with no place for a number, the other one is right.'**
+  String get tutRipplesS2;
+
+  /// No description provided for @exRipplesNaked.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: every other number is already in its region or too close in its row or column.'**
+  String exRipplesNaked(Object cell, Object value);
+
+  /// No description provided for @exRipplesHidden.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: it\'s the only place left for {value} in its region.'**
+  String exRipplesHidden(Object cell, Object value);
+
+  /// No description provided for @exRipplesPointing.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} can\'t be {value}: it is too close, in a row or column, to every cell where the region at {region} can still put its {value}.'**
+  String exRipplesPointing(Object cell, Object value, Object region);
+
+  /// No description provided for @exRipplesPair.
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {b} share {v1} and {v2}, so no other cell of their region can hold them.'**
+  String exRipplesPair(Object a, Object b, Object v1, Object v2);
+
+  /// No description provided for @exRipplesFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no number is left for {cell}.'**
+  String exRipplesFailEmpty(Object cell);
+
+  /// No description provided for @exRipplesFailNoPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the region at {region} has no place left for {value}.'**
+  String exRipplesFailNoPlace(Object region, Object value);
+
+  /// No description provided for @exRipplesAlone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be 1: its region is just this one cell.'**
+  String exRipplesAlone(Object cell);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -8033,4 +8033,73 @@ class AppLocalizationsEn extends AppLocalizations {
   String exStraightsFailRun(Object run) {
     return 'But then the run $run can\'t hold consecutive numbers.';
   }
+
+  @override
+  String get ripplesName => 'Echoes';
+
+  @override
+  String get ripplesTagline => 'Equal numbers keep their distance';
+
+  @override
+  String get ripplesRules =>
+      '• Fill every cell with a number.\n• A region of k cells holds each number from 1 to k exactly once (a region of one cell holds a 1).\n• When the same number N appears twice in a row or column, there are at least N cells between them: two 1s never sit side by side, two 2s have two or more cells between them, and so on.\n• Given numbers are fixed.\n\nPick a number in the palette and tap cells to place it, or tap a cell first and then a number. The pencil button toggles small notes. Long-press / right-click clears a cell.';
+
+  @override
+  String get tutRipples1 =>
+      'Every region of k cells holds the numbers 1 to k once each. Each highlighted cell is the last gap in its region: pick the missing number in the palette, then tap the cell.';
+
+  @override
+  String get tutRipples2 =>
+      'Equal numbers in a row or column need room: at least as many cells between them as the number itself. So two 1s never sit side by side. Each highlighted cell is next to a 1, so it takes the 2 of its two-cell region. Finish the board.';
+
+  @override
+  String get tutRipples3 =>
+      'Bigger numbers need more room: two 3s need at least three cells between them, two 4s four. The highlighted cell is too close to a 1, a 2 and a 4 in its row and column, so it holds the 3 its region still needs. Finish the board.';
+
+  @override
+  String get tutRipples4 =>
+      'Now a real board. Start with small regions and with big numbers, which rule out the most cells around them. Pencil notes help.';
+
+  @override
+  String get tutRipplesS1 =>
+      'Pointing: note where a region can still put a number. When one cell outside the region is too close to all those spots in their rows and columns, it can\'t hold that number. And two cells of a region that can only hold the same two numbers keep them from the rest of the region.';
+
+  @override
+  String get tutRipplesS2 =>
+      'A hard board. When nothing else works, pick a cell with just two possible numbers and try one: if it soon leaves a region with no place for a number, the other one is right.';
+
+  @override
+  String exRipplesNaked(Object cell, Object value) {
+    return '$cell must be $value: every other number is already in its region or too close in its row or column.';
+  }
+
+  @override
+  String exRipplesHidden(Object cell, Object value) {
+    return '$cell must be $value: it\'s the only place left for $value in its region.';
+  }
+
+  @override
+  String exRipplesPointing(Object cell, Object value, Object region) {
+    return '$cell can\'t be $value: it is too close, in a row or column, to every cell where the region at $region can still put its $value.';
+  }
+
+  @override
+  String exRipplesPair(Object a, Object b, Object v1, Object v2) {
+    return '$a and $b share $v1 and $v2, so no other cell of their region can hold them.';
+  }
+
+  @override
+  String exRipplesFailEmpty(Object cell) {
+    return 'But then no number is left for $cell.';
+  }
+
+  @override
+  String exRipplesFailNoPlace(Object region, Object value) {
+    return 'But then the region at $region has no place left for $value.';
+  }
+
+  @override
+  String exRipplesAlone(Object cell) {
+    return '$cell must be 1: its region is just this one cell.';
+  }
 }

@@ -1681,5 +1681,21 @@
   "exStraightsSubset": "In {cells} können nur {digits} stehen, also kann {cell}, anderswo in {kind, select, row{Zeile {line}} other{Spalte {line}}}, nicht {gone} sein.",
   "exStraightsFill": "Keine Art, die Strecke {run} mit verschiedenen aufeinanderfolgenden Zahlen zu füllen, die in ihre Felder passen, setzt {gone} in {cell}.",
   "exStraightsFailEmpty": "Aber dann bleibt für {cell} nichts übrig.",
-  "exStraightsFailRun": "Aber dann kann die Strecke {run} keine aufeinanderfolgenden Zahlen enthalten."
+  "exStraightsFailRun": "Aber dann kann die Strecke {run} keine aufeinanderfolgenden Zahlen enthalten.",
+  "ripplesName": "Echos",
+  "ripplesTagline": "Gleiche Zahlen halten Abstand",
+  "ripplesRules": "• Fülle jedes Feld mit einer Zahl.\n• Ein Bereich aus k Feldern enthält jede Zahl von 1 bis k genau einmal (ein Bereich aus einem Feld enthält eine 1).\n• Steht dieselbe Zahl N zweimal in einer Zeile oder Spalte, liegen mindestens N Felder dazwischen: Zwei 1en stehen nie nebeneinander, zwischen zwei 2en liegen zwei Felder oder mehr, und so weiter.\n• Vorgegebene Zahlen sind fest.\n\nWähle eine Zahl in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf eine Zahl. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld.",
+  "tutRipples1": "Jeder Bereich aus k Feldern enthält die Zahlen 1 bis k je einmal. Jedes markierte Feld ist die letzte Lücke in seinem Bereich: Wähle die fehlende Zahl in der Palette und tippe auf das Feld.",
+  "tutRipples2": "Gleiche Zahlen in einer Zeile oder Spalte brauchen Platz: Dazwischen liegen mindestens so viele Felder, wie die Zahl selbst angibt. Zwei 1en stehen also nie nebeneinander. Jedes markierte Feld liegt neben einer 1, also bekommt es die 2 seines Bereichs aus zwei Feldern. Löse das Gitter fertig.",
+  "tutRipples3": "Größere Zahlen brauchen mehr Platz: Zwischen zwei 3en liegen mindestens drei Felder, zwischen zwei 4en vier. Das markierte Feld ist in seiner Zeile und Spalte zu nah an einer 1, einer 2 und einer 4, also steht dort die 3, die sein Bereich noch braucht. Löse das Gitter fertig.",
+  "tutRipples4": "Jetzt ein echtes Gitter. Fang mit kleinen Bereichen und großen Zahlen an, die die meisten Felder um sich herum ausschließen. Stift-Notizen helfen.",
+  "tutRipplesS1": "Zeigen: Notiere, wo ein Bereich eine Zahl noch setzen kann. Ist ein Feld außerhalb des Bereichs in Zeile oder Spalte zu nah an all diesen Stellen, kann dort diese Zahl nicht stehen. Und zwei Felder eines Bereichs, die nur dieselben zwei Zahlen haben können, nehmen sie dem Rest des Bereichs weg.",
+  "tutRipplesS2": "Ein schweres Gitter. Wenn sonst nichts geht, nimm ein Feld mit nur zwei möglichen Zahlen und probier eine: Hat bald ein Bereich keinen Platz mehr für eine Zahl, ist die andere richtig.",
+  "exRipplesNaked": "In {cell} muss {value} stehen: alle anderen Zahlen stehen schon in seinem Bereich oder zu nah in seiner Zeile oder Spalte.",
+  "exRipplesHidden": "In {cell} muss {value} stehen: es ist der einzige Platz für {value} in seinem Bereich.",
+  "exRipplesPointing": "In {cell} kann keine {value} stehen: es liegt in Zeile oder Spalte zu nah an jedem Feld, in dem der Bereich bei {region} seine {value} noch haben kann.",
+  "exRipplesPair": "{a} und {b} teilen sich {v1} und {v2}, also kann kein anderes Feld ihres Bereichs sie haben.",
+  "exRipplesFailEmpty": "Dann bliebe für {cell} aber keine Zahl übrig.",
+  "exRipplesFailNoPlace": "Dann hätte der Bereich bei {region} aber keinen Platz mehr für {value}.",
+  "exRipplesAlone": "In {cell} muss 1 stehen: sein Bereich besteht nur aus diesem Feld."
 }
