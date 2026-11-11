@@ -7729,7 +7729,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get quarryRules =>
-      '• Zamaluj pola każdego kamienia pokazanego pod planszą: każdy kamień raz, obrócony lub odbity dowolnie.\n• Kamienie nie stykają się bokami; styk narożnikami jest dozwolony.\n• Pełne kółko jest częścią kamienia, puste kółko zostaje niezamalowane.\n• Wszystkie niezamalowane pola tworzą jeden obszar połączony bokami.\n\nDotknij pola, aby przełączać: zamalowane → kropka (twoja notatka „to pole zostaje niezamalowane”) → puste. Prawy przycisk przełącza wstecz. Długie naciśnięcie stawia kropki obok każdego gotowego kamienia. Gotowy kamień blednie też pod planszą. Kropki są opcjonalne: łamigłówka jest rozwiązana, gdy zamalowane są właściwe pola.';
+      '• Zamaluj pola każdego kamienia pokazanego pod planszą: każdy kamień raz, obrócony lub odbity dowolnie.\n• Kamienie nie stykają się bokami; styk narożnikami jest dozwolony.\n• Pełne kółko jest częścią kamienia, puste kółko zostaje niezamalowane.\n• Wszystkie niezamalowane pola tworzą jeden obszar połączony bokami.\n\nDotknij pola, aby przełączać: zamalowane → kropka (twoja notatka „to pole zostaje niezamalowane”) → puste. Prawy przycisk przełącza wstecz. Długie naciśnięcie stawia kropki obok każdego gotowego kamienia. Kamień pod planszą blednie, gdy na planszy jest obszar jego kształtu. Kropki są opcjonalne: łamigłówka jest rozwiązana, gdy zamalowane są właściwe pola.';
 
   @override
   String get tutQuarry1 =>

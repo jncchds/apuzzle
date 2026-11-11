@@ -93,8 +93,8 @@ class QuarryType extends ValueGridType<QuarryPuzzle> {
   List<bool> _shaded(ValueGrid s) => [for (final c in s.cells) c.value == quarryShade];
 
   /// The shaded areas that are surely a stone of the tray, with that stone
-  /// (see [quarryFinished]): closed off means every cell beside the area is
-  /// dotted, a hollow circle, or the board is complete.
+  /// (see [quarryFinished]), for the long press: closed off means every cell
+  /// beside the area is dotted, a hollow circle, or the board is complete.
   List<(List<int>, int)> _finished(QuarryPuzzle p, ValueGrid s) {
     final nb = orthNeighbors(p.n, p.n);
     final shaded = _shaded(s);
@@ -201,7 +201,12 @@ class QuarryType extends ValueGridType<QuarryPuzzle> {
 
   @override
   List<Widget> buildOverlayIn(BuildContext context, QuarryPuzzle puzzle, ValueGrid state, BoardMetrics m) {
-    final found = {for (final (_, k) in _finished(puzzle, state)) k};
+    // A stone fades whenever the board shows an area of its shape, whether
+    // or not it is right or could still grow: the tray only mirrors the board.
+    final shaded = _shaded(state);
+    final found = {
+      for (final g in components(orthNeighbors(puzzle.n, puzzle.n), (i) => shaded[i])) quarryPieceOf(puzzle, g),
+    }..remove(-1);
     final layout = trayLayout(puzzle);
     final heights = _lineHeights(puzzle, layout);
     final tops = <double>[];

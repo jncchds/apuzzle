@@ -7665,7 +7665,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get quarryRules =>
-      '• Schwärze die Felder jedes Steins, der unter dem Gitter gezeigt wird: jeden Stein einmal, gedreht oder gespiegelt, wie du willst.\n• Steine berühren sich nie mit einer Seite; an einer Ecke ist es erlaubt.\n• Ein voller Kreis gehört zu einem Stein, ein leerer Kreis bleibt frei.\n• Alle freien Felder bilden ein Gebiet, über Seiten verbunden.\n\nTippe auf ein Feld zum Durchschalten: geschwärzt → Punkt (deine Notiz „dieses bleibt frei“) → leer. Rechtsklick schaltet zurück. Langes Drücken setzt Punkte neben jeden fertigen Stein. Ein fertiger Stein verblasst auch unter dem Gitter. Punkte sind freiwillig: Das Rätsel ist gelöst, sobald die richtigen Felder geschwärzt sind.';
+      '• Schwärze die Felder jedes Steins, der unter dem Gitter gezeigt wird: jeden Stein einmal, gedreht oder gespiegelt, wie du willst.\n• Steine berühren sich nie mit einer Seite; an einer Ecke ist es erlaubt.\n• Ein voller Kreis gehört zu einem Stein, ein leerer Kreis bleibt frei.\n• Alle freien Felder bilden ein Gebiet, über Seiten verbunden.\n\nTippe auf ein Feld zum Durchschalten: geschwärzt → Punkt (deine Notiz „dieses bleibt frei“) → leer. Rechtsklick schaltet zurück. Langes Drücken setzt Punkte neben jeden fertigen Stein. Ein Stein unter dem Gitter verblasst, solange das Gitter ein Gebiet seiner Form zeigt. Punkte sind freiwillig: Das Rätsel ist gelöst, sobald die richtigen Felder geschwärzt sind.';
 
   @override
   String get tutQuarry1 =>
