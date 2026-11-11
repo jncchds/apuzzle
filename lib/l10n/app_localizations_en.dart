@@ -7781,4 +7781,168 @@ class AppLocalizationsEn extends AppLocalizations {
   String exQuarryFailNoPiece(Object cell) {
     return 'But then no stone fits over the shaded $cell.';
   }
+
+  @override
+  String get betweenName => 'Brackets';
+
+  @override
+  String get betweenTagline => 'Add up the numbers between the shaded cells';
+
+  @override
+  String get betweenRules =>
+      '• Shade exactly two cells in every row and column.\n• Fill the other cells with the numbers 1 to N−2 (N = grid size), each once per row and column.\n• A number left of a row or above a column is the sum of the numbers between its two shaded cells (0 when they touch).\n\nPick the shade or a number in the palette and tap cells to place it, or tap a cell first and then a value. The pencil button toggles small notes. Long-press / right-click clears a cell.';
+
+  @override
+  String get tutBetween1 =>
+      'Every row and column has two shaded cells and the numbers 1, 2 and 3 once each. Pick the shade or a number in the palette and fill the empty cells.';
+
+  @override
+  String get tutBetween2 =>
+      'A number left of a row or above a column is the sum of the numbers between its two shaded cells. A 0 puts them side by side. The biggest sum, 1 + 2 + 3 = 6, needs every number between them, so they sit at both ends. Finish the board.';
+
+  @override
+  String get tutBetween3 =>
+      'Once the shaded cells of a row are known, its clue tells which numbers lie between them, and the other numbers go outside. Finish the board.';
+
+  @override
+  String get tutBetween4 =>
+      'Now a whole board. Ask where the shaded cells can lie so that the numbers between them can make the clue, and note what a cell can still hold with the pencil.';
+
+  @override
+  String get tutBetweenS1 =>
+      'Stuck? Take a row or column with a clue and go through every way to place its shaded cells and the numbers between them that fits your notes. A value that never lands in a cell can be crossed off there.';
+
+  @override
+  String get tutBetweenS2 =>
+      'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three values (shaded counts as one) and follow on; if that runs into a contradiction, cross the value off.';
+
+  @override
+  String exBetweenTwoShaded(Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return '$cell isn\'t shaded: $_temp0 already has its two shaded cells.';
+  }
+
+  @override
+  String exBetweenNaked(Object cell, Object value) {
+    return '$cell must be $value: everything else is ruled out there.';
+  }
+
+  @override
+  String exBetweenHidden(Object cell, Object value, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return '$cell must be $value: it\'s the only place left for $value in $_temp0.';
+  }
+
+  @override
+  String exBetweenShadePair(Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return '$cell is shaded: it\'s one of the only two cells of $_temp0 left that can be.';
+  }
+
+  @override
+  String exBetweenSpan(Object cell, Object line, String kind, Object sum) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return '$cell isn\'t shaded: $_temp0 has $sum between its shaded cells, and no cell that could be shaded lies at a distance from it that leaves room for that.';
+  }
+
+  @override
+  String exBetweenSumOut(Object line, String kind, Object sum, Object digits, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return 'To make $sum between the shaded cells of $_temp0, the cells between can only hold $digits, so $cell can\'t be $gone.';
+  }
+
+  @override
+  String exBetweenSumIn(Object line, String kind, Object sum, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return 'Every way to make $sum between the shaded cells of $_temp0 uses $gone, so $cell, outside them, can\'t be $gone.';
+  }
+
+  @override
+  String exBetweenLine(Object line, String kind, Object sum, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return 'No way to fill $_temp0 with $sum between its shaded cells puts $gone into $cell.';
+  }
+
+  @override
+  String exBetweenFailEmpty(Object cell) {
+    return 'But then nothing is left for $cell.';
+  }
+
+  @override
+  String exBetweenFailNoPlace(Object value, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return 'But then $value has no place left in $_temp0.';
+  }
+
+  @override
+  String exBetweenFailShade(Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return 'But then $_temp0 can\'t have two shaded cells.';
+  }
+
+  @override
+  String exBetweenFailLine(Object line, String kind, Object sum) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $line',
+        'other': 'column $line',
+      },
+    );
+    return 'But then $_temp0 can no longer have $sum between its shaded cells.';
+  }
 }

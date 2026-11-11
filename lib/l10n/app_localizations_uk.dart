@@ -7843,4 +7843,168 @@ class AppLocalizationsUk extends AppLocalizations {
   String exQuarryFailNoPiece(Object cell) {
     return 'Але тоді жоден камінь не вміщається на зафарбованій $cell.';
   }
+
+  @override
+  String get betweenName => 'Дужки';
+
+  @override
+  String get betweenTagline => 'Додайте числа між зафарбованими клітинками';
+
+  @override
+  String get betweenRules =>
+      '• Зафарбуйте рівно дві клітинки в кожному рядку й стовпці.\n• Заповніть решту клітинок числами від 1 до N−2 (N — розмір сітки), кожним один раз у рядку й стовпці.\n• Число ліворуч від рядка чи над стовпцем — це сума чисел між двома його зафарбованими клітинками (0, коли вони поруч).\n\nВиберіть зафарбування або число в палітрі й торкайтеся клітинок, щоб поставити його, або спершу торкніться клітинки, а потім значення. Кнопка з олівцем вмикає дрібні позначки. Довге натискання / правий клік очищає клітинку.';
+
+  @override
+  String get tutBetween1 =>
+      'У кожному рядку й стовпці дві зафарбовані клітинки та числа 1, 2 і 3 по одному разу. Виберіть зафарбування чи число в палітрі й заповніть порожні клітинки.';
+
+  @override
+  String get tutBetween2 =>
+      'Число ліворуч від рядка чи над стовпцем — це сума чисел між двома його зафарбованими клітинками. 0 ставить їх поруч. Найбільша сума, 1 + 2 + 3 = 6, потребує всіх чисел між ними, тож вони стоять на обох кінцях. Завершіть поле.';
+
+  @override
+  String get tutBetween3 =>
+      'Коли зафарбовані клітинки рядка відомі, його підказка каже, які числа стоять між ними, а решта чисел іде назовні. Завершіть поле.';
+
+  @override
+  String get tutBetween4 =>
+      'Тепер ціле поле. Думайте, де можуть бути зафарбовані клітинки, щоб числа між ними дали підказку, і позначайте олівцем, що ще може бути в клітинці.';
+
+  @override
+  String get tutBetweenS1 =>
+      'Застрягли? Візьміть рядок чи стовпець із підказкою й переберіть усі способи розставити його зафарбовані клітинки й числа між ними, що пасують до ваших позначок. Значення, яке ніколи не потрапляє в клітинку, там можна викреслити.';
+
+  @override
+  String get tutBetweenS2 =>
+      'Найважчі поля потребують припущення, яке можна спростувати. Припустіть, що в клітинці одне з двох-трьох останніх значень (зафарбування теж рахується), і міркуйте далі; якщо дійдете до суперечності, викресліть це значення.';
+
+  @override
+  String exBetweenTwoShaded(Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядок $line',
+        'other': 'стовпець $line',
+      },
+    );
+    return '$cell не зафарбовано: $_temp0 уже має дві зафарбовані клітинки.';
+  }
+
+  @override
+  String exBetweenNaked(Object cell, Object value) {
+    return 'У $cell має бути $value: усе інше там виключено.';
+  }
+
+  @override
+  String exBetweenHidden(Object cell, Object value, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'у рядку $line',
+        'other': 'у стовпці $line',
+      },
+    );
+    return 'У $cell має бути $value: це єдине місце для $value $_temp0.';
+  }
+
+  @override
+  String exBetweenShadePair(Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядка $line',
+        'other': 'стовпця $line',
+      },
+    );
+    return '$cell зафарбовано: це одна з двох клітинок $_temp0, які ще можна зафарбувати.';
+  }
+
+  @override
+  String exBetweenSpan(Object cell, Object line, String kind, Object sum) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядок $line',
+        'other': 'стовпець $line',
+      },
+    );
+    return '$cell не зафарбовано: $_temp0 має $sum між зафарбованими клітинками, а жодна клітинка, яку можна зафарбувати, не стоїть від неї на такій відстані, щоб на це вистачило місця.';
+  }
+
+  @override
+  String exBetweenSumOut(Object line, String kind, Object sum, Object digits, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядка $line',
+        'other': 'стовпця $line',
+      },
+    );
+    return 'Щоб між зафарбованими клітинками $_temp0 вийшло $sum, там можуть стояти лише $digits, тож у $cell не може бути $gone.';
+  }
+
+  @override
+  String exBetweenSumIn(Object line, String kind, Object sum, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядка $line',
+        'other': 'стовпця $line',
+      },
+    );
+    return 'Кожен спосіб дати $sum між зафарбованими клітинками $_temp0 використовує $gone, тож у $cell, поза ними, не може бути $gone.';
+  }
+
+  @override
+  String exBetweenLine(Object line, String kind, Object sum, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядок $line',
+        'other': 'стовпець $line',
+      },
+    );
+    return 'Жоден спосіб заповнити $_temp0 із $sum між зафарбованими клітинками не ставить $gone у $cell.';
+  }
+
+  @override
+  String exBetweenFailEmpty(Object cell) {
+    return 'Але тоді для $cell нічого не лишається.';
+  }
+
+  @override
+  String exBetweenFailNoPlace(Object value, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'у рядку $line',
+        'other': 'у стовпці $line',
+      },
+    );
+    return 'Але тоді для $value не лишається місця $_temp0.';
+  }
+
+  @override
+  String exBetweenFailShade(Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядок $line',
+        'other': 'стовпець $line',
+      },
+    );
+    return 'Але тоді $_temp0 не може мати двох зафарбованих клітинок.';
+  }
+
+  @override
+  String exBetweenFailLine(Object line, String kind, Object sum) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядок $line',
+        'other': 'стовпець $line',
+      },
+    );
+    return 'Але тоді $_temp0 уже не може мати $sum між зафарбованими клітинками.';
+  }
 }

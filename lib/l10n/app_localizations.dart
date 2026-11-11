@@ -9806,6 +9806,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then no stone fits over the shaded {cell}.'**
   String exQuarryFailNoPiece(Object cell);
+
+  /// No description provided for @betweenName.
+  ///
+  /// In en, this message translates to:
+  /// **'Brackets'**
+  String get betweenName;
+
+  /// No description provided for @betweenTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Add up the numbers between the shaded cells'**
+  String get betweenTagline;
+
+  /// No description provided for @betweenRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Shade exactly two cells in every row and column.\n• Fill the other cells with the numbers 1 to N−2 (N = grid size), each once per row and column.\n• A number left of a row or above a column is the sum of the numbers between its two shaded cells (0 when they touch).\n\nPick the shade or a number in the palette and tap cells to place it, or tap a cell first and then a value. The pencil button toggles small notes. Long-press / right-click clears a cell.'**
+  String get betweenRules;
+
+  /// No description provided for @tutBetween1.
+  ///
+  /// In en, this message translates to:
+  /// **'Every row and column has two shaded cells and the numbers 1, 2 and 3 once each. Pick the shade or a number in the palette and fill the empty cells.'**
+  String get tutBetween1;
+
+  /// No description provided for @tutBetween2.
+  ///
+  /// In en, this message translates to:
+  /// **'A number left of a row or above a column is the sum of the numbers between its two shaded cells. A 0 puts them side by side. The biggest sum, 1 + 2 + 3 = 6, needs every number between them, so they sit at both ends. Finish the board.'**
+  String get tutBetween2;
+
+  /// No description provided for @tutBetween3.
+  ///
+  /// In en, this message translates to:
+  /// **'Once the shaded cells of a row are known, its clue tells which numbers lie between them, and the other numbers go outside. Finish the board.'**
+  String get tutBetween3;
+
+  /// No description provided for @tutBetween4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a whole board. Ask where the shaded cells can lie so that the numbers between them can make the clue, and note what a cell can still hold with the pencil.'**
+  String get tutBetween4;
+
+  /// No description provided for @tutBetweenS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Stuck? Take a row or column with a clue and go through every way to place its shaded cells and the numbers between them that fits your notes. A value that never lands in a cell can be crossed off there.'**
+  String get tutBetweenS1;
+
+  /// No description provided for @tutBetweenS2.
+  ///
+  /// In en, this message translates to:
+  /// **'The hardest boards need a guess you can disprove. Suppose a cell holds one of its last two or three values (shaded counts as one) and follow on; if that runs into a contradiction, cross the value off.'**
+  String get tutBetweenS2;
+
+  /// No description provided for @exBetweenTwoShaded.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} isn\'t shaded: {kind, select, row{row {line}} other{column {line}}} already has its two shaded cells.'**
+  String exBetweenTwoShaded(Object cell, Object line, String kind);
+
+  /// No description provided for @exBetweenNaked.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: everything else is ruled out there.'**
+  String exBetweenNaked(Object cell, Object value);
+
+  /// No description provided for @exBetweenHidden.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} must be {value}: it\'s the only place left for {value} in {kind, select, row{row {line}} other{column {line}}}.'**
+  String exBetweenHidden(Object cell, Object value, Object line, String kind);
+
+  /// No description provided for @exBetweenShadePair.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: it\'s one of the only two cells of {kind, select, row{row {line}} other{column {line}}} left that can be.'**
+  String exBetweenShadePair(Object cell, Object line, String kind);
+
+  /// No description provided for @exBetweenSpan.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} isn\'t shaded: {kind, select, row{row {line}} other{column {line}}} has {sum} between its shaded cells, and no cell that could be shaded lies at a distance from it that leaves room for that.'**
+  String exBetweenSpan(Object cell, Object line, String kind, Object sum);
+
+  /// No description provided for @exBetweenSumOut.
+  ///
+  /// In en, this message translates to:
+  /// **'To make {sum} between the shaded cells of {kind, select, row{row {line}} other{column {line}}}, the cells between can only hold {digits}, so {cell} can\'t be {gone}.'**
+  String exBetweenSumOut(Object line, String kind, Object sum, Object digits, Object cell, Object gone);
+
+  /// No description provided for @exBetweenSumIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Every way to make {sum} between the shaded cells of {kind, select, row{row {line}} other{column {line}}} uses {gone}, so {cell}, outside them, can\'t be {gone}.'**
+  String exBetweenSumIn(Object line, String kind, Object sum, Object cell, Object gone);
+
+  /// No description provided for @exBetweenLine.
+  ///
+  /// In en, this message translates to:
+  /// **'No way to fill {kind, select, row{row {line}} other{column {line}}} with {sum} between its shaded cells puts {gone} into {cell}.'**
+  String exBetweenLine(Object line, String kind, Object sum, Object cell, Object gone);
+
+  /// No description provided for @exBetweenFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then nothing is left for {cell}.'**
+  String exBetweenFailEmpty(Object cell);
+
+  /// No description provided for @exBetweenFailNoPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {value} has no place left in {kind, select, row{row {line}} other{column {line}}}.'**
+  String exBetweenFailNoPlace(Object value, Object line, String kind);
+
+  /// No description provided for @exBetweenFailShade.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {kind, select, row{row {line}} other{column {line}}} can\'t have two shaded cells.'**
+  String exBetweenFailShade(Object line, String kind);
+
+  /// No description provided for @exBetweenFailLine.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {kind, select, row{row {line}} other{column {line}}} can no longer have {sum} between its shaded cells.'**
+  String exBetweenFailLine(Object line, String kind, Object sum);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

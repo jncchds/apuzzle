@@ -76,6 +76,7 @@ const Map<String, List<GameTag>> gameTags = {
   'skyline': [GameTag.numbers, GameTag.latin],
   'cages': [GameTag.numbers, GameTag.latin, GameTag.sums, GameTag.regions],
   'totals': [GameTag.numbers, GameTag.sums],
+  'between': [GameTag.numbers, GameTag.sums, GameTag.shade, GameTag.latin],
   'signs': [GameTag.numbers, GameTag.latin, GameTag.compare],
   'kings': [GameTag.place, GameTag.regions],
   'stars': [GameTag.place, GameTag.regions],
@@ -154,6 +155,7 @@ const Map<String, List<String>> gameAliases = {
     'Кілер-судоку',
   ],
   'skyline': ['Skyscrapers', 'Skyscraper', 'Towers', 'Buildings', 'Хмарочоси', 'Drapacze chmur', 'Wolkenkratzer'],
+  'between': ['Doppelblock', 'Between Sums', 'Double Block', 'Доппельблок', 'Допельблок'],
   'totals': ['Kakuro', 'Cross Sums', 'Cross Sum', 'Kreuzsummen', 'Какуро'],
   'cages': ['KenKen', 'Ken Ken', 'Calcudoku', 'Mathdoku', 'KenDoku', 'Inky', 'Кенкен', 'Калькудоку'],
   'signs': [

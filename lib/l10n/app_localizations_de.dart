@@ -7748,4 +7748,168 @@ class AppLocalizationsDe extends AppLocalizations {
   String exQuarryFailNoPiece(Object cell) {
     return 'Aber dann passt kein Stein über das geschwärzte $cell.';
   }
+
+  @override
+  String get betweenName => 'Klammern';
+
+  @override
+  String get betweenTagline => 'Addiere die Zahlen zwischen den geschwärzten Feldern';
+
+  @override
+  String get betweenRules =>
+      '• Schwärze in jeder Zeile und jeder Spalte genau zwei Felder.\n• Fülle die übrigen Felder mit den Zahlen 1 bis N−2 (N = Gittergröße), jede einmal pro Zeile und Spalte.\n• Eine Zahl links einer Zeile oder über einer Spalte ist die Summe der Zahlen zwischen ihren beiden geschwärzten Feldern (0, wenn sie sich berühren).\n\nWähle das Schwärzen oder eine Zahl in der Palette und tippe auf Felder, um sie zu setzen, oder tippe zuerst auf ein Feld und dann auf einen Wert. Die Stift-Taste schaltet kleine Notizen um. Langes Drücken / Rechtsklick leert ein Feld.';
+
+  @override
+  String get tutBetween1 =>
+      'Jede Zeile und jede Spalte hat zwei geschwärzte Felder und die Zahlen 1, 2 und 3 je einmal. Wähle das Schwärzen oder eine Zahl in der Palette und fülle die leeren Felder.';
+
+  @override
+  String get tutBetween2 =>
+      'Eine Zahl links einer Zeile oder über einer Spalte ist die Summe der Zahlen zwischen ihren beiden geschwärzten Feldern. Eine 0 setzt sie nebeneinander. Die größte Summe, 1 + 2 + 3 = 6, braucht alle Zahlen dazwischen, also stehen sie an beiden Enden. Löse das Gitter.';
+
+  @override
+  String get tutBetween3 =>
+      'Sobald die geschwärzten Felder einer Zeile feststehen, sagt ihr Hinweis, welche Zahlen dazwischen liegen, und die übrigen Zahlen kommen nach außen. Löse das Gitter.';
+
+  @override
+  String get tutBetween4 =>
+      'Jetzt ein ganzes Gitter. Überleg, wo die geschwärzten Felder liegen können, damit die Zahlen dazwischen den Hinweis ergeben, und notiere mit dem Stift, was in einem Feld noch stehen kann.';
+
+  @override
+  String get tutBetweenS1 =>
+      'Kommst du nicht weiter? Nimm eine Zeile oder Spalte mit Hinweis und geh alle Arten durch, ihre geschwärzten Felder und die Zahlen dazwischen passend zu deinen Notizen zu setzen. Ein Wert, der nie in einem Feld landet, kann dort gestrichen werden.';
+
+  @override
+  String get tutBetweenS2 =>
+      'Die schwersten Gitter brauchen eine Annahme, die sich widerlegen lässt. Nimm an, ein Feld hat einen seiner letzten zwei oder drei Werte (Schwärzen zählt mit), und denk weiter; führt das zu einem Widerspruch, streich den Wert.';
+
+  @override
+  String exBetweenTwoShaded(Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return '$cell ist nicht geschwärzt: $_temp0 hat schon ihre zwei geschwärzten Felder.';
+  }
+
+  @override
+  String exBetweenNaked(Object cell, Object value) {
+    return 'In $cell muss $value stehen: alles andere ist dort ausgeschlossen.';
+  }
+
+  @override
+  String exBetweenHidden(Object cell, Object value, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'In $cell muss $value stehen: es ist der einzige Platz für $value in $_temp0.';
+  }
+
+  @override
+  String exBetweenShadePair(Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return '$cell ist geschwärzt: es ist eines der nur noch zwei Felder von $_temp0, die es sein können.';
+  }
+
+  @override
+  String exBetweenSpan(Object cell, Object line, String kind, Object sum) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return '$cell ist nicht geschwärzt: $_temp0 hat $sum zwischen ihren geschwärzten Feldern, und kein Feld, das geschwärzt sein könnte, liegt so weit davon entfernt, dass dafür Platz bleibt.';
+  }
+
+  @override
+  String exBetweenSumOut(Object line, String kind, Object sum, Object digits, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'Damit zwischen den geschwärzten Feldern von $_temp0 $sum herauskommt, können dort nur $digits stehen, also ist $cell nicht $gone.';
+  }
+
+  @override
+  String exBetweenSumIn(Object line, String kind, Object sum, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'Jede Art, $sum zwischen den geschwärzten Feldern von $_temp0 zu bilden, braucht $gone, also ist $cell, außerhalb davon, nicht $gone.';
+  }
+
+  @override
+  String exBetweenLine(Object line, String kind, Object sum, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'Keine Art, $_temp0 mit $sum zwischen den geschwärzten Feldern zu füllen, setzt $gone in $cell.';
+  }
+
+  @override
+  String exBetweenFailEmpty(Object cell) {
+    return 'Aber dann bleibt für $cell nichts übrig.';
+  }
+
+  @override
+  String exBetweenFailNoPlace(Object value, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'Aber dann hat $value keinen Platz mehr in $_temp0.';
+  }
+
+  @override
+  String exBetweenFailShade(Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'Aber dann kann $_temp0 keine zwei geschwärzten Felder haben.';
+  }
+
+  @override
+  String exBetweenFailLine(Object line, String kind, Object sum) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $line',
+        'other': 'Spalte $line',
+      },
+    );
+    return 'Aber dann kann $_temp0 nicht mehr $sum zwischen ihren geschwärzten Feldern haben.';
+  }
 }

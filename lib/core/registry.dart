@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../puzzles/arrows/arrows_type.dart';
 import '../puzzles/atoms/atoms_type.dart';
 import '../puzzles/blockade/blockade_type.dart';
+import '../puzzles/between/between_type.dart';
 import '../puzzles/blocks/blocks_type.dart';
 import '../puzzles/cages/cages_type.dart';
 import '../puzzles/chambers/chambers_type.dart';
@@ -78,6 +79,7 @@ const List<PuzzleType> puzzleTypes = [
   CagesType(),
   SignsType(),
   TotalsType(),
+  BetweenType(),
   KingsType(),
   StarsType(),
   BlocksType(),
@@ -207,6 +209,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('sudokus', [SudokuType(), PocketsType()]),
       PuzzleFamily('latin', [SkylineType(), CagesType(), SignsType()]),
       PuzzleFamily('totals', [TotalsType()]),
+      PuzzleFamily('between', [BetweenType()]),
       PuzzleFamily('blocks', [BlocksType()]),
       PuzzleFamily('tally', [TallyType()]),
       PuzzleFamily('solo', [SoloType()]),

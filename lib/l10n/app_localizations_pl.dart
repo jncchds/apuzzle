@@ -7812,4 +7812,168 @@ class AppLocalizationsPl extends AppLocalizations {
   String exQuarryFailNoPiece(Object cell) {
     return 'Ale wtedy żaden kamień nie mieści się na zamalowanym $cell.';
   }
+
+  @override
+  String get betweenName => 'Nawiasy';
+
+  @override
+  String get betweenTagline => 'Zsumuj liczby między zamalowanymi polami';
+
+  @override
+  String get betweenRules =>
+      '• Zamaluj dokładnie dwa pola w każdym wierszu i kolumnie.\n• Pozostałe pola wypełnij liczbami od 1 do N−2 (N = rozmiar siatki), każdą raz w wierszu i kolumnie.\n• Liczba na lewo od wiersza lub nad kolumną to suma liczb między jej dwoma zamalowanymi polami (0, gdy się stykają).\n\nWybierz zamalowanie lub liczbę z palety i dotykaj pól, aby ją wpisać, albo najpierw dotknij pola, a potem wartości. Przycisk ołówka włącza małe notatki. Długie naciśnięcie / prawy przycisk czyści pole.';
+
+  @override
+  String get tutBetween1 =>
+      'W każdym wierszu i kolumnie są dwa zamalowane pola oraz liczby 1, 2 i 3, każda raz. Wybierz zamalowanie lub liczbę z palety i wypełnij puste pola.';
+
+  @override
+  String get tutBetween2 =>
+      'Liczba na lewo od wiersza lub nad kolumną to suma liczb między jej dwoma zamalowanymi polami. 0 stawia je obok siebie. Największa suma, 1 + 2 + 3 = 6, wymaga wszystkich liczb między nimi, więc stoją na obu końcach. Dokończ planszę.';
+
+  @override
+  String get tutBetween3 =>
+      'Gdy zamalowane pola wiersza są znane, jego wskazówka mówi, które liczby leżą między nimi, a pozostałe liczby idą na zewnątrz. Dokończ planszę.';
+
+  @override
+  String get tutBetween4 =>
+      'Teraz cała plansza. Zastanów się, gdzie mogą leżeć zamalowane pola, by liczby między nimi dały wskazówkę, i notuj ołówkiem, co jeszcze może stać w polu.';
+
+  @override
+  String get tutBetweenS1 =>
+      'Utknąłeś? Weź wiersz lub kolumnę ze wskazówką i przejrzyj wszystkie sposoby rozmieszczenia jej zamalowanych pól i liczb między nimi, które pasują do twoich notatek. Wartość, która nigdy nie trafia do pola, można tam skreślić.';
+
+  @override
+  String get tutBetweenS2 =>
+      'Najtrudniejsze plansze wymagają założenia, które da się obalić. Załóż, że w polu jest jedna z dwóch lub trzech ostatnich wartości (zamalowanie też się liczy), i rozumuj dalej; jeśli dojdziesz do sprzeczności, skreśl tę wartość.';
+
+  @override
+  String exBetweenTwoShaded(Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersz $line',
+        'other': 'kolumna $line',
+      },
+    );
+    return '$cell nie jest zamalowane: $_temp0 ma już dwa zamalowane pola.';
+  }
+
+  @override
+  String exBetweenNaked(Object cell, Object value) {
+    return 'W $cell musi być $value: wszystko inne jest tam wykluczone.';
+  }
+
+  @override
+  String exBetweenHidden(Object cell, Object value, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'w wierszu $line',
+        'other': 'w kolumnie $line',
+      },
+    );
+    return 'W $cell musi być $value: to jedyne miejsce na $value $_temp0.';
+  }
+
+  @override
+  String exBetweenShadePair(Object cell, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersza $line',
+        'other': 'kolumny $line',
+      },
+    );
+    return '$cell jest zamalowane: to jedno z dwóch pól $_temp0, które jeszcze można zamalować.';
+  }
+
+  @override
+  String exBetweenSpan(Object cell, Object line, String kind, Object sum) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersz $line',
+        'other': 'kolumna $line',
+      },
+    );
+    return '$cell nie jest zamalowane: $_temp0 ma $sum między zamalowanymi polami, a żadne pole, które można zamalować, nie leży od niego w takiej odległości, by na to starczyło miejsca.';
+  }
+
+  @override
+  String exBetweenSumOut(Object line, String kind, Object sum, Object digits, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersza $line',
+        'other': 'kolumny $line',
+      },
+    );
+    return 'Aby między zamalowanymi polami $_temp0 wyszło $sum, mogą tam stać tylko $digits, więc w $cell nie może być $gone.';
+  }
+
+  @override
+  String exBetweenSumIn(Object line, String kind, Object sum, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersza $line',
+        'other': 'kolumny $line',
+      },
+    );
+    return 'Każdy sposób na $sum między zamalowanymi polami $_temp0 używa $gone, więc w $cell, poza nimi, nie może być $gone.';
+  }
+
+  @override
+  String exBetweenLine(Object line, String kind, Object sum, Object cell, Object gone) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersza $line',
+        'other': 'kolumny $line',
+      },
+    );
+    return 'Żaden sposób wypełnienia $_temp0 z $sum między zamalowanymi polami nie stawia $gone w $cell.';
+  }
+
+  @override
+  String exBetweenFailEmpty(Object cell) {
+    return 'Ale wtedy dla $cell nic nie zostaje.';
+  }
+
+  @override
+  String exBetweenFailNoPlace(Object value, Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'w wierszu $line',
+        'other': 'w kolumnie $line',
+      },
+    );
+    return 'Ale wtedy $value nie ma już miejsca $_temp0.';
+  }
+
+  @override
+  String exBetweenFailShade(Object line, String kind) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersz $line',
+        'other': 'kolumna $line',
+      },
+    );
+    return 'Ale wtedy $_temp0 nie może mieć dwóch zamalowanych pól.';
+  }
+
+  @override
+  String exBetweenFailLine(Object line, String kind, Object sum) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersz $line',
+        'other': 'kolumna $line',
+      },
+    );
+    return 'Ale wtedy $_temp0 nie może już mieć $sum między zamalowanymi polami.';
+  }
 }
