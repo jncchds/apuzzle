@@ -21,6 +21,7 @@ Sudoku and Pockets are one family on the home screen, Sudoku; Skyline, Cages and
 | <img src="docs/screenshots/formula_dark.png" width="90" alt="Formula, dark theme"> | <img src="docs/screenshots/formula_light.png" width="90" alt="Formula, light theme"> | **Formula** | Guess the hidden equation in six tries. Every guess is a true equation, and each tile is marked as in place, elsewhere or not there. Six, eight or ten tiles wide; harder levels add × ÷, then brackets, squares and cubes. |
 | <img src="docs/screenshots/plots_dark.png" width="90" alt="Plots, dark theme"> | <img src="docs/screenshots/plots_light.png" width="90" alt="Plots, light theme"> | **Plots** | Fill every cell with a number. Equal numbers that touch form a plot with exactly that many cells, and plots of the same size never touch. |
 | <img src="docs/screenshots/shikaku_dark.png" width="90" alt="Shikaku, dark theme"> | <img src="docs/screenshots/shikaku_light.png" width="90" alt="Shikaku, light theme"> | **Shikaku** | Split the grid into rectangles. Each holds one number equal to its area. |
+| <img src="docs/screenshots/parcels_dark.png" width="90" alt="Parcels, dark theme"> | <img src="docs/screenshots/parcels_light.png" width="90" alt="Parcels, light theme"> | **Parcels** | Draw borders to split the grid into regions that all have the same size, shown under the board. A number tells how many sides of its cell are borders, and the outline of the grid counts. |
 
 ## Logic grids
 

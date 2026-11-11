@@ -7000,4 +7000,206 @@ class AppLocalizationsUk extends AppLocalizations {
     );
     return 'Але тоді області не дають $_temp0 потрібної кількості зірок.';
   }
+
+  @override
+  String get parcelsName => 'Наділи';
+
+  @override
+  String get parcelsTagline => 'Поділіть землю на однакові наділи';
+
+  @override
+  String get parcelsRules =>
+      '• Поділіть сітку на області, усі такого розміру, як указано під полем.\n• Число показує, скільки з чотирьох сторін його клітинки — межі. Край сітки теж вважається межею.\n• Кожна межа лежить між двома різними областями.\n\nТоркніться між двома точками, щоб провести межу, ще раз — щоб позначити її хрестиком (ваша позначка «одна область»), і ще раз — щоб очистити. Проводьте від точки до точки, щоб малювати кілька меж, або стирати їх, якщо почати на межі. Область, замкнена в потрібному розмірі, затінюється.';
+
+  @override
+  String parcelsRegionCells(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Області по $count клітинки',
+      many: 'Області по $count клітинок',
+      few: 'Області по $count клітинки',
+      one: 'Області по $count клітинці',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tutParcels1 =>
+      'Поділіть сітку на області по 4 клітинки. Число показує, скільки сторін його клітинки — межі, і край сітки теж рахується. У цієї 1 вже є її єдина межа — край, тож три інші сторони відкриті: її область — чотири клітинки навколо неї. Торкніться між двома точками, щоб провести межу, або проведіть від точки до точки.';
+
+  @override
+  String get tutParcels2 =>
+      'Шматок, у якому вже 4 клітинки, замикається межами. Між двома шматками, які разом мали б понад 4 клітинки, проходить межа, а шматок, якому ще бракує клітинок і який має лише один вихід, мусить ним скористатися. Торкніться сторони двічі, щоб поставити хрестик: позначку, що обидві клітинки в одній області.';
+
+  @override
+  String get tutParcels4 =>
+      'Тепер ціле поле. Почніть із чисел, замикайте кожен шматок, що вже має всі клітинки, і розділяйте шматки, які стали б завеликими. Розмір областей указано під полем.';
+
+  @override
+  String get tutParcels3 =>
+      'Подумайте про всі способи, як шматок ще може вирости. У 2 в куті вже є обидві межі — край, тож її область бере клітинки праворуч і знизу. Тому шматку бракує ще однієї клітинки: якщо взяти клітинку з іншою 2, у тієї 2 стало б три межі, тож лишається тільки вниз.';
+
+  @override
+  String get tutParcelsS1 =>
+      'На справжньому полі: для шматка, якому ще треба рости, переберіть усі області потрібного розміру, якими він може стати, так, щоб числа в них були правильні. Сторона, що є межею в усіх них, — межа, а сторона всередині всіх них — відкрита.';
+
+  @override
+  String get tutParcelsS2 =>
+      'На складних полях іноді доводиться пробувати: припустіть, що сторона — межа або ні, і йдіть за правилами. Якщо це веде до суперечності, наприклад, у числа забагато меж або область не ділиться на цілі області, правильний інший варіант. Режим пояснень показує такі ланцюжки крок за кроком.';
+
+  @override
+  String exParcelsClueDone(Object edge, Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'уже має всі свої межі ($count)',
+      one: 'уже має свою єдину межу',
+      zero: 'показує 0, тож жодна з її сторін не межа',
+    );
+    return '$edge — не межа: $cell $_temp0.';
+  }
+
+  @override
+  String exParcelsClueNeed(Object edge, Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count межі',
+      many: '$count меж',
+      few: '$count межі',
+      one: 'одну межу',
+    );
+    return '$edge — межа: $cell потрібно $_temp0, і саме стільки її сторін ще можуть нею бути.';
+  }
+
+  @override
+  String exParcelsSamePiece(Object edge, Object a, Object b) {
+    return '$edge — не межа: $a і $b уже в одній області.';
+  }
+
+  @override
+  String exParcelsPieceFull(Object edge, Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинок',
+      one: '$count клітинки',
+    );
+    return '$edge — межа: $cells уже складають цілу область із $_temp0.';
+  }
+
+  @override
+  String exParcelsTooBig(Object edge, Object a, Object b, int total, int count) {
+    return '$edge — межа: $a і $b разом мали б $total клітинок, більше, ніж $count в області.';
+  }
+
+  @override
+  String exParcelsOneWayOut(Object edge, Object cells, int count) {
+    return '$edge — не межа: $cells ще бракує клітинок до $count, і це їхній єдиний вихід.';
+  }
+
+  @override
+  String exParcelsEveryWayBorder(Object edge, Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинок',
+      one: '$count клітинки',
+    );
+    return '$edge — межа: за будь-якого способу виростити з $cells область із $_temp0 там проходить межа.';
+  }
+
+  @override
+  String exParcelsEveryWayOpen(Object edge, Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинок',
+      one: '$count клітинки',
+    );
+    return '$edge — не межа: будь-який спосіб виростити з $cells область із $_temp0 проходить крізь неї.';
+  }
+
+  @override
+  String exParcelsFailClue(Object cell) {
+    return 'Але тоді $cell не може отримати потрібну кількість меж.';
+  }
+
+  @override
+  String exParcelsFailBig(Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинки',
+      one: '$count клітинку',
+    );
+    return 'Але тоді $cells були б однією областю, у якій понад $_temp0.';
+  }
+
+  @override
+  String exParcelsFailInside(Object a, Object b) {
+    return 'Але тоді межа проходила б усередині однієї області, між $a і $b.';
+  }
+
+  @override
+  String exParcelsFailArea(Object cell, int total, int count) {
+    return 'Але тоді ділянку з $cell замкнено на $total клітинках, які не діляться на області по $count.';
+  }
+
+  @override
+  String exParcelsFailNoWay(Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count клітинки',
+      many: '$count клітинок',
+      few: '$count клітинок',
+      one: '$count клітинки',
+    );
+    return 'Але тоді з $cells не виросте область із $_temp0.';
+  }
+
+  @override
+  String exParcelsSupposeBorder(Object edge) {
+    return 'Припустімо, що $edge — межа.';
+  }
+
+  @override
+  String exParcelsSupposeOpen(Object edge) {
+    return 'Припустімо, що $edge — не межа.';
+  }
+
+  @override
+  String exParcelsRefutedBorder(Object edge) {
+    return '$edge — не межа: межа там веде до суперечності.';
+  }
+
+  @override
+  String exParcelsRefutedOpen(Object edge) {
+    return '$edge — межа: якщо лишити її відкритою, виникає суперечність.';
+  }
+
+  @override
+  String exParcelsGoOn(Object edge, Object other) {
+    return '$edge — межа: межа біля $other не може просто обірватися, і це єдиний шлях, яким вона може йти далі.';
+  }
+
+  @override
+  String exParcelsNoEnd(Object edge) {
+    return '$edge — не межа: інші сторони, що сходяться на її кінці, відкриті, тож межа там просто обірвалася б.';
+  }
+
+  @override
+  String exParcelsFailEnd(Object cells) {
+    return 'Але тоді межа обірвалася б там, де сходяться $cells.';
+  }
 }

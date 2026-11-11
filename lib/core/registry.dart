@@ -38,6 +38,7 @@ import '../puzzles/nightfall/nightfall_type.dart';
 import '../puzzles/orbits/orbits_type.dart';
 import '../puzzles/pebbles/pebbles_type.dart';
 import '../puzzles/pairs/pairs_type.dart';
+import '../puzzles/parcels/parcels_type.dart';
 import '../puzzles/pearls/pearls_type.dart';
 import '../puzzles/plots/plots_type.dart';
 import '../puzzles/pockets/pockets_type.dart';
@@ -97,6 +98,7 @@ const List<PuzzleType> puzzleTypes = [
   PipesType(),
   ChannelType(),
   ShikakuType(),
+  ParcelsType(),
   PlotsType(),
   OrbitsType(),
   InlayType(),
@@ -202,6 +204,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('formula', [FormulaType()]),
       PuzzleFamily('plots', [PlotsType()]),
       PuzzleFamily('shikaku', [ShikakuType()]),
+      PuzzleFamily('parcels', [ParcelsType()]),
     ],
   ),
   PuzzleCategory(

@@ -8834,6 +8834,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then the regions can\'t give {kind, select, row{row {from}} rows{rows {from}–{to}} col{column {from}} other{columns {from}–{to}}} the right number of stars.'**
   String exStarsFailBand(String kind, Object from, Object to);
+
+  /// No description provided for @parcelsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Parcels'**
+  String get parcelsName;
+
+  /// No description provided for @parcelsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Split the land into plots of one size'**
+  String get parcelsTagline;
+
+  /// No description provided for @parcelsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Divide the grid into regions that all have the size shown under the board.\n• A number tells how many of its cell\'s four sides are borders. The outline of the grid counts as a border.\n• Every border lies between two different regions.\n\nTap between two dots to draw a border, tap again to mark it with a cross (your \"same region\" note), and once more to clear it. Drag from dot to dot to draw several borders, or to erase them if you start on one. A region closed off at the right size is shaded.'**
+  String get parcelsRules;
+
+  /// No description provided for @parcelsRegionCells.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{Regions of {count} cell} other{Regions of {count} cells}}'**
+  String parcelsRegionCells(int count);
+
+  /// No description provided for @tutParcels1.
+  ///
+  /// In en, this message translates to:
+  /// **'Divide the grid into regions of 4 cells. A number tells how many sides of its cell are borders, and the outline counts. This 1 already has its one border, the outline, so its other three sides are open: its region is the four cells around it. Tap between two dots to draw a border, or drag from dot to dot.'**
+  String get tutParcels1;
+
+  /// No description provided for @tutParcels2.
+  ///
+  /// In en, this message translates to:
+  /// **'A piece that has its 4 cells is closed off by borders. Two pieces that together would have more than 4 cells get a border between them, and a piece that still needs cells but has one way out must take it. Tap a side twice for a cross: your note that both cells share a region.'**
+  String get tutParcels2;
+
+  /// No description provided for @tutParcels4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a whole board. Start at the numbers, close off every piece that has its cells, and split pieces that would grow too big. The size of the regions is shown under the board.'**
+  String get tutParcels4;
+
+  /// No description provided for @tutParcels3.
+  ///
+  /// In en, this message translates to:
+  /// **'Think of every way a piece can still grow. The 2 in the corner already has its two borders, the outline, so its region takes the cells right of it and below it. That piece needs one more cell: taking the cell with the other 2 would give that 2 three borders, so the only way left is down.'**
+  String get tutParcels3;
+
+  /// No description provided for @tutParcelsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'On a real board: for a piece that still has to grow, go through every region of the right size it could become, keeping the numbers inside it right. A side that is a border in all of them is a border, and a side inside all of them is open.'**
+  String get tutParcelsS1;
+
+  /// No description provided for @tutParcelsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'On hard boards you sometimes have to try: suppose a side is a border, or isn\'t, and follow the rules. If that leads to a contradiction, such as a number with too many borders or an area that can\'t be split into whole regions, the other choice is right. Explain mode shows such chains step by step.'**
+  String get tutParcelsS2;
+
+  /// No description provided for @exParcelsClueDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is no border: {cell} {count, plural, =0{shows 0, so none of its sides is a border} =1{already has its one border} =2{already has both of its borders} other{already has all {count} of its borders}}.'**
+  String exParcelsClueDone(Object edge, Object cell, int count);
+
+  /// No description provided for @exParcelsClueNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a border: {cell} needs {count, plural, =1{a border} other{{count} borders}}, and only that many of its sides can still be one.'**
+  String exParcelsClueNeed(Object edge, Object cell, int count);
+
+  /// No description provided for @exParcelsSamePiece.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is no border: {a} and {b} are in one region already.'**
+  String exParcelsSamePiece(Object edge, Object a, Object b);
+
+  /// No description provided for @exParcelsPieceFull.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a border: {cells} already make a whole region of {count, plural, =1{one cell} other{{count} cells}}.'**
+  String exParcelsPieceFull(Object edge, Object cells, int count);
+
+  /// No description provided for @exParcelsTooBig.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a border: {a} and {b} together would have {total} cells, more than a region\'s {count}.'**
+  String exParcelsTooBig(Object edge, Object a, Object b, int total, int count);
+
+  /// No description provided for @exParcelsOneWayOut.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is no border: {cells} still need more cells to make {count}, and this is their only way out.'**
+  String exParcelsOneWayOut(Object edge, Object cells, int count);
+
+  /// No description provided for @exParcelsEveryWayBorder.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a border: every way {cells} can grow into a region of {count, plural, =1{one cell} other{{count} cells}} has a border there.'**
+  String exParcelsEveryWayBorder(Object edge, Object cells, int count);
+
+  /// No description provided for @exParcelsEveryWayOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is no border: every way {cells} can grow into a region of {count, plural, =1{one cell} other{{count} cells}} goes through it.'**
+  String exParcelsEveryWayOpen(Object edge, Object cells, int count);
+
+  /// No description provided for @exParcelsFailClue.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cell} can\'t get the right number of borders.'**
+  String exParcelsFailClue(Object cell);
+
+  /// No description provided for @exParcelsFailBig.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cells} would be one region with more than {count, plural, =1{one cell} other{{count} cells}}.'**
+  String exParcelsFailBig(Object cells, int count);
+
+  /// No description provided for @exParcelsFailInside.
+  ///
+  /// In en, this message translates to:
+  /// **'But then a border would run inside one region, between {a} and {b}.'**
+  String exParcelsFailInside(Object a, Object b);
+
+  /// No description provided for @exParcelsFailArea.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the area with {cell} is closed off at {total} cells, which don\'t split into regions of {count}.'**
+  String exParcelsFailArea(Object cell, int total, int count);
+
+  /// No description provided for @exParcelsFailNoWay.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {cells} can\'t grow into a region of {count, plural, =1{one cell} other{{count} cells}}.'**
+  String exParcelsFailNoWay(Object cells, int count);
+
+  /// No description provided for @exParcelsSupposeBorder.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {edge} were a border.'**
+  String exParcelsSupposeBorder(Object edge);
+
+  /// No description provided for @exParcelsSupposeOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {edge} were no border.'**
+  String exParcelsSupposeOpen(Object edge);
+
+  /// No description provided for @exParcelsRefutedBorder.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is no border: a border there leads to a contradiction.'**
+  String exParcelsRefutedBorder(Object edge);
+
+  /// No description provided for @exParcelsRefutedOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a border: leaving it open leads to a contradiction.'**
+  String exParcelsRefutedOpen(Object edge);
+
+  /// No description provided for @exParcelsGoOn.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is a border: the border at {other} can\'t just end there, and this is the only way it can go on.'**
+  String exParcelsGoOn(Object edge, Object other);
+
+  /// No description provided for @exParcelsNoEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'{edge} is no border: the other sides meeting at its end are open, so a border there would just end.'**
+  String exParcelsNoEnd(Object edge);
+
+  /// No description provided for @exParcelsFailEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'But then a border would just end where {cells} meet.'**
+  String exParcelsFailEnd(Object cells);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

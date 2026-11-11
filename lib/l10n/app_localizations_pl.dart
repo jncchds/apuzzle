@@ -6982,4 +6982,194 @@ class AppLocalizationsPl extends AppLocalizations {
     );
     return 'Ale wtedy obszary nie dają $_temp0 właściwej liczby gwiazd.';
   }
+
+  @override
+  String get parcelsName => 'Parcele';
+
+  @override
+  String get parcelsTagline => 'Podziel ziemię na równe parcele';
+
+  @override
+  String get parcelsRules =>
+      '• Podziel siatkę na obszary, wszystkie o wielkości podanej pod planszą.\n• Liczba mówi, ile z czterech boków jej pola to granice. Brzeg siatki też liczy się jako granica.\n• Każda granica leży między dwoma różnymi obszarami.\n\nDotknij między dwiema kropkami, aby narysować granicę, ponownie, aby oznaczyć ją krzyżykiem (twoja notatka „ten sam obszar”), i jeszcze raz, aby ją wyczyścić. Przeciągaj od kropki do kropki, aby rysować kilka granic albo je ścierać, jeśli zaczniesz na granicy. Obszar zamknięty w odpowiedniej wielkości jest cieniowany.';
+
+  @override
+  String parcelsRegionCells(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Obszary po $count pola',
+      many: 'Obszary po $count pól',
+      few: 'Obszary po $count pola',
+      one: 'Obszary po $count polu',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tutParcels1 =>
+      'Podziel siatkę na obszary po 4 pola. Liczba mówi, ile boków jej pola to granice, i brzeg siatki też się liczy. Ta 1 ma już swoją jedyną granicę, brzeg, więc jej trzy pozostałe boki są otwarte: jej obszar to cztery pola wokół niej. Dotknij między dwiema kropkami, aby narysować granicę, albo przeciągnij od kropki do kropki.';
+
+  @override
+  String get tutParcels2 =>
+      'Kawałek, który ma już 4 pola, zamykają granice. Dwa kawałki, które razem miałyby więcej niż 4 pola, dzieli granica, a kawałek, któremu brakuje pól i który ma tylko jedno wyjście, musi z niego skorzystać. Dotknij boku dwa razy, aby postawić krzyżyk: notatkę, że oba pola są w jednym obszarze.';
+
+  @override
+  String get tutParcels4 =>
+      'Teraz cała plansza. Zacznij od liczb, zamykaj każdy kawałek, który ma już swoje pola, i dziel kawałki, które urosłyby za bardzo. Wielkość obszarów jest podana pod planszą.';
+
+  @override
+  String get tutParcels3 =>
+      'Pomyśl o wszystkich sposobach, w jakie kawałek może jeszcze urosnąć. 2 w rogu ma już obie granice, brzeg, więc jej obszar bierze pola na prawo od niej i pod nią. Temu kawałkowi brakuje jeszcze jednego pola: pole z drugą 2 dałoby tej 2 trzy granice, więc zostaje tylko w dół.';
+
+  @override
+  String get tutParcelsS1 =>
+      'Na prawdziwej planszy: dla kawałka, który musi jeszcze urosnąć, przejrzyj wszystkie obszary właściwej wielkości, jakimi może się stać, tak by liczby w nich się zgadzały. Bok, który jest granicą we wszystkich, jest granicą, a bok wewnątrz wszystkich jest otwarty.';
+
+  @override
+  String get tutParcelsS2 =>
+      'Na trudnych planszach czasem trzeba spróbować: załóż, że bok jest granicą albo nie, i idź za regułami. Jeśli to prowadzi do sprzeczności, na przykład liczba ma za dużo granic albo obszaru nie da się podzielić na całe obszary, słuszny jest drugi wybór. Tryb wyjaśnień pokazuje takie łańcuchy krok po kroku.';
+
+  @override
+  String exParcelsClueDone(Object edge, Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ma już wszystkie swoje granice ($count)',
+      one: 'ma już swoją jedyną granicę',
+      zero: 'pokazuje 0, więc żaden z jej boków nie jest granicą',
+    );
+    return '$edge to nie granica: $cell $_temp0.';
+  }
+
+  @override
+  String exParcelsClueNeed(Object edge, Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count granic',
+      one: 'jednej granicy',
+    );
+    return '$edge to granica: $cell potrzebuje $_temp0, a tylko tyle jej boków może nią jeszcze być.';
+  }
+
+  @override
+  String exParcelsSamePiece(Object edge, Object a, Object b) {
+    return '$edge to nie granica: $a i $b są już w jednym obszarze.';
+  }
+
+  @override
+  String exParcelsPieceFull(Object edge, Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól',
+      one: '1 pola',
+    );
+    return '$edge to granica: $cells tworzą już cały obszar z $_temp0.';
+  }
+
+  @override
+  String exParcelsTooBig(Object edge, Object a, Object b, int total, int count) {
+    return '$edge to granica: $a i $b miałyby razem $total pól, więcej niż $count w obszarze.';
+  }
+
+  @override
+  String exParcelsOneWayOut(Object edge, Object cells, int count) {
+    return '$edge to nie granica: $cells brakuje jeszcze pól do $count, a to ich jedyne wyjście.';
+  }
+
+  @override
+  String exParcelsEveryWayBorder(Object edge, Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól',
+      one: '1 pola',
+    );
+    return '$edge to granica: przy każdym sposobie, w jaki $cells mogą urosnąć w obszar z $_temp0, jest tam granica.';
+  }
+
+  @override
+  String exParcelsEveryWayOpen(Object edge, Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól',
+      one: '1 pola',
+    );
+    return '$edge to nie granica: każdy sposób, w jaki $cells mogą urosnąć w obszar z $_temp0, przez nią przechodzi.';
+  }
+
+  @override
+  String exParcelsFailClue(Object cell) {
+    return 'Ale wtedy $cell nie dostanie właściwej liczby granic.';
+  }
+
+  @override
+  String exParcelsFailBig(Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól',
+      one: '1 pola',
+    );
+    return 'Ale wtedy $cells byłyby jednym obszarem z więcej niż $_temp0.';
+  }
+
+  @override
+  String exParcelsFailInside(Object a, Object b) {
+    return 'Ale wtedy granica biegłaby wewnątrz jednego obszaru, między $a i $b.';
+  }
+
+  @override
+  String exParcelsFailArea(Object cell, int total, int count) {
+    return 'Ale wtedy teren z $cell jest zamknięty na $total polach, których nie da się podzielić na obszary po $count.';
+  }
+
+  @override
+  String exParcelsFailNoWay(Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pól',
+      one: '1 pola',
+    );
+    return 'Ale wtedy $cells nie urosną w obszar z $_temp0.';
+  }
+
+  @override
+  String exParcelsSupposeBorder(Object edge) {
+    return 'Załóżmy, że $edge to granica.';
+  }
+
+  @override
+  String exParcelsSupposeOpen(Object edge) {
+    return 'Załóżmy, że $edge to nie granica.';
+  }
+
+  @override
+  String exParcelsRefutedBorder(Object edge) {
+    return '$edge to nie granica: granica tam prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exParcelsRefutedOpen(Object edge) {
+    return '$edge to granica: pozostawienie jej otwartej prowadzi do sprzeczności.';
+  }
+
+  @override
+  String exParcelsGoOn(Object edge, Object other) {
+    return '$edge to granica: granica przy $other nie może się po prostu urwać, a to jedyna droga, którą może biec dalej.';
+  }
+
+  @override
+  String exParcelsNoEnd(Object edge) {
+    return '$edge to nie granica: pozostałe boki stykające się na jej końcu są otwarte, więc granica by się tam po prostu urwała.';
+  }
+
+  @override
+  String exParcelsFailEnd(Object cells) {
+    return 'Ale wtedy granica urwałaby się tam, gdzie stykają się $cells.';
+  }
 }

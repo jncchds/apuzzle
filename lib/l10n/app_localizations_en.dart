@@ -6951,4 +6951,193 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return 'But then the regions can\'t give $_temp0 the right number of stars.';
   }
+
+  @override
+  String get parcelsName => 'Parcels';
+
+  @override
+  String get parcelsTagline => 'Split the land into plots of one size';
+
+  @override
+  String get parcelsRules =>
+      '• Divide the grid into regions that all have the size shown under the board.\n• A number tells how many of its cell\'s four sides are borders. The outline of the grid counts as a border.\n• Every border lies between two different regions.\n\nTap between two dots to draw a border, tap again to mark it with a cross (your \"same region\" note), and once more to clear it. Drag from dot to dot to draw several borders, or to erase them if you start on one. A region closed off at the right size is shaded.';
+
+  @override
+  String parcelsRegionCells(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Regions of $count cells',
+      one: 'Regions of $count cell',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tutParcels1 =>
+      'Divide the grid into regions of 4 cells. A number tells how many sides of its cell are borders, and the outline counts. This 1 already has its one border, the outline, so its other three sides are open: its region is the four cells around it. Tap between two dots to draw a border, or drag from dot to dot.';
+
+  @override
+  String get tutParcels2 =>
+      'A piece that has its 4 cells is closed off by borders. Two pieces that together would have more than 4 cells get a border between them, and a piece that still needs cells but has one way out must take it. Tap a side twice for a cross: your note that both cells share a region.';
+
+  @override
+  String get tutParcels4 =>
+      'Now a whole board. Start at the numbers, close off every piece that has its cells, and split pieces that would grow too big. The size of the regions is shown under the board.';
+
+  @override
+  String get tutParcels3 =>
+      'Think of every way a piece can still grow. The 2 in the corner already has its two borders, the outline, so its region takes the cells right of it and below it. That piece needs one more cell: taking the cell with the other 2 would give that 2 three borders, so the only way left is down.';
+
+  @override
+  String get tutParcelsS1 =>
+      'On a real board: for a piece that still has to grow, go through every region of the right size it could become, keeping the numbers inside it right. A side that is a border in all of them is a border, and a side inside all of them is open.';
+
+  @override
+  String get tutParcelsS2 =>
+      'On hard boards you sometimes have to try: suppose a side is a border, or isn\'t, and follow the rules. If that leads to a contradiction, such as a number with too many borders or an area that can\'t be split into whole regions, the other choice is right. Explain mode shows such chains step by step.';
+
+  @override
+  String exParcelsClueDone(Object edge, Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'already has all $count of its borders',
+      two: 'already has both of its borders',
+      one: 'already has its one border',
+      zero: 'shows 0, so none of its sides is a border',
+    );
+    return '$edge is no border: $cell $_temp0.';
+  }
+
+  @override
+  String exParcelsClueNeed(Object edge, Object cell, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count borders',
+      one: 'a border',
+    );
+    return '$edge is a border: $cell needs $_temp0, and only that many of its sides can still be one.';
+  }
+
+  @override
+  String exParcelsSamePiece(Object edge, Object a, Object b) {
+    return '$edge is no border: $a and $b are in one region already.';
+  }
+
+  @override
+  String exParcelsPieceFull(Object edge, Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'one cell',
+    );
+    return '$edge is a border: $cells already make a whole region of $_temp0.';
+  }
+
+  @override
+  String exParcelsTooBig(Object edge, Object a, Object b, int total, int count) {
+    return '$edge is a border: $a and $b together would have $total cells, more than a region\'s $count.';
+  }
+
+  @override
+  String exParcelsOneWayOut(Object edge, Object cells, int count) {
+    return '$edge is no border: $cells still need more cells to make $count, and this is their only way out.';
+  }
+
+  @override
+  String exParcelsEveryWayBorder(Object edge, Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'one cell',
+    );
+    return '$edge is a border: every way $cells can grow into a region of $_temp0 has a border there.';
+  }
+
+  @override
+  String exParcelsEveryWayOpen(Object edge, Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'one cell',
+    );
+    return '$edge is no border: every way $cells can grow into a region of $_temp0 goes through it.';
+  }
+
+  @override
+  String exParcelsFailClue(Object cell) {
+    return 'But then $cell can\'t get the right number of borders.';
+  }
+
+  @override
+  String exParcelsFailBig(Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'one cell',
+    );
+    return 'But then $cells would be one region with more than $_temp0.';
+  }
+
+  @override
+  String exParcelsFailInside(Object a, Object b) {
+    return 'But then a border would run inside one region, between $a and $b.';
+  }
+
+  @override
+  String exParcelsFailArea(Object cell, int total, int count) {
+    return 'But then the area with $cell is closed off at $total cells, which don\'t split into regions of $count.';
+  }
+
+  @override
+  String exParcelsFailNoWay(Object cells, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells',
+      one: 'one cell',
+    );
+    return 'But then $cells can\'t grow into a region of $_temp0.';
+  }
+
+  @override
+  String exParcelsSupposeBorder(Object edge) {
+    return 'Suppose $edge were a border.';
+  }
+
+  @override
+  String exParcelsSupposeOpen(Object edge) {
+    return 'Suppose $edge were no border.';
+  }
+
+  @override
+  String exParcelsRefutedBorder(Object edge) {
+    return '$edge is no border: a border there leads to a contradiction.';
+  }
+
+  @override
+  String exParcelsRefutedOpen(Object edge) {
+    return '$edge is a border: leaving it open leads to a contradiction.';
+  }
+
+  @override
+  String exParcelsGoOn(Object edge, Object other) {
+    return '$edge is a border: the border at $other can\'t just end there, and this is the only way it can go on.';
+  }
+
+  @override
+  String exParcelsNoEnd(Object edge) {
+    return '$edge is no border: the other sides meeting at its end are open, so a border there would just end.';
+  }
+
+  @override
+  String exParcelsFailEnd(Object cells) {
+    return 'But then a border would just end where $cells meet.';
+  }
 }
