@@ -51,7 +51,7 @@ class WedgesType extends ValueGridType<WedgesPuzzle> {
     _ => const GridSize.square(9),
   };
   @override
-  Day get dailySince => const Day(2026, 11, 13);
+  Day get dailySince => const Day(2026, 11, 12);
 
   @override
   List<ValueSpec> get values => [

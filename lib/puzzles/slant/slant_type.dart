@@ -56,7 +56,7 @@ class SlantType extends ValueGridType<SlantPuzzle> {
     _ => const GridSize.square(8),
   };
   @override
-  Day get dailySince => const Day(2026, 11, 13);
+  Day get dailySince => const Day(2026, 11, 12);
 
   @override
   List<ValueSpec> get values => [
