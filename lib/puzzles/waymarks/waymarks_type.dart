@@ -216,7 +216,8 @@ class _WaymarksBoardState extends State<_WaymarksBoard> {
     }
     final errors = ctrl.errorCells;
     final active = ctrl.solved ? -1 : (_dragFrom >= 0 ? _dragFrom : _picked);
-    final aims = active >= 0 ? {...p.targets[active], ...p.sources[active]} : const <int>{};
+    final after = active >= 0 ? p.targets[active].toSet() : const <int>{};
+    final before = active >= 0 ? p.sources[active].toSet() : const <int>{};
     return CellGridBoard(
       explain: ExplainView.of(ctrl),
       rows: p.n,
@@ -239,7 +240,8 @@ class _WaymarksBoardState extends State<_WaymarksBoard> {
               tint: tint,
               label: label,
               active: active,
-              aims: aims,
+              after: after,
+              before: before,
               from: _dragFrom,
               finger: _finger,
               scheme: scheme,
@@ -284,7 +286,8 @@ class _WaymarksPainter extends CustomPainter {
     required this.tint,
     required this.label,
     required this.active,
-    required this.aims,
+    required this.after,
+    required this.before,
     required this.from,
     required this.finger,
     required this.scheme,
@@ -297,7 +300,12 @@ class _WaymarksPainter extends CustomPainter {
   final List<int> tint;
   final List<String> label;
   final int active;
-  final Set<int> aims;
+
+  /// Cells the picked cell's arrow points at (they can come right after it).
+  final Set<int> after;
+
+  /// Cells whose arrows point at the picked cell (they can come right before it).
+  final Set<int> before;
   final int from;
   final Offset? finger;
   final ColorScheme scheme;
@@ -328,13 +336,12 @@ class _WaymarksPainter extends CustomPainter {
           ..strokeCap = StrokeCap.round,
       );
     }
-    // Where the picked cell can link: dots.
-    for (final j in aims) {
-      canvas.drawCircle(
-        m.topLeft(p.size.pos(j)) + Offset(cell * 0.5, cell * 0.86),
-        cell * 0.05,
-        Paint()..color = scheme.tertiary,
-      );
+    // Where the picked cell can link: a tint on cells that can come after
+    // it, stripes on cells that can come before it, both for either way.
+    for (final j in {...after, ...before}) {
+      final rect = RRect.fromRectAndRadius(m.topLeft(p.size.pos(j)) & Size(cell, cell), Radius.circular(cell * 0.12));
+      if (after.contains(j)) canvas.drawRRect(rect, Paint()..color = scheme.tertiary.withValues(alpha: 0.24));
+      if (before.contains(j)) _stripes(canvas, rect);
     }
     for (var i = 0; i < p.cells; i++) {
       final c = _at(i);
@@ -384,6 +391,21 @@ class _WaymarksPainter extends CustomPainter {
           ..strokeCap = StrokeCap.round,
       );
     }
+  }
+
+  /// Diagonal stripes across [rect].
+  void _stripes(Canvas canvas, RRect rect) {
+    final r = rect.outerRect;
+    final step = m.cell * 0.17;
+    final paint = Paint()
+      ..color = scheme.tertiary.withValues(alpha: 0.42)
+      ..strokeWidth = max(1.5, m.cell * 0.05);
+    canvas.save();
+    canvas.clipRRect(rect);
+    for (var x = -r.height; x < r.width; x += step) {
+      canvas.drawLine(Offset(r.left + x, r.bottom), Offset(r.left + x + r.height, r.top), paint);
+    }
+    canvas.restore();
   }
 
   /// A small arrow near the edge of the cell at [c], pointing along [d].

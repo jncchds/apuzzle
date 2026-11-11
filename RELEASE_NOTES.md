@@ -1,5 +1,8 @@
 # Release notes
 
+## 0.12.2 - 2026-11-11
+- Waymarks: when you pick a cell, the cells that can come right after it are shaded and the cells that can come right before it are striped (both for cells that can go either way), instead of small dots that a downward arrow could hide
+
 ## 0.12.1 - 2026-10-17
 - Sudoku: expert boards from 2026-10-18 draw on more techniques: Skyscraper, 2-String Kite, Empty Rectangle, finned X-Wing and W-Wing join X-Wing, Swordfish, Y-Wing and XYZ-Wing. Two new strategy lessons teach linked pairs and the W-Wing, and explain mode walks through every one
 
