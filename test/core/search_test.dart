@@ -56,7 +56,8 @@ void main() {
     expect(alt('yajilin'), ['arrows']);
     expect(alt('takuzu'), ['mambo']);
     expect(alt('binairo'), ['mambo']);
-    expect(alt('star battle'), ['kings']);
+    expect(alt('star battle'), ['stars']);
+    expect(alt('queens'), ['kings']);
     expect(alt('sumplete'), ['tally']);
     expect(alt('hitori'), ['solo']);
     expect(alt('heyawake'), ['chambers']);

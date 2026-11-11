@@ -1,6 +1,7 @@
 # Release notes
 
-## 0.12.2 - 2026-11-11
+## 0.13.0 - 2026-11-11
+- New game: Stars. Place two stars in every row, every column and every colored region, and no two stars may touch, not even diagonally. Crowns and Stars share a family page, Crowns. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - Waymarks: when you pick a cell, the cells that can come right after it and the cells that can come right before it are striped in opposite directions (crossed for cells that can go either way), instead of small dots that a downward arrow could hide
 
 ## 0.12.1 - 2026-10-17

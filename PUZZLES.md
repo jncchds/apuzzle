@@ -24,10 +24,13 @@ Sudoku and Pockets are one family on the home screen, Sudoku; Skyline, Cages and
 
 ## Logic grids
 
+Crowns and Stars are one family on the home screen, Crowns; Basins and Mercury are another, Filling.
+
 | Dark | Light | Puzzle | Goal |
 |---|---|---|---|
 | <img src="docs/screenshots/mambo_dark.png" width="90" alt="Sun & Moon, dark theme"> | <img src="docs/screenshots/mambo_light.png" width="90" alt="Sun & Moon, light theme"> | **Sun & Moon** | Fill every cell with a sun or a moon. No three of the same in a row, equal counts in every row and column, and `=` / `×` clues between cells. |
 | <img src="docs/screenshots/kings_dark.png" width="90" alt="Crowns, dark theme"> | <img src="docs/screenshots/kings_light.png" width="90" alt="Crowns, light theme"> | **Crowns** | Place one crown in every row, column and colored region. Crowns can't touch, not even diagonally. |
+| <img src="docs/screenshots/stars_dark.png" width="90" alt="Stars, dark theme"> | <img src="docs/screenshots/stars_light.png" width="90" alt="Stars, light theme"> | **Stars** | Place two stars in every row, every column and every colored region. Stars can't touch, not even diagonally. 9×9 and 10×10 grids. |
 | <img src="docs/screenshots/pairs_dark.png" width="90" alt="Pairs, dark theme"> | <img src="docs/screenshots/pairs_light.png" width="90" alt="Pairs, light theme"> | **Pairs** | Shade exactly two cells in every region. Shaded cells come in side-by-side pairs, and pairs never touch each other. |
 | <img src="docs/screenshots/hues_dark.png" width="90" alt="Hues, dark theme"> | <img src="docs/screenshots/hues_light.png" width="90" alt="Hues, light theme"> | **Hues** | Color the blank cells. Each number counts the blank cells around it (all 8 neighbors) that end up in its color. Supports pencil marks. |
 | <img src="docs/screenshots/lits_dark.png" width="90" alt="Tetra, dark theme"> | <img src="docs/screenshots/lits_light.png" width="90" alt="Tetra, light theme"> | **Tetra** | Shade one L, I, T or S tetromino in every region. The shaded area is connected, with no 2×2 blocks, and identical shapes never touch across region borders. |

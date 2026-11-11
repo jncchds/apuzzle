@@ -52,6 +52,7 @@ import '../puzzles/signs/signs_type.dart';
 import '../puzzles/skyline/skyline_type.dart';
 import '../puzzles/snake/snake_type.dart';
 import '../puzzles/solo/solo_type.dart';
+import '../puzzles/stars/stars_type.dart';
 import '../puzzles/sudoku/sudoku_type.dart';
 import '../puzzles/tally/tally_type.dart';
 import '../puzzles/totals/totals_type.dart';
@@ -72,6 +73,7 @@ const List<PuzzleType> puzzleTypes = [
   SignsType(),
   TotalsType(),
   KingsType(),
+  StarsType(),
   BlocksType(),
   TallyType(),
   SoloType(),
@@ -143,6 +145,7 @@ class PuzzleFamily {
     'memory' => l.famMemory,
     'plumbing' => l.famPlumbing,
     'filling' => l.famFilling,
+    'crowns' => l.famCrowns,
     _ => types.first.name(l),
   };
 
@@ -154,6 +157,7 @@ class PuzzleFamily {
     'memory' => l.famMemoryAbout,
     'plumbing' => l.famPlumbingAbout,
     'filling' => l.famFillingAbout,
+    'crowns' => l.famCrownsAbout,
     _ => types.first.tagline(l),
   };
 
@@ -206,7 +210,7 @@ const List<PuzzleCategory> puzzleCategories = [
     accent: Color(0xFFFFB86B),
     [
       PuzzleFamily('mambo', [MamboType()]),
-      PuzzleFamily('kings', [KingsType()]),
+      PuzzleFamily('crowns', [KingsType(), StarsType()]),
       PuzzleFamily('pairs', [PairsType()]),
       PuzzleFamily('hues', [HuesType()]),
       PuzzleFamily('lits', [LitsType()]),

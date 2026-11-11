@@ -6809,4 +6809,177 @@ class AppLocalizationsPl extends AppLocalizations {
     );
     return 'Ale wtedy $_temp0 i $_temp1 musiałyby być pomalowane każde po drugim.';
   }
+
+  @override
+  String get starsName => 'Gwiazdy';
+
+  @override
+  String get starsTagline => 'Dwie gwiazdy w wierszu, kolumnie i obszarze';
+
+  @override
+  String get starsRules =>
+      '• Umieść dokładnie dwie gwiazdy w każdym wierszu, każdej kolumnie i każdym kolorowym obszarze.\n• Gwiazdy nie mogą się stykać, nawet po przekątnej.\n\nDotknij pola, aby przełączać: puste → kropka (twoja notatka „tu nie ma gwiazdy”) → gwiazda. Prawy przycisk przełącza wstecz. Przesuń palcem po polach, aby oznaczyć je wszystkie naraz. Długie naciśnięcie stawia kropki na wszystkich polach, na których przez postawione gwiazdy nie może już być gwiazdy.';
+
+  @override
+  String get famCrowns => 'Korony';
+
+  @override
+  String get famCrownsAbout => 'Korony lub gwiazdy w każdym wierszu, kolumnie i obszarze, nigdy się nie stykają';
+
+  @override
+  String get tutStars1 =>
+      'Umieść dokładnie dwie gwiazdy w każdym wierszu, każdej kolumnie i każdym kolorowym obszarze. Gwiazdy się nie stykają, nawet rogami. Gwiazd brakuje tylko w podświetlonym wierszu: kolumny, które mają już dwie gwiazdy, i pola obok gwiazdy odpadają, więc zostają dwa pola. Dotknij każdego dwa razy: najpierw kropka, potem gwiazda.';
+
+  @override
+  String get tutStars2 =>
+      'Gwiazdy nigdy się nie stykają, nawet po przekątnej. Dotknij raz, aby postawić kropkę (notatkę „tu nie ma gwiazdy”) na każdym polu wokół tej gwiazdy.';
+
+  @override
+  String get tutStars3 =>
+      'Pozostałe pola tego wiersza odpadają i zostają trzy wolne pola obok siebie. Dwie gwiazdy, które nie mogą się stykać, mieszczą się tylko na końcach: postaw je.';
+
+  @override
+  String get tutStars4 =>
+      'Teraz cała plansza. Stawiaj kropki tam, gdzie gwiazd być nie może, szukaj wierszy, kolumn lub obszarów, w których wolnych pól jest dokładnie tyle, ile brakuje gwiazd, i trzech wolnych pól obok siebie, gdzie gwiazdy stoją na końcach. Długie naciśnięcie stawia kropki wszędzie, gdzie przez postawione gwiazdy gwiazd być nie może.';
+
+  @override
+  String get tutStarsS1 =>
+      'Licz obszary w pasach. Gdy dwa obszary leżą w całości w dwóch sąsiednich wierszach, potrzebują wszystkich czterech gwiazd tych wierszy, więc pozostałe pola obu wierszy dostają kropki. Tak samo działa z jednym lub trzema wierszami i z kolumnami. I odwrotnie: jeśli do dwóch wierszy sięgają tylko dwa obszary, nie mają one gwiazd poza tymi wierszami.';
+
+  @override
+  String get tutStarsS2 =>
+      'Zobacz, co zrobiłaby gwiazda. Gwiazda stawia kropki wokół siebie i liczy się do swojego wiersza, kolumny i obszaru. Jeśli wtedy jakiemuś wierszowi, kolumnie lub obszarowi zabrakłoby miejsca na potrzebne gwiazdy, w polu jest kropka. Spróbuj na polach obok małego obszaru.';
+
+  @override
+  String get tutStarsS3 =>
+      'Na trudnych planszach czasem trzeba spróbować: załóż, że w polu jest gwiazda, i idź za regułami. Jeśli prowadzi to do sprzeczności (dwie gwiazdy się stykają albo w wierszu brakuje miejsca), w polu jest kropka. Tryb wyjaśnień pokazuje takie łańcuchy krok po kroku.';
+
+  @override
+  String exStarsSuppose(Object cell) {
+    return 'Załóżmy, że w $cell jest gwiazda.';
+  }
+
+  @override
+  String exStarsRefuted(Object cell) {
+    return 'W $cell kropka: gwiazda prowadzi tam do sprzeczności.';
+  }
+
+  @override
+  String exStarsTouch(Object cell, Object a) {
+    return 'W $cell kropka: styka się z gwiazdą w $a.';
+  }
+
+  @override
+  String exStarsFull(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersz $unit ma',
+        'col': 'kolumna $unit ma',
+        'other': 'obszar z $unit ma',
+      },
+    );
+    return 'W $cell kropka: $_temp0 już obie gwiazdy.';
+  }
+
+  @override
+  String exStarsFill(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'w wierszu $unit',
+        'col': 'w kolumnie $unit',
+        'other': 'w obszarze z $unit',
+      },
+    );
+    return 'W $cell gwiazda: $_temp0 zostało dokładnie tyle wolnych pól, ile brakuje gwiazd.';
+  }
+
+  @override
+  String exStarsSqueeze(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wiersza $unit',
+        'col': 'kolumny $unit',
+        'other': 'obszaru z $unit',
+      },
+    );
+    return 'W $cell gwiazda: bez niego wolne pola $_temp0 nie pomieszczą dwóch niestykających się gwiazd.';
+  }
+
+  @override
+  String exStarsAttack(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wierszowi $unit',
+        'col': 'kolumnie $unit',
+        'other': 'obszarowi z $unit',
+      },
+    );
+    return 'W $cell kropka: gwiazda tam zostawiłaby $_temp0 za mało miejsca na gwiazdy.';
+  }
+
+  @override
+  String exStarsBandIn(Object cell, String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'w wierszu $from leży w całości obszar, więc zabiera obie gwiazdy wiersza',
+        'rows':
+            'w wierszach $from–$to leży w całości tyle obszarów, ile jest wierszy, więc zabierają wszystkie gwiazdy tych wierszy',
+        'col': 'w kolumnie $from leży w całości obszar, więc zabiera obie gwiazdy kolumny',
+        'other':
+            'w kolumnach $from–$to leży w całości tyle obszarów, ile jest kolumn, więc zabierają wszystkie gwiazdy tych kolumn',
+      },
+    );
+    return 'W $cell kropka: $_temp0.';
+  }
+
+  @override
+  String exStarsBandOut(Object cell, String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'do wiersza $from sięga tylko jeden obszar, więc obie jego gwiazdy są w tym wierszu',
+        'rows': 'do wierszy $from–$to sięga tylko tyle obszarów, ile jest wierszy, więc wszystkie ich gwiazdy są tam',
+        'col': 'do kolumny $from sięga tylko jeden obszar, więc obie jego gwiazdy są w tej kolumnie',
+        'other': 'do kolumn $from–$to sięga tylko tyle obszarów, ile jest kolumn, więc wszystkie ich gwiazdy są tam',
+      },
+    );
+    return 'W $cell kropka: $_temp0.';
+  }
+
+  @override
+  String exStarsFailEmpty(String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wierszowi $unit',
+        'col': 'kolumnie $unit',
+        'other': 'obszarowi z $unit',
+      },
+    );
+    return 'Ale wtedy $_temp0 brakuje miejsca na gwiazdy.';
+  }
+
+  @override
+  String exStarsFailClash(Object a, Object b) {
+    return 'Ale wtedy gwiazdy w $a i $b się stykają.';
+  }
+
+  @override
+  String exStarsFailBand(String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'wierszowi $from',
+        'rows': 'wierszom $from–$to',
+        'col': 'kolumnie $from',
+        'other': 'kolumnom $from–$to',
+      },
+    );
+    return 'Ale wtedy obszary nie dają $_temp0 właściwej liczby gwiazd.';
+  }
 }

@@ -44,6 +44,58 @@ class _CrownPainter extends CustomPainter {
   bool shouldRepaint(_CrownPainter old) => old.color != color;
 }
 
+/// A five-pointed star.
+class StarSymbol extends StatelessWidget {
+  const StarSymbol({super.key, required this.size, this.color});
+
+  final double size;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+    size: Size.square(size),
+    painter: _StarPainter(color ?? Theme.of(context).colorScheme.onSurface),
+  );
+}
+
+class _StarPainter extends CustomPainter {
+  _StarPainter(this.color);
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size s) {
+    final c = Offset(s.width / 2, s.height * 0.53);
+    final outer = s.width * 0.4, inner = outer * 0.42;
+    final p = Path();
+    for (var k = 0; k < 10; k++) {
+      final a = -pi / 2 + k * pi / 5;
+      final r = k.isEven ? outer : inner;
+      final pt = c + Offset(cos(a) * r, sin(a) * r);
+      k == 0 ? p.moveTo(pt.dx, pt.dy) : p.lineTo(pt.dx, pt.dy);
+    }
+    p.close();
+    canvas.drawPath(
+      p,
+      Paint()
+        ..color = color
+        ..strokeJoin = StrokeJoin.round
+        ..strokeWidth = s.width * 0.05
+        ..style = PaintingStyle.fill,
+    );
+    canvas.drawPath(
+      p,
+      Paint()
+        ..color = color
+        ..strokeJoin = StrokeJoin.round
+        ..strokeWidth = s.width * 0.05
+        ..style = PaintingStyle.stroke,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_StarPainter old) => old.color != color;
+}
+
 class DotSymbol extends StatelessWidget {
   const DotSymbol({super.key, required this.size, this.color});
   final double size;

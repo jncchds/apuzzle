@@ -6827,4 +6827,177 @@ class AppLocalizationsUk extends AppLocalizations {
     );
     return 'Але тоді $_temp0 і $_temp1 мали б бути пофарбовані кожен після іншого.';
   }
+
+  @override
+  String get starsName => 'Зірки';
+
+  @override
+  String get starsTagline => 'Дві зірки в рядку, стовпці й області';
+
+  @override
+  String get starsRules =>
+      '• Поставте рівно дві зірки в кожен рядок, кожен стовпець і кожну кольорову область.\n• Зірки не можуть торкатися одна одної, навіть по діагоналі.\n\nТоркніться клітинки, щоб перебрати: порожньо → крапка (ваша позначка «тут зірки немає») → зірка. Правий клік — у зворотному порядку. Проведіть пальцем по клітинках, щоб позначити їх усі одразу. Довге натискання ставить крапки в усіх клітинках, де через поставлені зірки зірки вже бути не може.';
+
+  @override
+  String get famCrowns => 'Корони';
+
+  @override
+  String get famCrownsAbout => 'Корони чи зірки в кожному рядку, стовпці й області, і жодні не торкаються';
+
+  @override
+  String get tutStars1 =>
+      'Поставте рівно дві зірки в кожен рядок, кожен стовпець і кожну кольорову область. Зірки не торкаються, навіть кутами. Зірок бракує лише у виділеному рядку: стовпці, де вже є дві зірки, і клітинки поруч із зіркою відпадають, тож лишаються дві клітинки. Торкніться кожної двічі: спершу крапка, потім зірка.';
+
+  @override
+  String get tutStars2 =>
+      'Зірки ніколи не торкаються, навіть по діагоналі. Торкніться один раз, щоб поставити крапку (позначку «тут зірки немає») на кожну клітинку навколо цієї зірки.';
+
+  @override
+  String get tutStars3 =>
+      'Решта клітинок цього рядка відпадає, і лишаються три вільні клітинки поспіль. Дві зірки, що не можуть торкатися, вміщаються лише на краях: поставте їх.';
+
+  @override
+  String get tutStars4 =>
+      'Тепер ціле поле. Ставте крапки там, де зірок бути не може, шукайте рядки, стовпці чи області, де вільних клітинок рівно стільки, скільки бракує зірок, і три вільні клітинки поспіль, де зірки стоять на краях. Довге натискання ставить крапки всюди, де через поставлені зірки зірок бути не може.';
+
+  @override
+  String get tutStarsS1 =>
+      'Рахуйте області в смугах. Коли дві області цілком лежать у двох сусідніх рядках, їм потрібні всі чотири зірки цих рядків, тож решта клітинок цих двох рядків отримує крапки. Так само з одним чи трьома рядками і зі стовпцями. І навпаки: якщо у два рядки заходять лише дві області, поза цими рядками зірок у них немає.';
+
+  @override
+  String get tutStarsS2 =>
+      'Подивіться, що зробила б зірка. Зірка ставить крапки навколо себе й рахується у своєму рядку, стовпці та області. Якщо тоді якомусь рядку, стовпцю чи області забракне місця для потрібних зірок, у клітинці крапка. Спробуйте на клітинках біля малої області.';
+
+  @override
+  String get tutStarsS3 =>
+      'На складних полях іноді доводиться пробувати: припустіть, що в клітинці зірка, і йдіть за правилами. Якщо це веде до суперечності (дві зірки торкаються або рядку бракує місця), у клітинці крапка. Режим пояснень показує такі ланцюжки крок за кроком.';
+
+  @override
+  String exStarsSuppose(Object cell) {
+    return 'Припустімо, що в $cell зірка.';
+  }
+
+  @override
+  String exStarsRefuted(Object cell) {
+    return 'У $cell крапка: зірка там веде до суперечності.';
+  }
+
+  @override
+  String exStarsTouch(Object cell, Object a) {
+    return 'У $cell крапка: вона торкається зірки в $a.';
+  }
+
+  @override
+  String exStarsFull(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'у рядку $unit',
+        'col': 'у стовпці $unit',
+        'other': 'в області з $unit',
+      },
+    );
+    return 'У $cell крапка: $_temp0 вже є обидві зірки.';
+  }
+
+  @override
+  String exStarsFill(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'у рядку $unit',
+        'col': 'у стовпці $unit',
+        'other': 'в області з $unit',
+      },
+    );
+    return 'У $cell зірка: $_temp0 лишилося рівно стільки вільних клітинок, скільки ще бракує зірок.';
+  }
+
+  @override
+  String exStarsSqueeze(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядка $unit',
+        'col': 'стовпця $unit',
+        'other': 'області з $unit',
+      },
+    );
+    return 'У $cell зірка: без неї вільні клітинки $_temp0 не вмістять двох зірок, що не торкаються.';
+  }
+
+  @override
+  String exStarsAttack(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядку $unit',
+        'col': 'стовпцю $unit',
+        'other': 'області з $unit',
+      },
+    );
+    return 'У $cell крапка: зірка там не лишила б $_temp0 місця для потрібних зірок.';
+  }
+
+  @override
+  String exStarsBandIn(Object cell, String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'у рядку $from цілком лежить область, тож вона забирає обидві зірки рядка',
+        'rows':
+            'у рядках $from–$to цілком лежить стільки областей, скільки там рядків, тож вони забирають усі зірки цих рядків',
+        'col': 'у стовпці $from цілком лежить область, тож вона забирає обидві зірки стовпця',
+        'other':
+            'у стовпцях $from–$to цілком лежить стільки областей, скільки там стовпців, тож вони забирають усі зірки цих стовпців',
+      },
+    );
+    return 'У $cell крапка: $_temp0.';
+  }
+
+  @override
+  String exStarsBandOut(Object cell, String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'у рядок $from заходить лише одна область, тож обидві її зірки в цьому рядку',
+        'rows': 'у рядки $from–$to заходить лише стільки областей, скільки там рядків, тож усі їхні зірки там',
+        'col': 'у стовпець $from заходить лише одна область, тож обидві її зірки в цьому стовпці',
+        'other': 'у стовпці $from–$to заходить лише стільки областей, скільки там стовпців, тож усі їхні зірки там',
+      },
+    );
+    return 'У $cell крапка: $_temp0.';
+  }
+
+  @override
+  String exStarsFailEmpty(String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядку $unit',
+        'col': 'стовпцю $unit',
+        'other': 'області з $unit',
+      },
+    );
+    return 'Але тоді $_temp0 бракує місця для зірок.';
+  }
+
+  @override
+  String exStarsFailClash(Object a, Object b) {
+    return 'Але тоді зірки в $a і $b торкаються.';
+  }
+
+  @override
+  String exStarsFailBand(String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'рядку $from',
+        'rows': 'рядкам $from–$to',
+        'col': 'стовпцю $from',
+        'other': 'стовпцям $from–$to',
+      },
+    );
+    return 'Але тоді області не дають $_temp0 потрібної кількості зірок.';
+  }
 }

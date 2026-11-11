@@ -6744,4 +6744,179 @@ class AppLocalizationsDe extends AppLocalizations {
     );
     return 'Aber dann wären $_temp0 und $_temp1 jeweils nach der anderen gestrichen worden.';
   }
+
+  @override
+  String get starsName => 'Sterne';
+
+  @override
+  String get starsTagline => 'Zwei Sterne pro Zeile, Spalte und Bereich';
+
+  @override
+  String get starsRules =>
+      '• Setze genau zwei Sterne in jede Zeile, jede Spalte und jeden farbigen Bereich.\n• Sterne dürfen sich nicht berühren, auch nicht diagonal.\n\nTippe auf ein Feld, um zu wechseln: leer → Punkt (deine Notiz „kein Stern hier“) → Stern. Rechtsklick wechselt zurück. Wische über Felder, um sie alle auf einmal zu markieren. Langes Drücken setzt Punkte in alle Felder, in denen wegen der gesetzten Sterne kein Stern mehr stehen kann.';
+
+  @override
+  String get famCrowns => 'Kronen';
+
+  @override
+  String get famCrownsAbout => 'Kronen oder Sterne in jeder Zeile, Spalte und jedem Bereich, die sich nie berühren';
+
+  @override
+  String get tutStars1 =>
+      'Setze genau zwei Sterne in jede Zeile, jede Spalte und jeden farbigen Bereich. Sterne berühren sich nicht, auch nicht an den Ecken. Nur der markierten Zeile fehlen noch Sterne: Spalten, die schon zwei haben, und Felder neben einem Stern fallen weg, also bleiben zwei Felder. Tippe jedes zweimal an: erst ein Punkt, dann ein Stern.';
+
+  @override
+  String get tutStars2 =>
+      'Sterne berühren sich nie, auch nicht diagonal. Tippe einmal, um einen Punkt (deine Notiz „kein Stern hier“) auf jedes Feld um diesen Stern zu setzen.';
+
+  @override
+  String get tutStars3 =>
+      'Die übrigen Felder dieser Zeile fallen weg, es bleiben drei freie Felder nebeneinander. Zwei Sterne, die sich nicht berühren dürfen, passen nur an die beiden Enden: setze sie.';
+
+  @override
+  String get tutStars4 =>
+      'Jetzt ein ganzes Brett. Setze Punkte, wo kein Stern hin kann, und suche Zeilen, Spalten oder Bereiche mit genau so vielen freien Feldern, wie noch Sterne fehlen, und drei freie Felder nebeneinander, bei denen die Sterne an die Enden kommen. Langes Drücken setzt Punkte überall, wo wegen der gesetzten Sterne keiner mehr hin kann.';
+
+  @override
+  String get tutStarsS1 =>
+      'Zähle Bereiche in Streifen. Liegen zwei Bereiche ganz in zwei benachbarten Zeilen, brauchen sie alle vier Sterne dieser Zeilen, also bekommen die übrigen Felder der beiden Zeilen Punkte. Das geht auch mit einer oder drei Zeilen und mit Spalten. Und umgekehrt: Reichen nur zwei Bereiche in zwei Zeilen hinein, haben diese Bereiche außerhalb davon keine Sterne.';
+
+  @override
+  String get tutStarsS2 =>
+      'Schau, was ein Stern anrichten würde. Ein Stern setzt Punkte um sich herum und zählt für seine Zeile, Spalte und seinen Bereich. Bliebe dann einer Zeile, Spalte oder einem Bereich zu wenig Platz für die Sterne, die noch fehlen, bekommt das Feld einen Punkt. Probiere es an Feldern neben einem kleinen Bereich.';
+
+  @override
+  String get tutStarsS3 =>
+      'Auf schweren Brettern musst du manchmal probieren: nimm an, ein Feld hätte einen Stern, und folge den Regeln. Führt das zu einem Widerspruch (zwei Sterne berühren sich oder einer Zeile fehlt der Platz), bekommt das Feld einen Punkt. Der Erklärmodus zeigt solche Ketten Schritt für Schritt.';
+
+  @override
+  String exStarsSuppose(Object cell) {
+    return 'Angenommen, in $cell stünde ein Stern.';
+  }
+
+  @override
+  String exStarsRefuted(Object cell) {
+    return '$cell bekommt einen Punkt: ein Stern dort führt zu einem Widerspruch.';
+  }
+
+  @override
+  String exStarsTouch(Object cell, Object a) {
+    return '$cell bekommt einen Punkt: es berührt den Stern in $a.';
+  }
+
+  @override
+  String exStarsFull(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $unit hat',
+        'col': 'Spalte $unit hat',
+        'other': 'der Bereich bei $unit hat',
+      },
+    );
+    return '$cell bekommt einen Punkt: $_temp0 schon beide Sterne.';
+  }
+
+  @override
+  String exStarsFill(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $unit hat',
+        'col': 'Spalte $unit hat',
+        'other': 'der Bereich bei $unit hat',
+      },
+    );
+    return '$cell bekommt einen Stern: $_temp0 nur noch so viele freie Felder, wie Sterne fehlen.';
+  }
+
+  @override
+  String exStarsSqueeze(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'von Zeile $unit',
+        'col': 'von Spalte $unit',
+        'other': 'des Bereichs bei $unit',
+      },
+    );
+    return '$cell bekommt einen Stern: ohne es fassen die freien Felder $_temp0 keine zwei Sterne, die sich nicht berühren.';
+  }
+
+  @override
+  String exStarsAttack(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'der Zeile $unit',
+        'col': 'der Spalte $unit',
+        'other': 'dem Bereich bei $unit',
+      },
+    );
+    return '$cell bekommt einen Punkt: ein Stern dort ließe $_temp0 zu wenig Platz für die fehlenden Sterne.';
+  }
+
+  @override
+  String exStarsBandIn(Object cell, String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'in Zeile $from liegt ein ganzer Bereich, der beide Sterne der Zeile braucht',
+        'rows':
+            'in den Zeilen $from–$to liegen so viele ganze Bereiche, wie es Zeilen sind, und sie brauchen alle Sterne dort',
+        'col': 'in Spalte $from liegt ein ganzer Bereich, der beide Sterne der Spalte braucht',
+        'other':
+            'in den Spalten $from–$to liegen so viele ganze Bereiche, wie es Spalten sind, und sie brauchen alle Sterne dort',
+      },
+    );
+    return '$cell bekommt einen Punkt: $_temp0.';
+  }
+
+  @override
+  String exStarsBandOut(Object cell, String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'nur ein Bereich reicht in Zeile $from, also liegen beide seiner Sterne dort',
+        'rows':
+            'in die Zeilen $from–$to reichen nur so viele Bereiche, wie es Zeilen sind, also liegen all ihre Sterne dort',
+        'col': 'nur ein Bereich reicht in Spalte $from, also liegen beide seiner Sterne dort',
+        'other':
+            'in die Spalten $from–$to reichen nur so viele Bereiche, wie es Spalten sind, also liegen all ihre Sterne dort',
+      },
+    );
+    return '$cell bekommt einen Punkt: $_temp0.';
+  }
+
+  @override
+  String exStarsFailEmpty(String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'Zeile $unit',
+        'col': 'Spalte $unit',
+        'other': 'der Bereich bei $unit',
+      },
+    );
+    return 'Dann hätte $_temp0 aber keinen Platz mehr für die fehlenden Sterne.';
+  }
+
+  @override
+  String exStarsFailClash(Object a, Object b) {
+    return 'Dann berühren sich aber die Sterne in $a und $b.';
+  }
+
+  @override
+  String exStarsFailBand(String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'der Zeile $from',
+        'rows': 'den Zeilen $from–$to',
+        'col': 'der Spalte $from',
+        'other': 'den Spalten $from–$to',
+      },
+    );
+    return 'Dann geben die Bereiche $_temp0 aber nicht die richtige Zahl von Sternen.';
+  }
 }

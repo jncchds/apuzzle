@@ -6779,4 +6779,176 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return 'But then $_temp0 and $_temp1 would each have been painted after the other.';
   }
+
+  @override
+  String get starsName => 'Stars';
+
+  @override
+  String get starsTagline => 'Two stars per row, column and region';
+
+  @override
+  String get starsRules =>
+      '• Place exactly two stars in every row, every column and every colored region.\n• Stars may not touch each other, not even diagonally.\n\nTap a cell to cycle empty → dot (your \"no star here\" note) → star. Right-click cycles back. Slide across cells to mark them all in one go. A long press puts a dot on every cell the placed stars rule out.';
+
+  @override
+  String get famCrowns => 'Crowns';
+
+  @override
+  String get famCrownsAbout => 'Crowns or stars in every row, column and region, never touching';
+
+  @override
+  String get tutStars1 =>
+      'Put exactly two stars in every row, every column and every colored region. Stars never touch, not even at the corners. Only the highlighted row still needs its stars: columns that already have two and cells next to a star are out, which leaves two cells. Tap each twice: first a dot, then a star.';
+
+  @override
+  String get tutStars2 =>
+      'Stars never touch, not even diagonally. Tap once to put a dot (your \"no star here\" note) on each cell around this star.';
+
+  @override
+  String get tutStars3 =>
+      'The other cells of this row are ruled out, leaving three free cells side by side. Two stars that may not touch only fit at both ends: place them.';
+
+  @override
+  String get tutStars4 =>
+      'Now a whole board. Dot the cells you can rule out, and look for rows, columns or regions with just as many free cells as they still need stars, and for three free cells side by side, where the stars go at the ends. A long press dots everything the placed stars rule out.';
+
+  @override
+  String get tutStarsS1 =>
+      'Count regions in bands. When two regions lie entirely inside two neighbouring rows, they need all four stars of those rows, so every other cell of the two rows gets a dot. It works with one row or three, and with columns too. And the other way round: if only two regions reach into two rows, those regions have no stars outside them.';
+
+  @override
+  String get tutStarsS2 =>
+      'Look at what a star would do. A star dots the cells around it and counts toward its row, column and region. If that would leave some row, column or region without room for the stars it still needs, the cell gets a dot. Try it on the cells next to a small region.';
+
+  @override
+  String get tutStarsS3 =>
+      'On hard boards you sometimes have to try: suppose a cell has a star and follow the rules. If that runs into a contradiction (two stars touching, or a row with no room left), the cell gets a dot. Explain mode shows such chains step by step.';
+
+  @override
+  String exStarsSuppose(Object cell) {
+    return 'Suppose $cell had a star.';
+  }
+
+  @override
+  String exStarsRefuted(Object cell) {
+    return '$cell gets a dot: a star there leads to a contradiction.';
+  }
+
+  @override
+  String exStarsTouch(Object cell, Object a) {
+    return '$cell gets a dot: it touches the star in $a.';
+  }
+
+  @override
+  String exStarsFull(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'the region at $unit',
+      },
+    );
+    return '$cell gets a dot: $_temp0 already has both its stars.';
+  }
+
+  @override
+  String exStarsFill(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'the region at $unit',
+      },
+    );
+    return '$cell gets a star: $_temp0 has just as many free cells left as it still needs stars.';
+  }
+
+  @override
+  String exStarsSqueeze(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'the region at $unit',
+      },
+    );
+    return '$cell gets a star: without it, the free cells of $_temp0 can\'t hold its two stars apart.';
+  }
+
+  @override
+  String exStarsAttack(Object cell, String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'the region at $unit',
+      },
+    );
+    return '$cell gets a dot: a star there would leave $_temp0 too little room for its stars.';
+  }
+
+  @override
+  String exStarsBandIn(Object cell, String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'a whole region lies inside row $from, so it takes both of the row\'s stars',
+        'rows': 'as many whole regions lie inside rows $from–$to as there are rows, so they take all the stars there',
+        'col': 'a whole region lies inside column $from, so it takes both of the column\'s stars',
+        'other':
+            'as many whole regions lie inside columns $from–$to as there are columns, so they take all the stars there',
+      },
+    );
+    return '$cell gets a dot: $_temp0.';
+  }
+
+  @override
+  String exStarsBandOut(Object cell, String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'only one region reaches into row $from, so both its stars are in that row',
+        'rows': 'only as many regions reach into rows $from–$to as there are rows, so all their stars are there',
+        'col': 'only one region reaches into column $from, so both its stars are in that column',
+        'other': 'only as many regions reach into columns $from–$to as there are columns, so all their stars are there',
+      },
+    );
+    return '$cell gets a dot: $_temp0.';
+  }
+
+  @override
+  String exStarsFailEmpty(String kind, Object unit) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $unit',
+        'col': 'column $unit',
+        'other': 'the region at $unit',
+      },
+    );
+    return 'But then $_temp0 has no room left for its stars.';
+  }
+
+  @override
+  String exStarsFailClash(Object a, Object b) {
+    return 'But then the stars in $a and $b touch.';
+  }
+
+  @override
+  String exStarsFailBand(String kind, Object from, Object to) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'row': 'row $from',
+        'rows': 'rows $from–$to',
+        'col': 'column $from',
+        'other': 'columns $from–$to',
+      },
+    );
+    return 'But then the regions can\'t give $_temp0 the right number of stars.';
+  }
 }

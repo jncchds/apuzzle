@@ -8690,6 +8690,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then {aKind, select, row{row {a}} other{column {a}}} and {bKind, select, row{row {b}} other{column {b}}} would each have been painted after the other.'**
   String exLayersFailCycle(Object a, String aKind, Object b, String bKind);
+
+  /// No description provided for @starsName.
+  ///
+  /// In en, this message translates to:
+  /// **'Stars'**
+  String get starsName;
+
+  /// No description provided for @starsTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Two stars per row, column and region'**
+  String get starsTagline;
+
+  /// No description provided for @starsRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Place exactly two stars in every row, every column and every colored region.\n• Stars may not touch each other, not even diagonally.\n\nTap a cell to cycle empty → dot (your \"no star here\" note) → star. Right-click cycles back. Slide across cells to mark them all in one go. A long press puts a dot on every cell the placed stars rule out.'**
+  String get starsRules;
+
+  /// No description provided for @famCrowns.
+  ///
+  /// In en, this message translates to:
+  /// **'Crowns'**
+  String get famCrowns;
+
+  /// No description provided for @famCrownsAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'Crowns or stars in every row, column and region, never touching'**
+  String get famCrownsAbout;
+
+  /// No description provided for @tutStars1.
+  ///
+  /// In en, this message translates to:
+  /// **'Put exactly two stars in every row, every column and every colored region. Stars never touch, not even at the corners. Only the highlighted row still needs its stars: columns that already have two and cells next to a star are out, which leaves two cells. Tap each twice: first a dot, then a star.'**
+  String get tutStars1;
+
+  /// No description provided for @tutStars2.
+  ///
+  /// In en, this message translates to:
+  /// **'Stars never touch, not even diagonally. Tap once to put a dot (your \"no star here\" note) on each cell around this star.'**
+  String get tutStars2;
+
+  /// No description provided for @tutStars3.
+  ///
+  /// In en, this message translates to:
+  /// **'The other cells of this row are ruled out, leaving three free cells side by side. Two stars that may not touch only fit at both ends: place them.'**
+  String get tutStars3;
+
+  /// No description provided for @tutStars4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a whole board. Dot the cells you can rule out, and look for rows, columns or regions with just as many free cells as they still need stars, and for three free cells side by side, where the stars go at the ends. A long press dots everything the placed stars rule out.'**
+  String get tutStars4;
+
+  /// No description provided for @tutStarsS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Count regions in bands. When two regions lie entirely inside two neighbouring rows, they need all four stars of those rows, so every other cell of the two rows gets a dot. It works with one row or three, and with columns too. And the other way round: if only two regions reach into two rows, those regions have no stars outside them.'**
+  String get tutStarsS1;
+
+  /// No description provided for @tutStarsS2.
+  ///
+  /// In en, this message translates to:
+  /// **'Look at what a star would do. A star dots the cells around it and counts toward its row, column and region. If that would leave some row, column or region without room for the stars it still needs, the cell gets a dot. Try it on the cells next to a small region.'**
+  String get tutStarsS2;
+
+  /// No description provided for @tutStarsS3.
+  ///
+  /// In en, this message translates to:
+  /// **'On hard boards you sometimes have to try: suppose a cell has a star and follow the rules. If that runs into a contradiction (two stars touching, or a row with no room left), the cell gets a dot. Explain mode shows such chains step by step.'**
+  String get tutStarsS3;
+
+  /// No description provided for @exStarsSuppose.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppose {cell} had a star.'**
+  String exStarsSuppose(Object cell);
+
+  /// No description provided for @exStarsRefuted.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: a star there leads to a contradiction.'**
+  String exStarsRefuted(Object cell);
+
+  /// No description provided for @exStarsTouch.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: it touches the star in {a}.'**
+  String exStarsTouch(Object cell, Object a);
+
+  /// No description provided for @exStarsFull.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: {kind, select, row{row {unit}} col{column {unit}} other{the region at {unit}}} already has both its stars.'**
+  String exStarsFull(Object cell, String kind, Object unit);
+
+  /// No description provided for @exStarsFill.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a star: {kind, select, row{row {unit}} col{column {unit}} other{the region at {unit}}} has just as many free cells left as it still needs stars.'**
+  String exStarsFill(Object cell, String kind, Object unit);
+
+  /// No description provided for @exStarsSqueeze.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a star: without it, the free cells of {kind, select, row{row {unit}} col{column {unit}} other{the region at {unit}}} can\'t hold its two stars apart.'**
+  String exStarsSqueeze(Object cell, String kind, Object unit);
+
+  /// No description provided for @exStarsAttack.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: a star there would leave {kind, select, row{row {unit}} col{column {unit}} other{the region at {unit}}} too little room for its stars.'**
+  String exStarsAttack(Object cell, String kind, Object unit);
+
+  /// No description provided for @exStarsBandIn.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: {kind, select, row{a whole region lies inside row {from}, so it takes both of the row\'s stars} rows{as many whole regions lie inside rows {from}–{to} as there are rows, so they take all the stars there} col{a whole region lies inside column {from}, so it takes both of the column\'s stars} other{as many whole regions lie inside columns {from}–{to} as there are columns, so they take all the stars there}}.'**
+  String exStarsBandIn(Object cell, String kind, Object from, Object to);
+
+  /// No description provided for @exStarsBandOut.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets a dot: {kind, select, row{only one region reaches into row {from}, so both its stars are in that row} rows{only as many regions reach into rows {from}–{to} as there are rows, so all their stars are there} col{only one region reaches into column {from}, so both its stars are in that column} other{only as many regions reach into columns {from}–{to} as there are columns, so all their stars are there}}.'**
+  String exStarsBandOut(Object cell, String kind, Object from, Object to);
+
+  /// No description provided for @exStarsFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then {kind, select, row{row {unit}} col{column {unit}} other{the region at {unit}}} has no room left for its stars.'**
+  String exStarsFailEmpty(String kind, Object unit);
+
+  /// No description provided for @exStarsFailClash.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the stars in {a} and {b} touch.'**
+  String exStarsFailClash(Object a, Object b);
+
+  /// No description provided for @exStarsFailBand.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the regions can\'t give {kind, select, row{row {from}} rows{rows {from}–{to}} col{column {from}} other{columns {from}–{to}}} the right number of stars.'**
+  String exStarsFailBand(String kind, Object from, Object to);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
