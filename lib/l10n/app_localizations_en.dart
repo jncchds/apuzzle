@@ -7689,4 +7689,96 @@ class AppLocalizationsEn extends AppLocalizations {
   String exGladesFailOrphan(Object cell) {
     return 'But then no number\'s rectangle can reach the unshaded $cell.';
   }
+
+  @override
+  String get quarryName => 'Quarry';
+
+  @override
+  String get quarryTagline => 'Cut every stone of the set out of the grid';
+
+  @override
+  String get quarryRules =>
+      '• Shade the cells of every stone shown under the grid, each stone once, turned or mirrored as you like.\n• Stones never touch along a side; touching at a corner is fine.\n• A filled circle is part of a stone, a hollow circle stays unshaded.\n• All unshaded cells form one area, joined side by side.\n\nTap a cell to cycle: shaded → dot (your \"this one stays unshaded\" note) → empty. Right-click cycles back. A long press dots every cell beside a finished stone. A finished stone also fades under the grid. Dots are optional: the puzzle is done once the right cells are shaded.';
+
+  @override
+  String get tutQuarry1 =>
+      'Shade the stones shown under the grid, each one once, turned or mirrored as you like. A filled circle is part of a stone, a hollow circle stays unshaded. The straight stone must cover the filled circle, and the hollow circle leaves it just one way to lie. Finish the board.';
+
+  @override
+  String get tutQuarry2 =>
+      'Stones never touch along a side, only at corners. So every cell beside a placed stone stays unshaded, and the other stone has to keep its distance. Finish the board.';
+
+  @override
+  String get tutQuarry3 =>
+      'All unshaded cells form one area. A cell walled in by stones and the edge can\'t stay unshaded, so it belongs to a stone. Finish the board.';
+
+  @override
+  String get tutQuarry4 =>
+      'The unshaded cells must reach each other. The hollow circle at the top, with the cells beside it that no stone can cover, has only one way out left: the cell below it. So that cell stays unshaded, and no stone may cover it. Finish the board.';
+
+  @override
+  String get tutQuarry5 =>
+      'Now a real board. Find where each stone can still go: cells all its places cover are shaded, cells beside all of them stay unshaded, and keep the unshaded cells together.';
+
+  @override
+  String get tutQuarryS1 =>
+      'Stones need room for each other. A place where one stone would leave another no spot to fit, apart and not touching, is out. Finish the board.';
+
+  @override
+  String get tutQuarryS2 =>
+      'If shading a cell would cut the unshaded cells into parts, it stays unshaded. Finish the board.';
+
+  @override
+  String get tutQuarryS3 =>
+      'A hard board. When stuck, shade a cell and follow on: if a stone no longer fits anywhere, or the unshaded cells fall apart, that cell stays unshaded. It works the other way round too.';
+
+  @override
+  String exQuarryFits(Object cell, Object piece) {
+    return '$cell is shaded: wherever the stone $piece still fits, it covers this cell.';
+  }
+
+  @override
+  String exQuarryBeside(Object cell, Object piece) {
+    return '$cell stays unshaded: wherever the stone $piece still fits, it lies beside this cell, and stones never touch.';
+  }
+
+  @override
+  String exQuarryOnly(Object cell, Object piece, Object other) {
+    return '$cell is shaded: only the stone $piece can still cover the shaded $other, and wherever it does, it covers this cell.';
+  }
+
+  @override
+  String exQuarryOnlyBeside(Object cell, Object piece, Object other) {
+    return '$cell stays unshaded: only the stone $piece can still cover the shaded $other, and wherever it does, it lies beside this cell.';
+  }
+
+  @override
+  String exQuarryOrphan(Object cell) {
+    return '$cell stays unshaded: no stone fits over it any more.';
+  }
+
+  @override
+  String exQuarryIsolated(Object cell, Object other) {
+    return '$cell is shaded: shaded cells cut it off from the unshaded $other.';
+  }
+
+  @override
+  String exQuarryRoom(Object cell, Object piece) {
+    return '$cell is shaded: wherever the stone $piece fits and still leaves the other stones room, it covers this cell.';
+  }
+
+  @override
+  String exQuarryRoomBeside(Object cell, Object piece) {
+    return '$cell stays unshaded: wherever the stone $piece fits and still leaves the other stones room, it lies beside this cell.';
+  }
+
+  @override
+  String exQuarryFailNoRoom(Object piece) {
+    return 'But then the stone $piece fits nowhere.';
+  }
+
+  @override
+  String exQuarryFailNoPiece(Object cell) {
+    return 'But then no stone fits over the shaded $cell.';
+  }
 }

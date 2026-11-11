@@ -1,6 +1,7 @@
 # Release notes
 
 ## 0.13.0 - 2026-11-11
+- New game: Quarry. Shade every stone shown under the grid, each once, turned or mirrored as you like; stones never touch along a side, a filled circle is part of a stone, a hollow circle stays unshaded, and all unshaded cells form one area. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Glades. Shade some cells so that every unshaded area is a rectangle holding exactly one number, its count of cells; no 2×2 block is all shaded, and the areas all link up, touching at least at a corner. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Slabs. Shade some cells so that every shaded area is a rectangle and no unshaded area is one; a number tells how many cells its area has, shaded or not. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Wedges. Put wedges (half a cell, cut from corner to corner) into some cells so that every open area left is a rectangle, upright or leaning at 45°; a number on a wall tells how many wedges are in the cells beside it. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13

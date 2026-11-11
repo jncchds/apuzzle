@@ -56,6 +56,7 @@ void main() {
     expect(alt('shakashaka'), ['wedges']);
     expect(alt('choco banana'), ['slabs']);
     expect(alt('mochikoro'), ['glades']);
+    expect(alt('statue park'), ['quarry']);
     expect(alt('yajilin'), ['arrows']);
     expect(alt('takuzu'), ['mambo']);
     expect(alt('binairo'), ['mambo']);

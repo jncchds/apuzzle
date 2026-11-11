@@ -7720,4 +7720,96 @@ class AppLocalizationsPl extends AppLocalizations {
   String exGladesFailOrphan(Object cell) {
     return 'Ale wtedy do niezamalowanego $cell nie sięga prostokąt żadnej liczby.';
   }
+
+  @override
+  String get quarryName => 'Kamieniołom';
+
+  @override
+  String get quarryTagline => 'Wytnij z planszy każdy kamień z zestawu';
+
+  @override
+  String get quarryRules =>
+      '• Zamaluj pola każdego kamienia pokazanego pod planszą: każdy kamień raz, obrócony lub odbity dowolnie.\n• Kamienie nie stykają się bokami; styk narożnikami jest dozwolony.\n• Pełne kółko jest częścią kamienia, puste kółko zostaje niezamalowane.\n• Wszystkie niezamalowane pola tworzą jeden obszar połączony bokami.\n\nDotknij pola, aby przełączać: zamalowane → kropka (twoja notatka „to pole zostaje niezamalowane”) → puste. Prawy przycisk przełącza wstecz. Długie naciśnięcie stawia kropki obok każdego gotowego kamienia. Gotowy kamień blednie też pod planszą. Kropki są opcjonalne: łamigłówka jest rozwiązana, gdy zamalowane są właściwe pola.';
+
+  @override
+  String get tutQuarry1 =>
+      'Zamaluj kamienie pokazane pod planszą, każdy raz, obrócony lub odbity dowolnie. Pełne kółko jest częścią kamienia, puste kółko zostaje niezamalowane. Prosty kamień musi przykryć pełne kółko, a puste zostawia mu tylko jedno położenie. Rozwiąż planszę.';
+
+  @override
+  String get tutQuarry2 =>
+      'Kamienie nie stykają się bokami, tylko narożnikami. Każde pole obok położonego kamienia zostaje więc niezamalowane, a drugi kamień musi trzymać się z daleka. Rozwiąż planszę.';
+
+  @override
+  String get tutQuarry3 =>
+      'Wszystkie niezamalowane pola tworzą jeden obszar. Pole zamurowane kamieniami i krawędzią nie może zostać niezamalowane, więc należy do kamienia. Rozwiąż planszę.';
+
+  @override
+  String get tutQuarry4 =>
+      'Niezamalowane pola muszą się ze sobą łączyć. Puste kółko u góry razem z sąsiednimi polami, których nie przykryje żaden kamień, ma już tylko jedno wyjście: pole pod sobą. To pole zostaje więc niezamalowane i żaden kamień nie może go przykryć. Rozwiąż planszę.';
+
+  @override
+  String get tutQuarry5 =>
+      'Teraz prawdziwa plansza. Szukaj, gdzie może jeszcze leżeć każdy kamień: pola, które przykrywają wszystkie jego położenia, są zamalowane, pola obok nich wszystkich zostają niezamalowane, i nie rozdzielaj niezamalowanych pól.';
+
+  @override
+  String get tutQuarryS1 =>
+      'Kamienie potrzebują miejsca dla siebie nawzajem. Położenie, w którym jeden kamień nie zostawia innemu żadnego miejsca osobno i bez styku, odpada. Rozwiąż planszę.';
+
+  @override
+  String get tutQuarryS2 =>
+      'Jeśli zamalowanie pola rozcięłoby niezamalowane pola na części, zostaje ono niezamalowane. Rozwiąż planszę.';
+
+  @override
+  String get tutQuarryS3 =>
+      'Trudna plansza. Gdy utkniesz, zamaluj pole i śledź skutki: jeśli jakiś kamień nigdzie się już nie mieści albo niezamalowane pola się rozpadną, to pole zostaje niezamalowane. Działa to też w drugą stronę.';
+
+  @override
+  String exQuarryFits(Object cell, Object piece) {
+    return '$cell jest zamalowane: gdziekolwiek jeszcze mieści się kamień $piece, przykrywa to pole.';
+  }
+
+  @override
+  String exQuarryBeside(Object cell, Object piece) {
+    return '$cell zostaje niezamalowane: gdziekolwiek jeszcze mieści się kamień $piece, leży obok tego pola, a kamienie się nie stykają.';
+  }
+
+  @override
+  String exQuarryOnly(Object cell, Object piece, Object other) {
+    return '$cell jest zamalowane: tylko kamień $piece może jeszcze przykryć zamalowane $other, a jakkolwiek to robi, przykrywa to pole.';
+  }
+
+  @override
+  String exQuarryOnlyBeside(Object cell, Object piece, Object other) {
+    return '$cell zostaje niezamalowane: tylko kamień $piece może jeszcze przykryć zamalowane $other, a jakkolwiek to robi, leży obok tego pola.';
+  }
+
+  @override
+  String exQuarryOrphan(Object cell) {
+    return '$cell zostaje niezamalowane: żaden kamień już się na nim nie mieści.';
+  }
+
+  @override
+  String exQuarryIsolated(Object cell, Object other) {
+    return '$cell jest zamalowane: zamalowane pola odcinają je od niezamalowanego $other.';
+  }
+
+  @override
+  String exQuarryRoom(Object cell, Object piece) {
+    return '$cell jest zamalowane: gdziekolwiek mieści się kamień $piece, zostawiając miejsce innym kamieniom, przykrywa to pole.';
+  }
+
+  @override
+  String exQuarryRoomBeside(Object cell, Object piece) {
+    return '$cell zostaje niezamalowane: gdziekolwiek mieści się kamień $piece, zostawiając miejsce innym kamieniom, leży obok tego pola.';
+  }
+
+  @override
+  String exQuarryFailNoRoom(Object piece) {
+    return 'Ale wtedy kamień $piece nigdzie się nie mieści.';
+  }
+
+  @override
+  String exQuarryFailNoPiece(Object cell) {
+    return 'Ale wtedy żaden kamień nie mieści się na zamalowanym $cell.';
+  }
 }

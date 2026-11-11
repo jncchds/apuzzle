@@ -7656,4 +7656,96 @@ class AppLocalizationsDe extends AppLocalizations {
   String exGladesFailOrphan(Object cell) {
     return 'Aber dann reicht kein Rechteck einer Zahl bis zum freien $cell.';
   }
+
+  @override
+  String get quarryName => 'Steinbruch';
+
+  @override
+  String get quarryTagline => 'Schlage jeden Stein des Satzes aus dem Gitter';
+
+  @override
+  String get quarryRules =>
+      '• Schwärze die Felder jedes Steins, der unter dem Gitter gezeigt wird: jeden Stein einmal, gedreht oder gespiegelt, wie du willst.\n• Steine berühren sich nie mit einer Seite; an einer Ecke ist es erlaubt.\n• Ein voller Kreis gehört zu einem Stein, ein leerer Kreis bleibt frei.\n• Alle freien Felder bilden ein Gebiet, über Seiten verbunden.\n\nTippe auf ein Feld zum Durchschalten: geschwärzt → Punkt (deine Notiz „dieses bleibt frei“) → leer. Rechtsklick schaltet zurück. Langes Drücken setzt Punkte neben jeden fertigen Stein. Ein fertiger Stein verblasst auch unter dem Gitter. Punkte sind freiwillig: Das Rätsel ist gelöst, sobald die richtigen Felder geschwärzt sind.';
+
+  @override
+  String get tutQuarry1 =>
+      'Schwärze die Steine unter dem Gitter, jeden einmal, gedreht oder gespiegelt, wie du willst. Ein voller Kreis gehört zu einem Stein, ein leerer Kreis bleibt frei. Der gerade Stein muss den vollen Kreis bedecken, und der leere Kreis lässt ihm nur eine Lage. Löse das Feld.';
+
+  @override
+  String get tutQuarry2 =>
+      'Steine berühren sich nie mit einer Seite, nur an Ecken. Jedes Feld neben einem gelegten Stein bleibt also frei, und der andere Stein muss Abstand halten. Löse das Feld.';
+
+  @override
+  String get tutQuarry3 =>
+      'Alle freien Felder bilden ein Gebiet. Ein Feld, das Steine und der Rand einmauern, kann nicht frei bleiben, also gehört es zu einem Stein. Löse das Feld.';
+
+  @override
+  String get tutQuarry4 =>
+      'Die freien Felder müssen einander erreichen. Der leere Kreis oben hat mit den Feldern daneben, die kein Stein bedecken kann, nur noch einen Ausweg: das Feld darunter. Dieses Feld bleibt also frei, und kein Stein darf es bedecken. Löse das Feld.';
+
+  @override
+  String get tutQuarry5 =>
+      'Jetzt ein echtes Rätsel. Suche, wo jeder Stein noch liegen kann: Felder, die alle seine Lagen bedecken, sind geschwärzt, Felder neben allen bleiben frei, und halte die freien Felder zusammen.';
+
+  @override
+  String get tutQuarryS1 =>
+      'Steine brauchen Platz füreinander. Eine Lage, in der ein Stein einem anderen keinen Platz mehr lässt, getrennt und ohne Berührung, fällt weg. Löse das Feld.';
+
+  @override
+  String get tutQuarryS2 =>
+      'Würde das Schwärzen eines Feldes die freien Felder in Teile trennen, bleibt es frei. Löse das Feld.';
+
+  @override
+  String get tutQuarryS3 =>
+      'Ein schweres Rätsel. Wenn du feststeckst, schwärze ein Feld und verfolge die Folgen: Passt ein Stein nirgends mehr hin oder zerfallen die freien Felder, bleibt das Feld frei. Das geht auch andersherum.';
+
+  @override
+  String exQuarryFits(Object cell, Object piece) {
+    return '$cell ist geschwärzt: Wo der Stein $piece auch noch passt, er bedeckt dieses Feld.';
+  }
+
+  @override
+  String exQuarryBeside(Object cell, Object piece) {
+    return '$cell bleibt frei: Wo der Stein $piece auch noch passt, er liegt neben diesem Feld, und Steine berühren sich nicht.';
+  }
+
+  @override
+  String exQuarryOnly(Object cell, Object piece, Object other) {
+    return '$cell ist geschwärzt: Nur der Stein $piece kann das geschwärzte $other noch bedecken, und wie er es auch tut, er bedeckt dieses Feld.';
+  }
+
+  @override
+  String exQuarryOnlyBeside(Object cell, Object piece, Object other) {
+    return '$cell bleibt frei: Nur der Stein $piece kann das geschwärzte $other noch bedecken, und wie er es auch tut, er liegt neben diesem Feld.';
+  }
+
+  @override
+  String exQuarryOrphan(Object cell) {
+    return '$cell bleibt frei: Kein Stein passt mehr darüber.';
+  }
+
+  @override
+  String exQuarryIsolated(Object cell, Object other) {
+    return '$cell ist geschwärzt: Geschwärzte Felder schneiden es vom freien $other ab.';
+  }
+
+  @override
+  String exQuarryRoom(Object cell, Object piece) {
+    return '$cell ist geschwärzt: Wo der Stein $piece auch passt und den anderen Steinen Platz lässt, er bedeckt dieses Feld.';
+  }
+
+  @override
+  String exQuarryRoomBeside(Object cell, Object piece) {
+    return '$cell bleibt frei: Wo der Stein $piece auch passt und den anderen Steinen Platz lässt, er liegt neben diesem Feld.';
+  }
+
+  @override
+  String exQuarryFailNoRoom(Object piece) {
+    return 'Aber dann passt der Stein $piece nirgends hin.';
+  }
+
+  @override
+  String exQuarryFailNoPiece(Object cell) {
+    return 'Aber dann passt kein Stein über das geschwärzte $cell.';
+  }
 }

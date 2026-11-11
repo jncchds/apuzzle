@@ -9680,6 +9680,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then no number\'s rectangle can reach the unshaded {cell}.'**
   String exGladesFailOrphan(Object cell);
+
+  /// No description provided for @quarryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Quarry'**
+  String get quarryName;
+
+  /// No description provided for @quarryTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Cut every stone of the set out of the grid'**
+  String get quarryTagline;
+
+  /// No description provided for @quarryRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Shade the cells of every stone shown under the grid, each stone once, turned or mirrored as you like.\n• Stones never touch along a side; touching at a corner is fine.\n• A filled circle is part of a stone, a hollow circle stays unshaded.\n• All unshaded cells form one area, joined side by side.\n\nTap a cell to cycle: shaded → dot (your \"this one stays unshaded\" note) → empty. Right-click cycles back. A long press dots every cell beside a finished stone. A finished stone also fades under the grid. Dots are optional: the puzzle is done once the right cells are shaded.'**
+  String get quarryRules;
+
+  /// No description provided for @tutQuarry1.
+  ///
+  /// In en, this message translates to:
+  /// **'Shade the stones shown under the grid, each one once, turned or mirrored as you like. A filled circle is part of a stone, a hollow circle stays unshaded. The straight stone must cover the filled circle, and the hollow circle leaves it just one way to lie. Finish the board.'**
+  String get tutQuarry1;
+
+  /// No description provided for @tutQuarry2.
+  ///
+  /// In en, this message translates to:
+  /// **'Stones never touch along a side, only at corners. So every cell beside a placed stone stays unshaded, and the other stone has to keep its distance. Finish the board.'**
+  String get tutQuarry2;
+
+  /// No description provided for @tutQuarry3.
+  ///
+  /// In en, this message translates to:
+  /// **'All unshaded cells form one area. A cell walled in by stones and the edge can\'t stay unshaded, so it belongs to a stone. Finish the board.'**
+  String get tutQuarry3;
+
+  /// No description provided for @tutQuarry4.
+  ///
+  /// In en, this message translates to:
+  /// **'The unshaded cells must reach each other. The hollow circle at the top, with the cells beside it that no stone can cover, has only one way out left: the cell below it. So that cell stays unshaded, and no stone may cover it. Finish the board.'**
+  String get tutQuarry4;
+
+  /// No description provided for @tutQuarry5.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Find where each stone can still go: cells all its places cover are shaded, cells beside all of them stay unshaded, and keep the unshaded cells together.'**
+  String get tutQuarry5;
+
+  /// No description provided for @tutQuarryS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Stones need room for each other. A place where one stone would leave another no spot to fit, apart and not touching, is out. Finish the board.'**
+  String get tutQuarryS1;
+
+  /// No description provided for @tutQuarryS2.
+  ///
+  /// In en, this message translates to:
+  /// **'If shading a cell would cut the unshaded cells into parts, it stays unshaded. Finish the board.'**
+  String get tutQuarryS2;
+
+  /// No description provided for @tutQuarryS3.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard board. When stuck, shade a cell and follow on: if a stone no longer fits anywhere, or the unshaded cells fall apart, that cell stays unshaded. It works the other way round too.'**
+  String get tutQuarryS3;
+
+  /// No description provided for @exQuarryFits.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: wherever the stone {piece} still fits, it covers this cell.'**
+  String exQuarryFits(Object cell, Object piece);
+
+  /// No description provided for @exQuarryBeside.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: wherever the stone {piece} still fits, it lies beside this cell, and stones never touch.'**
+  String exQuarryBeside(Object cell, Object piece);
+
+  /// No description provided for @exQuarryOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: only the stone {piece} can still cover the shaded {other}, and wherever it does, it covers this cell.'**
+  String exQuarryOnly(Object cell, Object piece, Object other);
+
+  /// No description provided for @exQuarryOnlyBeside.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: only the stone {piece} can still cover the shaded {other}, and wherever it does, it lies beside this cell.'**
+  String exQuarryOnlyBeside(Object cell, Object piece, Object other);
+
+  /// No description provided for @exQuarryOrphan.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: no stone fits over it any more.'**
+  String exQuarryOrphan(Object cell);
+
+  /// No description provided for @exQuarryIsolated.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: shaded cells cut it off from the unshaded {other}.'**
+  String exQuarryIsolated(Object cell, Object other);
+
+  /// No description provided for @exQuarryRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} is shaded: wherever the stone {piece} fits and still leaves the other stones room, it covers this cell.'**
+  String exQuarryRoom(Object cell, Object piece);
+
+  /// No description provided for @exQuarryRoomBeside.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} stays unshaded: wherever the stone {piece} fits and still leaves the other stones room, it lies beside this cell.'**
+  String exQuarryRoomBeside(Object cell, Object piece);
+
+  /// No description provided for @exQuarryFailNoRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the stone {piece} fits nowhere.'**
+  String exQuarryFailNoRoom(Object piece);
+
+  /// No description provided for @exQuarryFailNoPiece.
+  ///
+  /// In en, this message translates to:
+  /// **'But then no stone fits over the shaded {cell}.'**
+  String exQuarryFailNoPiece(Object cell);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
