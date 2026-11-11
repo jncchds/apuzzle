@@ -7233,4 +7233,123 @@ class AppLocalizationsEn extends AppLocalizations {
   String exSlantFailPair(Object first, Object second) {
     return 'But then the numbers at $first and $second can\'t both be met.';
   }
+
+  @override
+  String get tagTriangle => 'triangle, triangles, wedge, wedges, rectangle, rectangles, diamond';
+
+  @override
+  String get wedgesName => 'Wedges';
+
+  @override
+  String get wedgesTagline => 'Cut the open space into rectangles';
+
+  @override
+  String get wedgesRules =>
+      '• Some cells are walls. Put a wedge (half a cell, cut from corner to corner) into some of the other cells.\n• Every open area left must be a rectangle: upright, or leaning at 45° like a diamond.\n• A number on a wall says how many wedges are in the cells beside it (above, below, left and right). Walls without a number say nothing.\n\nTap a cell to cycle through the four wedges and a dot (no wedge; dots are optional). Right-click cycles back. Long-press to dot every empty cell that can\'t take a wedge any more.';
+
+  @override
+  String get tutWedges1 =>
+      'Some cells are walls. Put wedges, half a cell cut from corner to corner, into other cells so that every open area left is a rectangle. A number counts the wedges beside its wall: this 1 needs one, and a lone wedge would leave corners that aren\'t square, so all four cells get one and the open area becomes a diamond. Tap a cell to cycle through the wedges.';
+
+  @override
+  String get tutWedges2 =>
+      'A 0 means no wedge beside its wall, so the cell below it stays open. The 1 still needs its wedge: find where the diamond goes.';
+
+  @override
+  String get tutWedges3 =>
+      'Rectangles may lean and be longer one way than the other. Every corner of an open area must be square, so a slanted side runs on until it turns.';
+
+  @override
+  String get tutWedges4 =>
+      'Now a real board. Start from the numbers and look at the corners by walls and the edge: each corner of an open area must be square. Dots for cells without a wedge are optional.';
+
+  @override
+  String get tutWedgesS1 =>
+      'Sometimes one corner alone settles nothing, but two corners one side apart do, since they share the cells on either side of it. A numbered wall works the same way: try every way to place its wedges and keep all four of its corners square.';
+
+  @override
+  String get tutWedgesS2 =>
+      'When nothing else helps, try a wedge (or none) in a cell and follow where it leads. If that ends in a corner that can\'t be square or a number that can\'t be met, the cell takes something else.';
+
+  @override
+  String exWedgesPoint(String kind, Object cell, Object value, Object corner) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell needs a wedge',
+        'other': '$cell can\'t take $value',
+      },
+    );
+    return '$_temp0: an open area would get a corner at $corner that isn\'t square.';
+  }
+
+  @override
+  String exWedgesDone(Object cell, Object wall, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'the $count at $wall already has all its wedges',
+      zero: 'the 0 at $wall takes none',
+    );
+    return '$cell gets no wedge: $_temp0.';
+  }
+
+  @override
+  String exWedgesNeed(Object cell, Object wall, int count) {
+    return '$cell holds a wedge: the $count at $wall needs every cell beside it that can still take one.';
+  }
+
+  @override
+  String exWedgesLast(Object cell, Object value) {
+    return '$cell gets $value: nothing else fits.';
+  }
+
+  @override
+  String exWedgesPair(String kind, Object cell, Object value, Object first, Object second) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell needs a wedge',
+        'other': '$cell can\'t take $value',
+      },
+    );
+    return '$_temp0: otherwise the corners $first and $second, one side apart, can\'t both be square.';
+  }
+
+  @override
+  String exWedgesRing(String kind, Object cell, Object value, Object wall, int count) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell needs a wedge',
+        'other': '$cell can\'t take $value',
+      },
+    );
+    return '$_temp0: otherwise the $count at $wall can\'t be met with all four of its corners square.';
+  }
+
+  @override
+  String exWedgesFailEmpty(Object cell) {
+    return 'But then nothing fits in $cell.';
+  }
+
+  @override
+  String exWedgesFailPoint(Object corner) {
+    return 'But then an open area would get a corner at $corner that isn\'t square.';
+  }
+
+  @override
+  String exWedgesFailClue(Object wall, int count) {
+    return 'But then the $count at $wall can\'t be met.';
+  }
+
+  @override
+  String exWedgesFailPair(Object first, Object second) {
+    return 'But then the corners $first and $second can\'t both be square.';
+  }
+
+  @override
+  String exWedgesFailRing(Object wall, int count) {
+    return 'But then the $count at $wall can\'t be met with all four of its corners square.';
+  }
 }

@@ -53,6 +53,7 @@ void main() {
     expect(alt('norinori'), ['pairs']);
     expect(alt('suguru'), ['blocks']);
     expect(alt('akari'), ['lamps']);
+    expect(alt('shakashaka'), ['wedges']);
     expect(alt('yajilin'), ['arrows']);
     expect(alt('takuzu'), ['mambo']);
     expect(alt('binairo'), ['mambo']);

@@ -7295,4 +7295,123 @@ class AppLocalizationsUk extends AppLocalizations {
   String exSlantFailPair(Object first, Object second) {
     return 'Але тоді числа на $first і $second не виконати обидва.';
   }
+
+  @override
+  String get tagTriangle => 'трикутник, трикутники, клин, клини, прямокутник, прямокутники, ромб';
+
+  @override
+  String get wedgesName => 'Клини';
+
+  @override
+  String get wedgesTagline => 'Розріжте вільне місце на прямокутники';
+
+  @override
+  String get wedgesRules =>
+      '• Деякі клітинки — стіни. Покладіть клин (половину клітинки, відрізану від кута до кута) в деякі інші клітинки.\n• Кожна вільна область, що лишилася, має бути прямокутником: прямим або нахиленим на 45°, як ромб.\n• Число на стіні показує, скільки клинів у клітинках поруч із нею (згори, знизу, ліворуч і праворуч). Стіни без числа нічого не кажуть.\n\nТоркніться клітинки, щоб перемикати чотири клини й крапку (без клина; крапки необов\'язкові). Правий клік перемикає назад. Довге натискання ставить крапки в усі порожні клітинки, куди клин уже не стане.';
+
+  @override
+  String get tutWedges1 =>
+      'Деякі клітинки — стіни. Кладіть клини, половинки клітинки, відрізані від кута до кута, в інші клітинки так, щоб кожна вільна область була прямокутником. Число рахує клини поруч зі своєю стіною: цій 1 потрібен один, а самотній клин лишив би непрямі кути, тож клин отримують усі чотири клітинки, і вільна область стає ромбом. Торкайтеся клітинки, щоб перемикати клини.';
+
+  @override
+  String get tutWedges2 =>
+      '0 означає, що поруч зі стіною немає клина, тож клітинка під нею лишається вільною. 1 однаково потрібен клин: знайдіть, де стоїть ромб.';
+
+  @override
+  String get tutWedges3 =>
+      'Прямокутники можуть бути нахиленими й довшими в один бік, ніж в інший. Кожен кут вільної області має бути прямим, тож похила сторона тягнеться далі, аж поки не поверне.';
+
+  @override
+  String get tutWedges4 =>
+      'Тепер справжнє поле. Почніть із чисел і придивіться до кутів біля стін і краю: кожен кут вільної області має бути прямим. Крапки для клітинок без клина необов\'язкові.';
+
+  @override
+  String get tutWedgesS1 =>
+      'Іноді один кут сам нічого не вирішує, а два кути на відстані однієї сторони — так, бо в них спільні клітинки обабіч цієї сторони. Так само зі стіною з числом: переберіть усі способи поставити її клини так, щоб усі чотири її кути лишилися прямими.';
+
+  @override
+  String get tutWedgesS2 =>
+      'Коли ніщо інше не допомагає, спробуйте клин (або жодного) у клітинці й простежте, куди це веде. Якщо все закінчується кутом, який не може бути прямим, чи числом, якого не виконати, клітинка отримує щось інше.';
+
+  @override
+  String exWedgesPoint(String kind, Object cell, Object value, Object corner) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell має отримати клин',
+        'other': '$cell не може мати $value',
+      },
+    );
+    return '$_temp0: вільна область отримала б непрямий кут на $corner.';
+  }
+
+  @override
+  String exWedgesDone(Object cell, Object wall, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count на $wall вже має всі свої клини',
+      zero: '0 на $wall не бере жодного',
+    );
+    return '$cell не отримує клина: $_temp0.';
+  }
+
+  @override
+  String exWedgesNeed(Object cell, Object wall, int count) {
+    return '$cell має клин: $count на $wall потрібна кожна клітинка поруч, куди ще можна покласти клин.';
+  }
+
+  @override
+  String exWedgesLast(Object cell, Object value) {
+    return '$cell отримує $value: ніщо інше не підходить.';
+  }
+
+  @override
+  String exWedgesPair(String kind, Object cell, Object value, Object first, Object second) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell має отримати клин',
+        'other': '$cell не може мати $value',
+      },
+    );
+    return '$_temp0: інакше кути $first і $second, що за одну сторону один від одного, не можуть обидва бути прямими.';
+  }
+
+  @override
+  String exWedgesRing(String kind, Object cell, Object value, Object wall, int count) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell має отримати клин',
+        'other': '$cell не може мати $value',
+      },
+    );
+    return '$_temp0: інакше $count на $wall не виконати так, щоб усі чотири її кути були прямими.';
+  }
+
+  @override
+  String exWedgesFailEmpty(Object cell) {
+    return 'Але тоді в $cell нічого не підходить.';
+  }
+
+  @override
+  String exWedgesFailPoint(Object corner) {
+    return 'Але тоді вільна область отримала б непрямий кут на $corner.';
+  }
+
+  @override
+  String exWedgesFailClue(Object wall, int count) {
+    return 'Але тоді $count на $wall не виконати.';
+  }
+
+  @override
+  String exWedgesFailPair(Object first, Object second) {
+    return 'Але тоді кути $first і $second не можуть обидва бути прямими.';
+  }
+
+  @override
+  String exWedgesFailRing(Object wall, int count) {
+    return 'Але тоді $count на $wall не виконати так, щоб усі чотири її кути були прямими.';
+  }
 }

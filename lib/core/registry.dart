@@ -62,6 +62,7 @@ import '../puzzles/trail/trail_type.dart';
 import '../puzzles/turnabout/turnabout_type.dart';
 import '../puzzles/vanish/vanish_type.dart';
 import '../puzzles/waymarks/waymarks_type.dart';
+import '../puzzles/wedges/wedges_type.dart';
 import '../l10n/app_localizations.dart';
 import 'puzzle_type.dart';
 
@@ -123,6 +124,7 @@ const List<PuzzleType> puzzleTypes = [
   WaymarksType(),
   IslandsType(),
   LampsType(),
+  WedgesType(),
   FenceType(),
   SlantType(),
   PearlsType(),
@@ -230,6 +232,7 @@ const List<PuzzleCategory> puzzleCategories = [
       PuzzleFamily('rampart', [RampartType()]),
       PuzzleFamily('islands', [IslandsType()]),
       PuzzleFamily('lamps', [LampsType()]),
+      PuzzleFamily('wedges', [WedgesType()]),
       PuzzleFamily('orbits', [OrbitsType()]),
       PuzzleFamily('inlay', [InlayType()]),
       PuzzleFamily('mines', [MinesType()]),

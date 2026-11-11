@@ -18,10 +18,10 @@ You choose the grid size and the difficulty.
 
 ## Puzzles
 
-62 games in four categories. See [PUZZLES.md](PUZZLES.md) for the rules of each, with screenshots in both themes.
+63 games in four categories. See [PUZZLES.md](PUZZLES.md) for the rules of each, with screenshots in both themes.
 
 - **Numbers:** Sudoku, Pockets, Skyline, Cages, Signs, Totals, Blocks, Tally, Solo, Dominoes, Formula, Plots, Shikaku, Parcels
-- **Logic grids:** Sun & Moon, Crowns, Stars, Pairs, Hues, Tetra, Campsite, Fleet, Basins, Mercury, Poles, Pebbles, Layers, Chambers, Lookout, Rampart, Islands, Lamps, Orbits, Inlay, Mines
+- **Logic grids:** Sun & Moon, Crowns, Stars, Pairs, Hues, Tetra, Campsite, Fleet, Basins, Mercury, Poles, Pebbles, Layers, Chambers, Lookout, Rampart, Islands, Lamps, Wedges, Orbits, Inlay, Mines
 - **Paths & loops:** Trail, Links, Waymarks, Labyrinth, Homeward, Blockade, Pipes, Channel, Atoms, Fence, Twigs, Pearls, Rails, Arrows
 - **Casual:** Mosaic, Blend, Pop, 2048, Nightfall, Glide, Snake, Junction, Turnabout, Glimpse, Vanish, Hopper, Rebound
 

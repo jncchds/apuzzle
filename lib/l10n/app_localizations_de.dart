@@ -7200,4 +7200,123 @@ class AppLocalizationsDe extends AppLocalizations {
   String exSlantFailPair(Object first, Object second) {
     return 'Dann ließen sich die Zahlen auf $first und $second aber nicht beide erfüllen.';
   }
+
+  @override
+  String get tagTriangle => 'Dreieck, Dreiecke, Keil, Keile, Rechteck, Rechtecke, Raute';
+
+  @override
+  String get wedgesName => 'Keile';
+
+  @override
+  String get wedgesTagline => 'Teile den freien Raum in Rechtecke';
+
+  @override
+  String get wedgesRules =>
+      '• Manche Felder sind Wände. Setze in einige der anderen Felder einen Keil (ein halbes Feld, von Ecke zu Ecke geschnitten).\n• Jede freie Fläche, die übrig bleibt, muss ein Rechteck sein: gerade oder um 45° gekippt wie eine Raute.\n• Eine Zahl auf einer Wand sagt, wie viele Keile in den Feldern neben ihr liegen (oben, unten, links und rechts). Wände ohne Zahl sagen nichts.\n\nTippe auf ein Feld, um die vier Keile und einen Punkt (kein Keil; Punkte sind freiwillig) durchzugehen. Rechtsklick geht zurück. Lange drücken setzt Punkte in alle leeren Felder, in die kein Keil mehr passt.';
+
+  @override
+  String get tutWedges1 =>
+      'Manche Felder sind Wände. Setze Keile, halbe Felder von Ecke zu Ecke geschnitten, so in andere Felder, dass jede freie Fläche ein Rechteck ist. Eine Zahl zählt die Keile neben ihrer Wand: Diese 1 braucht einen, und ein einzelner Keil ließe Ecken, die nicht rechtwinklig sind, also bekommen alle vier Felder einen und die freie Fläche wird eine Raute. Tippe auf ein Feld, um die Keile durchzugehen.';
+
+  @override
+  String get tutWedges2 =>
+      'Eine 0 heißt: kein Keil neben ihrer Wand, also bleibt das Feld darunter frei. Die 1 braucht trotzdem ihren Keil: Finde, wo die Raute hingehört.';
+
+  @override
+  String get tutWedges3 =>
+      'Rechtecke dürfen gekippt und in eine Richtung länger als in die andere sein. Jede Ecke einer freien Fläche muss rechtwinklig sein, also läuft eine schräge Seite weiter, bis sie abbiegt.';
+
+  @override
+  String get tutWedges4 =>
+      'Jetzt ein echtes Brett. Fang bei den Zahlen an und schau dir die Ecken an Wänden und am Rand an: Jede Ecke einer freien Fläche muss rechtwinklig sein. Punkte für Felder ohne Keil sind freiwillig.';
+
+  @override
+  String get tutWedgesS1 =>
+      'Manchmal entscheidet eine Ecke allein nichts, zwei Ecken eine Seite voneinander aber schon, denn sie teilen sich die Felder zu beiden Seiten dieser Seite. Mit einer Wand mit Zahl geht es genauso: Probiere jede Art, ihre Keile zu setzen, bei der alle vier ihrer Ecken rechtwinklig bleiben.';
+
+  @override
+  String get tutWedgesS2 =>
+      'Wenn nichts anderes hilft, probiere einen Keil (oder keinen) in einem Feld und verfolge, wohin das führt. Endet es in einer Ecke, die nicht rechtwinklig sein kann, oder einer Zahl, die nicht aufgeht, bekommt das Feld etwas anderes.';
+
+  @override
+  String exWedgesPoint(String kind, Object cell, Object value, Object corner) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell braucht einen Keil',
+        'other': '$cell kann $value nicht haben',
+      },
+    );
+    return '$_temp0: eine freie Fläche bekäme an $corner eine Ecke, die nicht rechtwinklig ist.';
+  }
+
+  @override
+  String exWedgesDone(Object cell, Object wall, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'die $count auf $wall hat schon alle ihre Keile',
+      zero: 'die 0 auf $wall nimmt keinen',
+    );
+    return '$cell bekommt keinen Keil: $_temp0.';
+  }
+
+  @override
+  String exWedgesNeed(Object cell, Object wall, int count) {
+    return '$cell hat einen Keil: die $count auf $wall braucht jedes Feld neben sich, das noch einen bekommen kann.';
+  }
+
+  @override
+  String exWedgesLast(Object cell, Object value) {
+    return '$cell bekommt $value: nichts anderes passt.';
+  }
+
+  @override
+  String exWedgesPair(String kind, Object cell, Object value, Object first, Object second) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell braucht einen Keil',
+        'other': '$cell kann $value nicht haben',
+      },
+    );
+    return '$_temp0: sonst können die Ecken $first und $second, eine Seite voneinander, nicht beide rechtwinklig sein.';
+  }
+
+  @override
+  String exWedgesRing(String kind, Object cell, Object value, Object wall, int count) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell braucht einen Keil',
+        'other': '$cell kann $value nicht haben',
+      },
+    );
+    return '$_temp0: sonst geht die $count auf $wall nicht auf, ohne dass eine ihrer vier Ecken schief wird.';
+  }
+
+  @override
+  String exWedgesFailEmpty(Object cell) {
+    return 'Aber dann passt nichts in $cell.';
+  }
+
+  @override
+  String exWedgesFailPoint(Object corner) {
+    return 'Aber dann bekäme eine freie Fläche an $corner eine Ecke, die nicht rechtwinklig ist.';
+  }
+
+  @override
+  String exWedgesFailClue(Object wall, int count) {
+    return 'Aber dann geht die $count auf $wall nicht auf.';
+  }
+
+  @override
+  String exWedgesFailPair(Object first, Object second) {
+    return 'Aber dann können die Ecken $first und $second nicht beide rechtwinklig sein.';
+  }
+
+  @override
+  String exWedgesFailRing(Object wall, int count) {
+    return 'Aber dann geht die $count auf $wall nicht auf, ohne dass eine ihrer vier Ecken schief wird.';
+  }
 }

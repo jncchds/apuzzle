@@ -7264,4 +7264,123 @@ class AppLocalizationsPl extends AppLocalizations {
   String exSlantFailPair(Object first, Object second) {
     return 'Ale wtedy liczb w $first i $second nie da się spełnić naraz.';
   }
+
+  @override
+  String get tagTriangle => 'trójkąt, trójkąty, klin, kliny, prostokąt, prostokąty, romb';
+
+  @override
+  String get wedgesName => 'Kliny';
+
+  @override
+  String get wedgesTagline => 'Potnij wolne miejsce na prostokąty';
+
+  @override
+  String get wedgesRules =>
+      '• Niektóre komórki to ściany. Włóż klin (pół komórki przeciętej od rogu do rogu) do niektórych pozostałych komórek.\n• Każdy wolny obszar, który zostanie, musi być prostokątem: prostym albo pochylonym o 45°, jak romb.\n• Liczba na ścianie mówi, ile klinów jest w komórkach obok niej (nad, pod, z lewej i z prawej). Ściany bez liczby nic nie mówią.\n\nDotknij komórki, aby przełączać cztery kliny i kropkę (bez klina; kropki są opcjonalne). Prawy klik przełącza wstecz. Długie naciśnięcie stawia kropki we wszystkich pustych komórkach, w które klin już nie pasuje.';
+
+  @override
+  String get tutWedges1 =>
+      'Niektóre komórki to ściany. Wkładaj kliny, połówki komórki przeciętej od rogu do rogu, do innych komórek tak, aby każdy wolny obszar był prostokątem. Liczba liczy kliny obok swojej ściany: ta 1 potrzebuje jednego, a samotny klin zostawiłby nieproste rogi, więc klin dostają wszystkie cztery komórki i wolny obszar staje się rombem. Dotykaj komórki, aby przełączać kliny.';
+
+  @override
+  String get tutWedges2 =>
+      '0 oznacza, że obok ściany nie ma klina, więc komórka pod nią zostaje wolna. 1 nadal potrzebuje klina: znajdź, gdzie stoi romb.';
+
+  @override
+  String get tutWedges3 =>
+      'Prostokąty mogą być pochylone i dłuższe w jedną stronę niż w drugą. Każdy róg wolnego obszaru musi być prosty, więc ukośny bok biegnie dalej, aż skręci.';
+
+  @override
+  String get tutWedges4 =>
+      'Teraz prawdziwa plansza. Zacznij od liczb i przyjrzyj się rogom przy ścianach i brzegu: każdy róg wolnego obszaru musi być prosty. Kropki w komórkach bez klina są opcjonalne.';
+
+  @override
+  String get tutWedgesS1 =>
+      'Czasem jeden róg sam niczego nie rozstrzyga, ale dwa rogi odległe o jeden bok już tak, bo dzielą komórki po obu stronach tego boku. Tak samo działa ściana z liczbą: sprawdź każdy sposób ułożenia jej klinów, przy którym wszystkie cztery jej rogi zostają proste.';
+
+  @override
+  String get tutWedgesS2 =>
+      'Gdy nic innego nie pomaga, spróbuj klina (albo żadnego) w komórce i zobacz, dokąd to prowadzi. Jeśli kończy się to rogiem, który nie może być prosty, albo liczbą, której nie da się spełnić, komórka dostaje coś innego.';
+
+  @override
+  String exWedgesPoint(String kind, Object cell, Object value, Object corner) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell potrzebuje klina',
+        'other': '$cell nie może mieć $value',
+      },
+    );
+    return '$_temp0: wolny obszar dostałby przy $corner róg, który nie jest prosty.';
+  }
+
+  @override
+  String exWedgesDone(Object cell, Object wall, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count na $wall ma już wszystkie swoje kliny',
+      zero: '0 na $wall nie bierze żadnego',
+    );
+    return '$cell nie dostaje klina: $_temp0.';
+  }
+
+  @override
+  String exWedgesNeed(Object cell, Object wall, int count) {
+    return '$cell ma klin: $count na $wall potrzebuje każdej komórki obok, która może jeszcze dostać klin.';
+  }
+
+  @override
+  String exWedgesLast(Object cell, Object value) {
+    return '$cell dostaje $value: nic innego nie pasuje.';
+  }
+
+  @override
+  String exWedgesPair(String kind, Object cell, Object value, Object first, Object second) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell potrzebuje klina',
+        'other': '$cell nie może mieć $value',
+      },
+    );
+    return '$_temp0: inaczej rogi $first i $second, odległe o jeden bok, nie mogą być oba proste.';
+  }
+
+  @override
+  String exWedgesRing(String kind, Object cell, Object value, Object wall, int count) {
+    String _temp0 = intl.Intl.selectLogic(
+      kind,
+      {
+        'dot': '$cell potrzebuje klina',
+        'other': '$cell nie może mieć $value',
+      },
+    );
+    return '$_temp0: inaczej $count na $wall nie da się spełnić tak, by wszystkie cztery jej rogi były proste.';
+  }
+
+  @override
+  String exWedgesFailEmpty(Object cell) {
+    return 'Ale wtedy nic nie pasuje do $cell.';
+  }
+
+  @override
+  String exWedgesFailPoint(Object corner) {
+    return 'Ale wtedy wolny obszar dostałby przy $corner róg, który nie jest prosty.';
+  }
+
+  @override
+  String exWedgesFailClue(Object wall, int count) {
+    return 'Ale wtedy $count na $wall nie da się spełnić.';
+  }
+
+  @override
+  String exWedgesFailPair(Object first, Object second) {
+    return 'Ale wtedy rogi $first i $second nie mogą być oba proste.';
+  }
+
+  @override
+  String exWedgesFailRing(Object wall, int count) {
+    return 'Ale wtedy $count na $wall nie da się spełnić tak, by wszystkie cztery jej rogi były proste.';
+  }
 }

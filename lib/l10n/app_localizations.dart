@@ -9134,6 +9134,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'But then the numbers at {first} and {second} can\'t both be met.'**
   String exSlantFailPair(Object first, Object second);
+
+  /// No description provided for @tagTriangle.
+  ///
+  /// In en, this message translates to:
+  /// **'triangle, triangles, wedge, wedges, rectangle, rectangles, diamond'**
+  String get tagTriangle;
+
+  /// No description provided for @wedgesName.
+  ///
+  /// In en, this message translates to:
+  /// **'Wedges'**
+  String get wedgesName;
+
+  /// No description provided for @wedgesTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Cut the open space into rectangles'**
+  String get wedgesTagline;
+
+  /// No description provided for @wedgesRules.
+  ///
+  /// In en, this message translates to:
+  /// **'• Some cells are walls. Put a wedge (half a cell, cut from corner to corner) into some of the other cells.\n• Every open area left must be a rectangle: upright, or leaning at 45° like a diamond.\n• A number on a wall says how many wedges are in the cells beside it (above, below, left and right). Walls without a number say nothing.\n\nTap a cell to cycle through the four wedges and a dot (no wedge; dots are optional). Right-click cycles back. Long-press to dot every empty cell that can\'t take a wedge any more.'**
+  String get wedgesRules;
+
+  /// No description provided for @tutWedges1.
+  ///
+  /// In en, this message translates to:
+  /// **'Some cells are walls. Put wedges, half a cell cut from corner to corner, into other cells so that every open area left is a rectangle. A number counts the wedges beside its wall: this 1 needs one, and a lone wedge would leave corners that aren\'t square, so all four cells get one and the open area becomes a diamond. Tap a cell to cycle through the wedges.'**
+  String get tutWedges1;
+
+  /// No description provided for @tutWedges2.
+  ///
+  /// In en, this message translates to:
+  /// **'A 0 means no wedge beside its wall, so the cell below it stays open. The 1 still needs its wedge: find where the diamond goes.'**
+  String get tutWedges2;
+
+  /// No description provided for @tutWedges3.
+  ///
+  /// In en, this message translates to:
+  /// **'Rectangles may lean and be longer one way than the other. Every corner of an open area must be square, so a slanted side runs on until it turns.'**
+  String get tutWedges3;
+
+  /// No description provided for @tutWedges4.
+  ///
+  /// In en, this message translates to:
+  /// **'Now a real board. Start from the numbers and look at the corners by walls and the edge: each corner of an open area must be square. Dots for cells without a wedge are optional.'**
+  String get tutWedges4;
+
+  /// No description provided for @tutWedgesS1.
+  ///
+  /// In en, this message translates to:
+  /// **'Sometimes one corner alone settles nothing, but two corners one side apart do, since they share the cells on either side of it. A numbered wall works the same way: try every way to place its wedges and keep all four of its corners square.'**
+  String get tutWedgesS1;
+
+  /// No description provided for @tutWedgesS2.
+  ///
+  /// In en, this message translates to:
+  /// **'When nothing else helps, try a wedge (or none) in a cell and follow where it leads. If that ends in a corner that can\'t be square or a number that can\'t be met, the cell takes something else.'**
+  String get tutWedgesS2;
+
+  /// No description provided for @exWedgesPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'{kind, select, dot{{cell} needs a wedge} other{{cell} can\'t take {value}}}: an open area would get a corner at {corner} that isn\'t square.'**
+  String exWedgesPoint(String kind, Object cell, Object value, Object corner);
+
+  /// No description provided for @exWedgesDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets no wedge: {count, plural, =0{the 0 at {wall} takes none} other{the {count} at {wall} already has all its wedges}}.'**
+  String exWedgesDone(Object cell, Object wall, int count);
+
+  /// No description provided for @exWedgesNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} holds a wedge: the {count} at {wall} needs every cell beside it that can still take one.'**
+  String exWedgesNeed(Object cell, Object wall, int count);
+
+  /// No description provided for @exWedgesLast.
+  ///
+  /// In en, this message translates to:
+  /// **'{cell} gets {value}: nothing else fits.'**
+  String exWedgesLast(Object cell, Object value);
+
+  /// No description provided for @exWedgesPair.
+  ///
+  /// In en, this message translates to:
+  /// **'{kind, select, dot{{cell} needs a wedge} other{{cell} can\'t take {value}}}: otherwise the corners {first} and {second}, one side apart, can\'t both be square.'**
+  String exWedgesPair(String kind, Object cell, Object value, Object first, Object second);
+
+  /// No description provided for @exWedgesRing.
+  ///
+  /// In en, this message translates to:
+  /// **'{kind, select, dot{{cell} needs a wedge} other{{cell} can\'t take {value}}}: otherwise the {count} at {wall} can\'t be met with all four of its corners square.'**
+  String exWedgesRing(String kind, Object cell, Object value, Object wall, int count);
+
+  /// No description provided for @exWedgesFailEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'But then nothing fits in {cell}.'**
+  String exWedgesFailEmpty(Object cell);
+
+  /// No description provided for @exWedgesFailPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'But then an open area would get a corner at {corner} that isn\'t square.'**
+  String exWedgesFailPoint(Object corner);
+
+  /// No description provided for @exWedgesFailClue.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the {count} at {wall} can\'t be met.'**
+  String exWedgesFailClue(Object wall, int count);
+
+  /// No description provided for @exWedgesFailPair.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the corners {first} and {second} can\'t both be square.'**
+  String exWedgesFailPair(Object first, Object second);
+
+  /// No description provided for @exWedgesFailRing.
+  ///
+  /// In en, this message translates to:
+  /// **'But then the {count} at {wall} can\'t be met with all four of its corners square.'**
+  String exWedgesFailRing(Object wall, int count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
