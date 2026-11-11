@@ -7693,7 +7693,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quarryRules =>
-      '• Shade the cells of every stone shown under the grid, each stone once, turned or mirrored as you like.\n• Stones never touch along a side; touching at a corner is fine.\n• A filled circle is part of a stone, a hollow circle stays unshaded.\n• All unshaded cells form one area, joined side by side.\n\nTap a cell to cycle: shaded → dot (your \"this one stays unshaded\" note) → empty. Right-click cycles back. A long press dots every cell beside a finished stone. A finished stone also fades under the grid. Dots are optional: the puzzle is done once the right cells are shaded.';
+      '• Shade the cells of every stone shown under the grid, each stone once, turned or mirrored as you like.\n• Stones never touch along a side; touching at a corner is fine.\n• A filled circle is part of a stone, a hollow circle stays unshaded.\n• All unshaded cells form one area, joined side by side.\n\nTap a cell to cycle: shaded → dot (your \"this one stays unshaded\" note) → empty. Right-click cycles back. A long press dots every cell beside a finished stone. A stone under the grid fades while the board shows an area of its shape. Dots are optional: the puzzle is done once the right cells are shaded.';
 
   @override
   String get tutQuarry1 =>

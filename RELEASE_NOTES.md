@@ -1,5 +1,8 @@
 # Release notes
 
+## 0.13.1 - 2026-11-11
+- Quarry: a stone in the set under the board fades whenever the board shows an area of its shape, so you can see at a glance which stones are already laid out
+
 ## 0.13.0 - 2026-11-11
 - New game: Echoes. Fill every region of k cells with the numbers 1 to k; when the same number N appears twice in a row or column, there are at least N cells between them. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-12
 - New game: Ladders. Fill the grid with the numbers 1 to N, never twice in a row or column, so that every run of cells between walls holds consecutive numbers in any order; a number on a wall still counts for its row and column. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-12
