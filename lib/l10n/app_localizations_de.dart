@@ -79,11 +79,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get searchNone => 'Keine Spiele gefunden. Stöbere in den Kategorien:';
 
   @override
-  String searchSimilar(String query) {
-    return 'Nichts namens „$query“. Meintest du:';
-  }
-
-  @override
   String searchAlternatives(String query) {
     return '„$query“ haben wir nicht, aber vielleicht gefällt dir:';
   }

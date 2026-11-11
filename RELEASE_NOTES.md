@@ -12,6 +12,7 @@
 - New game: Parcels. Draw borders to split the grid into regions that all have the same size; a number tells how many sides of its cell are borders, and the outline of the grid counts. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - New game: Stars. Place two stars in every row, every column and every colored region, and no two stars may touch, not even diagonally. Crowns and Stars share a family page, Crowns. With a tutorial, strategy lessons and explain mode, and in the daily challenges from 2026-11-13
 - Waymarks: when you pick a cell, the cells that can come right after it and the cells that can come right before it are striped in opposite directions (crossed for cells that can go either way), instead of small dots that a downward arrow could hide
+- Search: when a game isn't found by its name, the games suggested instead are always introduced the same way, whether they go by another name, are close to what you typed or are just the nearest match
 
 ## 0.12.1 - 2026-10-17
 - Sudoku: expert boards from 2026-10-18 draw on more techniques: Skyscraper, 2-String Kite, Empty Rectangle, finned X-Wing and W-Wing join X-Wing, Swordfish, Y-Wing and XYZ-Wing. Two new strategy lessons teach linked pairs and the W-Wing, and explain mode walks through every one

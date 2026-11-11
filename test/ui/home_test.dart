@@ -54,11 +54,11 @@ void main() {
     expect(find.text('Islands'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'zzzz');
     await tester.pumpAndSettle();
-    expect(find.textContaining('Did you mean'), findsOneWidget, reason: 'the closest games instead');
+    expect(find.textContaining('“zzzz”, but you might like'), findsOneWidget, reason: 'the closest games instead');
     expect(find.textContaining('No games found'), findsNothing);
     await tester.enterText(find.byType(TextField), 'sudoko');
     await tester.pumpAndSettle();
-    expect(find.textContaining('Did you mean'), findsOneWidget);
+    expect(find.textContaining('“sudoko”, but you might like'), findsOneWidget, reason: 'typos read the same');
     expect(find.text('Sudoku'), findsOneWidget);
   });
 

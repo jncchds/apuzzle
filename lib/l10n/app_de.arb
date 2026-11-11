@@ -23,7 +23,6 @@
   "catCasual": "Zum Entspannen",
   "searchHint": "Spiele suchen",
   "searchNone": "Keine Spiele gefunden. Stöbere in den Kategorien:",
-  "searchSimilar": "Nichts namens „{query}“. Meintest du:",
   "searchAlternatives": "„{query}“ haben wir nicht, aber vielleicht gefällt dir:",
   "yourGames": "Deine Spiele",
   "gamesCount": "{count, plural, one{{count} Spiel} other{{count} Spiele}}",

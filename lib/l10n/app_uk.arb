@@ -23,7 +23,6 @@
   "catCasual": "Для відпочинку",
   "searchHint": "Пошук ігор",
   "searchNone": "Ігор не знайдено. Перегляньте категорії:",
-  "searchSimilar": "Нічого не знайдено за «{query}». Можливо, ви мали на увазі:",
   "searchAlternatives": "У нас немає «{query}», але може сподобатися:",
   "yourGames": "Ваші ігри",
   "gamesCount": "{count, plural, one{{count} гра} few{{count} гри} many{{count} ігор} other{{count} гри}}",

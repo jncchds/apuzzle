@@ -26,8 +26,6 @@
   "catCasual": "Casual",
   "searchHint": "Search games",
   "searchNone": "No games found. Browse the categories:",
-  "searchSimilar": "Nothing called “{query}”. Did you mean:",
-  "@searchSimilar": {"placeholders": {"query": {"type": "String"}}},
   "searchAlternatives": "We don’t have “{query}”, but you might like:",
   "@searchAlternatives": {"placeholders": {"query": {"type": "String"}}},
   "yourGames": "Your games",

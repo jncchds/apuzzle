@@ -79,11 +79,6 @@ class AppLocalizationsUk extends AppLocalizations {
   String get searchNone => 'Ігор не знайдено. Перегляньте категорії:';
 
   @override
-  String searchSimilar(String query) {
-    return 'Нічого не знайдено за «$query». Можливо, ви мали на увазі:';
-  }
-
-  @override
   String searchAlternatives(String query) {
     return 'У нас немає «$query», але може сподобатися:';
   }

@@ -131,21 +131,19 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.fromLTRB(4, 12, 4, 8),
       child: Text(text, style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
     );
-    final nothing = r.found.isEmpty && r.alternatives.isEmpty && r.similar.isEmpty;
+    // Games found by another name, with typos or by closeness: all told the same way.
+    final suggested = r.alternatives.isNotEmpty ? r.alternatives : r.similar;
+    final nothing = r.found.isEmpty && suggested.isEmpty;
     return [
       SliverPadding(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
         sliver: SliverList.list(
           children: [
-            if (r.similar.isNotEmpty) ...[
-              note(l.searchSimilar(widget.query.trim())),
-              for (final t in r.similar) row(t),
-            ] else if (r.found.isEmpty && r.alternatives.isEmpty)
-              note(l.searchNone),
+            if (nothing) note(l.searchNone),
             for (final t in r.found) row(t),
-            if (r.alternatives.isNotEmpty) ...[
+            if (suggested.isNotEmpty) ...[
               note(l.searchAlternatives(widget.query.trim())),
-              for (final t in r.alternatives) row(t),
+              for (final t in suggested) row(t),
             ],
           ],
         ),

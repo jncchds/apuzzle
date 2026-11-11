@@ -220,12 +220,6 @@ abstract class AppLocalizations {
   /// **'No games found. Browse the categories:'**
   String get searchNone;
 
-  /// No description provided for @searchSimilar.
-  ///
-  /// In en, this message translates to:
-  /// **'Nothing called “{query}”. Did you mean:'**
-  String searchSimilar(String query);
-
   /// No description provided for @searchAlternatives.
   ///
   /// In en, this message translates to:

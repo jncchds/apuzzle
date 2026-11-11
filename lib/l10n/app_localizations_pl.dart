@@ -79,11 +79,6 @@ class AppLocalizationsPl extends AppLocalizations {
   String get searchNone => 'Nie znaleziono gier. Przejrzyj kategorie:';
 
   @override
-  String searchSimilar(String query) {
-    return 'Nic o nazwie „$query”. Czy chodziło o:';
-  }
-
-  @override
   String searchAlternatives(String query) {
     return 'Nie mamy „$query”, ale może spodoba ci się:';
   }

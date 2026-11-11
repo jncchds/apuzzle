@@ -23,7 +23,6 @@
   "catCasual": "Na luzie",
   "searchHint": "Szukaj gier",
   "searchNone": "Nie znaleziono gier. Przejrzyj kategorie:",
-  "searchSimilar": "Nic o nazwie „{query}”. Czy chodziło o:",
   "searchAlternatives": "Nie mamy „{query}”, ale może spodoba ci się:",
   "yourGames": "Twoje gry",
   "gamesCount": "{count, plural, one{{count} gra} few{{count} gry} many{{count} gier} other{{count} gry}}",
