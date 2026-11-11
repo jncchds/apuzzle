@@ -336,12 +336,13 @@ class _WaymarksPainter extends CustomPainter {
           ..strokeCap = StrokeCap.round,
       );
     }
-    // Where the picked cell can link: a tint on cells that can come after
-    // it, stripes on cells that can come before it, both for either way.
+    // Where the picked cell can link: stripes down to the right on cells
+    // that can come after it, up to the right on cells that can come before
+    // it, crossed for either way.
     for (final j in {...after, ...before}) {
       final rect = RRect.fromRectAndRadius(m.topLeft(p.size.pos(j)) & Size(cell, cell), Radius.circular(cell * 0.12));
-      if (after.contains(j)) canvas.drawRRect(rect, Paint()..color = scheme.tertiary.withValues(alpha: 0.24));
-      if (before.contains(j)) _stripes(canvas, rect);
+      if (after.contains(j)) _stripes(canvas, rect, down: true);
+      if (before.contains(j)) _stripes(canvas, rect, down: false);
     }
     for (var i = 0; i < p.cells; i++) {
       final c = _at(i);
@@ -393,8 +394,8 @@ class _WaymarksPainter extends CustomPainter {
     }
   }
 
-  /// Diagonal stripes across [rect].
-  void _stripes(Canvas canvas, RRect rect) {
+  /// Diagonal stripes across [rect], going down to the right or up to the right.
+  void _stripes(Canvas canvas, RRect rect, {required bool down}) {
     final r = rect.outerRect;
     final step = m.cell * 0.17;
     final paint = Paint()
@@ -403,7 +404,11 @@ class _WaymarksPainter extends CustomPainter {
     canvas.save();
     canvas.clipRRect(rect);
     for (var x = -r.height; x < r.width; x += step) {
-      canvas.drawLine(Offset(r.left + x, r.bottom), Offset(r.left + x + r.height, r.top), paint);
+      canvas.drawLine(
+        Offset(r.left + x, down ? r.top : r.bottom),
+        Offset(r.left + x + r.height, down ? r.bottom : r.top),
+        paint,
+      );
     }
     canvas.restore();
   }
